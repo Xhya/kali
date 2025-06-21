@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
-import 'package:kalori/core/domains/nutriScore.state.dart';
 
 void main() {
   setUp(() async {
@@ -18,9 +17,9 @@ void main() {
     onAddNewMeal();
     expect(quickAddMealState.isInAddingMode.value, true);
     onUpdateUserMealText("Pizza");
-    expect(nutriScoreState.userMealText.value, "Pizza");
+    expect(quickAddMealState.userMealText.value, "Pizza");
     onCloseAddNewMeal();
-    expect(nutriScoreState.userMealText.value.isEmpty, true);
+    expect(quickAddMealState.userMealText.value.isEmpty, true);
   });
 
   test('can select all items', () async {

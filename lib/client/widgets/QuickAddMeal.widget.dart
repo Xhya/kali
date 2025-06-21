@@ -13,11 +13,11 @@ onAddNewMeal() {
 
 onCloseAddNewMeal() {
   quickAddMealState.isInAddingMode.value = false;
-  nutriScoreState.userMealText.value = "";
+  quickAddMealState.userMealText.value = "";
 }
 
 onUpdateUserMealText(String value) {
-  nutriScoreState.userMealText.value = value;
+  quickAddMealState.userMealText.value = value;
 }
 
 class QuickAddMealWidget extends StatefulWidget {

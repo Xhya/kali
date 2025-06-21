@@ -7,4 +7,5 @@ computeNutriScore(String userText) async {
   final nutriScore = await aiService.computeNutriScore(userText);
   nutriScoreState.currentNutriScore.value = nutriScore;
   quickAddMealState.isLoading.value = false;
+  quickAddMealState.userMealText.value = "";
 }
