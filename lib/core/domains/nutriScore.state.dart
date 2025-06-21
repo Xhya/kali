@@ -4,11 +4,18 @@ import 'package:kalori/core/models/NutriScore.model.dart';
 var nutriScoreState = NutriScoreState();
 
 class NutriScoreState extends ChangeNotifier {
-  NutriScore? _nutriScore;
-  NutriScore? get nutriScore => _nutriScore;
+  final userMealText = ValueNotifier<String>("");
+  final currentNutriScore = ValueNotifier<NutriScore?>(null);
 
-  setNutriScore(NutriScore value) {
-    _nutriScore = value;
-    notifyListeners();
+  NutriScoreState() {
+    userMealText.addListener(notifyListeners);
+    currentNutriScore.addListener(notifyListeners);
+  }
+
+  @override
+  void dispose() {
+    userMealText.dispose();
+    currentNutriScore.dispose();
+    super.dispose();
   }
 }
