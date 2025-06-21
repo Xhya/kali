@@ -38,7 +38,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
 
   @override
   Widget build(BuildContext context) {
-    String userMealText = context.watch<NutriScoreState>().userMealText.value;
+    String userMealText = context.watch<QuickAddMealState>().userMealText.value;
     bool isInAddingMode =
         context.watch<QuickAddMealState>().isInAddingMode.value;
     bool isLoading = context.watch<QuickAddMealState>().isLoading.value;
