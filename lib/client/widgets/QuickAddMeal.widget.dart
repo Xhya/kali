@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/client/widgets/CustomButton.widget.dart';
 import 'package:kalori/client/widgets/LoaderIcon.widget.dart';
 import 'package:kalori/core/actions/nutriScore.actions.dart';
 import 'package:kalori/core/domains/nutriScore.state.dart';
 import 'package:kalori/core/services/Translation.service.dart';
-import 'package:provider/provider.dart';
 
 onAddNewMeal() {
   quickAddMealState.isInAddingMode.value = true;
