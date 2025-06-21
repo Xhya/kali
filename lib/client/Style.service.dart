@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kalory/client/Screen.service.dart';
+import 'package:kalori/client/Screen.service.dart';
 
 var style = Style();
 
@@ -16,19 +16,13 @@ class Style {
 
 Color _yellow = const Color(0xFFFCC547);
 Color _red = const Color(0xFFEA3B38);
-Color _purple = const Color(0xFFBD1689);
 Color _blue = const Color(0xFF076CEB);
-Color _grey_dark = const Color(0xFF373740);
-Color _grey_light = const Color(0xFFE9E2D0);
-Color _orange_dark = const Color(0xFFEA3B38);
-Color _orange_light = const Color(0xFFF59342);
 
 var _white = Colors.white;
 var _black = Colors.black;
 
 class BackgroundColors {
-  var color1 = TextStyle(color: _grey_light);
-  var onColor1 = TextStyle(color: _white);
+  var color1 = TextStyle(color: _white);
   var color2 = TextStyle(color: _blue);
 
   var neutral = TextStyle(color: _white);
@@ -65,9 +59,8 @@ class BorderRadiuses {
 
 class IconsColors {
   var color1 = TextStyle(color: _yellow);
-  var color2 = TextStyle(color: _grey_light);
+  var color2 = TextStyle(color: _blue);
   var color3 = TextStyle(color: _black);
-  var color4 = TextStyle(color: _blue);
 }
 
 class FontSizes {

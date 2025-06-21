@@ -1,7 +1,7 @@
-import 'package:kalory/client/Style.service.dart';
-import 'package:kalory/client/screens/Home.screen.dart';
-import 'package:kalory/core/services/Error.service.dart';
-import 'package:kalory/core/services/Navigation.service.dart';
+import 'package:kalori/client/Style.service.dart';
+import 'package:kalori/client/screens/Home.screen.dart';
+import 'package:kalori/core/services/Error.service.dart';
+import 'package:kalori/core/services/Navigation.service.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';

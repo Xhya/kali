@@ -1,11 +1,12 @@
-import 'package:kalory/core/domains/ai.repository.dart';
+import 'package:kalori/core/domains/ai.repository.dart';
+import 'package:kalori/core/models/NutriScore.model.dart';
 
 var aiService = AIService();
 
 class AIService {
-  var aiRepository = AIRepository();
+  final _aiRepository = AIRepository();
 
-  Future<void> getTodoCategory(String itemName) async {
-    return await aiRepository.getTodoCategory(itemName);
+  Future<NutriScore> computeNutriScore(String userText) async {
+    return await _aiRepository.computeNutriScore(userText);
   }
 }

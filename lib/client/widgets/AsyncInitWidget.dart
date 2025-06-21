@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kalory/client/widgets/LoaderIcon.widget.dart';
+import 'package:kalori/client/widgets/LoaderIcon.widget.dart';
 
 class AsyncInitWidget extends StatefulWidget {
   const AsyncInitWidget({

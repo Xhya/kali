@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kalory/core/services/String.extension.dart';
+import 'package:kalori/core/services/String.extension.dart';
 
 String t(String key, [List<String>? args]) {
   String text = TranslationService().textFR[key];

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kalory/client/Style.service.dart';
-import 'package:kalory/core/services/Navigation.service.dart';
+import 'package:kalori/client/Style.service.dart';
+import 'package:kalori/core/services/Navigation.service.dart';
 import 'package:provider/provider.dart';
 
 class MenuTabs extends StatelessWidget {

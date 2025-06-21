@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:kalory/core/services/Error.service.dart';
+import 'package:kalori/core/services/Error.service.dart';
 
 enum ScreenEnum {
   home,

@@ -1,4 +1,4 @@
-# kalory
+# kalori
 
 A new Flutter project.
 

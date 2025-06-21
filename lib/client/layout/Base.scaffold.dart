@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kalory/client/Style.service.dart';
+import 'package:kalori/client/Style.service.dart';
 
 class BaseScaffold extends StatefulWidget {
   const BaseScaffold({super.key, required this.child});

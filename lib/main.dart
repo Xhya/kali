@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:kalory/client/widgets/AsyncInitWidget.dart';
-import 'package:kalory/client/Routing.dart';
-import 'package:kalory/core/domains/user.state.dart';
-import 'package:kalory/core/services/Navigation.service.dart';
-import 'package:kalory/core/services/Translation.service.dart';
+import 'package:kalori/client/widgets/AsyncInitWidget.dart';
+import 'package:kalori/client/Routing.dart';
+import 'package:kalori/core/domains/nutriScore.state.dart';
+import 'package:kalori/core/domains/user.state.dart';
+import 'package:kalori/core/services/Navigation.service.dart';
+import 'package:kalori/core/services/Translation.service.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -18,6 +19,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => userState),
         ChangeNotifierProvider(create: (context) => navigationService),
+        ChangeNotifierProvider(create: (context) => nutriScoreState),
       ],
       child: const App(),
     ),
@@ -30,7 +32,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Kalory',
+      title: 'kalori',
       theme: ThemeData(fontFamily: 'Barlow'),
       home: AsyncInitWidget(
         initFunction: () async {
