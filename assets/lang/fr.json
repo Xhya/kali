@@ -1,4 +1,7 @@
 {
+  "add": "Ajouter",
   "describe_your_meal": "Décrivez votre repas",
-  "add": "Ajouter"
+  "proteins": "Protéines",
+  "lipids": "Lipides",
+  "glucids": "Glucides"
 }

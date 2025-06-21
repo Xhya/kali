@@ -51,7 +51,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
       ),
       child: Row(
         mainAxisAlignment:
-            userMealText.isEmpty
+            userMealText.isNotEmpty
                 ? MainAxisAlignment.spaceBetween
                 : MainAxisAlignment.end,
         children: [

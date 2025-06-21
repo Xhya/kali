@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/widgets/Gauge.widget.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
+import 'package:kalori/core/services/Translation.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kalori/client/Style.service.dart';
@@ -37,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Column(
                               children: [
-                                Text("Protéines"),
+                                Text(t('proteins')),
                                 SizedBox(height: 12),
                                 GaugeWidget(
                                   percentage:
@@ -48,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             Column(
                               children: [
-                                Text("Lipides"),
+                                Text(t('lipids')),
                                 SizedBox(height: 12),
                                 GaugeWidget(
                                   percentage: nutriScore.lipidAmount.toDouble(),
@@ -58,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             Column(
                               children: [
-                                Text("Glucides"),
+                                Text(t('glucids')),
                                 SizedBox(height: 12),
                                 GaugeWidget(
                                   percentage:
