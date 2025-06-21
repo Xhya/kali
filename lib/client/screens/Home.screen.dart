@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kalori/client/widgets/Gauge.widget.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
@@ -37,19 +38,33 @@ class _HomeScreenState extends State<HomeScreen> {
                             Column(
                               children: [
                                 Text("Protéines"),
-                                Text(nutriScore.proteinAmount.toString()),
+                                SizedBox(height: 12),
+                                GaugeWidget(
+                                  percentage:
+                                      nutriScore.proteinAmount.toDouble(),
+                                ),
+                                Text("${nutriScore.proteinAmount.toString()}g"),
                               ],
                             ),
                             Column(
                               children: [
                                 Text("Lipides"),
-                                Text(nutriScore.lipidAmount.toString()),
+                                SizedBox(height: 12),
+                                GaugeWidget(
+                                  percentage: nutriScore.lipidAmount.toDouble(),
+                                ),
+                                Text("${nutriScore.glucidAmount.toString()}g"),
                               ],
                             ),
                             Column(
                               children: [
                                 Text("Glucides"),
-                                Text(nutriScore.glucidAmount.toString()),
+                                SizedBox(height: 12),
+                                GaugeWidget(
+                                  percentage:
+                                      nutriScore.glucidAmount.toDouble(),
+                                ),
+                                Text("${nutriScore.glucidAmount.toString()}g"),
                               ],
                             ),
                           ],
