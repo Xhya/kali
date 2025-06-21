@@ -7,30 +7,18 @@ import 'package:kalori/core/domains/nutriScore.state.dart';
 import 'package:kalori/core/services/Translation.service.dart';
 import 'package:provider/provider.dart';
 
-// onAddNewTodoItem() async {
-//   todosState.setCreatingNewTodoItem(!todosState.creatingNewTodoItem);
-// }
+onAddNewMeal() {
+  quickAddMealState.isInAddingMode.value = true;
+}
 
-// validateNewItemName() async {
-//   List<String> items = todosState.newItemName.split("\n");
+onCloseAddNewMeal() {
+  quickAddMealState.isInAddingMode.value = false;
+  nutriScoreState.userMealText.value = "";
+}
 
-//   todosState.setIsAddingItemLoading(true);
-//   for (int i = 0; i < items.length; i++) {
-//     var name = items[i];
-//     ProductCategoryEnum? category = await aiService.getTodoCategory(name);
-//     await todoItemService.createTodoItem(
-//       name: name,
-//       category: category,
-//     );
-//     reset();
-//   }
-//   todosState.setIsAddingItemLoading(true);
-// }
-
-// reset() async {
-//   todosState.setCreatingNewTodoItem(false);
-//   todosState.setNewItemName("");
-// }
+onUpdateUserMealText(String value) {
+  nutriScoreState.userMealText.value = value;
+}
 
 class QuickAddMealWidget extends StatefulWidget {
   const QuickAddMealWidget({super.key});
@@ -73,7 +61,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                 padding: EdgeInsets.only(right: 12),
                 child: TextField(
                   onChanged: (value) {
-                    nutriScoreState.userMealText.value = value;
+                    onUpdateUserMealText(value);
                   },
                   textCapitalization: TextCapitalization.sentences,
                   minLines: 1,
@@ -96,7 +84,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                         SizedBox(width: 12),
                         GestureDetector(
                           onTap: () {
-                            quickAddMealState.isInAddingMode.value = false;
+                            onCloseAddNewMeal();
                           },
                           child: Icon(Icons.close),
                         ),
@@ -111,7 +99,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
             ButtonWidget(
               text: "+",
               onPressed: () async {
-                quickAddMealState.isInAddingMode.value = true;
+                onAddNewMeal();
               },
               buttonType: ButtonTypeEnum.filled,
             ),
