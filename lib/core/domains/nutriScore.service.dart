@@ -1,71 +1,21 @@
-import 'package:kalori/core/domains/meal.state.dart';
+import 'package:kalori/core/domains/nutriScore.repository.dart';
 import 'package:kalori/core/domains/nutriScore.state.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
-import 'package:kalori/core/services/AI.service.dart';
-import 'package:kalori/client/states/quickAddMeal.state.dart';
 
-computeNutriScore(String userText) async {
-  quickAddMealState.isLoading.value = true;
-  return await aiService.computeNutriScore(userText);
-}
+Future<void> refreshPersonalNutriScore() async {
+  final personalNutriScore =
+      await NutriScoreRepository().getPersonalNutriScore();
 
-computeDayAverages() {
-  if (nutriScoreState.currentNutriScore.value == null) {
-    nutriScoreState.currentNutriScore.value = NutriScore(
-      proteinAmount: 0.0,
-      glucidAmount: 0.0,
-      lipidAmount: 0.0,
-      caloryAmount: 0.0,
-    );
-  }
-
-  nutriScoreState.currentNutriScore.value!.lipidAmount = mealState
-      .userMeals
-      .value
-      .fold(
-        0,
-        (sum, curr) => sum + (curr.nutriScore?.lipidAmount.toInt() ?? 0),
-      );
-
-  nutriScoreState.currentNutriScore.value!.proteinAmount = mealState
-      .userMeals
-      .value
-      .fold(
-        0,
-        (sum, curr) => sum + (curr.nutriScore?.proteinAmount.toInt() ?? 0),
-      );
-  nutriScoreState.currentNutriScore.value!.glucidAmount = mealState
-      .userMeals
-      .value
-      .fold(
-        0,
-        (sum, curr) => sum + (curr.nutriScore?.glucidAmount.toInt() ?? 0),
-      );
-
-  nutriScoreState.currentNutriScore.value!.caloryAmount = mealState
-      .userMeals
-      .value
-      .fold(
-        0,
-        (sum, curr) => sum + (curr.nutriScore?.caloryAmount.toInt() ?? 0),
-      );
-}
-
-computeMaxAmount() {
-  if (nutriScoreState.maximumNutriScore.value == null) {
+  if (personalNutriScore != null) {
     nutriScoreState.maximumNutriScore.value = NutriScore(
-      proteinAmount: 0.0,
-      glucidAmount: 0.0,
-      lipidAmount: 0.0,
-      caloryAmount: 0.0,
+      proteinAmount: personalNutriScore.proteinAmount,
+      glucidAmount: personalNutriScore.glucidAmount,
+      lipidAmount: personalNutriScore.lipidAmount,
+      caloryAmount: personalNutriScore.caloryAmount,
     );
   }
+}
 
-  nutriScoreState.maximumNutriScore.value!.lipidAmount = 60;
-
-  nutriScoreState.maximumNutriScore.value!.proteinAmount = 130;
-
-  nutriScoreState.maximumNutriScore.value!.glucidAmount = 135;
-
-  nutriScoreState.maximumNutriScore.value!.caloryAmount = 1700;
+Future<void> setPersonalNutriScore(NutriScore nutriScore) async {
+  
 }

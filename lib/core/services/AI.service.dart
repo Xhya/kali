@@ -21,4 +21,25 @@ class AIService {
       caloryAmount: nutriScoreJson["caloryAmount"],
     );
   }
+
+  Future<NutriScore> computePersonalNutriScore({
+    required String size,
+    required String age,
+    required String weight,
+  }) async {
+    final json = await _aiRepository.computePersonalNutriScore(
+      size: size,
+      age: age,
+      weight: weight,
+    );
+    final nutriScoreJson = jsonDecode(json);
+
+    return NutriScore(
+      id: _uuid.v6(),
+      proteinAmount: nutriScoreJson["proteinAmount"],
+      lipidAmount: nutriScoreJson["lipidAmount"],
+      glucidAmount: nutriScoreJson["glucidAmount"],
+      caloryAmount: nutriScoreJson["caloryAmount"],
+    );
+  }
 }

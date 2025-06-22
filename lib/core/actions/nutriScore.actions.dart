@@ -1,7 +1,9 @@
 import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/core/domains/meal.service.dart';
+import 'package:kalori/core/domains/nutriScore.utils.dart';
 import 'package:kalori/core/domains/nutriScore.service.dart';
 import 'package:kalori/core/models/Meal.model.dart';
+import 'package:kalori/core/services/AI.service.dart';
 import 'package:kalori/core/services/Error.service.dart';
 import 'package:kalori/core/utils/computeMealPeriod.utils.dart';
 import 'package:uuid/uuid.dart';
@@ -10,7 +12,7 @@ initHomeScreen() async {
   try {
     await refreshMeals();
     computeDayAverages();
-    computeMaxAmount();
+    await refreshPersonalNutriScore();
   } catch (e) {
     errorService.notifyError(e);
   }
@@ -18,8 +20,9 @@ initHomeScreen() async {
 
 onAddMeal() async {
   try {
+    quickAddMealState.isLoading.value = true;
     final userText = quickAddMealState.userMealText.value;
-    final nutriScore = await computeNutriScore(userText);
+    final nutriScore = await aiService.computeNutriScore(userText);
     final meal = MealModel(
       id: Uuid().v6(),
       createdAt: DateTime.now(),

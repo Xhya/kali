@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
+import 'package:kalori/client/states/startForm.state.dart';
 import 'package:kalori/client/widgets/AsyncInitWidget.dart';
 import 'package:kalori/client/Routing.dart';
 import 'package:kalori/core/domains/meal.state.dart';
@@ -24,8 +25,10 @@ void main() async {
         ChangeNotifierProvider(create: (context) => navigationService),
         ChangeNotifierProvider(create: (context) => errorService),
 
-        ChangeNotifierProvider(create: (context) => nutriScoreState),
         ChangeNotifierProvider(create: (context) => quickAddMealState),
+        ChangeNotifierProvider(create: (context) => startFormState),
+
+        ChangeNotifierProvider(create: (context) => nutriScoreState),
         ChangeNotifierProvider(create: (context) => mealState),
       ],
       child: const App(),

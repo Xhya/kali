@@ -2,13 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:kalori/client/widgets/CustomButton.widget.dart';
 import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kalori/client/layout/Base.scaffold.dart';
+import 'package:kalori/core/actions/startForm.actions.dart';
 import 'package:kalori/core/services/Translation.service.dart';
-
-onUpdateSize(String value) {}
-
-onUpdateWeight(String value) {}
-
-onUpdateAge(String value) {}
 
 class StartFormScreen extends StatefulWidget {
   const StartFormScreen({super.key});
@@ -81,7 +76,9 @@ class _StartFormScreenState extends State<StartFormScreen> {
                             ],
                           ),
                         ),
-                        ButtonWidget(onPressed: () {}, fullWidth: true),
+                        ButtonWidget(onPressed: () {
+                          onComputePersonalNutriScore();
+                        }, fullWidth: true),
                         SizedBox(height: 16),
                       ],
                     ),
