@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:kalori/core/models/NutriScore.model.dart';
-import 'package:kalori/core/utils/computeMealPeriod.utils.dart';
 import 'package:kalori/environment.dart';
 import 'package:kalori/utils.dart';
 
 class AIRepository {
-  Future<NutriScore> computeNutriScore(String userText) async {
+  Future<String> computeNutriScore(String userText) async {
     var body = {
       "contents": [
         {
@@ -31,18 +29,7 @@ class AIRepository {
       final res = body['candidates'][0]['content']['parts'][0]['text'];
       final nutriScore =
           res.replaceAll('```json', '').replaceAll('```', '').trim();
-      final nutriScoreJson = jsonDecode(nutriScore);
-
-      return NutriScore(
-        id: "0",
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        mealDescription: "100g Pizza",
-        period: computeMealPeriod(DateTime.now()),
-        proteinAmount: nutriScoreJson["proteinAmount"],
-        lipidAmount: nutriScoreJson["lipidAmount"],
-        glucidAmount: nutriScoreJson["glucidAmount"],
-      );
+      return nutriScore;
     } else {
       throw Exception('AI Server Error');
     }

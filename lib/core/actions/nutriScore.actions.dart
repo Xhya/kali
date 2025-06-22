@@ -21,6 +21,7 @@ computeNutriScore(String userText) async {
     quickAddMealState.isLoading.value = false;
     quickAddMealState.userMealText.value = "";
   } catch (e) {
+    quickAddMealState.isLoading.value = false;
     errorService.notifyError(e);
   }
 }

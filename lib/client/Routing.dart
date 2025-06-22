@@ -35,6 +35,7 @@ class _RoutingState extends State<Routing> {
   Widget build(BuildContext context) {
     Widget? bottomSheet = context.watch<NavigationService>().bottomSheet;
     Widget? snackBar = context.watch<NavigationService>().snackBar;
+    String? error = context.watch<ErrorService>().error;
 
     if (bottomSheet != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -54,6 +55,27 @@ class _RoutingState extends State<Routing> {
       });
     }
 
+    if (error != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showDialog(
+          useSafeArea: false,
+          barrierDismissible: false,
+          context: context,
+          builder: (BuildContext context) {
+            return Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                child: Text(error),
+              ),
+            );
+          },
+        );
+      });
+    }
+
     if (snackBar != null) {
       var snackBarWidget = SnackBar(
         backgroundColor: style.background.neutral.color,
@@ -62,10 +84,9 @@ class _RoutingState extends State<Routing> {
       );
 
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        ScaffoldMessenger.of(navigationService.context!)
-            .showSnackBar(snackBarWidget)
-            .closed
-            .then((reason) {
+        ScaffoldMessenger.of(
+          navigationService.context!,
+        ).showSnackBar(snackBarWidget).closed.then((reason) {
           navigationService.snackBar = null;
         });
       });

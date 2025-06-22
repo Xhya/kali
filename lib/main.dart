@@ -5,6 +5,7 @@ import 'package:kalori/client/widgets/AsyncInitWidget.dart';
 import 'package:kalori/client/Routing.dart';
 import 'package:kalori/core/domains/nutriScore.state.dart';
 import 'package:kalori/core/domains/user.state.dart';
+import 'package:kalori/core/services/Error.service.dart';
 import 'package:kalori/core/services/Navigation.service.dart';
 import 'package:kalori/core/services/Translation.service.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,8 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => userState),
         ChangeNotifierProvider(create: (context) => navigationService),
+        ChangeNotifierProvider(create: (context) => errorService),
+        
         ChangeNotifierProvider(create: (context) => nutriScoreState),
         ChangeNotifierProvider(create: (context) => quickAddMealState),
       ],
@@ -39,7 +42,6 @@ class App extends StatelessWidget {
       home: AsyncInitWidget(
         initFunction: () async {
           await TranslationService().init();
-          // await userService.refreshUser();
         },
         child: const Scaffold(body: Routing()),
       ),
