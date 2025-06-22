@@ -1,6 +1,6 @@
 import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/core/domains/meal.service.dart';
-import 'package:kalori/core/domains/nutriScore.utils.dart';
+import 'package:kalori/core/utils/computeDayAverages.utils.dart';
 import 'package:kalori/core/domains/nutriScore.service.dart';
 import 'package:kalori/core/models/Meal.model.dart';
 import 'package:kalori/core/services/AI.service.dart';
