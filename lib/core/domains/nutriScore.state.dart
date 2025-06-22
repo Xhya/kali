@@ -5,7 +5,7 @@ var nutriScoreState = NutriScoreState();
 
 class NutriScoreState extends ChangeNotifier {
   var currentNutriScore = ValueNotifier<NutriScore?>(null);
-  var maximumNutriScore = ValueNotifier<NutriScore?>(null);
+  var personalNutriScore = ValueNotifier<NutriScore?>(null);
 
   NutriScoreState() {
     currentNutriScore.addListener(notifyListeners);

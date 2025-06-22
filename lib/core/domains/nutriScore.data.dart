@@ -32,14 +32,18 @@ class NutriScoreData {
     }
   }
 
+  _get() async {
+    var str = await _storage.read(key: personalNutriScoreStoreKey);
+    if (str == null) {
+      return null;
+    }
+    return jsonDecode(str);
+  }
+
   Future<NutriScore?> getPersonalNutriScore() async {
     if (!isInTestEnv) {
-      var str = await _storage.read(key: personalNutriScoreStoreKey);
-      if (str == null) {
-        return null;
-      }
-      final json = jsonDecode(str);
-      return NutriScore.fromJson(json);
+      final json = await _get();
+      return json != null ? NutriScore.fromJson(json) : null;
     } else {
       return null;
     }
@@ -48,7 +52,7 @@ class NutriScoreData {
   Future<void> setPersonalNutriScore(NutriScore nutriScore) async {
     if (!isInTestEnv) {
       _nutriScore = nutriScore;
-      _store();
+      await _store();
     }
   }
 }

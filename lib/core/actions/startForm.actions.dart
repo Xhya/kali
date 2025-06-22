@@ -25,7 +25,7 @@ onComputePersonalNutriScore() async {
       age: startFormState.age.value,
     );
     await setPersonalNutriScore(personalNutriScore);
-    nutriScoreState.maximumNutriScore.value = personalNutriScore;
+    nutriScoreState.personalNutriScore.value = personalNutriScore;
     navigationService.navigateTo(ScreenEnum.home);
   } catch (e) {
     errorService.notifyError(e);

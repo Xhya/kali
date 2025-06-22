@@ -26,7 +26,7 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
     NutriScore? currentNutriScore =
         context.watch<NutriScoreState>().currentNutriScore.value;
     NutriScore? maxNutriScore =
-        context.watch<NutriScoreState>().maximumNutriScore.value;
+        context.watch<NutriScoreState>().personalNutriScore.value;
 
     if (currentNutriScore != null && maxNutriScore != null) {
       return Row(

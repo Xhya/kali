@@ -5,6 +5,7 @@ import 'package:kalori/client/states/startForm.state.dart';
 import 'package:kalori/client/widgets/AsyncInitWidget.dart';
 import 'package:kalori/client/Routing.dart';
 import 'package:kalori/core/domains/meal.state.dart';
+import 'package:kalori/core/domains/nutriScore.service.dart';
 import 'package:kalori/core/domains/nutriScore.state.dart';
 import 'package:kalori/core/domains/user.state.dart';
 import 'package:kalori/core/services/Error.service.dart';
@@ -51,6 +52,7 @@ class App extends StatelessWidget {
       ),
       home: AsyncInitWidget(
         initFunction: () async {
+          await refreshPersonalNutriScore();
           await TranslationService().init();
         },
         child: const Scaffold(body: Routing()),

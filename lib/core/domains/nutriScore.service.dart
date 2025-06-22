@@ -7,7 +7,7 @@ Future<void> refreshPersonalNutriScore() async {
       await NutriScoreRepository().getPersonalNutriScore();
 
   if (personalNutriScore != null) {
-    nutriScoreState.maximumNutriScore.value = NutriScore(
+    nutriScoreState.personalNutriScore.value = NutriScore(
       proteinAmount: personalNutriScore.proteinAmount,
       glucidAmount: personalNutriScore.glucidAmount,
       lipidAmount: personalNutriScore.lipidAmount,
@@ -17,5 +17,5 @@ Future<void> refreshPersonalNutriScore() async {
 }
 
 Future<void> setPersonalNutriScore(NutriScore nutriScore) async {
-  
+  await NutriScoreRepository().setPersonalNutriScore(nutriScore);
 }
