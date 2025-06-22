@@ -3,6 +3,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/client/widgets/AsyncInitWidget.dart';
 import 'package:kalori/client/Routing.dart';
+import 'package:kalori/core/domains/meal.state.dart';
 import 'package:kalori/core/domains/nutriScore.state.dart';
 import 'package:kalori/core/domains/user.state.dart';
 import 'package:kalori/core/services/Error.service.dart';
@@ -25,6 +26,7 @@ void main() async {
         
         ChangeNotifierProvider(create: (context) => nutriScoreState),
         ChangeNotifierProvider(create: (context) => quickAddMealState),
+        ChangeNotifierProvider(create: (context) => mealState),
       ],
       child: const App(),
     ),

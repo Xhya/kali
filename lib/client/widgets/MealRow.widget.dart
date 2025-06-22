@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/widgets/MealPeriodTag.widget.dart';
-import 'package:kalori/core/models/NutriScore.model.dart';
+import 'package:kalori/core/models/Meal.model.dart';
 
 class MealRowWidget extends StatefulWidget {
-  const MealRowWidget({super.key, required this.nutriScore});
+  const MealRowWidget({super.key, required this.meal});
 
-  final NutriScore nutriScore;
+  final MealModel meal;
 
   @override
   State<MealRowWidget> createState() => _MealPeriodTagWidgetState();
@@ -21,10 +21,10 @@ class _MealPeriodTagWidgetState extends State<MealRowWidget> {
           child: Row(
             spacing: 4,
             children: [
-              MealPeriodTagWidget(mealPeriod: widget.nutriScore.period),
+              MealPeriodTagWidget(mealPeriod: widget.meal.period),
               Expanded(
                 child: Text(
-                  widget.nutriScore.mealDescription,
+                  widget.meal.mealDescription,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                 ),
@@ -32,7 +32,8 @@ class _MealPeriodTagWidgetState extends State<MealRowWidget> {
             ],
           ),
         ),
-        Text("${widget.nutriScore.caloryAmount.toString()} kcal"),
+        if (widget.meal.nutriScore != null)
+          Text("${widget.meal.nutriScore!.caloryAmount.toString()} kcal"),
       ],
     );
   }

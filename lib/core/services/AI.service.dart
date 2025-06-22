@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:kalori/core/domains/ai.repository.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
-import 'package:kalori/core/utils/computeMealPeriod.utils.dart';
 import 'package:uuid/uuid.dart';
 
 var aiService = AIService();
@@ -16,10 +15,10 @@ class AIService {
 
     return NutriScore(
       id: _uuid.v6(),
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-      mealDescription: userText,
-      period: computeMealPeriod(DateTime.now()),
+      // createdAt: DateTime.now(),
+      // updatedAt: DateTime.now(),
+      // mealDescription: userText,
+      // period: computeMealPeriod(DateTime.now()),
       proteinAmount: nutriScoreJson["proteinAmount"],
       lipidAmount: nutriScoreJson["lipidAmount"],
       glucidAmount: nutriScoreJson["glucidAmount"],

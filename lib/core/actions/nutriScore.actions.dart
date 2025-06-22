@@ -1,22 +1,24 @@
 import 'package:kalori/client/states/quickAddMeal.state.dart';
-import 'package:kalori/core/domains/nutriScore.repository.dart';
-import 'package:kalori/core/domains/nutriScore.state.dart';
-import 'package:kalori/core/models/NutriScore.model.dart';
+import 'package:kalori/core/domains/meal.repository.dart';
+import 'package:kalori/core/domains/meal.state.dart';
+import 'package:kalori/core/models/Meal.model.dart';
 import 'package:kalori/core/services/AI.service.dart';
 import 'package:kalori/core/services/Error.service.dart';
+import 'package:kalori/core/utils/computeMealPeriod.utils.dart';
+import 'package:uuid/uuid.dart';
 
 initHomeScreen() async {
   try {
-    await _refreshNutriScores();
+    await _refreshMeals();
   } catch (e) {
     errorService.notifyError(e);
   }
 }
 
-_refreshNutriScores() async {
+_refreshMeals() async {
   try {
-    final list = await NutriScoreRepository().getNutriScores();
-    nutriScoreState.userNutriScores.value = List.from(list);
+    final list = await MealRepository().getMeals();
+    mealState.userMeals.value = List.from(list);
   } catch (e) {
     errorService.notifyError(e);
   }
@@ -26,7 +28,15 @@ computeNutriScore(String userText) async {
   try {
     quickAddMealState.isLoading.value = true;
     final nutriScore = await aiService.computeNutriScore(userText);
-    await _addNutriScore(nutriScore);
+    final meal = MealModel(
+      id: Uuid().v6(),
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+      mealDescription: userText,
+      period: computeMealPeriod(DateTime.now()),
+      nutriScore: nutriScore,
+    );
+    await _addNutriScore(meal);
     // nutriScoreState.currentNutriScore.value = nutriScore;
     quickAddMealState.isLoading.value = false;
     quickAddMealState.userMealText.value = "";
@@ -37,10 +47,10 @@ computeNutriScore(String userText) async {
   }
 }
 
-_addNutriScore(NutriScore nutriScore) async {
+_addNutriScore(MealModel meal) async {
   try {
-    await NutriScoreRepository().addNutriScore(nutriScore);
-    await _refreshNutriScores();
+    await MealRepository().addMeal(meal);
+    await _refreshMeals();
   } catch (e) {
     errorService.notifyError(e);
   }

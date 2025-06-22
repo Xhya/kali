@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kalori/client/widgets/MealPeriodTag.widget.dart';
 import 'package:kalori/client/widgets/MealRow.widget.dart';
 import 'package:kalori/client/widgets/NutriScoreGauges.widget.dart';
 import 'package:kalori/core/actions/nutriScore.actions.dart';
-import 'package:kalori/core/models/NutriScore.model.dart';
-import 'package:kalori/core/services/Translation.service.dart';
+import 'package:kalori/core/domains/meal.state.dart';
+import 'package:kalori/core/models/Meal.model.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kalori/client/Style.service.dart';
@@ -27,23 +26,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<NutriScore> nutriScores =
-        context.watch<NutriScoreState>().userNutriScores.value;
+    List<MealModel> meals = context.watch<MealState>().userMeals.value;
 
-    final lipidAmountDayAverage = nutriScores.fold(
+    final lipidAmountDayAverage = meals.fold(
       0,
-      (sum, curr) => sum + curr.lipidAmount.toInt(),
+      (sum, curr) => sum + (curr.nutriScore?.lipidAmount.toInt() ?? 0),
     );
-    final proteinAmountDayAverage = nutriScores.fold(
+    final proteinAmountDayAverage = meals.fold(
       0,
-      (sum, curr) => sum + curr.proteinAmount.toInt(),
+      (sum, curr) => sum + (curr.nutriScore?.proteinAmount.toInt() ?? 0),
     );
-    final glucidAmountDayAverage = nutriScores.fold(
+    final glucidAmountDayAverage = meals.fold(
       0,
-      (sum, curr) => sum + curr.glucidAmount.toInt(),
+      (sum, curr) => sum + (curr.nutriScore?.glucidAmount.toInt() ?? 0),
     );
 
-    final lastNutriScore = nutriScores.isNotEmpty ? nutriScores.last : null;
+    final lastMeal = meals.isNotEmpty ? meals.last : null;
 
     return BaseScaffold(
       child: Scaffold(
@@ -55,8 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (lastNutriScore != null)
-                MealRowWidget(nutriScore: lastNutriScore),
+              if (lastMeal != null) MealRowWidget(meal: lastMeal),
               SizedBox(height: 32),
               Expanded(
                 child: NutriScoreGaugesWidget(
