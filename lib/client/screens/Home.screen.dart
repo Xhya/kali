@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kalori/client/widgets/MealPeriodTag.widget.dart';
+import 'package:kalori/client/widgets/MealRow.widget.dart';
+import 'package:kalori/client/widgets/NutriScoreGauges.widget.dart';
 import 'package:kalori/core/actions/nutriScore.actions.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
 import 'package:kalori/core/services/Translation.service.dart';
@@ -27,37 +30,39 @@ class _HomeScreenState extends State<HomeScreen> {
     List<NutriScore> nutriScores =
         context.watch<NutriScoreState>().userNutriScores.value;
 
+    final lipidAmountDayAverage = nutriScores.fold(
+      0,
+      (sum, curr) => sum + curr.lipidAmount.toInt(),
+    );
+    final proteinAmountDayAverage = nutriScores.fold(
+      0,
+      (sum, curr) => sum + curr.proteinAmount.toInt(),
+    );
+    final glucidAmountDayAverage = nutriScores.fold(
+      0,
+      (sum, curr) => sum + curr.glucidAmount.toInt(),
+    );
+
+    final lastNutriScore = nutriScores.isNotEmpty ? nutriScores.last : null;
+
     return BaseScaffold(
       child: Scaffold(
         body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
           color: style.background.neutral.color,
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Expanded(
-              //   child:
-              //       nutriScore == null
-              //           ? SizedBox.expand()
-              //           : NutriScoreGaugesWidget(nutriScore: nutriScore),
-              // ),
+              if (lastNutriScore != null)
+                MealRowWidget(nutriScore: lastNutriScore),
+              SizedBox(height: 32),
               Expanded(
-                child: ListView.builder(
-                  itemCount: nutriScores.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final nutriScore = nutriScores[index];
-                    return Padding(
-                      padding: EdgeInsets.only(bottom: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(nutriScore.mealDescription),
-                          Text(t(nutriScore.period.label)),
-                          Text(nutriScore.caloryAmount.toString()),
-                        ],
-                      ),
-                    );
-                  },
+                child: NutriScoreGaugesWidget(
+                  lipidAmount: lipidAmountDayAverage,
+                  glucidAmount: glucidAmountDayAverage,
+                  proteinAmount: proteinAmountDayAverage,
                 ),
               ),
               QuickAddMealWidget(),
