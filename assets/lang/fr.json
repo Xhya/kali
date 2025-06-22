@@ -1,7 +1,11 @@
 {
   "add": "Ajouter",
+  "breakfast": "petit déjeuner",
   "describe_your_meal": "Décrivez votre repas",
-  "proteins": "Protéines",
+  "dinner": "dîner",
+  "glucids": "Glucides",
   "lipids": "Lipides",
-  "glucids": "Glucides"
+  "lunch": "déjeuner",
+  "proteins": "Protéines",
+  "snack": "goûter"
 }

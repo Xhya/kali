@@ -12,15 +12,18 @@ class NutriScoreData {
   final _storage = const FlutterSecureStorage();
   final _uuid = Uuid();
 
-  List<NutriScore> _nutriScores = fixtureNutriScores;
+  List<NutriScore> _nutriScores = [];
 
   reset() async {
-    _nutriScores = fixtureNutriScores;
+    _nutriScores = [];
   }
 
   _store() async {
     if (!isInTestEnv) {
-      // await _storage.write(key: challengeStoreKey, value: jsonEncode(_challenge));
+      await _storage.write(
+        key: nutriScoresStoreKey,
+        value: jsonEncode(_nutriScores),
+      );
     }
   }
 
@@ -30,10 +33,24 @@ class NutriScoreData {
       if (str == null) {
         return _nutriScores;
       }
-      var json = jsonDecode(str);
-      return json.map((e) => NutriScore.fromJson(e)).toList();
+      final json = jsonDecode(str);
+      return (json as List).map((e) => NutriScore.fromJson(e)).toList();
     } else {
       return _nutriScores;
+    }
+  }
+
+  Future<void> addNutriScore(NutriScore nutriScore) async {
+    if (!isInTestEnv) {
+      var str = await _storage.read(key: nutriScoresStoreKey);
+      str ??= "[]";
+      var json = jsonDecode(str);
+      final nutriScores = json.map((e) => NutriScore.fromJson(e)).toList();
+      nutriScores.add(nutriScore);
+      await _store();
+      return;
+    } else {
+      return;
     }
   }
 }

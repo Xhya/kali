@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/core/actions/nutriScore.actions.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
+import 'package:kalori/core/services/Translation.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kalori/client/Style.service.dart';
@@ -47,7 +48,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     final nutriScore = nutriScores[index];
                     return Padding(
                       padding: EdgeInsets.only(bottom: 10),
-                      child: Text(nutriScore.mealDescription),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(nutriScore.mealDescription),
+                          Text(t(nutriScore.period.label)),
+                        ],
+                      ),
                     );
                   },
                 ),

@@ -5,4 +5,8 @@ class NutriScoreRepository {
   Future<List<NutriScore>> getNutriScores() async {
     return await nutriScoreData.getNutriScores();
   }
+
+  Future<void> addNutriScore(NutriScore nutriScore) async {
+    await nutriScoreData.addNutriScore(nutriScore);
+  }
 }
