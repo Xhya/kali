@@ -45,6 +45,9 @@ class _RoutingState extends State<Routing> {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         showModalBottomSheet(
           context: navigationService.context!,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
           builder: (BuildContext context) {
             if (navigationService.bottomSheet != null) {
               return navigationService.bottomSheet!;

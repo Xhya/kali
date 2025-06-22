@@ -1,5 +1,6 @@
 import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/core/domains/meal.service.dart';
+import 'package:kalori/core/services/Navigation.service.dart';
 import 'package:kalori/core/utils/computeDayAverages.utils.dart';
 import 'package:kalori/core/domains/nutriScore.service.dart';
 import 'package:kalori/core/models/Meal.model.dart';
@@ -35,12 +36,9 @@ onAddMeal() async {
     computeDayAverages();
     quickAddMealState.isLoading.value = false;
     quickAddMealState.userMealText.value = "";
-    quickAddMealState.isInAddingMode.value = false;
+    navigationService.closeBottomSheet();
   } catch (e) {
     quickAddMealState.isLoading.value = false;
     errorService.notifyError(e);
   }
 }
-
-
-

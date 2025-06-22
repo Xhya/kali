@@ -18,7 +18,7 @@ void main() {
     expect(mealState.currentMeal.value, fixtureMeal1);
     expect(navigationService.currentScreen, ScreenEnum.meal);
 
-    goToMealScreen(fixtureMeal1);
+    goToMealsScreen();
     expect(navigationService.currentScreen, ScreenEnum.meals);
   });
 }
