@@ -1,9 +1,17 @@
 class NutriScore {
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final String mealDescription;
   final double proteinAmount;
   final double glucidAmount;
   final double lipidAmount;
 
   NutriScore({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.mealDescription,
     required this.proteinAmount,
     required this.glucidAmount,
     required this.lipidAmount,
@@ -11,6 +19,10 @@ class NutriScore {
 
   factory NutriScore.fromJson(Map<String, dynamic> json) {
     return NutriScore(
+      id: json['id'] as String,
+      createdAt: DateTime.parse(json['createdAt']).toLocal(),
+      updatedAt: DateTime.parse(json['updatedAt']).toLocal(),
+      mealDescription: json['mealDescription'] as String,
       lipidAmount: json['lipidAmount'] as double,
       glucidAmount: json['glucidAmount'] as double,
       proteinAmount: json['proteinAmount'] as double,
@@ -18,6 +30,14 @@ class NutriScore {
   }
 
   Map<String, dynamic> toJson() {
-    return {'lipidAmount': lipidAmount, 'glucidAmount': glucidAmount, 'proteinAmount': proteinAmount};
+    return {
+      'id': id,
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+      'mealDescription': mealDescription,
+      'lipidAmount': lipidAmount,
+      'glucidAmount': glucidAmount,
+      'proteinAmount': proteinAmount,
+    };
   }
 }

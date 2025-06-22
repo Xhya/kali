@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/widgets/NutriScoreGauges.widget.dart';
+import 'package:kalori/core/actions/nutriScore.actions.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
@@ -16,9 +17,17 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    super.initState();
+    initHomeScreen();
+  }
+
+  @override
   Widget build(BuildContext context) {
     NutriScore? nutriScore =
         context.watch<NutriScoreState>().currentNutriScore.value;
+    List<NutriScore> nutriScores =
+        context.watch<NutriScoreState>().userNutriScores.value;
 
     return BaseScaffold(
       child: Scaffold(
@@ -28,11 +37,23 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Expanded(
+              //   child:
+              //       nutriScore == null
+              //           ? SizedBox.expand()
+              //           : NutriScoreGaugesWidget(nutriScore: nutriScore),
+              // ),
               Expanded(
-                child:
-                    nutriScore == null
-                        ? SizedBox.expand()
-                        : NutriScoreGaugesWidget(nutriScore: nutriScore),
+                child: ListView.builder(
+                  itemCount: nutriScores.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final nutriScore = nutriScores[index];
+                    return Padding(
+                      padding: EdgeInsets.only(bottom: 10),
+                      child: Text(nutriScore.id),
+                    );
+                  },
+                ),
               ),
               QuickAddMealWidget(),
             ],

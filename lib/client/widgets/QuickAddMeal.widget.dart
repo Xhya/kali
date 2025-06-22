@@ -4,7 +4,6 @@ import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/client/widgets/CustomButton.widget.dart';
 import 'package:kalori/client/widgets/LoaderIcon.widget.dart';
 import 'package:kalori/core/actions/nutriScore.actions.dart';
-import 'package:kalori/core/domains/nutriScore.state.dart';
 import 'package:kalori/core/services/Translation.service.dart';
 
 onAddNewMeal() {
@@ -47,7 +46,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
       padding: EdgeInsets.only(
         left: 16,
         right: 16,
-        bottom: userMealText.isNotEmpty ? 8 : 16,
+        bottom: userMealText.isNotEmpty ? 16 : 16,
       ),
       child: Row(
         mainAxisAlignment:
