@@ -9,6 +9,7 @@ import 'package:uuid/uuid.dart';
 initHomeScreen() async {
   try {
     await refreshMeals();
+    computeDayAverages();
   } catch (e) {
     errorService.notifyError(e);
   }

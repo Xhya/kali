@@ -1,12 +1,12 @@
 class NutriScore {
-  final String id;
-  final double proteinAmount;
-  final double glucidAmount;
-  final double lipidAmount;
-  final double caloryAmount;
+  String? id;
+  double proteinAmount;
+  double glucidAmount;
+  double lipidAmount;
+  double caloryAmount;
 
   NutriScore({
-    required this.id,
+    this.id,
     required this.proteinAmount,
     required this.glucidAmount,
     required this.lipidAmount,

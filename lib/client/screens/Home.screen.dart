@@ -26,20 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     List<MealModel> meals = context.watch<MealState>().userMeals.value;
-
-    final lipidAmountDayAverage = meals.fold(
-      0,
-      (sum, curr) => sum + (curr.nutriScore?.lipidAmount.toInt() ?? 0),
-    );
-    final proteinAmountDayAverage = meals.fold(
-      0,
-      (sum, curr) => sum + (curr.nutriScore?.proteinAmount.toInt() ?? 0),
-    );
-    final glucidAmountDayAverage = meals.fold(
-      0,
-      (sum, curr) => sum + (curr.nutriScore?.glucidAmount.toInt() ?? 0),
-    );
-
+    
     final lastMeal = meals.isNotEmpty ? meals.last : null;
 
     return BaseScaffold(
@@ -55,11 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
               if (lastMeal != null) MealRowWidget(meal: lastMeal),
               SizedBox(height: 32),
               Expanded(
-                child: NutriScoreGaugesWidget(
-                  lipidAmount: lipidAmountDayAverage,
-                  glucidAmount: glucidAmountDayAverage,
-                  proteinAmount: proteinAmountDayAverage,
-                ),
+                child: NutriScoreGaugesWidget(),
               ),
               QuickAddMealWidget(),
             ],
