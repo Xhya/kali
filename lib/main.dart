@@ -23,7 +23,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => userState),
         ChangeNotifierProvider(create: (context) => navigationService),
         ChangeNotifierProvider(create: (context) => errorService),
-        
+
         ChangeNotifierProvider(create: (context) => nutriScoreState),
         ChangeNotifierProvider(create: (context) => quickAddMealState),
         ChangeNotifierProvider(create: (context) => mealState),
@@ -40,7 +40,12 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'kalori',
-      theme: ThemeData(fontFamily: 'Barlow'),
+      theme: ThemeData(
+        fontFamily: 'Barlow',
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blue,
+        ),
+      ),
       home: AsyncInitWidget(
         initFunction: () async {
           await TranslationService().init();

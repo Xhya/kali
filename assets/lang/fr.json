@@ -1,5 +1,6 @@
 {
   "add": "Ajouter",
+  "age": "age",
   "breakfast": "petit déjeuner",
   "calories": "Calories",
   "describe_your_meal": "Décrivez votre repas",
@@ -8,5 +9,7 @@
   "lipids": "Lipides",
   "lunch": "déjeuner",
   "proteins": "Protéines",
-  "snack": "goûter"
+  "size": "taille",
+  "snack": "goûter",
+  "weight": "poids"
 }
