@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kalori/client/widgets/NutriScoreGauges.widget.dart';
 import 'package:kalori/core/actions/nutriScore.actions.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
 import 'package:provider/provider.dart';
@@ -24,8 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    NutriScore? nutriScore =
-        context.watch<NutriScoreState>().currentNutriScore.value;
     List<NutriScore> nutriScores =
         context.watch<NutriScoreState>().userNutriScores.value;
 
@@ -50,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     final nutriScore = nutriScores[index];
                     return Padding(
                       padding: EdgeInsets.only(bottom: 10),
-                      child: Text(nutriScore.id),
+                      child: Text(nutriScore.mealDescription),
                     );
                   },
                 ),

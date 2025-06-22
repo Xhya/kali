@@ -1,3 +1,4 @@
+import 'package:kalori/core/models/MealPeriod.enum.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
 
 final fixtureNutriScores = [
@@ -9,6 +10,7 @@ final fixtureNutriScore1 = NutriScore(
   createdAt: DateTime.now(),
   updatedAt: DateTime.now(),
   mealDescription: "100g Pizza",
+  period: MealPeriodEnum.breakfast,
   proteinAmount: 30,
   lipidAmount: 20,
   glucidAmount: 50,
