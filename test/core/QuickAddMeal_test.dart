@@ -1,6 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
+import 'package:kalori/core/actions/nutriScore.actions.dart';
+import 'package:kalori/core/domains/meal.state.dart';
+import 'package:kalori/core/models/meal.fixture.dart';
 
 void main() {
   setUp(() async {
@@ -8,41 +11,30 @@ void main() {
     // await todoItemService.refreshTodoItems();
   });
 
-  test('should turn to addingMode', () async {
+  test('quick add meal scenario', () async {
     expect(quickAddMealState.isInAddingMode.value, false);
-    onAddNewMeal();
+    await initHomeScreen();
+    expect(mealState.userMeals.value.length, 1);
+    onOpenQuickAddMode();
     expect(quickAddMealState.isInAddingMode.value, true);
-    onCloseAddNewMeal();
+    onCloseQuickAddMode();
     expect(quickAddMealState.isInAddingMode.value, false);
-    onAddNewMeal();
+    onOpenQuickAddMode();
     expect(quickAddMealState.isInAddingMode.value, true);
     onUpdateUserMealText("Pizza");
     expect(quickAddMealState.userMealText.value, "Pizza");
-    onCloseAddNewMeal();
+    onCloseQuickAddMode();
     expect(quickAddMealState.userMealText.value.isEmpty, true);
-  });
-
-  test('can select all items', () async {
-    // todosState.setNewItemName("Pain");
-    // await validateNewItemName();
-    // todosState.setNewItemName("Tomate");
-    // await validateNewItemName();
-    // todosState.setNewItemName("Oignon");
-    // await validateNewItemName();
-
-    // // Ensure there are multiple todo items
-    // expect(todosState.todos.length, greaterThan(1));
-
-    // // Call the onSelectAll function to select all items
-    // todosState.onSelectAll(true);
-
-    // // Verify all items are marked as done
-    // expect(todosState.todos.every((todo) => todo.isDone == true), true);
-
-    // // Call the onSelectAll function to deselect all items
-    // todosState.onSelectAll(false);
-
-    // // Verify all items are marked as not done
-    // expect(todosState.todos.every((todo) => todo.isDone == false), true);
+    onOpenQuickAddMode();
+    expect(quickAddMealState.isInAddingMode.value, true);
+    onUpdateUserMealText(fixtureMeal2.mealDescription);
+    expect(quickAddMealState.userMealText.value, fixtureMeal2.mealDescription);
+    await onAddMeal();
+    expect(mealState.userMeals.value.length, 2);
+    expect(mealState.userMeals.value.last.mealDescription, fixtureMeal2.mealDescription);
+    expect(mealState.userMeals.value.last.nutriScore!.caloryAmount, fixtureMeal2.nutriScore!.caloryAmount);
+    expect(mealState.userMeals.value.last.nutriScore!.glucidAmount, fixtureMeal2.nutriScore!.glucidAmount);
+    expect(mealState.userMeals.value.last.nutriScore!.lipidAmount, fixtureMeal2.nutriScore!.lipidAmount);
+    expect(mealState.userMeals.value.last.nutriScore!.proteinAmount, fixtureMeal2.nutriScore!.proteinAmount);
   });
 }

@@ -14,3 +14,12 @@ final fixtureMeal1 = MealModel(
   period: MealPeriodEnum.breakfast,
   nutriScore: fixtureNutriScore1,
 );
+
+final fixtureMeal2 = MealModel(
+  id: "1",
+  createdAt: DateTime.now(),
+  updatedAt: DateTime.now(),
+  mealDescription: "200g viande",
+  period: MealPeriodEnum.breakfast,
+  nutriScore: fixtureNutriScore1,
+);

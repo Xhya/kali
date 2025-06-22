@@ -15,10 +15,6 @@ class AIService {
 
     return NutriScore(
       id: _uuid.v6(),
-      // createdAt: DateTime.now(),
-      // updatedAt: DateTime.now(),
-      // mealDescription: userText,
-      // period: computeMealPeriod(DateTime.now()),
       proteinAmount: nutriScoreJson["proteinAmount"],
       lipidAmount: nutriScoreJson["lipidAmount"],
       glucidAmount: nutriScoreJson["glucidAmount"],

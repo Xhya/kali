@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kalori/core/models/Meal.model.dart';
+import 'package:kalori/core/models/meal.fixture.dart';
 import 'package:kalori/environment.dart';
 import 'package:uuid/uuid.dart';
 
@@ -13,16 +14,21 @@ class MealData {
 
   List<MealModel> _meals = [];
 
+  MealData() {
+    reset();
+  }
+
   reset() async {
-    _meals = [];
+    if (!isInTestEnv) {
+      _meals = await getMeals();
+    } else {
+      _meals = fixtureMeals;
+    }
   }
 
   _store() async {
     if (!isInTestEnv) {
-      await _storage.write(
-        key: mealStoreKey,
-        value: jsonEncode(_meals),
-      );
+      await _storage.write(key: mealStoreKey, value: jsonEncode(_meals));
     }
   }
 
@@ -49,6 +55,7 @@ class MealData {
       await _store();
       return;
     } else {
+      _meals = [..._meals, meal];
       return;
     }
   }

@@ -14,8 +14,9 @@ initHomeScreen() async {
   }
 }
 
-onAddMeal(String userText) async {
+onAddMeal() async {
   try {
+    final userText = quickAddMealState.userMealText.value;
     final nutriScore = await computeNutriScore(userText);
     final meal = MealModel(
       id: Uuid().v6(),

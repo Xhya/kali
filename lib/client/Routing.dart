@@ -59,7 +59,7 @@ class _RoutingState extends State<Routing> {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         showDialog(
           useSafeArea: false,
-          barrierDismissible: false,
+          barrierDismissible: true,
           context: context,
           builder: (BuildContext context) {
             return Dialog(
