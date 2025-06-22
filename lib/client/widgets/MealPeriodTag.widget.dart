@@ -4,9 +4,14 @@ import 'package:kalori/core/models/MealPeriod.enum.dart';
 import 'package:kalori/core/services/Translation.service.dart';
 
 class MealPeriodTagWidget extends StatefulWidget {
-  const MealPeriodTagWidget({super.key, required this.mealPeriod});
+  const MealPeriodTagWidget({
+    super.key,
+    required this.mealPeriod,
+    this.disabled = false,
+  });
 
   final MealPeriodEnum mealPeriod;
+  final bool disabled;
 
   @override
   State<MealPeriodTagWidget> createState() => _MealPeriodTagWidgetState();
@@ -16,7 +21,9 @@ class _MealPeriodTagWidgetState extends State<MealPeriodTagWidget> {
   @override
   Widget build(BuildContext context) {
     final color =
-        widget.mealPeriod == MealPeriodEnum.breakfast
+        widget.disabled
+            ? Colors.grey
+            : widget.mealPeriod == MealPeriodEnum.breakfast
             ? Colors.amber
             : widget.mealPeriod == MealPeriodEnum.lunch
             ? Colors.red

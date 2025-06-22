@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/Style.service.dart';
+import 'package:kalori/core/domains/editMeal.state.dart';
 import 'package:kalori/core/domains/nutriScore.state.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +29,8 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
         context.watch<NutriScoreState>().currentNutriScore.value;
     NutriScore? maxNutriScore =
         context.watch<NutriScoreState>().personalNutriScore.value;
+    NutriScore? editingNutriScore =
+        context.watch<EditMealState>().editingNutriScore.value;
 
     if (currentNutriScore != null && maxNutriScore != null) {
       return Row(
@@ -48,6 +51,7 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
               GaugeWidget(
                 currentAmount: currentNutriScore.proteinAmount.toInt(),
                 maxAmount: maxNutriScore.proteinAmount.toInt(),
+                editingAmount: editingNutriScore?.proteinAmount.toInt(),
               ),
               Text(
                 "${currentNutriScore.proteinAmount.toStringAsFixed(0)}g",
@@ -74,6 +78,7 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
               GaugeWidget(
                 currentAmount: currentNutriScore.lipidAmount.toInt(),
                 maxAmount: maxNutriScore.lipidAmount.toInt(),
+                editingAmount: editingNutriScore?.lipidAmount.toInt(),
               ),
               Text(
                 "${currentNutriScore.lipidAmount.toStringAsFixed(0)}g",
@@ -100,6 +105,7 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
               GaugeWidget(
                 currentAmount: currentNutriScore.glucidAmount.toInt(),
                 maxAmount: maxNutriScore.glucidAmount.toInt(),
+                editingAmount: editingNutriScore?.glucidAmount.toInt(),
               ),
               Text(
                 "${currentNutriScore.glucidAmount.toStringAsFixed(0)}g",
@@ -126,6 +132,7 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
               GaugeWidget(
                 currentAmount: currentNutriScore.caloryAmount.toInt(),
                 maxAmount: maxNutriScore.caloryAmount.toInt(),
+                editingAmount: editingNutriScore?.caloryAmount.toInt(),
               ),
               Text(
                 "${currentNutriScore.caloryAmount.toStringAsFixed(0)}g",

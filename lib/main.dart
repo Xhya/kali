@@ -4,6 +4,7 @@ import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/client/states/startForm.state.dart';
 import 'package:kalori/client/widgets/AsyncInitWidget.dart';
 import 'package:kalori/client/Routing.dart';
+import 'package:kalori/core/domains/editMeal.state.dart';
 import 'package:kalori/core/domains/meal.state.dart';
 import 'package:kalori/core/domains/nutriScore.service.dart';
 import 'package:kalori/core/domains/nutriScore.state.dart';
@@ -28,6 +29,7 @@ void main() async {
 
         ChangeNotifierProvider(create: (context) => quickAddMealState),
         ChangeNotifierProvider(create: (context) => startFormState),
+        ChangeNotifierProvider(create: (context) => editMealState),
 
         ChangeNotifierProvider(create: (context) => nutriScoreState),
         ChangeNotifierProvider(create: (context) => mealState),

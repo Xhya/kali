@@ -9,11 +9,13 @@ class NutriScoreState extends ChangeNotifier {
 
   NutriScoreState() {
     currentNutriScore.addListener(notifyListeners);
+    personalNutriScore.addListener(notifyListeners);
   }
 
   @override
   void dispose() {
     currentNutriScore.dispose();
+    personalNutriScore.dispose();
     super.dispose();
   }
 }

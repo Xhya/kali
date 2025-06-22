@@ -6,10 +6,12 @@ class GaugeWidget extends StatefulWidget {
     super.key,
     required this.currentAmount,
     required this.maxAmount,
+    this.editingAmount,
   });
 
   final int currentAmount;
   final int maxAmount;
+  final int? editingAmount;
 
   @override
   State<GaugeWidget> createState() => _GaugeWidgetState();
@@ -38,6 +40,13 @@ class _GaugeWidgetState extends State<GaugeWidget> {
           thickness: 15,
           edgeStyle: LinearEdgeStyle.bothCurve,
         ),
+        if (widget.editingAmount != null)
+          LinearBarPointer(
+            value: widget.editingAmount!.toDouble(),
+            color: Colors.blue,
+            thickness: 5,
+            edgeStyle: LinearEdgeStyle.bothCurve,
+          ),
       ],
     );
   }
