@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kalori/client/Style.service.dart';
 import 'package:kalori/client/widgets/MealPeriodTag.widget.dart';
 import 'package:kalori/core/models/Meal.model.dart';
 
@@ -26,6 +27,7 @@ class _MealPeriodTagWidgetState extends State<MealRowWidget> {
               Expanded(
                 child: Text(
                   widget.meal.mealDescription,
+                  style: style.fontsize.md.merge(style.text.color1),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                 ),
@@ -34,7 +36,10 @@ class _MealPeriodTagWidgetState extends State<MealRowWidget> {
           ),
         ),
         if (widget.meal.nutriScore != null)
-          Text("${widget.meal.nutriScore!.caloryAmount.toString()} kcal"),
+          Text(
+            "${widget.meal.nutriScore!.caloryAmount.toString()} kcal",
+            style: style.fontsize.md.merge(style.text.color1),
+          ),
       ],
     );
   }

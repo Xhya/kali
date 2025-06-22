@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     List<MealModel> meals = context.watch<MealState>().userMeals.value;
-    
+
     final lastMeal = meals.isNotEmpty ? meals.last : null;
 
     return BaseScaffold(
@@ -40,10 +40,12 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (lastMeal != null) MealRowWidget(meal: lastMeal),
-              SizedBox(height: 32),
-              Expanded(
-                child: NutriScoreGaugesWidget(),
+              Text(
+                "Voir tout",
+                style: style.fontsize.xs.merge(style.text.color1),
               ),
+              SizedBox(height: 32),
+              Expanded(child: NutriScoreGaugesWidget()),
               QuickAddMealWidget(),
             ],
           ),

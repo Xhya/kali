@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kalori/client/Style.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/client/widgets/CustomButton.widget.dart';
@@ -79,7 +80,15 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                                 onAddMeal();
                               }
                             },
-                            child: isLoading ? LoaderIcon() : Text(t('add')),
+                            child:
+                                isLoading
+                                    ? LoaderIcon()
+                                    : Text(
+                                      t('add'),
+                                      style: style.fontsize.sm.merge(
+                                        style.text.color1,
+                                      ),
+                                    ),
                           ),
                         SizedBox(width: 12),
                         GestureDetector(

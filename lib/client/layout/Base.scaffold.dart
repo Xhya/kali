@@ -22,7 +22,7 @@ class _BaseScaffoldState extends State<BaseScaffold>
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(80),
+        preferredSize: Size.fromHeight(40),
         child: AppBar(
           backgroundColor: style.background.neutral.color,
           automaticallyImplyLeading: false,
