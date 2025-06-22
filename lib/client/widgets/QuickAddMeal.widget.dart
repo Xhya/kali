@@ -76,7 +76,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                           GestureDetector(
                             onTap: () {
                               if (isInAddingMode) {
-                                computeNutriScore(controller.text);
+                                onAddMeal(controller.text);
                               }
                             },
                             child: isLoading ? LoaderIcon() : Text(t('add')),

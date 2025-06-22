@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kalori/client/Style.service.dart';
 import 'package:kalori/client/layout/Base.scaffold.dart';
-import 'package:kalori/core/domains/nutriScore.state.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
