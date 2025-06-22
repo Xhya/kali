@@ -14,4 +14,5 @@ final fixtureNutriScore1 = NutriScore(
   proteinAmount: 30,
   lipidAmount: 20,
   glucidAmount: 50,
+  caloryAmount: 122,
 );

@@ -53,6 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Text(nutriScore.mealDescription),
                           Text(t(nutriScore.period.label)),
+                          Text(nutriScore.caloryAmount.toString()),
                         ],
                       ),
                     );

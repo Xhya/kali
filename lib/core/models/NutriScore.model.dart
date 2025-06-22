@@ -9,6 +9,7 @@ class NutriScore {
   final double proteinAmount;
   final double glucidAmount;
   final double lipidAmount;
+  final double caloryAmount;
 
   NutriScore({
     required this.id,
@@ -19,6 +20,7 @@ class NutriScore {
     required this.proteinAmount,
     required this.glucidAmount,
     required this.lipidAmount,
+    required this.caloryAmount,
   });
 
   factory NutriScore.fromJson(Map<String, dynamic> json) {
@@ -31,6 +33,7 @@ class NutriScore {
       lipidAmount: json['lipidAmount'] as double,
       glucidAmount: json['glucidAmount'] as double,
       proteinAmount: json['proteinAmount'] as double,
+      caloryAmount: json['caloryAmount'] as double,
     );
   }
 
@@ -44,6 +47,7 @@ class NutriScore {
       'lipidAmount': lipidAmount,
       'glucidAmount': glucidAmount,
       'proteinAmount': proteinAmount,
+      'caloryAmount': caloryAmount,
     };
   }
 }

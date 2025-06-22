@@ -46,7 +46,7 @@ class NutriScoreData {
       str ??= "[]";
       var json = jsonDecode(str);
       final nutriScores = json.map((e) => NutriScore.fromJson(e)).toList();
-      nutriScores.add(nutriScore);
+      _nutriScores = [...nutriScores, nutriScore];
       await _store();
       return;
     } else {

@@ -59,6 +59,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
               child: Padding(
                 padding: EdgeInsets.only(right: 12),
                 child: TextField(
+                  controller: controller,
                   onChanged: (value) {
                     onUpdateUserMealText(value);
                   },

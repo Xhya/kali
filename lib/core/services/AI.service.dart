@@ -23,6 +23,7 @@ class AIService {
       proteinAmount: nutriScoreJson["proteinAmount"],
       lipidAmount: nutriScoreJson["lipidAmount"],
       glucidAmount: nutriScoreJson["glucidAmount"],
+      caloryAmount: nutriScoreJson["caloryAmount"],
     );
   }
 }
