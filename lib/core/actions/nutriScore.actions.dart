@@ -10,6 +10,7 @@ initHomeScreen() async {
   try {
     await refreshMeals();
     computeDayAverages();
+    computeMaxAmount();
   } catch (e) {
     errorService.notifyError(e);
   }
@@ -28,6 +29,7 @@ onAddMeal() async {
       nutriScore: nutriScore,
     );
     await addMeal(meal);
+    computeDayAverages();
     quickAddMealState.isLoading.value = false;
     quickAddMealState.userMealText.value = "";
     quickAddMealState.isInAddingMode.value = false;

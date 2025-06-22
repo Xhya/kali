@@ -41,7 +41,7 @@ computeDayAverages() {
         0,
         (sum, curr) => sum + (curr.nutriScore?.glucidAmount.toInt() ?? 0),
       );
-      
+
   nutriScoreState.currentNutriScore.value!.caloryAmount = mealState
       .userMeals
       .value
@@ -49,4 +49,23 @@ computeDayAverages() {
         0,
         (sum, curr) => sum + (curr.nutriScore?.caloryAmount.toInt() ?? 0),
       );
+}
+
+computeMaxAmount() {
+  if (nutriScoreState.maximumNutriScore.value == null) {
+    nutriScoreState.maximumNutriScore.value = NutriScore(
+      proteinAmount: 0.0,
+      glucidAmount: 0.0,
+      lipidAmount: 0.0,
+      caloryAmount: 0.0,
+    );
+  }
+
+  nutriScoreState.maximumNutriScore.value!.lipidAmount = 60;
+
+  nutriScoreState.maximumNutriScore.value!.proteinAmount = 130;
+
+  nutriScoreState.maximumNutriScore.value!.glucidAmount = 135;
+
+  nutriScoreState.maximumNutriScore.value!.caloryAmount = 1700;
 }

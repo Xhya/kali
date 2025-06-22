@@ -16,6 +16,7 @@ class _MealPeriodTagWidgetState extends State<MealRowWidget> {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      spacing: 8,
       children: [
         Expanded(
           child: Row(

@@ -23,10 +23,12 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
 
   @override
   Widget build(BuildContext context) {
-    NutriScore? nutriScore =
+    NutriScore? currentNutriScore =
         context.watch<NutriScoreState>().currentNutriScore.value;
+    NutriScore? maxNutriScore =
+        context.watch<NutriScoreState>().maximumNutriScore.value;
 
-    if (nutriScore != null) {
+    if (currentNutriScore != null && maxNutriScore != null) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -34,32 +36,64 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
             children: [
               Text(t('proteins')),
               SizedBox(height: 12),
-              GaugeWidget(percentage: nutriScore.proteinAmount.toDouble()),
-              Text("${nutriScore.proteinAmount.toString()}g"),
+              Text("${maxNutriScore.proteinAmount.toStringAsFixed(0)}g"),
+              SizedBox(height: 12),
+              GaugeWidget(
+                currentAmount: currentNutriScore.proteinAmount.toInt(),
+                maxAmount: maxNutriScore.proteinAmount.toInt(),
+              ),
+              Text("${currentNutriScore.proteinAmount.toStringAsFixed(0)}g"),
+              Text(
+                "(${((currentNutriScore.proteinAmount / maxNutriScore.proteinAmount) * 100).toStringAsFixed(0)}%)",
+              ),
             ],
           ),
           Column(
             children: [
               Text(t('lipids')),
               SizedBox(height: 12),
-              GaugeWidget(percentage: nutriScore.lipidAmount.toDouble()),
-              Text("${nutriScore.lipidAmount.toString()}g"),
+              Text("${maxNutriScore.lipidAmount.toStringAsFixed(0)}g"),
+              SizedBox(height: 12),
+              GaugeWidget(
+                currentAmount: currentNutriScore.lipidAmount.toInt(),
+                maxAmount: maxNutriScore.lipidAmount.toInt(),
+              ),
+              Text("${currentNutriScore.lipidAmount.toStringAsFixed(0)}g"),
+              Text(
+                "(${((currentNutriScore.lipidAmount / maxNutriScore.lipidAmount) * 100).toStringAsFixed(0)}%)",
+              ),
             ],
           ),
           Column(
             children: [
               Text(t('glucids')),
               SizedBox(height: 12),
-              GaugeWidget(percentage: nutriScore.glucidAmount.toDouble()),
-              Text("${nutriScore.glucidAmount.toString()}g"),
+              Text("${maxNutriScore.glucidAmount.toStringAsFixed(0)}g"),
+              SizedBox(height: 12),
+              GaugeWidget(
+                currentAmount: currentNutriScore.glucidAmount.toInt(),
+                maxAmount: maxNutriScore.glucidAmount.toInt(),
+              ),
+              Text("${currentNutriScore.glucidAmount.toStringAsFixed(0)}g"),
+              Text(
+                "(${((currentNutriScore.glucidAmount / maxNutriScore.glucidAmount) * 100).toStringAsFixed(0)}%)",
+              ),
             ],
           ),
           Column(
             children: [
               Text(t('calories')),
               SizedBox(height: 12),
-              GaugeWidget(percentage: nutriScore.caloryAmount.toDouble()),
-              Text("${nutriScore.caloryAmount.toString()}g"),
+              Text("${maxNutriScore.caloryAmount.toStringAsFixed(0)}g"),
+              SizedBox(height: 12),
+              GaugeWidget(
+                currentAmount: currentNutriScore.caloryAmount.toInt(),
+                maxAmount: maxNutriScore.caloryAmount.toInt(),
+              ),
+              Text("${currentNutriScore.caloryAmount.toStringAsFixed(0)}g"),
+              Text(
+                "(${((currentNutriScore.caloryAmount / maxNutriScore.caloryAmount) * 100).toStringAsFixed(0)}%)",
+              ),
             ],
           ),
         ],
