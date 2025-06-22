@@ -32,6 +32,7 @@ class TextColors {
   var color1 = TextStyle(color: _black);
   var color2 = TextStyle(color: _red);
   var color3 = TextStyle(color: _white);
+  var color4 = TextStyle(color: _blue);
 }
 
 class ButtonColors {}

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/widgets/MealRow.widget.dart';
 import 'package:kalori/client/widgets/NutriScoreGauges.widget.dart';
+import 'package:kalori/core/actions/Goto.actions.dart';
 import 'package:kalori/core/actions/nutriScore.actions.dart';
 import 'package:kalori/core/domains/meal.state.dart';
 import 'package:kalori/core/models/Meal.model.dart';
+import 'package:kalori/core/services/Translation.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kalori/client/Style.service.dart';
@@ -39,10 +41,27 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (lastMeal != null) MealRowWidget(meal: lastMeal),
-              Text(
-                "Voir tout",
-                style: style.fontsize.xs.merge(style.text.color1),
+              if (lastMeal != null)
+                GestureDetector(
+                  onTap: () {
+                    goToMealScreen(lastMeal);
+                  },
+                  child: MealRowWidget(meal: lastMeal),
+                ),
+              Flex(
+                direction: Axis.horizontal,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      goToMealsScreen();
+                    },
+                    child: Text(
+                      t("see_all"),
+                      style: style.fontsize.xs.merge(style.text.color4),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 32),
               Expanded(child: NutriScoreGaugesWidget()),

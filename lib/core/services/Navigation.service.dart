@@ -3,7 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'package:kalori/core/services/Error.service.dart';
 
 enum ScreenEnum {
+  startForm,
   home,
+  meal,
+  meals,
 }
 
 var navigationService = NavigationService();

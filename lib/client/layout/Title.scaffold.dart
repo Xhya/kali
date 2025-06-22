@@ -1,5 +1,5 @@
-import 'package:thirtydayschallenge/core/services/Navigation.service.dart';
-import 'package:thirtydayschallenge/client/Style.service.dart';
+import 'package:kalori/client/Style.service.dart';
+import 'package:kalori/core/services/Navigation.service.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +29,7 @@ class TitleScaffold extends StatelessWidget {
         ),
         title: Text(
           title,
-          style: style.text.primary
+          style: style.text.color1
               .merge(style.fontsize.lg)
               .merge(style.fontweight.bold),
         ),
