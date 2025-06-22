@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/layout/Title.scaffold.dart';
 import 'package:kalori/client/widgets/MealRow.widget.dart';
-import 'package:kalori/core/actions/Goto.actions.dart';
+import 'package:kalori/client/widgets/NutriScoreGauges.widget.dart';
 import 'package:kalori/core/domains/meal.state.dart';
 import 'package:kalori/core/models/Meal.model.dart';
+import 'package:kalori/core/services/Error.service.dart';
 import 'package:kalori/core/services/Translation.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/Style.service.dart';
 
-class MealsScreen extends StatefulWidget {
-  const MealsScreen({super.key});
+class MealScreen extends StatefulWidget {
+  const MealScreen({super.key});
 
   @override
-  State<MealsScreen> createState() => _MealsScreenState();
+  State<MealScreen> createState() => _MealScreenState();
 }
 
-class _MealsScreenState extends State<MealsScreen> {
+class _MealScreenState extends State<MealScreen> {
   @override
   Widget build(BuildContext context) {
-    List<MealModel> meals = context.watch<MealState>().userMeals.value;
+    MealModel? meal = context.watch<MealState>().currentMeal.value;
+
+    if (meal == null) {
+      errorService.notifyError("Missing meal");
+      return SizedBox.shrink();
+    }
 
     return TitleScaffold(
       title: t("meal"),
@@ -28,20 +34,8 @@ class _MealsScreenState extends State<MealsScreen> {
           width: MediaQuery.of(context).size.width,
           color: style.background.neutral.color,
           padding: EdgeInsets.all(16),
-          child: ListView.builder(
-            itemCount: meals.length,
-            itemBuilder: (BuildContext context, int index) {
-              final meal = meals[index];
-              return GestureDetector(
-                onTap: () {
-                  goToMealScreen(meal);
-                },
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 6),
-                  child: MealRowWidget(meal: meal),
-                ),
-              );
-            },
+          child: Column(
+            children: [MealRowWidget(meal: meal), NutriScoreGaugesWidget()],
           ),
         ),
       ),
