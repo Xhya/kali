@@ -42,35 +42,38 @@ class _HomeScreenState extends State<HomeScreen> {
     return BaseScaffold(
       child: Scaffold(
         body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (lastMeal != null)
-                GestureDetector(
-                  onTap: () {
-                    goToMealScreen(lastMeal);
-                  },
-                  child: MealRowWidget(meal: lastMeal),
-                ),
-              if (lastMeal != null)
-                Flex(
-                  direction: Axis.horizontal,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        goToMealsScreen();
-                      },
-                      child: Text(
-                        t("see_all"),
-                        style: style.fontsize.xs.merge(style.text.color4),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (lastMeal != null)
+                  GestureDetector(
+                    onTap: () {
+                      goToMealScreen(lastMeal);
+                    },
+                    child: MealRowWidget(meal: lastMeal),
+                  ),
+                if (lastMeal != null)
+                  Flex(
+                    direction: Axis.horizontal,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          goToMealsScreen();
+                        },
+                        child: Text(
+                          t("see_all"),
+                          style: style.fontsize.xs.merge(style.text.color4),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              SizedBox(height: 32),
-              NutriScoreGaugesWidget(),
-            ],
+                    ],
+                  ),
+                SizedBox(height: 32),
+                NutriScoreGaugesWidget(),
+              ],
+            ),
           ),
         ),
         floatingActionButton: ButtonWidget(
