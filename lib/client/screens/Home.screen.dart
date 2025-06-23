@@ -41,11 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return BaseScaffold(
       child: Scaffold(
-        body: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          color: style.background.neutral.color,
-          padding: EdgeInsets.all(16),
+        body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -73,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               SizedBox(height: 32),
-              Expanded(child: NutriScoreGaugesWidget()),
+              NutriScoreGaugesWidget(),
             ],
           ),
         ),
