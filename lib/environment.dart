@@ -8,4 +8,7 @@ const environment = {
 
 final useFixtures = environment["USE_FIXTURES"];
 final isInTestEnv = environment["TEST"] == true;
+final isInLocalEnv = environment["ENVIRONMENT"] == "local";
+final isInDevEnv = environment["ENVIRONMENT"] == "development";
+final isInProdEnv = environment["ENVIRONMENT"] == "production";
 final String googleAIUrl = environment["GOOGLE_AI_URL"] as String;
