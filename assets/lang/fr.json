@@ -3,7 +3,7 @@
   "age": "age",
   "breakfast": "petit déjeuner",
   "calories": "Calories",
-  "describe_your_meal": "Décrivez votre repas",
+  "describe_your_meal": "Décrivez votre [0]",
   "dinner": "dîner",
   "error_message": "Une erreur est survenue. Nos équipes ont été notifié et sont sur le coup!",
   "glucids": "Glucides",

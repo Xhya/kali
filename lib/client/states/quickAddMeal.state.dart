@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/core/models/MealPeriod.enum.dart';
+import 'package:kalori/core/models/NutriScore.model.dart';
 
 var quickAddMealState = QuickAddMealState();
 
@@ -7,6 +8,7 @@ class QuickAddMealState extends ChangeNotifier {
   final isLoading = ValueNotifier<bool>(false);
   final userMealText = ValueNotifier<String>("");
   final chosenPeriod = ValueNotifier<MealPeriodEnum?>(null);
+  final nutriScore = ValueNotifier<NutriScore?>(null);
 
   QuickAddMealState() {
     isLoading.addListener(notifyListeners);

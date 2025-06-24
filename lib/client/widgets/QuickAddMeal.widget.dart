@@ -17,7 +17,7 @@ onInputUpdateUserMealText(String value) {
 }
 
 onClickAddMeal() {
-  onAddMeal();
+  addMealAction();
 }
 
 class QuickAddMealWidget extends StatefulWidget {
@@ -29,6 +29,21 @@ class QuickAddMealWidget extends StatefulWidget {
 
 class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
   TextEditingController controller = TextEditingController();
+  bool isExpanded = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    quickAddMealState.nutriScore.addListener(() {
+      final nutri = quickAddMealState.nutriScore.value;
+      if (nutri != null && !isExpanded) {
+        setState(() {
+          isExpanded = true;
+        });
+      }
+    });
+  }
 
   @override
   void dispose() {
@@ -42,54 +57,68 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
     bool isLoading = context.watch<QuickAddMealState>().isLoading.value;
 
     return Container(
+      height: 250,
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(right: 12),
-              child: TextField(
-                controller: controller,
-                onChanged: (value) {
-                  onInputUpdateUserMealText(value);
-                },
-                textCapitalization: TextCapitalization.sentences,
-                minLines: 1,
-                maxLines: 6,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: t('describe_your_meal'),
-                  suffixIcon: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (userMealText.isNotEmpty)
-                        GestureDetector(
-                          onTap: () {
-                            onClickAddMeal();
-                          },
-                          child:
-                              isLoading
-                                  ? LoaderIcon()
-                                  : Text(
-                                    t('add'),
-                                    style: style.fontsize.sm.merge(
-                                      style.text.color1,
-                                    ),
-                                  ),
-                        ),
-                      SizedBox(width: 12),
-                      GestureDetector(
-                        onTap: () {
-                          onClickCloseQuickAddMode();
-                        },
-                        child: Icon(Icons.close),
-                      ),
-                      SizedBox(width: 12),
-                    ],
+          TextField(
+            controller: controller,
+            onChanged: (value) {
+              onInputUpdateUserMealText(value);
+            },
+            textCapitalization: TextCapitalization.sentences,
+            minLines: 1,
+            maxLines: 6,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: t('describe_your_meal', [
+                quickAddMealState.chosenPeriod.value != null
+                    ? t(quickAddMealState.chosenPeriod.value!.label)
+                    : "repas",
+              ]),
+              suffixIcon: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (userMealText.isNotEmpty)
+                    GestureDetector(
+                      onTap: () {
+                        onClickAddMeal();
+                      },
+                      child:
+                          isLoading
+                              ? LoaderIcon()
+                              : Text(
+                                t('add'),
+                                style: style.fontsize.sm.merge(
+                                  style.text.color1,
+                                ),
+                              ),
+                    ),
+                  SizedBox(width: 12),
+                  GestureDetector(
+                    onTap: () {
+                      onClickCloseQuickAddMode();
+                    },
+                    child: Icon(Icons.close),
                   ),
-                ),
+                  SizedBox(width: 12),
+                ],
               ),
+            ),
+          ),
+          SizedBox(height: 12),
+          AnimatedContainer(
+            duration: Duration(seconds: 2),
+            curve: Curves.easeInOut,
+            width: isExpanded ? double.maxFinite : 0,
+            height: isExpanded ? 120 : 0,
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
+            child: Text(
+              "Voici un résumé de vos nutriments:\nProtétines: ${quickAddMealState.nutriScore.value?.proteinAmount.toInt()}g\nGlucides: ${quickAddMealState.nutriScore.value?.glucidAmount.toInt()}g\nLipides: ${quickAddMealState.nutriScore.value?.lipidAmount.toInt()}g\nCalories: ${quickAddMealState.nutriScore.value?.caloryAmount.toInt()}g",
+              maxLines: 5,
             ),
           ),
         ],

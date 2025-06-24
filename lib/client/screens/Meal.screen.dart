@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/layout/Title.scaffold.dart';
+import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/client/widgets/LoaderIcon.widget.dart';
 import 'package:kalori/client/widgets/MealPeriodTag.widget.dart';
 import 'package:kalori/client/widgets/NutriScoreGauges.widget.dart';
@@ -126,13 +127,14 @@ class _MealScreenState extends State<MealScreen> {
                   editMealState.editingUserTextMeal.value = value;
                 },
                 decoration: InputDecoration(
-                  hintText: t('describe_your_meal'),
+                  hintText: t('describe_your_meal', [
+                    quickAddMealState.chosenPeriod.value != null
+                        ? t(quickAddMealState.chosenPeriod.value!.label)
+                        : "repas",
+                  ]),
                   border: const OutlineInputBorder(),
                   suffixIcon: IconButton(
-                    icon:
-                        isLoading
-                            ? LoaderIcon()
-                            : const Icon(Icons.save),
+                    icon: isLoading ? LoaderIcon() : const Icon(Icons.save),
                     onPressed: () {
                       onUpdateMeal();
                     },
