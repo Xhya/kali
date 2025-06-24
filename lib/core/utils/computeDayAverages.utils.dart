@@ -5,10 +5,10 @@ import 'package:kalori/core/models/NutriScore.model.dart';
 void computeDayAverages() {
   if (nutriScoreState.currentNutriScore.value == null) {
     nutriScoreState.currentNutriScore.value = NutriScore(
-      proteinAmount: 0.0,
-      glucidAmount: 0.0,
-      lipidAmount: 0.0,
-      caloryAmount: 0.0,
+      proteinAmount: 0,
+      glucidAmount: 0,
+      lipidAmount: 0,
+      caloryAmount: 0,
     );
   }
 

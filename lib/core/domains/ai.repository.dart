@@ -13,7 +13,7 @@ class AIRepository {
             "parts": [
               {
                 "text":
-                    "A partir de ce texte $userText, je veux que le JSON suivant: { 'proteinAmount': {proteinAmount}, 'glucidAmount': {glucidAmount}, 'lipidAmount': {lipidAmount}, 'caloryAmount': {caloryAmount} }. Je veux que la représentation soit le JSON UNIQUEMENT. Et je veux que les données renvoyées soient en grammes, mais je veux que dans le json ce soient des doubles.",
+                    "A partir de ce texte $userText, je veux que le JSON suivant: { 'proteinAmount': {proteinAmount}, 'glucidAmount': {glucidAmount}, 'lipidAmount': {lipidAmount}, 'caloryAmount': {caloryAmount} }. Je veux que la représentation soit le JSON UNIQUEMENT. Et je veux que les données renvoyées soient en grammes, mais je veux que dans le json ce soient des int.",
               },
             ],
           },

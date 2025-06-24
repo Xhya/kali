@@ -46,10 +46,10 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                       startAngle: 180,
                       endAngle: 0,
                       minimum: 0,
-                      maximum: maxNutriScore.caloryAmount,
+                      maximum: maxNutriScore.caloryAmount.toDouble(),
                       pointers: <GaugePointer>[
                         MarkerPointer(
-                          value: currentNutriScore.caloryAmount,
+                          value: currentNutriScore.caloryAmount.toDouble(),
                           color: Colors.amber,
                           markerType: MarkerType.diamond,
                           markerHeight: 30,
@@ -69,14 +69,14 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                           startWidth: 20,
                           endWidth: 20,
                           startValue: maxNutriScore.caloryAmount / 3,
-                          endValue: maxNutriScore.caloryAmount,
+                          endValue: maxNutriScore.caloryAmount.toDouble(),
                           color: Colors.green,
                         ),
                       ],
                       annotations: <GaugeAnnotation>[
                         GaugeAnnotation(
                           widget: Text(
-                            "${currentNutriScore.caloryAmount.toStringAsFixed(0)}kcal (${((currentNutriScore.caloryAmount / maxNutriScore.caloryAmount) * 100).toStringAsFixed(0)}%)",
+                            "${currentNutriScore.caloryAmount}kcal (${((currentNutriScore.caloryAmount / maxNutriScore.caloryAmount) * 100)}%)",
                             style: style.text.color1.merge(style.fontsize.sm),
                           ),
                           angle: 90,
@@ -102,7 +102,7 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                     ),
                     SizedBox(height: 12),
                     Text(
-                      "${maxNutriScore.proteinAmount.toStringAsFixed(0)}g",
+                      "${maxNutriScore.proteinAmount}g",
                       style: style.fontsize.sm.merge(style.text.color1),
                     ),
                     SizedBox(height: 12),
@@ -115,11 +115,11 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                       ),
                     ),
                     Text(
-                      "${currentNutriScore.proteinAmount.toStringAsFixed(0)}g",
+                      "${currentNutriScore.proteinAmount}g",
                       style: style.fontsize.sm.merge(style.text.color1),
                     ),
                     Text(
-                      "(${((currentNutriScore.proteinAmount / maxNutriScore.proteinAmount) * 100).toStringAsFixed(0)}%)",
+                      "(${((currentNutriScore.proteinAmount / maxNutriScore.proteinAmount) * 100)}%)",
                       style: style.fontsize.sm.merge(style.text.color1),
                     ),
                   ],
@@ -132,7 +132,7 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                     ),
                     SizedBox(height: 12),
                     Text(
-                      "${maxNutriScore.lipidAmount.toStringAsFixed(0)}g",
+                      "${maxNutriScore.lipidAmount}g",
                       style: style.fontsize.sm.merge(style.text.color1),
                     ),
                     SizedBox(height: 12),
@@ -145,11 +145,11 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                       ),
                     ),
                     Text(
-                      "${currentNutriScore.lipidAmount.toStringAsFixed(0)}g",
+                      "${currentNutriScore.lipidAmount}g",
                       style: style.fontsize.sm.merge(style.text.color1),
                     ),
                     Text(
-                      "(${((currentNutriScore.lipidAmount / maxNutriScore.lipidAmount) * 100).toStringAsFixed(0)}%)",
+                      "(${((currentNutriScore.lipidAmount / maxNutriScore.lipidAmount) * 100)}%)",
                       style: style.fontsize.sm.merge(style.text.color1),
                     ),
                   ],
@@ -162,7 +162,7 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                     ),
                     SizedBox(height: 12),
                     Text(
-                      "${maxNutriScore.glucidAmount.toStringAsFixed(0)}g",
+                      "${maxNutriScore.glucidAmount}g",
                       style: style.fontsize.sm.merge(style.text.color1),
                     ),
                     SizedBox(height: 12),
@@ -175,11 +175,11 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                       ),
                     ),
                     Text(
-                      "${currentNutriScore.glucidAmount.toStringAsFixed(0)}g",
+                      "${currentNutriScore.glucidAmount}g",
                       style: style.fontsize.sm.merge(style.text.color1),
                     ),
                     Text(
-                      "(${((currentNutriScore.glucidAmount / maxNutriScore.glucidAmount) * 100).toStringAsFixed(0)}%)",
+                      "(${((currentNutriScore.glucidAmount / maxNutriScore.glucidAmount) * 100)}%)",
                       style: style.fontsize.sm.merge(style.text.color1),
                     ),
                   ],

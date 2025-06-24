@@ -1,9 +1,9 @@
 class NutriScore {
   String? id;
-  double proteinAmount;
-  double glucidAmount;
-  double lipidAmount;
-  double caloryAmount;
+  int proteinAmount;
+  int glucidAmount;
+  int lipidAmount;
+  int caloryAmount;
 
   NutriScore({
     this.id,
@@ -16,10 +16,10 @@ class NutriScore {
   factory NutriScore.fromJson(Map<String, dynamic> json) {
     return NutriScore(
       id: json['id'] as String,
-      lipidAmount: json['lipidAmount'] as double,
-      glucidAmount: json['glucidAmount'] as double,
-      proteinAmount: json['proteinAmount'] as double,
-      caloryAmount: json['caloryAmount'] as double,
+      lipidAmount: json['lipidAmount'] as int,
+      glucidAmount: json['glucidAmount'] as int,
+      proteinAmount: json['proteinAmount'] as int,
+      caloryAmount: json['caloryAmount'] as int,
     );
   }
 
