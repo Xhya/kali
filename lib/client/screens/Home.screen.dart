@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
-import 'package:kalori/client/widgets/CustomButton.widget.dart';
 import 'package:kalori/client/widgets/MealRow.widget.dart';
 import 'package:kalori/client/widgets/NutriScoreGauges.widget.dart';
 import 'package:kalori/core/actions/Goto.actions.dart';
 import 'package:kalori/core/actions/nutriScore.actions.dart';
 import 'package:kalori/core/domains/meal.state.dart';
 import 'package:kalori/core/models/Meal.model.dart';
+import 'package:kalori/core/models/MealPeriod.enum.dart';
 import 'package:kalori/core/services/Navigation.service.dart';
 import 'package:kalori/core/services/Translation.service.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +14,8 @@ import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kalori/client/Style.service.dart';
 import 'package:kalori/client/layout/Base.scaffold.dart';
 
-onOpenQuickAddMode() {
+onClickPeriodToQuickAddMeal({MealPeriodEnum? period}) {
+  quickAddMealState.chosenPeriod.value = period;
   quickAddMealState.userMealText.value = "";
   navigationService.openBottomSheet(widget: QuickAddMealWidget());
 }
@@ -76,13 +77,54 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        floatingActionButton: ButtonWidget(
-          text: "+",
-          onPressed: () async {
-            navigationService.context = context;
-            onOpenQuickAddMode();
-          },
-          buttonType: ButtonTypeEnum.filled,
+        bottomSheet: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.only(
+            left: 16,
+            right: 16,
+            top: 16,
+            bottom: 24,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  navigationService.context = context;
+                  onClickPeriodToQuickAddMeal(period: MealPeriodEnum.breakfast);
+                },
+                child: Text(t("breakfast")),
+              ),
+              GestureDetector(
+                onTap: () {
+                  navigationService.context = context;
+                  onClickPeriodToQuickAddMeal(period: MealPeriodEnum.lunch);
+                },
+                child: Text(t("lunch")),
+              ),
+              GestureDetector(
+                onTap: () {
+                  navigationService.context = context;
+                  onClickPeriodToQuickAddMeal(period: MealPeriodEnum.snack);
+                },
+                child: Text(t("snack")),
+              ),
+              GestureDetector(
+                onTap: () {
+                  navigationService.context = context;
+                  onClickPeriodToQuickAddMeal(period: MealPeriodEnum.dinner);
+                },
+                child: Text(t("dinner")),
+              ),
+            ],
+          ),
+          //  ButtonWidget(
+          //   text: "+",
+          //   onPressed: () async {
+
+          //   },
+          //   buttonType: ButtonTypeEnum.filled,
+          // ),
         ),
       ),
     );

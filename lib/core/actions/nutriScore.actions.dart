@@ -24,12 +24,15 @@ onAddMeal() async {
     quickAddMealState.isLoading.value = true;
     final userText = quickAddMealState.userMealText.value;
     final nutriScore = await aiService.computeNutriScore(userText);
+    final period =
+        quickAddMealState.chosenPeriod.value ??
+        computeMealPeriod(DateTime.now());
     final meal = MealModel(
       id: Uuid().v6(),
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
       mealDescription: userText,
-      period: computeMealPeriod(DateTime.now()),
+      period: period,
       nutriScore: nutriScore,
     );
     await addMeal(meal);

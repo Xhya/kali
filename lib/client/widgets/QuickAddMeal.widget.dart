@@ -7,13 +7,17 @@ import 'package:kalori/client/widgets/LoaderIcon.widget.dart';
 import 'package:kalori/core/actions/nutriScore.actions.dart';
 import 'package:kalori/core/services/Translation.service.dart';
 
-onCloseQuickAddMode() {
+onClickCloseQuickAddMode() {
   navigationService.closeBottomSheet();
   quickAddMealState.userMealText.value = "";
 }
 
-onUpdateUserMealText(String value) {
+onInputUpdateUserMealText(String value) {
   quickAddMealState.userMealText.value = value;
+}
+
+onClickAddMeal() {
+  onAddMeal();
 }
 
 class QuickAddMealWidget extends StatefulWidget {
@@ -48,7 +52,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
               child: TextField(
                 controller: controller,
                 onChanged: (value) {
-                  onUpdateUserMealText(value);
+                  onInputUpdateUserMealText(value);
                 },
                 textCapitalization: TextCapitalization.sentences,
                 minLines: 1,
@@ -62,7 +66,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                       if (userMealText.isNotEmpty)
                         GestureDetector(
                           onTap: () {
-                            onAddMeal();
+                            onClickAddMeal();
                           },
                           child:
                               isLoading
@@ -77,7 +81,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                       SizedBox(width: 12),
                       GestureDetector(
                         onTap: () {
-                          onCloseQuickAddMode();
+                          onClickCloseQuickAddMode();
                         },
                         child: Icon(Icons.close),
                       ),

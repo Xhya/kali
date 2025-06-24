@@ -39,7 +39,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
                             children: [
                               TextField(
                                 onChanged: (value) {
-                                  onUpdateUserMealText(value);
+                                  onInputUpdateUserMealText(value);
                                 },
                                 maxLines: 1,
                                 decoration: InputDecoration(
@@ -51,7 +51,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
                               SizedBox(height: 32),
                               TextField(
                                 onChanged: (value) {
-                                  onUpdateUserMealText(value);
+                                  onInputUpdateUserMealText(value);
                                 },
                                 maxLines: 1,
                                 decoration: InputDecoration(
@@ -63,7 +63,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
                               SizedBox(height: 32),
                               TextField(
                                 onChanged: (value) {
-                                  onUpdateUserMealText(value);
+                                  onInputUpdateUserMealText(value);
                                 },
                                 maxLines: 1,
                                 decoration: InputDecoration(
