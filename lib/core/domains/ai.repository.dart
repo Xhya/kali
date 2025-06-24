@@ -6,7 +6,7 @@ import 'package:kalori/utils.dart';
 
 class AIRepository {
   Future<String> computeNutriScore(String userText) async {
-    if (!isInTestEnv) {
+    if (!isInTestEnv && !isInFixturesMode) {
       var body = {
         "contents": [
           {
@@ -45,14 +45,14 @@ class AIRepository {
     required String age,
     required String weight,
   }) async {
-    if (!isInTestEnv) {
+    if (!isInTestEnv && !isInFixturesMode) {
       var body = {
         "contents": [
           {
             "parts": [
               {
                 "text":
-                    "je mesure $size cm, je pèse $weight kg et j'ai $age ans, je veux que tu me calcules le JSON suivant: { 'proteinAmount': {proteinAmount}, 'glucidAmount': {glucidAmount}, 'lipidAmount': {lipidAmount}, 'caloryAmount': {caloryAmount} }. Ce json représente les quantités en gramme maximum par jour que je peux ingérer, si je veux perdre 10kg par mois. Je veux que la représentation soit le JSON UNIQUEMENT. Et je veux que les données renvoyées soient en grammes, mais je veux que dans le json ce soient des doubles.",
+                    "je mesure $size cm, je pèse $weight kg et j'ai $age ans, je veux que tu me calcules le JSON suivant: { 'proteinAmount': {proteinAmount}, 'glucidAmount': {glucidAmount}, 'lipidAmount': {lipidAmount}, 'caloryAmount': {caloryAmount} }. Ce json représente les quantités en gramme maximum par jour que je peux ingérer, si je veux perdre 10kg par mois. Je veux que la représentation soit le JSON UNIQUEMENT. Et je veux que les données renvoyées soient en grammes, mais je veux que dans le json ce soient des int.",
               },
             ],
           },

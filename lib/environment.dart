@@ -2,6 +2,7 @@ const environment = {
   "USE_FIXTURES": bool.fromEnvironment('USE_FIXTURES'),
   "ENVIRONMENT": String.fromEnvironment('ENVIRONMENT'),
   "TEST": bool.fromEnvironment('TEST'),
+  "MODE": String.fromEnvironment('MODE'),
   "GOOGLE_AI_API_KEY": String.fromEnvironment('GOOGLE_AI_API_KEY'),
   "GOOGLE_AI_URL": String.fromEnvironment('GOOGLE_AI_URL'),
 };
@@ -11,4 +12,5 @@ final isInTestEnv = environment["TEST"] == true;
 final isInLocalEnv = environment["ENVIRONMENT"] == "local";
 final isInDevEnv = environment["ENVIRONMENT"] == "development";
 final isInProdEnv = environment["ENVIRONMENT"] == "production";
+final isInFixturesMode = environment["MODE"] == "fixture";
 final String googleAIUrl = environment["GOOGLE_AI_URL"] as String;
