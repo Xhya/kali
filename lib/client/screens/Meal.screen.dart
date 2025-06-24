@@ -47,6 +47,12 @@ class _MealScreenState extends State<MealScreen> {
   }
 
   @override
+  void dispose() {
+    editMealState.editingNutriScore.value = null;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     MealPeriodEnum? editingMealPeriod =
         context.watch<EditMealState>().editingMealPeriod.value;
