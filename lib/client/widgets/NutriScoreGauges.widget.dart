@@ -22,12 +22,12 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
   Widget build(BuildContext context) {
     NutriScore? currentNutriScore =
         context.watch<NutriScoreState>().currentNutriScore.value;
-    NutriScore? maxNutriScore =
+    NutriScore? peronalNutriScore =
         context.watch<NutriScoreState>().personalNutriScore.value;
     NutriScore? editingNutriScore =
         context.watch<EditMealState>().editingNutriScore.value;
 
-    if (currentNutriScore != null && maxNutriScore != null) {
+    if (currentNutriScore != null && peronalNutriScore != null) {
       return Column(
         children: [
           Row(
@@ -38,6 +38,7 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                 child: CustomCard(
                   child: Column(
                     children: [
+                      SizedBox(height: 12),
                       Text(
                         "🥩",
                         style: style.fontsize.xl.merge(style.text.neutral),
@@ -54,15 +55,19 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                         child: GaugeWidget(
                           currentAmount:
                               currentNutriScore.proteinAmount.toInt(),
-                          maxAmount: maxNutriScore.proteinAmount.toInt(),
+                          maxAmount: peronalNutriScore.proteinAmount.toInt(),
                           editingAmount:
                               editingNutriScore?.proteinAmount.toInt(),
                         ),
                       ),
+                      SizedBox(height: 12),
                       Text(
-                        "${currentNutriScore.proteinAmount}g",
-                        style: style.fontsize.sm.merge(style.text.neutral),
+                        "${currentNutriScore.proteinAmount} / ${peronalNutriScore.proteinAmount}g",
+                        style: style.fontsize.sm.merge(
+                          style.text.reverse_neutral,
+                        ),
                       ),
+                      SizedBox(height: 12),
                     ],
                   ),
                 ),
@@ -71,6 +76,7 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                 child: CustomCard(
                   child: Column(
                     children: [
+                      SizedBox(height: 12),
                       Text(
                         "🍚",
                         style: style.fontsize.xl.merge(style.text.neutral),
@@ -86,14 +92,18 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                         height: gaugeHeight,
                         child: GaugeWidget(
                           currentAmount: currentNutriScore.lipidAmount.toInt(),
-                          maxAmount: maxNutriScore.lipidAmount.toInt(),
+                          maxAmount: peronalNutriScore.lipidAmount.toInt(),
                           editingAmount: editingNutriScore?.lipidAmount.toInt(),
                         ),
                       ),
+                      SizedBox(height: 12),
                       Text(
-                        "${currentNutriScore.lipidAmount}g",
-                        style: style.fontsize.sm.merge(style.text.neutral),
+                        "${currentNutriScore.lipidAmount} / ${peronalNutriScore.lipidAmount}g",
+                        style: style.fontsize.sm.merge(
+                          style.text.reverse_neutral,
+                        ),
                       ),
+                      SizedBox(height: 12),
                     ],
                   ),
                 ),
@@ -102,6 +112,7 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                 child: CustomCard(
                   child: Column(
                     children: [
+                      SizedBox(height: 12),
                       Text(
                         "🥑",
                         style: style.fontsize.xl.merge(style.text.neutral),
@@ -117,15 +128,19 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                         height: gaugeHeight,
                         child: GaugeWidget(
                           currentAmount: currentNutriScore.glucidAmount.toInt(),
-                          maxAmount: maxNutriScore.glucidAmount.toInt(),
+                          maxAmount: peronalNutriScore.glucidAmount.toInt(),
                           editingAmount:
                               editingNutriScore?.glucidAmount.toInt(),
                         ),
                       ),
+                      SizedBox(height: 12),
                       Text(
-                        "${currentNutriScore.glucidAmount}g",
-                        style: style.fontsize.sm.merge(style.text.neutral),
+                        "${currentNutriScore.glucidAmount} / ${peronalNutriScore.glucidAmount}g",
+                        style: style.fontsize.sm.merge(
+                          style.text.reverse_neutral,
+                        ),
                       ),
+                      SizedBox(height: 12),
                     ],
                   ),
                 ),
