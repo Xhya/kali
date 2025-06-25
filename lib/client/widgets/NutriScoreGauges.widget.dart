@@ -6,7 +6,6 @@ import 'package:kalori/core/models/NutriScore.model.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/widgets/Gauge.widget.dart';
 import 'package:kalori/core/services/Translation.service.dart';
-import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class NutriScoreGaugesWidget extends StatefulWidget {
   const NutriScoreGaugesWidget({super.key});
@@ -36,61 +35,8 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
     if (currentNutriScore != null && maxNutriScore != null) {
       return Column(
         children: [
-          Column(
-            children: [
-              SizedBox(
-                height: 300,
-                child: SfRadialGauge(
-                  axes: <RadialAxis>[
-                    RadialAxis(
-                      startAngle: 180,
-                      endAngle: 0,
-                      minimum: 0,
-                      maximum: maxNutriScore.caloryAmount.toDouble(),
-                      pointers: <GaugePointer>[
-                        MarkerPointer(
-                          value: currentNutriScore.caloryAmount.toDouble(),
-                          color: Colors.amber,
-                          markerType: MarkerType.diamond,
-                          markerHeight: 30,
-                          markerWidth: 30,
-                          enableDragging: true,
-                        ),
-                      ],
-                      ranges: <GaugeRange>[
-                        GaugeRange(
-                          startWidth: 20,
-                          endWidth: 20,
-                          startValue: 0,
-                          endValue: maxNutriScore.caloryAmount / 3,
-                          color: Colors.lightBlueAccent,
-                        ),
-                        GaugeRange(
-                          startWidth: 20,
-                          endWidth: 20,
-                          startValue: maxNutriScore.caloryAmount / 3,
-                          endValue: maxNutriScore.caloryAmount.toDouble(),
-                          color: Colors.green,
-                        ),
-                      ],
-                      annotations: <GaugeAnnotation>[
-                        GaugeAnnotation(
-                          widget: Text(
-                            "${currentNutriScore.caloryAmount}kcal (${((currentNutriScore.caloryAmount / maxNutriScore.caloryAmount) * 100)}%)",
-                            style: style.text.color1.merge(style.fontsize.sm),
-                          ),
-                          angle: 90,
-                          positionFactor: 0,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
           Transform.translate(
-            offset: Offset(0, -120),
+            offset: Offset(0, 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -98,12 +44,12 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                   children: [
                     Text(
                       t('proteins'),
-                      style: style.fontsize.md.merge(style.text.color1),
+                      style: style.fontsize.md.merge(style.text.neutral),
                     ),
                     SizedBox(height: 12),
                     Text(
                       "${maxNutriScore.proteinAmount}g",
-                      style: style.fontsize.sm.merge(style.text.color1),
+                      style: style.fontsize.sm.merge(style.text.neutral),
                     ),
                     SizedBox(height: 12),
                     SizedBox(
@@ -116,11 +62,11 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                     ),
                     Text(
                       "${currentNutriScore.proteinAmount}g",
-                      style: style.fontsize.sm.merge(style.text.color1),
+                      style: style.fontsize.sm.merge(style.text.neutral),
                     ),
                     Text(
                       "(${((currentNutriScore.proteinAmount / maxNutriScore.proteinAmount) * 100)}%)",
-                      style: style.fontsize.sm.merge(style.text.color1),
+                      style: style.fontsize.sm.merge(style.text.neutral),
                     ),
                   ],
                 ),
@@ -128,12 +74,12 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                   children: [
                     Text(
                       t('lipids'),
-                      style: style.fontsize.md.merge(style.text.color1),
+                      style: style.fontsize.md.merge(style.text.neutral),
                     ),
                     SizedBox(height: 12),
                     Text(
                       "${maxNutriScore.lipidAmount}g",
-                      style: style.fontsize.sm.merge(style.text.color1),
+                      style: style.fontsize.sm.merge(style.text.neutral),
                     ),
                     SizedBox(height: 12),
                     SizedBox(
@@ -146,11 +92,11 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                     ),
                     Text(
                       "${currentNutriScore.lipidAmount}g",
-                      style: style.fontsize.sm.merge(style.text.color1),
+                      style: style.fontsize.sm.merge(style.text.neutral),
                     ),
                     Text(
                       "(${((currentNutriScore.lipidAmount / maxNutriScore.lipidAmount) * 100)}%)",
-                      style: style.fontsize.sm.merge(style.text.color1),
+                      style: style.fontsize.sm.merge(style.text.neutral),
                     ),
                   ],
                 ),
@@ -158,12 +104,12 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                   children: [
                     Text(
                       t('glucids'),
-                      style: style.fontsize.md.merge(style.text.color1),
+                      style: style.fontsize.md.merge(style.text.neutral),
                     ),
                     SizedBox(height: 12),
                     Text(
                       "${maxNutriScore.glucidAmount}g",
-                      style: style.fontsize.sm.merge(style.text.color1),
+                      style: style.fontsize.sm.merge(style.text.neutral),
                     ),
                     SizedBox(height: 12),
                     SizedBox(
@@ -176,11 +122,11 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                     ),
                     Text(
                       "${currentNutriScore.glucidAmount}g",
-                      style: style.fontsize.sm.merge(style.text.color1),
+                      style: style.fontsize.sm.merge(style.text.neutral),
                     ),
                     Text(
                       "(${((currentNutriScore.glucidAmount / maxNutriScore.glucidAmount) * 100)}%)",
-                      style: style.fontsize.sm.merge(style.text.color1),
+                      style: style.fontsize.sm.merge(style.text.neutral),
                     ),
                   ],
                 ),

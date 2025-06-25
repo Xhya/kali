@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
+import 'package:kalori/client/widgets/MainKaloriesCount.widget.dart';
 import 'package:kalori/client/widgets/MealRow.widget.dart';
 import 'package:kalori/client/widgets/NutriScoreGauges.widget.dart';
 import 'package:kalori/core/actions/Goto.actions.dart';
@@ -44,10 +45,14 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Container(
+            color: style.background.color1.color,
+            height: double.maxFinite,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                MainKaloriesCountWidget(),
+
                 if (lastMeal != null)
                   GestureDetector(
                     onTap: () {
@@ -66,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                         child: Text(
                           t("see_all"),
-                          style: style.fontsize.xs.merge(style.text.color4),
+                          style: style.fontsize.xs.merge(style.text.color1),
                         ),
                       ),
                     ],
