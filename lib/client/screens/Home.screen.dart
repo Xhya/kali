@@ -52,6 +52,35 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 MainKaloriesCountWidget(),
+                SizedBox(height: 24),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Container(
+                    width: double.maxFinite,
+                    color: style.background.color2.color,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Bravo, 250 kcal dépensées !",
+                          style: style.text.reverse_neutral.merge(
+                            style.fontsize.md,
+                          ),
+                        ),
+                        Text(
+                          "🔥",
+                          style: style.text.reverse_neutral.merge(
+                            style.fontsize.md,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
 
                 if (lastMeal != null)
                   GestureDetector(
