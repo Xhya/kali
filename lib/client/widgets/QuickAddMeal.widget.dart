@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/Style.service.dart';
+import 'package:kalori/client/widgets/CustomInkwell.widget.dart';
 import 'package:kalori/client/widgets/MealPeriodTag.widget.dart';
 import 'package:kalori/core/models/MealPeriod.enum.dart';
 import 'package:kalori/core/services/Navigation.service.dart';
@@ -126,37 +127,34 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
           //   ),
           // ),
           SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 4),
             scrollDirection: Axis.horizontal,
             child: Row(
               spacing: 8,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                GestureDetector(
+                CustomInkwell(
                   onTap: () {
-                    navigationService.context = context;
                     onClickSelectPeriod(MealPeriodEnum.breakfast);
                   },
                   child: MealPeriodTagWidget(
                     mealPeriod: MealPeriodEnum.breakfast,
                   ),
                 ),
-                GestureDetector(
+                CustomInkwell(
                   onTap: () {
-                    navigationService.context = context;
                     onClickSelectPeriod(MealPeriodEnum.lunch);
                   },
                   child: MealPeriodTagWidget(mealPeriod: MealPeriodEnum.lunch),
                 ),
-                GestureDetector(
+                CustomInkwell(
                   onTap: () {
-                    navigationService.context = context;
                     onClickSelectPeriod(MealPeriodEnum.snack);
                   },
                   child: MealPeriodTagWidget(mealPeriod: MealPeriodEnum.snack),
                 ),
-                GestureDetector(
+                CustomInkwell(
                   onTap: () {
-                    navigationService.context = context;
                     onClickSelectPeriod(MealPeriodEnum.dinner);
                   },
                   child: MealPeriodTagWidget(mealPeriod: MealPeriodEnum.dinner),

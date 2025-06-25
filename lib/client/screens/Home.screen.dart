@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/client/widgets/CustomCard.widget.dart';
+import 'package:kalori/client/widgets/CustomInkwell.widget.dart';
 import 'package:kalori/client/widgets/MainKaloriesCount.widget.dart';
-import 'package:kalori/client/widgets/MealRow.widget.dart';
 import 'package:kalori/client/widgets/NutriScoreGauges.widget.dart';
 import 'package:kalori/core/actions/Goto.actions.dart';
 import 'package:kalori/core/actions/nutriScore.actions.dart';
@@ -15,7 +15,6 @@ import 'package:provider/provider.dart';
 import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kalori/client/Style.service.dart';
 import 'package:kalori/client/layout/Base.scaffold.dart';
-
 
 onClickAddQuickMeal() {
   quickAddMealState.userMealText.value = "";
@@ -126,81 +125,76 @@ class _HomeScreenState extends State<HomeScreen> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: ClipRRect(
           borderRadius: BorderRadius.circular(16),
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: () {
-                navigationService.context = context;
-                onClickAddQuickMeal();
-              },
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(color: style.border.color.color1.color!),
-                  borderRadius: const BorderRadius.all(Radius.circular(16)),
-                ),
-                child: Text(
-                  t("add_a_meal"),
-                  style: style.text.color2.merge(style.fontsize.md),
-                ),
+          child: CustomInkwell(
+            onTap: () {
+              navigationService.context = context;
+              onClickAddQuickMeal();
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              decoration: BoxDecoration(
+                border: Border.all(color: style.border.color.color1.color!),
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
+              ),
+              child: Text(
+                t("add_a_meal"),
+                style: style.text.color2.merge(style.fontsize.md),
               ),
             ),
           ),
         ),
-        // bottomSheet:
-        // Container(
-        //   width: double.infinity,
-        //   padding: const EdgeInsets.only(
-        //     left: 16,
-        //     right: 16,
-        //     top: 16,
-        //     bottom: 24,
-        //   ),
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //     children: [
-        //       GestureDetector(
-        //         onTap: () {
-        //           navigationService.context = context;
-        //           onClickPeriodToQuickAddMeal(period: MealPeriodEnum.breakfast);
-        //         },
-        //         child: Text(t("breakfast")),
-        //       ),
-        //       GestureDetector(
-        //         onTap: () {
-        //           navigationService.context = context;
-        //           onClickPeriodToQuickAddMeal(period: MealPeriodEnum.lunch);
-        //         },
-        //         child: Text(t("lunch")),
-        //       ),
-        //       GestureDetector(
-        //         onTap: () {
-        //           navigationService.context = context;
-        //           onClickPeriodToQuickAddMeal(period: MealPeriodEnum.snack);
-        //         },
-        //         child: Text(t("snack")),
-        //       ),
-        //       GestureDetector(
-        //         onTap: () {
-        //           navigationService.context = context;
-        //           onClickPeriodToQuickAddMeal(period: MealPeriodEnum.dinner);
-        //         },
-        //         child: Text(t("dinner")),
-        //       ),
-        //     ],
-        //   ),
-        //   //  ButtonWidget(
-        //   //   text: "+",
-        //   //   onPressed: () async {
-
-        //   //   },
-        //   //   buttonType: ButtonTypeEnum.filled,
-        //   // ),
-        // ),
       ),
+
+      // bottomSheet:
+      // Container(
+      //   width: double.infinity,
+      //   padding: const EdgeInsets.only(
+      //     left: 16,
+      //     right: 16,
+      //     top: 16,
+      //     bottom: 24,
+      //   ),
+      //   child: Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+      //     children: [
+      //       GestureDetector(
+      //         onTap: () {
+      //           navigationService.context = context;
+      //           onClickPeriodToQuickAddMeal(period: MealPeriodEnum.breakfast);
+      //         },
+      //         child: Text(t("breakfast")),
+      //       ),
+      //       GestureDetector(
+      //         onTap: () {
+      //           navigationService.context = context;
+      //           onClickPeriodToQuickAddMeal(period: MealPeriodEnum.lunch);
+      //         },
+      //         child: Text(t("lunch")),
+      //       ),
+      //       GestureDetector(
+      //         onTap: () {
+      //           navigationService.context = context;
+      //           onClickPeriodToQuickAddMeal(period: MealPeriodEnum.snack);
+      //         },
+      //         child: Text(t("snack")),
+      //       ),
+      //       GestureDetector(
+      //         onTap: () {
+      //           navigationService.context = context;
+      //           onClickPeriodToQuickAddMeal(period: MealPeriodEnum.dinner);
+      //         },
+      //         child: Text(t("dinner")),
+      //       ),
+      //     ],
+      //   ),
+      //   //  ButtonWidget(
+      //   //   text: "+",
+      //   //   onPressed: () async {
+
+      //   //   },
+      //   //   buttonType: ButtonTypeEnum.filled,
+      //   // ),
+      // ),
     );
   }
 }
