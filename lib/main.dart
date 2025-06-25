@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:kalori/client/Style.service.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/client/states/startForm.state.dart';
 import 'package:kalori/client/widgets/AsyncInitWidget.dart';
@@ -49,7 +50,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Barlow',
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blue,
+          seedColor: style.background.color1.color!,
         ),
       ),
       home: AsyncInitWidget(

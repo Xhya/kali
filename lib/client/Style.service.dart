@@ -12,6 +12,7 @@ class Style {
   var fontsize = FontSizes();
   var fontweight = CustomFontWeight();
   var padding = CustomPadding();
+  var gauge = Gauge();
 }
 
 Color _blue_100 = const Color(0xFF648DF6);
@@ -29,6 +30,10 @@ class BackgroundColors {
   var reverse_neutral = TextStyle(color: _black);
   var color1 = TextStyle(color: _blue_300);
   var color2 = TextStyle(color: _blue_200);
+}
+
+class Gauge {
+  final main = TextStyle(color: _yellow);
 }
 
 class TextColors {

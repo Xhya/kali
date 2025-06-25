@@ -20,7 +20,7 @@ class TitleScaffold extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: style.background.reverse_neutral.color,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {

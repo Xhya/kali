@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kalori/client/Style.service.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class GaugeWidget extends StatefulWidget {
@@ -36,7 +37,7 @@ class _GaugeWidgetState extends State<GaugeWidget> {
       barPointers: [
         LinearBarPointer(
           value: widget.currentAmount.toDouble(),
-          color: Colors.green,
+          color: style.gauge.main.color,
           thickness: 15,
           edgeStyle: LinearEdgeStyle.bothCurve,
         ),
