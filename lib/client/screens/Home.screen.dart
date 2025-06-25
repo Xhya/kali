@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: SingleChildScrollView(
           child: Container(
             color: style.background.color1.color,
-            height: double.maxFinite,
+            height: MediaQuery.of(context).size.height,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,55 +117,80 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        bottomSheet: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.only(
-            left: 16,
-            right: 16,
-            top: 16,
-            bottom: 24,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () {},
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 16,
+                ),
+                decoration: BoxDecoration(
+                  border: Border.all(color: style.border.color.color1.color!),
+                  borderRadius: const BorderRadius.all(Radius.circular(16)),
+                ),
+                child: Text(
+                  t("add_a_meal"),
+                  style: style.text.color2.merge(style.fontsize.md),
+                ),
+              ),
+            ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  navigationService.context = context;
-                  onClickPeriodToQuickAddMeal(period: MealPeriodEnum.breakfast);
-                },
-                child: Text(t("breakfast")),
-              ),
-              GestureDetector(
-                onTap: () {
-                  navigationService.context = context;
-                  onClickPeriodToQuickAddMeal(period: MealPeriodEnum.lunch);
-                },
-                child: Text(t("lunch")),
-              ),
-              GestureDetector(
-                onTap: () {
-                  navigationService.context = context;
-                  onClickPeriodToQuickAddMeal(period: MealPeriodEnum.snack);
-                },
-                child: Text(t("snack")),
-              ),
-              GestureDetector(
-                onTap: () {
-                  navigationService.context = context;
-                  onClickPeriodToQuickAddMeal(period: MealPeriodEnum.dinner);
-                },
-                child: Text(t("dinner")),
-              ),
-            ],
-          ),
-          //  ButtonWidget(
-          //   text: "+",
-          //   onPressed: () async {
-
-          //   },
-          //   buttonType: ButtonTypeEnum.filled,
-          // ),
         ),
+        // bottomSheet:
+        // Container(
+        //   width: double.infinity,
+        //   padding: const EdgeInsets.only(
+        //     left: 16,
+        //     right: 16,
+        //     top: 16,
+        //     bottom: 24,
+        //   ),
+        //   child: Row(
+        //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //     children: [
+        //       GestureDetector(
+        //         onTap: () {
+        //           navigationService.context = context;
+        //           onClickPeriodToQuickAddMeal(period: MealPeriodEnum.breakfast);
+        //         },
+        //         child: Text(t("breakfast")),
+        //       ),
+        //       GestureDetector(
+        //         onTap: () {
+        //           navigationService.context = context;
+        //           onClickPeriodToQuickAddMeal(period: MealPeriodEnum.lunch);
+        //         },
+        //         child: Text(t("lunch")),
+        //       ),
+        //       GestureDetector(
+        //         onTap: () {
+        //           navigationService.context = context;
+        //           onClickPeriodToQuickAddMeal(period: MealPeriodEnum.snack);
+        //         },
+        //         child: Text(t("snack")),
+        //       ),
+        //       GestureDetector(
+        //         onTap: () {
+        //           navigationService.context = context;
+        //           onClickPeriodToQuickAddMeal(period: MealPeriodEnum.dinner);
+        //         },
+        //         child: Text(t("dinner")),
+        //       ),
+        //     ],
+        //   ),
+        //   //  ButtonWidget(
+        //   //   text: "+",
+        //   //   onPressed: () async {
+
+        //   //   },
+        //   //   buttonType: ButtonTypeEnum.filled,
+        //   // ),
+        // ),
       ),
     );
   }

@@ -40,6 +40,7 @@ class TextColors {
   var neutral = TextStyle(color: _black);
   var reverse_neutral = TextStyle(color: _white);
   var color1 = TextStyle(color: _blue_100);
+  var color2 = TextStyle(color: _yellow);
 }
 
 class ButtonColors {}
@@ -51,7 +52,7 @@ class CustomBorder {
 }
 
 class BorderColors {
-  var color1 = TextStyle(color: _black);
+  var color1 = TextStyle(color: _yellow);
 }
 
 class BorderSizes {
