@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(8),
           child: CustomInkwell(
             onTap: () {
               navigationService.context = context;
@@ -134,11 +134,22 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               decoration: BoxDecoration(
                 border: Border.all(color: style.border.color.color1.color!),
-                borderRadius: const BorderRadius.all(Radius.circular(16)),
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
               ),
-              child: Text(
-                t("add_a_meal"),
-                style: style.text.color2.merge(style.fontsize.md),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                spacing: 12,
+                children: [
+                  Icon(
+                    Icons.add,
+                    color: style.icon.color1.color,
+                    size: style.fontsize.lg.fontSize,
+                  ),
+                  Text(
+                    t("add_a_meal"),
+                    style: style.text.color2.merge(style.fontsize.md),
+                  ),
+                ],
               ),
             ),
           ),
