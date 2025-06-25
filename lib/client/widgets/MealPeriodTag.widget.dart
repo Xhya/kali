@@ -36,7 +36,7 @@ class _MealPeriodTagWidgetState extends State<MealPeriodTagWidget> {
       child: Container(
         color: color,
         padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-        child: Text(t(widget.mealPeriod.label), style: style.text.color3),
+        child: Text(t(widget.mealPeriod.label), style: style.text.color1),
       ),
     );
   }

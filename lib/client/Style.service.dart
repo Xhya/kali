@@ -14,25 +14,27 @@ class Style {
   var padding = CustomPadding();
 }
 
-Color _yellow = const Color(0xFFFCC547);
-Color _red = const Color(0xFFEA3B38);
-Color _blue = const Color(0xFF076CEB);
+Color _blue_100 = const Color(0xFF648DF6);
+Color _blue_200 = const Color(0xFF4066F1);
+Color _blue_300 = const Color(0xFF3751E7);
+Color _blue_400 = const Color(0xFF222BAB);
+Color _blue_500 = const Color(0xFF191D52);
+Color _yellow = const Color(0xFFDFFE0F);
 
 var _white = Colors.white;
 var _black = Colors.black;
 
 class BackgroundColors {
-  var color1 = TextStyle(color: _white);
-  var color2 = TextStyle(color: _blue);
-
   var neutral = TextStyle(color: _white);
+  var reverse_neutral = TextStyle(color: _black);
+  var color1 = TextStyle(color: _blue_300);
+  var color2 = TextStyle(color: _blue_200);
 }
 
 class TextColors {
-  var color1 = TextStyle(color: _black);
-  var color2 = TextStyle(color: _red);
-  var color3 = TextStyle(color: _white);
-  var color4 = TextStyle(color: _blue);
+  var neutral = TextStyle(color: _black);
+  var reverse_neutral = TextStyle(color: _white);
+  var color1 = TextStyle(color: _blue_100);
 }
 
 class ButtonColors {}
@@ -60,8 +62,6 @@ class BorderRadiuses {
 
 class IconsColors {
   var color1 = TextStyle(color: _yellow);
-  var color2 = TextStyle(color: _blue);
-  var color3 = TextStyle(color: _black);
 }
 
 class FontSizes {

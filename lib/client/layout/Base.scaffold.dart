@@ -22,14 +22,13 @@ class _BaseScaffoldState extends State<BaseScaffold>
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(40),
+        preferredSize: Size.fromHeight(0),
         child: AppBar(
           backgroundColor: style.background.neutral.color,
           automaticallyImplyLeading: false,
           flexibleSpace: SafeArea(
-            child: Container(
+            child: SizedBox(
               height: double.maxFinite,
-              color: style.background.color1.color,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

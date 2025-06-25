@@ -29,7 +29,7 @@ class TitleScaffold extends StatelessWidget {
         ),
         title: Text(
           title,
-          style: style.text.color1
+          style: style.text.neutral
               .merge(style.fontsize.lg)
               .merge(style.fontweight.bold),
         ),

@@ -92,7 +92,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                               : Text(
                                 t('add'),
                                 style: style.fontsize.sm.merge(
-                                  style.text.color1,
+                                  style.text.neutral,
                                 ),
                               ),
                     ),

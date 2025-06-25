@@ -27,7 +27,7 @@ class _MealPeriodTagWidgetState extends State<MealRowWidget> {
               Expanded(
                 child: Text(
                   widget.meal.mealDescription,
-                  style: style.fontsize.md.merge(style.text.color1),
+                  style: style.fontsize.md.merge(style.text.neutral),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                 ),
@@ -38,7 +38,7 @@ class _MealPeriodTagWidgetState extends State<MealRowWidget> {
         if (widget.meal.nutriScore != null)
           Text(
             "${widget.meal.nutriScore!.caloryAmount} kcal",
-            style: style.fontsize.md.merge(style.text.color1),
+            style: style.fontsize.md.merge(style.text.neutral),
           ),
       ],
     );
