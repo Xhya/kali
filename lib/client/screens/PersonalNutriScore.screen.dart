@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kalori/client/layout/Title.scaffold.dart';
 import 'package:kalori/client/widgets/CustomButton.widget.dart';
 import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
-import 'package:kalori/client/layout/Base.scaffold.dart';
 import 'package:kalori/core/actions/startForm.actions.dart';
 import 'package:kalori/core/services/Translation.service.dart';
 
@@ -20,7 +20,8 @@ class _PersonalNutriScoreScreenState extends State<PersonalNutriScoreScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BaseScaffold(
+    return TitleScaffold(
+      title: "Nutri score",
       child: Scaffold(
         body: LayoutBuilder(
           builder: (context, constraints) {
