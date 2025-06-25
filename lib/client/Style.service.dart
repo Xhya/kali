@@ -30,6 +30,8 @@ class BackgroundColors {
   var reverse_neutral = TextStyle(color: _black);
   var color1 = TextStyle(color: _blue_300);
   var color2 = TextStyle(color: _blue_200);
+  var color3 = TextStyle(color: _blue_400);
+  var color4 = TextStyle(color: _blue_500);
 }
 
 class Gauge {

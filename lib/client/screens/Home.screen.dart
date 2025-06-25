@@ -16,6 +16,12 @@ import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kalori/client/Style.service.dart';
 import 'package:kalori/client/layout/Base.scaffold.dart';
 
+
+onClickAddQuickMeal() {
+  quickAddMealState.userMealText.value = "";
+  navigationService.openBottomSheet(widget: QuickAddMealWidget());
+}
+
 onClickPeriodToQuickAddMeal({MealPeriodEnum? period}) {
   quickAddMealState.chosenPeriod.value = period;
   quickAddMealState.userMealText.value = "";
@@ -123,7 +129,10 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                navigationService.context = context;
+                onClickAddQuickMeal();
+              },
               child: Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,

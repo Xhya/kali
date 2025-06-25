@@ -20,23 +20,32 @@ class MealPeriodTagWidget extends StatefulWidget {
 class _MealPeriodTagWidgetState extends State<MealPeriodTagWidget> {
   @override
   Widget build(BuildContext context) {
-    final color =
-        widget.disabled
-            ? Colors.grey
-            : widget.mealPeriod == MealPeriodEnum.breakfast
-            ? Colors.amber
+    final icon =
+        widget.mealPeriod == MealPeriodEnum.breakfast
+            ? "🥯"
             : widget.mealPeriod == MealPeriodEnum.lunch
-            ? Colors.red
+            ? "🍎"
             : widget.mealPeriod == MealPeriodEnum.snack
-            ? Colors.green
-            : Colors.blue;
+            ? "🍱"
+            : "🍪";
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
       child: Container(
-        color: color,
         padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-        child: Text(t(widget.mealPeriod.label), style: style.text.color1),
+        decoration: BoxDecoration(
+          border: Border.all(color: style.border.color.color1.color!),
+          borderRadius: const BorderRadius.all(Radius.circular(16)),
+        ),
+        child: Row(
+          children: [
+            Text(icon, style: style.fontsize.xs),
+            Text(
+              t(widget.mealPeriod.label),
+              style: style.text.reverse_neutral.merge(style.fontsize.xs),
+            ),
+          ],
+        ),
       ),
     );
   }
