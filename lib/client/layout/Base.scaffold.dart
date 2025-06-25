@@ -22,17 +22,30 @@ class _BaseScaffoldState extends State<BaseScaffold>
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(0),
+        preferredSize: Size.fromHeight(60),
         child: AppBar(
-          backgroundColor: style.background.neutral.color,
+          backgroundColor: style.background.color3.color,
           automaticallyImplyLeading: false,
           flexibleSpace: SafeArea(
-            child: SizedBox(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               height: double.maxFinite,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [],
+                children: [
+                  Text(
+                    "Kalori",
+                    style: style.text.color2
+                        .merge(style.fontsize.xl)
+                        .merge(style.fontweight.bold),
+                  ),
+                  Icon(
+                    Icons.settings,
+                    color: style.icon.color1.color,
+                    size: style.fontsize.xl.fontSize,
+                  ),
+                ],
               ),
             ),
           ),
