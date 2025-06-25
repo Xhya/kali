@@ -29,22 +29,27 @@ class _MealPeriodTagWidgetState extends State<MealPeriodTagWidget> {
             ? "🍱"
             : "🍪";
 
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(16),
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-        decoration: BoxDecoration(
-          border: Border.all(color: style.border.color.color1.color!),
-          borderRadius: const BorderRadius.all(Radius.circular(16)),
-        ),
-        child: Row(
-          children: [
-            Text(icon, style: style.fontsize.xs),
-            Text(
-              t(widget.mealPeriod.label),
-              style: style.text.reverse_neutral.merge(style.fontsize.xs),
-            ),
-          ],
+    final double opacity = widget.disabled ? 0.3 : 1;
+
+    return Opacity(
+      opacity: opacity,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+          decoration: BoxDecoration(
+            border: Border.all(color: style.border.color.color1.color!),
+            borderRadius: const BorderRadius.all(Radius.circular(16)),
+          ),
+          child: Row(
+            children: [
+              Text(icon, style: style.fontsize.xs),
+              Text(
+                t(widget.mealPeriod.label),
+                style: style.text.reverse_neutral.merge(style.fontsize.xs),
+              ),
+            ],
+          ),
         ),
       ),
     );

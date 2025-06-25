@@ -13,12 +13,16 @@ class QuickAddMealState extends ChangeNotifier {
   QuickAddMealState() {
     isLoading.addListener(notifyListeners);
     userMealText.addListener(notifyListeners);
+    chosenPeriod.addListener(notifyListeners);
+    nutriScore.addListener(notifyListeners);
   }
 
   @override
   void dispose() {
     isLoading.dispose();
     userMealText.dispose();
+    chosenPeriod.dispose();
+    nutriScore.dispose();
     super.dispose();
   }
 }

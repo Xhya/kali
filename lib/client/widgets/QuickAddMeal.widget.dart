@@ -4,13 +4,14 @@ import 'package:kalori/client/widgets/CustomInkwell.widget.dart';
 import 'package:kalori/client/widgets/MealPeriodTag.widget.dart';
 import 'package:kalori/core/models/MealPeriod.enum.dart';
 import 'package:kalori/core/services/Navigation.service.dart';
-import 'package:kalori/core/services/Translation.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/client/widgets/LoaderIcon.widget.dart';
 import 'package:kalori/core/actions/nutriScore.actions.dart';
 
-onClickSelectPeriod(MealPeriodEnum period) {}
+onClickSelectPeriod(MealPeriodEnum period) {
+  quickAddMealState.chosenPeriod.value = period;
+}
 
 onClickCloseQuickAddMode() {
   navigationService.closeBottomSheet();
@@ -60,6 +61,8 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
   Widget build(BuildContext context) {
     String userMealText = context.watch<QuickAddMealState>().userMealText.value;
     bool isLoading = context.watch<QuickAddMealState>().isLoading.value;
+    MealPeriodEnum? chosenPeriod =
+        context.watch<QuickAddMealState>().chosenPeriod.value;
 
     return Container(
       height: 250,
@@ -139,25 +142,43 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                   },
                   child: MealPeriodTagWidget(
                     mealPeriod: MealPeriodEnum.breakfast,
+                    disabled:
+                        chosenPeriod != null &&
+                        chosenPeriod != MealPeriodEnum.breakfast,
                   ),
                 ),
                 CustomInkwell(
                   onTap: () {
                     onClickSelectPeriod(MealPeriodEnum.lunch);
                   },
-                  child: MealPeriodTagWidget(mealPeriod: MealPeriodEnum.lunch),
+                  child: MealPeriodTagWidget(
+                    mealPeriod: MealPeriodEnum.lunch,
+                    disabled:
+                        chosenPeriod != null &&
+                        chosenPeriod != MealPeriodEnum.lunch,
+                  ),
                 ),
                 CustomInkwell(
                   onTap: () {
                     onClickSelectPeriod(MealPeriodEnum.snack);
                   },
-                  child: MealPeriodTagWidget(mealPeriod: MealPeriodEnum.snack),
+                  child: MealPeriodTagWidget(
+                    mealPeriod: MealPeriodEnum.snack,
+                    disabled:
+                        chosenPeriod != null &&
+                        chosenPeriod != MealPeriodEnum.snack,
+                  ),
                 ),
                 CustomInkwell(
                   onTap: () {
                     onClickSelectPeriod(MealPeriodEnum.dinner);
                   },
-                  child: MealPeriodTagWidget(mealPeriod: MealPeriodEnum.dinner),
+                  child: MealPeriodTagWidget(
+                    mealPeriod: MealPeriodEnum.dinner,
+                    disabled:
+                        chosenPeriod != null &&
+                        chosenPeriod != MealPeriodEnum.dinner,
+                  ),
                 ),
               ],
             ),
