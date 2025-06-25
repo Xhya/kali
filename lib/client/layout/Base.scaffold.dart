@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/Style.service.dart';
+import 'package:kalori/core/services/Navigation.service.dart';
 
 class BaseScaffold extends StatefulWidget {
   const BaseScaffold({super.key, required this.child});
@@ -40,10 +41,17 @@ class _BaseScaffoldState extends State<BaseScaffold>
                         .merge(style.fontsize.xl)
                         .merge(style.fontweight.bold),
                   ),
-                  Icon(
-                    Icons.settings,
-                    color: style.icon.color1.color,
-                    size: style.fontsize.xl.fontSize,
+                  IconButton(
+                    onPressed: () {
+                      navigationService.navigateTo(
+                        ScreenEnum.personalNutriScore,
+                      );
+                    },
+                    icon: Icon(
+                      Icons.settings,
+                      color: style.icon.color1.color,
+                      size: style.fontsize.xl.fontSize,
+                    ),
                   ),
                 ],
               ),

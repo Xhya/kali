@@ -2,6 +2,7 @@ import 'package:kalori/client/Style.service.dart';
 import 'package:kalori/client/screens/Home.screen.dart';
 import 'package:kalori/client/screens/Meal.screen.dart';
 import 'package:kalori/client/screens/Meals.screen.dart';
+import 'package:kalori/client/screens/PersonalNutriScore.screen.dart';
 import 'package:kalori/client/screens/StartForm.screen.dart';
 import 'package:kalori/core/domains/nutriScore.state.dart';
 import 'package:kalori/core/services/Error.service.dart';
@@ -147,6 +148,8 @@ class _RoutingState extends State<Routing> {
           navigateTo(const MealScreen());
         case ScreenEnum.meals:
           navigateTo(const MealsScreen());
+        case ScreenEnum.personalNutriScore:
+          navigateTo(const PersonalNutriScoreScreen());
       }
     };
 

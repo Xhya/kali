@@ -7,6 +7,7 @@ enum ScreenEnum {
   home,
   meal,
   meals,
+  personalNutriScore,
 }
 
 var navigationService = NavigationService();
