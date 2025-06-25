@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
+import 'package:kalori/client/widgets/CustomCard.widget.dart';
 import 'package:kalori/client/widgets/MainKaloriesCount.widget.dart';
 import 'package:kalori/client/widgets/MealRow.widget.dart';
 import 'package:kalori/client/widgets/NutriScoreGauges.widget.dart';
@@ -53,15 +54,9 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 MainKaloriesCountWidget(),
                 SizedBox(height: 24),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
+                CustomCard(
                   child: Container(
-                    width: double.maxFinite,
-                    color: style.background.color2.color,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
-                    ),
+                    padding: const EdgeInsets.all(20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -82,13 +77,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
 
-                if (lastMeal != null)
-                  GestureDetector(
-                    onTap: () {
-                      goToMealScreen(lastMeal);
-                    },
-                    child: MealRowWidget(meal: lastMeal),
-                  ),
+                // if (lastMeal != null)
+                //   GestureDetector(
+                //     onTap: () {
+                //       goToMealScreen(lastMeal);
+                //     },
+                //     child: MealRowWidget(meal: lastMeal),
+                //   ),
                 if (lastMeal != null)
                   Flex(
                     direction: Axis.horizontal,
