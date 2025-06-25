@@ -60,12 +60,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          "Bravo, 250 kcal dépensées !",
-                          style: style.text.reverse_neutral.merge(
-                            style.fontsize.md,
+                        RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            style: style.text.reverse_neutral.merge(
+                              style.fontsize.md,
+                            ),
+                            children: [
+                              TextSpan(text: 'Bravo, '),
+                              TextSpan(
+                                text: '250 kcal',
+                                style: style.fontweight.bold,
+                              ),
+                              TextSpan(text: ' dépensées !'),
+                            ],
                           ),
                         ),
+
                         Text(
                           "🔥",
                           style: style.text.reverse_neutral.merge(

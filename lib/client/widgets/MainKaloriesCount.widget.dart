@@ -24,12 +24,23 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Il te reste 450 calories pour aujourd'hui 🔥",
+        RichText(
           textAlign: TextAlign.center,
-          style: style.text.color1
-              .merge(style.fontsize.xl)
-              .merge(style.fontweight.bold),
+          text: TextSpan(
+            style: style.text.color1
+                .merge(style.fontsize.xl)
+                .merge(style.fontweight.bold),
+            children: [
+              TextSpan(text: 'Il te reste '),
+              TextSpan(
+                text: '450 calories',
+                style: style.text.reverse_neutral
+                    .merge(style.fontsize.xl)
+                    .merge(style.fontweight.bold),
+              ),
+              TextSpan(text: ' pour aujourd\'hui 🔥'),
+            ],
+          ),
         ),
         SizedBox(height: 24),
         Row(
@@ -68,7 +79,7 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
           barPointers: [
             LinearBarPointer(
               value: currentNutriScore?.caloryAmount.toDouble() ?? 0,
-              color: Colors.green,
+              color: style.gauge.main.color,
               thickness: 15,
               edgeStyle: LinearEdgeStyle.bothCurve,
             ),
