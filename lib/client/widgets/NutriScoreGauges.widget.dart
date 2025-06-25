@@ -16,13 +16,7 @@ class NutriScoreGaugesWidget extends StatefulWidget {
 }
 
 class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
-  TextEditingController controller = TextEditingController();
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
+  final double gaugeHeight = 150;
 
   @override
   Widget build(BuildContext context) {
@@ -36,113 +30,107 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
     if (currentNutriScore != null && maxNutriScore != null) {
       return Column(
         children: [
-          Transform.translate(
-            offset: Offset(0, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              spacing: 8,
-              children: [
-                Expanded(
-                  child: CustomCard(
-                    child: Column(
-                      children: [
-                        Text(
-                          "🥩",
-                          style: style.fontsize.xl.merge(style.text.neutral),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            spacing: 8,
+            children: [
+              Expanded(
+                child: CustomCard(
+                  child: Column(
+                    children: [
+                      Text(
+                        "🥩",
+                        style: style.fontsize.xl.merge(style.text.neutral),
+                      ),
+                      Text(
+                        t('proteins').toLowerCase(),
+                        style: style.fontsize.sm.merge(
+                          style.text.reverse_neutral,
                         ),
-                        Text(
-                          t('proteins').toLowerCase(),
-                          style: style.fontsize.sm.merge(
-                            style.text.reverse_neutral,
-                          ),
+                      ),
+                      SizedBox(height: 12),
+                      SizedBox(
+                        height: gaugeHeight,
+                        child: GaugeWidget(
+                          currentAmount:
+                              currentNutriScore.proteinAmount.toInt(),
+                          maxAmount: maxNutriScore.proteinAmount.toInt(),
+                          editingAmount:
+                              editingNutriScore?.proteinAmount.toInt(),
                         ),
-                        SizedBox(height: 12),
-                        SizedBox(
-                          height: 100,
-                          child: GaugeWidget(
-                            currentAmount:
-                                currentNutriScore.proteinAmount.toInt(),
-                            maxAmount: maxNutriScore.proteinAmount.toInt(),
-                            editingAmount:
-                                editingNutriScore?.proteinAmount.toInt(),
-                          ),
-                        ),
-                        Text(
-                          "${currentNutriScore.proteinAmount}g",
-                          style: style.fontsize.sm.merge(style.text.neutral),
-                        ),
-                      ],
-                    ),
+                      ),
+                      Text(
+                        "${currentNutriScore.proteinAmount}g",
+                        style: style.fontsize.sm.merge(style.text.neutral),
+                      ),
+                    ],
                   ),
                 ),
-                Expanded(
-                  child: CustomCard(
-                    child: Column(
-                      children: [
-                        Text(
-                          "🍚",
-                          style: style.fontsize.xl.merge(style.text.neutral),
+              ),
+              Expanded(
+                child: CustomCard(
+                  child: Column(
+                    children: [
+                      Text(
+                        "🍚",
+                        style: style.fontsize.xl.merge(style.text.neutral),
+                      ),
+                      Text(
+                        t('lipids').toLowerCase(),
+                        style: style.fontsize.sm.merge(
+                          style.text.reverse_neutral,
                         ),
-                        Text(
-                          t('lipids').toLowerCase(),
-                          style: style.fontsize.sm.merge(
-                            style.text.reverse_neutral,
-                          ),
+                      ),
+                      SizedBox(height: 12),
+                      SizedBox(
+                        height: gaugeHeight,
+                        child: GaugeWidget(
+                          currentAmount: currentNutriScore.lipidAmount.toInt(),
+                          maxAmount: maxNutriScore.lipidAmount.toInt(),
+                          editingAmount: editingNutriScore?.lipidAmount.toInt(),
                         ),
-                        SizedBox(height: 12),
-                        SizedBox(
-                          height: 100,
-                          child: GaugeWidget(
-                            currentAmount:
-                                currentNutriScore.lipidAmount.toInt(),
-                            maxAmount: maxNutriScore.lipidAmount.toInt(),
-                            editingAmount:
-                                editingNutriScore?.lipidAmount.toInt(),
-                          ),
-                        ),
-                        Text(
-                          "${currentNutriScore.lipidAmount}g",
-                          style: style.fontsize.sm.merge(style.text.neutral),
-                        ),
-                      ],
-                    ),
+                      ),
+                      Text(
+                        "${currentNutriScore.lipidAmount}g",
+                        style: style.fontsize.sm.merge(style.text.neutral),
+                      ),
+                    ],
                   ),
                 ),
-                Expanded(
-                  child: CustomCard(
-                    child: Column(
-                      children: [
-                        Text(
-                          "🥑",
-                          style: style.fontsize.xl.merge(style.text.neutral),
+              ),
+              Expanded(
+                child: CustomCard(
+                  child: Column(
+                    children: [
+                      Text(
+                        "🥑",
+                        style: style.fontsize.xl.merge(style.text.neutral),
+                      ),
+                      Text(
+                        t('glucids').toLowerCase(),
+                        style: style.fontsize.sm.merge(
+                          style.text.reverse_neutral,
                         ),
-                        Text(
-                          t('glucids').toLowerCase(),
-                          style: style.fontsize.sm.merge(
-                            style.text.reverse_neutral,
-                          ),
+                      ),
+                      SizedBox(height: 12),
+                      SizedBox(
+                        height: gaugeHeight,
+                        child: GaugeWidget(
+                          currentAmount: currentNutriScore.glucidAmount.toInt(),
+                          maxAmount: maxNutriScore.glucidAmount.toInt(),
+                          editingAmount:
+                              editingNutriScore?.glucidAmount.toInt(),
                         ),
-                        SizedBox(height: 12),
-                        SizedBox(
-                          height: 100,
-                          child: GaugeWidget(
-                            currentAmount:
-                                currentNutriScore.glucidAmount.toInt(),
-                            maxAmount: maxNutriScore.glucidAmount.toInt(),
-                            editingAmount:
-                                editingNutriScore?.glucidAmount.toInt(),
-                          ),
-                        ),
-                        Text(
-                          "${currentNutriScore.glucidAmount}g",
-                          style: style.fontsize.sm.merge(style.text.neutral),
-                        ),
-                      ],
-                    ),
+                      ),
+                      Text(
+                        "${currentNutriScore.glucidAmount}g",
+                        style: style.fontsize.sm.merge(style.text.neutral),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       );
