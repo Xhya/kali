@@ -65,152 +65,156 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
         context.watch<QuickAddMealState>().chosenPeriod.value;
 
     return Container(
-      height: 250,
-      color: style.background.color3.color,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // TextField(
-          //   controller: controller,
-          //   onChanged: (value) {
-          //     onInputUpdateUserMealText(value);
-          //   },
-          //   textCapitalization: TextCapitalization.sentences,
-          //   minLines: 1,
-          //   maxLines: 6,
-          //   decoration: InputDecoration(
-          //     border: OutlineInputBorder(),
-          //     labelText: t('describe_your_meal', [
-          //       quickAddMealState.chosenPeriod.value != null
-          //           ? t(quickAddMealState.chosenPeriod.value!.label)
-          //           : "repas",
-          //     ]),
-          //     suffixIcon: Row(
-          //       mainAxisSize: MainAxisSize.min,
-          //       children: [
-          //         if (userMealText.isNotEmpty)
-          //           GestureDetector(
-          //             onTap: () {
-          //               onClickAddMeal();
-          //             },
-          //             child:
-          //                 isLoading
-          //                     ? LoaderIcon()
-          //                     : Text(
-          //                       t('add'),
-          //                       style: style.fontsize.sm.merge(
-          //                         style.text.neutral,
-          //                       ),
-          //                     ),
-          //           ),
-          //         SizedBox(width: 12),
-          //         GestureDetector(
-          //           onTap: () {
-          //             onClickCloseQuickAddMode();
-          //           },
-          //           child: Icon(Icons.close),
-          //         ),
-          //         SizedBox(width: 12),
-          //       ],
-          //     ),
-          //   ),
-          // ),
-          // SizedBox(height: 12),
-          // AnimatedContainer(
-          //   duration: Duration(seconds: 2),
-          //   curve: Curves.easeInOut,
-          //   width: isExpanded ? double.maxFinite : 0,
-          //   height: isExpanded ? 120 : 0,
-          //   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          //   decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
-          //   child: Text(
-          //     "Voici un résumé de vos nutriments:\nProtétines: ${quickAddMealState.nutriScore.value?.proteinAmount.toInt()}g\nGlucides: ${quickAddMealState.nutriScore.value?.glucidAmount.toInt()}g\nLipides: ${quickAddMealState.nutriScore.value?.lipidAmount.toInt()}g\nCalories: ${quickAddMealState.nutriScore.value?.caloryAmount.toInt()}g",
-          //     maxLines: 5,
-          //   ),
-          // ),
-          SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 4),
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              spacing: 8,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                CustomInkwell(
-                  onTap: () {
-                    onClickSelectPeriod(MealPeriodEnum.breakfast);
-                  },
-                  child: MealPeriodTagWidget(
-                    mealPeriod: MealPeriodEnum.breakfast,
-                    disabled:
-                        chosenPeriod != null &&
-                        chosenPeriod != MealPeriodEnum.breakfast,
-                  ),
+      color: style.background.color4.color,
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+        child: Container(
+          color: style.background.color4.color,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(height: 12),
+              // TextField(
+              //   controller: controller,
+              //   onChanged: (value) {
+              //     onInputUpdateUserMealText(value);
+              //   },
+              //   textCapitalization: TextCapitalization.sentences,
+              //   minLines: 1,
+              //   maxLines: 6,
+              //   decoration: InputDecoration(
+              //     border: OutlineInputBorder(),
+              //     labelText: t('describe_your_meal', [
+              //       quickAddMealState.chosenPeriod.value != null
+              //           ? t(quickAddMealState.chosenPeriod.value!.label)
+              //           : "repas",
+              //     ]),
+              //     suffixIcon: Row(
+              //       mainAxisSize: MainAxisSize.min,
+              //       children: [
+              //         if (userMealText.isNotEmpty)
+              //           GestureDetector(
+              //             onTap: () {
+              //               onClickAddMeal();
+              //             },
+              //             child:
+              //                 isLoading
+              //                     ? LoaderIcon()
+              //                     : Text(
+              //                       t('add'),
+              //                       style: style.fontsize.sm.merge(
+              //                         style.text.neutral,
+              //                       ),
+              //                     ),
+              //           ),
+              //         SizedBox(width: 12),
+              //         GestureDetector(
+              //           onTap: () {
+              //             onClickCloseQuickAddMode();
+              //           },
+              //           child: Icon(Icons.close),
+              //         ),
+              //         SizedBox(width: 12),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(height: 12),
+              // AnimatedContainer(
+              //   duration: Duration(seconds: 2),
+              //   curve: Curves.easeInOut,
+              //   width: isExpanded ? double.maxFinite : 0,
+              //   height: isExpanded ? 120 : 0,
+              //   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              //   decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
+              //   child: Text(
+              //     "Voici un résumé de vos nutriments:\nProtétines: ${quickAddMealState.nutriScore.value?.proteinAmount.toInt()}g\nGlucides: ${quickAddMealState.nutriScore.value?.glucidAmount.toInt()}g\nLipides: ${quickAddMealState.nutriScore.value?.lipidAmount.toInt()}g\nCalories: ${quickAddMealState.nutriScore.value?.caloryAmount.toInt()}g",
+              //     maxLines: 5,
+              //   ),
+              // ),
+              SingleChildScrollView(
+                padding: EdgeInsets.symmetric(horizontal: 4),
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  spacing: 8,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    CustomInkwell(
+                      onTap: () {
+                        onClickSelectPeriod(MealPeriodEnum.breakfast);
+                      },
+                      child: MealPeriodTagWidget(
+                        mealPeriod: MealPeriodEnum.breakfast,
+                        disabled:
+                            chosenPeriod != null &&
+                            chosenPeriod != MealPeriodEnum.breakfast,
+                      ),
+                    ),
+                    CustomInkwell(
+                      onTap: () {
+                        onClickSelectPeriod(MealPeriodEnum.lunch);
+                      },
+                      child: MealPeriodTagWidget(
+                        mealPeriod: MealPeriodEnum.lunch,
+                        disabled:
+                            chosenPeriod != null &&
+                            chosenPeriod != MealPeriodEnum.lunch,
+                      ),
+                    ),
+                    CustomInkwell(
+                      onTap: () {
+                        onClickSelectPeriod(MealPeriodEnum.snack);
+                      },
+                      child: MealPeriodTagWidget(
+                        mealPeriod: MealPeriodEnum.snack,
+                        disabled:
+                            chosenPeriod != null &&
+                            chosenPeriod != MealPeriodEnum.snack,
+                      ),
+                    ),
+                    CustomInkwell(
+                      onTap: () {
+                        onClickSelectPeriod(MealPeriodEnum.dinner);
+                      },
+                      child: MealPeriodTagWidget(
+                        mealPeriod: MealPeriodEnum.dinner,
+                        disabled:
+                            chosenPeriod != null &&
+                            chosenPeriod != MealPeriodEnum.dinner,
+                      ),
+                    ),
+                  ],
                 ),
-                CustomInkwell(
-                  onTap: () {
-                    onClickSelectPeriod(MealPeriodEnum.lunch);
-                  },
-                  child: MealPeriodTagWidget(
-                    mealPeriod: MealPeriodEnum.lunch,
-                    disabled:
-                        chosenPeriod != null &&
-                        chosenPeriod != MealPeriodEnum.lunch,
-                  ),
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(16),
+                  topRight: Radius.circular(16),
                 ),
-                CustomInkwell(
-                  onTap: () {
-                    onClickSelectPeriod(MealPeriodEnum.snack);
-                  },
-                  child: MealPeriodTagWidget(
-                    mealPeriod: MealPeriodEnum.snack,
-                    disabled:
-                        chosenPeriod != null &&
-                        chosenPeriod != MealPeriodEnum.snack,
-                  ),
-                ),
-                CustomInkwell(
-                  onTap: () {
-                    onClickSelectPeriod(MealPeriodEnum.dinner);
-                  },
-                  child: MealPeriodTagWidget(
-                    mealPeriod: MealPeriodEnum.dinner,
-                    disabled:
-                        chosenPeriod != null &&
-                        chosenPeriod != MealPeriodEnum.dinner,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 12),
-          ClipRRect(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(16),
-              topRight: Radius.circular(16),
-            ),
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-              color: style.background.color4.color,
-              height: 80,
-              alignment: Alignment.center,
-              child: TextField(
-                controller: controller,
-                onChanged: (value) {
-                  onInputUpdateUserMealText(value);
-                },
-                textCapitalization: TextCapitalization.sentences,
-                minLines: 1,
-                maxLines: 6,
-                style: style.text.reverse_neutral,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: "J'ai mangé un acaï bowl",
-                  hintStyle: style.text.color1,
-                  suffixIcon: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      GestureDetector(
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                  color: style.background.color4.color,
+                  height: 80,
+                  alignment: Alignment.center,
+                  child: TextField(
+                    controller: controller,
+                    onChanged: (value) {
+                      onInputUpdateUserMealText(value);
+                    },
+                    textCapitalization: TextCapitalization.sentences,
+                    minLines: 1,
+                    maxLines: 6,
+                    style: style.text.reverse_neutral,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "J'ai mangé un acaï bowl",
+                      hintStyle: style.text.color1,
+                      suffixIcon: GestureDetector(
                         onTap: () {
                           if (!isLoading) {
                             if (userMealText.isNotEmpty) {
@@ -233,13 +237,13 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                                   color: style.icon.color1.color,
                                 ),
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
