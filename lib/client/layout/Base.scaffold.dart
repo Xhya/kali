@@ -32,8 +32,7 @@ class _BaseScaffoldState extends State<BaseScaffold>
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                ],
+                children: [],
               ),
             ),
           ),

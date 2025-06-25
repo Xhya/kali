@@ -45,14 +45,19 @@ class _RoutingState extends State<Routing> {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         showModalBottomSheet(
           useSafeArea: true,
+          isScrollControlled: true,
           context: navigationService.context!,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           builder: (BuildContext context) {
             if (navigationService.bottomSheet != null) {
-              return navigationService.bottomSheet!;
+              return Padding(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: navigationService.bottomSheet!,
+              );
             } else {
-              errorService.notifyError("Missing bottom sheet");
-              throw Exception("Missing bottom sheet");
+              return SizedBox.shrink();
             }
           },
         ).then((_) {
