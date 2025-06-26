@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/layout/Title.scaffold.dart';
 import 'package:kalori/client/widgets/CustomButton.widget.dart';
-import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
-import 'package:kalori/core/actions/startForm.actions.dart';
+import 'package:kalori/client/widgets/CustomInput.dart';
 import 'package:kalori/core/services/Translation.service.dart';
+
+onProteinInputChange(String value) {}
+
+onGlucidInputChange(String value) {}
+
+onLipidInputChange(String value) {}
+
+onCaloryInputChange(String value) {}
 
 class PersonalNutriScoreScreen extends StatefulWidget {
   const PersonalNutriScoreScreen({super.key});
 
   @override
-  State<PersonalNutriScoreScreen> createState() => _PersonalNutriScoreScreenState();
+  State<PersonalNutriScoreScreen> createState() =>
+      _PersonalNutriScoreScreenState();
 }
 
 class _PersonalNutriScoreScreenState extends State<PersonalNutriScoreScreen> {
@@ -21,7 +29,7 @@ class _PersonalNutriScoreScreenState extends State<PersonalNutriScoreScreen> {
   @override
   Widget build(BuildContext context) {
     return TitleScaffold(
-      title: "Nutri score",
+      title: "Objectifs",
       child: Scaffold(
         body: LayoutBuilder(
           builder: (context, constraints) {
@@ -38,48 +46,54 @@ class _PersonalNutriScoreScreenState extends State<PersonalNutriScoreScreen> {
                         Expanded(
                           child: Column(
                             children: [
-                              TextField(
+                              CustomInput(
                                 onChanged: (value) {
-                                  onInputUpdateUserMealText(value);
+                                  onProteinInputChange(value);
                                 },
-                                maxLines: 1,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelText: t("size"),
-                                  suffixText: "cm",
-                                ),
+                                placeholder: t("proteins"),
+                                suffixText: "g",
                               ),
+                              
                               SizedBox(height: 32),
-                              TextField(
+
+                              CustomInput(
                                 onChanged: (value) {
-                                  onInputUpdateUserMealText(value);
+                                  onGlucidInputChange(value);
                                 },
-                                maxLines: 1,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelText: t("weight"),
-                                  suffixText: "kg",
-                                ),
+                                placeholder: t("proteins"),
+                                suffixText: "g",
                               ),
+
                               SizedBox(height: 32),
-                              TextField(
+
+                              CustomInput(
                                 onChanged: (value) {
-                                  onInputUpdateUserMealText(value);
+                                  onLipidInputChange(value);
                                 },
-                                maxLines: 1,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelText: t("age"),
-                                  suffixText: "ans",
-                                ),
+                                placeholder: t("lipids"),
+                                suffixText: "g",
                               ),
+
+                              SizedBox(height: 32),
+
+                              CustomInput(
+                                onChanged: (value) {
+                                  onCaloryInputChange(value);
+                                },
+                                placeholder: t("calories"),
+                                suffixText: "g",
+                              ),
+
                               SizedBox(height: 32),
                             ],
                           ),
                         ),
-                        ButtonWidget(onPressed: () {
-                          onComputePersonalNutriScore();
-                        }, fullWidth: true),
+                        ButtonWidget(
+                          text: "Sauvegarder",
+                          buttonType: ButtonTypeEnum.filled,
+                          onPressed: () {},
+                          fullWidth: true,
+                        ),
                         SizedBox(height: 16),
                       ],
                     ),

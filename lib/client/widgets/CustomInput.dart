@@ -1,0 +1,63 @@
+import 'package:flutter/material.dart';
+import 'package:kalori/client/Style.service.dart';
+
+class CustomInput extends StatefulWidget {
+  const CustomInput({
+    super.key,
+    required this.onChanged,
+    this.content,
+    this.placeholder,
+    this.suffixText,
+  });
+
+  final Function onChanged;
+  final String? content;
+  final String? placeholder;
+  final String? suffixText;
+
+  @override
+  State<CustomInput> createState() => _CustomInputState();
+}
+
+class _CustomInputState extends State<CustomInput> {
+  final TextEditingController controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.content != null) {
+      controller.text = widget.content!;
+    }
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextFormField(
+          controller: controller,
+          onChanged: (value) {
+            widget.onChanged(value);
+          },
+          maxLines: 1,
+          minLines: 1,
+          decoration: InputDecoration(
+            border: const OutlineInputBorder(),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: style.text.color1.color!),
+            ),
+            labelText: widget.placeholder,
+            suffixText: widget.suffixText,
+          ),
+        ),
+      ],
+    );
+  }
+}
