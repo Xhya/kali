@@ -3,6 +3,7 @@ import 'package:kalori/client/layout/Title.scaffold.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/client/widgets/LoaderIcon.widget.dart';
 import 'package:kalori/client/widgets/MealPeriodTag.widget.dart';
+import 'package:kalori/client/widgets/MealPeriodsHorizontal.widget.dart';
 import 'package:kalori/client/widgets/NutriScoreGauges.widget.dart';
 import 'package:kalori/core/domains/meal.state.dart';
 import 'package:kalori/client/states/editMeal.state.dart';
@@ -25,6 +26,10 @@ onUpdateMeal() async {
   } finally {
     editMealState.isLoading.value = false;
   }
+}
+
+onClickSelectPeriod(MealPeriodEnum period) {
+  editMealState.editingMealPeriod.value = period;
 }
 
 class MealScreen extends StatefulWidget {
@@ -70,54 +75,15 @@ class _MealScreenState extends State<MealScreen> {
         body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          color: style.background.neutral.color,
+          color: style.background.color1.color,
           padding: EdgeInsets.all(16),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      editMealState.editingMealPeriod.value =
-                          MealPeriodEnum.breakfast;
-                    },
-                    child: MealPeriodTagWidget(
-                      mealPeriod: MealPeriodEnum.breakfast,
-                      disabled: editingMealPeriod != MealPeriodEnum.breakfast,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      editMealState.editingMealPeriod.value =
-                          MealPeriodEnum.lunch;
-                    },
-                    child: MealPeriodTagWidget(
-                      mealPeriod: MealPeriodEnum.lunch,
-                      disabled: editingMealPeriod != MealPeriodEnum.lunch,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      editMealState.editingMealPeriod.value =
-                          MealPeriodEnum.snack;
-                    },
-                    child: MealPeriodTagWidget(
-                      mealPeriod: MealPeriodEnum.snack,
-                      disabled: editingMealPeriod != MealPeriodEnum.snack,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      editMealState.editingMealPeriod.value =
-                          MealPeriodEnum.dinner;
-                    },
-                    child: MealPeriodTagWidget(
-                      mealPeriod: MealPeriodEnum.dinner,
-                      disabled: editingMealPeriod != MealPeriodEnum.dinner,
-                    ),
-                  ),
-                ],
+              MealPeriodsHorizontalWidget(
+                onClickSelectPeriod: (period) {
+                  onClickSelectPeriod(period);
+                },
+                chosenPeriod: editingMealPeriod,
               ),
               SizedBox(height: 16),
               TextField(
