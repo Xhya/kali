@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/Screen.service.dart';
 
-var style = Style();
+final style = Style();
 
 class Style {
-  var text = TextColors();
-  var background = BackgroundColors();
-  var border = CustomBorder();
-  var button = ButtonColors();
-  var icon = IconsColors();
-  var fontsize = FontSizes();
-  var fontweight = CustomFontWeight();
-  var padding = CustomPadding();
-  var gauge = Gauge();
+  final text = TextColors();
+  final background = BackgroundColors();
+  final border = CustomBorder();
+  final button = ButtonColors();
+  final icon = IconsColors();
+  final fontsize = FontSizes();
+  final fontweight = CustomFontWeight();
+  final padding = CustomPadding();
+  final gauge = Gauge();
+  final period = Period();
 }
+
+Color _breakfastColor = _pink;
+Color _lunchColor = _orange;
+Color _snackColor = _blue_300;
+Color _dinerColor = _red;
 
 Color _blue_100 = const Color(0xFF648DF6);
 Color _blue_200 = const Color(0xFF4066F1);
@@ -21,18 +27,27 @@ Color _blue_300 = const Color(0xFF3751E7);
 Color _blue_400 = const Color(0xFF222BAB);
 Color _blue_500 = const Color(0xFF191D52);
 Color _yellow = const Color(0xFFDFFE0F);
+Color _red = const Color(0xFFC72E2E);
+Color _orange = const Color(0xFFE8900B);
+Color _pink = const Color(0xFFFF63A6);
+final _white = Colors.white;
+final _black = Colors.black;
 
-var _white = Colors.white;
-var _black = Colors.black;
+class Period {
+  final breakfastColor = TextStyle(color: _breakfastColor);
+  final lunchColor = TextStyle(color: _lunchColor);
+  final snackColor = TextStyle(color: _snackColor);
+  final dinerColor = TextStyle(color: _dinerColor);
+}
 
 class BackgroundColors {
-  var neutral = TextStyle(color: _white);
-  var reverse_neutral = TextStyle(color: _black);
-  var color1 = TextStyle(color: _blue_300);
-  var color2 = TextStyle(color: _blue_200);
-  var color3 = TextStyle(color: _blue_400);
-  var color4 = TextStyle(color: _blue_500);
-  var color5 = TextStyle(color: _yellow);
+  final neutral = TextStyle(color: _white);
+  final reverse_neutral = TextStyle(color: _black);
+  final color1 = TextStyle(color: _blue_300);
+  final color2 = TextStyle(color: _blue_200);
+  final color3 = TextStyle(color: _blue_400);
+  final color4 = TextStyle(color: _blue_500);
+  final color5 = TextStyle(color: _yellow);
 }
 
 class Gauge {
@@ -40,40 +55,40 @@ class Gauge {
 }
 
 class TextColors {
-  var neutral = TextStyle(color: _black);
-  var reverse_neutral = TextStyle(color: _white);
-  var color1 = TextStyle(color: _blue_100);
-  var color2 = TextStyle(color: _yellow);
-  var color3 = TextStyle(color: _blue_500);
+  final neutral = TextStyle(color: _black);
+  final reverse_neutral = TextStyle(color: _white);
+  final color1 = TextStyle(color: _blue_100);
+  final color2 = TextStyle(color: _yellow);
+  final color3 = TextStyle(color: _blue_500);
 }
 
 class ButtonColors {}
 
 class CustomBorder {
-  var color = BorderColors();
-  var size = BorderSizes();
-  var radius = BorderRadiuses();
+  final color = BorderColors();
+  final size = BorderSizes();
+  final radius = BorderRadiuses();
 }
 
 class BorderColors {
-  var color1 = TextStyle(color: _yellow);
-  var color2 = TextStyle(color: _blue_200);
+  final color1 = TextStyle(color: _yellow);
+  final color2 = TextStyle(color: _blue_200);
 }
 
 class BorderSizes {
-  var light = 2.0;
-  var stroke = 4.0;
+  final light = 2.0;
+  final stroke = 4.0;
 }
 
 class BorderRadiuses {
-  var sm = 4.0;
-  var md = Radius.circular(20);
-  var lg = 4.0;
+  final sm = 4.0;
+  final md = Radius.circular(20);
+  final lg = 4.0;
 }
 
 class IconsColors {
-  var color1 = TextStyle(color: _yellow);
-  var color2 = TextStyle(color: _blue_200);
+  final color1 = TextStyle(color: _yellow);
+  final color2 = TextStyle(color: _blue_200);
 }
 
 class FontSizes {
@@ -96,9 +111,9 @@ class FontSizes {
 }
 
 class CustomFontWeight {
-  var light = TextStyle(fontWeight: FontWeight.w200);
-  var semibold = TextStyle(fontWeight: FontWeight.w500);
-  var bold = TextStyle(fontWeight: FontWeight.bold);
+  final light = TextStyle(fontWeight: FontWeight.w200);
+  final semibold = TextStyle(fontWeight: FontWeight.w500);
+  final bold = TextStyle(fontWeight: FontWeight.bold);
 }
 
 class CustomPadding {

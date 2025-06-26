@@ -51,7 +51,9 @@ class _MealPeriodTagWidgetState extends State<MealRowWidget> {
         if (widget.meal.nutriScore != null)
           Text(
             "${widget.meal.nutriScore!.caloryAmount} kcal",
-            style: style.fontsize.md.merge(style.text.neutral),
+            style: style.fontsize.md
+                .merge(style.text.reverse_neutral)
+                .merge(style.fontweight.bold),
           ),
       ],
     );
