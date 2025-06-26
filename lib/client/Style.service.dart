@@ -32,6 +32,7 @@ class BackgroundColors {
   var color2 = TextStyle(color: _blue_200);
   var color3 = TextStyle(color: _blue_400);
   var color4 = TextStyle(color: _blue_500);
+  var color5 = TextStyle(color: _yellow);
 }
 
 class Gauge {
@@ -43,6 +44,7 @@ class TextColors {
   var reverse_neutral = TextStyle(color: _white);
   var color1 = TextStyle(color: _blue_100);
   var color2 = TextStyle(color: _yellow);
+  var color3 = TextStyle(color: _blue_500);
 }
 
 class ButtonColors {}

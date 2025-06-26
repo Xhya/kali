@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/Style.service.dart';
+import 'package:kalori/client/widgets/CustomButton.widget.dart';
 import 'package:kalori/client/widgets/CustomCard.widget.dart';
 import 'package:kalori/client/widgets/MealPeriodsHorizontal.widget.dart';
 import 'package:kalori/core/models/MealPeriod.enum.dart';
+import 'package:kalori/core/models/NutriScore.model.dart';
 import 'package:kalori/core/services/Navigation.service.dart';
 import 'package:kalori/core/utils/macroIcon.utils.dart';
 import 'package:provider/provider.dart';
@@ -24,16 +26,15 @@ onInputUpdateUserMealText(String value) {
 }
 
 onClickQuickSuffixIcon() async {
-  if (quickAddMealState.nutriScore.value != null) {
-    await addMealAction();
-    return;
-  }
-
   if (quickAddMealState.canSend) {
     await computeNutriScoreAction();
   } else {
     onClickCloseQuickAddMode();
   }
+}
+
+onClickAddMealToDay() async {
+  addMealAction();
 }
 
 class QuickAddMealWidget extends StatefulWidget {
@@ -70,6 +71,8 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
     MealPeriodEnum? chosenPeriod =
         context.watch<QuickAddMealState>().chosenPeriod.value;
     bool isExpanded = context.watch<QuickAddMealState>().isExpanded.value;
+    NutriScore? nutriScore =
+        context.watch<QuickAddMealState>().nutriScore.value;
 
     return Container(
       color: style.background.color4.color,
@@ -113,52 +116,6 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                 ),
               ),
               SizedBox(height: 24),
-              // TextField(
-              //   controller: controller,
-              //   onChanged: (value) {
-              //     onInputUpdateUserMealText(value);
-              //   },
-              //   textCapitalization: TextCapitalization.sentences,
-              //   minLines: 1,
-              //   maxLines: 6,
-              //   decoration: InputDecoration(
-              //     border: OutlineInputBorder(),
-              //     labelText: t('describe_your_meal', [
-              //       quickAddMealState.chosenPeriod.value != null
-              //           ? t(quickAddMealState.chosenPeriod.value!.label)
-              //           : "repas",
-              //     ]),
-              //     suffixIcon: Row(
-              //       mainAxisSize: MainAxisSize.min,
-              //       children: [
-              //         if (userMealText.isNotEmpty)
-              //           GestureDetector(
-              //             onTap: () {
-              //               onClickAddMeal();
-              //             },
-              //             child:
-              //                 isLoading
-              //                     ? LoaderIcon()
-              //                     : Text(
-              //                       t('add'),
-              //                       style: style.fontsize.sm.merge(
-              //                         style.text.neutral,
-              //                       ),
-              //                     ),
-              //           ),
-              //         SizedBox(width: 12),
-              //         GestureDetector(
-              //           onTap: () {
-              //             onClickCloseQuickAddMode();
-              //           },
-              //           child: Icon(Icons.close),
-              //         ),
-              //         SizedBox(width: 12),
-              //       ],
-              //     ),
-              //   ),
-              // ),
-              // SizedBox(height: 12),
               MealPeriodsHorizontalWidget(
                 onClickSelectPeriod: (MealPeriodEnum period) {
                   onClickSelectPeriod(period);
@@ -207,7 +164,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                   curve: Curves.easeInOut,
                   alignment: Alignment.center,
                   width: isExpanded ? double.maxFinite : 0,
-                  height: isExpanded ? 100 : 0,
+                  height: isExpanded ? 220 : 0,
                   padding: EdgeInsets.symmetric(vertical: 4),
                   // decoration: BoxDecoration(
                   //   border: Border.all(color: style.border.color.color1.color!),
@@ -231,7 +188,9 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                                 ),
                               ),
                               Text(
-                                "-",
+                                nutriScore == null
+                                    ? "-"
+                                    : nutriScore.caloryAmount.toString(),
                                 style: style.text.reverse_neutral.merge(
                                   style.fontsize.sm,
                                 ),
@@ -254,7 +213,9 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                                 ),
                               ),
                               Text(
-                                "-",
+                                nutriScore == null
+                                    ? "-"
+                                    : nutriScore.glucidAmount.toString(),
                                 style: style.text.reverse_neutral.merge(
                                   style.fontsize.sm,
                                 ),
@@ -277,7 +238,9 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                                 ),
                               ),
                               Text(
-                                "-",
+                                nutriScore == null
+                                    ? "-"
+                                    : nutriScore.proteinAmount.toString(),
                                 style: style.text.reverse_neutral.merge(
                                   style.fontsize.sm,
                                 ),
@@ -300,7 +263,9 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                                 ),
                               ),
                               Text(
-                                "-",
+                                nutriScore == null
+                                    ? "-"
+                                    : nutriScore.lipidAmount.toString(),
                                 style: style.text.reverse_neutral.merge(
                                   style.fontsize.sm,
                                 ),
@@ -308,6 +273,17 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                             ],
                           ),
                         ),
+                      ),
+                      SizedBox(height: 16),
+                      ButtonWidget(
+                        text: "Ajouter à la journée",
+                        buttonType: ButtonTypeEnum.filled,
+                        onPressed: () {
+                          onClickAddMealToDay();
+                        },
+                        fullWidth: false,
+                        disabled: false,
+                        isLoading: false,
                       ),
                     ],
                   ),

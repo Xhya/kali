@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/Style.service.dart';
+import 'package:kalori/client/widgets/CustomInkwell.widget.dart';
 import 'package:kalori/client/widgets/LoaderIcon.widget.dart';
 
 enum ButtonTypeEnum { filled, outline, tonal }
@@ -17,7 +18,7 @@ class ButtonWidget extends StatelessWidget {
     this.isLoading = false,
   });
 
-  final Function onPressed;
+  final GestureTapCallback onPressed;
   final ButtonTypeEnum buttonType;
   final String? text;
   final bool fullWidth;
@@ -33,8 +34,8 @@ class ButtonWidget extends StatelessWidget {
 
     switch (buttonType) {
       case ButtonTypeEnum.filled:
-        backgroungColor = style.background.color3.color;
-        textColor = style.text.color2.color;
+        backgroungColor = style.background.color5.color;
+        textColor = style.text.color3.color;
         borderColor = null;
       case ButtonTypeEnum.outline:
         backgroungColor = Colors.transparent;
@@ -47,26 +48,35 @@ class ButtonWidget extends StatelessWidget {
         borderColor = null;
     }
 
-    return SizedBox(
-      width: fullWidth ? double.infinity : null,
-      height: 40,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          side:
-              borderColor != null
-                  ? BorderSide(width: borderSize, color: borderColor)
-                  : null,
-          backgroundColor: backgroungColor,
-          shadowColor: Colors.transparent,
+    return CustomInkwell(
+      onTap: disabled ? () {} : onPressed,
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+        child: Container(
+          alignment: Alignment.center,
+          width: fullWidth ? double.infinity : null,
+          height: 80,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            decoration: BoxDecoration(
+              color: backgroungColor,
+              border:
+                  borderColor != null
+                      ? Border.all(width: borderSize, color: borderColor)
+                      : null,
+              borderRadius: BorderRadius.all(Radius.circular(16)),
+            ),
+            child:
+                isLoading
+                    ? LoaderIcon()
+                    : Text(
+                      text ?? "Confirmer",
+                      style: style.fontsize.md
+                          .merge(style.fontweight.semibold)
+                          .merge(TextStyle(color: textColor)),
+                    ),
+          ),
         ),
-        onPressed: disabled ? null : () async => onPressed(),
-        child:
-            isLoading
-                ? LoaderIcon()
-                : Text(
-                  text ?? "Confirmer",
-                  style: style.fontsize.md.merge(TextStyle(color: textColor)),
-                ),
       ),
     );
   }
