@@ -38,7 +38,7 @@ class _MealsScreenState extends State<MealsScreen> {
                 },
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 6),
-                  child: MealRowWidget(meal: meal),
+                  child: MealRowWidget(meal: meal, onLightBackground: true),
                 ),
               );
             },

@@ -8,10 +8,12 @@ class MealPeriodTagWidget extends StatefulWidget {
     super.key,
     required this.mealPeriod,
     this.disabled = false,
+    this.onLightBackground = false,
   });
 
   final MealPeriodEnum mealPeriod;
   final bool disabled;
+  final bool onLightBackground;
 
   @override
   State<MealPeriodTagWidget> createState() => _MealPeriodTagWidgetState();
@@ -31,6 +33,11 @@ class _MealPeriodTagWidgetState extends State<MealPeriodTagWidget> {
 
     final double opacity = widget.disabled ? 0.3 : 1;
 
+    final textColor =
+        widget.onLightBackground
+            ? style.text.neutral
+            : style.text.reverse_neutral;
+
     return Opacity(
       opacity: opacity,
       child: ClipRRect(
@@ -46,7 +53,7 @@ class _MealPeriodTagWidgetState extends State<MealPeriodTagWidget> {
               Text(icon, style: style.fontsize.xs),
               Text(
                 t(widget.mealPeriod.label),
-                style: style.text.reverse_neutral.merge(style.fontsize.xs),
+                style: textColor.merge(style.fontsize.xs),
               ),
             ],
           ),

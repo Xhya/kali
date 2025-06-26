@@ -3,14 +3,12 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kalori/core/models/Meal.model.dart';
 import 'package:kalori/core/models/meal.fixture.dart';
 import 'package:kalori/environment.dart';
-import 'package:uuid/uuid.dart';
 
 final mealData = MealData();
 final mealStoreKey = 'hc_meals';
 
 class MealData {
   final _storage = const FlutterSecureStorage();
-  final _uuid = Uuid();
 
   List<MealModel> _meals = [];
 
