@@ -3,6 +3,7 @@ import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/client/widgets/CustomCard.widget.dart';
 import 'package:kalori/client/widgets/CustomInkwell.widget.dart';
 import 'package:kalori/client/widgets/MainKaloriesCount.widget.dart';
+import 'package:kalori/client/widgets/MealRow.widget.dart';
 import 'package:kalori/client/widgets/NutriScoreGauges.widget.dart';
 import 'package:kalori/core/actions/Goto.actions.dart';
 import 'package:kalori/core/domains/meal.service.dart';
@@ -78,41 +79,61 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 MainKaloriesCountWidget(),
                 SizedBox(height: 24),
-                CustomCard(
-                  child: Container(
-                    padding: const EdgeInsets.all(20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        if (currentNutriScore?.caloryAmount != null)
-                          RichText(
-                            textAlign: TextAlign.center,
-                            text: TextSpan(
-                              style: style.text.reverse_neutral.merge(
-                                style.fontsize.md,
-                              ),
-                              children: [
-                                TextSpan(text: 'Bravo, '),
-                                TextSpan(
-                                  text:
-                                      '${currentNutriScore!.caloryAmount} kcal',
-                                  style: style.fontweight.bold,
-                                ),
-                                TextSpan(text: ' dépensées !'),
-                              ],
-                            ),
-                          ),
 
+                if (lastMeal != null)
+                  CustomCard(
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    width: double.maxFinite,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                         Text(
-                          "🔥",
-                          style: style.text.reverse_neutral.merge(
-                            style.fontsize.md,
-                          ),
+                          "Dernier repas",
+                          style: style.text.reverse_neutral
+                              .merge(style.fontsize.sm)
+                              .merge(style.fontweight.bold),
                         ),
+                        SizedBox(height: 8),
+                        MealRowWidget(meal: lastMeal),
                       ],
                     ),
                   ),
-                ),
+
+                // CustomCard(
+                //   child: Container(
+                //     padding: const EdgeInsets.all(20),
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //       children: [
+                //         if (currentNutriScore?.caloryAmount != null)
+                //           RichText(
+                //             textAlign: TextAlign.center,
+                //             text: TextSpan(
+                //               style: style.text.reverse_neutral.merge(
+                //                 style.fontsize.md,
+                //               ),
+                //               children: [
+                //                 TextSpan(text: 'Bravo, '),
+                //                 TextSpan(
+                //                   text:
+                //                       '${currentNutriScore!.caloryAmount} kcal',
+                //                   style: style.fontweight.bold,
+                //                 ),
+                //                 TextSpan(text: ' dépensées !'),
+                //               ],
+                //             ),
+                //           ),
+
+                //         Text(
+                //           "🔥",
+                //           style: style.text.reverse_neutral.merge(
+                //             style.fontsize.md,
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
 
                 // if (lastMeal != null)
                 //   GestureDetector(
