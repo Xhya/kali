@@ -5,7 +5,6 @@ import 'package:kalori/core/models/MealPeriod.enum.dart';
 import 'package:kalori/core/services/Navigation.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
-import 'package:kalori/client/widgets/LoaderIcon.widget.dart';
 import 'package:kalori/core/actions/nutriScore.actions.dart';
 
 onClickSelectPeriod(MealPeriodEnum period) {
@@ -14,6 +13,7 @@ onClickSelectPeriod(MealPeriodEnum period) {
 
 onClickCloseQuickAddMode() {
   navigationService.closeBottomSheet();
+  quickAddMealState.chosenPeriod.value = null;
   quickAddMealState.userMealText.value = "";
 }
 
@@ -21,8 +21,12 @@ onInputUpdateUserMealText(String value) {
   quickAddMealState.userMealText.value = value;
 }
 
-onClickAddMeal() {
-  addMealAction();
+onClickQuickSuffixIcon() async {
+  if (quickAddMealState.canSend) {
+    await addMealAction();
+  } else {
+    onClickCloseQuickAddMode();
+  }
 }
 
 class QuickAddMealWidget extends StatefulWidget {
@@ -34,7 +38,6 @@ class QuickAddMealWidget extends StatefulWidget {
 
 class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
   TextEditingController controller = TextEditingController();
-  bool isExpanded = false;
 
   @override
   void initState() {
@@ -42,10 +45,8 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
 
     quickAddMealState.nutriScore.addListener(() {
       final nutri = quickAddMealState.nutriScore.value;
-      if (nutri != null && !isExpanded) {
-        setState(() {
-          isExpanded = true;
-        });
+      if (nutri != null && !quickAddMealState.isExpanded.value) {
+        quickAddMealState.isExpanded.value = true;
       }
     });
   }
@@ -58,13 +59,14 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
 
   @override
   Widget build(BuildContext context) {
-    String userMealText = context.watch<QuickAddMealState>().userMealText.value;
-    bool isLoading = context.watch<QuickAddMealState>().isLoading.value;
+    Widget suffixIcon = context.watch<QuickAddMealState>().suffixIcon;
     MealPeriodEnum? chosenPeriod =
         context.watch<QuickAddMealState>().chosenPeriod.value;
+    bool isExpanded = context.watch<QuickAddMealState>().isExpanded.value;
 
     return Container(
       color: style.background.color4.color,
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       child: ClipRRect(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(16),
@@ -124,33 +126,38 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
               //   ),
               // ),
               // SizedBox(height: 12),
-              // AnimatedContainer(
-              //   duration: Duration(seconds: 2),
-              //   curve: Curves.easeInOut,
-              //   width: isExpanded ? double.maxFinite : 0,
-              //   height: isExpanded ? 120 : 0,
-              //   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              //   decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
-              //   child: Text(
-              //     "Voici un résumé de vos nutriments:\nProtétines: ${quickAddMealState.nutriScore.value?.proteinAmount.toInt()}g\nGlucides: ${quickAddMealState.nutriScore.value?.glucidAmount.toInt()}g\nLipides: ${quickAddMealState.nutriScore.value?.lipidAmount.toInt()}g\nCalories: ${quickAddMealState.nutriScore.value?.caloryAmount.toInt()}g",
-              //     maxLines: 5,
-              //   ),
-              // ),
               MealPeriodsHorizontalWidget(
                 onClickSelectPeriod: (MealPeriodEnum period) {
                   onClickSelectPeriod(period);
                 },
                 chosenPeriod: chosenPeriod,
               ),
+              if (isExpanded) SizedBox(height: 16),
               ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+                child: AnimatedContainer(
+                  duration: Duration(seconds: 1),
+                  curve: Curves.easeInOut,
+                  alignment: Alignment.center,
+                  width: isExpanded ? double.maxFinite : 0,
+                  height: isExpanded ? 40 : 0,
+                  padding: EdgeInsets.symmetric(vertical: 4),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: style.border.color.color1.color!),
+                    borderRadius: const BorderRadius.all(Radius.circular(16)),
+                  ),
+                  child: Text(
+                    "PR: ${quickAddMealState.nutriScore.value?.proteinAmount.toInt()}g / GL: ${quickAddMealState.nutriScore.value?.glucidAmount.toInt()}g / LI: ${quickAddMealState.nutriScore.value?.lipidAmount.toInt()}g / CAL: ${quickAddMealState.nutriScore.value?.caloryAmount.toInt()}kcal",
+                    maxLines: 1,
+                    style: style.text.color1,
+                  ),
                 ),
+              ),
+              SizedBox(height: 16),
+              ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(16)),
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                   color: style.background.color4.color,
-                  height: 80,
                   alignment: Alignment.center,
                   child: TextField(
                     controller: controller,
@@ -162,36 +169,22 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                     maxLines: 6,
                     style: style.text.reverse_neutral,
                     decoration: InputDecoration(
+                      filled: true,
+                      fillColor: style.background.color3.color,
                       border: InputBorder.none,
                       hintText: "J'ai mangé un acaï bowl",
                       hintStyle: style.text.color1,
                       suffixIcon: GestureDetector(
                         onTap: () {
-                          if (!isLoading) {
-                            if (userMealText.isNotEmpty) {
-                              onClickAddMeal();
-                            } else {
-                              onClickCloseQuickAddMode();
-                            }
-                          }
+                          onClickQuickSuffixIcon();
                         },
-                        child:
-                            isLoading
-                                ? LoaderIcon()
-                                : userMealText.isNotEmpty
-                                ? Icon(
-                                  Icons.send,
-                                  color: style.icon.color1.color,
-                                )
-                                : Icon(
-                                  Icons.close,
-                                  color: style.icon.color1.color,
-                                ),
+                        child: suffixIcon,
                       ),
                     ),
                   ),
                 ),
               ),
+              SizedBox(height: 24),
             ],
           ),
         ),
