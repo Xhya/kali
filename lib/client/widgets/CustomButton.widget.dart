@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/Style.service.dart';
+import 'package:kalori/client/widgets/LoaderIcon.widget.dart';
 
 enum ButtonTypeEnum { filled, outline, tonal }
 
@@ -13,6 +14,7 @@ class ButtonWidget extends StatelessWidget {
     this.text,
     this.fullWidth = false,
     this.disabled = false,
+    this.isLoading = false,
   });
 
   final Function onPressed;
@@ -20,6 +22,7 @@ class ButtonWidget extends StatelessWidget {
   final String? text;
   final bool fullWidth;
   final bool disabled;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -49,20 +52,21 @@ class ButtonWidget extends StatelessWidget {
       height: 40,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          side: borderColor != null
-              ? BorderSide(
-                  width: borderSize,
-                  color: borderColor,
-                )
-              : null,
+          side:
+              borderColor != null
+                  ? BorderSide(width: borderSize, color: borderColor)
+                  : null,
           backgroundColor: backgroungColor,
           shadowColor: Colors.transparent,
         ),
         onPressed: disabled ? null : () async => onPressed(),
-        child: Text(
-          text ?? "Confirmer",
-          style: style.fontsize.md.merge(TextStyle(color: textColor)),
-        ),
+        child:
+            isLoading
+                ? LoaderIcon()
+                : Text(
+                  text ?? "Confirmer",
+                  style: style.fontsize.md.merge(TextStyle(color: textColor)),
+                ),
       ),
     );
   }

@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:kalori/core/domains/nutriScore.service.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
+import 'package:kalori/core/services/Error.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/layout/Title.scaffold.dart';
 import 'package:kalori/client/widgets/CustomButton.widget.dart';
 import 'package:kalori/client/widgets/CustomInput.dart';
 import 'package:kalori/core/domains/nutriScore.state.dart';
 import 'package:kalori/core/services/Translation.service.dart';
+import 'package:uuid/uuid.dart';
 
 final personalNutriScoreEditionState = PersonalNutriScoreEditionState();
 
 class PersonalNutriScoreEditionState extends ChangeNotifier {
+  final isLoading = ValueNotifier<bool>(false);
   final editingProteinAmount = ValueNotifier<String>("");
   final editingGlucidAmount = ValueNotifier<String>("");
   final editingLipidAmount = ValueNotifier<String>("");
@@ -26,6 +30,7 @@ class PersonalNutriScoreEditionState extends ChangeNotifier {
     editingGlucidAmount.addListener(notifyListeners);
     editingLipidAmount.addListener(notifyListeners);
     editingCaloryAmount.addListener(notifyListeners);
+    isLoading.addListener(notifyListeners);
   }
 
   @override
@@ -34,6 +39,7 @@ class PersonalNutriScoreEditionState extends ChangeNotifier {
     editingGlucidAmount.dispose();
     editingLipidAmount.dispose();
     editingCaloryAmount.dispose();
+    isLoading.dispose();
     super.dispose();
   }
 }
@@ -52,6 +58,34 @@ onLipidInputChange(String value) {
 
 onCaloryInputChange(String value) {
   personalNutriScoreEditionState.editingCaloryAmount.value = value;
+}
+
+onClickSave() async {
+  try {
+    personalNutriScoreEditionState.isLoading.value = true;
+    final nutriScore = NutriScore(
+      id: Uuid().v8(),
+      proteinAmount: int.parse(
+        personalNutriScoreEditionState.editingProteinAmount.value,
+      ),
+      glucidAmount: int.parse(
+        personalNutriScoreEditionState.editingGlucidAmount.value,
+      ),
+      lipidAmount: int.parse(
+        personalNutriScoreEditionState.editingLipidAmount.value,
+      ),
+      caloryAmount: int.parse(
+        personalNutriScoreEditionState.editingCaloryAmount.value,
+      ),
+    );
+
+    await setPersonalNutriScore(nutriScore);
+    await refreshPersonalNutriScore();
+  } catch (e) {
+    errorService.notifyError(e);
+  } finally {
+    personalNutriScoreEditionState.isLoading.value = false;
+  }
 }
 
 class PersonalNutriScoreScreen extends StatefulWidget {
@@ -83,6 +117,8 @@ class _PersonalNutriScoreScreenState extends State<PersonalNutriScoreScreen> {
     NutriScore? personalNutriScore =
         context.watch<NutriScoreState>().personalNutriScore.value;
     bool canSave = context.watch<PersonalNutriScoreEditionState>().canSave;
+    bool isLoading =
+        context.watch<PersonalNutriScoreEditionState>().isLoading.value;
 
     return TitleScaffold(
       title: "Objectifs",
@@ -121,7 +157,7 @@ class _PersonalNutriScoreScreenState extends State<PersonalNutriScoreScreen> {
                                 onChanged: (value) {
                                   onGlucidInputChange(value);
                                 },
-                                placeholder: t("proteins"),
+                                placeholder: t("glucids"),
                                 suffixText: "g",
                               ),
 
@@ -156,9 +192,12 @@ class _PersonalNutriScoreScreenState extends State<PersonalNutriScoreScreen> {
                         ButtonWidget(
                           text: "Sauvegarder",
                           buttonType: ButtonTypeEnum.filled,
-                          onPressed: () {},
+                          onPressed: () {
+                            onClickSave();
+                          },
                           fullWidth: true,
                           disabled: !canSave,
+                          isLoading: isLoading,
                         ),
                         SizedBox(height: 16),
                       ],
