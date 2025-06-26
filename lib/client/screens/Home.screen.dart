@@ -7,8 +7,10 @@ import 'package:kalori/client/widgets/NutriScoreGauges.widget.dart';
 import 'package:kalori/core/actions/Goto.actions.dart';
 import 'package:kalori/core/actions/nutriScore.actions.dart';
 import 'package:kalori/core/domains/meal.state.dart';
+import 'package:kalori/core/domains/nutriScore.state.dart';
 import 'package:kalori/core/models/Meal.model.dart';
 import 'package:kalori/core/models/MealPeriod.enum.dart';
+import 'package:kalori/core/models/NutriScore.model.dart';
 import 'package:kalori/core/services/Navigation.service.dart';
 import 'package:kalori/core/services/Translation.service.dart';
 import 'package:provider/provider.dart';
@@ -44,6 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     List<MealModel> meals = context.watch<MealState>().userMeals.value;
+    NutriScore? currentNutriScore =
+        context.watch<NutriScoreState>().currentNutriScore.value;
 
     final lastMeal = meals.isNotEmpty ? meals.last : null;
 
@@ -65,22 +69,24 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            style: style.text.reverse_neutral.merge(
-                              style.fontsize.md,
-                            ),
-                            children: [
-                              TextSpan(text: 'Bravo, '),
-                              TextSpan(
-                                text: '250 kcal',
-                                style: style.fontweight.bold,
+                        if (currentNutriScore?.caloryAmount != null)
+                          RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              style: style.text.reverse_neutral.merge(
+                                style.fontsize.md,
                               ),
-                              TextSpan(text: ' dépensées !'),
-                            ],
+                              children: [
+                                TextSpan(text: 'Bravo, '),
+                                TextSpan(
+                                  text:
+                                      '${currentNutriScore!.caloryAmount} kcal',
+                                  style: style.fontweight.bold,
+                                ),
+                                TextSpan(text: ' dépensées !'),
+                              ],
+                            ),
                           ),
-                        ),
 
                         Text(
                           "🔥",
