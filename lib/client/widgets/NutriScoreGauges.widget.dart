@@ -4,6 +4,7 @@ import 'package:kalori/client/widgets/CustomCard.widget.dart';
 import 'package:kalori/client/states/editMeal.state.dart';
 import 'package:kalori/core/domains/nutriScore.state.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
+import 'package:kalori/core/utils/macroIcon.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/widgets/Gauge.widget.dart';
 import 'package:kalori/core/services/Translation.service.dart';
@@ -40,7 +41,7 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                     children: [
                       SizedBox(height: 12),
                       Text(
-                        "🥩",
+                        proteinIcon,
                         style: style.fontsize.xl.merge(style.text.neutral),
                       ),
                       Text(
@@ -78,7 +79,7 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                     children: [
                       SizedBox(height: 12),
                       Text(
-                        "🍚",
+                        glucidIcon,
                         style: style.fontsize.xl.merge(style.text.neutral),
                       ),
                       Text(
@@ -114,7 +115,7 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                     children: [
                       SizedBox(height: 12),
                       Text(
-                        "🥑",
+                        lipidIcon,
                         style: style.fontsize.xl.merge(style.text.neutral),
                       ),
                       Text(
