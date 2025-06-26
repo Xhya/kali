@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kalori/core/utils/remaningCaloriesToSpend.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/Style.service.dart';
 import 'package:kalori/core/domains/nutriScore.state.dart';
@@ -18,7 +19,7 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
   Widget build(BuildContext context) {
     NutriScore? currentNutriScore =
         context.watch<NutriScoreState>().currentNutriScore.value;
-    NutriScore? maxNutriScore =
+    NutriScore? personalNutriScore =
         context.watch<NutriScoreState>().personalNutriScore.value;
 
     return Column(
@@ -33,7 +34,7 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
             children: [
               TextSpan(text: 'Il te reste '),
               TextSpan(
-                text: '450 calories',
+                text: '${remaningCaloriesToSpend()} calories',
                 style: style.text.reverse_neutral
                     .merge(style.fontsize.xl)
                     .merge(style.fontweight.bold),
@@ -54,7 +55,7 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
                   .merge(style.fontweight.bold),
             ),
             Text(
-              "1250 / 1700",
+              "${currentNutriScore?.caloryAmount.toString()} / ${personalNutriScore?.caloryAmount.toString()} kcal",
               textAlign: TextAlign.start,
               style: style.text.color1
                   .merge(style.fontsize.xs)
@@ -65,7 +66,7 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
         SizedBox(height: 4),
         SfLinearGauge(
           minimum: 0,
-          maximum: maxNutriScore?.caloryAmount.toDouble() ?? 0,
+          maximum: personalNutriScore?.caloryAmount.toDouble() ?? 0,
           showLabels: false,
           showTicks: false,
           orientation: LinearGaugeOrientation.horizontal,
@@ -86,25 +87,25 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
           ],
         ),
         SizedBox(height: 4),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "Brûlées",
-              textAlign: TextAlign.start,
-              style: style.text.reverse_neutral
-                  .merge(style.fontsize.xs)
-                  .merge(style.fontweight.bold),
-            ),
-            Text(
-              "1250 / 1700",
-              textAlign: TextAlign.start,
-              style: style.text.color1
-                  .merge(style.fontsize.xs)
-                  .merge(style.fontweight.bold),
-            ),
-          ],
-        ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //   children: [
+        //     Text(
+        //       "Brûlées",
+        //       textAlign: TextAlign.start,
+        //       style: style.text.reverse_neutral
+        //           .merge(style.fontsize.xs)
+        //           .merge(style.fontweight.bold),
+        //     ),
+        //     Text(
+        //       "1250 / 1700",
+        //       textAlign: TextAlign.start,
+        //       style: style.text.color1
+        //           .merge(style.fontsize.xs)
+        //           .merge(style.fontweight.bold),
+        //     ),
+        // ],
+        // ),
       ],
     );
   }
