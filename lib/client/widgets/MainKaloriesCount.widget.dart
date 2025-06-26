@@ -74,6 +74,7 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
           axisLabelStyle: TextStyle(fontSize: 12.0, color: Colors.black),
           axisTrackStyle: LinearAxisTrackStyle(
             edgeStyle: LinearEdgeStyle.bothCurve,
+            color: style.background.color3.color,
             thickness: 15.0,
             borderColor: Colors.black,
           ),

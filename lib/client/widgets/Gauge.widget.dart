@@ -32,6 +32,7 @@ class _GaugeWidgetState extends State<GaugeWidget> {
       axisTrackStyle: LinearAxisTrackStyle(
         edgeStyle: LinearEdgeStyle.bothCurve,
         thickness: 15.0,
+        color: style.background.color3.color,
         borderColor: Colors.black,
       ),
       barPointers: [
