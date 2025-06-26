@@ -5,7 +5,7 @@ import 'package:kalori/client/widgets/LoaderIcon.widget.dart';
 import 'package:kalori/client/widgets/MealPeriodTag.widget.dart';
 import 'package:kalori/client/widgets/NutriScoreGauges.widget.dart';
 import 'package:kalori/core/domains/meal.state.dart';
-import 'package:kalori/core/domains/editMeal.state.dart';
+import 'package:kalori/client/states/editMeal.state.dart';
 import 'package:kalori/core/models/Meal.model.dart';
 import 'package:kalori/core/models/MealPeriod.enum.dart';
 import 'package:kalori/core/services/AI.service.dart';
