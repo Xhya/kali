@@ -31,7 +31,7 @@ void main() {
     expect(navigationService.bottomSheet, isNotNull);
     onInputUpdateUserMealText(fixtureMeal2.mealDescription);
     expect(quickAddMealState.userMealText.value, fixtureMeal2.mealDescription);
-    await addMealAction();
+    await computeNutriScoreAction();
     expect(mealState.userMeals.value.length, 2);
     expect(mealState.userMeals.value.last.mealDescription, fixtureMeal2.mealDescription);
     expect(mealState.userMeals.value.last.nutriScore!.caloryAmount, fixtureMeal2.nutriScore!.caloryAmount);

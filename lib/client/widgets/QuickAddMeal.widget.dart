@@ -22,8 +22,13 @@ onInputUpdateUserMealText(String value) {
 }
 
 onClickQuickSuffixIcon() async {
-  if (quickAddMealState.canSend) {
+  if (quickAddMealState.nutriScore.value != null) {
     await addMealAction();
+    return;
+  }
+
+  if (quickAddMealState.canSend) {
+    await computeNutriScoreAction();
   } else {
     onClickCloseQuickAddMode();
   }

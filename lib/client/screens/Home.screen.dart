@@ -5,21 +5,34 @@ import 'package:kalori/client/widgets/CustomInkwell.widget.dart';
 import 'package:kalori/client/widgets/MainKaloriesCount.widget.dart';
 import 'package:kalori/client/widgets/NutriScoreGauges.widget.dart';
 import 'package:kalori/core/actions/Goto.actions.dart';
-import 'package:kalori/core/actions/nutriScore.actions.dart';
+import 'package:kalori/core/domains/meal.service.dart';
 import 'package:kalori/core/domains/meal.state.dart';
+import 'package:kalori/core/domains/nutriScore.service.dart';
 import 'package:kalori/core/domains/nutriScore.state.dart';
 import 'package:kalori/core/models/Meal.model.dart';
 import 'package:kalori/core/models/MealPeriod.enum.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
+import 'package:kalori/core/services/Error.service.dart';
 import 'package:kalori/core/services/Navigation.service.dart';
 import 'package:kalori/core/services/Translation.service.dart';
+import 'package:kalori/core/utils/computeDayAverages.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kalori/client/Style.service.dart';
 import 'package:kalori/client/layout/Base.scaffold.dart';
 
+initHomeScreen() async {
+  try {
+    await refreshMeals();
+    computeDayAverages();
+    await refreshPersonalNutriScore();
+  } catch (e) {
+    errorService.notifyError(e);
+  }
+}
+
 onClickAddQuickMeal() {
-  quickAddMealState.userMealText.value = "";
+  quickAddMealState.reset();
   navigationService.openBottomSheet(widget: QuickAddMealWidget());
 }
 

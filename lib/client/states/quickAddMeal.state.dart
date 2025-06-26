@@ -42,4 +42,12 @@ class QuickAddMealState extends ChangeNotifier {
     isExpanded.dispose();
     super.dispose();
   }
+
+  reset() {
+    isLoading.value = false;
+    userMealText.value = "";
+    chosenPeriod.value = null;
+    nutriScore.value = null;
+    isExpanded.value = false;
+  }
 }
