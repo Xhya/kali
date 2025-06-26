@@ -64,7 +64,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
 
   @override
   Widget build(BuildContext context) {
-    Widget suffixIcon = context.watch<QuickAddMealState>().suffixIcon;
+    Widget? suffixIcon = context.watch<QuickAddMealState>().suffixIcon;
     MealPeriodEnum? chosenPeriod =
         context.watch<QuickAddMealState>().chosenPeriod.value;
     bool isExpanded = context.watch<QuickAddMealState>().isExpanded.value;
@@ -80,11 +80,37 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
         child: Container(
           color: style.background.color4.color,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(height: 12),
+              Container(
+                padding: EdgeInsets.only(left: 4),
+                width: double.maxFinite,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Ajouter un repas",
+                      textAlign: TextAlign.start,
+                      style: style.text.reverse_neutral.merge(
+                        style.fontsize.lg,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        onClickCloseQuickAddMode();
+                      },
+                      icon: Icon(
+                        Icons.close,
+                        color: style.icon.color2.color,
+                        size: style.fontsize.lg.fontSize,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 24),
               // TextField(
               //   controller: controller,
               //   onChanged: (value) {
@@ -137,7 +163,41 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                 },
                 chosenPeriod: chosenPeriod,
               ),
-              if (isExpanded) SizedBox(height: 16),
+              SizedBox(height: 16),
+              ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+                child: Container(
+                  color: style.background.color4.color,
+                  alignment: Alignment.center,
+                  child: TextField(
+                    controller: controller,
+                    onChanged: (value) {
+                      onInputUpdateUserMealText(value);
+                    },
+                    textCapitalization: TextCapitalization.sentences,
+                    minLines: 1,
+                    maxLines: 6,
+                    style: style.text.reverse_neutral,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: style.background.color3.color,
+                      border: InputBorder.none,
+                      hintText: "Quel est le menu du jour ?",
+                      hintStyle: style.text.color1,
+                      suffixIcon:
+                          suffixIcon != null
+                              ? GestureDetector(
+                                onTap: () {
+                                  onClickQuickSuffixIcon();
+                                },
+                                child: suffixIcon,
+                              )
+                              : null,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 16),
               ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
                 child: AnimatedContainer(
@@ -159,36 +219,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                 ),
               ),
               SizedBox(height: 16),
-              ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
-                child: Container(
-                  color: style.background.color4.color,
-                  alignment: Alignment.center,
-                  child: TextField(
-                    controller: controller,
-                    onChanged: (value) {
-                      onInputUpdateUserMealText(value);
-                    },
-                    textCapitalization: TextCapitalization.sentences,
-                    minLines: 1,
-                    maxLines: 6,
-                    style: style.text.reverse_neutral,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: style.background.color3.color,
-                      border: InputBorder.none,
-                      hintText: "J'ai mangé un acaï bowl",
-                      hintStyle: style.text.color1,
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          onClickQuickSuffixIcon();
-                        },
-                        child: suffixIcon,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+
               SizedBox(height: 24),
             ],
           ),

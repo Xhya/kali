@@ -16,6 +16,7 @@ import 'package:kalori/core/services/Error.service.dart';
 import 'package:kalori/core/services/Navigation.service.dart';
 import 'package:kalori/core/services/Translation.service.dart';
 import 'package:kalori/core/utils/computeDayAverages.utils.dart';
+import 'package:kalori/core/utils/computeMealPeriod.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kalori/client/Style.service.dart';
@@ -33,6 +34,7 @@ initHomeScreen() async {
 
 onClickAddQuickMeal() {
   quickAddMealState.reset();
+  quickAddMealState.chosenPeriod.value = computeMealPeriod(DateTime.now());
   navigationService.openBottomSheet(widget: QuickAddMealWidget());
 }
 

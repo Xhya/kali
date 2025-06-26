@@ -18,12 +18,24 @@ class QuickAddMealState extends ChangeNotifier {
       userMealText.value.isNotEmpty &&
       chosenPeriod.value != null;
 
-  Widget get suffixIcon =>
-      isLoading.value
-          ? LoaderIcon()
-          : userMealText.value.isNotEmpty && chosenPeriod.value != null
-          ? Icon(Icons.send, color: style.icon.color1.color)
-          : Icon(Icons.close, color: style.icon.color1.color);
+  Widget? get suffixIcon =>
+      userMealText.value.isNotEmpty && chosenPeriod.value != null
+          ? Container(
+            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+            decoration: BoxDecoration(
+              border: Border.all(color: style.border.color.color2.color!),
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
+            ),
+            child:
+                isLoading.value
+                    ? LoaderIcon()
+                    : Icon(
+                      Icons.calculate,
+                      color: style.icon.color2.color,
+                      size: 16,
+                    ),
+          )
+          : null;
 
   QuickAddMealState() {
     isLoading.addListener(notifyListeners);

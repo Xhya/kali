@@ -7,9 +7,13 @@ class LoaderIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LoadingAnimationWidget.threeRotatingDots(
-      color: style.icon.color1.color!,
-      size: 30,
+    return SizedBox(
+      width: 30,
+      height: 30,
+      child: LoadingAnimationWidget.hexagonDots(
+        color: style.icon.color1.color!,
+        size: 20,
+      ),
     );
   }
 }

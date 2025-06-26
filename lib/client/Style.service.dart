@@ -55,6 +55,7 @@ class CustomBorder {
 
 class BorderColors {
   var color1 = TextStyle(color: _yellow);
+  var color2 = TextStyle(color: _blue_200);
 }
 
 class BorderSizes {
@@ -70,6 +71,7 @@ class BorderRadiuses {
 
 class IconsColors {
   var color1 = TextStyle(color: _yellow);
+  var color2 = TextStyle(color: _blue_200);
 }
 
 class FontSizes {
