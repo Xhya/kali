@@ -31,7 +31,7 @@ class _MealPeriodTagWidgetState extends State<MealRowWidget> {
       children: [
         Expanded(
           child: Row(
-            spacing: 4,
+            spacing: 8,
             children: [
               MealPeriodTagWidget(
                 mealPeriod: widget.meal.period,
@@ -40,9 +40,9 @@ class _MealPeriodTagWidgetState extends State<MealRowWidget> {
               Expanded(
                 child: Text(
                   widget.meal.mealDescription,
-                  style: style.fontsize.md.merge(textColor),
+                  style: style.fontsize.sm.merge(textColor),
                   overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
+                  maxLines: 2,
                 ),
               ),
             ],

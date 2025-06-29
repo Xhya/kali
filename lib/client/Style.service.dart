@@ -18,7 +18,7 @@ class Style {
 
 Color _breakfastColor = _pink;
 Color _lunchColor = _orange;
-Color _snackColor = _blue_300;
+Color _snackColor = _blue_100;
 Color _dinerColor = _red;
 
 Color _blue_100 = const Color(0xFF648DF6);

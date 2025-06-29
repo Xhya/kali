@@ -16,7 +16,7 @@ void main() {
   test('quick add meal scenario', () async {
     expect(navigationService.bottomSheet, null);
     await initHomeScreen();
-    expect(mealState.userMeals.value.length, 1);
+    expect(mealState.currentMeals.value.length, 1);
     onClickPeriodToQuickAddMeal();
     expect(navigationService.bottomSheet, isNotNull);
     onClickCloseQuickAddMode();
@@ -32,11 +32,11 @@ void main() {
     onInputUpdateUserMealText(fixtureMeal2.mealDescription);
     expect(quickAddMealState.userMealText.value, fixtureMeal2.mealDescription);
     await computeNutriScoreAction();
-    expect(mealState.userMeals.value.length, 2);
-    expect(mealState.userMeals.value.last.mealDescription, fixtureMeal2.mealDescription);
-    expect(mealState.userMeals.value.last.nutriScore!.caloryAmount, fixtureMeal2.nutriScore!.caloryAmount);
-    expect(mealState.userMeals.value.last.nutriScore!.glucidAmount, fixtureMeal2.nutriScore!.glucidAmount);
-    expect(mealState.userMeals.value.last.nutriScore!.lipidAmount, fixtureMeal2.nutriScore!.lipidAmount);
-    expect(mealState.userMeals.value.last.nutriScore!.proteinAmount, fixtureMeal2.nutriScore!.proteinAmount);
+    expect(mealState.currentMeals.value.length, 2);
+    expect(mealState.currentMeals.value.last.mealDescription, fixtureMeal2.mealDescription);
+    expect(mealState.currentMeals.value.last.nutriScore!.caloryAmount, fixtureMeal2.nutriScore!.caloryAmount);
+    expect(mealState.currentMeals.value.last.nutriScore!.glucidAmount, fixtureMeal2.nutriScore!.glucidAmount);
+    expect(mealState.currentMeals.value.last.nutriScore!.lipidAmount, fixtureMeal2.nutriScore!.lipidAmount);
+    expect(mealState.currentMeals.value.last.nutriScore!.proteinAmount, fixtureMeal2.nutriScore!.proteinAmount);
   });
 }

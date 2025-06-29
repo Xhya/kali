@@ -5,15 +5,15 @@ var mealState = MealState();
 
 class MealState extends ChangeNotifier {
   final currentMeal = ValueNotifier<MealModel?>(null);
-  final userMeals = ValueNotifier<List<MealModel>>([]);
+  final currentMeals = ValueNotifier<List<MealModel>>([]);
 
   MealState() {
-    userMeals.addListener(notifyListeners);
+    currentMeals.addListener(notifyListeners);
   }
 
   @override
   void dispose() {
-    userMeals.dispose();
+    currentMeals.dispose();
     super.dispose();
   }
 }

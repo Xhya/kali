@@ -18,7 +18,7 @@ class MealsScreen extends StatefulWidget {
 class _MealsScreenState extends State<MealsScreen> {
   @override
   Widget build(BuildContext context) {
-    List<MealModel> meals = context.watch<MealState>().userMeals.value;
+    List<MealModel> meals = context.watch<MealState>().currentMeals.value;
 
     return TitleScaffold(
       title: t("meal"),

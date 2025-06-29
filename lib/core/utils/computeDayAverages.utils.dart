@@ -13,7 +13,7 @@ void computeDayAverages() {
   }
 
   nutriScoreState.currentNutriScore.value!.lipidAmount = mealState
-      .userMeals
+      .currentMeals
       .value
       .fold(
         0,
@@ -21,14 +21,14 @@ void computeDayAverages() {
       );
 
   nutriScoreState.currentNutriScore.value!.proteinAmount = mealState
-      .userMeals
+      .currentMeals
       .value
       .fold(
         0,
         (sum, curr) => sum + (curr.nutriScore?.proteinAmount.toInt() ?? 0),
       );
   nutriScoreState.currentNutriScore.value!.glucidAmount = mealState
-      .userMeals
+      .currentMeals
       .value
       .fold(
         0,
@@ -36,7 +36,7 @@ void computeDayAverages() {
       );
 
   nutriScoreState.currentNutriScore.value!.caloryAmount = mealState
-      .userMeals
+      .currentMeals
       .value
       .fold(
         0,
