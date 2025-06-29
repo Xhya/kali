@@ -9,10 +9,8 @@ import 'package:kalori/core/actions/Goto.actions.dart';
 import 'package:kalori/core/domains/meal.service.dart';
 import 'package:kalori/core/domains/meal.state.dart';
 import 'package:kalori/core/domains/nutriScore.service.dart';
-import 'package:kalori/core/domains/nutriScore.state.dart';
 import 'package:kalori/core/models/Meal.model.dart';
 import 'package:kalori/core/models/MealPeriod.enum.dart';
-import 'package:kalori/core/models/NutriScore.model.dart';
 import 'package:kalori/core/services/Error.service.dart';
 import 'package:kalori/core/services/Navigation.service.dart';
 import 'package:kalori/core/services/Translation.service.dart';
@@ -61,9 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<MealModel> meals = context.watch<MealState>().userMeals.value;
-    NutriScore? currentNutriScore =
-        context.watch<NutriScoreState>().currentNutriScore.value;
+    List<MealModel> meals = context.watch<MealState>().currentMeals.value;
 
     final lastMeal = meals.isNotEmpty ? meals.last : null;
 
@@ -82,6 +78,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 if (lastMeal != null)
                   CustomCard(
+                    onClick: () {
+                      goToMealScreen(lastMeal);
+                    },
                     padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                     width: double.maxFinite,
                     child: Column(
@@ -159,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 SizedBox(height: 32),
-                NutriScoreGaugesWidget(),
+                NutriScoreGaugesWidget(meals: meals),
               ],
             ),
           ),

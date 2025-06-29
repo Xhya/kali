@@ -5,6 +5,7 @@ class CustomCard extends StatelessWidget {
   const CustomCard({
     super.key,
     required this.child,
+    this.onClick,
     this.height,
     this.width,
     this.padding,
@@ -14,17 +15,21 @@ class CustomCard extends StatelessWidget {
   final double? height;
   final double? width;
   final EdgeInsetsGeometry? padding;
+  final VoidCallback? onClick;
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
-      child: Container(
-        padding: padding,
-        height: height,
-        width: width,
-        color: style.background.color2.color,
-        child: child,
+      child: GestureDetector(
+        onTap: onClick,
+        child: Container(
+          padding: padding,
+          height: height,
+          width: width,
+          color: style.background.color2.color,
+          child: child,
+        ),
       ),
     );
   }

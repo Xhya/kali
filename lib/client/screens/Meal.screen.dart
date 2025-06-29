@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kalori/client/layout/Title.scaffold.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/client/widgets/LoaderIcon.widget.dart';
-import 'package:kalori/client/widgets/MealPeriodTag.widget.dart';
 import 'package:kalori/client/widgets/MealPeriodsHorizontal.widget.dart';
 import 'package:kalori/client/widgets/NutriScoreGauges.widget.dart';
 import 'package:kalori/core/domains/meal.state.dart';
@@ -108,7 +107,7 @@ class _MealScreenState extends State<MealScreen> {
                 ),
               ),
               SizedBox(height: 16),
-              NutriScoreGaugesWidget(),
+              NutriScoreGaugesWidget(meals: [meal!]),
             ],
           ),
         ),

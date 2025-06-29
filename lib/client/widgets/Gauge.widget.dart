@@ -8,11 +8,13 @@ class GaugeWidget extends StatefulWidget {
     required this.currentAmount,
     required this.maxAmount,
     this.editingAmount,
+    this.bars = const {},
   });
 
   final int currentAmount;
   final int maxAmount;
   final int? editingAmount;
+  final Map<Color, int> bars;
 
   @override
   State<GaugeWidget> createState() => _GaugeWidgetState();
@@ -36,12 +38,32 @@ class _GaugeWidgetState extends State<GaugeWidget> {
         borderColor: Colors.black,
       ),
       barPointers: [
-        LinearBarPointer(
-          value: widget.currentAmount.toDouble(),
-          color: style.gauge.main.color,
-          thickness: 15,
-          edgeStyle: LinearEdgeStyle.bothCurve,
-        ),
+        // LinearBarPointer(
+        //   value: 80,
+        //   color: Colors.red,
+        //   thickness: 15,
+        //   edgeStyle: LinearEdgeStyle.bothCurve,
+        // ),
+        // LinearBarPointer(
+        //   value: 40,
+        //   color: Colors.amber,
+        //   thickness: 15,
+        //   edgeStyle: LinearEdgeStyle.bothCurve,
+        // ),
+        ...widget.bars.entries.map((entry) {
+          return LinearBarPointer(
+            value: entry.value.toDouble(),
+            color: entry.key,
+            thickness: 15,
+            edgeStyle: LinearEdgeStyle.bothCurve,
+          );
+        }),
+        // LinearBarPointer(
+        //   value: widget.currentAmount.toDouble(),
+        //   color: style.gauge.main.color,
+        //   thickness: 15,
+        //   edgeStyle: LinearEdgeStyle.bothCurve,
+        // ),
         if (widget.editingAmount != null)
           LinearBarPointer(
             value: widget.editingAmount!.toDouble(),

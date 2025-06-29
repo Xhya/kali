@@ -1,0 +1,38 @@
+import 'package:kalori/core/models/Meal.model.dart';
+import 'package:kalori/core/models/MealPeriod.enum.dart';
+import 'package:kalori/core/models/NutriScore.model.dart';
+
+Map<MealPeriodEnum, List<NutriScore>> getNutriscoresByPeriod(
+  List<MealModel> meals,
+) {
+  final List<NutriScore> breakfastNutriscoresByPeriod =
+      meals
+          .where((it) => it.period == MealPeriodEnum.breakfast)
+          .map((it) => it.nutriScore!)
+          .toList();
+
+  final List<NutriScore> lunchNutriscoresByPeriod =
+      meals
+          .where((it) => it.period == MealPeriodEnum.lunch)
+          .map((it) => it.nutriScore!)
+          .toList();
+
+  final List<NutriScore> snackNutriscoresByPeriod =
+      meals
+          .where((it) => it.period == MealPeriodEnum.snack)
+          .map((it) => it.nutriScore!)
+          .toList();
+
+  final List<NutriScore> dinnerNutriscoresByPeriod =
+      meals
+          .where((it) => it.period == MealPeriodEnum.dinner)
+          .map((it) => it.nutriScore!)
+          .toList();
+
+  return {
+    MealPeriodEnum.breakfast: breakfastNutriscoresByPeriod,
+    MealPeriodEnum.lunch: lunchNutriscoresByPeriod,
+    MealPeriodEnum.snack: snackNutriscoresByPeriod,
+    MealPeriodEnum.dinner: dinnerNutriscoresByPeriod,
+  };
+}
