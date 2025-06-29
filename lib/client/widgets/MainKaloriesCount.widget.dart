@@ -25,24 +25,25 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        RichText(
-          textAlign: TextAlign.center,
-          text: TextSpan(
-            style: style.text.color1
-                .merge(style.fontsize.xl)
-                .merge(style.fontweight.bold),
-            children: [
-              TextSpan(text: 'Il te reste '),
-              TextSpan(
-                text: '${remaningCaloriesToSpend()} calories',
-                style: style.text.reverse_neutral
-                    .merge(style.fontsize.xl)
-                    .merge(style.fontweight.bold),
-              ),
-              TextSpan(text: ' pour aujourd\'hui 🔥'),
-            ],
+        if (currentNutriScore != null)
+          RichText(
+            textAlign: TextAlign.center,
+            text: TextSpan(
+              style: style.text.color1
+                  .merge(style.fontsize.xl)
+                  .merge(style.fontweight.bold),
+              children: [
+                TextSpan(text: 'Il te reste '),
+                TextSpan(
+                  text: '${remaningCaloriesToSpend()} calories',
+                  style: style.text.reverse_neutral
+                      .merge(style.fontsize.xl)
+                      .merge(style.fontweight.bold),
+                ),
+                TextSpan(text: ' pour aujourd\'hui 🔥'),
+              ],
+            ),
           ),
-        ),
         SizedBox(height: 24),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

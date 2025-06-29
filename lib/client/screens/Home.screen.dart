@@ -56,11 +56,19 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     initHomeScreen();
+    mealState.currentDate.addListener(refreshMeals);
+  }
+
+  @override
+  void dispose() {
+    mealState.currentDate.removeListener(refreshMeals);
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     List<MealModel> meals = context.watch<MealState>().currentMeals.value;
+    DateTime currentDate = context.watch<MealState>().currentDate.value;
 
     final lastMeal = meals.isNotEmpty ? meals.last : null;
 
@@ -74,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                DateSelector(currentDate: DateTime.now()),
+                DateSelector(currentDate: currentDate),
 
                 SizedBox(height: 24),
                 MainKaloriesCountWidget(),
