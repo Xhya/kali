@@ -180,6 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: BoxDecoration(
                 border: Border.all(color: style.border.color.color1.color!),
                 borderRadius: const BorderRadius.all(Radius.circular(8)),
+                color: style.background.color2.color,
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,

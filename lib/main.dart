@@ -12,6 +12,7 @@ import 'package:kalori/core/domains/nutriScore.service.dart';
 import 'package:kalori/core/domains/nutriScore.state.dart';
 import 'package:kalori/core/domains/user.state.dart';
 import 'package:kalori/core/services/Error.service.dart';
+import 'package:kalori/core/services/Locale.service.dart';
 import 'package:kalori/core/services/Navigation.service.dart';
 import 'package:kalori/core/services/Translation.service.dart';
 import 'package:kalori/core/services/connexion.service.dart';
@@ -30,6 +31,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => navigationService),
         ChangeNotifierProvider(create: (context) => errorService),
         ChangeNotifierProvider(create: (context) => connexionService),
+        ChangeNotifierProvider(create: (context) => localeService),
 
         ChangeNotifierProvider(create: (context) => quickAddMealState),
         ChangeNotifierProvider(create: (context) => startFormState),

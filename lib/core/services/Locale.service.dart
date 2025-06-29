@@ -12,6 +12,8 @@ enum LocaleEnum {
   }
 }
 
+final localeService = LocaleService();
+
 class LocaleService extends ChangeNotifier {
   static final LocaleService _singleton = LocaleService._internal();
 
