@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/client/widgets/CustomCard.widget.dart';
 import 'package:kalori/client/widgets/CustomInkwell.widget.dart';
+import 'package:kalori/client/widgets/DateSelector.widget.dart';
 import 'package:kalori/client/widgets/MainKaloriesCount.widget.dart';
 import 'package:kalori/client/widgets/MealRow.widget.dart';
 import 'package:kalori/client/widgets/NutriScoreGauges.widget.dart';
@@ -73,6 +74,9 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                DateSelector(currentDate: DateTime.now()),
+
+                SizedBox(height: 24),
                 MainKaloriesCountWidget(),
                 SizedBox(height: 24),
 
