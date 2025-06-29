@@ -3,6 +3,7 @@ import 'package:kalori/client/Style.service.dart';
 import 'package:kalori/client/widgets/LoaderIcon.widget.dart';
 import 'package:kalori/core/models/MealPeriod.enum.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
+import 'package:kalori/core/services/AI.service.dart';
 
 var quickAddMealState = QuickAddMealState();
 
@@ -61,5 +62,6 @@ class QuickAddMealState extends ChangeNotifier {
     chosenPeriod.value = null;
     nutriScore.value = null;
     isExpanded.value = false;
+    aiService.aiNotUnderstandError.value = false;
   }
 }

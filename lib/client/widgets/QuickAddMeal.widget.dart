@@ -5,6 +5,7 @@ import 'package:kalori/client/widgets/CustomCard.widget.dart';
 import 'package:kalori/client/widgets/MealPeriodsHorizontal.widget.dart';
 import 'package:kalori/core/models/MealPeriod.enum.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
+import 'package:kalori/core/services/AI.service.dart';
 import 'package:kalori/core/services/Navigation.service.dart';
 import 'package:kalori/core/utils/macroIcon.utils.dart';
 import 'package:provider/provider.dart';
@@ -138,6 +139,10 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                     maxLines: 6,
                     style: style.text.reverse_neutral,
                     decoration: InputDecoration(
+                      errorText:
+                          aiService.aiNotUnderstandError.value
+                              ? 'Veuillez être plus précis'
+                              : null,
                       filled: true,
                       fillColor: style.background.color3.color,
                       border: InputBorder.none,

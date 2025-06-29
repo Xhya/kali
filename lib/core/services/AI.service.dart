@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/widgets.dart';
 import 'package:kalori/core/domains/ai.repository.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
 import 'package:uuid/uuid.dart';
@@ -9,17 +10,31 @@ class AIService {
   final _aiRepository = AIRepository();
   final _uuid = Uuid();
 
-  Future<NutriScore> computeNutriScore(String userText) async {
-    final json = await _aiRepository.computeNutriScore(userText);
-    final nutriScoreJson = jsonDecode(json);
+  final aiNotUnderstandError = ValueNotifier<bool>(false);
 
-    return NutriScore(
-      id: _uuid.v6(),
-      proteinAmount: nutriScoreJson["proteinAmount"],
-      lipidAmount: nutriScoreJson["lipidAmount"],
-      glucidAmount: nutriScoreJson["glucidAmount"],
-      caloryAmount: nutriScoreJson["caloryAmount"],
-    );
+  Future<NutriScore> computeNutriScore(String userText) async {
+    try {
+      final json = await _aiRepository.computeNutriScore(userText);
+      final nutriScoreJson = jsonDecode(json);
+
+      final nutriScore = NutriScore(
+        id: _uuid.v6(),
+        proteinAmount: nutriScoreJson["proteinAmount"],
+        lipidAmount: nutriScoreJson["lipidAmount"],
+        glucidAmount: nutriScoreJson["glucidAmount"],
+        caloryAmount: nutriScoreJson["caloryAmount"],
+      );
+
+      if (nutriScore.isEmpty()) {
+        aiNotUnderstandError.value = true;
+        throw Exception("Empty nutri score");
+      }
+      
+      return nutriScore;
+    } catch (e) {
+      aiNotUnderstandError.value = true;
+      rethrow;
+    }
   }
 
   Future<NutriScore> computePersonalNutriScore({

@@ -32,4 +32,11 @@ class NutriScore {
       'caloryAmount': caloryAmount,
     };
   }
+
+  bool isEmpty() {
+    return proteinAmount == 0 &&
+        glucidAmount == 0 &&
+        lipidAmount == 0 &&
+        caloryAmount == 0;
+  }
 }

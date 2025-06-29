@@ -1,7 +1,6 @@
 import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/core/domains/meal.service.dart';
 import 'package:kalori/core/models/Meal.model.dart';
-import 'package:kalori/core/models/nutriScore.fixture.dart';
 import 'package:kalori/core/services/AI.service.dart';
 import 'package:kalori/core/services/Navigation.service.dart';
 import 'package:kalori/core/utils/computeDayAverages.utils.dart';
@@ -14,12 +13,8 @@ computeNutriScoreAction() async {
     quickAddMealState.isLoading.value = true;
     final userText = quickAddMealState.userMealText.value;
     final nutriScore = await aiService.computeNutriScore(userText);
-    //await Future.delayed(const Duration(seconds: 2));
     quickAddMealState.nutriScore.value = nutriScore;
     quickAddMealState.isLoading.value = false;
-  } catch (e) {
-    print("ERROR TOTO");
-    errorService.notifyError(e);
   } finally {
     quickAddMealState.isLoading.value = false;
   }
