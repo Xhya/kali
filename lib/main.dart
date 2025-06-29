@@ -14,6 +14,7 @@ import 'package:kalori/core/domains/user.state.dart';
 import 'package:kalori/core/services/Error.service.dart';
 import 'package:kalori/core/services/Navigation.service.dart';
 import 'package:kalori/core/services/Translation.service.dart';
+import 'package:kalori/core/services/connexion.service.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -28,6 +29,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => userState),
         ChangeNotifierProvider(create: (context) => navigationService),
         ChangeNotifierProvider(create: (context) => errorService),
+        ChangeNotifierProvider(create: (context) => connexionService),
 
         ChangeNotifierProvider(create: (context) => quickAddMealState),
         ChangeNotifierProvider(create: (context) => startFormState),
@@ -38,6 +40,7 @@ void main() async {
 
         ChangeNotifierProvider(create: (context) => nutriScoreState),
         ChangeNotifierProvider(create: (context) => mealState),
+        
       ],
       child: const App(),
     ),
@@ -59,6 +62,7 @@ class App extends StatelessWidget {
       ),
       home: AsyncInitWidget(
         initFunction: () async {
+          connexionService.listenToInternetConnexion();
           await refreshPersonalNutriScore();
           await TranslationService().init();
         },
