@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kalori/client/Style.service.dart';
 import 'package:kalori/client/widgets/CustomButton.widget.dart';
+import 'package:kalori/client/widgets/CustomInput.dart';
 import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kalori/client/layout/Base.scaffold.dart';
 import 'package:kalori/core/actions/startForm.actions.dart';
@@ -22,6 +24,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
   Widget build(BuildContext context) {
     return BaseScaffold(
       child: Scaffold(
+        backgroundColor: style.background.color1.color,
         body: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(
@@ -37,48 +40,39 @@ class _StartFormScreenState extends State<StartFormScreen> {
                         Expanded(
                           child: Column(
                             children: [
-                              TextField(
-                                onChanged: (value) {
+                              CustomInput(
+                                onChanged: (String value) {
                                   onInputUpdateUserMealText(value);
                                 },
-                                maxLines: 1,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelText: t("size"),
-                                  suffixText: "cm",
-                                ),
+                                suffixText: "cm",
+                                placeholder: t("size"),
                               ),
                               SizedBox(height: 32),
-                              TextField(
+                              CustomInput(
                                 onChanged: (value) {
                                   onInputUpdateUserMealText(value);
                                 },
-                                maxLines: 1,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelText: t("weight"),
-                                  suffixText: "kg",
-                                ),
+                                suffixText: "kg",
+                                placeholder: t("weight"),
                               ),
                               SizedBox(height: 32),
-                              TextField(
+                              CustomInput(
                                 onChanged: (value) {
                                   onInputUpdateUserMealText(value);
                                 },
-                                maxLines: 1,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelText: t("age"),
-                                  suffixText: "ans",
-                                ),
+                                suffixText: "ans",
+                                placeholder: t("age"),
                               ),
                               SizedBox(height: 32),
                             ],
                           ),
                         ),
-                        ButtonWidget(onPressed: () {
-                          onComputePersonalNutriScore();
-                        }, fullWidth: true),
+                        ButtonWidget(
+                          onPressed: () {
+                            onComputePersonalNutriScore();
+                          },
+                          fullWidth: true,
+                        ),
                         SizedBox(height: 16),
                       ],
                     ),
