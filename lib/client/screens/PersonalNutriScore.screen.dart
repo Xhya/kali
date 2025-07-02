@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kalori/client/Style.service.dart';
 import 'package:kalori/core/domains/nutriScore.service.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
 import 'package:kalori/core/services/Error.service.dart';
@@ -123,6 +124,7 @@ class _PersonalNutriScoreScreenState extends State<PersonalNutriScoreScreen> {
     return TitleScaffold(
       title: "Objectifs",
       child: Scaffold(
+        backgroundColor: style.background.color1.color,
         body: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(

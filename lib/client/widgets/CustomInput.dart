@@ -46,15 +46,22 @@ class _CustomInputState extends State<CustomInput> {
           onChanged: (value) {
             widget.onChanged(value);
           },
+          style: style.text.color2,
           maxLines: 1,
           minLines: 1,
+          cursorColor: style.text.color2.color,
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: style.text.color1.color!),
+              borderSide: BorderSide(color: style.text.color2.color!),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: style.text.color2.color!),
             ),
             labelText: widget.placeholder,
+            labelStyle: style.text.color2,
             suffixText: widget.suffixText,
+            suffixStyle: style.text.color2
           ),
         ),
       ],
