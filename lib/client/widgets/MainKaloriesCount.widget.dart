@@ -1,4 +1,6 @@
+import 'package:dart_date/dart_date.dart';
 import 'package:flutter/material.dart';
+import 'package:kalori/core/domains/meal.state.dart';
 import 'package:kalori/core/utils/remaningCaloriesToSpend.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/Style.service.dart';
@@ -21,11 +23,15 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
         context.watch<NutriScoreState>().currentNutriScore.value;
     NutriScore? personalNutriScore =
         context.watch<NutriScoreState>().personalNutriScore.value;
+    // NutriScoreByPeriod dateTotalNutriscoreByPeriod = getTotalNutriscoreByPeriod(
+    //   widget.meals,
+    // );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (currentNutriScore != null)
+        if (currentNutriScore != null &&
+            mealState.currentDate.value.isSameDay(DateTime.now()))
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(

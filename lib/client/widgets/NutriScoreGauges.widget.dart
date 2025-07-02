@@ -1,8 +1,8 @@
-import 'package:dart_date/dart_date.dart';
 import 'package:flutter/material.dart';
 import 'package:kalori/client/Style.service.dart';
 import 'package:kalori/client/widgets/CustomCard.widget.dart';
 import 'package:kalori/client/states/editMeal.state.dart';
+import 'package:kalori/client/widgets/NutriScoreByPeriod.type.dart';
 import 'package:kalori/core/domains/nutriScore.state.dart';
 import 'package:kalori/core/models/Meal.model.dart';
 import 'package:kalori/core/models/MealPeriod.enum.dart';
@@ -29,7 +29,7 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
   Widget build(BuildContext context) {
     NutriScore? currentNutriScore =
         context.watch<NutriScoreState>().currentNutriScore.value;
-    Map<MealPeriodEnum, NutriScore> dateTotalNutriscoreByPeriod =
+    NutriScoreByPeriod dateTotalNutriscoreByPeriod =
         getTotalNutriscoreByPeriod(widget.meals);
     NutriScore? personalNutriScore =
         context.watch<NutriScoreState>().personalNutriScore.value;

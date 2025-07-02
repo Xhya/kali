@@ -23,10 +23,10 @@ class _MealsScreenState extends State<MealsScreen> {
     return TitleScaffold(
       title: t("meal"),
       child: Scaffold(
+        backgroundColor: style.background.color2.color,
         body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          color: style.background.neutral.color,
           padding: EdgeInsets.all(16),
           child: ListView.builder(
             itemCount: meals.length,
@@ -38,7 +38,7 @@ class _MealsScreenState extends State<MealsScreen> {
                 },
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 6),
-                  child: MealRowWidget(meal: meal, onLightBackground: true),
+                  child: MealRowWidget(meal: meal),
                 ),
               );
             },
