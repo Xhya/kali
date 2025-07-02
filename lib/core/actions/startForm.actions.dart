@@ -24,9 +24,19 @@ onComputePersonalNutriScore() async {
       weight: startFormState.weight.value,
       age: startFormState.age.value,
     );
-    await setPersonalNutriScore(personalNutriScore);
     nutriScoreState.personalNutriScore.value = personalNutriScore;
-    navigationService.navigateTo(ScreenEnum.home);
+  } catch (e) {
+    errorService.notifyError(e);
+  }
+}
+
+onValidatePersonalNutriScore() async {
+  try {
+    if (nutriScoreState.personalNutriScore.value != null) {
+      await setPersonalNutriScore(nutriScoreState.personalNutriScore.value!);
+      nutriScoreState.personalNutriScore.value = null;
+      navigationService.navigateTo(ScreenEnum.home);
+    }
   } catch (e) {
     errorService.notifyError(e);
   }

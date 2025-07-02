@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:kalori/core/models/NutriScore.model.dart';
+import 'package:provider/provider.dart';
 import 'package:kalori/client/Style.service.dart';
 import 'package:kalori/client/widgets/CustomButton.widget.dart';
 import 'package:kalori/client/widgets/CustomInput.dart';
+import 'package:kalori/client/widgets/Expanded.widget.dart';
+import 'package:kalori/client/widgets/NutriScore2by2.widget.dart';
 import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kalori/client/layout/Base.scaffold.dart';
 import 'package:kalori/core/actions/startForm.actions.dart';
+import 'package:kalori/core/domains/nutriScore.state.dart';
 import 'package:kalori/core/services/Translation.service.dart';
 
 class StartFormScreen extends StatefulWidget {
@@ -22,6 +27,9 @@ class _StartFormScreenState extends State<StartFormScreen> {
 
   @override
   Widget build(BuildContext context) {
+    NutriScore? personalNutriScore =
+        context.watch<NutriScoreState>().personalNutriScore.value;
+
     return BaseScaffold(
       child: Scaffold(
         backgroundColor: style.background.color1.color,
@@ -67,9 +75,30 @@ class _StartFormScreenState extends State<StartFormScreen> {
                             ],
                           ),
                         ),
+                        if (personalNutriScore != null)
+                          ExpandedWidget(
+                            child: Wrap(
+                              spacing: 12,
+                              runSpacing: 12,
+                              children: [
+                                NutriScore2by2Widget(
+                                  nutriScore: personalNutriScore,
+                                ),
+                              ],
+                            ),
+                          ),
+
                         ButtonWidget(
+                          text:
+                              personalNutriScore == null
+                                  ? "Calculer"
+                                  : "Valider",
                           onPressed: () {
-                            onComputePersonalNutriScore();
+                            if (personalNutriScore == null) {
+                              onComputePersonalNutriScore();
+                            } else {
+                              onValidatePersonalNutriScore();
+                            }
                           },
                           fullWidth: true,
                         ),
