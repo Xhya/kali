@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/Style.service.dart';
 import 'package:kalori/client/widgets/CustomButton.widget.dart';
-import 'package:kalori/client/widgets/CustomCard.widget.dart';
+import 'package:kalori/client/widgets/Expanded.widget.dart';
 import 'package:kalori/client/widgets/MealPeriodsHorizontal.widget.dart';
+import 'package:kalori/client/widgets/NutriScore2by2.widget.dart';
 import 'package:kalori/core/models/MealPeriod.enum.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
 import 'package:kalori/core/services/AI.service.dart';
 import 'package:kalori/core/services/Navigation.service.dart';
-import 'package:kalori/core/utils/macroIcon.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/core/actions/nutriScore.actions.dart';
@@ -71,7 +71,6 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
     Widget? suffixIcon = context.watch<QuickAddMealState>().suffixIcon;
     MealPeriodEnum? chosenPeriod =
         context.watch<QuickAddMealState>().chosenPeriod.value;
-    bool isExpanded = context.watch<QuickAddMealState>().isExpanded.value;
     NutriScore? nutriScore =
         context.watch<QuickAddMealState>().nutriScore.value;
 
@@ -161,124 +160,14 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                   ),
                 ),
               ),
-              SizedBox(height: 16),
-              ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
-                child: AnimatedContainer(
-                  duration: Duration(seconds: 1),
-                  curve: Curves.easeInOut,
-                  alignment: Alignment.center,
-                  width: isExpanded ? double.maxFinite : 0,
-                  height: isExpanded ? 220 : 0,
-                  padding: EdgeInsets.symmetric(vertical: 4),
-                  // decoration: BoxDecoration(
-                  //   border: Border.all(color: style.border.color.color1.color!),
-                  //   borderRadius: const BorderRadius.all(Radius.circular(16)),
-                  // ),
+              if (nutriScore != null) SizedBox(height: 24),
+              if (nutriScore != null)
+                ExpandedWidget(
                   child: Wrap(
                     spacing: 12,
                     runSpacing: 12,
                     children: [
-                      CustomCard(
-                        child: SizedBox(
-                          height: 50,
-                          width: MediaQuery.of(context).size.width / 2 - 12 * 2,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                "$caloryIcon calories",
-                                style: style.text.reverse_neutral.merge(
-                                  style.fontsize.sm,
-                                ),
-                              ),
-                              Text(
-                                nutriScore == null
-                                    ? "-"
-                                    : nutriScore.caloryAmount.toString(),
-                                style: style.text.reverse_neutral.merge(
-                                  style.fontsize.sm,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      CustomCard(
-                        child: SizedBox(
-                          height: 50,
-                          width: MediaQuery.of(context).size.width / 2 - 12 * 2,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                "$glucidIcon glucides",
-                                style: style.text.reverse_neutral.merge(
-                                  style.fontsize.sm,
-                                ),
-                              ),
-                              Text(
-                                nutriScore == null
-                                    ? "-"
-                                    : nutriScore.glucidAmount.toString(),
-                                style: style.text.reverse_neutral.merge(
-                                  style.fontsize.sm,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      CustomCard(
-                        child: SizedBox(
-                          height: 50,
-                          width: MediaQuery.of(context).size.width / 2 - 12 * 2,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                "$proteinIcon protéines",
-                                style: style.text.reverse_neutral.merge(
-                                  style.fontsize.sm,
-                                ),
-                              ),
-                              Text(
-                                nutriScore == null
-                                    ? "-"
-                                    : nutriScore.proteinAmount.toString(),
-                                style: style.text.reverse_neutral.merge(
-                                  style.fontsize.sm,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      CustomCard(
-                        child: SizedBox(
-                          height: 50,
-                          width: MediaQuery.of(context).size.width / 2 - 12 * 2,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                "$lipidIcon lipides",
-                                style: style.text.reverse_neutral.merge(
-                                  style.fontsize.sm,
-                                ),
-                              ),
-                              Text(
-                                nutriScore == null
-                                    ? "-"
-                                    : nutriScore.lipidAmount.toString(),
-                                style: style.text.reverse_neutral.merge(
-                                  style.fontsize.sm,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      NutriScore2by2Widget(nutriScore: nutriScore),
                       SizedBox(height: 16),
                       ButtonWidget(
                         text: "Ajouter à la journée",
@@ -292,15 +181,8 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                       ),
                     ],
                   ),
-
-                  // Text(
-                  //   "PR: ${quickAddMealState.nutriScore.value?.proteinAmount.toInt()}g / GL: ${quickAddMealState.nutriScore.value?.glucidAmount.toInt()}g / LI: ${quickAddMealState.nutriScore.value?.lipidAmount.toInt()}g / CAL: ${quickAddMealState.nutriScore.value?.caloryAmount.toInt()}kcal",
-                  //   maxLines: 1,
-                  //   style: style.text.color1,
-                  // ),
                 ),
-              ),
-              SizedBox(height: 24),
+              SizedBox(height: 52),
             ],
           ),
         ),
