@@ -8,12 +8,14 @@ class CustomInput extends StatefulWidget {
     this.content,
     this.placeholder,
     this.suffixText,
+    this.suffixIcon,
   });
 
   final Function onChanged;
   final String? content;
   final String? placeholder;
   final String? suffixText;
+  final Widget? suffixIcon;
 
   @override
   State<CustomInput> createState() => _CustomInputState();
@@ -61,7 +63,8 @@ class _CustomInputState extends State<CustomInput> {
             labelText: widget.placeholder,
             labelStyle: style.text.color2,
             suffixText: widget.suffixText,
-            suffixStyle: style.text.color2
+            suffixStyle: style.text.color2,
+            suffixIcon: widget.suffixIcon
           ),
         ),
       ],

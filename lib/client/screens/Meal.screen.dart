@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/layout/Title.scaffold.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
+import 'package:kalori/client/widgets/CustomInput.dart';
 import 'package:kalori/client/widgets/LoaderIcon.widget.dart';
 import 'package:kalori/client/widgets/MealPeriodsHorizontal.widget.dart';
 import 'package:kalori/client/widgets/NutriScoreGauges.widget.dart';
@@ -85,25 +86,20 @@ class _MealScreenState extends State<MealScreen> {
                 chosenPeriod: editingMealPeriod,
               ),
               SizedBox(height: 16),
-              TextField(
-                controller: controller,
-                maxLines: 2,
-                onChanged: (String value) {
+              CustomInput(
+                onChanged: (value) {
                   editMealState.editingUserTextMeal.value = value;
                 },
-                decoration: InputDecoration(
-                  hintText: t('describe_your_meal', [
-                    quickAddMealState.chosenPeriod.value != null
-                        ? t(quickAddMealState.chosenPeriod.value!.label)
-                        : "repas",
-                  ]),
-                  border: const OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    icon: isLoading ? LoaderIcon() : const Icon(Icons.save),
-                    onPressed: () {
-                      onUpdateMeal();
-                    },
-                  ),
+                placeholder: t('describe_your_meal', ["repas"]),
+                suffixText: "g",
+                suffixIcon: IconButton(
+                  icon:
+                      isLoading
+                          ? LoaderIcon()
+                          : Icon(Icons.save, color: style.icon.color1.color),
+                  onPressed: () {
+                    onUpdateMeal();
+                  },
                 ),
               ),
               SizedBox(height: 16),
