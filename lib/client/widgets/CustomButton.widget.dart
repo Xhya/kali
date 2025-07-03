@@ -34,7 +34,8 @@ class ButtonWidget extends StatelessWidget {
 
     switch (buttonType) {
       case ButtonTypeEnum.filled:
-        backgroungColor = style.background.color5.color;
+        backgroungColor =
+            disabled ? Colors.grey : style.background.color5.color;
         textColor = style.text.color3.color;
         borderColor = null;
       case ButtonTypeEnum.outline:

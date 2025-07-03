@@ -6,6 +6,8 @@ class StartFormState extends ChangeNotifier {
   final size = ValueNotifier<String>("");
   final weight = ValueNotifier<String>("");
   final age = ValueNotifier<String>("");
+  bool get isSubmitButtonDisabled =>
+      size.value.isEmpty || weight.value.isEmpty || age.value.isEmpty;
 
   StartFormState() {
     size.addListener(notifyListeners);
