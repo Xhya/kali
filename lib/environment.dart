@@ -1,5 +1,6 @@
 const environment = {
   "USE_FIXTURES": bool.fromEnvironment('USE_FIXTURES'),
+  "USE_SIMULATOR": bool.fromEnvironment('USE_SIMULATOR'),
   "ENVIRONMENT": String.fromEnvironment('ENVIRONMENT'),
   "TEST": bool.fromEnvironment('TEST'),
   "MODE": String.fromEnvironment('MODE'),
@@ -8,6 +9,7 @@ const environment = {
 };
 
 final useFixtures = environment["USE_FIXTURES"];
+final useSimulator = environment["USE_SIMULATOR"];
 final isInTestEnv = environment["TEST"] == true;
 final isInLocalEnv = environment["ENVIRONMENT"] == "local";
 final isInDevEnv = environment["ENVIRONMENT"] == "development";
