@@ -15,7 +15,7 @@ var navigationService = NavigationService();
 class NavigationService extends ChangeNotifier {
   bool initialScreenSet = false;
 
-  ScreenEnum currentScreen = ScreenEnum.home;
+  ScreenEnum currentScreen = ScreenEnum.startForm;
   bool userScaffoldObserved = false;
   BuildContext? context;
   Widget? bottomSheet;

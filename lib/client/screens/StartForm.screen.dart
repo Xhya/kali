@@ -1,16 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
+import 'package:kalori/core/utils/formatters.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/Style.service.dart';
 import 'package:kalori/client/widgets/CustomButton.widget.dart';
 import 'package:kalori/client/widgets/CustomInput.dart';
 import 'package:kalori/client/widgets/Expanded.widget.dart';
 import 'package:kalori/client/widgets/NutriScore2by2.widget.dart';
-import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kalori/client/layout/Base.scaffold.dart';
 import 'package:kalori/core/actions/startForm.actions.dart';
 import 'package:kalori/core/domains/nutriScore.state.dart';
 import 'package:kalori/core/services/Translation.service.dart';
+import 'package:kalori/client/states/startForm.state.dart';
+
+onUpdateSize(String value) {
+  startFormState.size.value = value;
+}
+
+onUpdateWeight(String value) {
+  startFormState.weight.value = value;
+}
+
+onUpdateAge(String value) {
+  startFormState.age.value = value;
+}
+
+String getSubmitButtonText() {
+  if (nutriScoreState.personalNutriScore.value == null) {
+    return t('compute');
+  } else {
+    return t('validate');
+  }
+}
+
+Future<void> onClickSubmitButton() async {
+  if (nutriScoreState.personalNutriScore.value == null) {
+    await onComputePersonalNutriScore();
+  } else {
+    await onValidatePersonalNutriScore();
+  }
+}
 
 class StartFormScreen extends StatefulWidget {
   const StartFormScreen({super.key});
@@ -29,6 +58,11 @@ class _StartFormScreenState extends State<StartFormScreen> {
   Widget build(BuildContext context) {
     NutriScore? personalNutriScore =
         context.watch<NutriScoreState>().personalNutriScore.value;
+    bool isSubmitButtonDisabled =
+        context.watch<StartFormState>().isSubmitButtonDisabled;
+    String age = context.watch<StartFormState>().age.value;
+    String weight = context.watch<StartFormState>().weight.value;
+    String size = context.watch<StartFormState>().size.value;
 
     return BaseScaffold(
       child: Scaffold(
@@ -49,27 +83,33 @@ class _StartFormScreenState extends State<StartFormScreen> {
                           child: Column(
                             children: [
                               CustomInput(
+                                content: size,
                                 onChanged: (String value) {
-                                  onInputUpdateUserMealText(value);
+                                  onUpdateAge(value);
                                 },
                                 suffixText: "cm",
                                 placeholder: t("size"),
+                                inputFormatters: [onlyNumbersFormatter()],
                               ),
                               SizedBox(height: 32),
                               CustomInput(
+                                content: weight,
                                 onChanged: (value) {
-                                  onInputUpdateUserMealText(value);
+                                  onUpdateWeight(value);
                                 },
                                 suffixText: "kg",
                                 placeholder: t("weight"),
+                                inputFormatters: [onlyNumbersFormatter()],
                               ),
                               SizedBox(height: 32),
                               CustomInput(
+                                content: age,
                                 onChanged: (value) {
-                                  onInputUpdateUserMealText(value);
+                                  onUpdateSize(value);
                                 },
                                 suffixText: "ans",
                                 placeholder: t("age"),
+                                inputFormatters: [onlyNumbersFormatter()],
                               ),
                               SizedBox(height: 32),
                             ],
@@ -89,18 +129,12 @@ class _StartFormScreenState extends State<StartFormScreen> {
                           ),
 
                         ButtonWidget(
-                          text:
-                              personalNutriScore == null
-                                  ? "Calculer"
-                                  : "Valider",
+                          text: getSubmitButtonText(),
                           onPressed: () {
-                            if (personalNutriScore == null) {
-                              onComputePersonalNutriScore();
-                            } else {
-                              onValidatePersonalNutriScore();
-                            }
+                            onClickSubmitButton();
                           },
                           fullWidth: true,
+                          disabled: isSubmitButtonDisabled,
                         ),
                         SizedBox(height: 16),
                       ],
