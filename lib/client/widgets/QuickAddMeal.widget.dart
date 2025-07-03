@@ -27,11 +27,7 @@ onInputUpdateUserMealText(String value) {
 }
 
 onClickQuickSuffixIcon() async {
-  if (quickAddMealState.canSend) {
-    await computeNutriScoreAction();
-  } else {
-    onClickCloseQuickAddMode();
-  }
+  await computeNutriScoreAction();
 }
 
 onClickAddMealToDay() async {
@@ -147,15 +143,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                       border: InputBorder.none,
                       hintText: "Quel est le menu du jour ?",
                       hintStyle: style.text.color1,
-                      suffixIcon:
-                          suffixIcon != null
-                              ? GestureDetector(
-                                onTap: () {
-                                  onClickQuickSuffixIcon();
-                                },
-                                child: suffixIcon,
-                              )
-                              : null,
+                      suffixIcon: suffixIcon,
                     ),
                   ),
                 ),

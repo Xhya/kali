@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/client/Style.service.dart';
 import 'package:kalori/client/widgets/LoaderIcon.widget.dart';
+import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kalori/core/models/MealPeriod.enum.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
 import 'package:kalori/core/services/AI.service.dart';
@@ -14,27 +15,27 @@ class QuickAddMealState extends ChangeNotifier {
   final nutriScore = ValueNotifier<NutriScore?>(null);
   final isExpanded = ValueNotifier<bool>(false);
 
-  bool get canSend =>
-      !isLoading.value &&
-      userMealText.value.isNotEmpty &&
-      chosenPeriod.value != null;
-
   Widget? get suffixIcon =>
       userMealText.value.isNotEmpty && chosenPeriod.value != null
-          ? Container(
-            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-            decoration: BoxDecoration(
-              border: Border.all(color: style.border.color.color2.color!),
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
+          ? GestureDetector(
+            onTap: () {
+              onClickQuickSuffixIcon();
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+              decoration: BoxDecoration(
+                border: Border.all(color: style.border.color.color2.color!),
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
+              ),
+              child:
+                  isLoading.value
+                      ? LoaderIcon()
+                      : Icon(
+                        Icons.calculate,
+                        color: style.icon.color2.color,
+                        size: 16,
+                      ),
             ),
-            child:
-                isLoading.value
-                    ? LoaderIcon()
-                    : Icon(
-                      Icons.calculate,
-                      color: style.icon.color2.color,
-                      size: 16,
-                    ),
           )
           : null;
 
