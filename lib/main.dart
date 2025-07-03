@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:kalori/core/services/Crashlytics.service.dart';
+import 'package:provider/provider.dart';
 import 'package:kalori/client/Style.service.dart';
 import 'package:kalori/client/screens/PersonalNutriScore.screen.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
@@ -16,13 +18,14 @@ import 'package:kalori/core/services/Locale.service.dart';
 import 'package:kalori/core/services/Navigation.service.dart';
 import 'package:kalori/core/services/Translation.service.dart';
 import 'package:kalori/core/services/connexion.service.dart';
-import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+ 
   // Initialize intl
   await initializeDateFormatting();
+
+  await CrashlyticsService().init();
 
   runApp(
     MultiProvider(
