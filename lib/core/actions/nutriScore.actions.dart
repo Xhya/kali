@@ -1,5 +1,6 @@
 import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/core/domains/meal.service.dart';
+import 'package:kalori/core/domains/meal.state.dart';
 import 'package:kalori/core/models/Meal.model.dart';
 import 'package:kalori/core/services/AI.service.dart';
 import 'package:kalori/core/services/Navigation.service.dart';
@@ -30,6 +31,7 @@ addMealAction() async {
       id: Uuid().v6(),
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
+      date: mealState.currentDate.value,
       mealDescription: userText,
       period: period,
       nutriScore: quickAddMealState.nutriScore.value,

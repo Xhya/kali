@@ -14,6 +14,7 @@ class AIService {
 
   Future<NutriScore> computeNutriScore(String userText) async {
     try {
+      aiNotUnderstandError.value = false;
       final json = await _aiRepository.computeNutriScore(userText);
       final nutriScoreJson = jsonDecode(json);
 

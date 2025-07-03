@@ -9,7 +9,12 @@ refreshMeals() async {
     final List<MealModel> meals = await MealRepository().getMeals();
     mealState.currentMeals.value =
         meals
-            .where((it) => it.createdAt.isSameDay(mealState.currentDate.value))
+            .where(
+              (it) =>
+                  it.date != null
+                      ? it.date!.isSameDay(mealState.currentDate.value)
+                      : false,
+            )
             .toList()
             .cast<MealModel>();
   } catch (e) {

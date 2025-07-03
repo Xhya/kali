@@ -33,13 +33,15 @@ class _MealPeriodTagWidgetState extends State<MealRowWidget> {
           child: Row(
             spacing: 8,
             children: [
-              MealPeriodTagWidget(
-                mealPeriod: widget.meal.period,
-                onLightBackground: widget.onLightBackground,
-              ),
+              if (widget.meal.period != null)
+                MealPeriodTagWidget(
+                  mealPeriod: widget.meal.period!,
+                  onLightBackground: widget.onLightBackground,
+                ),
+              if (widget.meal.mealDescription != null)
               Expanded(
                 child: Text(
-                  widget.meal.mealDescription,
+                  widget.meal.mealDescription!,
                   style: style.fontsize.sm.merge(textColor),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
