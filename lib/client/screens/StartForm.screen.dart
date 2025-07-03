@@ -35,9 +35,13 @@ String getSubmitButtonText() {
 
 Future<void> onClickSubmitButton() async {
   if (nutriScoreState.personalNutriScore.value == null) {
+    startFormState.isLoading.value = true;
     await onComputePersonalNutriScore();
+    startFormState.isLoading.value = false;
   } else {
+    startFormState.isLoading.value = true;
     await onValidatePersonalNutriScore();
+    startFormState.isLoading.value = false;
   }
 }
 
@@ -63,6 +67,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
     String age = context.watch<StartFormState>().age.value;
     String weight = context.watch<StartFormState>().weight.value;
     String size = context.watch<StartFormState>().size.value;
+    bool isLoading = context.watch<StartFormState>().isLoading.value;
 
     return BaseScaffold(
       child: Scaffold(
@@ -135,6 +140,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
                           },
                           fullWidth: true,
                           disabled: isSubmitButtonDisabled,
+                          isLoading: isLoading,
                         ),
                         SizedBox(height: 16),
                       ],

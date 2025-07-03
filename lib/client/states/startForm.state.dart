@@ -6,6 +6,7 @@ class StartFormState extends ChangeNotifier {
   final size = ValueNotifier<String>("");
   final weight = ValueNotifier<String>("");
   final age = ValueNotifier<String>("");
+  final isLoading = ValueNotifier<bool>(false);
   bool get isSubmitButtonDisabled =>
       size.value.isEmpty || weight.value.isEmpty || age.value.isEmpty;
 
@@ -13,6 +14,7 @@ class StartFormState extends ChangeNotifier {
     size.addListener(notifyListeners);
     weight.addListener(notifyListeners);
     age.addListener(notifyListeners);
+    isLoading.addListener(notifyListeners);
   }
 
   @override
@@ -20,6 +22,7 @@ class StartFormState extends ChangeNotifier {
     size.dispose();
     weight.dispose();
     age.dispose();
+    isLoading.dispose();
     super.dispose();
   }
 }

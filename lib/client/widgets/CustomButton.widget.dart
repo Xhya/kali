@@ -70,7 +70,7 @@ class ButtonWidget extends StatelessWidget {
             ),
             child:
                 isLoading
-                    ? LoaderIcon()
+                    ? LoaderIcon(isLightBackground: true)
                     : Text(
                       text ?? "Confirmer",
                       style: style.fontsize.md
