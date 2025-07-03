@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:kalori/core/services/Crashlytics.service.dart';
 import 'package:kalori/core/services/Translation.service.dart';
 import 'package:kalori/environment.dart';
 
 var errorService = ErrorService();
 
 class ErrorService extends ChangeNotifier {
+  final crashlyticsService = CrashlyticsService();
   String? error;
 
-  notifyError(Object e) {
+  notifyError(Object e, StackTrace stack) {
     if (!isInProdEnv) {
       print(e);
     }
@@ -18,6 +20,9 @@ class ErrorService extends ChangeNotifier {
             : e.toString().isNotEmpty
             ? e.toString()
             : t("error_message");
+    if (isInProdEnv) {
+      crashlyticsService.notifyError(e: e, stack: stack, reason: error);
+    }
 
     notifyListeners();
   }

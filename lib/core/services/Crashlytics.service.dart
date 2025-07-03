@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 
 class CrashlyticsService {
   Future<void> init() async {
-  await Firebase.initializeApp();
+    await Firebase.initializeApp();
 
     FlutterError.onError = (errorDetails) {
       FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
@@ -14,5 +14,9 @@ class CrashlyticsService {
       FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
       return true;
     };
+  }
+
+  notifyError({required e, required stack, required reason}) {
+    FirebaseCrashlytics.instance.recordError(e, stack, reason: reason);
   }
 }
