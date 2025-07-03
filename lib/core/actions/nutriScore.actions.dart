@@ -35,8 +35,8 @@ addMealAction() async {
       nutriScore: quickAddMealState.nutriScore.value,
     );
     await addMeal(meal);
-  } catch (e) {
-    errorService.notifyError(e);
+  } catch (e, stack) {
+    errorService.notifyError(e: e, stack: stack);
   } finally {
     quickAddMealState.isLoading.value = false;
   }

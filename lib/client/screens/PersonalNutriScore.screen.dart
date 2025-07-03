@@ -82,8 +82,8 @@ onClickSave() async {
 
     await setPersonalNutriScore(nutriScore);
     await refreshPersonalNutriScore();
-  } catch (e) {
-    errorService.notifyError(e);
+  } catch (e, stack) {
+    errorService.notifyError(e: e, stack: stack);
   } finally {
     personalNutriScoreEditionState.isLoading.value = false;
   }

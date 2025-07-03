@@ -9,7 +9,7 @@ double? computeNutriScoreAverage(String macroType) {
           nutriScoreState.personalNutriScore.value!.glucidAmount *
           100;
     } else {
-      errorService.notifyError("Missing nutriscores");
+      errorService.notifyError(e: "Missing nutriscores");
     }
   }
 
@@ -20,7 +20,7 @@ double? computeNutriScoreAverage(String macroType) {
           nutriScoreState.personalNutriScore.value!.lipidAmount *
           100;
     } else {
-      errorService.notifyError("Missing nutriscores");
+      errorService.notifyError(e: "Missing nutriscores");
     }
   }
 
@@ -31,7 +31,7 @@ double? computeNutriScoreAverage(String macroType) {
           nutriScoreState.personalNutriScore.value!.proteinAmount *
           100;
     } else {
-      errorService.notifyError("Missing nutriscores");
+      errorService.notifyError(e: "Missing nutriscores");
     }
   }
 }

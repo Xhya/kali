@@ -17,8 +17,8 @@ refreshMeals() async {
             )
             .toList()
             .cast<MealModel>();
-  } catch (e) {
-    errorService.notifyError(e);
+  } catch (e, stack) {
+    errorService.notifyError(e: e, stack: stack);
   }
 }
 
@@ -26,7 +26,7 @@ addMeal(MealModel meal) async {
   try {
     await MealRepository().addMeal(meal);
     await refreshMeals();
-  } catch (e) {
-    errorService.notifyError(e);
+  } catch (e, stack) {
+    errorService.notifyError(e: e, stack: stack);
   }
 }

@@ -13,8 +13,8 @@ onComputePersonalNutriScore() async {
       age: startFormState.age.value,
     );
     nutriScoreState.personalNutriScore.value = personalNutriScore;
-  } catch (e) {
-    errorService.notifyError(e);
+  } catch (e, stack) {
+    errorService.notifyError(e: e, stack: stack);
   }
 }
 
@@ -25,7 +25,7 @@ onValidatePersonalNutriScore() async {
       nutriScoreState.personalNutriScore.value = null;
       navigationService.navigateTo(ScreenEnum.home);
     }
-  } catch (e) {
-    errorService.notifyError(e);
+  } catch (e, stack) {
+    errorService.notifyError(e: e, stack: stack);
   }
 }

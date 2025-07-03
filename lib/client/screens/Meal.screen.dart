@@ -21,8 +21,8 @@ onUpdateMeal() async {
     final userText = editMealState.editingUserTextMeal.value;
     final nutriScore = await aiService.computeNutriScore(userText);
     editMealState.editingNutriScore.value = nutriScore;
-  } catch (e) {
-    errorService.notifyError(e);
+  } catch (e, stack) {
+    errorService.notifyError(e: e, stack: stack);
   } finally {
     editMealState.isLoading.value = false;
   }
@@ -65,7 +65,7 @@ class _MealScreenState extends State<MealScreen> {
     bool isLoading = context.watch<EditMealState>().isLoading.value;
 
     if (meal == null) {
-      errorService.notifyError("Missing meal");
+      errorService.notifyError(e: "Missing meal");
       return SizedBox.shrink();
     }
 

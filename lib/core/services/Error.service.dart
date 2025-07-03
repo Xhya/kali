@@ -9,7 +9,7 @@ class ErrorService extends ChangeNotifier {
   final crashlyticsService = CrashlyticsService();
   String? error;
 
-  notifyError(Object e, StackTrace stack) {
+  notifyError({required Object e, StackTrace? stack}) {
     if (!isInProdEnv) {
       print(e);
     }

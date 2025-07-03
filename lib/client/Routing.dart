@@ -108,7 +108,7 @@ class _RoutingState extends State<Routing> {
       if (navigationService.context != null) {
         Navigator.pop(context);
       } else {
-        errorService.notifyError("Missing BuildContext");
+        errorService.notifyError(e: "Missing BuildContext");
       }
     };
 

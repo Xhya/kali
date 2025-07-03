@@ -27,8 +27,8 @@ initHomeScreen() async {
     await refreshMeals();
     computeDayAverages();
     await refreshPersonalNutriScore();
-  } catch (e) {
-    errorService.notifyError(e);
+  } catch (e, stack) {
+    errorService.notifyError(e: e, stack: stack);
   }
 }
 
