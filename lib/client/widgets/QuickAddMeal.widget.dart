@@ -8,6 +8,7 @@ import 'package:kalori/core/models/MealPeriod.enum.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
 import 'package:kalori/core/services/AI.service.dart';
 import 'package:kalori/core/services/Navigation.service.dart';
+import 'package:kalori/core/utils/computeDayAverages.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/core/actions/nutriScore.actions.dart';
@@ -31,7 +32,10 @@ onClickQuickSuffixIcon() async {
 }
 
 onClickAddMealToDay() async {
-  addMealAction();
+  await addMealAction();
+  computeDayAverages();
+  quickAddMealState.userMealText.value = "";
+  navigationService.closeBottomSheet();
 }
 
 class QuickAddMealWidget extends StatefulWidget {

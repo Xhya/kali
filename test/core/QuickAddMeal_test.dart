@@ -1,16 +1,19 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kalori/client/screens/Home.screen.dart';
 import 'package:kalori/client/states/quickAddMeal.state.dart';
 import 'package:kalori/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kalori/core/actions/nutriScore.actions.dart';
 import 'package:kalori/core/domains/meal.state.dart';
+import 'package:kalori/core/domains/nutriScore.state.dart';
 import 'package:kalori/core/models/meal.fixture.dart';
 import 'package:kalori/core/services/Navigation.service.dart';
+import 'package:kalori/core/services/Translation.service.dart';
 
 void main() {
   setUp(() async {
-    // todoItemData.reset();
-    // await todoItemService.refreshTodoItems();
+    WidgetsFlutterBinding.ensureInitialized();
+    await TranslationService().init();
   });
 
   test('quick add meal scenario', () async {
@@ -29,9 +32,28 @@ void main() {
     expect(quickAddMealState.userMealText.value.isEmpty, true);
     onClickPeriodToQuickAddMeal();
     expect(navigationService.bottomSheet, isNotNull);
-    onInputUpdateUserMealText(fixtureMeal2.mealDescription);
+    onInputUpdateUserMealText(fixtureMeal2.mealDescription!);
     expect(quickAddMealState.userMealText.value, fixtureMeal2.mealDescription);
     await computeNutriScoreAction();
+    expect(nutriScoreState.currentNutriScore.value, isNotNull);
+    expect(
+      nutriScoreState.currentNutriScore.value!.caloryAmount,
+      fixtureMeal1.nutriScore!.caloryAmount,
+    );
+    expect(
+      nutriScoreState.currentNutriScore.value!.glucidAmount,
+      fixtureMeal1.nutriScore!.glucidAmount,
+    );
+    expect(
+      nutriScoreState.currentNutriScore.value!.lipidAmount,
+      fixtureMeal1.nutriScore!.lipidAmount,
+    );
+    expect(
+      nutriScoreState.currentNutriScore.value!.proteinAmount,
+      fixtureMeal1.nutriScore!.proteinAmount,
+    );
+    await onClickAddMealToDay();
+
     // expect(mealState.currentMeals.value.length, 1);
     // expect(mealState.currentMeals.value.last.mealDescription, fixtureMeal2.mealDescription);
     // expect(mealState.currentMeals.value.last.nutriScore!.caloryAmount, fixtureMeal2.nutriScore!.caloryAmount);

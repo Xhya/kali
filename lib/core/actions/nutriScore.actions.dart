@@ -3,8 +3,6 @@ import 'package:kalori/core/domains/meal.service.dart';
 import 'package:kalori/core/domains/meal.state.dart';
 import 'package:kalori/core/models/Meal.model.dart';
 import 'package:kalori/core/services/AI.service.dart';
-import 'package:kalori/core/services/Navigation.service.dart';
-import 'package:kalori/core/utils/computeDayAverages.utils.dart';
 import 'package:kalori/core/services/Error.service.dart';
 import 'package:kalori/core/utils/computeMealPeriod.utils.dart';
 import 'package:uuid/uuid.dart';
@@ -37,11 +35,7 @@ addMealAction() async {
       nutriScore: quickAddMealState.nutriScore.value,
     );
     await addMeal(meal);
-    computeDayAverages();
-    quickAddMealState.userMealText.value = "";
-    navigationService.closeBottomSheet();
   } catch (e) {
-    print("ERROR TOTO");
     errorService.notifyError(e);
   } finally {
     quickAddMealState.isLoading.value = false;
