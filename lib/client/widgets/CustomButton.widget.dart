@@ -48,14 +48,15 @@ class ButtonWidget extends StatelessWidget {
         borderColor = null;
     }
 
-    return CustomInkwell(
-      onTap: disabled ? () {} : onPressed,
-      child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(16)),
-        child: Container(
-          alignment: Alignment.center,
-          width: fullWidth ? double.infinity : null,
-          height: 80,
+    return Container(
+      alignment: Alignment.center,
+      width: fullWidth ? double.infinity : null,
+      height: 80,
+      child: CustomInkwell(
+        onTap: disabled ? () {} : onPressed,
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(16)),
+
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
