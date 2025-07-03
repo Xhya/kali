@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kalori/client/Style.service.dart';
 
 class CustomInput extends StatefulWidget {
@@ -9,6 +10,7 @@ class CustomInput extends StatefulWidget {
     this.placeholder,
     this.suffixText,
     this.suffixIcon,
+    this.inputFormatters,
   });
 
   final Function onChanged;
@@ -16,6 +18,7 @@ class CustomInput extends StatefulWidget {
   final String? placeholder;
   final String? suffixText;
   final Widget? suffixIcon;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   State<CustomInput> createState() => _CustomInputState();
@@ -51,6 +54,7 @@ class _CustomInputState extends State<CustomInput> {
           style: style.text.color2,
           maxLines: 1,
           minLines: 1,
+          inputFormatters: widget.inputFormatters,
           cursorColor: style.text.color2.color,
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
@@ -64,7 +68,7 @@ class _CustomInputState extends State<CustomInput> {
             labelStyle: style.text.color2,
             suffixText: widget.suffixText,
             suffixStyle: style.text.color2,
-            suffixIcon: widget.suffixIcon
+            suffixIcon: widget.suffixIcon,
           ),
         ),
       ],
