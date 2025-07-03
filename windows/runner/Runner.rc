@@ -89,11 +89,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
+            VALUE "CompanyName", "com.horace" "\0"
             VALUE "FileDescription", "kalori" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "kalori" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2025 com.example. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025 com.horace. All rights reserved." "\0"
             VALUE "OriginalFilename", "kalori.exe" "\0"
             VALUE "ProductName", "kalori" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
