@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kalori/core/models/NutriScore.model.dart';
+import 'package:kalori/core/services/Error.service.dart';
 import 'package:kalori/core/utils/formatters.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kalori/client/Style.service.dart';
@@ -132,6 +133,13 @@ class _StartFormScreenState extends State<StartFormScreen> {
                               ],
                             ),
                           ),
+                        ButtonWidget(
+                          text: "Crash",
+                          onPressed: () {
+                            errorService.notifyError(e: Exception("Crash button pressed"));
+                          },
+                          fullWidth: true,
+                        ),
 
                         ButtonWidget(
                           text: getSubmitButtonText(),

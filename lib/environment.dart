@@ -6,6 +6,8 @@ const environment = {
   "MODE": String.fromEnvironment('MODE'),
   "GOOGLE_AI_API_KEY": String.fromEnvironment('GOOGLE_AI_API_KEY'),
   "GOOGLE_AI_URL": String.fromEnvironment('GOOGLE_AI_URL'),
+  "BUGSNAG_ENV": String.fromEnvironment('BUGSNAG_ENV'),
+  "BUGSNAG_API_KEY": String.fromEnvironment('BUGSNAG_API_KEY'),
 };
 
 final useFixtures = environment["USE_FIXTURES"];
@@ -16,3 +18,6 @@ final isInDevEnv = environment["ENVIRONMENT"] == "development";
 final isInProdEnv = environment["ENVIRONMENT"] == "production";
 final isInFixturesMode = environment["MODE"] == "fixture";
 final String googleAIUrl = environment["GOOGLE_AI_URL"] as String;
+final String bugsnagEnvironment = environment["BUGSNAG_ENV"] as String;
+final String bugsnagApiKey = environment["BUGSNAG_API_KEY"] as String;
+

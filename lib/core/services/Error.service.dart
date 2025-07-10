@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:kalori/core/services/Crashlytics.service.dart';
+import 'package:kalori/core/services/Bugsnag.service.dart';
 import 'package:kalori/core/services/Translation.service.dart';
 import 'package:kalori/environment.dart';
 
 var errorService = ErrorService();
 
 class ErrorService extends ChangeNotifier {
-  final crashlyticsService = CrashlyticsService();
+  final bugsnagService = BugsnagService();
   String? error;
 
-  notifyError({required Object e, StackTrace? stack}) {
+  notifyError({required Object e, StackTrace? stack}) async {
     if (!isInProdEnv) {
       print(e);
     }
@@ -20,8 +20,9 @@ class ErrorService extends ChangeNotifier {
             : e.toString().isNotEmpty
             ? e.toString()
             : t("error_message");
-    if (isInProdEnv) {
-      crashlyticsService.notifyError(e: e, stack: stack, reason: error);
+
+    if (isInDevEnv || isInProdEnv) {
+      await bugsnagService.notify(e: e, stack: stack);
     }
 
     notifyListeners();
