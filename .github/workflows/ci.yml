@@ -26,8 +26,10 @@ jobs:
         run: flutter test --dart-define-from-file=env.test.json
         
   build:
+    needs: test
     name: Build Android AAB
     runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'  # Job déclenché manuellement uniquement
 
     steps:
       - name: Checkout code
