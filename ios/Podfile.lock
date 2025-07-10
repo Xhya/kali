@@ -1,4 +1,8 @@
 PODS:
+  - Bugsnag (6.32.1)
+  - bugsnag_flutter (0.0.1):
+    - Bugsnag (= 6.32.1)
+    - Flutter
   - connectivity_plus (0.0.1):
     - Flutter
   - Firebase/CoreOnly (11.15.0):
@@ -28,6 +32,7 @@ PODS:
     - FlutterMacOS
 
 DEPENDENCIES:
+  - bugsnag_flutter (from `.symlinks/plugins/bugsnag_flutter/ios`)
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Flutter`)
@@ -36,12 +41,15 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Bugsnag
     - Firebase
     - FirebaseCore
     - FirebaseCoreInternal
     - GoogleUtilities
 
 EXTERNAL SOURCES:
+  bugsnag_flutter:
+    :path: ".symlinks/plugins/bugsnag_flutter/ios"
   connectivity_plus:
     :path: ".symlinks/plugins/connectivity_plus/ios"
   firebase_core:
@@ -54,6 +62,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
 
 SPEC CHECKSUMS:
+  Bugsnag: 265186a1ec7af706c3a96ab628e4f360d2fc9ce2
+  bugsnag_flutter: b9b09d1e604a04fe9837cafc17f435f2376e36c9
   connectivity_plus: 2a701ffec2c0ae28a48cf7540e279787e77c447d
   Firebase: d99ac19b909cd2c548339c2241ecd0d1599ab02e
   firebase_core: cf4d42a8ac915e51c0c2dc103442f3036d941a2d
