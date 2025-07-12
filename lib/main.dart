@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:kalori/core/services/Bugsnag.service.dart';
+import 'package:kali/core/services/Bugsnag.service.dart';
 import 'package:provider/provider.dart';
-import 'package:kalori/client/Style.service.dart';
-import 'package:kalori/client/screens/PersonalNutriScore.screen.dart';
-import 'package:kalori/client/states/quickAddMeal.state.dart';
-import 'package:kalori/client/states/startForm.state.dart';
-import 'package:kalori/client/widgets/AsyncInitWidget.dart';
-import 'package:kalori/client/Routing.dart';
-import 'package:kalori/client/states/editMeal.state.dart';
-import 'package:kalori/core/domains/meal.state.dart';
-import 'package:kalori/core/domains/nutriScore.service.dart';
-import 'package:kalori/core/domains/nutriScore.state.dart';
-import 'package:kalori/core/domains/user.state.dart';
-import 'package:kalori/core/services/Error.service.dart';
-import 'package:kalori/core/services/Locale.service.dart';
-import 'package:kalori/core/services/Navigation.service.dart';
-import 'package:kalori/core/services/Translation.service.dart';
-import 'package:kalori/core/services/connexion.service.dart';
+import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/screens/PersonalNutriScore.screen.dart';
+import 'package:kali/client/states/quickAddMeal.state.dart';
+import 'package:kali/client/states/startForm.state.dart';
+import 'package:kali/client/widgets/AsyncInitWidget.dart';
+import 'package:kali/client/Routing.dart';
+import 'package:kali/client/states/editMeal.state.dart';
+import 'package:kali/core/domains/meal.state.dart';
+import 'package:kali/core/domains/nutriScore.service.dart';
+import 'package:kali/core/domains/nutriScore.state.dart';
+import 'package:kali/core/domains/user.state.dart';
+import 'package:kali/core/services/Error.service.dart';
+import 'package:kali/core/services/Locale.service.dart';
+import 'package:kali/core/services/Navigation.service.dart';
+import 'package:kali/core/services/Translation.service.dart';
+import 'package:kali/core/services/connexion.service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -59,7 +59,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'kalori',
+      title: 'kali',
       theme: ThemeData(
         fontFamily: 'Barlow',
         colorScheme: ColorScheme.fromSeed(

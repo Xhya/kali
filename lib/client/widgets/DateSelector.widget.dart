@@ -1,8 +1,8 @@
 import 'package:dart_date/dart_date.dart';
 import 'package:flutter/material.dart';
-import 'package:kalori/client/Style.service.dart';
-import 'package:kalori/core/domains/meal.state.dart';
-import 'package:kalori/core/services/Datetime.extension.dart';
+import 'package:kali/client/Style.service.dart';
+import 'package:kali/core/domains/meal.state.dart';
+import 'package:kali/core/services/Datetime.extension.dart';
 
 onClickLeftArrow() {
   mealState.currentDate.value = mealState.currentDate.value.subtract(

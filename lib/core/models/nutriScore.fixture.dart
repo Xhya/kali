@@ -1,4 +1,4 @@
-import 'package:kalori/core/models/NutriScore.model.dart';
+import 'package:kali/core/models/NutriScore.model.dart';
 
 final emptyNutriScore = NutriScore(
   id: "1",

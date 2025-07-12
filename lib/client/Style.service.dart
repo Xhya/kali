@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kalori/client/Screen.service.dart';
+import 'package:kali/client/Screen.service.dart';
 
 final style = Style();
 

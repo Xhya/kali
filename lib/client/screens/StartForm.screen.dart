@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:kalori/core/models/NutriScore.model.dart';
-import 'package:kalori/core/services/Error.service.dart';
-import 'package:kalori/core/utils/formatters.utils.dart';
+import 'package:kali/core/models/NutriScore.model.dart';
+import 'package:kali/core/services/Error.service.dart';
+import 'package:kali/core/utils/formatters.utils.dart';
 import 'package:provider/provider.dart';
-import 'package:kalori/client/Style.service.dart';
-import 'package:kalori/client/widgets/CustomButton.widget.dart';
-import 'package:kalori/client/widgets/CustomInput.dart';
-import 'package:kalori/client/widgets/Expanded.widget.dart';
-import 'package:kalori/client/widgets/NutriScore2by2.widget.dart';
-import 'package:kalori/client/layout/Base.scaffold.dart';
-import 'package:kalori/core/actions/startForm.actions.dart';
-import 'package:kalori/core/domains/nutriScore.state.dart';
-import 'package:kalori/core/services/Translation.service.dart';
-import 'package:kalori/client/states/startForm.state.dart';
+import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/widgets/CustomButton.widget.dart';
+import 'package:kali/client/widgets/CustomInput.dart';
+import 'package:kali/client/widgets/Expanded.widget.dart';
+import 'package:kali/client/widgets/NutriScore2by2.widget.dart';
+import 'package:kali/client/layout/Base.scaffold.dart';
+import 'package:kali/core/actions/startForm.actions.dart';
+import 'package:kali/core/domains/nutriScore.state.dart';
+import 'package:kali/core/services/Translation.service.dart';
+import 'package:kali/client/states/startForm.state.dart';
 
 onUpdateSize(String value) {
   startFormState.size.value = value;

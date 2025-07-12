@@ -1,5 +1,5 @@
 import 'package:bugsnag_flutter/bugsnag_flutter.dart';
-import 'package:kalori/environment.dart';
+import 'package:kali/environment.dart';
 
 var bugsnagService = BugsnagService();
 

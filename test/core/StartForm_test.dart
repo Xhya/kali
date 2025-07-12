@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kalori/client/screens/StartForm.screen.dart';
-import 'package:kalori/client/states/startForm.state.dart';
-import 'package:kalori/core/domains/nutriScore.state.dart';
-import 'package:kalori/core/models/meal.fixture.dart';
-import 'package:kalori/core/services/Navigation.service.dart';
-import 'package:kalori/core/services/Translation.service.dart';
+import 'package:kali/client/screens/StartForm.screen.dart';
+import 'package:kali/client/states/startForm.state.dart';
+import 'package:kali/core/domains/nutriScore.state.dart';
+import 'package:kali/core/models/meal.fixture.dart';
+import 'package:kali/core/services/Navigation.service.dart';
+import 'package:kali/core/services/Translation.service.dart';
 
 void main() {
   setUp(() async {

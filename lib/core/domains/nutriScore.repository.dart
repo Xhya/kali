@@ -1,5 +1,5 @@
-import 'package:kalori/core/domains/nutriScore.data.dart';
-import 'package:kalori/core/models/NutriScore.model.dart';
+import 'package:kali/core/domains/nutriScore.data.dart';
+import 'package:kali/core/models/NutriScore.model.dart';
 
 class NutriScoreRepository {
   Future<NutriScore?> getPersonalNutriScore() async {

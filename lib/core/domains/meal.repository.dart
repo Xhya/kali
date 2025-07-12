@@ -1,5 +1,5 @@
-import 'package:kalori/core/domains/meal.data.dart';
-import 'package:kalori/core/models/Meal.model.dart';
+import 'package:kali/core/domains/meal.data.dart';
+import 'package:kali/core/models/Meal.model.dart';
 
 class MealRepository {
   Future<List<MealModel>> getMeals() async {

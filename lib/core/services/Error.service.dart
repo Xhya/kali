@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kalori/core/services/Bugsnag.service.dart';
-import 'package:kalori/core/services/Translation.service.dart';
-import 'package:kalori/environment.dart';
+import 'package:kali/core/services/Bugsnag.service.dart';
+import 'package:kali/core/services/Translation.service.dart';
+import 'package:kali/environment.dart';
 
 var errorService = ErrorService();
 

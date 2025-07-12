@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kalori/core/models/Meal.model.dart';
+import 'package:kali/core/models/Meal.model.dart';
 
 var mealState = MealState();
 

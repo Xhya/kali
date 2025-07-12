@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/widgets.dart';
-import 'package:kalori/core/domains/ai.repository.dart';
-import 'package:kalori/core/models/NutriScore.model.dart';
+import 'package:kali/core/domains/ai.repository.dart';
+import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:uuid/uuid.dart';
 
 var aiService = AIService();

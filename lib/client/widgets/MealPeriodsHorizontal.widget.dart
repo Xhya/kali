@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kalori/client/widgets/CustomInkwell.widget.dart';
-import 'package:kalori/client/widgets/MealPeriodTag.widget.dart';
-import 'package:kalori/core/models/MealPeriod.enum.dart';
+import 'package:kali/client/widgets/CustomInkwell.widget.dart';
+import 'package:kali/client/widgets/MealPeriodTag.widget.dart';
+import 'package:kali/core/models/MealPeriod.enum.dart';
 
 class MealPeriodsHorizontalWidget extends StatefulWidget {
   const MealPeriodsHorizontalWidget({

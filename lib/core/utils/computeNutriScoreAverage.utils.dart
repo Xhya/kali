@@ -1,5 +1,5 @@
-import 'package:kalori/core/domains/nutriScore.state.dart';
-import 'package:kalori/core/services/Error.service.dart';
+import 'package:kali/core/domains/nutriScore.state.dart';
+import 'package:kali/core/services/Error.service.dart';
 
 double? computeNutriScoreAverage(String macroType) {
   if (macroType == "glucids") {

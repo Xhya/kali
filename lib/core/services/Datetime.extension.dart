@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-import 'package:kalori/core/services/Locale.service.dart';
+import 'package:kali/core/services/Locale.service.dart';
 
 extension DateTimeExtension on DateTime {
   String formateDate(String pattern) {

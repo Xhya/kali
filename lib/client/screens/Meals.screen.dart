@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:kalori/client/layout/Title.scaffold.dart';
-import 'package:kalori/client/widgets/MealRow.widget.dart';
-import 'package:kalori/core/actions/Goto.actions.dart';
-import 'package:kalori/core/domains/meal.state.dart';
-import 'package:kalori/core/models/Meal.model.dart';
-import 'package:kalori/core/services/Translation.service.dart';
+import 'package:kali/client/layout/Title.scaffold.dart';
+import 'package:kali/client/widgets/MealRow.widget.dart';
+import 'package:kali/core/actions/Goto.actions.dart';
+import 'package:kali/core/domains/meal.state.dart';
+import 'package:kali/core/models/Meal.model.dart';
+import 'package:kali/core/services/Translation.service.dart';
 import 'package:provider/provider.dart';
-import 'package:kalori/client/Style.service.dart';
+import 'package:kali/client/Style.service.dart';
 
 class MealsScreen extends StatefulWidget {
   const MealsScreen({super.key});

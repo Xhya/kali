@@ -1,11 +1,11 @@
 import 'package:dart_date/dart_date.dart';
 import 'package:flutter/material.dart';
-import 'package:kalori/core/domains/meal.state.dart';
-import 'package:kalori/core/utils/remaningCaloriesToSpend.utils.dart';
+import 'package:kali/core/domains/meal.state.dart';
+import 'package:kali/core/utils/remaningCaloriesToSpend.utils.dart';
 import 'package:provider/provider.dart';
-import 'package:kalori/client/Style.service.dart';
-import 'package:kalori/core/domains/nutriScore.state.dart';
-import 'package:kalori/core/models/NutriScore.model.dart';
+import 'package:kali/client/Style.service.dart';
+import 'package:kali/core/domains/nutriScore.state.dart';
+import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class MainKaloriesCountWidget extends StatefulWidget {

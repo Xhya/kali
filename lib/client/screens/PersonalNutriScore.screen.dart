@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:kalori/client/Style.service.dart';
-import 'package:kalori/core/domains/nutriScore.service.dart';
-import 'package:kalori/core/models/NutriScore.model.dart';
-import 'package:kalori/core/services/Error.service.dart';
+import 'package:kali/client/Style.service.dart';
+import 'package:kali/core/domains/nutriScore.service.dart';
+import 'package:kali/core/models/NutriScore.model.dart';
+import 'package:kali/core/services/Error.service.dart';
 import 'package:provider/provider.dart';
-import 'package:kalori/client/layout/Title.scaffold.dart';
-import 'package:kalori/client/widgets/CustomButton.widget.dart';
-import 'package:kalori/client/widgets/CustomInput.dart';
-import 'package:kalori/core/domains/nutriScore.state.dart';
-import 'package:kalori/core/services/Translation.service.dart';
+import 'package:kali/client/layout/Title.scaffold.dart';
+import 'package:kali/client/widgets/CustomButton.widget.dart';
+import 'package:kali/client/widgets/CustomInput.dart';
+import 'package:kali/core/domains/nutriScore.state.dart';
+import 'package:kali/core/services/Translation.service.dart';
 import 'package:uuid/uuid.dart';
 
 final personalNutriScoreEditionState = PersonalNutriScoreEditionState();

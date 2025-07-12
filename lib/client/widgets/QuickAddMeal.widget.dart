@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:kalori/client/Style.service.dart';
-import 'package:kalori/client/widgets/CustomButton.widget.dart';
-import 'package:kalori/client/widgets/Expanded.widget.dart';
-import 'package:kalori/client/widgets/MealPeriodsHorizontal.widget.dart';
-import 'package:kalori/client/widgets/NutriScore2by2.widget.dart';
-import 'package:kalori/core/models/MealPeriod.enum.dart';
-import 'package:kalori/core/models/NutriScore.model.dart';
-import 'package:kalori/core/services/AI.service.dart';
-import 'package:kalori/core/services/Navigation.service.dart';
-import 'package:kalori/core/utils/computeDayAverages.utils.dart';
+import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/widgets/CustomButton.widget.dart';
+import 'package:kali/client/widgets/Expanded.widget.dart';
+import 'package:kali/client/widgets/MealPeriodsHorizontal.widget.dart';
+import 'package:kali/client/widgets/NutriScore2by2.widget.dart';
+import 'package:kali/core/models/MealPeriod.enum.dart';
+import 'package:kali/core/models/NutriScore.model.dart';
+import 'package:kali/core/services/AI.service.dart';
+import 'package:kali/core/services/Navigation.service.dart';
+import 'package:kali/core/utils/computeDayAverages.utils.dart';
 import 'package:provider/provider.dart';
-import 'package:kalori/client/states/quickAddMeal.state.dart';
-import 'package:kalori/core/actions/nutriScore.actions.dart';
+import 'package:kali/client/states/quickAddMeal.state.dart';
+import 'package:kali/core/actions/nutriScore.actions.dart';
 
 onClickSelectPeriod(MealPeriodEnum period) {
   quickAddMealState.chosenPeriod.value = period;

@@ -1,9 +1,9 @@
-import 'package:kalori/client/widgets/NutriScoreByPeriod.type.dart';
-import 'package:kalori/core/models/Meal.model.dart';
-import 'package:kalori/core/models/MealPeriod.enum.dart';
-import 'package:kalori/core/models/NutriScore.model.dart';
-import 'package:kalori/core/models/nutriScore.fixture.dart';
-import 'package:kalori/core/utils/getNutriscoresByPeriod.utils.dart';
+import 'package:kali/client/widgets/NutriScoreByPeriod.type.dart';
+import 'package:kali/core/models/Meal.model.dart';
+import 'package:kali/core/models/MealPeriod.enum.dart';
+import 'package:kali/core/models/NutriScore.model.dart';
+import 'package:kali/core/models/nutriScore.fixture.dart';
+import 'package:kali/core/utils/getNutriscoresByPeriod.utils.dart';
 
 NutriScoreByPeriod getTotalNutriscoreByPeriod(
   List<MealModel> meals,

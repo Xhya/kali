@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kalori/client/Style.service.dart';
+import 'package:kali/client/Style.service.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({

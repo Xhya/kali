@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:kalori/core/models/meal.fixture.dart';
-import 'package:kalori/environment.dart';
-import 'package:kalori/utils.dart';
+import 'package:kali/core/models/meal.fixture.dart';
+import 'package:kali/environment.dart';
+import 'package:kali/utils.dart';
 
 class AIRepository {
   Future<String> computeNutriScore(String userText) async {

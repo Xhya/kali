@@ -1,6 +1,6 @@
-import 'package:kalori/core/models/Meal.model.dart';
-import 'package:kalori/core/models/MealPeriod.enum.dart';
-import 'package:kalori/core/models/nutriScore.fixture.dart';
+import 'package:kali/core/models/Meal.model.dart';
+import 'package:kali/core/models/MealPeriod.enum.dart';
+import 'package:kali/core/models/nutriScore.fixture.dart';
 
 final fixtureMeals = [
   fixtureMeal1,

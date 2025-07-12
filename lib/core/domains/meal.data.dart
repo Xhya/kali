@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:kalori/core/models/Meal.model.dart';
-import 'package:kalori/core/models/meal.fixture.dart';
-import 'package:kalori/environment.dart';
+import 'package:kali/core/models/Meal.model.dart';
+import 'package:kali/core/models/meal.fixture.dart';
+import 'package:kali/environment.dart';
 
 final mealData = MealData();
 final mealStoreKey = 'hc_meals';

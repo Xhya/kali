@@ -1,4 +1,4 @@
-import 'package:kalori/core/domains/nutriScore.state.dart';
+import 'package:kali/core/domains/nutriScore.state.dart';
 
 int? remaningCaloriesToSpend() {
   if (nutriScoreState.personalNutriScore.value?.caloryAmount == null ||

@@ -1,7 +1,7 @@
 import 'package:dart_date/dart_date.dart';
-import 'package:kalori/core/domains/meal.state.dart';
-import 'package:kalori/core/models/Meal.model.dart';
-import 'package:kalori/core/models/MealPeriod.enum.dart';
+import 'package:kali/core/domains/meal.state.dart';
+import 'package:kali/core/models/Meal.model.dart';
+import 'package:kali/core/models/MealPeriod.enum.dart';
 
 Map<MealPeriodEnum, List<MealModel>> getDateMealsByPeriod(DateTime date) {
   final dateMeals = mealState.currentMeals.value.where((meal) {

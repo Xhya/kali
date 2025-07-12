@@ -1,8 +1,8 @@
 import 'package:dart_date/dart_date.dart';
-import 'package:kalori/core/domains/meal.repository.dart';
-import 'package:kalori/core/models/Meal.model.dart';
-import 'package:kalori/core/services/Error.service.dart';
-import 'package:kalori/core/domains/meal.state.dart';
+import 'package:kali/core/domains/meal.repository.dart';
+import 'package:kali/core/models/Meal.model.dart';
+import 'package:kali/core/services/Error.service.dart';
+import 'package:kali/core/domains/meal.state.dart';
 
 refreshMeals() async {
   try {

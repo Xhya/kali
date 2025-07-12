@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kalori/client/Style.service.dart';
-import 'package:kalori/client/widgets/CustomCard.widget.dart';
-import 'package:kalori/core/models/NutriScore.model.dart';
-import 'package:kalori/core/utils/macroIcon.utils.dart';
+import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/widgets/CustomCard.widget.dart';
+import 'package:kali/core/models/NutriScore.model.dart';
+import 'package:kali/core/utils/macroIcon.utils.dart';
 
 class NutriScore2by2Widget extends StatefulWidget {
   const NutriScore2by2Widget({super.key, required this.nutriScore});

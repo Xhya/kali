@@ -1,10 +1,10 @@
-import 'package:kalori/client/states/quickAddMeal.state.dart';
-import 'package:kalori/core/domains/meal.service.dart';
-import 'package:kalori/core/domains/meal.state.dart';
-import 'package:kalori/core/models/Meal.model.dart';
-import 'package:kalori/core/services/AI.service.dart';
-import 'package:kalori/core/services/Error.service.dart';
-import 'package:kalori/core/utils/computeMealPeriod.utils.dart';
+import 'package:kali/client/states/quickAddMeal.state.dart';
+import 'package:kali/core/domains/meal.service.dart';
+import 'package:kali/core/domains/meal.state.dart';
+import 'package:kali/core/models/Meal.model.dart';
+import 'package:kali/core/services/AI.service.dart';
+import 'package:kali/core/services/Error.service.dart';
+import 'package:kali/core/utils/computeMealPeriod.utils.dart';
 import 'package:uuid/uuid.dart';
 
 computeNutriScoreAction() async {

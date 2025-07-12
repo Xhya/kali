@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kalori/client/Style.service.dart';
+import 'package:kali/client/Style.service.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class GaugeWidget extends StatefulWidget {

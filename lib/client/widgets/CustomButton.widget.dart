@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kalori/client/Style.service.dart';
-import 'package:kalori/client/widgets/CustomInkwell.widget.dart';
-import 'package:kalori/client/widgets/LoaderIcon.widget.dart';
+import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/widgets/CustomInkwell.widget.dart';
+import 'package:kali/client/widgets/LoaderIcon.widget.dart';
 
 enum ButtonTypeEnum { filled, outline, tonal }
 

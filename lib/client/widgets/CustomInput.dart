@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kalori/client/Style.service.dart';
+import 'package:kali/client/Style.service.dart';
 
 class CustomInput extends StatefulWidget {
   const CustomInput({

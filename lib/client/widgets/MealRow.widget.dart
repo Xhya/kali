@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kalori/client/Style.service.dart';
-import 'package:kalori/client/widgets/MealPeriodTag.widget.dart';
-import 'package:kalori/core/models/Meal.model.dart';
+import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/widgets/MealPeriodTag.widget.dart';
+import 'package:kali/core/models/Meal.model.dart';
 
 class MealRowWidget extends StatefulWidget {
   const MealRowWidget({

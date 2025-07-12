@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:kalori/core/models/NutriScore.model.dart';
-import 'package:kalori/environment.dart';
+import 'package:kali/core/models/NutriScore.model.dart';
+import 'package:kali/environment.dart';
 
 final nutriScoreData = NutriScoreData();
 final personalNutriScoreStoreKey = 'hc_personal_nutri_score';
@@ -33,6 +33,8 @@ class NutriScoreData {
   }
 
   _get() async {
+    //await _storage.delete(key: personalNutriScoreStoreKey);
+
     var str = await _storage.read(key: personalNutriScoreStoreKey);
     if (str == null) {
       return null;

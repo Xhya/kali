@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kalori/client/Style.service.dart';
-import 'package:kalori/core/models/MealPeriod.enum.dart';
-import 'package:kalori/core/services/Translation.service.dart';
+import 'package:kali/client/Style.service.dart';
+import 'package:kali/core/models/MealPeriod.enum.dart';
+import 'package:kali/core/services/Translation.service.dart';
 
 class MealPeriodTagWidget extends StatefulWidget {
   const MealPeriodTagWidget({

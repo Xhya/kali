@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:kalori/client/Style.service.dart';
-import 'package:kalori/client/widgets/CustomCard.widget.dart';
-import 'package:kalori/client/states/editMeal.state.dart';
-import 'package:kalori/client/widgets/NutriScoreByPeriod.type.dart';
-import 'package:kalori/core/domains/nutriScore.state.dart';
-import 'package:kalori/core/models/Meal.model.dart';
-import 'package:kalori/core/models/MealPeriod.enum.dart';
-import 'package:kalori/core/models/NutriScore.model.dart';
-import 'package:kalori/core/utils/getTotalNutriscoreByPeriod.utils.dart';
-import 'package:kalori/core/utils/macroIcon.utils.dart';
+import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/widgets/CustomCard.widget.dart';
+import 'package:kali/client/states/editMeal.state.dart';
+import 'package:kali/client/widgets/NutriScoreByPeriod.type.dart';
+import 'package:kali/core/domains/nutriScore.state.dart';
+import 'package:kali/core/models/Meal.model.dart';
+import 'package:kali/core/models/MealPeriod.enum.dart';
+import 'package:kali/core/models/NutriScore.model.dart';
+import 'package:kali/core/utils/getTotalNutriscoreByPeriod.utils.dart';
+import 'package:kali/core/utils/macroIcon.utils.dart';
 import 'package:provider/provider.dart';
-import 'package:kalori/client/widgets/Gauge.widget.dart';
-import 'package:kalori/core/services/Translation.service.dart';
+import 'package:kali/client/widgets/Gauge.widget.dart';
+import 'package:kali/core/services/Translation.service.dart';
 
 class NutriScoreGaugesWidget extends StatefulWidget {
   const NutriScoreGaugesWidget({super.key, required this.meals});

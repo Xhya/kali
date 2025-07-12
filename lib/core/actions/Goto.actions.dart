@@ -1,7 +1,7 @@
-import 'package:kalori/core/domains/meal.state.dart';
-import 'package:kalori/core/domains/nutriScore.state.dart';
-import 'package:kalori/core/models/Meal.model.dart';
-import 'package:kalori/core/services/Navigation.service.dart';
+import 'package:kali/core/domains/meal.state.dart';
+import 'package:kali/core/domains/nutriScore.state.dart';
+import 'package:kali/core/models/Meal.model.dart';
+import 'package:kali/core/services/Navigation.service.dart';
 
 goToMealScreen(MealModel meal) {
   mealState.currentMeal.value = meal;

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:kalori/client/layout/Title.scaffold.dart';
-import 'package:kalori/client/states/quickAddMeal.state.dart';
-import 'package:kalori/client/widgets/CustomInput.dart';
-import 'package:kalori/client/widgets/LoaderIcon.widget.dart';
-import 'package:kalori/client/widgets/MealPeriodsHorizontal.widget.dart';
-import 'package:kalori/client/widgets/NutriScoreGauges.widget.dart';
-import 'package:kalori/core/domains/meal.state.dart';
-import 'package:kalori/client/states/editMeal.state.dart';
-import 'package:kalori/core/models/Meal.model.dart';
-import 'package:kalori/core/models/MealPeriod.enum.dart';
-import 'package:kalori/core/services/AI.service.dart';
-import 'package:kalori/core/services/Error.service.dart';
-import 'package:kalori/core/services/Translation.service.dart';
+import 'package:kali/client/layout/Title.scaffold.dart';
+import 'package:kali/client/states/quickAddMeal.state.dart';
+import 'package:kali/client/widgets/CustomInput.dart';
+import 'package:kali/client/widgets/LoaderIcon.widget.dart';
+import 'package:kali/client/widgets/MealPeriodsHorizontal.widget.dart';
+import 'package:kali/client/widgets/NutriScoreGauges.widget.dart';
+import 'package:kali/core/domains/meal.state.dart';
+import 'package:kali/client/states/editMeal.state.dart';
+import 'package:kali/core/models/Meal.model.dart';
+import 'package:kali/core/models/MealPeriod.enum.dart';
+import 'package:kali/core/services/AI.service.dart';
+import 'package:kali/core/services/Error.service.dart';
+import 'package:kali/core/services/Translation.service.dart';
 import 'package:provider/provider.dart';
-import 'package:kalori/client/Style.service.dart';
+import 'package:kali/client/Style.service.dart';
 
 onUpdateMeal() async {
   try {

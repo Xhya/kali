@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kalori/client/Style.service.dart';
-import 'package:kalori/core/services/Navigation.service.dart';
+import 'package:kali/client/Style.service.dart';
+import 'package:kali/core/services/Navigation.service.dart';
 
 class BaseScaffold extends StatefulWidget {
   const BaseScaffold({super.key, required this.child});

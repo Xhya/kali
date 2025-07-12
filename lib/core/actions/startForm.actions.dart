@@ -1,9 +1,9 @@
-import 'package:kalori/client/states/startForm.state.dart';
-import 'package:kalori/core/domains/nutriScore.service.dart';
-import 'package:kalori/core/domains/nutriScore.state.dart';
-import 'package:kalori/core/services/AI.service.dart';
-import 'package:kalori/core/services/Error.service.dart';
-import 'package:kalori/core/services/Navigation.service.dart';
+import 'package:kali/client/states/startForm.state.dart';
+import 'package:kali/core/domains/nutriScore.service.dart';
+import 'package:kali/core/domains/nutriScore.state.dart';
+import 'package:kali/core/services/AI.service.dart';
+import 'package:kali/core/services/Error.service.dart';
+import 'package:kali/core/services/Navigation.service.dart';
 
 onComputePersonalNutriScore() async {
   try {

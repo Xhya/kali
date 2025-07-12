@@ -1,6 +1,6 @@
-import 'package:kalori/core/models/Meal.model.dart';
-import 'package:kalori/core/models/MealPeriod.enum.dart';
-import 'package:kalori/core/models/NutriScore.model.dart';
+import 'package:kali/core/models/Meal.model.dart';
+import 'package:kali/core/models/MealPeriod.enum.dart';
+import 'package:kali/core/models/NutriScore.model.dart';
 
 Map<MealPeriodEnum, List<NutriScore>> getNutriscoresByPeriod(
   List<MealModel> meals,

@@ -1,4 +1,4 @@
-import 'package:kalori/core/models/MealPeriod.enum.dart';
+import 'package:kali/core/models/MealPeriod.enum.dart';
 
 MealPeriodEnum computeMealPeriod(DateTime time) {
   return time.hour < 11
