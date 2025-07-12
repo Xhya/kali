@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kali/core/models/Meal.model.dart';
 
-var mealState = MealState();
+final mealState = MealState();
 
 class MealState extends ChangeNotifier {
   final currentMeal = ValueNotifier<MealModel?>(null);

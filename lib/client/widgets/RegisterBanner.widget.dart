@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
-import 'package:kali/core/domains/topBanner.state.dart';
+import 'package:kali/core/states/topBanner.state.dart';
 
 class RegisterBannerWidget extends StatefulWidget {
   const RegisterBannerWidget({super.key});

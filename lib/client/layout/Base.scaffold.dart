@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kali/core/domains/topBanner.state.dart';
+import 'package:kali/core/states/topBanner.state.dart';
 import 'package:kali/core/services/connexion.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';

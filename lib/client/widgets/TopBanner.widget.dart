@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kali/core/domains/topBanner.state.dart';
+import 'package:kali/core/states/topBanner.state.dart';
 import 'package:provider/provider.dart';
 
 class TopBannerWidget extends StatefulWidget {

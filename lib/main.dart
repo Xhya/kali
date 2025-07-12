@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:kali/core/domains/topBanner.state.dart';
+import 'package:kali/core/states/topBanner.state.dart';
 import 'package:kali/core/services/Bugsnag.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
