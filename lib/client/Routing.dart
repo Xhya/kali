@@ -7,6 +7,7 @@ import 'package:kali/client/screens/StartForm.screen.dart';
 import 'package:kali/core/domains/nutriScore.state.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
+import 'package:kali/core/services/connexion.service.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
@@ -27,11 +28,13 @@ class _RoutingState extends State<Routing> {
   @override
   void initState() {
     super.initState();
+    connexionService.listenToInternetConnexion();
     BackButtonInterceptor.add(backButtonInterceptor);
   }
 
   @override
   void dispose() {
+    connexionService.stopListeningInternetConnexion();
     BackButtonInterceptor.remove(backButtonInterceptor);
     super.dispose();
   }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -5,18 +7,19 @@ import 'package:flutter/widgets.dart';
 final connexionService = ConnexionService();
 
 class ConnexionService extends ChangeNotifier {
-  static final ConnexionService _singleton = ConnexionService._internal();
+  StreamSubscription<InternetStatus>? subscription;
 
-  factory ConnexionService() {
-    return _singleton;
+  final hasInternetConnexion = ValueNotifier<bool>(true);
+
+  ConnexionService() {
+    hasInternetConnexion.addListener(notifyListeners);
   }
 
-  ConnexionService._internal();
-
-  // ignore: prefer_typing_uninitialized_variables
-  var subscription;
-
-  bool hasInternetConnexion = true;
+  @override
+  void dispose() {
+    hasInternetConnexion.dispose();
+    super.dispose();
+  }
 
   getHasInternetConnexion() async {
     return await InternetConnection().hasInternetAccess;
@@ -28,18 +31,16 @@ class ConnexionService extends ChangeNotifier {
     ) {
       switch (status) {
         case InternetStatus.connected:
-          hasInternetConnexion = true;
-          notifyListeners();
+          hasInternetConnexion.value = true;
           break;
         case InternetStatus.disconnected:
-          hasInternetConnexion = false;
-          notifyListeners();
+          hasInternetConnexion.value = false;
           break;
       }
     });
   }
 
   stopListeningInternetConnexion() {
-    subscription.cancel();
+    subscription?.cancel();
   }
 }
