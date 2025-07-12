@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:kali/core/domains/topBanner.state.dart';
 import 'package:kali/core/services/Bugsnag.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
@@ -41,6 +42,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => quickAddMealState),
         ChangeNotifierProvider(create: (context) => startFormState),
         ChangeNotifierProvider(create: (context) => editMealState),
+        ChangeNotifierProvider(create: (context) => topBannerState),
         ChangeNotifierProvider(
           create: (context) => personalNutriScoreEditionState,
         ),

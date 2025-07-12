@@ -4,6 +4,8 @@ import 'package:kali/client/screens/Meal.screen.dart';
 import 'package:kali/client/screens/Meals.screen.dart';
 import 'package:kali/client/screens/PersonalNutriScore.screen.dart';
 import 'package:kali/client/screens/StartForm.screen.dart';
+import 'package:kali/client/widgets/RegisterBanner.widget.dart';
+import 'package:kali/client/widgets/TopBanner.widget.dart';
 import 'package:kali/core/domains/nutriScore.state.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
@@ -159,7 +161,19 @@ class _RoutingState extends State<Routing> {
     if (nutriScoreState.personalNutriScore.value == null) {
       return const StartFormScreen();
     } else {
-      return const HomeScreen();
+      return const Stack(
+        children: [
+          HomeScreen(),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: SafeArea(
+              child: TopBannerWidget(child: RegisterBannerWidget()),
+            ),
+          ),
+        ],
+      );
     }
   }
 }

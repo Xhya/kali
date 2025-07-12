@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kali/core/domains/topBanner.state.dart';
 import 'package:kali/core/services/connexion.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
@@ -18,6 +19,9 @@ class _BaseScaffoldState extends State<BaseScaffold>
     with WidgetsBindingObserver {
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      topBannerState.show.value = true;
+    });
     super.initState();
   }
 
@@ -69,20 +73,6 @@ class _BaseScaffoldState extends State<BaseScaffold>
                 MaybeConnexionMissingWidget(),
               ],
             ),
-
-            // actions: [
-            //   IconButton(
-            //     icon: Icon(
-            //       Icons.auto_graph_outlined,
-            //       color: style.icon.primary.color,
-            //     ),
-            //     onPressed: () {
-            //       navigationService.context = context;
-            //       navigationService.screenTitle = "Résumé des objectifs";
-            //       navigationService.navigateTo(ScreenEnum.objectivesSummary);
-            //     },
-            //   ),
-            // ],
           ),
         ),
       ),

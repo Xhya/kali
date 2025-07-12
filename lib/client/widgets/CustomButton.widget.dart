@@ -50,9 +50,7 @@ class ButtonWidget extends StatelessWidget {
     }
 
     return Container(
-      alignment: Alignment.center,
       width: fullWidth ? double.infinity : null,
-      height: 80,
       child: CustomInkwell(
         onTap: disabled ? () {} : onPressed,
         child: ClipRRect(
@@ -73,6 +71,7 @@ class ButtonWidget extends StatelessWidget {
                     ? LoaderIcon(isLightBackground: true)
                     : Text(
                       text ?? "Confirmer",
+                      textAlign: TextAlign.center,
                       style: style.fontsize.md
                           .merge(style.fontweight.semibold)
                           .merge(TextStyle(color: textColor)),
