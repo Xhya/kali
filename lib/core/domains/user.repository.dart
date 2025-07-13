@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:kali/core/services/Error.service.dart';
-import 'package:kali/core/services/Headers.service.dart';
+import 'package:kali/core/services/headers.service.dart';
 import 'package:kali/environment.dart';
 
 class UserRepository {
