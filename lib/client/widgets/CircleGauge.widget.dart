@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/Style.service.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class CircleGaugeWidget extends StatefulWidget {
@@ -34,7 +35,7 @@ class _CircleGaugeWidgetState extends State<CircleGaugeWidget> {
           axisLineStyle: AxisLineStyle(
             thickness: 0.15,
             cornerStyle: CornerStyle.bothCurve,
-            color: Colors.grey.shade300,
+            color: style.background.greenDark.color,
             thicknessUnit: GaugeSizeUnit.factor,
           ),
           ranges: [
@@ -43,8 +44,8 @@ class _CircleGaugeWidgetState extends State<CircleGaugeWidget> {
                 startValue: 0,
                 endValue: entry.value.toDouble(),
                 color: entry.key,
-                startWidth: 8,
-                endWidth: 8,
+                startWidth: 6,
+                endWidth: 6,
               );
             }),
             if (widget.editingAmount != null)

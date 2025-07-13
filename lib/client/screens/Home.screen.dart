@@ -80,18 +80,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 DateSelector(currentDate: currentDate),
 
                 SizedBox(height: 24),
+                
                 MainKaloriesCountWidget(),
+
                 SizedBox(height: 4),
 
                 NutriScoreGaugesWidget(meals: meals),
 
-                // if (lastMeal != null)
-                //   GestureDetector(
-                //     onTap: () {
-                //       goToMealScreen(lastMeal);
-                //     },
-                //     child: MealRowWidget(meal: lastMeal),
-                //   ),
                 SizedBox(height: 32),
 
                 Row(

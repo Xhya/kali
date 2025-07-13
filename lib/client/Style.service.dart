@@ -72,11 +72,13 @@ class BackgroundColors {
   final color5 = TextStyle(color: _yellow);
   final greenTransparent = TextStyle(color: _green_50);
   final greenLight = TextStyle(color: _green_100);
+  final green = TextStyle(color: _green_300);
+  final greenDark = TextStyle(color: _green_950);
   final grey = TextStyle(color: _grey_light);
 }
 
 class Gauge {
-  final main = TextStyle(color: _yellow);
+  final main = TextStyle(color: _green_300);
 }
 
 class TextColors {

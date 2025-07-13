@@ -58,7 +58,7 @@ class _MainButtonState extends State<MainButtonWidget> {
           child: Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: style.background.greenLight.color,
+              color: style.background.green.color,
               border: Border(
                 bottom: BorderSide(color: style.background.greenLight.color!),
               ),

@@ -91,21 +91,17 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
                   showTicks: false,
                   orientation: LinearGaugeOrientation.horizontal,
                   majorTickStyle: LinearTickStyle(length: 20),
-                  axisLabelStyle: TextStyle(
-                    fontSize: 12.0,
-                    color: Colors.black,
-                  ),
                   axisTrackStyle: LinearAxisTrackStyle(
                     edgeStyle: LinearEdgeStyle.bothCurve,
-                    color: style.background.color3.color,
-                    thickness: 15.0,
+                    color: style.background.greenDark.color,
+                    thickness: 8,
                     borderColor: Colors.black,
                   ),
                   barPointers: [
                     LinearBarPointer(
                       value: currentNutriScore?.caloryAmount.toDouble() ?? 0,
                       color: style.gauge.main.color,
-                      thickness: 15,
+                      thickness: 8,
                       edgeStyle: LinearEdgeStyle.bothCurve,
                     ),
                   ],
