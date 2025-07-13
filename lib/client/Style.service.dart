@@ -41,6 +41,7 @@ Color _green_50 = const Color(0xFFF0F9F2);
 Color _green_100 = const Color(0xFFd7ffdf);
 Color _green_300 = const Color(0xFF7cff98);
 Color _green_600 = const Color(0xFF01b829);
+Color _green_800 = const Color(0xFF0a7122);
 Color _green_950 = const Color(0xFF00340d);
 
 class Period {
@@ -70,6 +71,8 @@ class Gauge {
 class TextColors {
   final neutral = TextStyle(color: _grey_dark);
   final neutralLight = TextStyle(color: _grey_middle);
+  final greenDark = TextStyle(color: _green_950);
+  final green = TextStyle(color: _green_800);
 
   final reverse_neutral = TextStyle(color: _white);
   final color1 = TextStyle(color: _blue_100);

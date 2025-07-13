@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/states/quickAddMeal.state.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
+import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/DateSelector.widget.dart';
 import 'package:kali/client/widgets/MainKaloriesCount.widget.dart';
 import 'package:kali/client/widgets/MealRow.widget.dart';
@@ -92,24 +93,30 @@ class _HomeScreenState extends State<HomeScreen> {
                 //     },
                 //     child: MealRowWidget(meal: lastMeal),
                 //   ),
-                if (lastMeal != null)
-                  Flex(
-                    direction: Axis.horizontal,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      GestureDetector(
+                SizedBox(height: 32),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Derniers ajouts",
+                      style: style.fontsize.xs.merge(style.text.greenDark),
+                    ),
+                    if (lastMeal != null)
+                      CustomInkwell(
                         onTap: () {
                           goToMealsScreen();
                         },
                         child: Text(
-                          t("see_all"),
-                          style: style.fontsize.xs.merge(style.text.color1),
+                          "Afficher tout",
+                          style: style.fontsize.xs
+                              .merge(style.text.green)
+                              .merge(style.fontweight.bold),
                         ),
                       ),
-                    ],
-                  ),
-                SizedBox(height: 32),
-
+                  ],
+                ),
+                SizedBox(height: 8),
                 if (lastMeal != null)
                   CustomCard(
                     onClick: () {
@@ -136,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: QuickAddMealButtonWidget()
+        floatingActionButton: QuickAddMealButtonWidget(),
       ),
 
       // bottomSheet:
