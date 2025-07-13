@@ -44,13 +44,13 @@ class _NutriScore2by2WidgetState extends State<NutriScore2by2Widget> {
               children: [
                 Text(
                   "$caloryIcon calories",
-                  style: style.text.reverse_neutral.merge(style.fontsize.sm),
+                  style: style.text.neutral.merge(style.fontsize.sm),
                 ),
                 Text(
                   widget.nutriScore == null
                       ? "-"
                       : widget.nutriScore!.caloryAmount.toString(),
-                  style: style.text.reverse_neutral.merge(style.fontsize.sm),
+                  style: style.text.neutral.merge(style.fontsize.sm),
                 ),
               ],
             ),
@@ -65,13 +65,13 @@ class _NutriScore2by2WidgetState extends State<NutriScore2by2Widget> {
               children: [
                 Text(
                   "$glucidIcon glucides",
-                  style: style.text.reverse_neutral.merge(style.fontsize.sm),
+                  style: style.text.neutral.merge(style.fontsize.sm),
                 ),
                 Text(
                   widget.nutriScore == null
                       ? "-"
                       : widget.nutriScore!.glucidAmount.toString(),
-                  style: style.text.reverse_neutral.merge(style.fontsize.sm),
+                  style: style.text.neutral.merge(style.fontsize.sm),
                 ),
               ],
             ),
@@ -86,13 +86,13 @@ class _NutriScore2by2WidgetState extends State<NutriScore2by2Widget> {
               children: [
                 Text(
                   "$proteinIcon protéines",
-                  style: style.text.reverse_neutral.merge(style.fontsize.sm),
+                  style: style.text.neutral.merge(style.fontsize.sm),
                 ),
                 Text(
                   widget.nutriScore == null
                       ? "-"
                       : widget.nutriScore!.proteinAmount.toString(),
-                  style: style.text.reverse_neutral.merge(style.fontsize.sm),
+                  style: style.text.neutral.merge(style.fontsize.sm),
                 ),
               ],
             ),
@@ -107,13 +107,13 @@ class _NutriScore2by2WidgetState extends State<NutriScore2by2Widget> {
               children: [
                 Text(
                   "$lipidIcon lipides",
-                  style: style.text.reverse_neutral.merge(style.fontsize.sm),
+                  style: style.text.neutral.merge(style.fontsize.sm),
                 ),
                 Text(
                   widget.nutriScore == null
                       ? "-"
                       : widget.nutriScore!.lipidAmount.toString(),
-                  style: style.text.reverse_neutral.merge(style.fontsize.sm),
+                  style: style.text.neutral.merge(style.fontsize.sm),
                 ),
               ],
             ),

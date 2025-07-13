@@ -75,7 +75,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
         context.watch<QuickAddMealState>().nutriScore.value;
 
     return Container(
-      color: style.background.greenLight.color,
+      color: style.background.greenTransparent.color,
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       child: ClipRRect(
         borderRadius: BorderRadius.only(
@@ -133,7 +133,6 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
             ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(16)),
               child: Container(
-                color: style.background.color4.color,
                 alignment: Alignment.center,
                 child: TextField(
                   controller: controller,
@@ -143,23 +142,22 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                   textCapitalization: TextCapitalization.sentences,
                   minLines: 1,
                   maxLines: 6,
-                  style: style.text.reverse_neutral,
+                  style: style.text.neutral,
                   decoration: InputDecoration(
                     errorText:
                         aiService.aiNotUnderstandError.value
                             ? 'Veuillez être plus précis'
                             : null,
                     filled: true,
-                    fillColor: style.background.color3.color,
+                    fillColor: style.background.neutral.color,
                     border: InputBorder.none,
                     hintText: "Quel est le menu du jour ?",
-                    hintStyle: style.text.color1,
+                    hintStyle: style.text.neutral,
                     suffixIcon: suffixIcon,
                   ),
                 ),
               ),
             ),
-            if (nutriScore != null) SizedBox(height: 24),
             if (nutriScore != null)
               ExpandedWidget(
                 child: Wrap(
