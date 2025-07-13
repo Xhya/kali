@@ -4,6 +4,9 @@ const environment = {
   "ENVIRONMENT": String.fromEnvironment('ENVIRONMENT'),
   "TEST": bool.fromEnvironment('TEST'),
   "MODE": String.fromEnvironment('MODE'),
+
+  "API_URL": String.fromEnvironment('API_URL'),
+
   "GOOGLE_AI_API_KEY": String.fromEnvironment('GOOGLE_AI_API_KEY'),
   "GOOGLE_AI_URL": String.fromEnvironment('GOOGLE_AI_URL'),
   "BUGSNAG_ENV": String.fromEnvironment('BUGSNAG_ENV'),
@@ -20,4 +23,6 @@ final isInFixturesMode = environment["MODE"] == "fixture";
 final String googleAIUrl = environment["GOOGLE_AI_URL"] as String;
 final String bugsnagEnvironment = environment["BUGSNAG_ENV"] as String;
 final String bugsnagApiKey = environment["BUGSNAG_API_KEY"] as String;
+// ignore: non_constant_identifier_names
+final String API_URL = environment["API_URL"] as String;
 

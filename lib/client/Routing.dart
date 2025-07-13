@@ -1,4 +1,5 @@
 import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/screens/AuthenticationHome.screen.dart';
 import 'package:kali/client/screens/Home.screen.dart';
 import 'package:kali/client/screens/Meal.screen.dart';
 import 'package:kali/client/screens/Meals.screen.dart';
@@ -155,6 +156,8 @@ class _RoutingState extends State<Routing> {
           navigateTo(const MealsScreen());
         case ScreenEnum.personalNutriScore:
           navigateTo(const PersonalNutriScoreScreen());
+        case ScreenEnum.authenticationHome:
+          navigateTo(const AuthenticationHomeScreen());
       }
     };
 

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/LoaderIcon.widget.dart';
+import 'package:kali/core/services/connexion.service.dart';
 
 enum ButtonTypeEnum { filled, outline, tonal }
 
@@ -16,6 +18,7 @@ class ButtonWidget extends StatelessWidget {
     this.fullWidth = false,
     this.disabled = false,
     this.isLoading = false,
+    this.needConnection = false,
   });
 
   final GestureTapCallback onPressed;
@@ -24,6 +27,7 @@ class ButtonWidget extends StatelessWidget {
   final bool fullWidth;
   final bool disabled;
   final bool isLoading;
+  final bool needConnection;
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +36,21 @@ class ButtonWidget extends StatelessWidget {
     Color? borderColor;
     var borderSize;
 
+    var isButtonDisabled = disabled;
+
+    if (!disabled && needConnection) {
+      final hasInternetConnexion =
+          context.watch<ConnexionService>().hasInternetConnexion.value;
+      isButtonDisabled = !hasInternetConnexion;
+    }
+
+    final currentText =
+        isButtonDisabled ? "Nécessite une connexion" : text ?? "Confirmer";
+
     switch (buttonType) {
       case ButtonTypeEnum.filled:
         backgroungColor =
-            disabled ? Colors.grey : style.background.color5.color;
+            isButtonDisabled ? Colors.grey : style.background.color5.color;
         textColor = style.text.color3.color;
         borderColor = null;
       case ButtonTypeEnum.outline:
@@ -52,7 +67,7 @@ class ButtonWidget extends StatelessWidget {
     return Container(
       width: fullWidth ? double.infinity : null,
       child: CustomInkwell(
-        onTap: disabled ? () {} : onPressed,
+        onTap: isButtonDisabled ? () {} : onPressed,
         child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(16)),
 
@@ -70,7 +85,7 @@ class ButtonWidget extends StatelessWidget {
                 isLoading
                     ? LoaderIcon(isLightBackground: true)
                     : Text(
-                      text ?? "Confirmer",
+                      currentText,
                       textAlign: TextAlign.center,
                       style: style.fontsize.md
                           .merge(style.fontweight.semibold)

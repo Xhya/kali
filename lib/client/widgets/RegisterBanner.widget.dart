@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
+import 'package:kali/core/actions/Goto.actions.dart';
 import 'package:kali/core/states/topBanner.state.dart';
 
 class RegisterBannerWidget extends StatefulWidget {
@@ -31,7 +32,9 @@ class _RegisterBannerWidgetState extends State<RegisterBannerWidget> {
                 SizedBox(height: 8),
                 ButtonWidget(
                   text: "Se connecter",
-                  onPressed: () {},
+                  onPressed: () {
+                    goToAuthenticationHome();
+                  },
                   fullWidth: false,
                   buttonType: ButtonTypeEnum.tonal,
                 ),

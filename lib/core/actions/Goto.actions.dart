@@ -12,3 +12,7 @@ goToMealScreen(MealModel meal) {
 goToMealsScreen() {
   navigationService.navigateTo(ScreenEnum.meals);
 }
+
+goToAuthenticationHome() {
+  navigationService.navigateTo(ScreenEnum.authenticationHome);
+}
