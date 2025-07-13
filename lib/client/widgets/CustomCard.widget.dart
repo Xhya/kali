@@ -27,7 +27,7 @@ class CustomCard extends StatelessWidget {
           padding: padding,
           height: height,
           width: width,
-          color: style.background.color2.color,
+          color: style.background.neutral.color,
           child: child,
         ),
       ),

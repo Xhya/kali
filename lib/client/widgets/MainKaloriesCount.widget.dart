@@ -1,7 +1,6 @@
-import 'package:dart_date/dart_date.dart';
 import 'package:flutter/material.dart';
-import 'package:kali/core/domains/meal.state.dart';
-import 'package:kali/core/utils/remaningCaloriesToSpend.utils.dart';
+import 'package:kali/client/widgets/CustomCard.widget.dart';
+import 'package:kali/core/utils/computeRemainingCalories.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/core/domains/nutriScore.state.dart';
@@ -27,73 +26,102 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
     //   widget.meals,
     // );
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (currentNutriScore != null &&
-            mealState.currentDate.value.isSameDay(DateTime.now()))
-          RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-              style: style.text.color1
-                  .merge(style.fontsize.xl)
-                  .merge(style.fontweight.bold),
+    return CustomCard(
+      padding: EdgeInsets.all(16),
+      child: Row(
+        spacing: 12,
+        children: [
+          Text(
+            "⚖️",
+            textAlign: TextAlign.start,
+            style: style.text.color1
+                .merge(style.fontsize.md)
+                .merge(style.fontweight.bold),
+          ),
+
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextSpan(text: 'Il te reste '),
-                TextSpan(
-                  text: '${remaningCaloriesToSpend()} calories',
-                  style: style.text.reverse_neutral
-                      .merge(style.fontsize.xl)
-                      .merge(style.fontweight.bold),
+                if (currentNutriScore?.caloryAmount != null &&
+                    personalNutriScore?.caloryAmount != null)
+                  Text(
+                    "${currentNutriScore?.caloryAmount.toString()} / ${personalNutriScore?.caloryAmount.toString()}",
+                    textAlign: TextAlign.start,
+                    style: style.text.neutral
+                        .merge(style.fontsize.md)
+                        .merge(style.fontweight.bold),
+                  ),
+                if (currentNutriScore?.caloryAmount == null ||
+                    personalNutriScore?.caloryAmount == null)
+                  Text(
+                    "...",
+                    textAlign: TextAlign.start,
+                    style: style.text.neutral
+                        .merge(style.fontsize.sm)
+                        .merge(style.fontweight.bold),
+                  ),
+                Text(
+                  "calories",
+                  textAlign: TextAlign.start,
+                  style: style.text.neutral.merge(style.fontsize.sm),
                 ),
-                TextSpan(text: ' pour aujourd\'hui 🔥'),
               ],
             ),
           ),
-        SizedBox(height: 24),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "Consommées",
-              textAlign: TextAlign.start,
-              style: style.text.reverse_neutral
-                  .merge(style.fontsize.xs)
-                  .merge(style.fontweight.bold),
-            ),
-            Text(
-              "${currentNutriScore?.caloryAmount.toString()} / ${personalNutriScore?.caloryAmount.toString()} kcal",
-              textAlign: TextAlign.start,
-              style: style.text.color1
-                  .merge(style.fontsize.xs)
-                  .merge(style.fontweight.bold),
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                "${computeRemainingCalories("calories")} restantes 🔥",
+                textAlign: TextAlign.start,
+                style: style.text.neutralLight.merge(style.fontsize.sm),
+              ),
+              SizedBox(height: 4),
+              SizedBox(
+                width: 150,
+                child: SfLinearGauge(
+                  minimum: 0,
+                  maximum: personalNutriScore?.caloryAmount.toDouble() ?? 0,
+                  showLabels: false,
+                  showTicks: false,
+                  orientation: LinearGaugeOrientation.horizontal,
+                  majorTickStyle: LinearTickStyle(length: 20),
+                  axisLabelStyle: TextStyle(
+                    fontSize: 12.0,
+                    color: Colors.black,
+                  ),
+                  axisTrackStyle: LinearAxisTrackStyle(
+                    edgeStyle: LinearEdgeStyle.bothCurve,
+                    color: style.background.color3.color,
+                    thickness: 15.0,
+                    borderColor: Colors.black,
+                  ),
+                  barPointers: [
+                    LinearBarPointer(
+                      value: currentNutriScore?.caloryAmount.toDouble() ?? 0,
+                      color: style.gauge.main.color,
+                      thickness: 15,
+                      edgeStyle: LinearEdgeStyle.bothCurve,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+
           ],
         ),
         SizedBox(height: 4),
-        SfLinearGauge(
-          minimum: 0,
-          maximum: personalNutriScore?.caloryAmount.toDouble() ?? 0,
-          showLabels: false,
-          showTicks: false,
-          orientation: LinearGaugeOrientation.horizontal,
-          majorTickStyle: LinearTickStyle(length: 20),
-          axisLabelStyle: TextStyle(fontSize: 12.0, color: Colors.black),
-          axisTrackStyle: LinearAxisTrackStyle(
-            edgeStyle: LinearEdgeStyle.bothCurve,
-            color: style.background.color3.color,
-            thickness: 15.0,
-            borderColor: Colors.black,
-          ),
-          barPointers: [
-            LinearBarPointer(
-              value: currentNutriScore?.caloryAmount.toDouble() ?? 0,
-              color: style.gauge.main.color,
-              thickness: 15,
-              edgeStyle: LinearEdgeStyle.bothCurve,
-            ),
-          ],
-        ),
+
         SizedBox(height: 4),
         // Row(
         //   mainAxisAlignment: MainAxisAlignment.spaceBetween,

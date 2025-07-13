@@ -32,6 +32,16 @@ Color _orange = const Color(0xFFE8900B);
 Color _pink = const Color(0xFFFF63A6);
 final _white = Colors.white;
 final _black = Colors.black;
+Color _grey_dark = const Color(0xFF282928);
+Color _grey_middle = const Color(0xFF515450);
+Color _grey_light = const Color(0xFFeaebea);
+
+
+Color _green_50 = const Color(0xFFF0F9F2);
+Color _green_100 = const Color(0xFFd7ffdf);
+Color _green_300 = const Color(0xFF7cff98);
+Color _green_600 = const Color(0xFF01b829);
+Color _green_950 = const Color(0xFF00340d);
 
 class Period {
   final breakfastColor = TextStyle(color: _breakfastColor);
@@ -47,7 +57,9 @@ class BackgroundColors {
   final color2 = TextStyle(color: _blue_200);
   final color3 = TextStyle(color: _blue_400);
   final color4 = TextStyle(color: _blue_500);
-  final color5 = TextStyle(color: _yellow);
+  final color5 = TextStyle(color: _yellow);  
+  final greenTransparent = TextStyle(color: _green_50);  
+  final greenLight = TextStyle(color: _green_100);  
 }
 
 class Gauge {
@@ -55,7 +67,8 @@ class Gauge {
 }
 
 class TextColors {
-  final neutral = TextStyle(color: _black);
+  final neutral = TextStyle(color: _grey_dark);
+  final neutralLight = TextStyle(color: _grey_middle);
   final reverse_neutral = TextStyle(color: _white);
   final color1 = TextStyle(color: _blue_100);
   final color2 = TextStyle(color: _yellow);
