@@ -84,8 +84,10 @@ class Gauge {
 class TextColors {
   final neutral = TextStyle(color: _grey_dark);
   final neutralLight = TextStyle(color: _grey_middle);
+  
   final greenDark = TextStyle(color: _green_950);
   final green = TextStyle(color: _green_800);
+  final greenLight = TextStyle(color: _green_300);
 
   final reverse_neutral = TextStyle(color: _white);
   final color1 = TextStyle(color: _blue_100);

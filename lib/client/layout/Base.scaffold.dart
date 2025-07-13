@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kali/core/states/topBanner.state.dart';
 import 'package:kali/core/services/connexion.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
@@ -30,48 +29,82 @@ class _BaseScaffoldState extends State<BaseScaffold>
     bool hasInternetConnexion =
         context.watch<ConnexionService>().hasInternetConnexion.value;
 
-    double headerHeight = hasInternetConnexion ? 70 : 95;
+    double headerHeight = hasInternetConnexion ? 80 : 105;
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(headerHeight),
         child: AppBar(
-          backgroundColor: style.background.color3.color,
           automaticallyImplyLeading: false,
           flexibleSpace: SafeArea(
-            child: Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  height: 70,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Kali",
-                        style: style.text.color2
-                            .merge(style.fontsize.xl)
-                            .merge(style.fontweight.bold),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          navigationService.navigateTo(
-                            ScreenEnum.personalNutriScore,
-                          );
-                        },
-                        icon: Icon(
-                          Icons.settings,
-                          color: style.icon.color1.color,
-                          size: style.fontsize.xl.fontSize,
-                        ),
-                      ),
-                    ],
-                  ),
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/header-photo.jpg"),
+                  fit: BoxFit.cover,
                 ),
-                MaybeConnexionMissingWidget(),
-              ],
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    height: 80,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            RichText(
+                              text: TextSpan(
+                                style: style.text.reverse_neutral
+                                    .merge(style.fontsize.xl)
+                                    .merge(style.fontweight.bold),
+                                children: <TextSpan>[
+                                  TextSpan(text: "Kali"),
+                                  TextSpan(
+                                    text: ",",
+                                    style: style.text.greenLight,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Text(
+                              "tu racontes, je compte",
+                              style: style.text.reverse_neutral.merge(
+                                style.fontsize.sm,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        IconButton(
+                          padding: EdgeInsets.all(0),
+                          onPressed: () {
+                            navigationService.navigateTo(
+                              ScreenEnum.personalNutriScore,
+                            );
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: WidgetStateProperty.all(
+                              style.iconBackground.color1.color,
+                            ),
+                          ),
+                          icon: Icon(
+                            Icons.settings_outlined,
+                            color: style.icon.color1.color,
+                            size: style.fontsize.md.fontSize,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  MaybeConnexionMissingWidget(),
+                ],
+              ),
             ),
           ),
         ),
@@ -84,7 +117,10 @@ class _BaseScaffoldState extends State<BaseScaffold>
                 maxWidth: MediaQuery.of(context).size.width,
                 maxHeight: MediaQuery.of(context).size.height,
               ),
-              child: widget.child,
+              child: ClipRRect(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                child: widget.child,
+              ),
             );
           },
         ),

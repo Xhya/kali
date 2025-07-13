@@ -70,56 +70,62 @@ class _HomeScreenState extends State<HomeScreen> {
     return BaseScaffold(
       child: Scaffold(
         body: SingleChildScrollView(
-          child: Container(
-            color: style.background.greenTransparent.color,
-            height: MediaQuery.of(context).size.height,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                DateSelector(currentDate: currentDate),
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(16)),
+            child: Container(
+              color: style.background.greenTransparent.color,
+              height: MediaQuery.of(context).size.height,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  DateSelector(currentDate: currentDate),
 
-                SizedBox(height: 24),
-                
-                MainKaloriesCountWidget(),
+                  SizedBox(height: 24),
 
-                SizedBox(height: 4),
+                  MainKaloriesCountWidget(),
 
-                NutriScoreGaugesWidget(meals: meals),
+                  SizedBox(height: 4),
 
-                SizedBox(height: 32),
+                  NutriScoreGaugesWidget(meals: meals),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Derniers ajouts",
-                      style: style.fontsize.xs.merge(style.text.greenDark),
-                    ),
-                    if (lastMeal != null)
-                      CustomInkwell(
-                        onTap: () {
-                          goToMealsScreen();
-                        },
-                        child: Text(
-                          "Afficher tout",
-                          style: style.fontsize.xs
-                              .merge(style.text.green)
-                              .merge(style.fontweight.bold),
-                        ),
+                  SizedBox(height: 32),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Derniers ajouts",
+                        style: style.fontsize.xs.merge(style.text.greenDark),
                       ),
-                  ],
-                ),
-                SizedBox(height: 8),
-                if (lastMeal != null)
-                  CustomCard(
-                    onClick: () {
-                      goToMealScreen(lastMeal);
-                    },
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                    child: MealRowWidget(meal: lastMeal),
+                      if (lastMeal != null)
+                        CustomInkwell(
+                          onTap: () {
+                            goToMealsScreen();
+                          },
+                          child: Text(
+                            "Afficher tout",
+                            style: style.fontsize.xs
+                                .merge(style.text.green)
+                                .merge(style.fontweight.bold),
+                          ),
+                        ),
+                    ],
                   ),
-              ],
+                  SizedBox(height: 8),
+                  if (lastMeal != null)
+                    CustomCard(
+                      onClick: () {
+                        goToMealScreen(lastMeal);
+                      },
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 16,
+                      ),
+                      child: MealRowWidget(meal: lastMeal),
+                    ),
+                ],
+              ),
             ),
           ),
         ),
