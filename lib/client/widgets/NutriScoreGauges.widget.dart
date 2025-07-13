@@ -29,8 +29,9 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
   Widget build(BuildContext context) {
     NutriScore? currentNutriScore =
         context.watch<NutriScoreState>().currentNutriScore.value;
-    NutriScoreByPeriod dateTotalNutriscoreByPeriod =
-        getTotalNutriscoreByPeriod(widget.meals);
+    NutriScoreByPeriod dateTotalNutriscoreByPeriod = getTotalNutriscoreByPeriod(
+      widget.meals,
+    );
     NutriScore? personalNutriScore =
         context.watch<NutriScoreState>().personalNutriScore.value;
     NutriScore? editingNutriScore =
@@ -53,12 +54,12 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                         style: style.fontsize.xl.merge(style.text.neutral),
                       ),
                       Text(
-                        t('proteins').toLowerCase(),
-                        style: style.fontsize.sm.merge(
-                          style.text.reverse_neutral,
-                        ),
+                        "${currentNutriScore.proteinAmount} / ${personalNutriScore.proteinAmount}g",
+                        style: style.fontsize.sm
+                            .merge(style.text.neutral)
+                            .merge(style.fontweight.bold),
                       ),
-                      SizedBox(height: 12),
+                      SizedBox(height: 16),
                       SizedBox(
                         height: gaugeHeight,
                         child: GaugeWidget(
@@ -87,66 +88,10 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                           },
                         ),
                       ),
-                      SizedBox(height: 12),
+                      SizedBox(height: 16),
                       Text(
-                        "${currentNutriScore.proteinAmount} / ${personalNutriScore.proteinAmount}g",
-                        style: style.fontsize.sm.merge(
-                          style.text.reverse_neutral,
-                        ),
-                      ),
-                      SizedBox(height: 12),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: CustomCard(
-                  child: Column(
-                    children: [
-                      SizedBox(height: 12),
-                      Text(
-                        glucidIcon,
-                        style: style.fontsize.xl.merge(style.text.neutral),
-                      ),
-                      Text(
-                        t('lipids').toLowerCase(),
-                        style: style.fontsize.sm.merge(
-                          style.text.reverse_neutral,
-                        ),
-                      ),
-                      SizedBox(height: 12),
-                      SizedBox(
-                        height: gaugeHeight,
-                        child: GaugeWidget(
-                          currentAmount: currentNutriScore.lipidAmount.toInt(),
-                          maxAmount: personalNutriScore.lipidAmount.toInt(),
-                          editingAmount: editingNutriScore?.lipidAmount.toInt(),
-                          bars: {
-                            style.period.dinerColor.color!:
-                                dateTotalNutriscoreByPeriod[MealPeriodEnum
-                                        .dinner]!
-                                    .lipidAmount,
-                            style.period.snackColor.color!:
-                                dateTotalNutriscoreByPeriod[MealPeriodEnum
-                                        .snack]!
-                                    .lipidAmount,
-                            style.period.lunchColor.color!:
-                                dateTotalNutriscoreByPeriod[MealPeriodEnum
-                                        .lunch]!
-                                    .lipidAmount,
-                            style.period.breakfastColor.color!:
-                                dateTotalNutriscoreByPeriod[MealPeriodEnum
-                                        .breakfast]!
-                                    .lipidAmount,
-                          },
-                        ),
-                      ),
-                      SizedBox(height: 12),
-                      Text(
-                        "${currentNutriScore.lipidAmount} / ${personalNutriScore.lipidAmount}g",
-                        style: style.fontsize.sm.merge(
-                          style.text.reverse_neutral,
-                        ),
+                        t('proteins').toLowerCase(),
+                        style: style.fontsize.sm.merge(style.text.neutral),
                       ),
                       SizedBox(height: 12),
                     ],
@@ -163,12 +108,12 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                         style: style.fontsize.xl.merge(style.text.neutral),
                       ),
                       Text(
-                        t('glucids').toLowerCase(),
-                        style: style.fontsize.sm.merge(
-                          style.text.reverse_neutral,
-                        ),
+                        "${currentNutriScore.glucidAmount} / ${personalNutriScore.glucidAmount}g",
+                        style: style.fontsize.sm
+                            .merge(style.text.neutral)
+                            .merge(style.fontweight.bold),
                       ),
-                      SizedBox(height: 12),
+                      SizedBox(height: 16),
                       SizedBox(
                         height: gaugeHeight,
                         child: GaugeWidget(
@@ -196,12 +141,62 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                           },
                         ),
                       ),
+                      SizedBox(height: 16),
+                      Text(
+                        t('glucids').toLowerCase(),
+                        style: style.fontsize.sm.merge(style.text.neutral),
+                      ),
+                      SizedBox(height: 12),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: CustomCard(
+                  child: Column(
+                    children: [
                       SizedBox(height: 12),
                       Text(
-                        "${currentNutriScore.glucidAmount} / ${personalNutriScore.glucidAmount}g",
-                        style: style.fontsize.sm.merge(
-                          style.text.reverse_neutral,
+                        glucidIcon,
+                        style: style.fontsize.xl.merge(style.text.neutral),
+                      ),
+                      Text(
+                        "${currentNutriScore.lipidAmount} / ${personalNutriScore.lipidAmount}g",
+                        style: style.fontsize.sm
+                            .merge(style.text.neutral)
+                            .merge(style.fontweight.bold),
+                      ),
+                      SizedBox(height: 16),
+                      SizedBox(
+                        height: gaugeHeight,
+                        child: GaugeWidget(
+                          currentAmount: currentNutriScore.lipidAmount.toInt(),
+                          maxAmount: personalNutriScore.lipidAmount.toInt(),
+                          editingAmount: editingNutriScore?.lipidAmount.toInt(),
+                          bars: {
+                            style.period.dinerColor.color!:
+                                dateTotalNutriscoreByPeriod[MealPeriodEnum
+                                        .dinner]!
+                                    .lipidAmount,
+                            style.period.snackColor.color!:
+                                dateTotalNutriscoreByPeriod[MealPeriodEnum
+                                        .snack]!
+                                    .lipidAmount,
+                            style.period.lunchColor.color!:
+                                dateTotalNutriscoreByPeriod[MealPeriodEnum
+                                        .lunch]!
+                                    .lipidAmount,
+                            style.period.breakfastColor.color!:
+                                dateTotalNutriscoreByPeriod[MealPeriodEnum
+                                        .breakfast]!
+                                    .lipidAmount,
+                          },
                         ),
+                      ),
+                      SizedBox(height: 16),
+                      Text(
+                        t('lipids').toLowerCase(),
+                        style: style.fontsize.sm.merge(style.text.neutral),
                       ),
                       SizedBox(height: 12),
                     ],
