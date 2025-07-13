@@ -20,7 +20,7 @@ class _BaseScaffoldState extends State<BaseScaffold>
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      topBannerState.show.value = true;
+      // topBannerState.show.value = true;
     });
     super.initState();
   }

@@ -33,8 +33,6 @@ class _TopBannerWidgetState extends State<TopBannerWidget>
     );
 
     _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
-
-    _controller.forward();
   }
 
   @override
@@ -49,11 +47,19 @@ class _TopBannerWidgetState extends State<TopBannerWidget>
       close();
     }
 
-    return SizeTransition(
-      sizeFactor: _animation,
-      axis: Axis.vertical,
-      child: widget.child,
-    );
+    if (showTopBanner) {
+      _controller.forward();
+    }
+
+    if (showTopBanner || _animation.value > 0) {
+      return SizeTransition(
+        sizeFactor: _animation,
+        axis: Axis.vertical,
+        child: widget.child,
+      );
+    } else {
+      return SizedBox.shrink();
+    }
   }
 
   @override
