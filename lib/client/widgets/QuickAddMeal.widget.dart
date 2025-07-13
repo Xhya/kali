@@ -4,6 +4,7 @@ import 'package:kali/client/widgets/CustomButton.widget.dart';
 import 'package:kali/client/widgets/Expanded.widget.dart';
 import 'package:kali/client/widgets/MealPeriodsHorizontal.widget.dart';
 import 'package:kali/client/widgets/NutriScore2by2.widget.dart';
+import 'package:kali/client/widgets/QuickAddMealHeader.widget.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/AI.service.dart';
@@ -15,12 +16,6 @@ import 'package:kali/core/actions/nutriScore.actions.dart';
 
 onClickSelectPeriod(MealPeriodEnum period) {
   quickAddMealState.chosenPeriod.value = period;
-}
-
-onClickCloseQuickAddMode() {
-  navigationService.closeBottomSheet();
-  quickAddMealState.chosenPeriod.value = null;
-  quickAddMealState.userMealText.value = "";
 }
 
 onInputUpdateUserMealText(String value) {
@@ -87,41 +82,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              padding: EdgeInsets.only(left: 4),
-              width: double.maxFinite,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Ajouter un repas",
-                    textAlign: TextAlign.start,
-                    style: style.text.neutral.merge(style.fontsize.md),
-                  ),
-
-                  Container(
-                    height: 32,
-                    width: 32,
-                    padding: EdgeInsets.all(0),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: style.icon.color1.color!, width: 1),
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    child: IconButton(
-                      padding: EdgeInsets.all(0),
-                      onPressed: () {
-                        onClickCloseQuickAddMode();
-                      },
-                      icon: Icon(
-                        Icons.close,
-                        color: style.icon.color1.color,
-                        size: style.fontsize.md.fontSize,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            QuickAddMealHeaderWidget(),
             SizedBox(height: 24),
             MealPeriodsHorizontalWidget(
               onClickSelectPeriod: (MealPeriodEnum period) {
