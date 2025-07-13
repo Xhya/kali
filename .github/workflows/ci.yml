@@ -26,10 +26,10 @@ jobs:
       - name: 🧪 Run tests
         run: flutter test --dart-define-from-file=env.test.json
 
-  build:
+  build_aab:
     name: Build Android AAB
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' # ← ici on conditionne le job
+    if: github.event_name == 'workflow_dispatch' 
 
     steps:
       - name: Checkout code
@@ -44,10 +44,36 @@ jobs:
         run: flutter pub get
 
       - name: Build AAB
-        run: flutter build appbundle --release
+        run: flutter build appbundle --release --build-name=1.0.0 --build-number=0 --dart-define-from-file=env.production.json
 
       - name: Upload AAB as artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-release.aab
           path: build/app/outputs/bundle/release/app-release.aab
+
+  build_apk:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.32.5"
+
+      - name: Flutter pub get
+        run: flutter pub get
+
+      - name: Build APK
+        run: flutter build apk --release --build-name=1.0.0 --build-number=0 --dart-define-from-file=env.production.json
+
+      - name: Upload APK as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release.apk
+          path: build/app/outputs/apk/release/app-release.apk
