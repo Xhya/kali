@@ -83,7 +83,7 @@ class ButtonWidget extends StatelessWidget {
             ),
             child:
                 isLoading
-                    ? LoaderIcon(isLightBackground: true)
+                    ? LoaderIcon()
                     : Text(
                       currentText,
                       textAlign: TextAlign.center,

@@ -50,7 +50,9 @@ class _NutriScore2by2WidgetState extends State<NutriScore2by2Widget> {
                   widget.nutriScore == null
                       ? "-"
                       : widget.nutriScore!.caloryAmount.toString(),
-                  style: style.text.neutral.merge(style.fontsize.sm),
+                  style: style.text.neutral
+                      .merge(style.fontsize.sm)
+                      .merge(style.fontweight.bold),
                 ),
               ],
             ),
@@ -71,7 +73,9 @@ class _NutriScore2by2WidgetState extends State<NutriScore2by2Widget> {
                   widget.nutriScore == null
                       ? "-"
                       : widget.nutriScore!.glucidAmount.toString(),
-                  style: style.text.neutral.merge(style.fontsize.sm),
+                  style: style.text.neutral
+                      .merge(style.fontsize.sm)
+                      .merge(style.fontweight.bold),
                 ),
               ],
             ),
@@ -92,7 +96,9 @@ class _NutriScore2by2WidgetState extends State<NutriScore2by2Widget> {
                   widget.nutriScore == null
                       ? "-"
                       : widget.nutriScore!.proteinAmount.toString(),
-                  style: style.text.neutral.merge(style.fontsize.sm),
+                  style: style.text.neutral
+                      .merge(style.fontsize.sm)
+                      .merge(style.fontweight.bold),
                 ),
               ],
             ),
@@ -113,7 +119,7 @@ class _NutriScore2by2WidgetState extends State<NutriScore2by2Widget> {
                   widget.nutriScore == null
                       ? "-"
                       : widget.nutriScore!.lipidAmount.toString(),
-                  style: style.text.neutral.merge(style.fontsize.sm),
+                  style: style.text.neutral.merge(style.fontsize.sm).merge(style.fontweight.bold),
                 ),
               ],
             ),

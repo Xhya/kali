@@ -121,12 +121,12 @@ class BorderRadiuses {
 
 class IconsColors {
   final color1 = TextStyle(color: _green_950);
-  final color2 = TextStyle(color: _blue_200);
   final color3 = TextStyle(color: _white);
 }
 
 class IconBackground {
   final color1 = TextStyle(color: _green_300);
+  final color2 = TextStyle(color: _grey_light);
 }
 
 class FontSizes {

@@ -15,30 +15,6 @@ class QuickAddMealState extends ChangeNotifier {
   final nutriScore = ValueNotifier<NutriScore?>(null);
   final isExpanded = ValueNotifier<bool>(false);
 
-  Widget? get suffixIcon =>
-      userMealText.value.isNotEmpty && chosenPeriod.value != null
-          ? GestureDetector(
-            onTap: () {
-              onClickQuickSuffixIcon();
-            },
-            child: Container(
-              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-              decoration: BoxDecoration(
-                border: Border.all(color: style.border.color.color2.color!),
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
-              ),
-              child:
-                  isLoading.value
-                      ? LoaderIcon()
-                      : Icon(
-                        Icons.calculate,
-                        color: style.icon.color2.color,
-                        size: 16,
-                      ),
-            ),
-          )
-          : null;
-
   QuickAddMealState() {
     isLoading.addListener(notifyListeners);
     userMealText.addListener(notifyListeners);

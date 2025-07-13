@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
+import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/Expanded.widget.dart';
+import 'package:kali/client/widgets/LoaderIcon.widget.dart';
+import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/MealPeriodsWrap.widget.dart';
 import 'package:kali/client/widgets/NutriScore2by2.widget.dart';
 import 'package:kali/client/widgets/QuickAddMealHeader.widget.dart';
@@ -23,7 +26,11 @@ onInputUpdateUserMealText(String value) {
 }
 
 onClickQuickSuffixIcon() async {
-  await computeNutriScoreAction();
+  if (!quickAddMealState.isLoading.value &&
+      quickAddMealState.userMealText.value.isNotEmpty &&
+      quickAddMealState.chosenPeriod.value != null) {
+    await computeNutriScoreAction();
+  }
 }
 
 onClickAddMealToDay() async {
@@ -63,11 +70,12 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
 
   @override
   Widget build(BuildContext context) {
-    Widget? suffixIcon = context.watch<QuickAddMealState>().suffixIcon;
     MealPeriodEnum? chosenPeriod =
         context.watch<QuickAddMealState>().chosenPeriod.value;
     NutriScore? nutriScore =
         context.watch<QuickAddMealState>().nutriScore.value;
+    bool isLoading = context.watch<QuickAddMealState>().isLoading.value;
+    String userMealText = context.watch<QuickAddMealState>().userMealText.value;
 
     return Container(
       color: style.background.greenTransparent.color,
@@ -79,7 +87,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             QuickAddMealHeaderWidget(),
@@ -91,55 +99,77 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
               chosenPeriod: chosenPeriod,
             ),
             SizedBox(height: 16),
-            ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(16)),
-              child: Container(
-                alignment: Alignment.center,
-                child: TextField(
-                  controller: controller,
-                  onChanged: (value) {
-                    onInputUpdateUserMealText(value);
-                  },
-                  textCapitalization: TextCapitalization.sentences,
-                  minLines: 1,
-                  maxLines: 6,
-                  style: style.text.neutral,
-                  decoration: InputDecoration(
-                    errorText:
-                        aiService.aiNotUnderstandError.value
-                            ? 'Veuillez être plus précis'
-                            : null,
-                    filled: true,
-                    fillColor: style.background.neutral.color,
-                    border: InputBorder.none,
-                    hintText: "Quel est le menu du jour ?",
-                    hintStyle: style.text.neutral,
-                    suffixIcon: suffixIcon,
+
+            Row(
+              spacing: 8,
+              children: [
+                Expanded(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: TextField(
+                        controller: controller,
+                        onChanged: (value) {
+                          onInputUpdateUserMealText(value);
+                        },
+                        textCapitalization: TextCapitalization.sentences,
+                        minLines: 1,
+                        maxLines: 2,
+                        style: style.text.neutral,
+                        decoration: InputDecoration(
+                          errorText:
+                              aiService.aiNotUnderstandError.value
+                                  ? 'Veuillez être plus précis'
+                                  : null,
+                          filled: true,
+                          fillColor: style.background.neutral.color,
+                          border: InputBorder.none,
+                          hintText: "Quel est le menu du jour ?",
+                          hintStyle: style.text.neutral,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
+
+                CustomIconWidget(
+                  icon:
+                      isLoading
+                          ? LoaderIcon()
+                          : Icon(
+                            Icons.calculate_outlined,
+                            color: style.icon.color1.color,
+                            size: 22,
+                          ),
+                  onClick: () {
+                    onClickQuickSuffixIcon();
+                  },
+                  disabled: userMealText.isEmpty || chosenPeriod == null,
+                ),
+              ],
             ),
+
             if (nutriScore != null)
               ExpandedWidget(
-                child: Wrap(
-                  spacing: 12,
-                  runSpacing: 12,
+                child: Column(
                   children: [
-                    NutriScore2by2Widget(nutriScore: nutriScore),
                     SizedBox(height: 16),
-                    ButtonWidget(
-                      text: "Ajouter à la journée",
-                      buttonType: ButtonTypeEnum.filled,
-                      onPressed: () {
+                    Expanded(
+                      child: NutriScore2by2Widget(nutriScore: nutriScore),
+                    ),
+                    SizedBox(height: 16),
+                    MainButtonWidget(
+                      onClick: () {
                         onClickAddMealToDay();
                       },
-                      fullWidth: false,
-                      disabled: false,
-                      isLoading: false,
+                      iconWidget: Icon(Icons.add),
+                      text: "Ajouter à la journée",
                     ),
                   ],
                 ),
               ),
+
             SizedBox(height: 52),
           ],
         ),

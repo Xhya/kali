@@ -24,17 +24,15 @@ class _MealPeriodsWrapWidgetState extends State<MealPeriodsWrapWidget> {
       spacing: 8,
       runSpacing: 8,
       children: [
-        IntrinsicHeight(
-          child: CustomInkwell(
-            onTap: () {
-              widget.onClickSelectPeriod(MealPeriodEnum.breakfast);
-            },
-            child: MealPeriodTagWidget(
-              mealPeriod: MealPeriodEnum.breakfast,
-              disabled:
-                  widget.chosenPeriod != null &&
-                  widget.chosenPeriod != MealPeriodEnum.breakfast,
-            ),
+        CustomInkwell(
+          onTap: () {
+            widget.onClickSelectPeriod(MealPeriodEnum.breakfast);
+          },
+          child: MealPeriodTagWidget(
+            mealPeriod: MealPeriodEnum.breakfast,
+            disabled:
+                widget.chosenPeriod != null &&
+                widget.chosenPeriod != MealPeriodEnum.breakfast,
           ),
         ),
         CustomInkwell(

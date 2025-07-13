@@ -65,6 +65,7 @@ class _MainButtonState extends State<MainButtonWidget> {
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 widget.iconWidget!,
                 const SizedBox(width: 8),
