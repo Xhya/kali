@@ -9,6 +9,7 @@ class Style {
   final border = CustomBorder();
   final button = ButtonColors();
   final icon = IconsColors();
+  final iconBackground = IconBackground();
   final fontsize = FontSizes();
   final fontweight = CustomFontWeight();
   final padding = CustomPadding();
@@ -100,9 +101,13 @@ class BorderRadiuses {
 }
 
 class IconsColors {
-  final color1 = TextStyle(color: _yellow);
+  final color1 = TextStyle(color: _green_950);
   final color2 = TextStyle(color: _blue_200);
   final color3 = TextStyle(color: _white);
+}
+
+class IconBackground {
+  final color1 = TextStyle(color: _green_300);
 }
 
 class FontSizes {

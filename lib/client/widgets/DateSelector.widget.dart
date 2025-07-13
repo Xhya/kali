@@ -36,33 +36,38 @@ class DateSelector extends StatelessWidget {
       spacing: 12,
       children: [
         IconButton(
+          padding: EdgeInsets.all(0),
           onPressed: () {
             onClickLeftArrow();
           },
+          style: ButtonStyle(
+            backgroundColor: WidgetStateProperty.all(
+              style.iconBackground.color1.color,
+            ),
+          ),
           icon: Icon(Icons.chevron_left_outlined),
-          color: style.icon.color3.color,
-          iconSize: style.fontsize.xl.fontSize,
+          color: style.icon.color1.color,
+          iconSize: style.fontsize.xl2.fontSize,
         ),
         Expanded(
           child: Text(
             getFormattedDate(currentDate),
-            style: style.text.reverse_neutral
-                .merge(style.fontsize.sm)
-                .merge(style.fontweight.bold),
+            style: style.text.neutral.merge(style.fontsize.md),
           ),
         ),
         IconButton.filled(
+          padding: EdgeInsets.all(0),
           onPressed: () {
             onClickRightArrow();
           },
           style: ButtonStyle(
             backgroundColor: WidgetStateProperty.all(
-              style.background.color5.color,
+              style.iconBackground.color1.color,
             ),
           ),
           icon: Icon(Icons.chevron_right_outlined),
-          color: style.icon.color3.color,
-          iconSize: style.fontsize.xl.fontSize,
+          color: style.icon.color1.color,
+          iconSize: style.fontsize.xl2.fontSize,
         ),
       ],
     );
