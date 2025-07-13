@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
 import 'package:kali/client/widgets/Expanded.widget.dart';
-import 'package:kali/client/widgets/MealPeriodsHorizontal.widget.dart';
+import 'package:kali/client/widgets/MealPeriodsWrap.widget.dart';
 import 'package:kali/client/widgets/NutriScore2by2.widget.dart';
 import 'package:kali/client/widgets/QuickAddMealHeader.widget.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
@@ -84,7 +84,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
           children: [
             QuickAddMealHeaderWidget(),
             SizedBox(height: 24),
-            MealPeriodsHorizontalWidget(
+            MealPeriodsWrapWidget(
               onClickSelectPeriod: (MealPeriodEnum period) {
                 onClickSelectPeriod(period);
               },

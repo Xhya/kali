@@ -63,6 +63,7 @@ class _MealPeriodTagWidgetState extends State<MealPeriodTagWidget> {
             borderRadius: const BorderRadius.all(Radius.circular(16)),
           ),
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(icon, style: style.fontsize.xs),
               Text(
