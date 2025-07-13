@@ -18,14 +18,10 @@ onClickRightArrow() {
 
 String getFormattedDate(DateTime date) {
   if (date.isSameDay(DateTime.now())) {
-    return "Aujourd'hui";
+    return "aujourd'hui";
   }
 
-  if (date.isSameDay(DateTime.now().subtract(Duration(days: 1)))) {
-    return "Hier";
-  }
-
-  return date.formateDate("dd MMM yyyy");
+  return date.formateDate("EE dd MMMM");
 }
 
 class DateSelector extends StatelessWidget {
@@ -36,32 +32,35 @@ class DateSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       spacing: 12,
       children: [
         IconButton(
           onPressed: () {
             onClickLeftArrow();
           },
-          icon: Icon(Icons.arrow_left),
+          icon: Icon(Icons.chevron_left_outlined),
           color: style.icon.color3.color,
           iconSize: style.fontsize.xl.fontSize,
         ),
-        Container(
-          alignment: Alignment.center,
-          width: 200,
+        Expanded(
           child: Text(
             getFormattedDate(currentDate),
             style: style.text.reverse_neutral
-                .merge(style.fontsize.lg)
+                .merge(style.fontsize.sm)
                 .merge(style.fontweight.bold),
           ),
         ),
-        IconButton(
+        IconButton.filled(
           onPressed: () {
             onClickRightArrow();
           },
-          icon: Icon(Icons.arrow_right),
+          style: ButtonStyle(
+            backgroundColor: WidgetStateProperty.all(
+              style.background.color5.color,
+            ),
+          ),
+          icon: Icon(Icons.chevron_right_outlined),
           color: style.icon.color3.color,
           iconSize: style.fontsize.xl.fontSize,
         ),
