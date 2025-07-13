@@ -15,7 +15,6 @@ import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
-import 'package:kali/core/services/Translation.service.dart';
 import 'package:kali/core/utils/computeDayAverages.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/QuickAddMeal.widget.dart';
@@ -122,21 +121,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     onClick: () {
                       goToMealScreen(lastMeal);
                     },
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                    width: double.maxFinite,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Dernier repas",
-                          style: style.text.reverse_neutral
-                              .merge(style.fontsize.sm)
-                              .merge(style.fontweight.bold),
-                        ),
-                        SizedBox(height: 8),
-                        MealRowWidget(meal: lastMeal),
-                      ],
-                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                    child: MealRowWidget(meal: lastMeal),
                   ),
               ],
             ),

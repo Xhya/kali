@@ -2,16 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/MealPeriodTag.widget.dart';
 import 'package:kali/core/models/Meal.model.dart';
+import 'package:kali/core/services/Datetime.extension.dart';
 
 class MealRowWidget extends StatefulWidget {
-  const MealRowWidget({
-    super.key,
-    required this.meal,
-    this.onLightBackground = false,
-  });
+  const MealRowWidget({super.key, required this.meal});
 
   final MealModel meal;
-  final bool onLightBackground;
 
   @override
   State<MealRowWidget> createState() => _MealPeriodTagWidgetState();
@@ -20,43 +16,38 @@ class MealRowWidget extends StatefulWidget {
 class _MealPeriodTagWidgetState extends State<MealRowWidget> {
   @override
   Widget build(BuildContext context) {
-    final textColor =
-        widget.onLightBackground
-            ? style.text.neutral
-            : style.text.reverse_neutral;
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       spacing: 8,
       children: [
         Expanded(
-          child: Row(
-            spacing: 8,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (widget.meal.period != null)
-                MealPeriodTagWidget(
-                  mealPeriod: widget.meal.period!,
-                  onLightBackground: widget.onLightBackground,
-                ),
               if (widget.meal.mealDescription != null)
-              Expanded(
-                child: Text(
+                Text(
                   widget.meal.mealDescription!,
-                  style: style.fontsize.sm.merge(textColor),
+                  style: style.fontsize.sm.merge(style.text.neutral),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                 ),
+              Text(
+                widget.meal.createdAt?.formateDate("hh:mm") ?? "TOTO",
+                style: style.fontsize.sm.merge(style.text.neutral),
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
         ),
-        if (widget.meal.nutriScore != null)
-          Text(
-            "${widget.meal.nutriScore!.caloryAmount} kcal",
-            style: style.fontsize.md
-                .merge(style.text.reverse_neutral)
-                .merge(style.fontweight.bold),
-          ),
+        if (widget.meal.period != null)
+          MealPeriodTagWidget(mealPeriod: widget.meal.period!),
+        // if (widget.meal.nutriScore != null)
+        //   Text(
+        //     "${widget.meal.nutriScore!.caloryAmount} kcal",
+        //     style: style.fontsize.md
+        //         .merge(style.text.reverse_neutral)
+        //         .merge(style.fontweight.bold),
+        //   ),
       ],
     );
   }

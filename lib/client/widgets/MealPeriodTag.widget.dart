@@ -8,12 +8,10 @@ class MealPeriodTagWidget extends StatefulWidget {
     super.key,
     required this.mealPeriod,
     this.disabled = false,
-    this.onLightBackground = false,
   });
 
   final MealPeriodEnum mealPeriod;
   final bool disabled;
-  final bool onLightBackground;
 
   @override
   State<MealPeriodTagWidget> createState() => _MealPeriodTagWidgetState();
