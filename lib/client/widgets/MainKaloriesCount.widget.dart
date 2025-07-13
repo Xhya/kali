@@ -22,6 +22,9 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
         context.watch<NutriScoreState>().currentNutriScore.value;
     NutriScore? personalNutriScore =
         context.watch<NutriScoreState>().personalNutriScore.value;
+    int? remainingCalories = context.select(
+      (NutriScoreState v) => computeRemainingCalories(),
+    );
     // NutriScoreByPeriod dateTotalNutriscoreByPeriod = getTotalNutriscoreByPeriod(
     //   widget.meals,
     // );
@@ -72,11 +75,12 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(
-                "${computeRemainingCalories("calories")} restantes 🔥",
-                textAlign: TextAlign.start,
-                style: style.text.neutralLight.merge(style.fontsize.sm),
-              ),
+              if (remainingCalories != null)
+                Text(
+                  "$remainingCalories restantes 🔥",
+                  textAlign: TextAlign.start,
+                  style: style.text.neutralLight.merge(style.fontsize.sm),
+                ),
               SizedBox(height: 4),
               SizedBox(
                 width: 150,

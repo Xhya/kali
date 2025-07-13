@@ -54,8 +54,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      initHomeScreen();
+    });
     super.initState();
-    initHomeScreen();
     mealState.currentDate.addListener(refreshMeals);
   }
 
@@ -86,65 +88,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 SizedBox(height: 24),
                 MainKaloriesCountWidget(),
-                SizedBox(height: 24),
+                SizedBox(height: 4),
 
-                if (lastMeal != null)
-                  CustomCard(
-                    onClick: () {
-                      goToMealScreen(lastMeal);
-                    },
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                    width: double.maxFinite,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Dernier repas",
-                          style: style.text.reverse_neutral
-                              .merge(style.fontsize.sm)
-                              .merge(style.fontweight.bold),
-                        ),
-                        SizedBox(height: 8),
-                        MealRowWidget(meal: lastMeal),
-                      ],
-                    ),
-                  ),
-
-                // CustomCard(
-                //   child: Container(
-                //     padding: const EdgeInsets.all(20),
-                //     child: Row(
-                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //       children: [
-                //         if (currentNutriScore?.caloryAmount != null)
-                //           RichText(
-                //             textAlign: TextAlign.center,
-                //             text: TextSpan(
-                //               style: style.text.reverse_neutral.merge(
-                //                 style.fontsize.md,
-                //               ),
-                //               children: [
-                //                 TextSpan(text: 'Bravo, '),
-                //                 TextSpan(
-                //                   text:
-                //                       '${currentNutriScore!.caloryAmount} kcal',
-                //                   style: style.fontweight.bold,
-                //                 ),
-                //                 TextSpan(text: ' dépensées !'),
-                //               ],
-                //             ),
-                //           ),
-
-                //         Text(
-                //           "🔥",
-                //           style: style.text.reverse_neutral.merge(
-                //             style.fontsize.md,
-                //           ),
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
+                NutriScoreGaugesWidget(meals: meals),
 
                 // if (lastMeal != null)
                 //   GestureDetector(
@@ -170,7 +116,28 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 SizedBox(height: 32),
-                NutriScoreGaugesWidget(meals: meals),
+
+                if (lastMeal != null)
+                  CustomCard(
+                    onClick: () {
+                      goToMealScreen(lastMeal);
+                    },
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    width: double.maxFinite,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Dernier repas",
+                          style: style.text.reverse_neutral
+                              .merge(style.fontsize.sm)
+                              .merge(style.fontweight.bold),
+                        ),
+                        SizedBox(height: 8),
+                        MealRowWidget(meal: lastMeal),
+                      ],
+                    ),
+                  ),
               ],
             ),
           ),
