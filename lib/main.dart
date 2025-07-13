@@ -65,7 +65,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'kali',
       theme: ThemeData(
-        fontFamily: 'Barlow',
+        fontFamily: 'BeVietnamPro',
         colorScheme: ColorScheme.fromSeed(
           seedColor: style.background.color1.color!,
         ),
