@@ -17,10 +17,17 @@ class Style {
   final period = Period();
 }
 
-Color _breakfastColor = _pink;
-Color _lunchColor = _orange;
-Color _snackColor = _blue_100;
-Color _dinerColor = _red;
+Color _breakfastColor = const Color(0xFFF8895D);
+Color _breakfastColor_light = const Color(0xFFFFEFE9);
+
+Color _lunchColor = const Color(0xFFE1345F);
+Color _lunchColor_light = const Color(0xFFFDE9ED);
+
+Color _snackColor = const Color(0xFFAC84E5);
+Color _snackColor_light = const Color(0xFFF1EDFC);
+
+Color _dinerColor = const Color(0xFFCDC152);
+Color _dinerColor_light = const Color(0xFFFDFBE8);
 
 Color _blue_100 = const Color(0xFF648DF6);
 Color _blue_200 = const Color(0xFF4066F1);
@@ -46,9 +53,13 @@ Color _green_950 = const Color(0xFF00340d);
 
 class Period {
   final breakfastColor = TextStyle(color: _breakfastColor);
+  final breakfastColorLight = TextStyle(color: _breakfastColor_light);
   final lunchColor = TextStyle(color: _lunchColor);
+  final lunchColorLight = TextStyle(color: _lunchColor_light);
   final snackColor = TextStyle(color: _snackColor);
+  final snackColorLight = TextStyle(color: _snackColor_light);
   final dinerColor = TextStyle(color: _dinerColor);
+  final dinerColorLight = TextStyle(color: _dinerColor_light);
 }
 
 class BackgroundColors {

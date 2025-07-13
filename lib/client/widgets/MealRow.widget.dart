@@ -41,13 +41,6 @@ class _MealPeriodTagWidgetState extends State<MealRowWidget> {
         ),
         if (widget.meal.period != null)
           MealPeriodTagWidget(mealPeriod: widget.meal.period!),
-        // if (widget.meal.nutriScore != null)
-        //   Text(
-        //     "${widget.meal.nutriScore!.caloryAmount} kcal",
-        //     style: style.fontsize.md
-        //         .merge(style.text.reverse_neutral)
-        //         .merge(style.fontweight.bold),
-        //   ),
       ],
     );
   }

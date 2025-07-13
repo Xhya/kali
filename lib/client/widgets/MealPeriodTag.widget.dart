@@ -31,7 +31,7 @@ class _MealPeriodTagWidgetState extends State<MealPeriodTagWidget> {
 
     final double opacity = widget.disabled ? 0.3 : 1;
 
-    final textColor = style.text.reverse_neutral;
+    final textColor = style.text.neutral;
 
     final borderColor =
         widget.mealPeriod == MealPeriodEnum.breakfast
@@ -44,12 +44,12 @@ class _MealPeriodTagWidgetState extends State<MealPeriodTagWidget> {
 
     final backgroundColor =
         widget.mealPeriod == MealPeriodEnum.breakfast
-            ? style.period.breakfastColor
+            ? style.period.breakfastColorLight
             : widget.mealPeriod == MealPeriodEnum.lunch
-            ? style.period.lunchColor
+            ? style.period.lunchColorLight
             : widget.mealPeriod == MealPeriodEnum.snack
-            ? style.period.snackColor
-            : style.period.dinerColor;
+            ? style.period.snackColorLight
+            : style.period.dinerColorLight;
 
     return Opacity(
       opacity: opacity,
