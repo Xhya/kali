@@ -75,108 +75,114 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
         context.watch<QuickAddMealState>().nutriScore.value;
 
     return Container(
-      color: style.background.color4.color,
+      color: style.background.greenLight.color,
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       child: ClipRRect(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(16),
           topRight: Radius.circular(16),
         ),
-        child: Container(
-          color: style.background.color4.color,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                padding: EdgeInsets.only(left: 4),
-                width: double.maxFinite,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Ajouter un repas",
-                      textAlign: TextAlign.start,
-                      style: style.text.reverse_neutral.merge(
-                        style.fontsize.lg,
-                      ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              padding: EdgeInsets.only(left: 4),
+              width: double.maxFinite,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Ajouter un repas",
+                    textAlign: TextAlign.start,
+                    style: style.text.neutral.merge(style.fontsize.md),
+                  ),
+
+                  Container(
+                    height: 32,
+                    width: 32,
+                    padding: EdgeInsets.all(0),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: style.icon.color1.color!, width: 1),
+                      borderRadius: BorderRadius.circular(100),
                     ),
-                    IconButton(
+                    child: IconButton(
+                      padding: EdgeInsets.all(0),
                       onPressed: () {
                         onClickCloseQuickAddMode();
                       },
                       icon: Icon(
                         Icons.close,
-                        color: style.icon.color2.color,
-                        size: style.fontsize.lg.fontSize,
+                        color: style.icon.color1.color,
+                        size: style.fontsize.md.fontSize,
                       ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 24),
+            MealPeriodsHorizontalWidget(
+              onClickSelectPeriod: (MealPeriodEnum period) {
+                onClickSelectPeriod(period);
+              },
+              chosenPeriod: chosenPeriod,
+            ),
+            SizedBox(height: 16),
+            ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(16)),
+              child: Container(
+                color: style.background.color4.color,
+                alignment: Alignment.center,
+                child: TextField(
+                  controller: controller,
+                  onChanged: (value) {
+                    onInputUpdateUserMealText(value);
+                  },
+                  textCapitalization: TextCapitalization.sentences,
+                  minLines: 1,
+                  maxLines: 6,
+                  style: style.text.reverse_neutral,
+                  decoration: InputDecoration(
+                    errorText:
+                        aiService.aiNotUnderstandError.value
+                            ? 'Veuillez être plus précis'
+                            : null,
+                    filled: true,
+                    fillColor: style.background.color3.color,
+                    border: InputBorder.none,
+                    hintText: "Quel est le menu du jour ?",
+                    hintStyle: style.text.color1,
+                    suffixIcon: suffixIcon,
+                  ),
+                ),
+              ),
+            ),
+            if (nutriScore != null) SizedBox(height: 24),
+            if (nutriScore != null)
+              ExpandedWidget(
+                child: Wrap(
+                  spacing: 12,
+                  runSpacing: 12,
+                  children: [
+                    NutriScore2by2Widget(nutriScore: nutriScore),
+                    SizedBox(height: 16),
+                    ButtonWidget(
+                      text: "Ajouter à la journée",
+                      buttonType: ButtonTypeEnum.filled,
+                      onPressed: () {
+                        onClickAddMealToDay();
+                      },
+                      fullWidth: false,
+                      disabled: false,
+                      isLoading: false,
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 24),
-              MealPeriodsHorizontalWidget(
-                onClickSelectPeriod: (MealPeriodEnum period) {
-                  onClickSelectPeriod(period);
-                },
-                chosenPeriod: chosenPeriod,
-              ),
-              SizedBox(height: 16),
-              ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
-                child: Container(
-                  color: style.background.color4.color,
-                  alignment: Alignment.center,
-                  child: TextField(
-                    controller: controller,
-                    onChanged: (value) {
-                      onInputUpdateUserMealText(value);
-                    },
-                    textCapitalization: TextCapitalization.sentences,
-                    minLines: 1,
-                    maxLines: 6,
-                    style: style.text.reverse_neutral,
-                    decoration: InputDecoration(
-                      errorText:
-                          aiService.aiNotUnderstandError.value
-                              ? 'Veuillez être plus précis'
-                              : null,
-                      filled: true,
-                      fillColor: style.background.color3.color,
-                      border: InputBorder.none,
-                      hintText: "Quel est le menu du jour ?",
-                      hintStyle: style.text.color1,
-                      suffixIcon: suffixIcon,
-                    ),
-                  ),
-                ),
-              ),
-              if (nutriScore != null) SizedBox(height: 24),
-              if (nutriScore != null)
-                ExpandedWidget(
-                  child: Wrap(
-                    spacing: 12,
-                    runSpacing: 12,
-                    children: [
-                      NutriScore2by2Widget(nutriScore: nutriScore),
-                      SizedBox(height: 16),
-                      ButtonWidget(
-                        text: "Ajouter à la journée",
-                        buttonType: ButtonTypeEnum.filled,
-                        onPressed: () {
-                          onClickAddMealToDay();
-                        },
-                        fullWidth: false,
-                        disabled: false,
-                        isLoading: false,
-                      ),
-                    ],
-                  ),
-                ),
-              SizedBox(height: 52),
-            ],
-          ),
+            SizedBox(height: 52),
+          ],
         ),
       ),
     );
