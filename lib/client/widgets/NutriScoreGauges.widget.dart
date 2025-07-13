@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/widgets/CircleGauge.widget.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/states/editMeal.state.dart';
 import 'package:kali/client/widgets/NutriScoreByPeriod.type.dart';
@@ -10,7 +11,6 @@ import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/utils/getTotalNutriscoreByPeriod.utils.dart';
 import 'package:kali/core/utils/macroIcon.utils.dart';
 import 'package:provider/provider.dart';
-import 'package:kali/client/widgets/Gauge.widget.dart';
 import 'package:kali/core/services/Translation.service.dart';
 
 class NutriScoreGaugesWidget extends StatefulWidget {
@@ -23,7 +23,8 @@ class NutriScoreGaugesWidget extends StatefulWidget {
 }
 
 class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
-  final double gaugeHeight = 150;
+  final double gaugeHeight = 80;
+  final double gaugeWidth = 80;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            spacing: 8,
+            spacing: 4,
             children: [
               Expanded(
                 child: CustomCard(
@@ -62,7 +63,8 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                       SizedBox(height: 16),
                       SizedBox(
                         height: gaugeHeight,
-                        child: GaugeWidget(
+                        width: gaugeWidth,
+                        child: CircleGaugeWidget(
                           currentAmount:
                               currentNutriScore.proteinAmount.toInt(),
                           maxAmount: personalNutriScore.proteinAmount.toInt(),
@@ -116,7 +118,8 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                       SizedBox(height: 16),
                       SizedBox(
                         height: gaugeHeight,
-                        child: GaugeWidget(
+                        width: gaugeWidth,
+                        child: CircleGaugeWidget(
                           currentAmount: currentNutriScore.glucidAmount.toInt(),
                           maxAmount: personalNutriScore.glucidAmount.toInt(),
                           editingAmount:
@@ -169,7 +172,8 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                       SizedBox(height: 16),
                       SizedBox(
                         height: gaugeHeight,
-                        child: GaugeWidget(
+                        width: gaugeWidth,
+                        child: CircleGaugeWidget(
                           currentAmount: currentNutriScore.lipidAmount.toInt(),
                           maxAmount: personalNutriScore.lipidAmount.toInt(),
                           editingAmount: editingNutriScore?.lipidAmount.toInt(),
