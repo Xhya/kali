@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/states/quickAddMeal.state.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
+import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/Translation.service.dart';
@@ -23,7 +24,56 @@ class QuickAddMealButtonWidget extends StatefulWidget {
 class _MealPeriodTagWidgetState extends State<QuickAddMealButtonWidget> {
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
+    return IntrinsicHeight(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          decoration: BoxDecoration(
+            color: style.background.grey.color,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("🥳", style: TextStyle(fontSize: 24)),
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontSize: style.fontsize.xs.fontSize,
+                        color: style.text.neutral.color,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(text: "Déjà "),
+                        TextSpan(
+                          text: "11 jours consécutifs",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Text("De suivi de repas", style: style.fontsize.xs),
+                ],
+              ),
+              MainButtonWidget(
+                onClick: () {
+                  navigationService.context = context;
+                  onClickAddQuickMeal();
+                },
+                iconWidget: Text("II"),
+                text: "ajouter",
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    ClipRRect(
       borderRadius: BorderRadius.circular(8),
       child: CustomInkwell(
         onTap: () {
