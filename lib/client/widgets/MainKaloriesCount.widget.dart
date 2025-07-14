@@ -82,31 +82,32 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
                   style: style.text.neutralLight.merge(style.fontsize.sm),
                 ),
               SizedBox(height: 4),
-              SizedBox(
-                width: 150,
-                child: SfLinearGauge(
-                  minimum: 0,
-                  maximum: personalNutriScore?.caloryAmount.toDouble() ?? 0,
-                  showLabels: false,
-                  showTicks: false,
-                  orientation: LinearGaugeOrientation.horizontal,
-                  majorTickStyle: LinearTickStyle(length: 20),
-                  axisTrackStyle: LinearAxisTrackStyle(
-                    edgeStyle: LinearEdgeStyle.bothCurve,
-                    color: style.background.greenDark.color,
-                    thickness: 8,
-                    borderColor: Colors.black,
-                  ),
-                  barPointers: [
-                    LinearBarPointer(
-                      value: currentNutriScore?.caloryAmount.toDouble() ?? 0,
-                      color: style.gauge.main.color,
-                      thickness: 8,
+              if (personalNutriScore?.caloryAmount != null)
+                SizedBox(
+                  width: 150,
+                  child: SfLinearGauge(
+                    minimum: 0,
+                    maximum: personalNutriScore?.caloryAmount.toDouble() ?? 0,
+                    showLabels: false,
+                    showTicks: false,
+                    orientation: LinearGaugeOrientation.horizontal,
+                    majorTickStyle: LinearTickStyle(length: 20),
+                    axisTrackStyle: LinearAxisTrackStyle(
                       edgeStyle: LinearEdgeStyle.bothCurve,
+                      color: style.background.greenDark.color,
+                      thickness: 8,
+                      borderColor: Colors.black,
                     ),
-                  ],
+                    barPointers: [
+                      LinearBarPointer(
+                        value: currentNutriScore?.caloryAmount.toDouble() ?? 0,
+                        color: style.gauge.main.color,
+                        thickness: 8,
+                        edgeStyle: LinearEdgeStyle.bothCurve,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
             ],
           ),
         ],
