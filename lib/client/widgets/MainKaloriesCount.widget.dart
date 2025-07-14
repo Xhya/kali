@@ -37,7 +37,7 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
           Text(
             "⚖️",
             textAlign: TextAlign.start,
-            style: style.text.color1
+            style: style.text.green
                 .merge(style.fontsize.md)
                 .merge(style.fontweight.bold),
           ),

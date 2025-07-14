@@ -67,7 +67,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'BeVietnamPro',
         colorScheme: ColorScheme.fromSeed(
-          seedColor: style.background.color1.color!,
+          seedColor: style.background.green.color!,
         ),
       ),
       home: AsyncInitWidget(

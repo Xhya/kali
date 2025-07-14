@@ -16,7 +16,7 @@ class _RegisterBannerWidgetState extends State<RegisterBannerWidget> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      color: style.background.color5.color,
+      color: style.background.greenLight.color,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

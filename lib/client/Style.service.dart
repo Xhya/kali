@@ -29,17 +29,8 @@ Color _snackColor_light = const Color(0xFFF1EDFC);
 Color _dinerColor = const Color(0xFFCDC152);
 Color _dinerColor_light = const Color(0xFFFDFBE8);
 
-Color _blue_100 = const Color(0xFF648DF6);
 Color _blue_200 = const Color(0xFF4066F1);
-Color _blue_300 = const Color(0xFF3751E7);
-Color _blue_400 = const Color(0xFF222BAB);
-Color _blue_500 = const Color(0xFF191D52);
-Color _yellow = const Color(0xFFDFFE0F);
-Color _red = const Color(0xFFC72E2E);
-Color _orange = const Color(0xFFE8900B);
-Color _pink = const Color(0xFFFF63A6);
 final _white = Colors.white;
-final _black = Colors.black;
 Color _grey_dark = const Color(0xFF282928);
 Color _grey_middle = const Color(0xFF515450);
 Color _grey_light = const Color(0xFFeaebea);
@@ -64,12 +55,6 @@ class Period {
 
 class BackgroundColors {
   final neutral = TextStyle(color: _white);
-  final reverse_neutral = TextStyle(color: _black);
-  final color1 = TextStyle(color: _blue_100);
-  final color2 = TextStyle(color: _blue_200);
-  final color3 = TextStyle(color: _blue_400);
-  final color4 = TextStyle(color: _blue_500);
-  final color5 = TextStyle(color: _yellow);
   final greenTransparent = TextStyle(color: _green_50);
   final greenLight = TextStyle(color: _green_100);
   final green = TextStyle(color: _green_300);
@@ -90,9 +75,6 @@ class TextColors {
   final greenLight = TextStyle(color: _green_300);
 
   final reverse_neutral = TextStyle(color: _white);
-  final color1 = TextStyle(color: _blue_100);
-  final color2 = TextStyle(color: _yellow);
-  final color3 = TextStyle(color: _blue_500);
 }
 
 class ButtonColors {}
@@ -104,8 +86,7 @@ class CustomBorder {
 }
 
 class BorderColors {
-  final color1 = TextStyle(color: _yellow);
-  final color2 = TextStyle(color: _blue_200);
+  final color1 = TextStyle(color: _green_600);
 }
 
 class BorderSizes {

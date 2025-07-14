@@ -85,7 +85,7 @@ class _MealPeriodTagWidgetState extends State<QuickAddMealButtonWidget> {
           decoration: BoxDecoration(
             border: Border.all(color: style.border.color.color1.color!),
             borderRadius: const BorderRadius.all(Radius.circular(8)),
-            color: style.background.color2.color,
+            color: style.background.green.color,
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -98,7 +98,7 @@ class _MealPeriodTagWidgetState extends State<QuickAddMealButtonWidget> {
               ),
               Text(
                 t("add_a_meal"),
-                style: style.text.color2.merge(style.fontsize.md),
+                style: style.text.green.merge(style.fontsize.md),
               ),
             ],
           ),
