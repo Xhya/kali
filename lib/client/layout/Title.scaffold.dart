@@ -16,7 +16,7 @@ class TitleScaffold extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        backgroundColor: style.background.color3.color,
+        backgroundColor: style.background.greenLight.color,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -29,7 +29,7 @@ class TitleScaffold extends StatelessWidget {
         ),
         title: Text(
           title,
-          style: style.text.color2
+          style: style.text.greenDark
               .merge(style.fontsize.lg)
               .merge(style.fontweight.bold),
         ),

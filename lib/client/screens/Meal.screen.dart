@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/layout/Title.scaffold.dart';
-import 'package:kali/client/states/quickAddMeal.state.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/widgets/LoaderIcon.widget.dart';
 import 'package:kali/client/widgets/MealPeriodsHorizontal.widget.dart';
@@ -75,7 +74,7 @@ class _MealScreenState extends State<MealScreen> {
         body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          color: style.background.color1.color,
+          color: style.background.greenTransparent.color,
           padding: EdgeInsets.all(16),
           child: Column(
             children: [

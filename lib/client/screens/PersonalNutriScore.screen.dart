@@ -124,7 +124,7 @@ class _PersonalNutriScoreScreenState extends State<PersonalNutriScoreScreen> {
     return TitleScaffold(
       title: "Objectifs",
       child: Scaffold(
-        backgroundColor: style.background.color1.color,
+        backgroundColor: style.background.greenTransparent.color,
         body: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(

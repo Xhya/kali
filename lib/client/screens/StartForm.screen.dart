@@ -72,7 +72,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
 
     return BaseScaffold(
       child: Scaffold(
-        backgroundColor: style.background.color1.color,
+        backgroundColor: style.background.greenTransparent.color,
         body: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(

@@ -118,7 +118,7 @@ class _BaseScaffoldState extends State<BaseScaffold>
                 maxHeight: MediaQuery.of(context).size.height,
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(0)),
                 child: widget.child,
               ),
             );

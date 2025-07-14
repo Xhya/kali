@@ -64,7 +64,7 @@ class _MealPeriodTagWidgetState extends State<QuickAddMealButtonWidget> {
                   navigationService.context = context;
                   onClickAddQuickMeal();
                 },
-                iconWidget: Text("II"),
+                iconWidget: Text("🍴"),
                 text: "ajouter",
               ),
             ],

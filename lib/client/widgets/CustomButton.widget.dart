@@ -37,15 +37,17 @@ class ButtonWidget extends StatelessWidget {
     var borderSize;
 
     var isButtonDisabled = disabled;
+    var currentText = text ?? "Confirmer";
 
     if (!disabled && needConnection) {
       final hasInternetConnexion =
           context.watch<ConnexionService>().hasInternetConnexion.value;
       isButtonDisabled = !hasInternetConnexion;
-    }
 
-    final currentText =
-        isButtonDisabled ? "Nécessite une connexion" : text ?? "Confirmer";
+      if (!hasInternetConnexion) {
+        currentText = "Nécessite une connexion";
+      }
+    }
 
     switch (buttonType) {
       case ButtonTypeEnum.filled:
