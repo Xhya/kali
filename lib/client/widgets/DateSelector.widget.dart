@@ -53,6 +53,7 @@ class DateSelector extends StatelessWidget {
           child: Text(
             getFormattedDate(currentDate),
             style: style.text.neutral.merge(style.fontsize.md),
+            textAlign: TextAlign.center,
           ),
         ),
         IconButton.filled(

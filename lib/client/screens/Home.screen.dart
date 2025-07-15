@@ -4,6 +4,7 @@ import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/DateSelector.widget.dart';
 import 'package:kali/client/widgets/MainKaloriesCount.widget.dart';
+import 'package:kali/client/widgets/MealPeriodsHorizontal.widget.dart';
 import 'package:kali/client/widgets/MealRow.widget.dart';
 import 'package:kali/client/widgets/NutriScoreGauges.widget.dart';
 import 'package:kali/client/widgets/QuickAddMealButton.widget.dart';
@@ -69,64 +70,79 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return BaseScaffold(
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(16)),
-            child: Container(
-              color: style.background.greenTransparent.color,
-              height: MediaQuery.of(context).size.height,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DateSelector(currentDate: currentDate),
-
-                  SizedBox(height: 24),
-
-                  MainKaloriesCountWidget(),
-
-                  SizedBox(height: 4),
-
-                  NutriScoreGaugesWidget(meals: meals),
-
-                  SizedBox(height: 32),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Derniers ajouts",
-                        style: style.fontsize.xs.merge(style.text.greenDark),
-                      ),
-                      if (lastMeal != null)
-                        CustomInkwell(
-                          onTap: () {
-                            goToMealsScreen();
-                          },
-                          child: Text(
-                            "Afficher tout",
-                            style: style.fontsize.xs
-                                .merge(style.text.green)
-                                .merge(style.fontweight.bold),
+        backgroundColor: style.background.greenTransparent.color,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: Column(
+            children: [
+              DateSelector(currentDate: currentDate),
+              SizedBox(height: 16),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(16)),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          MealPeriodsHorizontalWidget(
+                            onClickSelectPeriod: (period) {},
+                            chosenPeriod: MealPeriodEnum.breakfast,
                           ),
-                        ),
-                    ],
-                  ),
-                  SizedBox(height: 8),
-                  if (lastMeal != null)
-                    CustomCard(
-                      onClick: () {
-                        goToMealScreen(lastMeal);
-                      },
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 16,
+
+                          SizedBox(height: 24),
+
+                          MainKaloriesCountWidget(),
+
+                          SizedBox(height: 4),
+
+                          NutriScoreGaugesWidget(meals: meals),
+
+                          SizedBox(height: 32),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Derniers ajouts",
+                                style: style.fontsize.xs.merge(
+                                  style.text.greenDark,
+                                ),
+                              ),
+                              if (lastMeal != null)
+                                CustomInkwell(
+                                  onTap: () {
+                                    goToMealsScreen();
+                                  },
+                                  child: Text(
+                                    "Afficher tout",
+                                    style: style.fontsize.xs
+                                        .merge(style.text.green)
+                                        .merge(style.fontweight.bold),
+                                  ),
+                                ),
+                            ],
+                          ),
+                          SizedBox(height: 8),
+                          if (lastMeal != null)
+                            CustomCard(
+                              onClick: () {
+                                goToMealScreen(lastMeal);
+                              },
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 16,
+                              ),
+                              child: MealRowWidget(meal: lastMeal),
+                            ),
+                        ],
                       ),
-                      child: MealRowWidget(meal: lastMeal),
                     ),
-                ],
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
