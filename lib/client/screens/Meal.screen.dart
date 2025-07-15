@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kali/client/layout/Title.scaffold.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/widgets/LoaderIcon.widget.dart';
-import 'package:kali/client/widgets/MealPeriodsHorizontal.widget.dart';
+import 'package:kali/client/widgets/MealPeriodsWrap.widget.dart';
 import 'package:kali/client/widgets/NutriScoreGauges.widget.dart';
 import 'package:kali/core/domains/meal.state.dart';
 import 'package:kali/client/states/editMeal.state.dart';
@@ -27,7 +27,7 @@ onUpdateMeal() async {
   }
 }
 
-onClickSelectPeriod(MealPeriodEnum period) {
+onClickSelectPeriod(MealPeriodEnum? period) {
   editMealState.editingMealPeriod.value = period;
 }
 
@@ -78,8 +78,8 @@ class _MealScreenState extends State<MealScreen> {
           padding: EdgeInsets.all(16),
           child: Column(
             children: [
-              MealPeriodsHorizontalWidget(
-                onClickSelectPeriod: (period) {
+              MealPeriodsWrapWidget(
+                onClickSelectPeriod: (MealPeriodEnum period) {
                   onClickSelectPeriod(period);
                 },
                 chosenPeriod: editingMealPeriod,

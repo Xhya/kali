@@ -10,7 +10,7 @@ class MealPeriodTagWidget extends StatefulWidget {
     this.disabled = false,
   });
 
-  final MealPeriodEnum mealPeriod;
+  final MealPeriodEnum? mealPeriod;
   final bool disabled;
 
   @override
@@ -27,7 +27,9 @@ class _MealPeriodTagWidgetState extends State<MealPeriodTagWidget> {
             ? "🍎"
             : widget.mealPeriod == MealPeriodEnum.snack
             ? "🍱"
-            : "🍪";
+            : widget.mealPeriod == MealPeriodEnum.dinner
+            ? "🍪"
+            : "🍽️";
 
     final double opacity = widget.disabled ? 0.3 : 1;
 
@@ -40,7 +42,9 @@ class _MealPeriodTagWidgetState extends State<MealPeriodTagWidget> {
             ? style.period.lunchColor
             : widget.mealPeriod == MealPeriodEnum.snack
             ? style.period.snackColor
-            : style.period.dinerColor;
+            : widget.mealPeriod == MealPeriodEnum.dinner
+            ? style.period.dinerColor
+            : style.period.allMealsColor;
 
     final backgroundColor =
         widget.mealPeriod == MealPeriodEnum.breakfast
@@ -49,7 +53,9 @@ class _MealPeriodTagWidgetState extends State<MealPeriodTagWidget> {
             ? style.period.lunchColorLight
             : widget.mealPeriod == MealPeriodEnum.snack
             ? style.period.snackColorLight
-            : style.period.dinerColorLight;
+            : widget.mealPeriod == MealPeriodEnum.dinner
+            ? style.period.dinerColorLight
+            : style.period.allMealsColorLight;
 
     return Opacity(
       opacity: opacity,
@@ -67,7 +73,7 @@ class _MealPeriodTagWidgetState extends State<MealPeriodTagWidget> {
             children: [
               Text(icon, style: style.fontsize.xs),
               Text(
-                t(widget.mealPeriod.label),
+                t(widget.mealPeriod?.label ?? "all_meals"),
                 style: textColor.merge(style.fontsize.xs),
               ),
             ],

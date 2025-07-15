@@ -38,6 +38,17 @@ onClickPeriodToQuickAddMeal({MealPeriodEnum? period}) {
   navigationService.openBottomSheet(widget: QuickAddMealWidget());
 }
 
+onClickSelectPeriod(MealPeriodEnum? period) {
+  final periods = mealState.currentMealPeriods.value;
+  if (period == null) {
+    mealState.currentMealPeriods.value = [];
+  } else if (periods.contains(period)) {
+    mealState.currentMealPeriods.value = [...periods.where((f) => f != period)];
+  } else {
+    mealState.currentMealPeriods.value = [...periods, period];
+  }
+}
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -65,6 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     List<MealModel> meals = context.watch<MealState>().currentMeals.value;
     DateTime currentDate = context.watch<MealState>().currentDate.value;
+    List<MealPeriodEnum> currentMealPeriods =
+        context.watch<MealState>().currentMealPeriods.value;
 
     final lastMeal = meals.isNotEmpty ? meals.last : null;
 
@@ -87,8 +100,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           MealPeriodsHorizontalWidget(
-                            onClickSelectPeriod: (period) {},
-                            chosenPeriod: MealPeriodEnum.breakfast,
+                            onClickSelectPeriod: (period) {
+                              onClickSelectPeriod(period);
+                            },
+                            chosenPeriods: currentMealPeriods,
                           ),
 
                           SizedBox(height: 24),

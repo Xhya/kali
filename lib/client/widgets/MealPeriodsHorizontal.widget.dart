@@ -7,11 +7,11 @@ class MealPeriodsHorizontalWidget extends StatefulWidget {
   const MealPeriodsHorizontalWidget({
     super.key,
     required this.onClickSelectPeriod,
-    required this.chosenPeriod,
+    required this.chosenPeriods,
   });
 
-  final Function(MealPeriodEnum) onClickSelectPeriod;
-  final MealPeriodEnum? chosenPeriod;
+  final Function(MealPeriodEnum?) onClickSelectPeriod;
+  final List<MealPeriodEnum> chosenPeriods;
 
   @override
   State<MealPeriodsHorizontalWidget> createState() =>
@@ -31,13 +31,20 @@ class _MealPeriodsHorizontalWidgetState
         children: [
           CustomInkwell(
             onTap: () {
+              widget.onClickSelectPeriod(null);
+            },
+            child: MealPeriodTagWidget(
+              mealPeriod: null,
+              disabled: widget.chosenPeriods.isNotEmpty,
+            ),
+          ),
+          CustomInkwell(
+            onTap: () {
               widget.onClickSelectPeriod(MealPeriodEnum.breakfast);
             },
             child: MealPeriodTagWidget(
               mealPeriod: MealPeriodEnum.breakfast,
-              disabled:
-                  widget.chosenPeriod != null &&
-                  widget.chosenPeriod != MealPeriodEnum.breakfast,
+              disabled: !widget.chosenPeriods.contains(MealPeriodEnum.breakfast),
             ),
           ),
           CustomInkwell(
@@ -46,9 +53,7 @@ class _MealPeriodsHorizontalWidgetState
             },
             child: MealPeriodTagWidget(
               mealPeriod: MealPeriodEnum.lunch,
-              disabled:
-                  widget.chosenPeriod != null &&
-                  widget.chosenPeriod != MealPeriodEnum.lunch,
+              disabled: !widget.chosenPeriods.contains(MealPeriodEnum.lunch),
             ),
           ),
           CustomInkwell(
@@ -57,9 +62,7 @@ class _MealPeriodsHorizontalWidgetState
             },
             child: MealPeriodTagWidget(
               mealPeriod: MealPeriodEnum.snack,
-              disabled:
-                  widget.chosenPeriod != null &&
-                  widget.chosenPeriod != MealPeriodEnum.snack,
+              disabled: !widget.chosenPeriods.contains(MealPeriodEnum.snack),
             ),
           ),
           CustomInkwell(
@@ -68,9 +71,7 @@ class _MealPeriodsHorizontalWidgetState
             },
             child: MealPeriodTagWidget(
               mealPeriod: MealPeriodEnum.dinner,
-              disabled:
-                  widget.chosenPeriod != null &&
-                  widget.chosenPeriod != MealPeriodEnum.dinner,
+              disabled: !widget.chosenPeriods.contains(MealPeriodEnum.dinner),
             ),
           ),
         ],

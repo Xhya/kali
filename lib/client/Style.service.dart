@@ -29,7 +29,9 @@ Color _snackColor_light = const Color(0xFFF1EDFC);
 Color _dinerColor = const Color(0xFFCDC152);
 Color _dinerColor_light = const Color(0xFFFDFBE8);
 
-Color _blue_200 = const Color(0xFF4066F1);
+Color _allMealsColor = _green_300;
+Color _allMealsColor_light = _green_100;
+
 final _white = Colors.white;
 Color _grey_dark = const Color(0xFF282928);
 Color _grey_middle = const Color(0xFF515450);
@@ -51,6 +53,8 @@ class Period {
   final snackColorLight = TextStyle(color: _snackColor_light);
   final dinerColor = TextStyle(color: _dinerColor);
   final dinerColorLight = TextStyle(color: _dinerColor_light);
+  final allMealsColor = TextStyle(color: _allMealsColor);
+  final allMealsColorLight = TextStyle(color: _allMealsColor_light);
 }
 
 class BackgroundColors {
@@ -69,7 +73,7 @@ class Gauge {
 class TextColors {
   final neutral = TextStyle(color: _grey_dark);
   final neutralLight = TextStyle(color: _grey_middle);
-  
+
   final greenDark = TextStyle(color: _green_950);
   final green = TextStyle(color: _green_800);
   final greenLight = TextStyle(color: _green_300);
