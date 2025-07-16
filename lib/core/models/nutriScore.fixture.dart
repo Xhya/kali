@@ -15,3 +15,11 @@ final fixtureNutriScore1 = NutriScore(
   glucidAmount: 50,
   caloryAmount: 122,
 );
+
+final fixtureNutriScore2 = NutriScore(
+  id: "1",
+  proteinAmount: 50,
+  lipidAmount: 40,
+  glucidAmount: 100,
+  caloryAmount: 544,
+);

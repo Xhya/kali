@@ -90,6 +90,13 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               DateSelector(currentDate: currentDate),
               SizedBox(height: 16),
+              MealPeriodsHorizontalWidget(
+                onClickSelectPeriod: (period) {
+                  onClickSelectPeriod(period);
+                },
+                chosenPeriods: currentMealPeriods,
+              ),
+              SizedBox(height: 16),
               Expanded(
                 child: SingleChildScrollView(
                   child: ClipRRect(
@@ -99,14 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          MealPeriodsHorizontalWidget(
-                            onClickSelectPeriod: (period) {
-                              onClickSelectPeriod(period);
-                            },
-                            chosenPeriods: currentMealPeriods,
-                          ),
-
-                          SizedBox(height: 24),
+                          SizedBox(height: 8),
 
                           MainKaloriesCountWidget(),
 

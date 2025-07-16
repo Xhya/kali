@@ -1,8 +1,8 @@
 enum MacroTypeEnum {
-  breakfast('proteins'),
-  lunch('glucids'),
-  snack('lipids'),
-  dinner('calories');
+  proteins('proteins'),
+  glucids('glucids'),
+  lipids('lipids'),
+  calories('calories');
 
   const MacroTypeEnum(this.label);
   final String label;

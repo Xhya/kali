@@ -4,6 +4,7 @@ import 'package:kali/core/models/nutriScore.fixture.dart';
 
 final fixtureMeals = [
   fixtureMeal1,
+  fixtureMeal2,
 ];
 
 final fixtureMeal1 = MealModel(
@@ -22,6 +23,6 @@ final fixtureMeal2 = MealModel(
   updatedAt: DateTime.now(),
   date: DateTime.now(),
   mealDescription: "200g viande",
-  period: MealPeriodEnum.breakfast,
-  nutriScore: fixtureNutriScore1,
+  period: MealPeriodEnum.lunch,
+  nutriScore: fixtureNutriScore2,
 );

@@ -3,12 +3,11 @@ import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CircleGauge.widget.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/states/editMeal.state.dart';
-import 'package:kali/client/widgets/NutriScoreByPeriod.type.dart';
 import 'package:kali/core/domains/nutriScore.state.dart';
+import 'package:kali/core/models/MacroType.enum.dart';
 import 'package:kali/core/models/Meal.model.dart';
-import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
-import 'package:kali/core/utils/getTotalNutriscoreByPeriod.utils.dart';
+import 'package:kali/core/utils/getBars.utils.dart';
 import 'package:kali/core/utils/macroIcon.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/core/services/Translation.service.dart';
@@ -30,13 +29,16 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
   Widget build(BuildContext context) {
     NutriScore? currentNutriScore =
         context.watch<NutriScoreState>().currentNutriScore.value;
-    NutriScoreByPeriod dateTotalNutriscoreByPeriod = getTotalNutriscoreByPeriod(
-      widget.meals,
-    );
     NutriScore? personalNutriScore =
         context.watch<NutriScoreState>().personalNutriScore.value;
     NutriScore? editingNutriScore =
         context.watch<EditMealState>().editingNutriScore.value;
+
+    final proteinBars = getBars(widget.meals, MacroTypeEnum.proteins);
+
+    final lipidBars = getBars(widget.meals, MacroTypeEnum.lipids);
+
+    final glucidBars = getBars(widget.meals, MacroTypeEnum.glucids);
 
     if (currentNutriScore != null && personalNutriScore != null) {
       return Column(
@@ -65,29 +67,10 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                         height: gaugeHeight,
                         width: gaugeWidth,
                         child: CircleGaugeWidget(
-                          currentAmount:
-                              currentNutriScore.proteinAmount.toInt(),
                           maxAmount: personalNutriScore.proteinAmount.toInt(),
                           editingAmount:
                               editingNutriScore?.proteinAmount.toInt(),
-                          bars: {
-                            style.period.dinerColor.color!:
-                                dateTotalNutriscoreByPeriod[MealPeriodEnum
-                                        .dinner]!
-                                    .proteinAmount,
-                            style.period.snackColor.color!:
-                                dateTotalNutriscoreByPeriod[MealPeriodEnum
-                                        .snack]!
-                                    .proteinAmount,
-                            style.period.lunchColor.color!:
-                                dateTotalNutriscoreByPeriod[MealPeriodEnum
-                                        .lunch]!
-                                    .proteinAmount,
-                            style.period.breakfastColor.color!:
-                                dateTotalNutriscoreByPeriod[MealPeriodEnum
-                                        .breakfast]!
-                                    .proteinAmount,
-                          },
+                          bars: proteinBars,
                         ),
                       ),
                       SizedBox(height: 16),
@@ -120,28 +103,10 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                         height: gaugeHeight,
                         width: gaugeWidth,
                         child: CircleGaugeWidget(
-                          currentAmount: currentNutriScore.glucidAmount.toInt(),
                           maxAmount: personalNutriScore.glucidAmount.toInt(),
                           editingAmount:
                               editingNutriScore?.glucidAmount.toInt(),
-                          bars: {
-                            style.period.dinerColor.color!:
-                                dateTotalNutriscoreByPeriod[MealPeriodEnum
-                                        .dinner]!
-                                    .glucidAmount,
-                            style.period.snackColor.color!:
-                                dateTotalNutriscoreByPeriod[MealPeriodEnum
-                                        .snack]!
-                                    .glucidAmount,
-                            style.period.lunchColor.color!:
-                                dateTotalNutriscoreByPeriod[MealPeriodEnum
-                                        .lunch]!
-                                    .glucidAmount,
-                            style.period.breakfastColor.color!:
-                                dateTotalNutriscoreByPeriod[MealPeriodEnum
-                                        .breakfast]!
-                                    .glucidAmount,
-                          },
+                          bars: glucidBars,
                         ),
                       ),
                       SizedBox(height: 16),
@@ -174,27 +139,9 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                         height: gaugeHeight,
                         width: gaugeWidth,
                         child: CircleGaugeWidget(
-                          currentAmount: currentNutriScore.lipidAmount.toInt(),
                           maxAmount: personalNutriScore.lipidAmount.toInt(),
                           editingAmount: editingNutriScore?.lipidAmount.toInt(),
-                          bars: {
-                            style.period.dinerColor.color!:
-                                dateTotalNutriscoreByPeriod[MealPeriodEnum
-                                        .dinner]!
-                                    .lipidAmount,
-                            style.period.snackColor.color!:
-                                dateTotalNutriscoreByPeriod[MealPeriodEnum
-                                        .snack]!
-                                    .lipidAmount,
-                            style.period.lunchColor.color!:
-                                dateTotalNutriscoreByPeriod[MealPeriodEnum
-                                        .lunch]!
-                                    .lipidAmount,
-                            style.period.breakfastColor.color!:
-                                dateTotalNutriscoreByPeriod[MealPeriodEnum
-                                        .breakfast]!
-                                    .lipidAmount,
-                          },
+                          bars: lipidBars,
                         ),
                       ),
                       SizedBox(height: 16),
