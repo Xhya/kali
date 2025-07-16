@@ -20,7 +20,7 @@ void main() {
   test('quick add meal scenario', () async {
     expect(navigationService.bottomSheet, null);
     await initHomeScreen();
-    expect(mealState.currentMeals.value.length, 1);
+    expect(mealState.currentMeals.value.length, 2);
     onClickPeriodToQuickAddMeal();
     expect(navigationService.bottomSheet, isNotNull);
     onClickCloseQuickAddMode();
@@ -39,19 +39,19 @@ void main() {
     expect(nutriScoreState.currentNutriScore.value, isNotNull);
     expect(
       nutriScoreState.currentNutriScore.value!.caloryAmount,
-      fixtureMeal1.nutriScore!.caloryAmount,
+      fixtureMeal1.nutriScore!.caloryAmount + fixtureMeal2.nutriScore!.caloryAmount,
     );
     expect(
       nutriScoreState.currentNutriScore.value!.glucidAmount,
-      fixtureMeal1.nutriScore!.glucidAmount,
+      fixtureMeal1.nutriScore!.glucidAmount + fixtureMeal2.nutriScore!.glucidAmount,
     );
     expect(
       nutriScoreState.currentNutriScore.value!.lipidAmount,
-      fixtureMeal1.nutriScore!.lipidAmount,
+      fixtureMeal1.nutriScore!.lipidAmount + fixtureMeal2.nutriScore!.lipidAmount,
     );
     expect(
       nutriScoreState.currentNutriScore.value!.proteinAmount,
-      fixtureMeal1.nutriScore!.proteinAmount,
+      fixtureMeal1.nutriScore!.proteinAmount + fixtureMeal2.nutriScore!.proteinAmount,
     );
     await onClickAddMealToDay();
 
