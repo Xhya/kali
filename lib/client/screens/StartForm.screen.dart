@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/widgets/StartFormPage1.widget.dart';
+import 'package:kali/client/widgets/StartFormPage2.widget.dart';
 import 'package:kali/client/widgets/StartFormTop.widget.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
-import 'package:kali/client/widgets/Expanded.widget.dart';
-import 'package:kali/client/widgets/NutriScore2by2.widget.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/core/actions/startForm.actions.dart';
 import 'package:kali/core/domains/nutriScore.state.dart';
@@ -23,6 +22,20 @@ String getSubmitButtonText() {
 
 void onClickNext() {
   startFormState.currentPage.value = startFormState.currentPage.value + 1;
+  startFormState.controller.value.animateToPage(
+    startFormState.currentPage.value,
+    duration: const Duration(milliseconds: 400),
+    curve: Curves.easeInOut,
+  );
+}
+
+void onClickPrevious() {
+  startFormState.currentPage.value = startFormState.currentPage.value - 1;
+  startFormState.controller.value.animateToPage(
+    startFormState.currentPage.value,
+    duration: const Duration(milliseconds: 400),
+    curve: Curves.easeInOut,
+  );
 }
 
 Future<void> onClickSubmitButton() async {
@@ -57,6 +70,8 @@ class _StartFormScreenState extends State<StartFormScreen> {
     bool isSubmitButtonDisabled =
         context.watch<StartFormState>().isSubmitButtonDisabled;
     bool isLoading = context.watch<StartFormState>().isLoading.value;
+    PageController controller =
+        context.watch<StartFormState>().controller.value;
 
     return BaseScaffold(
       child: Scaffold(
@@ -70,38 +85,32 @@ class _StartFormScreenState extends State<StartFormScreen> {
                   StartFormTopWidget(),
 
                   Expanded(
-                    child: SingleChildScrollView(
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                          minHeight: constraints.maxHeight,
-                        ),
-                        child: IntrinsicHeight(
-                          child: Container(
-                            padding: const EdgeInsets.all(16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(child: StartFormPage1()),
-                                if (personalNutriScore != null)
-                                  ExpandedWidget(
-                                    child: Wrap(
-                                      spacing: 12,
-                                      runSpacing: 12,
-                                      children: [
-                                        NutriScore2by2Widget(
-                                          nutriScore: personalNutriScore,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                              ],
-                            ),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: constraints.maxHeight,
+                      ),
+                      child: IntrinsicHeight(
+                        child: Container(
+                          padding: const EdgeInsets.all(16),
+                          child: PageView.builder(
+                            controller: controller,
+                            itemCount: 7,
+                            onPageChanged: (index) {
+                              // TODO
+                            },
+                            itemBuilder: (_, index) {
+                              if (index == 0) {
+                                return StartFormPage2();
+                              } else {
+                                return StartFormPage1();
+                              }
+                            },
                           ),
                         ),
                       ),
                     ),
                   ),
+
                   // ButtonWidget(
                   //   text: "Crash",
                   //   onPressed: () {
@@ -111,7 +120,16 @@ class _StartFormScreenState extends State<StartFormScreen> {
                   //   },
                   //   fullWidth: true,
                   // ),
-
+                  // if (personalNutriScore != null)
+                  //   ExpandedWidget(
+                  //     child: Wrap(
+                  //       spacing: 12,
+                  //       runSpacing: 12,
+                  //       children: [
+                  //         NutriScore2by2Widget(nutriScore: personalNutriScore),
+                  //       ],
+                  //     ),
+                  //   ),
                   ButtonWidget(
                     text: "Suivant",
                     onPressed: () {

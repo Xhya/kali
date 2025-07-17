@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 var startFormState = StartFormState();
 
 class StartFormState extends ChangeNotifier {
+  final controller = ValueNotifier<PageController>(PageController());
+
   final currentPage = ValueNotifier<int>(0);
 
   final size = ValueNotifier<String>("");

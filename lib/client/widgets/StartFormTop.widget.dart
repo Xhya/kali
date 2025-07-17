@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/screens/StartForm.screen.dart';
 import 'package:kali/client/states/startForm.state.dart';
 import 'package:kali/client/widgets/CustomIconButton.widget.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +22,9 @@ class _StartFormTopWidgetState extends State<StartFormTopWidget> {
       spacing: 4,
       children: [
         CustomIconButtonWidget(
-          onPressed: () {},
+          onPressed: () {
+            onClickPrevious();
+          },
           icon: Icons.chevron_left_outlined,
         ),
         SfLinearGauge(
