@@ -19,42 +19,47 @@ class _StartFormPage1State extends State<StartFormPage1> {
     String weight = context.watch<StartFormState>().weight.value;
     String size = context.watch<StartFormState>().size.value;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text("Faison un peu connaissance"),
-        SizedBox(height: 8),
-        CustomInput(
-          content: size,
-          onChanged: (String value) {
-            startFormState.size.value = value;
-          },
-          suffixText: "cm",
-          placeholder: t("size"),
-          inputFormatters: [onlyNumbersFormatter()],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Faison un peu connaissance"),
+            SizedBox(height: 8),
+            CustomInput(
+              content: size,
+              onChanged: (String value) {
+                startFormState.size.value = value;
+              },
+              suffixText: "cm",
+              placeholder: t("size"),
+              inputFormatters: [onlyNumbersFormatter()],
+            ),
+            SizedBox(height: 32),
+            CustomInput(
+              content: weight,
+              onChanged: (value) {
+                startFormState.weight.value = value;
+              },
+              suffixText: "kg",
+              placeholder: t("weight"),
+              inputFormatters: [onlyNumbersFormatter()],
+            ),
+            SizedBox(height: 32),
+            CustomInput(
+              content: age,
+              onChanged: (value) {
+                startFormState.age.value = value;
+              },
+              suffixText: "ans",
+              placeholder: t("age"),
+              inputFormatters: [onlyNumbersFormatter()],
+            ),
+            SizedBox(height: 32),
+          ],
         ),
-        SizedBox(height: 32),
-        CustomInput(
-          content: weight,
-          onChanged: (value) {
-            startFormState.weight.value = value;
-          },
-          suffixText: "kg",
-          placeholder: t("weight"),
-          inputFormatters: [onlyNumbersFormatter()],
-        ),
-        SizedBox(height: 32),
-        CustomInput(
-          content: age,
-          onChanged: (value) {
-            startFormState.age.value = value;
-          },
-          suffixText: "ans",
-          placeholder: t("age"),
-          inputFormatters: [onlyNumbersFormatter()],
-        ),
-        SizedBox(height: 32),
-      ],
+      ),
     );
   }
 }

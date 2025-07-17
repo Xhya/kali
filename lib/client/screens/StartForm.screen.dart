@@ -79,7 +79,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
         body: LayoutBuilder(
           builder: (context, constraints) {
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+              padding: const EdgeInsets.symmetric(vertical: 12),
               child: Column(
                 children: [
                   StartFormTopWidget(),
@@ -90,22 +90,23 @@ class _StartFormScreenState extends State<StartFormScreen> {
                         minHeight: constraints.maxHeight,
                       ),
                       child: IntrinsicHeight(
-                        child: Container(
-                          padding: const EdgeInsets.all(16),
-                          child: PageView.builder(
-                            controller: controller,
-                            itemCount: 7,
-                            onPageChanged: (index) {
-                              // TODO
-                            },
-                            itemBuilder: (_, index) {
-                              if (index == 0) {
-                                return StartFormPage2();
-                              } else {
+                        child: PageView.builder(
+                          controller: controller,
+                          itemCount: 7,
+                          onPageChanged: (index) {
+                            // TODO
+                          },
+                          itemBuilder: (_, index) {
+                            switch (index) {
+                              case 0:
                                 return StartFormPage1();
-                              }
-                            },
-                          ),
+                              case 1:
+                                return StartFormPage2();
+
+                              default:
+                                return StartFormPage1();
+                            }
+                          },
                         ),
                       ),
                     ),

@@ -10,8 +10,11 @@ class StartFormPage2 extends StatefulWidget {
 class _StartFormPage2State extends State<StartFormPage2> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Text("Rentrons un peu dans les détails"),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: SingleChildScrollView(
+        child: Text("Rentrons un peu dans les détails"),
+      ),
     );
   }
 }
