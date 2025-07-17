@@ -68,26 +68,35 @@ class _DateInputWidgetState extends State<DateInputWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      onChanged: (value) => updateBirthDate(value),
-      autofocus: true,
-      inputFormatters: [DateTextFormatter()],
-      decoration: InputDecoration(
-        errorText: birthdateErrorText,
-        hintText: "jj/mm/aaaa",
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: style.border.color.color1.color!),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: style.border.color.color1.color!),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-        filled: true,
-        fillColor: style.background.neutral.color,
+    return Container(
+      decoration: BoxDecoration(
+        color: style.background.neutral.color,
+        borderRadius: BorderRadius.circular(16),
       ),
-      keyboardType: TextInputType.datetime,
+      child: TextField(
+        onChanged: (value) => updateBirthDate(value),
+        autofocus: true,
+        inputFormatters: [DateTextFormatter()],
+        decoration: InputDecoration(
+          errorText: birthdateErrorText,
+          hintText: "jj/mm/aaaa",
+          border: InputBorder.none,
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: style.border.color.color1.color!),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.transparent),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          contentPadding: EdgeInsets.symmetric(
+            //vertical: 20,
+            horizontal: 16,
+          ),
+          suffixIcon: Icon(Icons.calendar_today),
+        ),
+        keyboardType: TextInputType.datetime,
+      ),
     );
   }
 }

@@ -35,6 +35,7 @@ class _StartFormPage1State extends State<StartFormPage1> {
               content: size,
               onChanged: (String value) {},
               placeholder: "Ton nom",
+              suffixIcon: Icon(Icons.monitor_weight_outlined),
             ),
 
             SizedBox(height: 32),
@@ -58,7 +59,9 @@ class _StartFormPage1State extends State<StartFormPage1> {
               title: "Ton leitmotiv",
               content: size,
               onChanged: (String value) {},
-              placeholder: t("size"),
+              placeholder: "Un exemple de leitmotiv",
+              suffixIcon: Icon(Icons.note_outlined),
+              maxLines: 3,
             ),
           ],
         ),
