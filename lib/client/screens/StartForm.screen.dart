@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/widgets/StartFormPage1.widget.dart';
 import 'package:kali/client/widgets/StartFormPage2.widget.dart';
+import 'package:kali/client/widgets/StartFormPage3.widget.dart';
+import 'package:kali/client/widgets/StartFormPage4.widget.dart';
 import 'package:kali/client/widgets/StartFormTop.widget.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:provider/provider.dart';
@@ -93,6 +95,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
                         child: PageView.builder(
                           controller: controller,
                           itemCount: 7,
+                          physics: NeverScrollableScrollPhysics(),
                           onPageChanged: (index) {
                             // TODO
                           },
@@ -102,7 +105,10 @@ class _StartFormScreenState extends State<StartFormScreen> {
                                 return StartFormPage1();
                               case 1:
                                 return StartFormPage2();
-
+                              case 2:
+                                return StartFormPage3();
+                              case 3:
+                                return StartFormPage4();
                               default:
                                 return StartFormPage1();
                             }

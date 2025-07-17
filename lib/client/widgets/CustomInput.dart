@@ -11,6 +11,7 @@ class CustomInput extends StatefulWidget {
     this.suffixText,
     this.suffixIcon,
     this.inputFormatters,
+    this.title,
   });
 
   final Function onChanged;
@@ -19,6 +20,7 @@ class CustomInput extends StatefulWidget {
   final String? suffixText;
   final Widget? suffixIcon;
   final List<TextInputFormatter>? inputFormatters;
+  final String? title;
 
   @override
   State<CustomInput> createState() => _CustomInputState();
@@ -46,6 +48,14 @@ class _CustomInputState extends State<CustomInput> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        if (widget.title != null)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Text(
+              widget.title!,
+              style: style.text.neutral.merge(style.fontsize.sm),
+            ),
+          ),
         Container(
           decoration: BoxDecoration(
             color: style.background.neutral.color,

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 
-class StartFormPage2 extends StatefulWidget {
-  const StartFormPage2({super.key});
+class StartFormPage3 extends StatefulWidget {
+  const StartFormPage3({super.key});
 
   @override
-  State<StartFormPage2> createState() => _StartFormPage2State();
+  State<StartFormPage3> createState() => _StartFormPage3State();
 }
 
-class _StartFormPage2State extends State<StartFormPage2> {
+class _StartFormPage3State extends State<StartFormPage3> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,7 +19,7 @@ class _StartFormPage2State extends State<StartFormPage2> {
           children: [
             SizedBox(height: 12),
             Text(
-              "Rentrons un peu dans les détails",
+              "Quel est ton objectif principal ?",
               style: style.text.neutral.merge(style.fontsize.lg),
             ),
             SizedBox(height: 16),
