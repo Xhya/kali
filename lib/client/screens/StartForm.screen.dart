@@ -131,12 +131,15 @@ class _StartFormScreenState extends State<StartFormScreen> {
                   //       ],
                   //     ),
                   //   ),
-                  ButtonWidget(
-                    text: "Suivant",
-                    onPressed: () {
-                      onClickNext();
-                    },
-                    fullWidth: true,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: ButtonWidget(
+                      text: "Suivant",
+                      onPressed: () {
+                        onClickNext();
+                      },
+                      fullWidth: true,
+                    ),
                   ),
 
                   // ButtonWidget(
