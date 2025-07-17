@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 var startFormState = StartFormState();
 
 class StartFormState extends ChangeNotifier {
+  final currentPage = ValueNotifier<int>(0);
+
   final size = ValueNotifier<String>("");
   final weight = ValueNotifier<String>("");
   final age = ValueNotifier<String>("");
@@ -15,6 +17,7 @@ class StartFormState extends ChangeNotifier {
     weight.addListener(notifyListeners);
     age.addListener(notifyListeners);
     isLoading.addListener(notifyListeners);
+    currentPage.addListener(notifyListeners);
   }
 
   @override
@@ -23,6 +26,7 @@ class StartFormState extends ChangeNotifier {
     weight.dispose();
     age.dispose();
     isLoading.dispose();
+    currentPage.dispose();
     super.dispose();
   }
 }

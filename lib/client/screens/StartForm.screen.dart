@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kali/client/widgets/CustomIconButton.widget.dart';
 import 'package:kali/client/widgets/StartFormPage1.widget.dart';
+import 'package:kali/client/widgets/StartFormTop.widget.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
-import 'package:kali/core/services/Error.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
@@ -13,7 +12,6 @@ import 'package:kali/core/actions/startForm.actions.dart';
 import 'package:kali/core/domains/nutriScore.state.dart';
 import 'package:kali/core/services/Translation.service.dart';
 import 'package:kali/client/states/startForm.state.dart';
-import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 String getSubmitButtonText() {
   if (nutriScoreState.personalNutriScore.value == null) {
@@ -21,6 +19,10 @@ String getSubmitButtonText() {
   } else {
     return t('validate');
   }
+}
+
+void onClickNext() {
+  startFormState.currentPage.value = startFormState.currentPage.value + 1;
 }
 
 Future<void> onClickSubmitButton() async {
@@ -65,36 +67,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
               child: Column(
                 children: [
-                  Row(
-                    spacing: 4,
-                    children: [
-                      CustomIconButtonWidget(
-                        onPressed: () {},
-                        icon: Icons.chevron_left_outlined,
-                      ),
-                      SfLinearGauge(
-                        minimum: 0,
-                        maximum: 7,
-                        showLabels: false,
-                        showTicks: false,
-                        orientation: LinearGaugeOrientation.horizontal,
-                        majorTickStyle: LinearTickStyle(length: 20),
-                        axisTrackStyle: LinearAxisTrackStyle(
-                          color: style.background.greenDark.color,
-                          edgeStyle: LinearEdgeStyle.bothCurve,
-                          thickness: 5,
-                        ),
-                        barPointers: [
-                          LinearBarPointer(
-                            value: 1,
-                            color: style.background.green.color,
-                            thickness: 5,
-                            edgeStyle: LinearEdgeStyle.bothCurve,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                  StartFormTopWidget(),
 
                   Expanded(
                     child: SingleChildScrollView(
@@ -109,9 +82,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Expanded(
-                                  child: StartFormPage1()
-                                ),
+                                Expanded(child: StartFormPage1()),
                                 if (personalNutriScore != null)
                                   ExpandedWidget(
                                     child: Wrap(
@@ -131,25 +102,33 @@ class _StartFormScreenState extends State<StartFormScreen> {
                       ),
                     ),
                   ),
+                  // ButtonWidget(
+                  //   text: "Crash",
+                  //   onPressed: () {
+                  //     errorService.notifyError(
+                  //       e: Exception("Crash button pressed"),
+                  //     );
+                  //   },
+                  //   fullWidth: true,
+                  // ),
+
                   ButtonWidget(
-                    text: "Crash",
+                    text: "Suivant",
                     onPressed: () {
-                      errorService.notifyError(
-                        e: Exception("Crash button pressed"),
-                      );
+                      onClickNext();
                     },
                     fullWidth: true,
                   ),
 
-                  ButtonWidget(
-                    text: getSubmitButtonText(),
-                    onPressed: () {
-                      onClickSubmitButton();
-                    },
-                    fullWidth: true,
-                    disabled: isSubmitButtonDisabled,
-                    isLoading: isLoading,
-                  ),
+                  // ButtonWidget(
+                  //   text: getSubmitButtonText(),
+                  //   onPressed: () {
+                  //     onClickSubmitButton();
+                  //   },
+                  //   fullWidth: true,
+                  //   disabled: isSubmitButtonDisabled,
+                  //   isLoading: isLoading,
+                  // ),
                   SizedBox(height: 16),
                 ],
               ),
