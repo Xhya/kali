@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/widgets/CustomIconButton.widget.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/utils/formatters.utils.dart';
@@ -13,6 +14,7 @@ import 'package:kali/core/actions/startForm.actions.dart';
 import 'package:kali/core/domains/nutriScore.state.dart';
 import 'package:kali/core/services/Translation.service.dart';
 import 'package:kali/client/states/startForm.state.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 onUpdateSize(String value) {
   startFormState.size.value = value;
@@ -75,86 +77,136 @@ class _StartFormScreenState extends State<StartFormScreen> {
         backgroundColor: style.background.greenTransparent.color,
         body: LayoutBuilder(
           builder: (context, constraints) {
-            return SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                child: IntrinsicHeight(
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            children: [
-                              CustomInput(
-                                content: size,
-                                onChanged: (String value) {
-                                  onUpdateAge(value);
-                                },
-                                suffixText: "cm",
-                                placeholder: t("size"),
-                                inputFormatters: [onlyNumbersFormatter()],
-                              ),
-                              SizedBox(height: 32),
-                              CustomInput(
-                                content: weight,
-                                onChanged: (value) {
-                                  onUpdateWeight(value);
-                                },
-                                suffixText: "kg",
-                                placeholder: t("weight"),
-                                inputFormatters: [onlyNumbersFormatter()],
-                              ),
-                              SizedBox(height: 32),
-                              CustomInput(
-                                content: age,
-                                onChanged: (value) {
-                                  onUpdateSize(value);
-                                },
-                                suffixText: "ans",
-                                placeholder: t("age"),
-                                inputFormatters: [onlyNumbersFormatter()],
-                              ),
-                              SizedBox(height: 32),
-                            ],
-                          ),
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+              child: Column(
+                children: [
+                  Row(
+                    spacing: 4,
+                    children: [
+                      CustomIconButtonWidget(
+                        onPressed: () {},
+                        icon: Icons.chevron_left_outlined,
+                      ),
+                      SfLinearGauge(
+                        minimum: 0,
+                        maximum: 7,
+                        showLabels: false,
+                        showTicks: false,
+                        orientation: LinearGaugeOrientation.horizontal,
+                        majorTickStyle: LinearTickStyle(length: 20),
+                        axisTrackStyle: LinearAxisTrackStyle(
+                          color: style.background.greenDark.color,
+                          edgeStyle: LinearEdgeStyle.bothCurve,
+                          thickness: 5,
                         ),
-                        if (personalNutriScore != null)
-                          ExpandedWidget(
-                            child: Wrap(
-                              spacing: 12,
-                              runSpacing: 12,
+                        barPointers: [
+                          LinearBarPointer(
+                            value: 1,
+                            color: style.background.green.color,
+                            thickness: 5,
+                            edgeStyle: LinearEdgeStyle.bothCurve,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minHeight: constraints.maxHeight,
+                        ),
+                        child: IntrinsicHeight(
+                          child: Container(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                NutriScore2by2Widget(
-                                  nutriScore: personalNutriScore,
+                                Expanded(
+                                  child: Column(
+                                    children: [
+                                      CustomInput(
+                                        content: size,
+                                        onChanged: (String value) {
+                                          onUpdateAge(value);
+                                        },
+                                        suffixText: "cm",
+                                        placeholder: t("size"),
+                                        inputFormatters: [
+                                          onlyNumbersFormatter(),
+                                        ],
+                                      ),
+                                      SizedBox(height: 32),
+                                      CustomInput(
+                                        content: weight,
+                                        onChanged: (value) {
+                                          onUpdateWeight(value);
+                                        },
+                                        suffixText: "kg",
+                                        placeholder: t("weight"),
+                                        inputFormatters: [
+                                          onlyNumbersFormatter(),
+                                        ],
+                                      ),
+                                      SizedBox(height: 32),
+                                      CustomInput(
+                                        content: age,
+                                        onChanged: (value) {
+                                          onUpdateSize(value);
+                                        },
+                                        suffixText: "ans",
+                                        placeholder: t("age"),
+                                        inputFormatters: [
+                                          onlyNumbersFormatter(),
+                                        ],
+                                      ),
+                                      SizedBox(height: 32),
+                                    ],
+                                  ),
                                 ),
+                                if (personalNutriScore != null)
+                                  ExpandedWidget(
+                                    child: Wrap(
+                                      spacing: 12,
+                                      runSpacing: 12,
+                                      children: [
+                                        NutriScore2by2Widget(
+                                          nutriScore: personalNutriScore,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                               ],
                             ),
                           ),
-                        ButtonWidget(
-                          text: "Crash",
-                          onPressed: () {
-                            errorService.notifyError(e: Exception("Crash button pressed"));
-                          },
-                          fullWidth: true,
                         ),
-
-                        ButtonWidget(
-                          text: getSubmitButtonText(),
-                          onPressed: () {
-                            onClickSubmitButton();
-                          },
-                          fullWidth: true,
-                          disabled: isSubmitButtonDisabled,
-                          isLoading: isLoading,
-                        ),
-                        SizedBox(height: 16),
-                      ],
+                      ),
                     ),
                   ),
-                ),
+                  ButtonWidget(
+                    text: "Crash",
+                    onPressed: () {
+                      errorService.notifyError(
+                        e: Exception("Crash button pressed"),
+                      );
+                    },
+                    fullWidth: true,
+                  ),
+
+                  ButtonWidget(
+                    text: getSubmitButtonText(),
+                    onPressed: () {
+                      onClickSubmitButton();
+                    },
+                    fullWidth: true,
+                    disabled: isSubmitButtonDisabled,
+                    isLoading: isLoading,
+                  ),
+                  SizedBox(height: 16),
+                ],
               ),
             );
           },
