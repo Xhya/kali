@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/states/startForm.state.dart';
+import 'package:kali/client/widgets/DateInput.widget.dart';
 import 'package:kali/core/services/Translation.service.dart';
 import 'package:kali/core/utils/formatters.utils.dart';
 import 'package:provider/provider.dart';
@@ -20,12 +22,16 @@ class _StartFormPage1State extends State<StartFormPage1> {
     String size = context.watch<StartFormState>().size.value;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Faison un peu connaissance"),
+            SizedBox(height: 12),
+            Text(
+              "Faisons un peu connaissance",
+              style: style.text.neutral.merge(style.fontsize.lg),
+            ),
             SizedBox(height: 8),
             CustomInput(
               content: size,
@@ -37,14 +43,10 @@ class _StartFormPage1State extends State<StartFormPage1> {
               inputFormatters: [onlyNumbersFormatter()],
             ),
             SizedBox(height: 32),
-            CustomInput(
-              content: weight,
-              onChanged: (value) {
-                startFormState.weight.value = value;
+            DateInputWidget(
+              onUpdateDate: (String value) {
+                // startFormState.birthdate.value = value;
               },
-              suffixText: "kg",
-              placeholder: t("weight"),
-              inputFormatters: [onlyNumbersFormatter()],
             ),
             SizedBox(height: 32),
             CustomInput(
