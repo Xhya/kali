@@ -15,6 +15,7 @@ class StartFormState extends ChangeNotifier {
   bool get isSubmitButtonDisabled =>
       size.value.isEmpty || weight.value.isEmpty || age.value.isEmpty;
   final genderOption = ValueNotifier<SelectOption?>(null);
+  final objectiveOption = ValueNotifier<SelectOption?>(null);
 
   StartFormState() {
     size.addListener(notifyListeners);
@@ -23,6 +24,7 @@ class StartFormState extends ChangeNotifier {
     isLoading.addListener(notifyListeners);
     currentPage.addListener(notifyListeners);
     genderOption.addListener(notifyListeners);
+    objectiveOption.addListener(notifyListeners);
   }
 
   @override
@@ -33,6 +35,7 @@ class StartFormState extends ChangeNotifier {
     isLoading.dispose();
     currentPage.dispose();
     genderOption.dispose();
+    objectiveOption.dispose();
     super.dispose();
   }
 }

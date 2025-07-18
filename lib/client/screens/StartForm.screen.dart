@@ -101,11 +101,11 @@ class _StartFormScreenState extends State<StartFormScreen> {
                           },
                           itemBuilder: (_, index) {
                             switch (index) {
-                              case 0:
+                              case 1:
                                 return StartFormPage1();
                               case 1:
                                 return StartFormPage2();
-                              case 2:
+                              case 0:
                                 return StartFormPage3();
                               case 3:
                                 return StartFormPage4();
