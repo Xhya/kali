@@ -16,7 +16,9 @@ class ErrorService extends ChangeNotifier {
 
   notifyError({required Object e, StackTrace? stack}) async {
     if (!isInProdEnv) {
-      print(_extractErrorMessage);
+      if (currentResponseError != null) {
+        print(_extractErrorMessage(currentResponseError!));
+      }
     }
 
     error =

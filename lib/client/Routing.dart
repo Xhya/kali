@@ -1,5 +1,6 @@
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/screens/AuthenticationHome.screen.dart';
+import 'package:kali/client/screens/ForceUpdate.screen.dart';
 import 'package:kali/client/screens/Home.screen.dart';
 import 'package:kali/client/screens/Meal.screen.dart';
 import 'package:kali/client/screens/Meals.screen.dart';
@@ -7,10 +8,12 @@ import 'package:kali/client/screens/PersonalNutriScore.screen.dart';
 import 'package:kali/client/screens/StartForm.screen.dart';
 import 'package:kali/client/widgets/RegisterBanner.widget.dart';
 import 'package:kali/client/widgets/TopBanner.widget.dart';
+import 'package:kali/core/actions/checkAppVersion.actions.dart';
 import 'package:kali/core/domains/nutriScore.state.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/connexion.service.dart';
+import 'package:kali/core/states/configuration.state.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
@@ -47,6 +50,7 @@ class _RoutingState extends State<Routing> {
     Widget? bottomSheet = context.watch<NavigationService>().bottomSheet;
     Widget? snackBar = context.watch<NavigationService>().snackBar;
     String? error = context.watch<ErrorService>().error;
+    context.watch<ConfigurationState>().currentVersion;
 
     if (bottomSheet != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -161,7 +165,9 @@ class _RoutingState extends State<Routing> {
       }
     };
 
-    if (nutriScoreState.personalNutriScore.value == null) {
+    if (isUpdateRequired()) {
+      return const ForceUpdateScreen();
+    } else if (nutriScoreState.personalNutriScore.value == null) {
       return const StartFormScreen();
     } else {
       return const Stack(

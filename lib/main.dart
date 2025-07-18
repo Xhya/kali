@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:kali/core/actions/checkAppVersion.actions.dart';
+import 'package:kali/core/states/configuration.state.dart';
 import 'package:kali/core/states/register.state.dart';
 import 'package:kali/core/states/topBanner.state.dart';
 import 'package:kali/core/services/Bugsnag.service.dart';
@@ -30,7 +32,6 @@ void main() async {
   // Bugsnag Monitoring
   await bugsnagService.init();
 
-
   runApp(
     MultiProvider(
       providers: [
@@ -51,6 +52,7 @@ void main() async {
 
         ChangeNotifierProvider(create: (context) => nutriScoreState),
         ChangeNotifierProvider(create: (context) => mealState),
+        ChangeNotifierProvider(create: (context) => configurationState),
       ],
       child: const App(),
     ),
@@ -72,7 +74,8 @@ class App extends StatelessWidget {
       ),
       home: AsyncInitWidget(
         initFunction: () async {
-          connexionService.listenToInternetConnexion();
+          await refreshAppVersion();
+          await connexionService.listenToInternetConnexion();
           await refreshPersonalNutriScore();
           await TranslationService().init();
         },

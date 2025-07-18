@@ -24,9 +24,25 @@ headersWithToken() async {
 
   String? token = await getToken();
 
+  if (token == null) {
+    throw Exception();
+  }
+
   return {
     ...baseHeaders,
     'Authorization': 'Bearer $token',
+    'User-Agent': customUserAgent,
+  };
+}
+
+headersWithMaybeToken() async {
+  final customUserAgent = await getUserAgent();
+
+  String? token = await getToken();
+
+  return {
+    ...baseHeaders,
+    if (token != null) 'Authorization': 'Bearer $token',
     'User-Agent': customUserAgent,
   };
 }
