@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/Utils/Input.decoration.dart';
 
 class CustomInput extends StatefulWidget {
   const CustomInput({
@@ -73,20 +74,9 @@ class _CustomInputState extends State<CustomInput> {
             minLines: 1,
             inputFormatters: widget.inputFormatters,
             cursorColor: style.text.greenDark.color,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.symmetric(
-                // vertical: 12,
-                horizontal: 16,
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: style.border.color.color1.color!),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              // hintText: widget.placeholder,
-              labelStyle: style.text.greenDark,
+            decoration: inputDecoration.copyWith(
+              hintText: widget.placeholder,
               suffixText: widget.suffixText,
-              suffixStyle: style.text.greenDark,
               suffixIcon: widget.suffixIcon,
             ),
           ),

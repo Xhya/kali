@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kali/client/Formatters/DateInputFormatter.utils.dart';
+import 'package:kali/client/Utils/DateInputFormatter.utils.dart';
 import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/Utils/Input.decoration.dart';
 
 class DateInputWidget extends StatefulWidget {
   const DateInputWidget({super.key, required this.onUpdateDate});
@@ -77,22 +78,9 @@ class _DateInputWidgetState extends State<DateInputWidget> {
         onChanged: (value) => updateBirthDate(value),
         autofocus: true,
         inputFormatters: [DateTextFormatter()],
-        decoration: InputDecoration(
+        decoration: inputDecoration.copyWith(
           errorText: birthdateErrorText,
           hintText: "jj/mm/aaaa",
-          border: InputBorder.none,
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: style.border.color.color1.color!),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.transparent),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          contentPadding: EdgeInsets.symmetric(
-            //vertical: 20,
-            horizontal: 16,
-          ),
           suffixIcon: Icon(Icons.calendar_today),
         ),
         keyboardType: TextInputType.datetime,
