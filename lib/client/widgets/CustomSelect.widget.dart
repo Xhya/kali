@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
-import 'package:kali/client/widgets/CustomInput.dart';
+import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 
 class SelectOption {
   final String value;
@@ -20,7 +20,7 @@ class CustomSelectWidget extends StatefulWidget {
 
   final Function onChanged;
   final List<SelectOption> options;
-  final SelectOption selected;
+  final SelectOption? selected;
 
   @override
   State<CustomSelectWidget> createState() => _CustomSelectWidgetState();
@@ -34,7 +34,7 @@ class _CustomSelectWidgetState extends State<CustomSelectWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ...widget.options.map((it) {
-          final isSelected = widget.selected.value == it.value;
+          final isSelected = widget.selected?.value == it.value;
           final backgroundColor =
               isSelected
                   ? style.background.greenLight.color
@@ -42,21 +42,25 @@ class _CustomSelectWidgetState extends State<CustomSelectWidget> {
           final borderColor =
               isSelected ? style.background.green.color! : Colors.transparent;
           final suffixIcon = isSelected ? Icon(Icons.check, size: 20) : null;
-          return Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            width: double.maxFinite,
-            decoration: BoxDecoration(
-              color: backgroundColor,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: borderColor, width: 2),
-            ),
-            child: TextField(
-              readOnly: true,
-              controller: TextEditingController(text: it.label),
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                prefixIcon: it.icon,
-                suffixIcon: suffixIcon,
+          return CustomInkwell(
+            onTap: () {
+              widget.onChanged(it);
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              width: double.maxFinite,
+              decoration: BoxDecoration(
+                color: backgroundColor,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: borderColor, width: 2),
+              ),
+              child: Row(
+                children: [
+                  if (it.icon != null) it.icon!,
+                  const SizedBox(width: 8),
+                  Expanded(child: Text(it.label)),
+                  if (suffixIcon != null) suffixIcon,
+                ],
               ),
             ),
           );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/widgets/CustomSelect.widget.dart';
 
 var startFormState = StartFormState();
 
@@ -13,6 +14,7 @@ class StartFormState extends ChangeNotifier {
   final isLoading = ValueNotifier<bool>(false);
   bool get isSubmitButtonDisabled =>
       size.value.isEmpty || weight.value.isEmpty || age.value.isEmpty;
+  final genderOption = ValueNotifier<SelectOption?>(null);
 
   StartFormState() {
     size.addListener(notifyListeners);
@@ -20,6 +22,7 @@ class StartFormState extends ChangeNotifier {
     age.addListener(notifyListeners);
     isLoading.addListener(notifyListeners);
     currentPage.addListener(notifyListeners);
+    genderOption.addListener(notifyListeners);
   }
 
   @override
@@ -29,6 +32,7 @@ class StartFormState extends ChangeNotifier {
     age.dispose();
     isLoading.dispose();
     currentPage.dispose();
+    genderOption.dispose();
     super.dispose();
   }
 }
