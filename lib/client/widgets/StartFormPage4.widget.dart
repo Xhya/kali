@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/Utils/InputWithTextFormatter.utils.dart';
 import 'package:kali/client/states/startForm.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
@@ -18,7 +19,7 @@ class _StartFormPage4State extends State<StartFormPage4> {
   Widget build(BuildContext context) {
     String age = context.watch<StartFormState>().age.value;
     String weight = context.watch<StartFormState>().weight.value;
-    
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: SingleChildScrollView(
@@ -33,11 +34,13 @@ class _StartFormPage4State extends State<StartFormPage4> {
             SizedBox(height: 16),
 
             CustomInput(
-              title: "Ta taille",
-              content: "size",
+              content: null,
               onChanged: (String value) {},
-              placeholder: "170cm",
-              inputFormatters: [onlyNumbersFormatter()],
+              placeholder: "170 cm",
+              inputFormatters: [
+                onlyNumbersFormatter(),
+                InputWithTextFormatter(),
+              ],
             ),
             SizedBox(height: 32),
             CustomInput(
