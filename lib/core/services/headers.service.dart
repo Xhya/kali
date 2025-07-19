@@ -13,10 +13,19 @@ Future<String> getUserAgent() async {
   return '$baseUserAgent AppVersion:/$version+$build';
 }
 
-var baseHeaders = {
-  "Content-Type": "application/json",
-  'Accept': 'application/json',
-};
+Future<Map<String, String>> getBaseHeaders() async {
+  final secureStorage = FlutterSecureStorage();
+
+  final signature = await secureStorage.read(key: signatureKey);
+  final deviceId = await secureStorage.read(key: deviceIdKey);
+
+  return {
+    "Content-Type": "application/json",
+    'Accept': 'application/json',
+    'X-Device-ID': deviceId ?? "",
+    'X-Device-Signature': signature ?? "",
+  };
+}
 
 headersWithToken() async {
   final customUserAgent = await getUserAgent();
@@ -28,7 +37,7 @@ headersWithToken() async {
   }
 
   return {
-    ...baseHeaders,
+    ...await getBaseHeaders(),
     'Authorization': 'Bearer $token',
     'User-Agent': customUserAgent,
   };
@@ -40,7 +49,7 @@ headersWithMaybeToken() async {
   String? token = await getToken();
 
   return {
-    ...baseHeaders,
+    ...await getBaseHeaders(),
     if (token != null) 'Authorization': 'Bearer $token',
     'User-Agent': customUserAgent,
   };
@@ -49,7 +58,7 @@ headersWithMaybeToken() async {
 headersWithoutToken() async {
   final customUserAgent = await getUserAgent();
 
-  return {...baseHeaders, 'User-Agent': customUserAgent};
+  return {...await getBaseHeaders(), 'User-Agent': customUserAgent};
 }
 
 Future<bool> asToken() async {

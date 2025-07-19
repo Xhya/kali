@@ -27,6 +27,12 @@ class AuthenticationService {
   }
 
   Future<String> generateSignedDeviceId() async {
+    var signature = await secureStorage.read(key: signatureKey);
+
+    if (signature != null) {
+      return signature;
+    }
+
     final deviceId = await secureStorage.read(key: deviceIdKey);
 
     if (deviceId == null) {
@@ -34,7 +40,7 @@ class AuthenticationService {
     }
 
     final hmac = Hmac(sha256, utf8.encode(signatureSecretKey));
-    final signature = hmac.convert(utf8.encode(deviceId)).toString();
+    signature = hmac.convert(utf8.encode(deviceId)).toString();
 
     await secureStorage.write(key: signatureKey, value: signature);
 
@@ -42,8 +48,13 @@ class AuthenticationService {
   }
 
   Future<String> initDeviceId() async {
-    final deviceId = Uuid().v4();
-    await secureStorage.write(key: deviceIdKey, value: deviceId);
+    var deviceId = await secureStorage.read(key: deviceIdKey);
+
+    if (deviceId == null) {
+      deviceId = Uuid().v4();
+      await secureStorage.write(key: deviceIdKey, value: deviceId);
+    }
+
     return deviceId;
   }
 }
