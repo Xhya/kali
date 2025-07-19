@@ -9,6 +9,7 @@ import 'package:kali/client/screens/StartForm.screen.dart';
 import 'package:kali/client/widgets/RegisterBanner.widget.dart';
 import 'package:kali/client/widgets/TopBanner.widget.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
+import 'package:kali/core/services/Authentication.service.dart';
 import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
@@ -165,7 +166,9 @@ class _RoutingState extends State<Routing> {
       }
     };
 
-    if (isUpdateRequired()) {
+    if (!authenticationService.isAuthentifiedWithSignature) {
+      return const AuthenticationHomeScreen();
+    } else if (isUpdateRequired()) {
       return const ForceUpdateScreen();
     } else if (nutriScoreState.personalNutriScore.value == null) {
       return const StartFormScreen();

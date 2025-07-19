@@ -14,19 +14,21 @@ class ErrorService extends ChangeNotifier {
 
   Response? currentResponseError;
 
-  notifyError({required Object e, StackTrace? stack}) async {
+  notifyError({required Object e, StackTrace? stack, bool show = true}) async {
     if (!isInProdEnv) {
       if (currentResponseError != null) {
         print(_extractErrorMessage(currentResponseError!));
       }
     }
 
-    error =
-        isInProdEnv
-            ? t("error_message")
-            : e.toString().isNotEmpty
-            ? e.toString()
-            : t("error_message");
+    if (show) {
+      error =
+          isInProdEnv
+              ? t("error_message")
+              : e.toString().isNotEmpty
+              ? e.toString()
+              : t("error_message");
+    }
 
     if (isInDevEnv || isInProdEnv) {
       await bugsnagService.notify(e: e, stack: stack);

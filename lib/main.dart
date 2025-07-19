@@ -34,7 +34,7 @@ void main() async {
   await bugsnagService.init();
   
   // User identification
-  await AuthenticationService().init();
+  await authenticationService.init();
 
   runApp(
     MultiProvider(
