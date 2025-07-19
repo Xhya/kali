@@ -1,9 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:kali/core/utils/storageKeys.utils.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-
-final tokenKey = "hc_token";
 
 Future<String> getUserAgent() async {
   final packageInfo = await PackageInfo.fromPlatform();

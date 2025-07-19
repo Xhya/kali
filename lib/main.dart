@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
+import 'package:kali/core/services/Authentication.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
 import 'package:kali/core/states/register.state.dart';
 import 'package:kali/core/states/topBanner.state.dart';
@@ -31,6 +32,9 @@ void main() async {
 
   // Bugsnag Monitoring
   await bugsnagService.init();
+  
+  // User identification
+  await AuthenticationService().init();
 
   runApp(
     MultiProvider(

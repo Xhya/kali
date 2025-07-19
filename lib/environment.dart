@@ -5,6 +5,8 @@ const environment = {
   "TEST": bool.fromEnvironment('TEST'),
   "MODE": String.fromEnvironment('MODE'),
 
+  "SIGNATURE_SECRET_KEY": String.fromEnvironment('SIGNATURE_SECRET_KEY'),
+
   "API_URL": String.fromEnvironment('API_URL'),
 
   "GOOGLE_AI_API_KEY": String.fromEnvironment('GOOGLE_AI_API_KEY'),
@@ -20,6 +22,7 @@ final isInLocalEnv = environment["ENVIRONMENT"] == "local";
 final isInDevEnv = environment["ENVIRONMENT"] == "development";
 final isInProdEnv = environment["ENVIRONMENT"] == "production";
 final isInFixturesMode = environment["MODE"] == "fixture";
+final String signatureSecretKey = environment["SIGNATURE_SECRET_KEY"] as String;
 final String googleAIUrl = environment["GOOGLE_AI_URL"] as String;
 final String bugsnagEnvironment = environment["BUGSNAG_ENV"] as String;
 final String bugsnagApiKey = environment["BUGSNAG_API_KEY"] as String;

@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
+import 'package:kali/core/utils/storageKeys.utils.dart';
 import 'package:kali/environment.dart';
 
 final nutriScoreData = NutriScoreData();
-final personalNutriScoreStoreKey = 'hc_personal_nutri_score';
 
 class NutriScoreData {
   final _storage = const FlutterSecureStorage();

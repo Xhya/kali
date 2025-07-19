@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/meal.fixture.dart';
+import 'package:kali/core/utils/storageKeys.utils.dart';
 import 'package:kali/environment.dart';
 
 final mealData = MealData();
-final mealStoreKey = 'hc_meals';
 
 class MealData {
   final _storage = const FlutterSecureStorage();
