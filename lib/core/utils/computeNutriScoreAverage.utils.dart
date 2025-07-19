@@ -1,4 +1,4 @@
-import 'package:kali/core/domains/nutriScore.state.dart';
+import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/services/Error.service.dart';
 
 double? computeNutriScoreAverage(String macroType) {

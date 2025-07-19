@@ -1,6 +1,6 @@
-import 'package:kali/client/states/startForm.state.dart';
+import 'package:kali/core/states/startForm.state.dart';
 import 'package:kali/core/domains/nutriScore.service.dart';
-import 'package:kali/core/domains/nutriScore.state.dart';
+import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/services/AI.service.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';

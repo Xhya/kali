@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:kali/client/layout/Title.scaffold.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
-import 'package:kali/core/domains/nutriScore.state.dart';
+import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/services/Translation.service.dart';
 import 'package:uuid/uuid.dart';
 

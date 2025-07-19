@@ -14,7 +14,7 @@ import 'package:kali/core/services/AI.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/utils/computeDayAverages.utils.dart';
 import 'package:provider/provider.dart';
-import 'package:kali/client/states/quickAddMeal.state.dart';
+import 'package:kali/core/states/quickAddMeal.state.dart';
 import 'package:kali/core/actions/nutriScore.actions.dart';
 
 onClickSelectPeriod(MealPeriodEnum period) {

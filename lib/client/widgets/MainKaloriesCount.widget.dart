@@ -3,7 +3,7 @@ import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/core/utils/computeRemainingCalories.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
-import 'package:kali/core/domains/nutriScore.state.dart';
+import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 

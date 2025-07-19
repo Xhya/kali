@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
-import 'package:kali/client/states/quickAddMeal.state.dart';
+import 'package:kali/core/states/quickAddMeal.state.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/QuickAddMeal.widget.dart';

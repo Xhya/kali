@@ -1,5 +1,5 @@
 import 'package:dart_date/dart_date.dart';
-import 'package:kali/core/domains/meal.state.dart';
+import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 

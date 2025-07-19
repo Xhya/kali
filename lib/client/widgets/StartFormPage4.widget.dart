@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Utils/InputWithTextFormatter.utils.dart';
-import 'package:kali/client/states/startForm.state.dart';
+import 'package:kali/core/states/startForm.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
@@ -39,12 +39,27 @@ class _StartFormPage4State extends State<StartFormPage4> {
               placeholder: "170 cm",
               inputFormatters: [
                 onlyNumbersFormatter(),
-                InputWithTextFormatter(),
+                InputWithTextFormatter(extension: "cm"),
               ],
+              suffixIcon: Icon(Icons.rule),
             ),
-            SizedBox(height: 32),
+
+            SizedBox(height: 4),
+
             CustomInput(
-              content: age,
+              content: null,
+              onChanged: (String value) {},
+              placeholder: "70 kg",
+              inputFormatters: [
+                onlyNumbersFormatter(),
+                InputWithTextFormatter(extension: "kg"),
+              ],
+              suffixIcon: Icon(Icons.rule),
+            ),
+
+            SizedBox(height: 32),
+
+            CustomInput(
               onChanged: (value) {
                 startFormState.age.value = value;
               },

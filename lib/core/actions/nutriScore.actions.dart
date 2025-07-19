@@ -1,6 +1,6 @@
-import 'package:kali/client/states/quickAddMeal.state.dart';
+import 'package:kali/core/states/quickAddMeal.state.dart';
 import 'package:kali/core/domains/meal.service.dart';
-import 'package:kali/core/domains/meal.state.dart';
+import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/services/AI.service.dart';
 import 'package:kali/core/services/Error.service.dart';

@@ -10,9 +10,9 @@ import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/core/actions/startForm.actions.dart';
-import 'package:kali/core/domains/nutriScore.state.dart';
+import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/services/Translation.service.dart';
-import 'package:kali/client/states/startForm.state.dart';
+import 'package:kali/core/states/startForm.state.dart';
 
 String getSubmitButtonText() {
   if (nutriScoreState.personalNutriScore.value == null) {

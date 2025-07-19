@@ -1,7 +1,7 @@
 import 'package:dart_date/dart_date.dart';
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
-import 'package:kali/core/domains/meal.state.dart';
+import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/services/Datetime.extension.dart';
 
 onClickLeftArrow() {

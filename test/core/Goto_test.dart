@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kali/client/states/quickAddMeal.state.dart';
+import 'package:kali/core/states/quickAddMeal.state.dart';
 import 'package:kali/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kali/core/actions/Goto.actions.dart';
 import 'package:kali/core/actions/nutriScore.actions.dart';
-import 'package:kali/core/domains/meal.state.dart';
+import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/models/meal.fixture.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 

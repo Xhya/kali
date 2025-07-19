@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kali/client/states/quickAddMeal.state.dart';
+import 'package:kali/core/states/quickAddMeal.state.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/DateSelector.widget.dart';
@@ -10,7 +10,7 @@ import 'package:kali/client/widgets/NutriScoreGauges.widget.dart';
 import 'package:kali/client/widgets/QuickAddMealButton.widget.dart';
 import 'package:kali/core/actions/Goto.actions.dart';
 import 'package:kali/core/domains/meal.service.dart';
-import 'package:kali/core/domains/meal.state.dart';
+import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/domains/nutriScore.service.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';

@@ -1,5 +1,5 @@
-import 'package:kali/core/domains/meal.state.dart';
-import 'package:kali/core/domains/nutriScore.state.dart';
+import 'package:kali/core/states/meal.state.dart';
+import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 
 void computeDayAverages() {

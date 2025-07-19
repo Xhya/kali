@@ -5,7 +5,7 @@ import 'package:kali/core/models/MacroType.enum.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/models/meal.fixture.dart';
 import 'package:kali/core/utils/getBars.utils.dart';
-import 'package:kali/core/domains/meal.state.dart';
+import 'package:kali/core/states/meal.state.dart';
 
 void main() {
   test('get bars 1', () async {

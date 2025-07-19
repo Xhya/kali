@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kali/client/layout/Title.scaffold.dart';
 import 'package:kali/client/widgets/MealRow.widget.dart';
 import 'package:kali/core/actions/Goto.actions.dart';
-import 'package:kali/core/domains/meal.state.dart';
+import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/services/Translation.service.dart';
 import 'package:provider/provider.dart';
