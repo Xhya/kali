@@ -46,7 +46,7 @@ class _StartFormPage2State extends State<StartFormPage2> {
             ),
             DateInputWidget(
               onUpdateDate: (String value) {
-                // startFormState.birthdate.value = value;
+                startFormState.birthdate.value = value;
               },
             ),
 
