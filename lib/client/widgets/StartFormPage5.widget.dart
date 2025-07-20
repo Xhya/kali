@@ -14,8 +14,7 @@ class StartFormPage5 extends StatefulWidget {
 class _StartFormPage5State extends State<StartFormPage5> {
   @override
   Widget build(BuildContext context) {
-    String age = context.watch<StartFormState>().age.value;
-    String weight = context.watch<StartFormState>().weight.value;
+    SelectOption? lifeOption = context.watch<StartFormState>().lifeOption.value;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -39,26 +38,26 @@ class _StartFormPage5State extends State<StartFormPage5> {
             
             CustomSelectWidget(
               onChanged: (SelectOption? value) {
-                startFormState.objectiveOption.value = value;
+                startFormState.lifeOption.value = value;
               },
               options: [
                 SelectOption(
-                  value: "woman",
+                  value: LifeOptionEnum.sit.label,
                   label: "Principalement assis",
                   icon: Icon(Icons.abc),
                 ),
                 SelectOption(
-                  value: "man",
+                  value: LifeOptionEnum.stand.label,
                   label: "Principalement debout",
                   icon: Icon(Icons.alternate_email),
                 ),
                 SelectOption(
-                  value: "other",
+                  value: LifeOptionEnum.active.label,
                   label: "Très actif",
                   icon: Icon(Icons.apple),
                 ),
               ],
-              selected: null,
+              selected: lifeOption,
             ),
           ],
         ),

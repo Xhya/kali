@@ -40,6 +40,19 @@ enum ObjectiveOptionEnum {
   }
 }
 
+enum LifeOptionEnum {
+  sit('sit'),
+  stand('stand'),
+  active('active');
+
+  const LifeOptionEnum(this.label);
+  final String label;
+
+  factory LifeOptionEnum.fromText(String text) {
+    return LifeOptionEnum.values.firstWhere((it) => it.label == text);
+  }
+}
+
 var startFormState = StartFormState();
 
 class StartFormState extends ChangeNotifier {
@@ -60,7 +73,8 @@ class StartFormState extends ChangeNotifier {
 
   final objectiveOption = ValueNotifier<SelectOption?>(null);
 
-  final age = ValueNotifier<String>("");
+  final lifeOption = ValueNotifier<SelectOption?>(null);
+
   final isLoading = ValueNotifier<bool>(false);
   bool get isNextButtonDisabled {
     if (currentPage.value == 0) {
@@ -75,16 +89,16 @@ class StartFormState extends ChangeNotifier {
           resultOption.value == null;
     } else if (currentPage.value == 3) {
       return objectiveOption.value == null;
+    } else if (currentPage.value == 4) {
+      return lifeOption.value == null;
     } else {
       return objectiveOption.value == null;
     }
   }
 
   StartFormState() {
-    age.addListener(notifyListeners);
     isLoading.addListener(notifyListeners);
     currentPage.addListener(notifyListeners);
-    objectiveOption.addListener(notifyListeners);
 
     userName.addListener(notifyListeners);
     leitmotiv.addListener(notifyListeners);
@@ -96,14 +110,17 @@ class StartFormState extends ChangeNotifier {
     weight.addListener(notifyListeners);
     targetWeight.addListener(notifyListeners);
     resultOption.addListener(notifyListeners);
+
+    objectiveOption.addListener(notifyListeners);
+
+    lifeOption.addListener(notifyListeners);
   }
 
   @override
   void dispose() {
-    age.dispose();
     isLoading.dispose();
     currentPage.dispose();
-    objectiveOption.dispose();
+
     userName.dispose();
     leitmotiv.dispose();
 
@@ -114,6 +131,10 @@ class StartFormState extends ChangeNotifier {
     weight.dispose();
     targetWeight.dispose();
     resultOption.dispose();
+
+    objectiveOption.dispose();
+
+    lifeOption.dispose();
 
     super.dispose();
   }
