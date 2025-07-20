@@ -15,6 +15,18 @@ enum GenderEnum {
   }
 }
 
+enum ResultEnum {
+  quick('quick'),
+  normal('normal');
+
+  const ResultEnum(this.label);
+  final String label;
+
+  factory ResultEnum.fromText(String text) {
+    return ResultEnum.values.firstWhere((it) => it.label == text);
+  }
+}
+
 var startFormState = StartFormState();
 
 class StartFormState extends ChangeNotifier {
@@ -30,14 +42,21 @@ class StartFormState extends ChangeNotifier {
 
   final size = ValueNotifier<String>("");
   final weight = ValueNotifier<String>("");
+  final targetWeight = ValueNotifier<String>("");
+  final resultOption = ValueNotifier<SelectOption?>(null);
+
   final age = ValueNotifier<String>("");
   final isLoading = ValueNotifier<bool>(false);
   bool get isNextButtonDisabled {
     if (currentPage.value == 0) {
-      return userName.value.isEmpty || leitmotiv.value.isEmpty;
+      return userName.value.trim().isEmpty || leitmotiv.value.trim().isEmpty;
     } else if (currentPage.value == 1) {
-      print(birthdate.value.isValidDate());
-      return !birthdate.value.isValidDate() || genderOption.value == null;
+      return !birthdate.value.trim().isValidDate() || genderOption.value == null;
+    } else if (currentPage.value == 2) {
+      return size.value.trim().isEmpty ||
+          weight.value.trim().isEmpty ||
+          targetWeight.value.trim().isEmpty ||
+          resultOption.value == null;
     } else {
       return userName.value.isEmpty ||
           leitmotiv.value.isEmpty ||
@@ -50,8 +69,6 @@ class StartFormState extends ChangeNotifier {
   final objectiveOption = ValueNotifier<SelectOption?>(null);
 
   StartFormState() {
-    size.addListener(notifyListeners);
-    weight.addListener(notifyListeners);
     age.addListener(notifyListeners);
     isLoading.addListener(notifyListeners);
     currentPage.addListener(notifyListeners);
@@ -62,12 +79,15 @@ class StartFormState extends ChangeNotifier {
 
     birthdate.addListener(notifyListeners);
     genderOption.addListener(notifyListeners);
+
+    size.addListener(notifyListeners);
+    weight.addListener(notifyListeners);
+    targetWeight.addListener(notifyListeners);
+    resultOption.addListener(notifyListeners);
   }
 
   @override
   void dispose() {
-    size.dispose();
-    weight.dispose();
     age.dispose();
     isLoading.dispose();
     currentPage.dispose();
@@ -77,6 +97,11 @@ class StartFormState extends ChangeNotifier {
 
     birthdate.dispose();
     genderOption.dispose();
+
+    size.dispose();
+    weight.dispose();
+    targetWeight.dispose();
+    resultOption.dispose();
 
     super.dispose();
   }

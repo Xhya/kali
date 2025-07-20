@@ -17,8 +17,11 @@ class StartFormPage3 extends StatefulWidget {
 class _StartFormPage3State extends State<StartFormPage3> {
   @override
   Widget build(BuildContext context) {
-    SelectOption? objectiveOption =
-        context.watch<StartFormState>().objectiveOption.value;
+    String size = context.watch<StartFormState>().size.value;
+    String weight = context.watch<StartFormState>().weight.value;
+    String targetWeight = context.watch<StartFormState>().targetWeight.value;
+    SelectOption? resultOption =
+        context.watch<StartFormState>().resultOption.value;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -41,8 +44,10 @@ class _StartFormPage3State extends State<StartFormPage3> {
             SizedBox(height: 24),
 
             CustomInput(
-              content: null,
-              onChanged: (String value) {},
+              content: size,
+              onChanged: (String value) {
+                startFormState.size.value = value;
+              },
               placeholder: "170 cm",
               inputFormatters: [
                 onlyNumbersFormatter(),
@@ -54,8 +59,10 @@ class _StartFormPage3State extends State<StartFormPage3> {
             SizedBox(height: 4),
 
             CustomInput(
-              content: null,
-              onChanged: (String value) {},
+              content: weight,
+              onChanged: (String value) {
+                startFormState.weight.value = value;
+              },
               placeholder: "70 kg",
               inputFormatters: [
                 onlyNumbersFormatter(),
@@ -68,8 +75,10 @@ class _StartFormPage3State extends State<StartFormPage3> {
 
             CustomInput(
               title: "Ton poids cible",
-              content: null,
-              onChanged: (String value) {},
+              content: targetWeight,
+              onChanged: (String value) {
+                startFormState.targetWeight.value = value;
+              },
               placeholder: "70 kg",
               inputFormatters: [
                 onlyNumbersFormatter(),
@@ -90,21 +99,21 @@ class _StartFormPage3State extends State<StartFormPage3> {
 
             CustomSelectWidget(
               onChanged: (SelectOption? value) {
-                startFormState.objectiveOption.value = value;
+                startFormState.resultOption.value = value;
               },
               options: [
                 SelectOption(
-                  value: "woman",
+                  value: ResultOptionEnum.quick.label,
                   label: "Rapide",
                   icon: Icon(Icons.abc),
                 ),
                 SelectOption(
-                  value: "man",
+                  value: ResultOptionEnum.normal.label,
                   label: "Normaux",
                   icon: Icon(Icons.alternate_email),
                 ),
               ],
-              selected: objectiveOption,
+              selected: resultOption,
             ),
           ],
         ),
