@@ -81,6 +81,7 @@ class _CustomInputState extends State<CustomInput> {
                 horizontal: 16,
                 vertical: 12,
               ),
+              hintStyle: TextStyle(color: Colors.grey),
               hintText: widget.placeholder,
               suffixText: widget.suffixText,
               suffixIcon: widget.suffixIcon,
