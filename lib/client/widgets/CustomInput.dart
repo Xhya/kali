@@ -71,6 +71,7 @@ class _CustomInputState extends State<CustomInput> {
             onChanged: (value) {
               widget.onChanged(value);
             },
+            autofocus: false,
             style: style.text.greenDark,
             minLines: widget.minLines,
             maxLines: widget.maxLines,

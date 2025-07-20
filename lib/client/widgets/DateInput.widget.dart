@@ -76,7 +76,6 @@ class _DateInputWidgetState extends State<DateInputWidget> {
       ),
       child: TextField(
         onChanged: (value) => updateBirthDate(value),
-        autofocus: true,
         inputFormatters: [DateTextFormatter()],
         decoration: inputDecoration.copyWith(
           errorText: birthdateErrorText,
