@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kali/client/Utils/InputWithTextFormatter.utils.dart';
+import 'package:kali/client/widgets/CustomSelect.widget.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
-import 'package:kali/client/widgets/CustomInput.dart';
-import 'package:kali/core/services/Translation.service.dart';
-import 'package:kali/core/utils/formatters.utils.dart';
 
 class StartFormPage4 extends StatefulWidget {
   const StartFormPage4({super.key});
@@ -28,46 +25,41 @@ class _StartFormPage4State extends State<StartFormPage4> {
           children: [
             SizedBox(height: 12),
             Text(
-              "Où en es-tu actuellement ?",
+              "Quel est ton objectif ? 🎯",
               style: style.text.neutral.merge(style.fontsize.lg),
             ),
-            SizedBox(height: 16),
-
-            CustomInput(
-              content: null,
-              onChanged: (String value) {},
-              placeholder: "170 cm",
-              inputFormatters: [
-                onlyNumbersFormatter(),
-                InputWithTextFormatter(extension: "cm"),
-              ],
-              suffixIcon: Icon(Icons.rule),
-            ),
-
             SizedBox(height: 4),
 
-            CustomInput(
-              content: null,
-              onChanged: (String value) {},
-              placeholder: "70 kg",
-              inputFormatters: [
-                onlyNumbersFormatter(),
-                InputWithTextFormatter(extension: "kg"),
-              ],
-              suffixIcon: Icon(Icons.rule),
+            Text(
+              "Kali s'adapte à ce que tu veux vraiment atteindre.",
+              style: style.text.neutral.merge(style.fontsize.xs),
             ),
 
             SizedBox(height: 32),
-
-            CustomInput(
-              onChanged: (value) {
-                startFormState.age.value = value;
+            
+            CustomSelectWidget(
+              onChanged: (SelectOption? value) {
+                startFormState.objectiveOption.value = value;
               },
-              suffixText: "ans",
-              placeholder: t("age"),
-              inputFormatters: [onlyNumbersFormatter()],
+              options: [
+                SelectOption(
+                  value: "woman",
+                  label: "Perdre du poids",
+                  icon: Icon(Icons.abc),
+                ),
+                SelectOption(
+                  value: "man",
+                  label: "Prendre du muscle",
+                  icon: Icon(Icons.alternate_email),
+                ),
+                SelectOption(
+                  value: "other",
+                  label: "Garder la forme",
+                  icon: Icon(Icons.apple),
+                ),
+              ],
+              selected: null,
             ),
-            SizedBox(height: 32),
           ],
         ),
       ),
