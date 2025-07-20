@@ -31,7 +31,7 @@ class _StartFormTopWidgetState extends State<StartFormTopWidget> {
           ),
           SfLinearGauge(
             minimum: 0,
-            maximum: 7,
+            maximum: 5,
             showLabels: false,
             showTicks: false,
             orientation: LinearGaugeOrientation.horizontal,

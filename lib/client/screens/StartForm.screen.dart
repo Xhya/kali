@@ -7,7 +7,6 @@ import 'package:kali/client/widgets/StartFormPage4.widget.dart';
 import 'package:kali/client/widgets/StartFormPage5.widget.dart';
 import 'package:kali/client/widgets/StartFormPageFinal.widget.dart';
 import 'package:kali/client/widgets/StartFormTop.widget.dart';
-import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
@@ -25,21 +24,25 @@ String getSubmitButtonText() {
 }
 
 void onClickNext() {
-  startFormState.currentPage.value = startFormState.currentPage.value + 1;
-  startFormState.controller.value.animateToPage(
-    startFormState.currentPage.value,
-    duration: const Duration(milliseconds: 400),
-    curve: Curves.easeInOut,
-  );
+  if (startFormState.currentPage.value < 5) {
+    startFormState.currentPage.value = startFormState.currentPage.value + 1;
+    startFormState.controller.value.animateToPage(
+      startFormState.currentPage.value,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
+    );
+  }
 }
 
 void onClickPrevious() {
-  startFormState.currentPage.value = startFormState.currentPage.value - 1;
-  startFormState.controller.value.animateToPage(
-    startFormState.currentPage.value,
-    duration: const Duration(milliseconds: 400),
-    curve: Curves.easeInOut,
-  );
+  if (startFormState.currentPage.value > 1) {
+    startFormState.currentPage.value = startFormState.currentPage.value - 1;
+    startFormState.controller.value.animateToPage(
+      startFormState.currentPage.value,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
+    );
+  }
 }
 
 Future<void> onClickSubmitButton() async {
@@ -72,6 +75,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
     bool isNextButtonDisabled =
         context.watch<StartFormState>().isNextButtonDisabled;
     bool isLoading = context.watch<StartFormState>().isLoading.value;
+    context.watch<StartFormState>().currentPage.value;
     PageController controller =
         context.watch<StartFormState>().controller.value;
 
@@ -91,9 +95,6 @@ class _StartFormScreenState extends State<StartFormScreen> {
                     controller: controller,
                     itemCount: 6,
                     physics: NeverScrollableScrollPhysics(),
-                    onPageChanged: (index) {
-                      // TODO
-                    },
                     itemBuilder: (_, index) {
                       switch (index) {
                         case 0:
@@ -142,7 +143,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
           onClick: () {
             onClickNext();
           },
-          text: "suivant",
+          text: startFormState.isFormDone ? "terminer" : "suivant",
           iconWidget: Icon(Icons.arrow_forward, size: 20),
           disabled: isNextButtonDisabled,
         ),
