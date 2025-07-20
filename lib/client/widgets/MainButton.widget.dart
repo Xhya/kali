@@ -67,7 +67,7 @@ class _MainButtonState extends State<MainButtonWidget> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                widget.iconWidget!,
+                if (widget.iconWidget != null) widget.iconWidget!,
                 const SizedBox(width: 8),
                 Text(
                   widget.text!,
