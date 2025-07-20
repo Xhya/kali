@@ -69,21 +69,30 @@ class _DateInputWidgetState extends State<DateInputWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: style.background.neutral.color,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: TextField(
-        onChanged: (value) => updateBirthDate(value),
-        inputFormatters: [DateTextFormatter()],
-        decoration: inputDecoration.copyWith(
-          errorText: birthdateErrorText,
-          hintText: "jj/mm/aaaa",
-          suffixIcon: Icon(Icons.calendar_today),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: style.background.neutral.color,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: TextField(
+            onChanged: (value) => updateBirthDate(value),
+            inputFormatters: [DateTextFormatter()],
+            decoration: inputDecoration.copyWith(
+              hintText: "jj/mm/aaaa",
+              suffixIcon: Icon(Icons.calendar_today),
+            ),
+            keyboardType: TextInputType.datetime,
+          ),
         ),
-        keyboardType: TextInputType.datetime,
-      ),
+        if (birthdateErrorText != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 4, left: 4),
+            child: Text(birthdateErrorText!, style: style.text.error),
+          ),
+      ],
     );
   }
 }

@@ -78,6 +78,8 @@ class TextColors {
   final green = TextStyle(color: _green_800);
   final greenLight = TextStyle(color: _green_300);
 
+  final error = TextStyle(color: Colors.red);
+
   final reverse_neutral = TextStyle(color: _white);
 }
 
