@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ExpandedWidget extends StatefulWidget {
-  const ExpandedWidget({super.key, required this.child});
+  const ExpandedWidget({super.key, required this.child, this.height = 220});
 
   final Widget child;
+  final int height;
 
   @override
   State<ExpandedWidget> createState() => _ExpandedWidgetState();
@@ -37,7 +38,7 @@ class _ExpandedWidgetState extends State<ExpandedWidget> {
         curve: Curves.easeInOut,
         alignment: Alignment.center,
         width: isExpanded ? double.maxFinite : 0,
-        height: isExpanded ? 220 : 0,
+        height: isExpanded ? widget.height.toDouble() : 0,
         padding: EdgeInsets.symmetric(vertical: 4),
         child: widget.child,
       ),
