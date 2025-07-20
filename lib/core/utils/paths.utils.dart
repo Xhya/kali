@@ -1,0 +1,1 @@
+final imagesPath = "assets/images";

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kali/core/services/connexion.service.dart';
+import 'package:kali/core/utils/paths.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/MaybeConnexionMissingWidget.widget.dart';
@@ -41,7 +42,7 @@ class _BaseScaffoldState extends State<BaseScaffold>
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/header-photo.jpg"),
+                  image: AssetImage("$imagesPath/header-photo.jpg"),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -58,20 +59,21 @@ class _BaseScaffoldState extends State<BaseScaffold>
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            RichText(
-                              text: TextSpan(
-                                style: style.text.reverse_neutral
-                                    .merge(style.fontsize.xl)
-                                    .merge(style.fontweight.bold),
-                                children: <TextSpan>[
-                                  TextSpan(text: "Kali"),
-                                  TextSpan(
-                                    text: ",",
-                                    style: style.text.greenLight,
-                                  ),
-                                ],
-                              ),
-                            ),
+                            Image.asset('$imagesPath/logo-white-700.png', height: 32),
+                            // RichText(
+                            //   text: TextSpan(
+                            //     style: style.text.reverse_neutral
+                            //         .merge(style.fontsize.xl)
+                            //         .merge(style.fontweight.bold),
+                            //     children: <TextSpan>[
+                            //       TextSpan(text: "Kali"),
+                            //       TextSpan(
+                            //         text: ",",
+                            //         style: style.text.greenLight,
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                             Text(
                               "tu racontes, je compte",
                               style: style.text.reverse_neutral.merge(
