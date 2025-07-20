@@ -15,15 +15,15 @@ void main() {
 
   test('start form scenario', () async {
     expect(nutriScoreState.personalNutriScore.value, null);
-    expect(startFormState.isSubmitButtonDisabled, true);
+    expect(startFormState.isNextButtonDisabled, true);
     var text = getSubmitButtonText();
     expect(text, t('compute'));
     onUpdateSize("170");
-    expect(startFormState.isSubmitButtonDisabled, true);
+    expect(startFormState.isNextButtonDisabled, true);
     onUpdateWeight("81");
-    expect(startFormState.isSubmitButtonDisabled, true);
+    expect(startFormState.isNextButtonDisabled, true);
     onUpdateAge("37");
-    expect(startFormState.isSubmitButtonDisabled, false);
+    expect(startFormState.isNextButtonDisabled, false);
     await onClickSubmitButton();
     expect(nutriScoreState.personalNutriScore.value, isNotNull);
     expect(

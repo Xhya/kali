@@ -69,10 +69,8 @@ class _StartFormScreenState extends State<StartFormScreen> {
 
   @override
   Widget build(BuildContext context) {
-    NutriScore? personalNutriScore =
-        context.watch<NutriScoreState>().personalNutriScore.value;
-    bool isSubmitButtonDisabled =
-        context.watch<StartFormState>().isSubmitButtonDisabled;
+    bool isNextButtonDisabled =
+        context.watch<StartFormState>().isNextButtonDisabled;
     bool isLoading = context.watch<StartFormState>().isLoading.value;
     PageController controller =
         context.watch<StartFormState>().controller.value;
@@ -146,6 +144,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
           },
           text: "suivant",
           iconWidget: Icon(Icons.arrow_forward, size: 20),
+          disabled: isNextButtonDisabled,
         ),
       ),
     );

@@ -14,7 +14,8 @@ class StartFormPage1 extends StatefulWidget {
 class _StartFormPage1State extends State<StartFormPage1> {
   @override
   Widget build(BuildContext context) {
-    String size = context.watch<StartFormState>().size.value;
+    String userName = context.watch<StartFormState>().userName.value;
+    String leitmotiv = context.watch<StartFormState>().leitmotiv.value;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -29,7 +30,7 @@ class _StartFormPage1State extends State<StartFormPage1> {
             ),
             SizedBox(height: 4),
             Text(
-              "Choisis ton pseudo et partage ton pourquoi. C’est ton point de départ.",
+              "Choisis ton pseudo et partage ton pourquoi. C'est ton point de départ.",
               style: style.text.neutral.merge(style.fontsize.xs),
             ),
 
@@ -37,8 +38,10 @@ class _StartFormPage1State extends State<StartFormPage1> {
 
             CustomInput(
               title: "Ton nom d'utilisateur",
-              content: size,
-              onChanged: (String value) {},
+              content: userName,
+              onChanged: (String value) {
+                startFormState.userName.value = value;
+              },
               placeholder: "Mama kitchen",
               suffixIcon: Icon(Icons.monitor_weight_outlined),
             ),
@@ -47,9 +50,12 @@ class _StartFormPage1State extends State<StartFormPage1> {
 
             CustomInput(
               title: "Ton leitmotiv",
-              content: size,
-              onChanged: (String value) {},
-              placeholder: "Je veux changer pour moi, pour me prouver que j’en suis capable.",
+              content: leitmotiv,
+              onChanged: (String value) {
+                startFormState.leitmotiv.value = value;
+              },
+              placeholder:
+                  "Je veux changer pour moi, pour me prouver que j'en suis capable.",
               suffixIcon: Icon(Icons.note_outlined),
               minLines: 3,
               maxLines: 4,

@@ -8,12 +8,25 @@ class StartFormState extends ChangeNotifier {
 
   final currentPage = ValueNotifier<int>(0);
 
+  final userName = ValueNotifier<String>("");
+  final leitmotiv = ValueNotifier<String>("");
+
   final size = ValueNotifier<String>("");
   final weight = ValueNotifier<String>("");
   final age = ValueNotifier<String>("");
   final isLoading = ValueNotifier<bool>(false);
-  bool get isSubmitButtonDisabled =>
-      size.value.isEmpty || weight.value.isEmpty || age.value.isEmpty;
+  bool get isNextButtonDisabled {
+    if (currentPage.value == 0) {
+      return userName.value.isEmpty || leitmotiv.value.isEmpty;
+    } else {
+      return userName.value.isEmpty ||
+          leitmotiv.value.isEmpty ||
+          size.value.isEmpty ||
+          weight.value.isEmpty ||
+          age.value.isEmpty;
+    }
+  }
+
   final genderOption = ValueNotifier<SelectOption?>(null);
   final objectiveOption = ValueNotifier<SelectOption?>(null);
 
@@ -25,6 +38,8 @@ class StartFormState extends ChangeNotifier {
     currentPage.addListener(notifyListeners);
     genderOption.addListener(notifyListeners);
     objectiveOption.addListener(notifyListeners);
+    userName.addListener(notifyListeners);
+    leitmotiv.addListener(notifyListeners);
   }
 
   @override
@@ -36,6 +51,8 @@ class StartFormState extends ChangeNotifier {
     currentPage.dispose();
     genderOption.dispose();
     objectiveOption.dispose();
+    userName.dispose();
+    leitmotiv.dispose();
     super.dispose();
   }
 }

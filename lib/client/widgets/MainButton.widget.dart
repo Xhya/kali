@@ -7,11 +7,13 @@ class MainButtonWidget extends StatefulWidget {
     required this.onClick,
     this.text,
     this.iconWidget,
+    this.disabled = false,
   });
 
   final VoidCallback onClick;
   final String? text;
   final Widget? iconWidget;
+  final bool disabled;
 
   @override
   State<MainButtonWidget> createState() => _MainButtonState();
@@ -22,18 +24,25 @@ class _MainButtonState extends State<MainButtonWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final backgroundColor =
+        widget.disabled ? Colors.grey : style.background.green.color;
+
     return GestureDetector(
       onTapDown: (_) async {
-        setState(() {
-          _bottomPadding = 1;
-        });
+        if (!widget.disabled) {
+          setState(() {
+            _bottomPadding = 1;
+          });
+        }
       },
       onTapUp: (_) async {
-        await Future.delayed(const Duration(milliseconds: 100));
-        widget.onClick();
-        setState(() {
-          _bottomPadding = 4;
-        });
+        if (!widget.disabled) {
+          await Future.delayed(const Duration(milliseconds: 100));
+          widget.onClick();
+          setState(() {
+            _bottomPadding = 4;
+          });
+        }
       },
       child: Container(
         padding: EdgeInsets.only(
@@ -58,10 +67,7 @@ class _MainButtonState extends State<MainButtonWidget> {
           child: Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: style.background.green.color,
-              border: Border(
-                bottom: BorderSide(color: style.background.greenLight.color!),
-              ),
+              color: backgroundColor,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
