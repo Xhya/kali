@@ -13,6 +13,7 @@ class CustomInput extends StatefulWidget {
     this.suffixIcon,
     this.inputFormatters,
     this.title,
+    this.minLines = 1,
     this.maxLines = 1,
   });
 
@@ -23,6 +24,7 @@ class CustomInput extends StatefulWidget {
   final Widget? suffixIcon;
   final List<TextInputFormatter>? inputFormatters;
   final String? title;
+  final int minLines;
   final int maxLines;
 
   @override
@@ -70,11 +72,15 @@ class _CustomInputState extends State<CustomInput> {
               widget.onChanged(value);
             },
             style: style.text.greenDark,
+            minLines: widget.minLines,
             maxLines: widget.maxLines,
-            minLines: 1,
             inputFormatters: widget.inputFormatters,
             cursorColor: style.text.greenDark.color,
             decoration: inputDecoration.copyWith(
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 12,
+              ),
               hintText: widget.placeholder,
               suffixText: widget.suffixText,
               suffixIcon: widget.suffixIcon,

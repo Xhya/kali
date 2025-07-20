@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/core/states/startForm.state.dart';
-import 'package:kali/client/widgets/DateInput.widget.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 
@@ -25,31 +24,23 @@ class _StartFormPage1State extends State<StartFormPage1> {
           children: [
             SizedBox(height: 12),
             Text(
-              "Faisons un peu connaissance",
+              "Faisons connaissance 👋🏼",
               style: style.text.neutral.merge(style.fontsize.lg),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 4),
+            Text(
+              "Choisis ton pseudo et partage ton pourquoi. C’est ton point de départ.",
+              style: style.text.neutral.merge(style.fontsize.xs),
+            ),
+
+            SizedBox(height: 44),
 
             CustomInput(
+              title: "Ton nom d'utilisateur",
               content: size,
               onChanged: (String value) {},
-              placeholder: "Ton nom",
+              placeholder: "Mama kitchen",
               suffixIcon: Icon(Icons.monitor_weight_outlined),
-            ),
-
-            SizedBox(height: 32),
-
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: Text(
-                "Ta date de naissance",
-                style: style.text.neutral.merge(style.fontsize.sm),
-              ),
-            ),
-            DateInputWidget(
-              onUpdateDate: (String value) {
-                // startFormState.birthdate.value = value;
-              },
             ),
 
             SizedBox(height: 32),
@@ -58,9 +49,10 @@ class _StartFormPage1State extends State<StartFormPage1> {
               title: "Ton leitmotiv",
               content: size,
               onChanged: (String value) {},
-              placeholder: "Un exemple de leitmotiv",
+              placeholder: "Je veux changer pour moi, pour me prouver que j’en suis capable.",
               suffixIcon: Icon(Icons.note_outlined),
-              maxLines: 3,
+              minLines: 3,
+              maxLines: 4,
             ),
           ],
         ),
