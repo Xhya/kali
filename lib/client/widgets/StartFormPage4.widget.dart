@@ -14,8 +14,7 @@ class StartFormPage4 extends StatefulWidget {
 class _StartFormPage4State extends State<StartFormPage4> {
   @override
   Widget build(BuildContext context) {
-    String age = context.watch<StartFormState>().age.value;
-    String weight = context.watch<StartFormState>().weight.value;
+    SelectOption? objectiveOption = context.watch<StartFormState>().objectiveOption.value;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -43,22 +42,22 @@ class _StartFormPage4State extends State<StartFormPage4> {
               },
               options: [
                 SelectOption(
-                  value: "woman",
+                  value: ObjectiveOptionEnum.loseWeight.label,
                   label: "Perdre du poids",
                   icon: Icon(Icons.abc),
                 ),
                 SelectOption(
-                  value: "man",
+                  value: ObjectiveOptionEnum.gainMuscle.label,
                   label: "Prendre du muscle",
                   icon: Icon(Icons.alternate_email),
                 ),
                 SelectOption(
-                  value: "other",
+                  value: ObjectiveOptionEnum.maintainWeight.label,
                   label: "Garder la forme",
                   icon: Icon(Icons.apple),
                 ),
               ],
-              selected: null,
+              selected: objectiveOption,
             ),
           ],
         ),

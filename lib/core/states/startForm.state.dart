@@ -15,15 +15,28 @@ enum GenderEnum {
   }
 }
 
-enum ResultEnum {
+enum ResultOptionEnum {
   quick('quick'),
   normal('normal');
 
-  const ResultEnum(this.label);
+  const ResultOptionEnum(this.label);
   final String label;
 
-  factory ResultEnum.fromText(String text) {
-    return ResultEnum.values.firstWhere((it) => it.label == text);
+  factory ResultOptionEnum.fromText(String text) {
+    return ResultOptionEnum.values.firstWhere((it) => it.label == text);
+  }
+}
+
+enum ObjectiveOptionEnum {
+  loseWeight('lose_weight'),
+  maintainWeight('maintain_weight'),
+  gainMuscle('gain_muscle');
+
+  const ObjectiveOptionEnum(this.label);
+  final String label;
+
+  factory ObjectiveOptionEnum.fromText(String text) {
+    return ObjectiveOptionEnum.values.firstWhere((it) => it.label == text);
   }
 }
 
@@ -45,28 +58,27 @@ class StartFormState extends ChangeNotifier {
   final targetWeight = ValueNotifier<String>("");
   final resultOption = ValueNotifier<SelectOption?>(null);
 
+  final objectiveOption = ValueNotifier<SelectOption?>(null);
+
   final age = ValueNotifier<String>("");
   final isLoading = ValueNotifier<bool>(false);
   bool get isNextButtonDisabled {
     if (currentPage.value == 0) {
       return userName.value.trim().isEmpty || leitmotiv.value.trim().isEmpty;
     } else if (currentPage.value == 1) {
-      return !birthdate.value.trim().isValidDate() || genderOption.value == null;
+      return !birthdate.value.trim().isValidDate() ||
+          genderOption.value == null;
     } else if (currentPage.value == 2) {
       return size.value.trim().isEmpty ||
           weight.value.trim().isEmpty ||
           targetWeight.value.trim().isEmpty ||
           resultOption.value == null;
+    } else if (currentPage.value == 3) {
+      return objectiveOption.value == null;
     } else {
-      return userName.value.isEmpty ||
-          leitmotiv.value.isEmpty ||
-          size.value.isEmpty ||
-          weight.value.isEmpty ||
-          age.value.isEmpty;
+      return objectiveOption.value == null;
     }
   }
-
-  final objectiveOption = ValueNotifier<SelectOption?>(null);
 
   StartFormState() {
     age.addListener(notifyListeners);
