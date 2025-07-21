@@ -2,6 +2,18 @@ import 'package:kali/core/domains/nutriScore.repository.dart';
 import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 
+class NutriScoreService {
+  final NutriScoreRepository nutriScoreRepository = NutriScoreRepository();
+
+  Future<NutriScore?> computePersonalNutriScore(
+    PersonalNutriScoreFormData formData,
+  ) async {
+    final personalNutriScore = await nutriScoreRepository
+        .computePersonalNutriScore(formData);
+    return personalNutriScore;
+  }
+}
+
 Future<void> refreshPersonalNutriScore() async {
   final personalNutriScore =
       await NutriScoreRepository().getPersonalNutriScore();

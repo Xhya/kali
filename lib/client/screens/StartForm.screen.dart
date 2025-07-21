@@ -16,8 +16,10 @@ import 'package:kali/core/actions/startForm.actions.dart';
 
 void onClickBottomButton() async {
   if (nutriScoreState.personalNutriScore.value != null) {
-    await validateNutriScore();
+    // add try catch
+    await validatePersonalNutriScore();
   } else if (startFormState.isFormDone) {
+    // add try catch
     await computePersonalNutriScore();
     onClickNext();
   } else {
@@ -45,18 +47,6 @@ void onClickPrevious() {
       curve: Curves.easeInOut,
     );
   }
-}
-
-Future<void> computePersonalNutriScore() async {
-  startFormState.isLoading.value = true;
-  await onComputePersonalNutriScore();
-  startFormState.isLoading.value = false;
-}
-
-Future<void> validateNutriScore() async {
-  startFormState.isLoading.value = true;
-  await onValidatePersonalNutriScore();
-  startFormState.isLoading.value = false;
 }
 
 class StartFormScreen extends StatefulWidget {
