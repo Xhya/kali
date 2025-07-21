@@ -1,12 +1,11 @@
 import 'package:kali/core/domains/configurations.repository.dart';
+import 'package:kali/core/domains/hardware.service.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 Future<void> refreshAppVersion() async {
   try {
-    final packageInfo = await PackageInfo.fromPlatform();
-    configurationState.currentVersion.value = packageInfo.version;
+    configurationState.currentVersion.value = await HardwareService().getCurrentVersion();
     configurationState.minimalVersion.value = await ConfigurationsRepository()
         .getConfig(ConfigKeyEnum.forceUpdateVersion);
   } catch (e, stack) {
