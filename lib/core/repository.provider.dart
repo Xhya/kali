@@ -7,12 +7,12 @@ get<T>() {
 
   if (!getMock) {
     switch (T) {
-      case HardwareRepository _:
+      case HardwareRepository:
         return HardwareRepository();
     }
   } else {
     switch (T) {
-      case HardwareRepository _:
+      case HardwareRepository:
         return HardwareRepositoryMock();
     }
   }

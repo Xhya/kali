@@ -7,19 +7,20 @@ import 'package:kali/client/widgets/StartFormPage4.widget.dart';
 import 'package:kali/client/widgets/StartFormPage5.widget.dart';
 import 'package:kali/client/widgets/StartFormPageFinal.widget.dart';
 import 'package:kali/client/widgets/StartFormTop.widget.dart';
+import 'package:kali/core/states/nutriScore.state.dart';
+import 'package:kali/core/states/startForm.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/core/actions/startForm.actions.dart';
-import 'package:kali/core/states/nutriScore.state.dart';
-import 'package:kali/core/services/Translation.service.dart';
-import 'package:kali/core/states/startForm.state.dart';
 
-String getSubmitButtonText() {
-  if (nutriScoreState.personalNutriScore.value == null) {
-    return t('compute');
+void onClickBottomButton() {
+  if (nutriScoreState.personalNutriScore.value != null) {
+    validateNutriScore();
+  } else if (startFormState.isFormDone) {
+    computePersonalNutriScore();
   } else {
-    return t('validate');
+    onClickNext();
   }
 }
 
@@ -45,16 +46,16 @@ void onClickPrevious() {
   }
 }
 
-Future<void> onClickSubmitButton() async {
-  if (nutriScoreState.personalNutriScore.value == null) {
-    startFormState.isLoading.value = true;
-    await onComputePersonalNutriScore();
-    startFormState.isLoading.value = false;
-  } else {
-    startFormState.isLoading.value = true;
-    await onValidatePersonalNutriScore();
-    startFormState.isLoading.value = false;
-  }
+Future<void> computePersonalNutriScore() async {
+  startFormState.isLoading.value = true;
+  await onComputePersonalNutriScore();
+  startFormState.isLoading.value = false;
+}
+
+Future<void> validateNutriScore() async {
+  startFormState.isLoading.value = true;
+  await onValidatePersonalNutriScore();
+  startFormState.isLoading.value = false;
 }
 
 class StartFormScreen extends StatefulWidget {
@@ -141,7 +142,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
         ),
         floatingActionButton: MainButtonWidget(
           onClick: () {
-            onClickNext();
+            onClickBottomButton();
           },
           text: startFormState.isFormDone ? "terminer" : "suivant",
           iconWidget: Icon(Icons.arrow_forward, size: 20),

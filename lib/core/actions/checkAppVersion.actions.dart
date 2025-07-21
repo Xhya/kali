@@ -20,7 +20,6 @@ bool isUpdateRequired() {
 
     return _isVersionLower(currentVersion, minimalVersion);
   } catch (e, stack) {
-    print(e);
     errorService.notifyError(e: e, stack: stack);
     return true;
   }
