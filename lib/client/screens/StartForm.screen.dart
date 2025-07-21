@@ -14,11 +14,12 @@ import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/core/actions/startForm.actions.dart';
 
-void onClickBottomButton() {
+void onClickBottomButton() async {
   if (nutriScoreState.personalNutriScore.value != null) {
-    validateNutriScore();
+    await validateNutriScore();
   } else if (startFormState.isFormDone) {
-    computePersonalNutriScore();
+    await computePersonalNutriScore();
+    onClickNext();
   } else {
     onClickNext();
   }

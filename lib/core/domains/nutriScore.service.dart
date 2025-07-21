@@ -19,7 +19,3 @@ Future<void> refreshPersonalNutriScore() async {
 Future<void> setPersonalNutriScore(NutriScore nutriScore) async {
   await NutriScoreRepository().setPersonalNutriScore(nutriScore);
 }
-
-Future<NutriScore> computeNutriScore(String userText) async {
-  return await NutriScoreRepository().computeNutriScore(userText);
-}

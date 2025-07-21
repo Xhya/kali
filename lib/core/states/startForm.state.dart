@@ -59,7 +59,7 @@ class StartFormState extends ChangeNotifier {
   final controller = ValueNotifier<PageController>(PageController());
 
   final currentPage = ValueNotifier<int>(0);
-  bool get isFormDone => currentPage.value == 5;
+  bool get isFormDone => currentPage.value == 4;
 
   final userName = ValueNotifier<String>("");
   final leitmotiv = ValueNotifier<String>("");

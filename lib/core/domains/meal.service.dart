@@ -1,6 +1,7 @@
 import 'package:dart_date/dart_date.dart';
 import 'package:kali/core/domains/meal.repository.dart';
 import 'package:kali/core/models/Meal.model.dart';
+import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/states/meal.state.dart';
 
@@ -29,4 +30,8 @@ addMeal(MealModel meal) async {
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);
   }
+}
+
+Future<NutriScore?> computeNutriScore(String userText) async {
+  return await MealRepository().computeNutriScore(userText);
 }

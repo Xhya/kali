@@ -1,4 +1,3 @@
-import 'package:kali/core/domains/nutriScore.service.dart';
 import 'package:kali/core/states/quickAddMeal.state.dart';
 import 'package:kali/core/domains/meal.service.dart';
 import 'package:kali/core/states/meal.state.dart';
