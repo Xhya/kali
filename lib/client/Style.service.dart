@@ -93,6 +93,7 @@ class CustomBorder {
 
 class BorderColors {
   final color1 = TextStyle(color: _green_600);
+  final color2 = TextStyle(color: _grey_middle);
 }
 
 class BorderSizes {

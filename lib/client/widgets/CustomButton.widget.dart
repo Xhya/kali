@@ -66,7 +66,7 @@ class ButtonWidget extends StatelessWidget {
         borderColor = null;
     }
 
-    return Container(
+    return SizedBox(
       width: fullWidth ? double.infinity : null,
       child: CustomInkwell(
         onTap: isButtonDisabled ? () {} : onPressed,
