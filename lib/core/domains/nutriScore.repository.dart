@@ -48,6 +48,7 @@ class NutriScoreRepository {
     Map body = {
       "userName": formData.userName,
       "leitmotiv": formData.leitmotiv,
+      "birthdate": formData.birthdate,
       "gender": formData.gender,
       "size": formData.size,
       "weight": formData.weight,
@@ -64,7 +65,8 @@ class NutriScoreRepository {
     );
 
     if (response.statusCode == 200) {
-      return NutriScore.fromJson(json.decode(response.body));
+      final body = json.decode(response.body);
+      return NutriScore.fromJson(body["data"]);
     } else {
       errorService.currentResponseError = response;
       throw Exception();

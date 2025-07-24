@@ -7,6 +7,7 @@ import 'package:kali/client/widgets/StartFormPage4.widget.dart';
 import 'package:kali/client/widgets/StartFormPage5.widget.dart';
 import 'package:kali/client/widgets/StartFormPageFinal.widget.dart';
 import 'package:kali/client/widgets/StartFormTop.widget.dart';
+import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:provider/provider.dart';
@@ -15,15 +16,17 @@ import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/core/actions/startForm.actions.dart';
 
 void onClickBottomButton() async {
-  if (nutriScoreState.personalNutriScore.value != null) {
-    // add try catch
-    await validatePersonalNutriScore();
-  } else if (startFormState.isFormDone) {
-    // add try catch
-    await computePersonalNutriScore();
-    onClickNext();
-  } else {
-    onClickNext();
+  try {
+    if (nutriScoreState.personalNutriScore.value != null) {
+      await validatePersonalNutriScore();
+    } else if (startFormState.isFormDone) {
+      await computePersonalNutriScore();
+      onClickNext();
+    } else {
+      onClickNext();
+    }
+  } catch (e) {
+    errorService.notifyError(e: e);
   }
 }
 
@@ -138,6 +141,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
           text: startFormState.isFormDone ? "terminer" : "suivant",
           iconWidget: Icon(Icons.arrow_forward, size: 20),
           disabled: isNextButtonDisabled,
+          isLoading: isLoading,
         ),
       ),
     );

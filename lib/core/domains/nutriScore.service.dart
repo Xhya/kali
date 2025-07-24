@@ -8,9 +8,8 @@ class NutriScoreService {
   Future<NutriScore?> computePersonalNutriScore(
     PersonalNutriScoreFormData formData,
   ) async {
-    final personalNutriScore = await nutriScoreRepository
+    return await nutriScoreRepository
         .computePersonalNutriScore(formData);
-    return personalNutriScore;
   }
 }
 

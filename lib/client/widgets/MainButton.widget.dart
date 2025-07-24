@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/widgets/LoaderIcon.widget.dart';
 
 class MainButtonWidget extends StatefulWidget {
   const MainButtonWidget({
@@ -8,12 +9,14 @@ class MainButtonWidget extends StatefulWidget {
     this.text,
     this.iconWidget,
     this.disabled = false,
+    this.isLoading = false,
   });
 
   final VoidCallback onClick;
   final String? text;
   final Widget? iconWidget;
   final bool disabled;
+  final bool isLoading;
 
   @override
   State<MainButtonWidget> createState() => _MainButtonState();
@@ -70,17 +73,20 @@ class _MainButtonState extends State<MainButtonWidget> {
               color: backgroundColor,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (widget.iconWidget != null) widget.iconWidget!,
-                const SizedBox(width: 8),
-                Text(
-                  widget.text!,
-                  style: TextStyle(color: style.text.neutral.color!),
-                ),
-              ],
-            ),
+            child:
+                widget.isLoading
+                    ? LoaderIcon()
+                    : Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        if (widget.iconWidget != null) widget.iconWidget!,
+                        const SizedBox(width: 8),
+                        Text(
+                          widget.text!,
+                          style: TextStyle(color: style.text.neutral.color!),
+                        ),
+                      ],
+                    ),
           ),
         ),
       ),
