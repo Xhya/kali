@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/BottomButton.widget.dart';
+import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
+import 'package:kali/core/services/Error.service.dart';
+import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/states/quickAddMeal.state.dart';
 import 'package:kali/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/utils/computeMealPeriod.utils.dart';
 
-onClickAddQuickMeal() {
-  quickAddMealState.reset();
-  quickAddMealState.chosenPeriod.value = computeMealPeriod(DateTime.now());
-  navigationService.openBottomSheet(widget: QuickAddMealWidget());
+onClickAddQuickMeal() async {
+  try {
+    if (await userService.canCompute()) {
+      quickAddMealState.reset();
+      quickAddMealState.chosenPeriod.value = computeMealPeriod(DateTime.now());
+      navigationService.openBottomSheet(widget: QuickAddMealWidget());
+    } else {
+      navigationService.openBottomSheet(widget: WelcomeBottomSheet());
+    }
+  } catch (e, stack) {
+    errorService.notifyError(e: e, stack: stack);
+  }
 }
 
 class QuickAddMealButtonWidget extends StatefulWidget {

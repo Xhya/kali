@@ -55,7 +55,7 @@ class _LoginWidgetState extends State<LoginWidget> {
           children: [
             MainButtonWidget(
               onClick: () {},
-              text: "créer un compte",
+              text: "se connecter",
               iconWidget: Icon(Icons.arrow_forward, size: 20),
               disabled: false,
               isLoading: false,

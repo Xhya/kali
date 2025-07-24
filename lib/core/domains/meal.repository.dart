@@ -20,7 +20,7 @@ class MealRepository {
     Map body = {"userText": userText};
 
     final response = await http.post(
-      Uri.parse('$API_URL/nutriscores/compute'),
+      Uri.parse('$API_URL/meals/compute'),
       headers: await headersWithMaybeToken(),
       body: json.encode(body),
     );

@@ -25,4 +25,19 @@ class UserRepository {
       throw Exception();
     }
   }
+
+  Future<bool> canCompute() async {
+    final response = await http.get(
+      Uri.parse('$API_URL/users/can-compute'),
+      headers: await headersWithMaybeToken(),
+    );
+
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body) as Map<String, dynamic>;
+      return body['data'];
+    } else {
+      errorService.currentResponseError = response;
+      throw Exception();
+    }
+  }
 }
