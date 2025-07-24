@@ -15,15 +15,7 @@ class BaseScaffold extends StatefulWidget {
   State<BaseScaffold> createState() => _BaseScaffoldState();
 }
 
-class _BaseScaffoldState extends State<BaseScaffold>
-    with WidgetsBindingObserver {
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // topBannerState.show.value = true;
-    });
-    super.initState();
-  }
+class _BaseScaffoldState extends State<BaseScaffold> {
 
   @override
   Widget build(BuildContext context) {

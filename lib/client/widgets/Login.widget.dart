@@ -4,31 +4,16 @@ import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/EmailInput.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/PasswordInput.widget.dart';
-import 'package:kali/core/domains/user.repository.dart';
-import 'package:kali/core/services/Error.service.dart';
-import 'package:kali/core/services/Navigation.service.dart';
-import 'package:kali/core/states/Input.state.dart';
 import 'package:kali/core/utils/paths.utils.dart';
 
-onSubmitRegisterUser() async {
-  try {
-    await UserRepository().register(
-      email: inputState.email.value,
-      password: inputState.password.value,
-    );
-  } catch (e, stack) {
-    errorService.notifyError(e: e, stack: stack);
-  }
-}
-
-class RegisterWidget extends StatefulWidget {
-  const RegisterWidget({super.key});
+class LoginWidget extends StatefulWidget {
+  const LoginWidget({super.key});
 
   @override
-  State<RegisterWidget> createState() => _RegisterWidgetState();
+  State<LoginWidget> createState() => _LoginWidgetState();
 }
 
-class _RegisterWidgetState extends State<RegisterWidget> {
+class _LoginWidgetState extends State<LoginWidget> {
   @override
   void initState() {
     super.initState();
@@ -43,38 +28,39 @@ class _RegisterWidgetState extends State<RegisterWidget> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.max,
       children: [
         Text(
-          "Bienvenu·e à bord 🔥",
+          "Ravie de te revoir 👋🏼",
           style: style.fontsize.lg
               .merge(style.text.neutral)
               .merge(style.fontweight.bold),
-          textAlign: TextAlign.center,
+          textAlign: TextAlign.start,
         ),
         SizedBox(height: 4),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12),
-          child: Text(
-            "Tu n'es plus qu'à 60 sec de commencer cette nouvelle aventure",
-            style: style.fontsize.sm.merge(style.text.neutralLight),
-            textAlign: TextAlign.center,
-          ),
+        Text(
+          "Il est temps de se remettre en route vers le changement ",
+          style: style.fontsize.sm.merge(style.text.neutralLight),
+          textAlign: TextAlign.start,
         ),
         SizedBox(height: 32),
         EmailInputWidget(),
         SizedBox(height: 4),
         PasswordInputWidget(),
         SizedBox(height: 32),
-        MainButtonWidget(
-          onClick: () {
-            onSubmitRegisterUser();
-          },
-          text: "créer un compte",
-          iconWidget: Icon(Icons.arrow_forward, size: 20),
-          disabled: false,
-          isLoading: false,
+        Flex(
+          direction: Axis.horizontal,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            MainButtonWidget(
+              onClick: () {},
+              text: "créer un compte",
+              iconWidget: Icon(Icons.arrow_forward, size: 20),
+              disabled: false,
+              isLoading: false,
+            ),
+          ],
         ),
         SizedBox(height: 40),
         Row(
@@ -109,8 +95,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
               decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.5),
-                border: Border.all(color: Colors.white),
+                color: style.background.grey.color!.withValues(alpha: 0.5),
                 borderRadius: BorderRadius.all(Radius.circular(16)),
               ),
               child: Row(
@@ -134,29 +119,6 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               ),
             ),
           ),
-        ),
-        SizedBox(height: 32),
-        Row(
-          spacing: 8,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Tu as déjà un compte ?",
-              style: style.fontsize.sm.merge(style.text.neutralLight),
-            ),
-            GestureDetector(
-              onTap: () {
-                navigationService.navigateTo(ScreenEnum.login);
-              },
-              child: Text(
-                "se connecter",
-                style: style.fontsize.sm
-                    .merge(style.text.neutralLight)
-                    .merge(TextStyle(decoration: TextDecoration.underline))
-                    .merge(style.fontweight.bold),
-              ),
-            ),
-          ],
         ),
       ],
     );

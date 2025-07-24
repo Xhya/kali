@@ -2,9 +2,11 @@ import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/screens/AuthenticationHome.screen.dart';
 import 'package:kali/client/screens/ForceUpdate.screen.dart';
 import 'package:kali/client/screens/Home.screen.dart';
+import 'package:kali/client/screens/Login.screen.dart';
 import 'package:kali/client/screens/Meal.screen.dart';
 import 'package:kali/client/screens/Meals.screen.dart';
 import 'package:kali/client/screens/PersonalNutriScore.screen.dart';
+import 'package:kali/client/screens/Register.screen.dart';
 import 'package:kali/client/screens/Start.screen.dart';
 import 'package:kali/client/screens/StartForm.screen.dart';
 import 'package:kali/client/widgets/RegisterBanner.widget.dart';
@@ -60,7 +62,9 @@ class _RoutingState extends State<Routing> {
           useSafeArea: true,
           isScrollControlled: true,
           context: navigationService.context!,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
           builder: (BuildContext context) {
             if (navigationService.bottomSheet != null) {
               return Padding(
@@ -154,6 +158,10 @@ class _RoutingState extends State<Routing> {
       switch (navigationService.currentScreen) {
         case ScreenEnum.home:
           navigateTo(const HomeScreen());
+        case ScreenEnum.register:
+          navigateTo(const RegisterScreen());
+        case ScreenEnum.login:
+          navigateTo(const LoginScreen());
         case ScreenEnum.startForm:
           navigateTo(const StartFormScreen());
         case ScreenEnum.meal:

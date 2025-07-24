@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:kali/core/services/Error.service.dart';
 
 enum ScreenEnum {
+  register,
+  login,
   startForm,
   home,
   meal,
