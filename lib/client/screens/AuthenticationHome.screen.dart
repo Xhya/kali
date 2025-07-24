@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:kali/core/domains/user.repository.dart';
 import 'package:kali/core/services/Error.service.dart';
-import 'package:kali/core/states/register.state.dart';
+import 'package:kali/core/states/Input.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 
 onUpdateInputEmail(String value) {
-  registerState.email.value = value;
+  inputState.email.value = value;
 }
 
 onUpdateInputPassword(String value) {
-  registerState.password.value = value;
+  inputState.password.value = value;
 }
 
 onSubmitRegisterUser() async {
   try {
     await UserRepository().register(
-      email: registerState.email.value,
-      password: registerState.password.value,
+      email: inputState.email.value,
+      password: inputState.password.value,
     );
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);
@@ -42,8 +42,8 @@ class _AuthenticationHomeScreenState extends State<AuthenticationHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String email = context.watch<RegisterState>().email.value;
-    String password = context.watch<RegisterState>().password.value;
+    String email = context.watch<InputState>().email.value;
+    String password = context.watch<InputState>().password.value;
 
     return BaseScaffold(
       child: Container(

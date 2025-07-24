@@ -7,7 +7,9 @@ import 'package:kali/client/widgets/StartFormPage4.widget.dart';
 import 'package:kali/client/widgets/StartFormPage5.widget.dart';
 import 'package:kali/client/widgets/StartFormPageFinal.widget.dart';
 import 'package:kali/client/widgets/StartFormTop.widget.dart';
+import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/services/Error.service.dart';
+import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +21,9 @@ void onClickBottomButton() async {
   try {
     if (nutriScoreState.personalNutriScore.value != null) {
       await validatePersonalNutriScore();
+      nutriScoreState.personalNutriScore.value = null;
+      navigationService.openBottomSheet(widget: WelcomeBottomSheet());
+      navigationService.navigateTo(ScreenEnum.home);
     } else if (startFormState.isFormDone) {
       await computePersonalNutriScore();
       onClickNext();
@@ -70,7 +75,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
     bool isNextButtonDisabled =
         context.watch<StartFormState>().isNextButtonDisabled;
     bool isLoading = context.watch<StartFormState>().isLoading.value;
-    context.watch<StartFormState>().currentPage.value;
+    final currentPage = context.watch<StartFormState>().currentPage.value;
     PageController controller =
         context.watch<StartFormState>().controller.value;
 
@@ -91,7 +96,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
                     itemCount: 6,
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (_, index) {
-                      switch (index) {
+                      switch (currentPage) {
                         case 0:
                           return StartFormPage1();
                         case 1:
@@ -136,6 +141,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
         ),
         floatingActionButton: MainButtonWidget(
           onClick: () {
+            navigationService.context = context;
             onClickBottomButton();
           },
           text: startFormState.isFormDone ? "terminer" : "suivant",

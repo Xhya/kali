@@ -31,8 +31,6 @@ validatePersonalNutriScore() async {
     startFormState.isLoading.value = true;
     if (nutriScoreState.personalNutriScore.value != null) {
       await setPersonalNutriScore(nutriScoreState.personalNutriScore.value!);
-      nutriScoreState.personalNutriScore.value = null;
-      navigationService.navigateTo(ScreenEnum.home);
     }
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);

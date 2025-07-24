@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-final registerState = RegisterState();
+final inputState = InputState();
 
-class RegisterState extends ChangeNotifier {
+class InputState extends ChangeNotifier {
   final email = ValueNotifier<String>("");
   final password = ValueNotifier<String>("");
 
-  RegisterState() {
+  InputState() {
     email.addListener(notifyListeners);
     password.addListener(notifyListeners);
   }

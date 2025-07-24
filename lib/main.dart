@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
 import 'package:kali/core/services/Authentication.service.dart';
+import 'package:kali/core/states/Input.state.dart';
 import 'package:kali/core/states/configuration.state.dart';
-import 'package:kali/core/states/register.state.dart';
 import 'package:kali/core/states/topBanner.state.dart';
 import 'package:kali/core/services/Bugsnag.service.dart';
 import 'package:provider/provider.dart';
@@ -49,7 +49,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => startFormState),
         ChangeNotifierProvider(create: (context) => editMealState),
         ChangeNotifierProvider(create: (context) => topBannerState),
-        ChangeNotifierProvider(create: (context) => registerState),
+        ChangeNotifierProvider(create: (context) => inputState),
         ChangeNotifierProvider(
           create: (context) => personalNutriScoreEditionState,
         ),
