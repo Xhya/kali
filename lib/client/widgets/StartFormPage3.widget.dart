@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/Utils/InputWithTextFormatter.utils.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
+import 'package:kali/core/models/StartForm.enum.dart';
 import 'package:kali/core/utils/formatters.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/core/states/startForm.state.dart';
