@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/Register.widget.dart';
+import 'package:kali/core/utils/linearGradient.utils.dart';
 
 class WelcomeBottomSheet extends StatefulWidget {
   const WelcomeBottomSheet({super.key});
@@ -30,16 +31,7 @@ class _WelcomeBottomSheetState extends State<WelcomeBottomSheet> {
       child: Container(
         width: double.maxFinite,
         height: MediaQuery.of(context).size.height - 80,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              style.background.greenTransparent.color!,
-              style.background.green.color!,
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
+        decoration: BoxDecoration(gradient: linearGradient),
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         child: Stack(
           children: [
