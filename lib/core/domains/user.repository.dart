@@ -40,4 +40,17 @@ class UserRepository {
       throw Exception();
     }
   }
+
+  Future<void> setPersonalNutriScore(String nutriScoreId) async {
+    final response = await http.patch(
+      Uri.parse('$API_URL/users/personal'),
+      headers: await headersWithMaybeToken(),
+      body: json.encode({"nutriScoreId": nutriScoreId}),
+    );
+
+    if (response.statusCode != 200) {
+      errorService.currentResponseError = response;
+      throw Exception();
+    }
+  }
 }

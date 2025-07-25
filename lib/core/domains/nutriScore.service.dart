@@ -26,7 +26,3 @@ Future<void> refreshPersonalNutriScore() async {
     );
   }
 }
-
-Future<void> setPersonalNutriScore(NutriScore nutriScore) async {
-  await NutriScoreRepository().setPersonalNutriScore(nutriScore);
-}

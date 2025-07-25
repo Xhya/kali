@@ -1,5 +1,6 @@
 import 'package:kali/core/domains/nutriScore.repository.dart';
 import 'package:kali/core/domains/nutriScore.service.dart';
+import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/states/startForm.state.dart';
@@ -29,7 +30,7 @@ validatePersonalNutriScore() async {
   try {
     startFormState.isLoading.value = true;
     if (nutriScoreState.personalNutriScore.value != null) {
-      await setPersonalNutriScore(nutriScoreState.personalNutriScore.value!);
+      await userService.setPersonalNutriScore(nutriScoreState.personalNutriScore.value!);
     }
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);

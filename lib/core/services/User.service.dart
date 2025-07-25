@@ -1,4 +1,5 @@
 import 'package:kali/core/domains/user.repository.dart';
+import 'package:kali/core/models/NutriScore.model.dart';
 
 final userService = UserService();
 
@@ -7,5 +8,9 @@ class UserService {
 
   Future<bool> canCompute() async {
     return await userRepository.canCompute();
+  }
+
+  Future<void> setPersonalNutriScore(NutriScore nutriScore) async {
+    await userRepository.setPersonalNutriScore(nutriScore.id!);
   }
 }

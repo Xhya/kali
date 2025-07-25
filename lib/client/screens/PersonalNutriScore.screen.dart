@@ -3,6 +3,7 @@ import 'package:kali/client/Style.service.dart';
 import 'package:kali/core/domains/nutriScore.service.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/Error.service.dart';
+import 'package:kali/core/services/User.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/layout/Title.scaffold.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
@@ -80,7 +81,7 @@ onClickSave() async {
       ),
     );
 
-    await setPersonalNutriScore(nutriScore);
+    await userService.setPersonalNutriScore(nutriScore);
     await refreshPersonalNutriScore();
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);
