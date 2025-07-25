@@ -174,11 +174,10 @@ class _RoutingState extends State<Routing> {
           navigateTo(const AuthenticationHomeScreen());
       }
     };
-
-    if (!authenticationService.isAuthentifiedWithSignature) {
-      return const AuthenticationHomeScreen();
-    } else if (isUpdateRequired()) {
+    if (isUpdateRequired()) {
       return const ForceUpdateScreen();
+    } else if (!authenticationService.isAuthentifiedWithSignature) {
+      return const AuthenticationHomeScreen();
     } else if (nutriScoreState.personalNutriScore.value == null) {
       return const StartScreen();
     } else {

@@ -10,6 +10,7 @@ import 'package:kali/client/widgets/QuickAddMealHeader.widget.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/AI.service.dart';
+import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/utils/computeDayAverages.utils.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,7 @@ onInputUpdateUserMealText(String value) {
   quickAddMealState.userMealText.value = value;
 }
 
-onClickQuickSuffixIcon() async {
+onClickSuffixIcon() async {
   if (!quickAddMealState.isLoading.value &&
       quickAddMealState.userMealText.value.isNotEmpty &&
       quickAddMealState.chosenPeriod.value != null) {
@@ -33,10 +34,14 @@ onClickQuickSuffixIcon() async {
 }
 
 onClickAddMealToDay() async {
-  await addMealAction();
-  computeDayAverages();
-  quickAddMealState.userMealText.value = "";
-  navigationService.closeBottomSheet();
+  try {
+    await addMealAction();
+    computeDayAverages();
+    quickAddMealState.userMealText.value = "";
+    navigationService.closeBottomSheet();
+  } catch (e, stack) {
+    errorService.notifyError(e: e, stack: stack);
+  }
 }
 
 class QuickAddMealWidget extends StatefulWidget {
@@ -142,7 +147,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                             size: 22,
                           ),
                   onClick: () {
-                    onClickQuickSuffixIcon();
+                    onClickSuffixIcon();
                   },
                   disabled: userMealText.isEmpty || chosenPeriod == null,
                 ),

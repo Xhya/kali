@@ -2,7 +2,6 @@ import 'package:kali/core/domains/nutriScore.repository.dart';
 import 'package:kali/core/domains/nutriScore.service.dart';
 import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/services/Error.service.dart';
-import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/startForm.state.dart';
 
 Future<void> computePersonalNutriScore() async {

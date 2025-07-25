@@ -32,7 +32,7 @@ void main() async {
 
   // Bugsnag Monitoring
   await bugsnagService.init();
-  
+
   // User identification
   await authenticationService.init();
 
@@ -78,10 +78,14 @@ class App extends StatelessWidget {
       ),
       home: AsyncInitWidget(
         initFunction: () async {
-          await refreshAppVersion();
-          await connexionService.listenToInternetConnexion();
-          await refreshPersonalNutriScore();
-          await TranslationService().init();
+          try {
+            await refreshAppVersion();
+            await connexionService.listenToInternetConnexion();
+            await refreshPersonalNutriScore();
+            await TranslationService().init();
+          } catch (e) {
+            errorService.notifyError(e: e, show: false);
+          }
         },
         child: const Scaffold(body: Routing()),
       ),
