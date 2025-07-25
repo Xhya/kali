@@ -59,7 +59,7 @@ class UserRepository {
 
   Future<NutriScore?> getPersonalNutriScore() async {
     final response = await http.get(
-      Uri.parse('$API_URL/users/personal'),
+      Uri.parse('$API_URL/users/nutriscore/personal'),
       headers: await headersWithMaybeToken(),
     );
 

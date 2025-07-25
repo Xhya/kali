@@ -81,7 +81,6 @@ class App extends StatelessWidget {
           try {
             await refreshAppVersion();
             await connexionService.listenToInternetConnexion();
-            await refreshPersonalNutriScore();
             await TranslationService().init();
           } catch (e) {
             errorService.notifyError(e: e, show: false);

@@ -12,6 +12,7 @@ import 'package:kali/client/screens/StartForm.screen.dart';
 import 'package:kali/client/widgets/RegisterBanner.widget.dart';
 import 'package:kali/client/widgets/TopBanner.widget.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
+import 'package:kali/core/domains/nutriScore.service.dart';
 import 'package:kali/core/services/Authentication.service.dart';
 import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/services/Error.service.dart';
@@ -40,6 +41,17 @@ class _RoutingState extends State<Routing> {
     super.initState();
     connexionService.listenToInternetConnexion();
     BackButtonInterceptor.add(backButtonInterceptor);
+    
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      try {
+        await refreshPersonalNutriScore();
+      } catch (e) {
+        if (context.mounted) {
+          navigationService.context = context;
+          errorService.notifyError(e: e);
+        }
+      }
+    });
   }
 
   @override
