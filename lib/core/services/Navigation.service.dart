@@ -50,7 +50,7 @@ class NavigationService extends ChangeNotifier {
     if (context != null && popNavigation != null) {
       popNavigation!.call(context);
     } else {
-      errorService.notifyError(e: "Navigation back error");
+      errorService.notifyError(e: Exception("Navigation back error"));
     }
   }
 

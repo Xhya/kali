@@ -21,7 +21,7 @@ class ConnexionService extends ChangeNotifier {
     super.dispose();
   }
 
-  getHasInternetConnexion() async {
+  Future<bool> getHasInternetConnexion() async {
     return await InternetConnection().hasInternetAccess;
   }
 

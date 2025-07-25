@@ -82,7 +82,7 @@ onClickSave() async {
     );
 
     await userService.setPersonalNutriScore(nutriScore);
-    await refreshPersonalNutriScore();
+    // await refreshPersonalNutriScore();
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);
   } finally {

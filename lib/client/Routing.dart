@@ -1,5 +1,4 @@
 import 'package:kali/client/Style.service.dart';
-import 'package:kali/client/screens/AuthenticationHome.screen.dart';
 import 'package:kali/client/screens/ForceUpdate.screen.dart';
 import 'package:kali/client/screens/Home.screen.dart';
 import 'package:kali/client/screens/Login.screen.dart';
@@ -12,7 +11,6 @@ import 'package:kali/client/screens/StartForm.screen.dart';
 import 'package:kali/client/widgets/RegisterBanner.widget.dart';
 import 'package:kali/client/widgets/TopBanner.widget.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
-import 'package:kali/core/domains/nutriScore.service.dart';
 import 'package:kali/core/services/Authentication.service.dart';
 import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/services/Error.service.dart';
@@ -39,13 +37,11 @@ class _RoutingState extends State<Routing> {
   @override
   void initState() {
     super.initState();
-    connexionService.listenToInternetConnexion();
     BackButtonInterceptor.add(backButtonInterceptor);
   }
 
   @override
   void dispose() {
-    connexionService.stopListeningInternetConnexion();
     BackButtonInterceptor.remove(backButtonInterceptor);
     super.dispose();
   }
@@ -125,7 +121,7 @@ class _RoutingState extends State<Routing> {
       if (navigationService.context != null) {
         Navigator.pop(context);
       } else {
-        errorService.notifyError(e: "Missing BuildContext");
+        errorService.notifyError(e: Exception("Missing BuildContext"));
       }
     };
 
@@ -174,7 +170,9 @@ class _RoutingState extends State<Routing> {
       }
     };
 
-    if (isUpdateRequired()) {
+    if (!connexionService.hasInternetConnexion.value) {
+      return const StartScreen();
+    } else if (isUpdateRequired()) {
       return const ForceUpdateScreen();
     } else if (!authenticationService.isAuthentifiedWithSignature) {
       return const RegisterScreen();

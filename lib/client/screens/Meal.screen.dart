@@ -64,7 +64,7 @@ class _MealScreenState extends State<MealScreen> {
     bool isLoading = context.watch<EditMealState>().isLoading.value;
 
     if (meal == null) {
-      errorService.notifyError(e: "Missing meal");
+      errorService.notifyError(e: Exception("Missing meal"));
       return SizedBox.shrink();
     }
 
