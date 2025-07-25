@@ -41,17 +41,6 @@ class _RoutingState extends State<Routing> {
     super.initState();
     connexionService.listenToInternetConnexion();
     BackButtonInterceptor.add(backButtonInterceptor);
-    
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      try {
-        await refreshPersonalNutriScore();
-      } catch (e) {
-        if (context.mounted) {
-          navigationService.context = context;
-          errorService.notifyError(e: e);
-        }
-      }
-    });
   }
 
   @override
