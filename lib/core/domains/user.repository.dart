@@ -43,10 +43,12 @@ class UserRepository {
   }
 
   Future<void> setPersonalNutriScore(String nutriScoreId) async {
+    Map body = {"nutriscoreId": nutriScoreId};
+
     final response = await http.patch(
       Uri.parse('$API_URL/users/nutriscore'),
       headers: await headersWithMaybeToken(),
-      body: json.encode({"nutriScoreId": nutriScoreId}),
+      body: json.encode(body),
     );
 
     if (response.statusCode != 200) {
