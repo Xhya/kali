@@ -1,9 +1,55 @@
+import 'package:flutter/material.dart';
+import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/domains/nutriScore.repository.dart';
 import 'package:kali/core/domains/nutriScore.service.dart';
+import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/states/startForm.state.dart';
+
+void onClickBottomButton() async {
+  startFormState.isLoading.value = true;
+  try {
+    if (nutriScoreState.personalNutriScore.value != null) {
+      await validatePersonalNutriScore();
+      nutriScoreState.personalNutriScore.value = null;
+      navigationService.openBottomSheet(widget: WelcomeBottomSheet());
+      navigationService.navigateTo(ScreenEnum.home);
+    } else if (startFormState.isFormDone) {
+      await computePersonalNutriScore();
+      onClickNext();
+    } else {
+      onClickNext();
+    }
+  } catch (e) {
+    errorService.notifyError(e: e);
+  } finally {
+    startFormState.isLoading.value = false;
+  }
+}
+
+void onClickNext() {
+  if (startFormState.currentPage.value < 5) {
+    startFormState.currentPage.value = startFormState.currentPage.value + 1;
+    startFormState.controller.value.animateToPage(
+      startFormState.currentPage.value,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
+    );
+  }
+}
+
+void onClickPrevious() {
+  if (startFormState.currentPage.value > 1) {
+    startFormState.currentPage.value = startFormState.currentPage.value - 1;
+    startFormState.controller.value.animateToPage(
+      startFormState.currentPage.value,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
+    );
+  }
+}
 
 Future<void> computePersonalNutriScore() async {
   startFormState.isLoading.value = true;
@@ -27,14 +73,9 @@ Future<void> computePersonalNutriScore() async {
 }
 
 validatePersonalNutriScore() async {
-  try {
-    startFormState.isLoading.value = true;
-    if (nutriScoreState.personalNutriScore.value != null) {
-      await userService.setPersonalNutriScore(nutriScoreState.personalNutriScore.value!);
-    }
-  } catch (e, stack) {
-    errorService.notifyError(e: e, stack: stack);
-  } finally {
-    startFormState.isLoading.value = false;
+  if (nutriScoreState.personalNutriScore.value != null) {
+    await userService.setPersonalNutriScore(
+      nutriScoreState.personalNutriScore.value!,
+    );
   }
 }

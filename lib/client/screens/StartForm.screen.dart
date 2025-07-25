@@ -7,55 +7,12 @@ import 'package:kali/client/widgets/StartFormPage4.widget.dart';
 import 'package:kali/client/widgets/StartFormPage5.widget.dart';
 import 'package:kali/client/widgets/StartFormPageFinal.widget.dart';
 import 'package:kali/client/widgets/StartFormTop.widget.dart';
-import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
-import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
-import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/core/actions/startForm.actions.dart';
-
-void onClickBottomButton() async {
-  try {
-    if (nutriScoreState.personalNutriScore.value != null) {
-      await validatePersonalNutriScore();
-      nutriScoreState.personalNutriScore.value = null;
-      navigationService.openBottomSheet(widget: WelcomeBottomSheet());
-      navigationService.navigateTo(ScreenEnum.home);
-    } else if (startFormState.isFormDone) {
-      await computePersonalNutriScore();
-      onClickNext();
-    } else {
-      onClickNext();
-    }
-  } catch (e) {
-    errorService.notifyError(e: e);
-  }
-}
-
-void onClickNext() {
-  if (startFormState.currentPage.value < 5) {
-    startFormState.currentPage.value = startFormState.currentPage.value + 1;
-    startFormState.controller.value.animateToPage(
-      startFormState.currentPage.value,
-      duration: const Duration(milliseconds: 400),
-      curve: Curves.easeInOut,
-    );
-  }
-}
-
-void onClickPrevious() {
-  if (startFormState.currentPage.value > 1) {
-    startFormState.currentPage.value = startFormState.currentPage.value - 1;
-    startFormState.controller.value.animateToPage(
-      startFormState.currentPage.value,
-      duration: const Duration(milliseconds: 400),
-      curve: Curves.easeInOut,
-    );
-  }
-}
 
 class StartFormScreen extends StatefulWidget {
   const StartFormScreen({super.key});
