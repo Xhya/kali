@@ -10,6 +10,10 @@ class UserService {
     return await userRepository.canCompute();
   }
 
+  Future<NutriScore?> getPersonalNutriScore() async {
+    return await userRepository.getPersonalNutriScore();
+  }
+
   Future<void> setPersonalNutriScore(NutriScore nutriScore) async {
     await userRepository.setPersonalNutriScore(nutriScore.id!);
   }
