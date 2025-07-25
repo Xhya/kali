@@ -13,6 +13,6 @@ goToMealsScreen() {
   navigationService.navigateTo(ScreenEnum.meals);
 }
 
-goToAuthenticationHome() {
-  navigationService.navigateTo(ScreenEnum.authenticationHome);
+goToRegisterScreen() {
+  navigationService.navigateTo(ScreenEnum.register);
 }

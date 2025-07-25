@@ -171,14 +171,13 @@ class _RoutingState extends State<Routing> {
           navigateTo(const MealsScreen());
         case ScreenEnum.personalNutriScore:
           navigateTo(const PersonalNutriScoreScreen());
-        case ScreenEnum.authenticationHome:
-          navigateTo(const AuthenticationHomeScreen());
       }
     };
+
     if (isUpdateRequired()) {
       return const ForceUpdateScreen();
     } else if (!authenticationService.isAuthentifiedWithSignature) {
-      return const AuthenticationHomeScreen();
+      return const RegisterScreen();
     } else if (nutriScoreState.personalNutriScore.value == null) {
       return const StartScreen();
     } else {

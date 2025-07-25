@@ -33,7 +33,7 @@ class _RegisterBannerWidgetState extends State<RegisterBannerWidget> {
                 ButtonWidget(
                   text: "Se connecter",
                   onPressed: () {
-                    goToAuthenticationHome();
+                    goToRegisterScreen();
                   },
                   fullWidth: false,
                   buttonType: ButtonTypeEnum.tonal,

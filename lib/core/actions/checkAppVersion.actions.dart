@@ -1,15 +1,16 @@
 import 'package:kali/core/domains/configurations.repository.dart';
-import 'package:kali/core/domains/hardware.service.dart';
+import 'package:kali/core/domains/hardware.repository.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
 
 Future<void> refreshAppVersion() async {
   try {
-    configurationState.currentVersion.value = await HardwareService().getCurrentVersion();
+    configurationState.currentVersion.value =
+        await HardwareRepository().getCurrentVersion();
     configurationState.minimalVersion.value = await ConfigurationsRepository()
         .getConfig(ConfigKeyEnum.forceUpdateVersion);
   } catch (e, stack) {
-    errorService.notifyError(e: e, stack: stack);
+    errorService.notifyError(e: e, stack: stack, show: false);
   }
 }
 
@@ -26,6 +27,10 @@ bool isUpdateRequired() {
 }
 
 bool _isVersionLower(String current, String min) {
+  if (min.isEmpty) {
+    return false;
+  }
+
   List<int> c = current.split('.').map(int.parse).toList();
   List<int> m = min.split('.').map(int.parse).toList();
   for (int i = 0; i < m.length; i++) {
