@@ -14,7 +14,7 @@ Map<MealPeriodEnum, List<MealModel>> getDateMealsByPeriod(DateTime date) {
             .where(
               (meal) =>
                   meal.period == MealPeriodEnum.breakfast &&
-                  meal.nutriScore != null,
+                  meal.nutriscore != null,
             )
             .toList(),
     MealPeriodEnum.lunch:
@@ -22,7 +22,7 @@ Map<MealPeriodEnum, List<MealModel>> getDateMealsByPeriod(DateTime date) {
             .where(
               (meal) =>
                   meal.period == MealPeriodEnum.lunch &&
-                  meal.nutriScore != null,
+                  meal.nutriscore != null,
             )
             .toList(),
     MealPeriodEnum.snack:
@@ -30,7 +30,7 @@ Map<MealPeriodEnum, List<MealModel>> getDateMealsByPeriod(DateTime date) {
             .where(
               (meal) =>
                   meal.period == MealPeriodEnum.snack &&
-                  meal.nutriScore != null,
+                  meal.nutriscore != null,
             )
             .toList(),
     MealPeriodEnum.dinner:
@@ -38,7 +38,7 @@ Map<MealPeriodEnum, List<MealModel>> getDateMealsByPeriod(DateTime date) {
             .where(
               (meal) =>
                   meal.period == MealPeriodEnum.dinner &&
-                  meal.nutriScore != null,
+                  meal.nutriscore != null,
             )
             .toList(),
   };

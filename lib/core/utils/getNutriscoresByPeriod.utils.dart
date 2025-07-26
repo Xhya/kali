@@ -8,25 +8,25 @@ Map<MealPeriodEnum, List<NutriScore>> getNutriscoresByPeriod(
   final List<NutriScore> breakfastNutriscoresByPeriod =
       meals
           .where((it) => it.period == MealPeriodEnum.breakfast)
-          .map((it) => it.nutriScore!)
+          .map((it) => it.nutriscore!)
           .toList();
 
   final List<NutriScore> lunchNutriscoresByPeriod =
       meals
           .where((it) => it.period == MealPeriodEnum.lunch)
-          .map((it) => it.nutriScore!)
+          .map((it) => it.nutriscore!)
           .toList();
 
   final List<NutriScore> snackNutriscoresByPeriod =
       meals
           .where((it) => it.period == MealPeriodEnum.snack)
-          .map((it) => it.nutriScore!)
+          .map((it) => it.nutriscore!)
           .toList();
 
   final List<NutriScore> dinnerNutriscoresByPeriod =
       meals
           .where((it) => it.period == MealPeriodEnum.dinner)
-          .map((it) => it.nutriScore!)
+          .map((it) => it.nutriscore!)
           .toList();
 
   return {

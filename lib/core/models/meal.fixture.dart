@@ -9,20 +9,16 @@ final fixtureMeals = [
 
 final fixtureMeal1 = MealModel(
   id: "0",
-  createdAt: DateTime.now(),
-  updatedAt: DateTime.now(),
   date: DateTime.now(),
-  mealDescription: "100g Pizza",
+  userText: "100g Pizza",
   period: MealPeriodEnum.breakfast,
-  nutriScore: fixtureNutriScore1,
+  nutriscore: fixtureNutriScore1,
 );
 
 final fixtureMeal2 = MealModel(
   id: "1",
-  createdAt: DateTime.now(),
-  updatedAt: DateTime.now(),
   date: DateTime.now(),
-  mealDescription: "200g viande",
+  userText: "200g viande",
   period: MealPeriodEnum.lunch,
-  nutriScore: fixtureNutriScore2,
+  nutriscore: fixtureNutriScore2,
 );

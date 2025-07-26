@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
-import 'package:kali/core/domains/nutriScore.service.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/User.service.dart';

@@ -5,7 +5,7 @@ import 'package:kali/core/services/Navigation.service.dart';
 
 goToMealScreen(MealModel meal) {
   mealState.currentMeal.value = meal;
-  nutriScoreState.currentNutriScore.value = meal.nutriScore;
+  nutriScoreState.currentNutriScore.value = meal.nutriscore;
   navigationService.navigateTo(ScreenEnum.meal);
 }
 

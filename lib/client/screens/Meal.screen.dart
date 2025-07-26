@@ -46,7 +46,7 @@ class _MealScreenState extends State<MealScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       editMealState.editingMealPeriod.value = meal?.period;
-      controller.text = meal?.mealDescription ?? "";
+      controller.text = meal?.userText ?? "";
     });
     super.initState();
   }

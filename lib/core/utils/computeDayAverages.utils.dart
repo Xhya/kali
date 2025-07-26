@@ -17,7 +17,7 @@ void computeDayAverages() {
       .value
       .fold(
         0,
-        (sum, curr) => sum + (curr.nutriScore?.lipidAmount.toInt() ?? 0),
+        (sum, curr) => sum + (curr.nutriscore?.lipidAmount.toInt() ?? 0),
       );
 
   nutriScoreState.currentNutriScore.value!.proteinAmount = mealState
@@ -25,14 +25,14 @@ void computeDayAverages() {
       .value
       .fold(
         0,
-        (sum, curr) => sum + (curr.nutriScore?.proteinAmount.toInt() ?? 0),
+        (sum, curr) => sum + (curr.nutriscore?.proteinAmount.toInt() ?? 0),
       );
   nutriScoreState.currentNutriScore.value!.glucidAmount = mealState
       .currentMeals
       .value
       .fold(
         0,
-        (sum, curr) => sum + (curr.nutriScore?.glucidAmount.toInt() ?? 0),
+        (sum, curr) => sum + (curr.nutriscore?.glucidAmount.toInt() ?? 0),
       );
 
   nutriScoreState.currentNutriScore.value!.caloryAmount = mealState
@@ -40,6 +40,6 @@ void computeDayAverages() {
       .value
       .fold(
         0,
-        (sum, curr) => sum + (curr.nutriScore?.caloryAmount.toInt() ?? 0),
+        (sum, curr) => sum + (curr.nutriscore?.caloryAmount.toInt() ?? 0),
       );
 }

@@ -36,7 +36,7 @@ class AIRepository {
         throw Exception('AI Server not return 200');
       }
     } else {
-      return '{"proteinAmount": ${fixtureMeal2.nutriScore!.proteinAmount}, "glucidAmount": ${fixtureMeal2.nutriScore!.glucidAmount}, "lipidAmount": ${fixtureMeal2.nutriScore!.lipidAmount}, "caloryAmount": ${fixtureMeal2.nutriScore!.caloryAmount}}';
+      return '{"proteinAmount": ${fixtureMeal2.nutriscore!.proteinAmount}, "glucidAmount": ${fixtureMeal2.nutriscore!.glucidAmount}, "lipidAmount": ${fixtureMeal2.nutriscore!.lipidAmount}, "caloryAmount": ${fixtureMeal2.nutriscore!.caloryAmount}}';
     }
   }
 
@@ -75,7 +75,7 @@ class AIRepository {
         throw Exception('AI Server not return 200');
       }
     } else {
-      return '{"proteinAmount": ${fixtureMeal2.nutriScore!.proteinAmount}, "glucidAmount": ${fixtureMeal2.nutriScore!.glucidAmount}, "lipidAmount": ${fixtureMeal2.nutriScore!.lipidAmount}, "caloryAmount": ${fixtureMeal2.nutriScore!.caloryAmount}}';
+      return '{"proteinAmount": ${fixtureMeal2.nutriscore!.proteinAmount}, "glucidAmount": ${fixtureMeal2.nutriscore!.glucidAmount}, "lipidAmount": ${fixtureMeal2.nutriscore!.lipidAmount}, "caloryAmount": ${fixtureMeal2.nutriscore!.caloryAmount}}';
     }
   }
 }

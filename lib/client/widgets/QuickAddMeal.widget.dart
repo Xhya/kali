@@ -59,7 +59,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
     super.initState();
 
     quickAddMealState.meal.addListener(() {
-      final nutri = quickAddMealState.meal.value?.nutriScore;
+      final nutri = quickAddMealState.meal.value?.nutriscore;
       if (nutri != null && !quickAddMealState.isExpanded.value) {
         quickAddMealState.isExpanded.value = true;
       }
@@ -77,7 +77,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
     MealPeriodEnum? chosenPeriod =
         context.watch<QuickAddMealState>().chosenPeriod.value;
     NutriScore? nutriScore =
-        context.watch<QuickAddMealState>().meal.value?.nutriScore;
+        context.watch<QuickAddMealState>().meal.value?.nutriscore;
     bool isLoading = context.watch<QuickAddMealState>().isLoading.value;
     String userMealText = context.watch<QuickAddMealState>().userMealText.value;
     bool aiNotUnderstandError =
