@@ -22,8 +22,6 @@ class _StartFormPage3State extends State<StartFormPage3> {
     String height = context.watch<StartFormState>().height.value;
     String weight = context.watch<StartFormState>().weight.value;
     String targetWeight = context.watch<StartFormState>().targetWeight.value;
-    SelectOption? resultOption =
-        context.watch<StartFormState>().resultOption.value;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -90,35 +88,6 @@ class _StartFormPage3State extends State<StartFormPage3> {
                 MaxCharactersCountFormatter(maxLength: 3),
               ],
               suffixIcon: Icon(Icons.rule),
-            ),
-
-            SizedBox(height: 32),
-
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: Text(
-                "Résultats",
-                style: style.text.neutral.merge(style.fontsize.sm),
-              ),
-            ),
-
-            CustomSelectWidget(
-              onChanged: (SelectOption? value) {
-                startFormState.resultOption.value = value;
-              },
-              options: [
-                SelectOption(
-                  value: ResultOptionEnum.quick.label,
-                  label: "Rapide",
-                  icon: Icon(Icons.abc),
-                ),
-                SelectOption(
-                  value: ResultOptionEnum.normal.label,
-                  label: "Normaux",
-                  icon: Icon(Icons.alternate_email),
-                ),
-              ],
-              selected: resultOption,
             ),
           ],
         ),

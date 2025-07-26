@@ -19,7 +19,6 @@ class StartFormState extends ChangeNotifier {
   final height = ValueNotifier<String>("");
   final weight = ValueNotifier<String>("");
   final targetWeight = ValueNotifier<String>("");
-  final resultOption = ValueNotifier<SelectOption?>(null);
 
   final objectiveOption = ValueNotifier<SelectOption?>(null);
 
@@ -35,8 +34,7 @@ class StartFormState extends ChangeNotifier {
     } else if (currentPage.value == 2) {
       return height.value.trim().isEmpty ||
           weight.value.trim().isEmpty ||
-          targetWeight.value.trim().isEmpty ||
-          resultOption.value == null;
+          targetWeight.value.trim().isEmpty;
     } else if (currentPage.value == 3) {
       return objectiveOption.value == null;
     } else if (currentPage.value == 4) {
@@ -59,7 +57,6 @@ class StartFormState extends ChangeNotifier {
     height.addListener(notifyListeners);
     weight.addListener(notifyListeners);
     targetWeight.addListener(notifyListeners);
-    resultOption.addListener(notifyListeners);
 
     objectiveOption.addListener(notifyListeners);
 
@@ -80,7 +77,6 @@ class StartFormState extends ChangeNotifier {
     height.dispose();
     weight.dispose();
     targetWeight.dispose();
-    resultOption.dispose();
 
     objectiveOption.dispose();
 

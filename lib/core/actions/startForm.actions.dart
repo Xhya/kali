@@ -62,7 +62,6 @@ Future<void> computePersonalNutriScore() async {
           height: startFormState.height.value,
           weight: startFormState.weight.value,
           targetWeight: startFormState.targetWeight.value,
-          speedExpectation: startFormState.resultOption.value?.label ?? "",
           objective: startFormState.objectiveOption.value?.label ?? "",
           lifeActivity: startFormState.lifeOption.value?.label ?? "",
         ),
