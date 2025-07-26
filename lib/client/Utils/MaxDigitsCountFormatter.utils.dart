@@ -1,9 +1,9 @@
 import 'package:flutter/services.dart';
 
-class MaxCharactersCountFormatter extends TextInputFormatter {
+class MaxDigitsCountFormatter extends TextInputFormatter {
   late int maxLength;
 
-  MaxCharactersCountFormatter({this.maxLength = 100});
+  MaxDigitsCountFormatter({this.maxLength = 100});
 
   @override
   TextEditingValue formatEditUpdate(

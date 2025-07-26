@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Utils/InputWithTextFormatter.utils.dart';
-import 'package:kali/client/Utils/MaxCharactersCountFormatter.utils.dart';
+import 'package:kali/client/Utils/MaxDigitsCountFormatter.utils.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:kali/core/utils/formatters.utils.dart';
@@ -49,7 +49,7 @@ class _StartFormPage4State extends State<StartFormPage4> {
               inputFormatters: [
                 onlyNumbersFormatter(),
                 InputWithTextFormatter(extension: "kg"),
-                MaxCharactersCountFormatter(maxLength: 3),
+                MaxDigitsCountFormatter(maxLength: 3),
               ],
               suffixIcon: Icon(Icons.rule),
             ),

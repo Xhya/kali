@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
-import 'package:kali/client/Utils/MaxCharactersCountFormatter.utils.dart';
+import 'package:kali/client/Utils/MaxDigitsCountFormatter.utils.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/widgets/Expanded.widget.dart';
@@ -120,7 +120,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                         },
                         placeholder: "Quel est le menu du jour ?",
                         inputFormatters: [
-                          MaxCharactersCountFormatter(maxLength: 85),
+                          MaxDigitsCountFormatter(maxLength: 10),
                         ],
                         minLines: 1,
                         maxLines: 2,
