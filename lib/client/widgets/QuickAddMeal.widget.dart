@@ -26,6 +26,7 @@ onInputUpdateUserMealText(String value) {
 }
 
 onClickSuffixIcon() async {
+  aiState.aiNotUnderstandError.value = false;
   if (!quickAddMealState.isLoading.value &&
       quickAddMealState.userMealText.value.isNotEmpty &&
       quickAddMealState.chosenPeriod.value != null) {

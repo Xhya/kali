@@ -17,7 +17,7 @@ class CustomInput extends StatefulWidget {
     this.maxLines = 1,
   });
 
-  final Function onChanged;
+  final Function(String)? onChanged;
   final String? content;
   final String? placeholder;
   final String? suffixText;
@@ -67,9 +67,10 @@ class _CustomInputState extends State<CustomInput> {
             borderRadius: BorderRadius.circular(16),
           ),
           child: TextField(
+            readOnly: widget.onChanged == null,
             controller: controller,
             onChanged: (value) {
-              widget.onChanged(value);
+              widget.onChanged?.call(value);
             },
             autofocus: false,
             style: style.text.greenDark,

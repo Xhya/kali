@@ -39,14 +39,14 @@ class MealScreen extends StatefulWidget {
 }
 
 class _MealScreenState extends State<MealScreen> {
-  final controller = TextEditingController();
-  late MealModel? meal = context.watch<MealState>().currentMeal.value;
+  MealModel? meal;
 
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      meal = mealState.currentMeal.value;
+      editMealState.editingUserTextMeal.value = meal?.userText ?? "";
       editMealState.editingMealPeriod.value = meal?.period;
-      controller.text = meal?.userText ?? "";
     });
     super.initState();
   }
@@ -61,10 +61,8 @@ class _MealScreenState extends State<MealScreen> {
   Widget build(BuildContext context) {
     MealPeriodEnum? editingMealPeriod =
         context.watch<EditMealState>().editingMealPeriod.value;
-    bool isLoading = context.watch<EditMealState>().isLoading.value;
 
     if (meal == null) {
-      errorService.notifyError(e: Exception("Missing meal"));
       return SizedBox.shrink();
     }
 
@@ -86,20 +84,17 @@ class _MealScreenState extends State<MealScreen> {
               ),
               SizedBox(height: 16),
               CustomInput(
-                onChanged: (value) {
-                  editMealState.editingUserTextMeal.value = value;
-                },
-                placeholder: t('describe_your_meal', ["repas"]),
-                suffixText: "g",
-                suffixIcon: IconButton(
-                  icon:
-                      isLoading
-                          ? LoaderIcon()
-                          : Icon(Icons.save, color: style.icon.color1.color),
-                  onPressed: () {
-                    onUpdateMeal();
-                  },
-                ),
+                content: editMealState.editingUserTextMeal.value,
+                onChanged: null,
+                // suffixIcon: IconButton(
+                //   icon:
+                //       isLoading
+                //           ? LoaderIcon()
+                //           : Icon(Icons.save, color: style.icon.color1.color),
+                //   onPressed: () {
+                //     onUpdateMeal();
+                //   },
+                // ),
               ),
               SizedBox(height: 16),
               NutriScoreGaugesWidget(meals: [meal!]),

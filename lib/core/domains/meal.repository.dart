@@ -26,10 +26,10 @@ class MealRepository {
   }
 
   Future<MealModel> addMeal(String mealId, MealPeriodEnum period) async {
-    Map body = {"mealId": mealId, "period": period.label};
+    Map body = {"period": period.label};
 
-    final response = await http.post(
-      Uri.parse('$API_URL/meals'),
+    final response = await http.patch(
+      Uri.parse('$API_URL/meals/$mealId'),
       headers: await headersWithMaybeToken(),
       body: json.encode(body),
     );

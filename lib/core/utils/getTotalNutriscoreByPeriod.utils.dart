@@ -5,9 +5,7 @@ import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/models/nutriScore.fixture.dart';
 import 'package:kali/core/utils/getNutriscoresByPeriod.utils.dart';
 
-NutriScoreByPeriod getTotalNutriscoreByPeriod(
-  List<MealModel> meals,
-) {
+NutriScoreByPeriod getTotalNutriscoreByPeriod(List<MealModel> meals) {
   final nutriscoresByPeriod = getNutriscoresByPeriod(meals);
 
   final NutriScore breakfastNutriscoreByPeriod =
