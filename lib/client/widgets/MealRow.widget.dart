@@ -32,7 +32,7 @@ class _MealPeriodTagWidgetState extends State<MealRowWidget> {
                   maxLines: 1,
                 ),
               Text(
-                widget.meal.createdAt?.formateDate("hh:mm") ?? "TOTO",
+                widget.meal.date?.formateDate("hh:mm") ?? "TOTO",
                 style: style.fontsize.sm.merge(style.text.neutral),
                 overflow: TextOverflow.ellipsis,
               ),
