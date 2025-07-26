@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/core/services/connexion.service.dart';
 import 'package:kali/core/utils/paths.utils.dart';
 import 'package:provider/provider.dart';
@@ -39,36 +40,24 @@ class _BaseScaffoldState extends State<BaseScaffold> {
                 ),
               ),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     height: 80,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    width: double.maxFinite,
+                    child: Stack(
+                      alignment: Alignment.center,
                       children: [
                         Column(
+                          mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Image.asset(
                               '$imagesPath/logo-white-700.png',
                               height: 32,
                             ),
-                            // RichText(
-                            //   text: TextSpan(
-                            //     style: style.text.reverse_neutral
-                            //         .merge(style.fontsize.xl)
-                            //         .merge(style.fontweight.bold),
-                            //     children: <TextSpan>[
-                            //       TextSpan(text: "Kali"),
-                            //       TextSpan(
-                            //         text: ",",
-                            //         style: style.text.greenLight,
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
                             Text(
                               "tu racontes, je compte",
                               style: style.text.reverse_neutral.merge(
@@ -77,23 +66,30 @@ class _BaseScaffoldState extends State<BaseScaffold> {
                             ),
                           ],
                         ),
-
-                        IconButton(
-                          padding: EdgeInsets.all(0),
-                          onPressed: () {
-                            navigationService.navigateTo(
-                              ScreenEnum.personalNutriScore,
-                            );
-                          },
-                          style: ButtonStyle(
-                            backgroundColor: WidgetStateProperty.all(
-                              style.iconBackground.color1.color,
+                        Positioned(
+                          top: 5,
+                          right: 0,
+                          child: CustomInkwell(
+                            child: Container(
+                              width: 40,
+                              height: 40,
+                              padding: EdgeInsets.zero,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              child: Icon(
+                                Icons.person_outline,
+                                color: style.icon.color3.color,
+                                size: style.fontsize.lg.fontSize,
+                              ),
                             ),
-                          ),
-                          icon: Icon(
-                            Icons.settings_outlined,
-                            color: style.icon.color1.color,
-                            size: style.fontsize.md.fontSize,
+                            onTap: () {
+                              navigationService.navigateTo(ScreenEnum.personalNutriScore);
+                            },
                           ),
                         ),
                       ],
