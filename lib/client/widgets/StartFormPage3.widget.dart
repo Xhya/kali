@@ -3,11 +3,9 @@ import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/Utils/InputWithTextFormatter.utils.dart';
 import 'package:kali/client/Utils/MaxCharactersCountFormatter.utils.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
-import 'package:kali/core/models/StartForm.enum.dart';
 import 'package:kali/core/utils/formatters.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/core/states/startForm.state.dart';
-import 'package:kali/client/widgets/CustomSelect.widget.dart';
 
 class StartFormPage3 extends StatefulWidget {
   const StartFormPage3({super.key});
@@ -21,7 +19,6 @@ class _StartFormPage3State extends State<StartFormPage3> {
   Widget build(BuildContext context) {
     String height = context.watch<StartFormState>().height.value;
     String weight = context.watch<StartFormState>().weight.value;
-    String targetWeight = context.watch<StartFormState>().targetWeight.value;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -63,23 +60,6 @@ class _StartFormPage3State extends State<StartFormPage3> {
               content: weight,
               onChanged: (String value) {
                 startFormState.weight.value = value;
-              },
-              placeholder: "70 kg",
-              inputFormatters: [
-                onlyNumbersFormatter(),
-                InputWithTextFormatter(extension: "kg"),
-                MaxCharactersCountFormatter(maxLength: 3),
-              ],
-              suffixIcon: Icon(Icons.rule),
-            ),
-
-            SizedBox(height: 32),
-
-            CustomInput(
-              title: "Ton poids cible",
-              content: targetWeight,
-              onChanged: (String value) {
-                startFormState.targetWeight.value = value;
               },
               placeholder: "70 kg",
               inputFormatters: [

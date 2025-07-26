@@ -20,8 +20,6 @@ class StartFormState extends ChangeNotifier {
   final weight = ValueNotifier<String>("");
   final targetWeight = ValueNotifier<String>("");
 
-  final objectiveOption = ValueNotifier<SelectOption?>(null);
-
   final lifeOption = ValueNotifier<SelectOption?>(null);
 
   final isLoading = ValueNotifier<bool>(false);
@@ -32,11 +30,9 @@ class StartFormState extends ChangeNotifier {
       return !birthdate.value.trim().isValidDate() ||
           genderOption.value == null;
     } else if (currentPage.value == 2) {
-      return height.value.trim().isEmpty ||
-          weight.value.trim().isEmpty ||
-          targetWeight.value.trim().isEmpty;
+      return height.value.trim().isEmpty || weight.value.trim().isEmpty;
     } else if (currentPage.value == 3) {
-      return objectiveOption.value == null;
+      return targetWeight.value.trim().isEmpty;
     } else if (currentPage.value == 4) {
       return lifeOption.value == null;
     } else {
@@ -58,8 +54,6 @@ class StartFormState extends ChangeNotifier {
     weight.addListener(notifyListeners);
     targetWeight.addListener(notifyListeners);
 
-    objectiveOption.addListener(notifyListeners);
-
     lifeOption.addListener(notifyListeners);
   }
 
@@ -77,8 +71,6 @@ class StartFormState extends ChangeNotifier {
     height.dispose();
     weight.dispose();
     targetWeight.dispose();
-
-    objectiveOption.dispose();
 
     lifeOption.dispose();
 

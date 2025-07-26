@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kali/client/widgets/CustomSelect.widget.dart';
-import 'package:kali/core/models/StartForm.enum.dart';
+import 'package:kali/client/Utils/InputWithTextFormatter.utils.dart';
+import 'package:kali/client/Utils/MaxCharactersCountFormatter.utils.dart';
+import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/core/states/startForm.state.dart';
+import 'package:kali/core/utils/formatters.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 
@@ -15,7 +17,7 @@ class StartFormPage4 extends StatefulWidget {
 class _StartFormPage4State extends State<StartFormPage4> {
   @override
   Widget build(BuildContext context) {
-    SelectOption? objectiveOption = context.watch<StartFormState>().objectiveOption.value;
+    String targetWeight = context.watch<StartFormState>().targetWeight.value;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -36,29 +38,20 @@ class _StartFormPage4State extends State<StartFormPage4> {
             ),
 
             SizedBox(height: 32),
-            
-            CustomSelectWidget(
-              onChanged: (SelectOption? value) {
-                startFormState.objectiveOption.value = value;
+
+            CustomInput(
+              title: "Ton poids cible",
+              content: targetWeight,
+              onChanged: (String value) {
+                startFormState.targetWeight.value = value;
               },
-              options: [
-                SelectOption(
-                  value: ObjectiveOptionEnum.loseWeight.label,
-                  label: "Perdre du poids",
-                  icon: Icon(Icons.abc),
-                ),
-                SelectOption(
-                  value: ObjectiveOptionEnum.gainMuscle.label,
-                  label: "Prendre du muscle",
-                  icon: Icon(Icons.alternate_email),
-                ),
-                SelectOption(
-                  value: ObjectiveOptionEnum.maintainWeight.label,
-                  label: "Garder la forme",
-                  icon: Icon(Icons.apple),
-                ),
+              placeholder: "70 kg",
+              inputFormatters: [
+                onlyNumbersFormatter(),
+                InputWithTextFormatter(extension: "kg"),
+                MaxCharactersCountFormatter(maxLength: 3),
               ],
-              selected: objectiveOption,
+              suffixIcon: Icon(Icons.rule),
             ),
           ],
         ),

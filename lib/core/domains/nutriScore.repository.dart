@@ -6,7 +6,6 @@ class PersonalNutriScoreFormData {
   final String height;
   final String weight;
   final String targetWeight;
-  final String objective;
   final String lifeActivity;
 
   PersonalNutriScoreFormData({
@@ -17,7 +16,6 @@ class PersonalNutriScoreFormData {
     required this.height,
     required this.weight,
     required this.targetWeight,
-    required this.objective,
     required this.lifeActivity,
   });
 }

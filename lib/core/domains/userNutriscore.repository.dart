@@ -50,7 +50,6 @@ class UserNutriscoreRepository {
       "height": formData.height,
       "weight": formData.weight,
       "targetWeight": formData.targetWeight,
-      "objective": formData.objective,
       "lifeActivity": formData.lifeActivity,
     };
 
