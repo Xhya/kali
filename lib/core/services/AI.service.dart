@@ -38,12 +38,12 @@ class AIService {
   }
 
   Future<NutriScore> computePersonalNutriScore({
-    required String size,
+    required String height,
     required String age,
     required String weight,
   }) async {
     final json = await _aiRepository.computePersonalNutriScore(
-      size: size,
+      height: height,
       age: age,
       weight: weight,
     );

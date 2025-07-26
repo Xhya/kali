@@ -43,20 +43,20 @@ class UserNutriscoreRepository {
     PersonalNutriScoreFormData formData,
   ) async {
     Map body = {
-      "userName": formData.userName,
+      "name": formData.userName,
       "leitmotiv": formData.leitmotiv,
       "birthdate": formData.birthdate,
       "gender": formData.gender,
-      "size": formData.size,
+      "height": formData.height,
       "weight": formData.weight,
       "targetWeight": formData.targetWeight,
       "speedExpectation": formData.speedExpectation,
       "objective": formData.objective,
-      "lifeRhythm": formData.lifeRhythm,
+      "lifeActivity": formData.lifeActivity,
     };
 
     final response = await http.post(
-      Uri.parse('$API_URL/users/nutriscores/personal/compute'),
+      Uri.parse('$API_URL/users/nutriscore/personal/compute'),
       headers: await headersWithoutToken(),
       body: json.encode(body),
     );

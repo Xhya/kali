@@ -41,7 +41,7 @@ class AIRepository {
   }
 
   Future<String> computePersonalNutriScore({
-    required String size,
+    required String height,
     required String age,
     required String weight,
   }) async {
@@ -52,7 +52,7 @@ class AIRepository {
             "parts": [
               {
                 "text":
-                    "je mesure $size cm, je pèse $weight kg et j'ai $age ans, je veux que tu me calcules le JSON suivant: { 'proteinAmount': {proteinAmount}, 'glucidAmount': {glucidAmount}, 'lipidAmount': {lipidAmount}, 'caloryAmount': {caloryAmount} }. Ce json représente les quantités en gramme maximum par jour que je peux ingérer, si je veux perdre 10kg par mois. Je veux que la représentation soit le JSON UNIQUEMENT. Et je veux que les données renvoyées soient en grammes, mais je veux que dans le json ce soient des int.",
+                    "je mesure $height cm, je pèse $weight kg et j'ai $age ans, je veux que tu me calcules le JSON suivant: { 'proteinAmount': {proteinAmount}, 'glucidAmount': {glucidAmount}, 'lipidAmount': {lipidAmount}, 'caloryAmount': {caloryAmount} }. Ce json représente les quantités en gramme maximum par jour que je peux ingérer, si je veux perdre 10kg par mois. Je veux que la représentation soit le JSON UNIQUEMENT. Et je veux que les données renvoyées soient en grammes, mais je veux que dans le json ce soient des int.",
               },
             ],
           },

@@ -1,35 +1,26 @@
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
-import 'package:kali/core/domains/nutriScore.data.dart';
-import 'package:kali/core/models/NutriScore.model.dart';
-import 'package:kali/core/services/Error.service.dart';
-import 'package:kali/core/services/headers.service.dart';
-import 'package:kali/environment.dart';
-
 class PersonalNutriScoreFormData {
   final String userName;
   final String leitmotiv;
   final String birthdate;
   final String gender;
-  final String size;
+  final String height;
   final String weight;
   final String targetWeight;
   final String speedExpectation;
   final String objective;
-  final String lifeRhythm;
+  final String lifeActivity;
 
   PersonalNutriScoreFormData({
     required this.userName,
     required this.leitmotiv,
     required this.birthdate,
     required this.gender,
-    required this.size,
+    required this.height,
     required this.weight,
     required this.targetWeight,
     required this.speedExpectation,
     required this.objective,
-    required this.lifeRhythm,
+    required this.lifeActivity,
   });
 }
 

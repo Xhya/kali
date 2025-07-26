@@ -19,7 +19,7 @@ class StartFormPage3 extends StatefulWidget {
 class _StartFormPage3State extends State<StartFormPage3> {
   @override
   Widget build(BuildContext context) {
-    String size = context.watch<StartFormState>().size.value;
+    String height = context.watch<StartFormState>().height.value;
     String weight = context.watch<StartFormState>().weight.value;
     String targetWeight = context.watch<StartFormState>().targetWeight.value;
     SelectOption? resultOption =
@@ -46,9 +46,9 @@ class _StartFormPage3State extends State<StartFormPage3> {
             SizedBox(height: 24),
 
             CustomInput(
-              content: size,
+              content: height,
               onChanged: (String value) {
-                startFormState.size.value = value;
+                startFormState.height.value = value;
               },
               placeholder: "170 cm",
               inputFormatters: [
