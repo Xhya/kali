@@ -6,20 +6,29 @@ class CustomIconButtonWidget extends StatelessWidget {
     super.key,
     required this.onPressed,
     required this.icon,
+    this.disabled = false,
   });
 
   final GestureTapCallback onPressed;
   final IconData icon;
+  final bool disabled;
 
   @override
   Widget build(BuildContext context) {
+    final backgroundColor =
+        disabled
+            ? style.iconBackground.color2.color
+            : style.iconBackground.color1.color;
+
     return IconButton(
       padding: EdgeInsets.all(0),
-      onPressed: onPressed,
+      onPressed: () {
+        if (!disabled) {
+          onPressed();
+        }
+      },
       style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(
-          style.iconBackground.color1.color,
-        ),
+        backgroundColor: WidgetStateProperty.all(backgroundColor),
       ),
       icon: Icon(icon),
       color: style.icon.color1.color,

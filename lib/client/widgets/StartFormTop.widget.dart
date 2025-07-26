@@ -24,12 +24,12 @@ class _StartFormTopWidgetState extends State<StartFormTopWidget> {
       child: Row(
         spacing: 4,
         children: [
-          if (currentPage != 5)
           CustomIconButtonWidget(
             onPressed: () {
               onClickPrevious();
             },
             icon: Icons.chevron_left_outlined,
+            disabled: currentPage == 5,
           ),
           SfLinearGauge(
             minimum: 0,
@@ -45,7 +45,7 @@ class _StartFormTopWidgetState extends State<StartFormTopWidget> {
             ),
             barPointers: [
               LinearBarPointer(
-                value: 1,
+                value: currentPage.toDouble(),
                 color: style.background.green.color,
                 thickness: 5,
                 edgeStyle: LinearEdgeStyle.bothCurve,
