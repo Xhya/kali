@@ -5,12 +5,6 @@ import 'package:kali/core/models/NutriScore.model.dart';
 
 class NutriScoreService {
   final NutriScoreRepository nutriScoreRepository = NutriScoreRepository();
-
-  Future<NutriScore?> computePersonalNutriScore(
-    PersonalNutriScoreFormData formData,
-  ) async {
-    return await nutriScoreRepository.computePersonalNutriScore(formData);
-  }
 }
 
 Future<void> refreshPersonalNutriScore() async {

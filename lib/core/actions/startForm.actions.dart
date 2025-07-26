@@ -53,7 +53,7 @@ void onClickPrevious() {
 
 Future<void> computePersonalNutriScore() async {
   startFormState.isLoading.value = true;
-  final personalNutriScore = await NutriScoreService()
+  final personalNutriScore = await UserService()
       .computePersonalNutriScore(
         PersonalNutriScoreFormData(
           userName: startFormState.userName.value,

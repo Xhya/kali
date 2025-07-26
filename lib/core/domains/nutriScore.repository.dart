@@ -34,34 +34,5 @@ class PersonalNutriScoreFormData {
 }
 
 class NutriScoreRepository {
-  Future<NutriScore?> computePersonalNutriScore(
-    PersonalNutriScoreFormData formData,
-  ) async {
-    Map body = {
-      "userName": formData.userName,
-      "leitmotiv": formData.leitmotiv,
-      "birthdate": formData.birthdate,
-      "gender": formData.gender,
-      "size": formData.size,
-      "weight": formData.weight,
-      "targetWeight": formData.targetWeight,
-      "speedExpectation": formData.speedExpectation,
-      "objective": formData.objective,
-      "lifeRhythm": formData.lifeRhythm,
-    };
 
-    final response = await http.post(
-      Uri.parse('$API_URL/nutriscores/personal/compute'),
-      headers: await headersWithoutToken(),
-      body: json.encode(body),
-    );
-
-    if (response.statusCode == 200) {
-      final body = json.decode(response.body);
-      return NutriScore.fromJson(body["data"]);
-    } else {
-      errorService.currentResponseError = response;
-      throw Exception();
-    }
-  }
 }
