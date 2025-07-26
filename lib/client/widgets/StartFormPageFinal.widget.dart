@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kali/core/services/Translation.service.dart';
+import 'package:kali/core/states/startForm.state.dart';
 import 'package:kali/core/utils/macroIcon.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
@@ -24,7 +25,7 @@ class _StartFormPageFinalState extends State<StartFormPageFinal> {
   @override
   Widget build(BuildContext context) {
     NutriScore? personalNutriScore =
-        context.watch<NutriScoreState>().personalNutriScore.value;
+        context.watch<StartFormState>().personalNutriScore.value;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -35,7 +36,7 @@ class _StartFormPageFinalState extends State<StartFormPageFinal> {
             children: [
               SizedBox(height: 12),
               Text(
-                "➡ Et voici ton plan sèche 🔥",
+                "➡ Et voici ton plan personnalisé 🔥",
                 style: style.text.neutral.merge(style.fontsize.lg),
               ),
 

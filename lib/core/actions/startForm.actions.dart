@@ -3,16 +3,15 @@ import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/domains/nutriScore.repository.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/User.service.dart';
-import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/states/startForm.state.dart';
 
 void onClickBottomButton() async {
   startFormState.isLoading.value = true;
   try {
-    if (nutriScoreState.personalNutriScore.value != null) {
+    if (startFormState.personalNutriScore.value != null) {
       await validatePersonalNutriScore();
-      nutriScoreState.personalNutriScore.value = null;
+      startFormState.personalNutriScore.value = null;
       navigationService.openBottomSheet(widget: WelcomeBottomSheet());
       navigationService.navigateTo(ScreenEnum.home);
     } else if (startFormState.isFormDone) {
@@ -40,6 +39,8 @@ void onClickNext() {
 }
 
 void onClickPrevious() {
+  startFormState.personalNutriScore.value = null;
+
   if (startFormState.currentPage.value > 1) {
     startFormState.currentPage.value = startFormState.currentPage.value - 1;
     startFormState.controller.value.animateToPage(
@@ -65,14 +66,14 @@ Future<void> computePersonalNutriScore() async {
           lifeActivity: startFormState.lifeOption.value?.label ?? "",
         ),
       );
-  nutriScoreState.personalNutriScore.value = personalNutriScore;
+  startFormState.personalNutriScore.value = personalNutriScore;
   startFormState.isLoading.value = false;
 }
 
 validatePersonalNutriScore() async {
-  if (nutriScoreState.personalNutriScore.value != null) {
+  if (startFormState.personalNutriScore.value != null) {
     await userService.setPersonalNutriScore(
-      nutriScoreState.personalNutriScore.value!,
+      startFormState.personalNutriScore.value!,
     );
   }
 }

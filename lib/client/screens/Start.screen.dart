@@ -1,19 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/widgets/BottomButton.widget.dart';
-import 'package:kali/client/widgets/StartFormPage1.widget.dart';
-import 'package:kali/client/widgets/StartFormPage2.widget.dart';
-import 'package:kali/client/widgets/StartFormPage3.widget.dart';
-import 'package:kali/client/widgets/StartFormPage4.widget.dart';
-import 'package:kali/client/widgets/StartFormTop.widget.dart';
-import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/utils/paths.utils.dart';
-import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
-import 'package:kali/client/widgets/CustomButton.widget.dart';
-import 'package:kali/client/layout/Base.scaffold.dart';
-import 'package:kali/core/states/nutriScore.state.dart';
-import 'package:kali/core/states/startForm.state.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});

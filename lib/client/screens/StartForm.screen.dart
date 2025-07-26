@@ -8,7 +8,6 @@ import 'package:kali/client/widgets/StartFormPage5.widget.dart';
 import 'package:kali/client/widgets/StartFormPageFinal.widget.dart';
 import 'package:kali/client/widgets/StartFormTop.widget.dart';
 import 'package:kali/core/services/Navigation.service.dart';
-import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
@@ -103,7 +102,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
             onClickBottomButton();
           },
           text:
-              nutriScoreState.personalNutriScore.value != null
+              startFormState.personalNutriScore.value != null
                   ? "c'est parti"
                   : startFormState.isFormDone
                   ? "terminer"

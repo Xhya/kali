@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kali/client/screens/StartForm.screen.dart';
-import 'package:kali/core/states/startForm.state.dart';
-import 'package:kali/core/states/nutriScore.state.dart';
-import 'package:kali/core/models/meal.fixture.dart';
-import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/Translation.service.dart';
 
 void main() {

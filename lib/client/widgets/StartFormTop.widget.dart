@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/core/actions/startForm.actions.dart';
+import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:kali/client/widgets/CustomIconButton.widget.dart';
 import 'package:provider/provider.dart';
@@ -17,18 +18,21 @@ class _StartFormTopWidgetState extends State<StartFormTopWidget> {
   @override
   Widget build(BuildContext context) {
     int currentPage = context.watch<StartFormState>().currentPage.value;
+    NutriScore? personalNutriScore =
+        context.watch<StartFormState>().personalNutriScore.value;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Row(
         spacing: 4,
         children: [
-          CustomIconButtonWidget(
-            onPressed: () {
-              onClickPrevious();
-            },
-            icon: Icons.chevron_left_outlined,
-          ),
+          if (personalNutriScore != null)
+            CustomIconButtonWidget(
+              onPressed: () {
+                onClickPrevious();
+              },
+              icon: Icons.chevron_left_outlined,
+            ),
           SfLinearGauge(
             minimum: 0,
             maximum: 5,
