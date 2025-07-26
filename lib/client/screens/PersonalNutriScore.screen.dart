@@ -117,9 +117,12 @@ class _PersonalNutriScoreScreenState extends State<PersonalNutriScoreScreen> {
   Widget build(BuildContext context) {
     NutriScore? personalNutriScore =
         context.watch<NutriScoreState>().personalNutriScore.value;
-    bool canSave = context.watch<PersonalNutriScoreEditionState>().canSave;
-    bool isLoading =
-        context.watch<PersonalNutriScoreEditionState>().isLoading.value;
+    bool canSave = context.select(
+      (PersonalNutriScoreEditionState s) => s.canSave,
+    );
+    bool isLoading = context.select(
+      (PersonalNutriScoreEditionState s) => s.isLoading.value,
+    );
 
     return TitleScaffold(
       title: "Objectifs",

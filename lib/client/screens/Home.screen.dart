@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     List<MealModel> meals = context.watch<MealState>().currentMeals.value;
-    DateTime currentDate = context.watch<MealState>().currentDate.value;
+    DateTime currentDate = context.select((MealState s) => s.currentDate.value);
     List<MealPeriodEnum> currentMealPeriods =
         context.watch<MealState>().currentMealPeriods.value;
 

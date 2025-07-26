@@ -16,11 +16,11 @@ class BaseScaffold extends StatefulWidget {
 }
 
 class _BaseScaffoldState extends State<BaseScaffold> {
-
   @override
   Widget build(BuildContext context) {
-    bool hasInternetConnexion =
-        context.watch<ConnexionService>().hasInternetConnexion.value;
+    bool hasInternetConnexion = context.select(
+      (ConnexionService v) => v.hasInternetConnexion.value,
+    );
 
     double headerHeight = hasInternetConnexion ? 80 : 105;
 
@@ -51,7 +51,10 @@ class _BaseScaffoldState extends State<BaseScaffold> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Image.asset('$imagesPath/logo-white-700.png', height: 32),
+                            Image.asset(
+                              '$imagesPath/logo-white-700.png',
+                              height: 32,
+                            ),
                             // RichText(
                             //   text: TextSpan(
                             //     style: style.text.reverse_neutral

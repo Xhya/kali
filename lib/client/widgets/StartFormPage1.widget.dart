@@ -14,8 +14,8 @@ class StartFormPage1 extends StatefulWidget {
 class _StartFormPage1State extends State<StartFormPage1> {
   @override
   Widget build(BuildContext context) {
-    String userName = context.watch<StartFormState>().userName.value;
-    String leitmotiv = context.watch<StartFormState>().leitmotiv.value;
+    String userName = context.select((StartFormState s) => s.userName.value);
+    String leitmotiv = context.select((StartFormState s) => s.leitmotiv.value);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),

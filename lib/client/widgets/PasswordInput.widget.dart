@@ -30,7 +30,7 @@ class _PasswordInputState extends State<PasswordInputWidget> {
 
   @override
   Widget build(BuildContext context) {
-    String password = context.watch<InputState>().password.value;
+    String password = context.select((InputState s) => s.password.value);
 
     return CustomInput(
       content: password,

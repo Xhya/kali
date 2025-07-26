@@ -17,7 +17,7 @@ class StartFormPage4 extends StatefulWidget {
 class _StartFormPage4State extends State<StartFormPage4> {
   @override
   Widget build(BuildContext context) {
-    String targetWeight = context.watch<StartFormState>().targetWeight.value;
+    String targetWeight = context.select((StartFormState s) => s.targetWeight.value);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),

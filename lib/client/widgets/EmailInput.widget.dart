@@ -30,7 +30,7 @@ class _EmailInputState extends State<EmailInputWidget> {
 
   @override
   Widget build(BuildContext context) {
-    String email = context.watch<InputState>().email.value;
+    String email = context.select((InputState s) => s.email.value);
 
     return CustomInput(
       content: email,

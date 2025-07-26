@@ -17,22 +17,20 @@ class StartFormTopWidget extends StatefulWidget {
 class _StartFormTopWidgetState extends State<StartFormTopWidget> {
   @override
   Widget build(BuildContext context) {
-    int currentPage = context.watch<StartFormState>().currentPage.value;
-    NutriScore? personalNutriScore =
-        context.watch<StartFormState>().personalNutriScore.value;
+    int currentPage = context.select((StartFormState s) => s.currentPage.value);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Row(
         spacing: 4,
         children: [
-          if (personalNutriScore != null)
-            CustomIconButtonWidget(
-              onPressed: () {
-                onClickPrevious();
-              },
-              icon: Icons.chevron_left_outlined,
-            ),
+          if (currentPage != 5)
+          CustomIconButtonWidget(
+            onPressed: () {
+              onClickPrevious();
+            },
+            icon: Icons.chevron_left_outlined,
+          ),
           SfLinearGauge(
             minimum: 0,
             maximum: 5,
@@ -47,7 +45,7 @@ class _StartFormTopWidgetState extends State<StartFormTopWidget> {
             ),
             barPointers: [
               LinearBarPointer(
-                value: currentPage.toDouble(),
+                value: 1,
                 color: style.background.green.color,
                 thickness: 5,
                 edgeStyle: LinearEdgeStyle.bothCurve,

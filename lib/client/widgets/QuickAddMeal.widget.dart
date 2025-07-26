@@ -75,14 +75,18 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
 
   @override
   Widget build(BuildContext context) {
-    MealPeriodEnum? chosenPeriod =
-        context.watch<QuickAddMealState>().chosenPeriod.value;
+    MealPeriodEnum? chosenPeriod = context.select(
+      (QuickAddMealState s) => s.chosenPeriod.value,
+    );
+    bool isLoading = context.select((QuickAddMealState s) => s.isLoading.value);
+    String userMealText = context.select(
+      (QuickAddMealState s) => s.userMealText.value,
+    );
+    bool aiNotUnderstandError = context.select(
+      (AIState s) => s.aiNotUnderstandError.value,
+    );
     NutriScore? nutriScore =
         context.watch<QuickAddMealState>().meal.value?.nutriscore;
-    bool isLoading = context.watch<QuickAddMealState>().isLoading.value;
-    String userMealText = context.watch<QuickAddMealState>().userMealText.value;
-    bool aiNotUnderstandError =
-        context.watch<AIState>().aiNotUnderstandError.value;
 
     return Container(
       color: style.background.greenTransparent.color,

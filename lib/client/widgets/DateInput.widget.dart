@@ -24,7 +24,6 @@ class _DateInputWidgetState extends State<DateInputWidget> {
         setState(() {
           birthdateErrorText = "Format invalide (jj/mm/yyyy)";
         });
-        return;
       } else {
         setState(() {
           birthdateErrorText = null;

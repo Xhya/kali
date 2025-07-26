@@ -15,7 +15,7 @@ class StartFormPage5 extends StatefulWidget {
 class _StartFormPage5State extends State<StartFormPage5> {
   @override
   Widget build(BuildContext context) {
-    SelectOption? lifeOption = context.watch<StartFormState>().lifeOption.value;
+    SelectOption? lifeOption = context.select((StartFormState s) => s.lifeOption.value);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),

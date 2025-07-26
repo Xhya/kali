@@ -40,8 +40,9 @@ class ButtonWidget extends StatelessWidget {
     var currentText = text ?? "Confirmer";
 
     if (!disabled && needConnection) {
-      final hasInternetConnexion =
-          context.watch<ConnexionService>().hasInternetConnexion.value;
+      bool hasInternetConnexion = context.select(
+        (ConnexionService s) => s.hasInternetConnexion.value,
+      );
       isButtonDisabled = !hasInternetConnexion;
 
       if (!hasInternetConnexion) {

@@ -16,7 +16,7 @@ class _StartFormPage2State extends State<StartFormPage2> {
   @override
   Widget build(BuildContext context) {
     SelectOption? genderOption =
-        context.watch<StartFormState>().genderOption.value;
+        context.select((StartFormState s) => s.genderOption.value);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),

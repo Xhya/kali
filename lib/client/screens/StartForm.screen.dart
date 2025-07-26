@@ -31,8 +31,8 @@ class _StartFormScreenState extends State<StartFormScreen> {
   Widget build(BuildContext context) {
     bool isNextButtonDisabled =
         context.watch<StartFormState>().isNextButtonDisabled;
-    bool isLoading = context.watch<StartFormState>().isLoading.value;
-    final currentPage = context.watch<StartFormState>().currentPage.value;
+    bool isLoading = context.select((StartFormState s) => s.isLoading.value);
+    int currentPage = context.select((StartFormState s) => s.currentPage.value);
     PageController controller =
         context.watch<StartFormState>().controller.value;
 
@@ -44,7 +44,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              StartFormTopWidget(),
+              const StartFormTopWidget(),
 
               Expanded(
                 child: IntrinsicHeight(

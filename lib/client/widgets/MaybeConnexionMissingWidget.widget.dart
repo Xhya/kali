@@ -3,18 +3,21 @@ import 'package:kali/core/services/Translation.service.dart';
 import 'package:kali/core/services/connexion.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
+
 class MaybeConnexionMissingWidget extends StatefulWidget {
   const MaybeConnexionMissingWidget({super.key});
 
   @override
-  State<MaybeConnexionMissingWidget> createState() => _MealPeriodTagWidgetState();
+  State<MaybeConnexionMissingWidget> createState() =>
+      _MealPeriodTagWidgetState();
 }
 
 class _MealPeriodTagWidgetState extends State<MaybeConnexionMissingWidget> {
   @override
   Widget build(BuildContext context) {
-    bool hasInternetConnexion =
-        context.watch<ConnexionService>().hasInternetConnexion.value;
+    bool hasInternetConnexion = context.select(
+      (ConnexionService s) => s.hasInternetConnexion.value,
+    );
 
     if (!hasInternetConnexion) {
       return Container(
