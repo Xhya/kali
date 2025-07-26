@@ -15,6 +15,8 @@ class CustomInput extends StatefulWidget {
     this.title,
     this.minLines = 1,
     this.maxLines = 1,
+    this.textCapitalization = TextCapitalization.none,
+    this.errorText,
   });
 
   final Function(String)? onChanged;
@@ -26,6 +28,8 @@ class CustomInput extends StatefulWidget {
   final String? title;
   final int minLines;
   final int maxLines;
+  final TextCapitalization textCapitalization;
+  final String? errorText;
 
   @override
   State<CustomInput> createState() => _CustomInputState();
@@ -87,7 +91,9 @@ class _CustomInputState extends State<CustomInput> {
               hintText: widget.placeholder,
               suffixText: widget.suffixText,
               suffixIcon: widget.suffixIcon,
+              errorText: widget.errorText,
             ),
+            textCapitalization: widget.textCapitalization,
           ),
         ),
       ],

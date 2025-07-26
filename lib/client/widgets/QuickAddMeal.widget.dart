@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/Utils/MaxCharactersCountFormatter.utils.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
+import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/widgets/Expanded.widget.dart';
 import 'package:kali/client/widgets/LoaderIcon.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
@@ -53,8 +55,6 @@ class QuickAddMealWidget extends StatefulWidget {
 }
 
 class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
-  TextEditingController controller = TextEditingController();
-
   @override
   void initState() {
     super.initState();
@@ -65,12 +65,6 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
         quickAddMealState.isExpanded.value = true;
       }
     });
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
   }
 
   @override
@@ -119,26 +113,22 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                     child: Container(
                       alignment: Alignment.center,
-                      child: TextField(
-                        controller: controller,
+                      child: CustomInput(
+                        content: userMealText,
                         onChanged: (value) {
                           onInputUpdateUserMealText(value);
                         },
-                        textCapitalization: TextCapitalization.sentences,
+                        placeholder: "Quel est le menu du jour ?",
+                        inputFormatters: [
+                          MaxCharactersCountFormatter(maxLength: 85),
+                        ],
                         minLines: 1,
                         maxLines: 2,
-                        style: style.text.neutral,
-                        decoration: InputDecoration(
-                          errorText:
-                              aiNotUnderstandError
-                                  ? 'Veuillez être plus précis'
-                                  : null,
-                          filled: true,
-                          fillColor: style.background.neutral.color,
-                          border: InputBorder.none,
-                          hintText: "Quel est le menu du jour ?",
-                          hintStyle: style.text.neutral,
-                        ),
+                        textCapitalization: TextCapitalization.sentences,
+                        errorText:
+                            aiNotUnderstandError
+                                ? 'Veuillez être plus précis'
+                                : null,
                       ),
                     ),
                   ),
