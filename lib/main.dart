@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
 import 'package:kali/core/services/Authentication.service.dart';
+import 'package:kali/core/states/Ai.state.dart';
 import 'package:kali/core/states/Input.state.dart';
 import 'package:kali/core/states/configuration.state.dart';
 import 'package:kali/core/states/topBanner.state.dart';
@@ -44,6 +45,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => errorService),
         ChangeNotifierProvider(create: (context) => connexionService),
         ChangeNotifierProvider(create: (context) => localeService),
+        ChangeNotifierProvider(create: (context) => aiState),
 
         ChangeNotifierProvider(create: (context) => quickAddMealState),
         ChangeNotifierProvider(create: (context) => startFormState),

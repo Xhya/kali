@@ -32,12 +32,6 @@ initHomeScreen() async {
   }
 }
 
-onClickPeriodToQuickAddMeal({MealPeriodEnum? period}) {
-  quickAddMealState.chosenPeriod.value = period;
-  quickAddMealState.userMealText.value = "";
-  navigationService.openBottomSheet(widget: QuickAddMealWidget());
-}
-
 onClickSelectPeriod(MealPeriodEnum? period) {
   final periods = mealState.currentMealPeriods.value;
   if (period == null) {

@@ -1,21 +1,23 @@
+import 'package:kali/core/states/Ai.state.dart';
 import 'package:kali/core/states/quickAddMeal.state.dart';
 import 'package:kali/core/domains/meal.service.dart';
-import 'package:kali/core/states/meal.state.dart';
-import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/utils/computeMealPeriod.utils.dart';
-import 'package:uuid/uuid.dart';
 
 computeNutriScoreAction() async {
   try {
     quickAddMealState.isLoading.value = true;
     final userText = quickAddMealState.userMealText.value;
-    
-    final nutriScore = await computeNutriScore(userText);
-    quickAddMealState.nutriScore.value = nutriScore;
+
+    final meal = await computeMealNutriScore(userText);
+    quickAddMealState.meal.value = meal;
     quickAddMealState.isLoading.value = false;
   } catch (e, stack) {
-    errorService.notifyError(e: e, stack: stack);
+    errorService.notifyError(
+      e: e,
+      stack: stack,
+      show: !aiState.aiNotUnderstandError.value,
+    );
   } finally {
     quickAddMealState.isLoading.value = false;
   }
@@ -23,20 +25,14 @@ computeNutriScoreAction() async {
 
 addMealAction() async {
   try {
-    final userText = quickAddMealState.userMealText.value;
     final period =
         quickAddMealState.chosenPeriod.value ??
         computeMealPeriod(DateTime.now());
-    final meal = MealModel(
-      id: Uuid().v6(),
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-      date: mealState.currentDate.value,
-      mealDescription: userText,
-      period: period,
-      nutriScore: quickAddMealState.nutriScore.value,
-    );
-    await addMeal(meal);
+    final meal = quickAddMealState.meal.value;
+
+    if (meal != null) {
+      await addMeal(meal.id, period);
+    }
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);
   } finally {

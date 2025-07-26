@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/widgets.dart';
 import 'package:kali/core/domains/ai.repository.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
+import 'package:kali/core/states/Ai.state.dart';
 import 'package:uuid/uuid.dart';
 
 var aiService = AIService();
@@ -10,11 +10,10 @@ class AIService {
   final _aiRepository = AIRepository();
   final _uuid = Uuid();
 
-  final aiNotUnderstandError = ValueNotifier<bool>(false);
 
   Future<NutriScore> computeNutriScore(String userText) async {
     try {
-      aiNotUnderstandError.value = false;
+      aiState.aiNotUnderstandError.value = false;
       final json = await _aiRepository.computeNutriScore(userText);
       final nutriScoreJson = jsonDecode(json);
 
@@ -27,13 +26,13 @@ class AIService {
       );
 
       if (nutriScore.isEmpty()) {
-        aiNotUnderstandError.value = true;
+        aiState.aiNotUnderstandError.value = true;
         throw Exception("Empty nutri score");
       }
       
       return nutriScore;
     } catch (e) {
-      aiNotUnderstandError.value = true;
+      aiState.aiNotUnderstandError.value = true;
       rethrow;
     }
   }

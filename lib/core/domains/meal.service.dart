@@ -1,7 +1,7 @@
 import 'package:dart_date/dart_date.dart';
 import 'package:kali/core/domains/meal.repository.dart';
 import 'package:kali/core/models/Meal.model.dart';
-import 'package:kali/core/models/NutriScore.model.dart';
+import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/states/meal.state.dart';
 
@@ -23,15 +23,15 @@ refreshMeals() async {
   }
 }
 
-addMeal(MealModel meal) async {
+addMeal(String mealId, MealPeriodEnum period) async {
   try {
-    await MealRepository().addMeal(meal);
+    await MealRepository().addMeal(mealId, period);
     await refreshMeals();
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);
   }
 }
 
-Future<NutriScore?> computeNutriScore(String userText) async {
-  return await MealRepository().computeNutriScore(userText);
+Future<MealModel?> computeMealNutriScore(String userText) async {
+  return await MealRepository().computeMealNutriScore(userText);
 }

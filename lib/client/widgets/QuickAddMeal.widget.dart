@@ -9,9 +9,9 @@ import 'package:kali/client/widgets/NutriScore2by2.widget.dart';
 import 'package:kali/client/widgets/QuickAddMealHeader.widget.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
-import 'package:kali/core/services/AI.service.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
+import 'package:kali/core/states/Ai.state.dart';
 import 'package:kali/core/utils/computeDayAverages.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/core/states/quickAddMeal.state.dart';
@@ -58,8 +58,8 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
   void initState() {
     super.initState();
 
-    quickAddMealState.nutriScore.addListener(() {
-      final nutri = quickAddMealState.nutriScore.value;
+    quickAddMealState.meal.addListener(() {
+      final nutri = quickAddMealState.meal.value?.nutriScore;
       if (nutri != null && !quickAddMealState.isExpanded.value) {
         quickAddMealState.isExpanded.value = true;
       }
@@ -77,9 +77,11 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
     MealPeriodEnum? chosenPeriod =
         context.watch<QuickAddMealState>().chosenPeriod.value;
     NutriScore? nutriScore =
-        context.watch<QuickAddMealState>().nutriScore.value;
+        context.watch<QuickAddMealState>().meal.value?.nutriScore;
     bool isLoading = context.watch<QuickAddMealState>().isLoading.value;
     String userMealText = context.watch<QuickAddMealState>().userMealText.value;
+    bool aiNotUnderstandError =
+        context.watch<AIState>().aiNotUnderstandError.value;
 
     return Container(
       color: style.background.greenTransparent.color,
@@ -123,7 +125,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                         style: style.text.neutral,
                         decoration: InputDecoration(
                           errorText:
-                              aiService.aiNotUnderstandError.value
+                              aiNotUnderstandError
                                   ? 'Veuillez être plus précis'
                                   : null,
                           filled: true,
