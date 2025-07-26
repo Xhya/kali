@@ -1,4 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:kali/core/services/Hardware.service.dart';
 import 'package:kali/core/utils/storageKeys.utils.dart';
 import 'package:kali/environment.dart';
 import 'package:uuid/uuid.dart';
@@ -11,6 +12,7 @@ final authenticationService = AuthenticationService();
 
 class AuthenticationService {
   final authenticationRepository = AuthenticationRepository();
+  final _hardwareService = HardwareService();
   final secureStorage = FlutterSecureStorage();
 
   bool isAuthentifiedWithSignature = false;
@@ -19,7 +21,13 @@ class AuthenticationService {
     try {
       await initDeviceId();
       await generateSignedDeviceId();
-      await authenticationRepository.initUser();
+      await authenticationRepository.initUser(
+        formattedSignature: await _hardwareService.getFormattedSignature(),
+        currentVersion: await _hardwareService.getCurrentVersion(),
+        currentBuild: await _hardwareService.getCurrentBuild(),
+        operatingSystem: await _hardwareService.getOperatingSystem(),
+        notificationActivated: await _hardwareService.getNotificationActivated(),
+      );
       isAuthentifiedWithSignature = true;
     } catch (e, stack) {
       await errorService.notifyError(e: e, stack: stack, show: false);
