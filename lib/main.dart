@@ -12,7 +12,6 @@ import 'package:kali/core/states/topBanner.state.dart';
 import 'package:kali/core/services/Bugsnag.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
-import 'package:kali/client/screens/PersonalNutriScore.screen.dart';
 import 'package:kali/core/states/quickAddMeal.state.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:kali/client/widgets/AsyncInitWidget.dart';
@@ -60,9 +59,6 @@ void main() async {
         ChangeNotifierProvider(create: (context) => editProfileState),
         ChangeNotifierProvider(create: (context) => topBannerState),
         ChangeNotifierProvider(create: (context) => inputState),
-        ChangeNotifierProvider(
-          create: (context) => personalNutriScoreEditionState,
-        ),
 
         ChangeNotifierProvider(create: (context) => nutriScoreState),
         ChangeNotifierProvider(create: (context) => mealState),

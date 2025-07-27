@@ -5,7 +5,6 @@ import 'package:kali/client/screens/Home.screen.dart';
 import 'package:kali/client/screens/Login.screen.dart';
 import 'package:kali/client/screens/Meal.screen.dart';
 import 'package:kali/client/screens/Meals.screen.dart';
-import 'package:kali/client/screens/PersonalNutriScore.screen.dart';
 import 'package:kali/client/screens/Profile.screen.dart';
 import 'package:kali/client/screens/Register.screen.dart';
 import 'package:kali/client/screens/Start.screen.dart';
@@ -14,7 +13,6 @@ import 'package:kali/client/widgets/RegisterBanner.widget.dart';
 import 'package:kali/client/widgets/TopBanner.widget.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
 import 'package:kali/core/services/Authentication.service.dart';
-import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
@@ -177,8 +175,6 @@ class _RoutingState extends State<Routing> {
           navigateTo(const MealScreen());
         case ScreenEnum.meals:
           navigateTo(const MealsScreen());
-        case ScreenEnum.personalNutriScore:
-          navigateTo(const PersonalNutriScoreScreen());
         case ScreenEnum.profile:
           navigateTo(const ProfileScreen());
         case ScreenEnum.editProfile:

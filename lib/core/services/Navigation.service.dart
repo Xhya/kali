@@ -9,7 +9,6 @@ enum ScreenEnum {
   home,
   meal,
   meals,
-  personalNutriScore,
   profile,
   editProfile,
 }
