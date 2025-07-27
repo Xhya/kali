@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/widgets/TotalCalories.widget.dart';
 import 'package:kali/core/services/Translation.service.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:kali/core/utils/macroIcon.utils.dart';
@@ -7,7 +8,6 @@ import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/Expanded.widget.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/client/Style.service.dart';
-import 'package:kali/core/states/nutriScore.state.dart';
 
 class StartFormPageFinal extends StatefulWidget {
   const StartFormPageFinal({super.key});
@@ -46,39 +46,7 @@ class _StartFormPageFinalState extends State<StartFormPageFinal> {
                 height: 220,
                 child: Column(
                   children: [
-                    CustomCard(
-                      padding: EdgeInsets.all(16),
-                      child: Row(
-                        spacing: 12,
-                        children: [
-                          Text(
-                            "⚖️",
-                            textAlign: TextAlign.start,
-                            style: style.text.green
-                                .merge(style.fontsize.md)
-                                .merge(style.fontweight.bold),
-                          ),
-
-                          Expanded(
-                            child: Text(
-                              "calories",
-                              textAlign: TextAlign.start,
-                              style: style.text.neutral.merge(
-                                style.fontsize.sm,
-                              ),
-                            ),
-                          ),
-                          if (personalNutriScore?.caloryAmount != null)
-                            Text(
-                              personalNutriScore!.caloryAmount.toString(),
-                              textAlign: TextAlign.start,
-                              style: style.text.neutral.merge(
-                                style.fontsize.sm,
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
+                    TotalCaloriesWidget(),
                     SizedBox(height: 4),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
