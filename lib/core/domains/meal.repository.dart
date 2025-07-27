@@ -43,6 +43,20 @@ class MealRepository {
     }
   }
 
+  Future<void> deleteMeal(String mealId) async {
+    final response = await http.delete(
+      Uri.parse('$API_URL/meals/$mealId'),
+      headers: await headersWithMaybeToken(),
+    );
+
+    if (response.statusCode == 200) {
+      return; 
+    } else {
+      errorService.currentResponseError = response;
+      throw Exception();
+    }
+  }
+
   Future<MealModel?> computeMealNutriScore(String userText) async {
     Map body = {"userText": userText};
 

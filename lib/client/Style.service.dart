@@ -64,6 +64,7 @@ class BackgroundColors {
   final green = TextStyle(color: _green_300);
   final greenDark = TextStyle(color: _green_950);
   final grey = TextStyle(color: _grey_light);
+  final error = TextStyle(color: Colors.red);
 }
 
 class Gauge {

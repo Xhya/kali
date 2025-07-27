@@ -6,12 +6,24 @@ import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/DateSelector.widget.dart';
 import 'package:kali/client/widgets/MealPeriodsHorizontal.widget.dart';
 import 'package:kali/client/widgets/MealRow.widget.dart';
+import 'package:kali/client/widgets/SlidableItem.widget.dart';
 import 'package:kali/core/actions/Goto.actions.dart';
+import 'package:kali/core/domains/meal.service.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
+import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
+
+onRemoveMeal(MealModel meal) async {
+  try {
+    await MealService().deleteMeal(meal.id);
+    await MealService().refreshMeals();
+  } catch (e) {
+    errorService.notifyError(e: e);
+  }
+}
 
 class MealsScreen extends StatefulWidget {
   const MealsScreen({super.key});
@@ -21,9 +33,11 @@ class MealsScreen extends StatefulWidget {
 }
 
 class _MealsScreenState extends State<MealsScreen> {
-@override
+  @override
   void initState() {
-    mealState.currentMealPeriods.value = [];
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      mealState.currentMealPeriods.value = [];
+    });
     super.initState();
   }
 
@@ -34,7 +48,6 @@ class _MealsScreenState extends State<MealsScreen> {
     DateTime currentDate = context.select((MealState s) => s.currentDate.value);
     List<MealPeriodEnum> currentMealPeriods =
         context.watch<MealState>().currentMealPeriods.value;
-
     return BaseScaffold(
       backButton: true,
       child: Scaffold(
@@ -67,12 +80,17 @@ class _MealsScreenState extends State<MealsScreen> {
                           goToMealScreen(meal);
                         },
                         child: CustomCard(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 8,
-                              horizontal: 16,
+                          child: SlidableItem(
+                            onRemove: () {
+                              onRemoveMeal(meal);
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 8,
+                                horizontal: 16,
+                              ),
+                              child: MealRowWidget(meal: meal),
                             ),
-                            child: MealRowWidget(meal: meal),
                           ),
                         ),
                       );
