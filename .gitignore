@@ -45,3 +45,9 @@ app.*.map.json
 /android/app/release
 
 env.json
+env.dev.json
+env.production.json
+
+google-services.json
+gen-lang-client-0820272321-10299bb777b6.json
+GoogleService-Info.plist
