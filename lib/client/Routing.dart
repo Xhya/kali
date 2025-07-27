@@ -5,6 +5,7 @@ import 'package:kali/client/screens/Login.screen.dart';
 import 'package:kali/client/screens/Meal.screen.dart';
 import 'package:kali/client/screens/Meals.screen.dart';
 import 'package:kali/client/screens/PersonalNutriScore.screen.dart';
+import 'package:kali/client/screens/Profile.screen.dart';
 import 'package:kali/client/screens/Register.screen.dart';
 import 'package:kali/client/screens/Start.screen.dart';
 import 'package:kali/client/screens/StartForm.screen.dart';
@@ -167,6 +168,8 @@ class _RoutingState extends State<Routing> {
           navigateTo(const MealsScreen());
         case ScreenEnum.personalNutriScore:
           navigateTo(const PersonalNutriScoreScreen());
+        case ScreenEnum.profile:
+          navigateTo(const ProfileScreen());
       }
     };
 

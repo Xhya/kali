@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
-import 'package:kali/core/states/startForm.state.dart';
 
 class TotalCaloriesWidget extends StatefulWidget {
   const TotalCaloriesWidget({super.key});
@@ -26,7 +26,7 @@ class _TotalCaloriesWidgetState extends State<TotalCaloriesWidget> {
   @override
   Widget build(BuildContext context) {
     NutriScore? personalNutriScore =
-        context.watch<StartFormState>().personalNutriScore.value;
+        context.watch<NutriScoreState>().personalNutriScore.value;
 
     return CustomCard(
       padding: EdgeInsets.all(16),

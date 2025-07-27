@@ -117,9 +117,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
                               ),
                             ),
                             onTap: () {
-                              navigationService.navigateTo(
-                                ScreenEnum.personalNutriScore,
-                              );
+                              navigationService.navigateTo(ScreenEnum.profile);
                             },
                           ),
                         ),
