@@ -1,10 +1,11 @@
 import 'package:kali/core/states/nutriScore.state.dart';
+import 'package:kali/core/states/user.state.dart';
 
 int? remaningCaloriesToSpend() {
-  if (nutriScoreState.personalNutriScore.value?.caloryAmount == null ||
+  if (userState.personalNutriscore?.caloryAmount == null ||
       nutriScoreState.currentNutriScore.value?.caloryAmount == null) {
     return null;
   }
-  return nutriScoreState.personalNutriScore.value!.caloryAmount -
+  return userState.personalNutriscore!.caloryAmount -
       nutriScoreState.currentNutriScore.value!.caloryAmount;
 }

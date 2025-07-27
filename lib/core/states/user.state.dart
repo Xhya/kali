@@ -5,6 +5,7 @@ var userState = UserState();
 
 class UserState extends ChangeNotifier {
   final user = ValueNotifier<User?>(null);
+  get personalNutriscore => user.value?.nutriscore;
 
   UserState() {
     user.addListener(notifyListeners);

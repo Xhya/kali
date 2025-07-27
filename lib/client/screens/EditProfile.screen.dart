@@ -51,14 +51,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     editProfileState.leitmotiv.value = userState.user.value?.leitmotiv ?? "";
     editProfileState.userName.value = userState.user.value?.username ?? "";
     editProfileState.editingCalories.value =
-        nutriScoreState.personalNutriScore.value?.caloryAmount.toString() ?? "";
+        userState.personalNutriscore?.caloryAmount.toString() ?? "";
     editProfileState.editingProteins.value =
-        nutriScoreState.personalNutriScore.value?.proteinAmount.toString() ??
-        "";
+        userState.personalNutriscore?.proteinAmount.toString() ?? "";
     editProfileState.editingGlucids.value =
-        nutriScoreState.personalNutriScore.value?.glucidAmount.toString() ?? "";
+        userState.personalNutriscore?.glucidAmount.toString() ?? "";
     editProfileState.editingLipids.value =
-        nutriScoreState.personalNutriScore.value?.lipidAmount.toString() ?? "";
+        userState.personalNutriscore?.lipidAmount.toString() ?? "";
     super.initState();
   }
 

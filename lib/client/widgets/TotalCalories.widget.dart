@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kali/core/states/nutriScore.state.dart';
+import 'package:kali/core/states/user.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
@@ -26,7 +26,7 @@ class _TotalCaloriesWidgetState extends State<TotalCaloriesWidget> {
   @override
   Widget build(BuildContext context) {
     NutriScore? personalNutriScore =
-        context.watch<NutriScoreState>().personalNutriScore.value;
+        context.watch<UserState>().personalNutriscore;
 
     return CustomCard(
       padding: EdgeInsets.all(16),

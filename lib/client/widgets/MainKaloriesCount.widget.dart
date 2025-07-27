@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
+import 'package:kali/core/states/user.state.dart';
 import 'package:kali/core/utils/computeRemainingCalories.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
@@ -21,7 +22,7 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
     NutriScore? currentNutriScore =
         context.watch<NutriScoreState>().currentNutriScore.value;
     NutriScore? personalNutriScore =
-        context.watch<NutriScoreState>().personalNutriScore.value;
+        context.watch<UserState>().user.value?.nutriscore;
     int? remainingCalories = context.select(
       (NutriScoreState v) => computeRemainingCalories(),
     );

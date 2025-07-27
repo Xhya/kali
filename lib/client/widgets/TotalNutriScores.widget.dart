@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kali/core/services/Translation.service.dart';
-import 'package:kali/core/states/nutriScore.state.dart';
+import 'package:kali/core/states/user.state.dart';
 import 'package:kali/core/utils/macroIcon.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
@@ -28,7 +28,7 @@ class _TotalNutriScoresWidgetState extends State<TotalNutriScoresWidget> {
   @override
   Widget build(BuildContext context) {
     NutriScore? personalNutriScore =
-        context.watch<NutriScoreState>().personalNutriScore.value;
+        context.watch<UserState>().personalNutriscore;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,

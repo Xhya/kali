@@ -7,6 +7,7 @@ import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/models/MacroType.enum.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
+import 'package:kali/core/states/user.state.dart';
 import 'package:kali/core/utils/getBars.utils.dart';
 import 'package:kali/core/utils/macroIcon.utils.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,7 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
     NutriScore? currentNutriScore =
         context.watch<NutriScoreState>().currentNutriScore.value;
     NutriScore? personalNutriScore =
-        context.watch<NutriScoreState>().personalNutriScore.value;
+        context.watch<UserState>().personalNutriscore;
     NutriScore? editingNutriScore =
         context.watch<EditMealState>().editingNutriScore.value;
 
