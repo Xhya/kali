@@ -1,12 +1,27 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:kali/core/models/NutriScore.model.dart';
+import 'package:kali/core/models/User.model.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/headers.service.dart';
 import 'package:kali/environment.dart';
 
 class UserRepository {
+  Future<User?> refreshUser() async {
+    final response = await http.get(
+      Uri.parse('$API_URL/users'),
+      headers: await headersWithoutToken(),
+    );
+
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body) as Map<String, dynamic>;
+      return User.fromJson(body['data']);
+    } else {
+      errorService.currentResponseError = response;
+      throw Exception();
+    }
+  }
+
   Future<void> register({
     required String email,
     required String password,

@@ -2,12 +2,19 @@ import 'package:kali/core/domains/nutriScore.repository.dart';
 import 'package:kali/core/domains/user.repository.dart';
 import 'package:kali/core/domains/userNutriscore.repository.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
+import 'package:kali/core/models/User.model.dart';
+import 'package:kali/core/states/user.state.dart';
 
 final userService = UserService();
 
 class UserService {
   final _userRepository = UserRepository();
   final _userNutriscoreRepository = UserNutriscoreRepository();
+
+  Future<void> refreshUser() async {
+    User? user = await _userRepository.refreshUser();
+    userState.user.value = user;
+  }
 
   Future<bool> canCompute() async {
     return await _userRepository.canCompute();

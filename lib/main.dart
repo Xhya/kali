@@ -3,9 +3,11 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
 import 'package:kali/core/services/Authentication.service.dart';
 import 'package:kali/core/services/PushNotification.service.dart';
+import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/states/Ai.state.dart';
 import 'package:kali/core/states/Input.state.dart';
 import 'package:kali/core/states/configuration.state.dart';
+import 'package:kali/core/states/editProfile.state.dart';
 import 'package:kali/core/states/topBanner.state.dart';
 import 'package:kali/core/services/Bugsnag.service.dart';
 import 'package:provider/provider.dart';
@@ -56,6 +58,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => quickAddMealState),
         ChangeNotifierProvider(create: (context) => startFormState),
         ChangeNotifierProvider(create: (context) => editMealState),
+        ChangeNotifierProvider(create: (context) => editProfileState),
         ChangeNotifierProvider(create: (context) => topBannerState),
         ChangeNotifierProvider(create: (context) => inputState),
         ChangeNotifierProvider(
@@ -107,6 +110,7 @@ class _AppState extends State<App> {
             await refreshAppVersion();
             await connexionService.listenToInternetConnexion();
             await TranslationService().init();
+            await UserService().refreshUser();
             await refreshPersonalNutriScore();
           } catch (e) {
             errorService.notifyError(e: e, show: false);

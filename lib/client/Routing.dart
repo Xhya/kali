@@ -18,6 +18,7 @@ import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
+import 'package:kali/core/states/user.state.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
@@ -189,7 +190,7 @@ class _RoutingState extends State<Routing> {
       return const ForceUpdateScreen();
     } else if (!authenticationService.isAuthentifiedWithSignature) {
       return const RegisterScreen();
-    } else if (nutriScoreState.personalNutriScore.value == null) {
+    } else if (userState.user.value == null) {
       return const StartScreen();
     } else {
       return const Stack(
