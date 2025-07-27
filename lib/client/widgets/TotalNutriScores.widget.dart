@@ -8,7 +8,9 @@ import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 
 class TotalNutriScoresWidget extends StatefulWidget {
-  const TotalNutriScoresWidget({super.key});
+  const TotalNutriScoresWidget({super.key, required this.nutriScore});
+
+  final NutriScore nutriScore;
 
   @override
   State<TotalNutriScoresWidget> createState() => _TotalNutriScoresWidgetState();

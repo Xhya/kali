@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:kali/core/states/startForm.state.dart';
+import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/TotalCalories.widget.dart';
 import 'package:kali/client/widgets/Expanded.widget.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/TotalNutriScores.widget.dart';
+import 'package:kali/core/models/NutriScore.model.dart';
 
 class StartFormPageFinal extends StatefulWidget {
   const StartFormPageFinal({super.key});
@@ -19,6 +22,9 @@ class _StartFormPageFinalState extends State<StartFormPageFinal> {
 
   @override
   Widget build(BuildContext context) {
+    NutriScore? personalNutriScore =
+        context.watch<StartFormState>().personalNutriScore.value;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Expanded(
@@ -34,16 +40,21 @@ class _StartFormPageFinalState extends State<StartFormPageFinal> {
 
               SizedBox(height: 32),
 
-              ExpandedWidget(
-                height: 220,
-                child: Column(
-                  children: [TotalCaloriesWidget(), SizedBox(height: 4)],
+              if (personalNutriScore != null)
+                ExpandedWidget(
+                  height: 220,
+                  child: Column(
+                    children: [
+                      TotalCaloriesWidget(nutriScore: personalNutriScore),
+                      SizedBox(height: 4),
+                    ],
+                  ),
                 ),
-              ),
 
               SizedBox(height: 16),
 
-              TotalNutriScoresWidget(),
+              if (personalNutriScore != null)
+                TotalNutriScoresWidget(nutriScore: personalNutriScore),
 
               // Text(
               //   "Avec ce plan, tu es en léger déficit. Si tu t'y tiens régulièrement, tu perdras environ 400g par semaine.",

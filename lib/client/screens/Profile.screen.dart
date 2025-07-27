@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
@@ -26,6 +27,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     String? leitmotiv = context.select(
       (UserState s) => s.user.value?.leitmotiv,
     );
+    NutriScore? personalNutriScore =
+        context.watch<UserState>().personalNutriscore;
 
     return BaseScaffold(
       backButton: true,
@@ -82,9 +85,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                             ),
                           SizedBox(height: 32),
-                          TotalCaloriesWidget(),
+                          if (personalNutriScore != null)
+                            TotalCaloriesWidget(nutriScore: personalNutriScore),
                           SizedBox(height: 4),
-                          TotalNutriScoresWidget(),
+                          if (personalNutriScore != null)
+                            TotalNutriScoresWidget(
+                              nutriScore: personalNutriScore,
+                            ),
                         ],
                       ),
                     ),
