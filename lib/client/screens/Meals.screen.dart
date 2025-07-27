@@ -49,29 +49,35 @@ class _MealsScreenState extends State<MealsScreen> {
                 chosenPeriods: currentMealPeriods,
               ),
               SizedBox(height: 24),
-              Expanded(
-                child: ListView.separated(
-                  itemCount: currentMealsByPeriods.length,
-                  separatorBuilder: (context, index) => SizedBox(height: 4),
-                  itemBuilder: (BuildContext context, int index) {
-                    final meal = currentMealsByPeriods[index];
-                    return CustomInkwell(
-                      onTap: () {
-                        goToMealScreen(meal);
-                      },
-                      child: CustomCard(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 8,
-                            horizontal: 16,
+              if (currentMealsByPeriods.isNotEmpty)
+                Expanded(
+                  child: ListView.separated(
+                    itemCount: currentMealsByPeriods.length,
+                    separatorBuilder: (context, index) => SizedBox(height: 4),
+                    itemBuilder: (BuildContext context, int index) {
+                      final meal = currentMealsByPeriods[index];
+                      return CustomInkwell(
+                        onTap: () {
+                          goToMealScreen(meal);
+                        },
+                        child: CustomCard(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 8,
+                              horizontal: 16,
+                            ),
+                            child: MealRowWidget(meal: meal),
                           ),
-                          child: MealRowWidget(meal: meal),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
-              ),
+              if (currentMealsByPeriods.isEmpty)
+                Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Text("Pas de repas trouvé", style: style.fontsize.sm),
+                ),
             ],
           ),
         ),

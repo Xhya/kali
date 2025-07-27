@@ -8,10 +8,12 @@ class MealPeriodTagWidget extends StatefulWidget {
     super.key,
     required this.mealPeriod,
     this.disabled = false,
+    this.fullwidth = false,
   });
 
   final MealPeriodEnum? mealPeriod;
   final bool disabled;
+  final bool fullwidth;
 
   @override
   State<MealPeriodTagWidget> createState() => _MealPeriodTagWidgetState();
@@ -63,12 +65,14 @@ class _MealPeriodTagWidgetState extends State<MealPeriodTagWidget> {
         borderRadius: BorderRadius.circular(16),
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+          width: widget.fullwidth ? double.maxFinite : null,
           decoration: BoxDecoration(
             border: Border.all(color: borderColor.color!),
             color: backgroundColor.color!,
             borderRadius: const BorderRadius.all(Radius.circular(16)),
           ),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(icon, style: style.fontsize.xs),
