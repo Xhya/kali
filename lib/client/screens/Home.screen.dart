@@ -1,3 +1,4 @@
+import 'package:dart_date/dart_date.dart';
 import 'package:flutter/material.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
@@ -65,12 +66,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<MealModel> currentMealsByPeriods = context.watch<MealState>().currentMealsByPeriods;
+    List<MealModel> currentMealsByPeriods =
+        context.watch<MealState>().currentMealsByPeriods;
     DateTime currentDate = context.select((MealState s) => s.currentDate.value);
     List<MealPeriodEnum> currentMealPeriods =
         context.watch<MealState>().currentMealPeriods.value;
 
-    final lastMeal = currentMealsByPeriods.isNotEmpty ? currentMealsByPeriods.last : null;
+    final lastMeal =
+        currentMealsByPeriods.isNotEmpty ? currentMealsByPeriods.last : null;
 
     return BaseScaffold(
       child: Scaffold(
@@ -103,7 +106,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
                           SizedBox(height: 4),
 
-                          NutriScoreGaugesWidget(mealsByPeriods: currentMealsByPeriods),
+                          NutriScoreGaugesWidget(
+                            mealsByPeriods: currentMealsByPeriods,
+                          ),
 
                           SizedBox(height: 32),
 
@@ -153,7 +158,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: QuickAddMealButtonWidget(),
+        floatingActionButton:
+            currentDate.isToday ? QuickAddMealButtonWidget() : null,
       ),
 
       // bottomSheet:

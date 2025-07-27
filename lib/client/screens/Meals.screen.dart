@@ -21,6 +21,12 @@ class MealsScreen extends StatefulWidget {
 }
 
 class _MealsScreenState extends State<MealsScreen> {
+@override
+  void initState() {
+    mealState.currentMealPeriods.value = [];
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     List<MealModel> currentMealsByPeriods =

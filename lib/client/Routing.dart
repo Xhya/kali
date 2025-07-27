@@ -170,9 +170,7 @@ class _RoutingState extends State<Routing> {
       }
     };
 
-    if (!connexionService.hasInternetConnexion.value) {
-      return const StartScreen();
-    } else if (isUpdateRequired()) {
+    if (isUpdateRequired()) {
       return const ForceUpdateScreen();
     } else if (!authenticationService.isAuthentifiedWithSignature) {
       return const RegisterScreen();
