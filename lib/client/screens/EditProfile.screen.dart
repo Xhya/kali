@@ -6,7 +6,6 @@ import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/states/editProfile.state.dart';
-import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/states/user.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
@@ -46,6 +45,11 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
+  final caloryController = TextEditingController();
+  final proteinController = TextEditingController();
+  final glucidController = TextEditingController();
+  final lipidController = TextEditingController();
+
   @override
   void initState() {
     editProfileState.leitmotiv.value = userState.user.value?.leitmotiv ?? "";
@@ -58,6 +62,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         userState.personalNutriscore?.glucidAmount.toString() ?? "";
     editProfileState.editingLipids.value =
         userState.personalNutriscore?.lipidAmount.toString() ?? "";
+
+    caloryController.text = editProfileState.editingCalories.value;
+    proteinController.text = editProfileState.editingProteins.value;
+    glucidController.text = editProfileState.editingGlucids.value;
+    lipidController.text = editProfileState.editingLipids.value;
+
     super.initState();
   }
 
@@ -80,6 +90,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       (EditProfileState s) => s.leitmotiv.value,
     );
     bool isLoading = context.select((EditProfileState s) => s.isLoading.value);
+    bool canSave = context.select((EditProfileState s) => s.canSave);
 
     return BaseScaffold(
       backButton: true,
@@ -148,9 +159,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                             Expanded(
                               child: TextField(
-                                controller: TextEditingController(
-                                  text: calories,
-                                ),
+                                controller: caloryController,
                                 textAlign: TextAlign.end,
                                 style: style.text.neutral.merge(
                                   style.fontsize.sm,
@@ -190,9 +199,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                             Expanded(
                               child: TextField(
-                                controller: TextEditingController(
-                                  text: proteins,
-                                ),
+                                controller: proteinController,
                                 textAlign: TextAlign.end,
                                 style: style.text.neutral.merge(
                                   style.fontsize.sm,
@@ -232,9 +239,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                             Expanded(
                               child: TextField(
-                                controller: TextEditingController(
-                                  text: glucids,
-                                ),
+                                controller: glucidController,
                                 textAlign: TextAlign.end,
                                 style: style.text.neutral.merge(
                                   style.fontsize.sm,
@@ -273,7 +278,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                             Expanded(
                               child: TextField(
-                                controller: TextEditingController(text: lipids),
+                                controller: lipidController,
                                 onChanged: (value) {
                                   editProfileState.editingLipids.value = value;
                                 },
@@ -302,6 +307,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           },
           text: "Enregistrer",
           isLoading: isLoading,
+          disabled: !canSave,
         ),
       ),
     );

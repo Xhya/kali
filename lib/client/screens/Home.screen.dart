@@ -1,5 +1,6 @@
 import 'package:dart_date/dart_date.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/DateSelector.widget.dart';
@@ -15,7 +16,6 @@ import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/utils/computeDayAverages.utils.dart';
-import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 

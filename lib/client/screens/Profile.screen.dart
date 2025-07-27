@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/client/widgets/TotalCalories.widget.dart';
@@ -21,6 +22,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String? username = context.select((UserState s) => s.user.value?.username);
+    String? leitmotiv = context.select(
+      (UserState s) => s.user.value?.leitmotiv,
+    );
+
     return BaseScaffold(
       backButton: true,
       child: Scaffold(
@@ -57,19 +63,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          if (userState.user.value?.username != null)
+                          if (username != null)
                             Text(
-                              userState.user.value!.username!,
+                              username,
                               style: style.fontsize.lg
                                   .merge(style.text.neutral)
                                   .merge(style.fontweight.semibold),
                             ),
                           SizedBox(height: 4),
-                          if (userState.user.value?.leitmotiv != null)
+                          if (leitmotiv != null)
                             Padding(
                               padding: const EdgeInsets.only(right: 42),
                               child: Text(
-                                userState.user.value!.leitmotiv!,
+                                leitmotiv,
                                 style: style.fontsize.xs.merge(
                                   style.text.neutral,
                                 ),
