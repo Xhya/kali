@@ -8,9 +8,10 @@ import 'package:kali/client/widgets/MaybeConnexionMissingWidget.widget.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 
 class BaseScaffold extends StatefulWidget {
-  const BaseScaffold({super.key, required this.child});
+  const BaseScaffold({super.key, required this.child, this.backButton = false});
 
   final Widget child;
+  final bool backButton;
 
   @override
   State<BaseScaffold> createState() => _BaseScaffoldState();
@@ -66,6 +67,34 @@ class _BaseScaffoldState extends State<BaseScaffold> {
                             ),
                           ],
                         ),
+                        if (widget.backButton)
+                          Positioned(
+                            top: 5,
+                            left: 0,
+                            child: CustomInkwell(
+                              child: Container(
+                                width: 40,
+                                height: 40,
+                                padding: EdgeInsets.zero,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.white,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(100),
+                                ),
+                                child: Icon(
+                                  Icons.arrow_back,
+                                  color: style.icon.color3.color,
+                                  size: style.fontsize.lg.fontSize,
+                                ),
+                              ),
+                              onTap: () {
+                                navigationService.context = context;
+                                navigationService.navigateBack();
+                              },
+                            ),
+                          ),
                         Positioned(
                           top: 5,
                           right: 0,
@@ -88,7 +117,9 @@ class _BaseScaffoldState extends State<BaseScaffold> {
                               ),
                             ),
                             onTap: () {
-                              navigationService.navigateTo(ScreenEnum.personalNutriScore);
+                              navigationService.navigateTo(
+                                ScreenEnum.personalNutriScore,
+                              );
                             },
                           ),
                         ),
