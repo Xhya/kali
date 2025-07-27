@@ -1,4 +1,5 @@
 import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/screens/EditProfile.screen.dart';
 import 'package:kali/client/screens/ForceUpdate.screen.dart';
 import 'package:kali/client/screens/Home.screen.dart';
 import 'package:kali/client/screens/Login.screen.dart';
@@ -16,7 +17,6 @@ import 'package:kali/core/services/Authentication.service.dart';
 import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
-import 'package:kali/core/services/connexion.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -180,6 +180,8 @@ class _RoutingState extends State<Routing> {
           navigateTo(const PersonalNutriScoreScreen());
         case ScreenEnum.profile:
           navigateTo(const ProfileScreen());
+        case ScreenEnum.editProfile:
+          navigateTo(const EditProfileScreen());
       }
     };
 

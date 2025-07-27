@@ -3,6 +3,7 @@ import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/client/widgets/TotalCalories.widget.dart';
 import 'package:kali/client/widgets/TotalNutriScores.widget.dart';
+import 'package:kali/core/services/Navigation.service.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -35,7 +36,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       right: 10,
                       child: IconButton(
                         padding: EdgeInsets.all(0),
-                        onPressed: () {},
+                        onPressed: () {
+                          navigationService.navigateTo(ScreenEnum.editProfile);
+                        },
                         style: ButtonStyle(
                           backgroundColor: WidgetStateProperty.all(
                             style.iconBackground.color1.color,

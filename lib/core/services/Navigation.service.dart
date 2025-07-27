@@ -11,6 +11,7 @@ enum ScreenEnum {
   meals,
   personalNutriScore,
   profile,
+  editProfile,
 }
 
 var navigationService = NavigationService();
