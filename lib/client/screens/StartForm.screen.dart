@@ -37,6 +37,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
         context.watch<StartFormState>().controller.value;
 
     return BaseScaffold(
+      backButton: true,
       child: Scaffold(
         backgroundColor: style.background.greenTransparent.color,
         body: Padding(

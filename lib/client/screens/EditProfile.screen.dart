@@ -115,6 +115,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           editProfileState.userName.value = value;
                         },
                         suffixIcon: Icon(Icons.ac_unit_outlined),
+                        textCapitalization: TextCapitalization.sentences,
                       ),
                       SizedBox(height: 32),
                       CustomInput(
@@ -128,6 +129,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         inputFormatters: [
                           MaxCharactersCountFormatter(maxLength: 120),
                         ],
+                        textCapitalization: TextCapitalization.sentences,
                       ),
                       SizedBox(height: 32),
                       Text(

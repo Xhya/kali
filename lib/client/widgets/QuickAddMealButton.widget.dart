@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/BottomButton.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
@@ -61,6 +62,7 @@ class _MealPeriodTagWidgetState extends State<QuickAddMealButtonWidget> {
               : null,
       buttonText: "🍴 ajouter",
       onClick: () {
+        HapticFeedback.vibrate();
         navigationService.context = context;
         onClickAddQuickMeal();
       },

@@ -44,6 +44,7 @@ class _StartFormPage1State extends State<StartFormPage1> {
               },
               placeholder: "Mama kitchen",
               suffixIcon: Icon(Icons.monitor_weight_outlined),
+              textCapitalization: TextCapitalization.sentences,
             ),
 
             SizedBox(height: 32),
@@ -59,6 +60,7 @@ class _StartFormPage1State extends State<StartFormPage1> {
               suffixIcon: Icon(Icons.note_outlined),
               minLines: 3,
               maxLines: 4,
+              textCapitalization: TextCapitalization.sentences,
             ),
           ],
         ),

@@ -52,6 +52,7 @@ class _StartFormPage4State extends State<StartFormPage4> {
                 MaxDigitsCountFormatter(maxLength: 3),
               ],
               suffixIcon: Icon(Icons.rule),
+              keyboardType: TextInputType.number,
             ),
           ],
         ),

@@ -52,6 +52,7 @@ class _StartFormPage3State extends State<StartFormPage3> {
                 MaxDigitsCountFormatter(maxLength: 3),
               ],
               suffixIcon: Icon(Icons.rule),
+              keyboardType: TextInputType.number,
             ),
 
             SizedBox(height: 4),
@@ -68,6 +69,7 @@ class _StartFormPage3State extends State<StartFormPage3> {
                 MaxDigitsCountFormatter(maxLength: 3),
               ],
               suffixIcon: Icon(Icons.rule),
+              keyboardType: TextInputType.number,
             ),
           ],
         ),

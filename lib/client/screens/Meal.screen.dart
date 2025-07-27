@@ -82,6 +82,7 @@ class _MealScreenState extends State<MealScreen> {
               CustomInput(
                 content: editMealState.editingUserTextMeal.value,
                 onChanged: null,
+                textCapitalization: TextCapitalization.sentences,
                 // suffixIcon: IconButton(
                 //   icon:
                 //       isLoading

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/BottomButton.widget.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/utils/paths.utils.dart';
@@ -37,6 +38,7 @@ class _StartFormScreenState extends State<StartScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  SizedBox(height: 16),
                   Image.asset('$imagesPath/logo-white-700.png', height: 32),
                   SizedBox(height: 4),
                   Text(
@@ -53,12 +55,13 @@ class _StartFormScreenState extends State<StartScreen> {
                     Text(
                       "Le suivi quotidien est l'outil idéal pour t'aider à atteindre tes objectifs",
                       style: style.fontsize.xs.merge(style.text.neutral),
-                      maxLines: 2,
+                      maxLines: 5,
                     ),
                   ],
                 ),
                 buttonText: "Démarrer",
                 onClick: () {
+                  HapticFeedback.vibrate();
                   navigationService.navigateTo(ScreenEnum.startForm);
                 },
               ),
