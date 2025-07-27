@@ -10,7 +10,7 @@ class BottomButtonWidget extends StatefulWidget {
     required this.buttonText,
   });
 
-  final Widget left;
+  final Widget? left;
   final Function onClick;
   final String buttonText;
 
@@ -21,13 +21,18 @@ class BottomButtonWidget extends StatefulWidget {
 class _BottomButtonState extends State<BottomButtonWidget> {
   @override
   Widget build(BuildContext context) {
+    final backgroundColor =
+        widget.left != null
+            ? style.background.grey.color
+            : Colors.transparent;
+
     return IntrinsicHeight(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           decoration: BoxDecoration(
-            color: style.background.grey.color,
+            color: backgroundColor,
             borderRadius: BorderRadius.circular(16),
           ),
           child: Row(
@@ -35,7 +40,7 @@ class _BottomButtonState extends State<BottomButtonWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Expanded(child: widget.left),
+              Expanded(child: widget.left ?? SizedBox.fromSize()),
               MainButtonWidget(
                 onClick: () {
                   widget.onClick();

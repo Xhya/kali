@@ -13,9 +13,9 @@ import 'package:provider/provider.dart';
 import 'package:kali/core/services/Translation.service.dart';
 
 class NutriScoreGaugesWidget extends StatefulWidget {
-  const NutriScoreGaugesWidget({super.key, required this.meals});
+  const NutriScoreGaugesWidget({super.key, required this.mealsByPeriods});
 
-  final List<MealModel> meals;
+  final List<MealModel> mealsByPeriods;
 
   @override
   State<NutriScoreGaugesWidget> createState() => _NutriScoreGaugesWidgetState();
@@ -34,11 +34,11 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
     NutriScore? editingNutriScore =
         context.watch<EditMealState>().editingNutriScore.value;
 
-    final proteinBars = getBars(widget.meals, MacroTypeEnum.proteins);
+    final proteinBars = getBars(widget.mealsByPeriods, MacroTypeEnum.proteins);
 
-    final lipidBars = getBars(widget.meals, MacroTypeEnum.lipids);
+    final lipidBars = getBars(widget.mealsByPeriods, MacroTypeEnum.lipids);
 
-    final glucidBars = getBars(widget.meals, MacroTypeEnum.glucids);
+    final glucidBars = getBars(widget.mealsByPeriods, MacroTypeEnum.glucids);
 
     if (currentNutriScore != null && personalNutriScore != null) {
       return Column(

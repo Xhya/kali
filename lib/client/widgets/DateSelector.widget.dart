@@ -25,9 +25,14 @@ String getFormattedDate(DateTime date) {
 }
 
 class DateSelector extends StatelessWidget {
-  const DateSelector({super.key, required this.currentDate});
+  const DateSelector({
+    super.key,
+    required this.currentDate,
+    this.canNavigate = true,
+  });
 
   final DateTime currentDate;
+  final bool canNavigate;
 
   @override
   Widget build(BuildContext context) {
@@ -35,20 +40,21 @@ class DateSelector extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       spacing: 12,
       children: [
-        IconButton(
-          padding: EdgeInsets.all(0),
-          onPressed: () {
-            onClickLeftArrow();
-          },
-          style: ButtonStyle(
-            backgroundColor: WidgetStateProperty.all(
-              style.iconBackground.color1.color,
+        if (canNavigate)
+          IconButton(
+            padding: EdgeInsets.all(0),
+            onPressed: () {
+              onClickLeftArrow();
+            },
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.all(
+                style.iconBackground.color1.color,
+              ),
             ),
+            icon: Icon(Icons.chevron_left_outlined),
+            color: style.icon.color1.color,
+            iconSize: style.fontsize.xl2.fontSize,
           ),
-          icon: Icon(Icons.chevron_left_outlined),
-          color: style.icon.color1.color,
-          iconSize: style.fontsize.xl2.fontSize,
-        ),
         Expanded(
           child: Text(
             getFormattedDate(currentDate),
@@ -56,20 +62,21 @@ class DateSelector extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
-        IconButton.filled(
-          padding: EdgeInsets.all(0),
-          onPressed: () {
-            onClickRightArrow();
-          },
-          style: ButtonStyle(
-            backgroundColor: WidgetStateProperty.all(
-              style.iconBackground.color1.color,
+        if (canNavigate)
+          IconButton.filled(
+            padding: EdgeInsets.all(0),
+            onPressed: () {
+              onClickRightArrow();
+            },
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.all(
+                style.iconBackground.color1.color,
+              ),
             ),
+            icon: Icon(Icons.chevron_right_outlined),
+            color: style.icon.color1.color,
+            iconSize: style.fontsize.xl2.fontSize,
           ),
-          icon: Icon(Icons.chevron_right_outlined),
-          color: style.icon.color1.color,
-          iconSize: style.fontsize.xl2.fontSize,
-        ),
       ],
     );
   }

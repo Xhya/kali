@@ -7,9 +7,9 @@ import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/utils/getTotalNutriscoreByPeriod.utils.dart';
 
-Map<Color, int> getBars(List<MealModel> meals, MacroTypeEnum macroType) {
+Map<Color, int> getBars(List<MealModel> mealsByPeriods, MacroTypeEnum macroType) {
   NutriScoreByPeriod dateTotalNutriscoreByPeriod = getTotalNutriscoreByPeriod(
-    meals,
+    mealsByPeriods,
   );
 
   final selectedPeriods = mealState.currentMealPeriods.value;

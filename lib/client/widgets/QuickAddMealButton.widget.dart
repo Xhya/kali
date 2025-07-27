@@ -34,28 +34,31 @@ class _MealPeriodTagWidgetState extends State<QuickAddMealButtonWidget> {
   @override
   Widget build(BuildContext context) {
     return BottomButtonWidget(
-      left: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("🥳", style: TextStyle(fontSize: 24)),
-          RichText(
-            text: TextSpan(
-              style: TextStyle(
-                fontSize: style.fontsize.xs.fontSize,
-                color: style.text.neutral.color,
-              ),
-              children: <TextSpan>[
-                TextSpan(text: "Déjà "),
-                TextSpan(
-                  text: "11 jours consécutifs",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-          Text("De suivi de repas", style: style.fontsize.xs),
-        ],
-      ),
+      left:
+          false
+              ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("🥳", style: TextStyle(fontSize: 24)),
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontSize: style.fontsize.xs.fontSize,
+                        color: style.text.neutral.color,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(text: "Déjà "),
+                        TextSpan(
+                          text: "11 jours consécutifs",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Text("De suivi de repas", style: style.fontsize.xs),
+                ],
+              )
+              : null,
       buttonText: "🍴 ajouter",
       onClick: () {
         navigationService.context = context;

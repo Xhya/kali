@@ -7,6 +7,16 @@ final mealState = MealState();
 class MealState extends ChangeNotifier {
   final currentMeal = ValueNotifier<MealModel?>(null);
   final currentMeals = ValueNotifier<List<MealModel>>([]);
+
+  get currentMealsByPeriods =>
+      currentMeals.value.where((it) {
+        if (currentMealPeriods.value.isEmpty) {
+          return true;
+        } else {
+          return currentMealPeriods.value.contains(it.period);
+        }
+      }).toList();
+
   final currentDate = ValueNotifier<DateTime>(DateTime.now());
   final currentMealPeriods = ValueNotifier<List<MealPeriodEnum>>([]);
 

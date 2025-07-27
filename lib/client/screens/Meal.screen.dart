@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kali/client/layout/Title.scaffold.dart';
+import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
-import 'package:kali/client/widgets/LoaderIcon.widget.dart';
 import 'package:kali/client/widgets/MealPeriodsWrap.widget.dart';
 import 'package:kali/client/widgets/NutriScoreGauges.widget.dart';
 import 'package:kali/core/states/meal.state.dart';
@@ -10,7 +9,6 @@ import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/services/AI.service.dart';
 import 'package:kali/core/services/Error.service.dart';
-import 'package:kali/core/services/Translation.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 
@@ -44,9 +42,11 @@ class _MealScreenState extends State<MealScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      meal = mealState.currentMeal.value;
-      editMealState.editingUserTextMeal.value = meal?.userText ?? "";
-      editMealState.editingMealPeriod.value = meal?.period;
+      setState(() {
+        meal = mealState.currentMeal.value;
+        editMealState.editingUserTextMeal.value = meal?.userText ?? "";
+        editMealState.editingMealPeriod.value = meal?.period;
+      });
     });
     super.initState();
   }
@@ -67,8 +67,8 @@ class _MealScreenState extends State<MealScreen> {
       return SizedBox.shrink();
     }
 
-    return TitleScaffold(
-      title: t("meal"),
+    return BaseScaffold(
+      backButton: true,
       child: Scaffold(
         body: Container(
           height: MediaQuery.of(context).size.height,
@@ -98,7 +98,7 @@ class _MealScreenState extends State<MealScreen> {
                 // ),
               ),
               SizedBox(height: 16),
-              NutriScoreGaugesWidget(meals: [meal!]),
+              NutriScoreGaugesWidget(mealsByPeriods: [meal!]),
             ],
           ),
         ),

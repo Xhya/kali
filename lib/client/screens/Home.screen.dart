@@ -65,12 +65,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<MealModel> meals = context.watch<MealState>().currentMeals.value;
+    List<MealModel> currentMealsByPeriods = context.watch<MealState>().currentMealsByPeriods;
     DateTime currentDate = context.select((MealState s) => s.currentDate.value);
     List<MealPeriodEnum> currentMealPeriods =
         context.watch<MealState>().currentMealPeriods.value;
 
-    final lastMeal = meals.isNotEmpty ? meals.last : null;
+    final lastMeal = currentMealsByPeriods.isNotEmpty ? currentMealsByPeriods.last : null;
 
     return BaseScaffold(
       child: Scaffold(
@@ -103,19 +103,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
                           SizedBox(height: 4),
 
-                          NutriScoreGaugesWidget(meals: meals),
+                          NutriScoreGaugesWidget(mealsByPeriods: currentMealsByPeriods),
 
                           SizedBox(height: 32),
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                "Derniers ajouts",
-                                style: style.fontsize.xs.merge(
-                                  style.text.greenDark,
+                              if (lastMeal != null)
+                                Text(
+                                  "Derniers ajouts",
+                                  style: style.fontsize.xs.merge(
+                                    style.text.greenDark,
+                                  ),
                                 ),
-                              ),
                               if (lastMeal != null)
                                 CustomInkwell(
                                   onTap: () {
