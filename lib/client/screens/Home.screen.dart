@@ -76,6 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
         currentMealsByPeriods.isNotEmpty ? currentMealsByPeriods.last : null;
 
     return BaseScaffold(
+      profileButton: true,
       child: Scaffold(
         backgroundColor: style.background.greenTransparent.color,
         body: Padding(

@@ -8,10 +8,16 @@ import 'package:kali/client/widgets/MaybeConnexionMissingWidget.widget.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 
 class BaseScaffold extends StatefulWidget {
-  const BaseScaffold({super.key, required this.child, this.backButton = false});
+  const BaseScaffold({
+    super.key,
+    required this.child,
+    this.backButton = false,
+    this.profileButton = false,
+  });
 
   final Widget child;
   final bool backButton;
+  final bool profileButton;
 
   @override
   State<BaseScaffold> createState() => _BaseScaffoldState();
@@ -95,32 +101,35 @@ class _BaseScaffoldState extends State<BaseScaffold> {
                               },
                             ),
                           ),
-                        Positioned(
-                          top: 5,
-                          right: 0,
-                          child: CustomInkwell(
-                            child: Container(
-                              width: 40,
-                              height: 40,
-                              padding: EdgeInsets.zero,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.white,
-                                  width: 2,
+                        if (widget.profileButton)
+                          Positioned(
+                            top: 5,
+                            right: 0,
+                            child: CustomInkwell(
+                              child: Container(
+                                width: 40,
+                                height: 40,
+                                padding: EdgeInsets.zero,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.white,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(100),
                                 ),
-                                borderRadius: BorderRadius.circular(100),
+                                child: Icon(
+                                  Icons.person_outline,
+                                  color: style.icon.color3.color,
+                                  size: style.fontsize.lg.fontSize,
+                                ),
                               ),
-                              child: Icon(
-                                Icons.person_outline,
-                                color: style.icon.color3.color,
-                                size: style.fontsize.lg.fontSize,
-                              ),
+                              onTap: () {
+                                navigationService.navigateTo(
+                                  ScreenEnum.profile,
+                                );
+                              },
                             ),
-                            onTap: () {
-                              navigationService.navigateTo(ScreenEnum.profile);
-                            },
                           ),
-                        ),
                       ],
                     ),
                   ),
