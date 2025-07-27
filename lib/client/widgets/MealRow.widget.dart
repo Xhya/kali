@@ -31,11 +31,11 @@ class _MealPeriodTagWidgetState extends State<MealRowWidget> {
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                 ),
-              Text(
-                widget.meal.date?.formateDate("hh:mm") ?? "TOTO",
-                style: style.fontsize.sm.merge(style.text.neutral),
-                overflow: TextOverflow.ellipsis,
-              ),
+              // Text(
+              //   widget.meal.date?.formateDate("hh:mm") ?? "TOTO",
+              //   style: style.fontsize.sm.merge(style.text.neutral),
+              //   overflow: TextOverflow.ellipsis,
+              // ),
             ],
           ),
         ),

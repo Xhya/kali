@@ -71,11 +71,8 @@ class _CustomInputState extends State<CustomInput> {
             borderRadius: BorderRadius.circular(16),
           ),
           child: TextField(
-            readOnly: widget.onChanged == null,
             controller: controller,
-            onChanged: (value) {
-              widget.onChanged?.call(value);
-            },
+            onChanged: widget.onChanged,
             autofocus: false,
             style: style.text.greenDark,
             minLines: widget.minLines,

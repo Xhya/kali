@@ -59,10 +59,6 @@ class _MealScreenState extends State<MealScreen> {
 
   @override
   Widget build(BuildContext context) {
-    MealPeriodEnum? editingMealPeriod = context.select(
-      (EditMealState s) => s.editingMealPeriod.value,
-    );
-
     if (meal == null) {
       return SizedBox.shrink();
     }

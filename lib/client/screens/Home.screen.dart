@@ -21,6 +21,7 @@ import 'package:kali/client/layout/Base.scaffold.dart';
 
 initHomeScreen() async {
   try {
+    await MealService().refreshMeals();
     computeDayAverages();
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);
