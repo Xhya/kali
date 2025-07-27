@@ -149,6 +149,16 @@ class _RoutingState extends State<Routing> {
             ) {
               return screen;
             },
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(opacity: animation, child: child);
+            },
+            transitionDuration: const Duration(milliseconds: 100),
+            reverseTransitionDuration: const Duration(milliseconds: 100),
           ),
         );
       }
