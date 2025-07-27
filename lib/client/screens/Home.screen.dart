@@ -11,7 +11,6 @@ import 'package:kali/client/widgets/QuickAddMealButton.widget.dart';
 import 'package:kali/core/actions/Goto.actions.dart';
 import 'package:kali/core/domains/meal.service.dart';
 import 'package:kali/core/states/meal.state.dart';
-import 'package:kali/core/domains/nutriScore.service.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/services/Error.service.dart';
@@ -22,9 +21,7 @@ import 'package:kali/client/layout/Base.scaffold.dart';
 
 initHomeScreen() async {
   try {
-    await MealService().refreshMeals();
     computeDayAverages();
-    await refreshPersonalNutriScore();
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);
   }

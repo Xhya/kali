@@ -23,22 +23,6 @@ class UserNutriscoreRepository {
     }
   }
 
-  Future<NutriScore?> getPersonalNutriScore() async {
-    final response = await http.get(
-      Uri.parse('$API_URL/users/nutriscore/personal'),
-      headers: await headersWithMaybeToken(),
-    );
-
-    if (response.statusCode == 200) {
-      final body = jsonDecode(response.body) as Map<String, dynamic>;
-      final data = body["data"];
-      return data != null ? NutriScore.fromJson(body["data"]) : null;
-    } else {
-      errorService.currentResponseError = response;
-      throw Exception();
-    }
-  }
-
   Future<NutriScore?> computePersonalNutriScore(
     PersonalNutriScoreFormData formData,
   ) async {

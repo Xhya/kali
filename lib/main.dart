@@ -19,7 +19,6 @@ import 'package:kali/client/widgets/AsyncInitWidget.dart';
 import 'package:kali/client/Routing.dart';
 import 'package:kali/core/states/editMeal.state.dart';
 import 'package:kali/core/states/meal.state.dart';
-import 'package:kali/core/domains/nutriScore.service.dart';
 import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/states/user.state.dart';
 import 'package:kali/core/services/Error.service.dart';
@@ -111,7 +110,6 @@ class _AppState extends State<App> {
             await connexionService.listenToInternetConnexion();
             await TranslationService().init();
             await UserService().refreshUser();
-            await refreshPersonalNutriScore();
           } catch (e) {
             errorService.notifyError(e: e, show: false);
           }
