@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/widgets/TotalCalories.widget.dart';
-import 'package:kali/core/services/Translation.service.dart';
-import 'package:kali/core/states/startForm.state.dart';
-import 'package:kali/core/utils/macroIcon.utils.dart';
-import 'package:provider/provider.dart';
-import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/Expanded.widget.dart';
-import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/widgets/TotalNutriScores.widget.dart';
 
 class StartFormPageFinal extends StatefulWidget {
   const StartFormPageFinal({super.key});
@@ -24,9 +19,6 @@ class _StartFormPageFinalState extends State<StartFormPageFinal> {
 
   @override
   Widget build(BuildContext context) {
-    NutriScore? personalNutriScore =
-        context.watch<StartFormState>().personalNutriScore.value;
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Expanded(
@@ -45,112 +37,18 @@ class _StartFormPageFinalState extends State<StartFormPageFinal> {
               ExpandedWidget(
                 height: 220,
                 child: Column(
-                  children: [
-                    TotalCaloriesWidget(),
-                    SizedBox(height: 4),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      spacing: 4,
-                      children: [
-                        Expanded(
-                          child: CustomCard(
-                            child: Column(
-                              children: [
-                                SizedBox(height: 12),
-                                Text(
-                                  proteinIcon,
-                                  style: style.fontsize.xl.merge(
-                                    style.text.neutral,
-                                  ),
-                                ),
-                                Text(
-                                  "${personalNutriScore!.proteinAmount}gr",
-                                  style: style.fontsize.sm
-                                      .merge(style.text.neutral)
-                                      .merge(style.fontweight.bold),
-                                ),
-                                SizedBox(height: 16),
-                                Text(
-                                  t('proteins').toLowerCase(),
-                                  style: style.fontsize.sm.merge(
-                                    style.text.neutral,
-                                  ),
-                                ),
-                                SizedBox(height: 12),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: CustomCard(
-                            child: Column(
-                              children: [
-                                SizedBox(height: 12),
-                                Text(
-                                  lipidIcon,
-                                  style: style.fontsize.xl.merge(
-                                    style.text.neutral,
-                                  ),
-                                ),
-                                Text(
-                                  "${personalNutriScore.glucidAmount}gr",
-                                  style: style.fontsize.sm
-                                      .merge(style.text.neutral)
-                                      .merge(style.fontweight.bold),
-                                ),
-                                SizedBox(height: 16),
-                                Text(
-                                  t('glucids').toLowerCase(),
-                                  style: style.fontsize.sm.merge(
-                                    style.text.neutral,
-                                  ),
-                                ),
-                                SizedBox(height: 12),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: CustomCard(
-                            child: Column(
-                              children: [
-                                SizedBox(height: 12),
-                                Text(
-                                  glucidIcon,
-                                  style: style.fontsize.xl.merge(
-                                    style.text.neutral,
-                                  ),
-                                ),
-                                Text(
-                                  "${personalNutriScore.lipidAmount}gr",
-                                  style: style.fontsize.sm
-                                      .merge(style.text.neutral)
-                                      .merge(style.fontweight.bold),
-                                ),
-                                SizedBox(height: 16),
-                                Text(
-                                  t('lipids').toLowerCase(),
-                                  style: style.fontsize.sm.merge(
-                                    style.text.neutral,
-                                  ),
-                                ),
-                                SizedBox(height: 12),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                  children: [TotalCaloriesWidget(), SizedBox(height: 4)],
                 ),
               ),
 
               SizedBox(height: 16),
 
-              Text(
-                "Avec ce plan, tu es en léger déficit. Si tu t'y tiens régulièrement, tu perdras environ 400g par semaine.",
-                style: style.text.neutral.merge(style.fontsize.xs),
-              ),
+              TotalNutriScoresWidget(),
+
+              // Text(
+              //   "Avec ce plan, tu es en léger déficit. Si tu t'y tiens régulièrement, tu perdras environ 400g par semaine.",
+              //   style: style.text.neutral.merge(style.fontsize.xs),
+              // ),
             ],
           ),
         ),

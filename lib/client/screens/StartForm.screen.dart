@@ -73,26 +73,6 @@ class _StartFormScreenState extends State<StartFormScreen> {
                   ),
                 ),
               ),
-
-              // ButtonWidget(
-              //   text: "Crash",
-              //   onPressed: () {
-              //     errorService.notifyError(
-              //       e: Exception("Crash button pressed"),
-              //     );
-              //   },
-              //   fullWidth: true,
-              // ),
-              // if (personalNutriScore != null)
-              //   ExpandedWidget(
-              //     child: Wrap(
-              //       spacing: 12,
-              //       runSpacing: 12,
-              //       children: [
-              //         NutriScore2by2Widget(nutriScore: personalNutriScore),
-              //       ],
-              //     ),
-              //   ),
             ],
           ),
         ),
