@@ -9,7 +9,7 @@ computeNutriScoreAction() async {
     quickAddMealState.isLoading.value = true;
     final userText = quickAddMealState.userMealText.value;
 
-    final meal = await computeMealNutriScore(userText);
+    final meal = await MealService().computeMealNutriScore(userText);
     quickAddMealState.meal.value = meal;
     quickAddMealState.isLoading.value = false;
   } catch (e, stack) {
@@ -31,7 +31,7 @@ addMealAction() async {
     final meal = quickAddMealState.meal.value;
 
     if (meal != null) {
-      await addMeal(meal.id, period);
+      await MealService().addMeal(meal.id, period);
     }
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);

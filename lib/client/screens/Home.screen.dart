@@ -22,7 +22,7 @@ import 'package:kali/client/layout/Base.scaffold.dart';
 
 initHomeScreen() async {
   try {
-    await refreshMeals();
+    await MealService().refreshMeals();
     computeDayAverages();
     await refreshPersonalNutriScore();
   } catch (e, stack) {
@@ -55,12 +55,12 @@ class _HomeScreenState extends State<HomeScreen> {
       initHomeScreen();
     });
     super.initState();
-    mealState.currentDate.addListener(refreshMeals);
+    mealState.currentDate.addListener(MealService().refreshMeals);
   }
 
   @override
   void dispose() {
-    mealState.currentDate.removeListener(refreshMeals);
+    mealState.currentDate.removeListener(MealService().refreshMeals);
     super.dispose();
   }
 
