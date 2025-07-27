@@ -6,14 +6,14 @@ class MainButtonWidget extends StatefulWidget {
   const MainButtonWidget({
     super.key,
     required this.onClick,
-    this.text,
+    required this.text,
     this.iconWidget,
     this.disabled = false,
     this.isLoading = false,
   });
 
   final VoidCallback onClick;
-  final String? text;
+  final String text;
   final Widget? iconWidget;
   final bool disabled;
   final bool isLoading;

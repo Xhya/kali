@@ -1,6 +1,7 @@
 import 'package:kali/core/domains/nutriScore.repository.dart';
 import 'package:kali/core/domains/user.repository.dart';
 import 'package:kali/core/domains/userNutriscore.repository.dart';
+import 'package:kali/core/models/EditUser.formdata.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/models/User.model.dart';
 import 'package:kali/core/states/user.state.dart';
@@ -32,5 +33,9 @@ class UserService {
     PersonalNutriScoreFormData formData,
   ) async {
     return await _userNutriscoreRepository.computePersonalNutriScore(formData);
+  }
+
+  Future<User> saveProfile(EditUserFormData formData) async {
+    return await _userRepository.saveProfile(formData);
   }
 }

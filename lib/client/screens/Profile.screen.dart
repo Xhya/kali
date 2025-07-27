@@ -4,6 +4,7 @@ import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/client/widgets/TotalCalories.widget.dart';
 import 'package:kali/client/widgets/TotalNutriScores.widget.dart';
 import 'package:kali/core/services/Navigation.service.dart';
+import 'package:kali/core/states/user.state.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -56,22 +57,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            "Mama Kitchen",
-                            style: style.fontsize.lg
-                                .merge(style.text.neutral)
-                                .merge(style.fontweight.semibold),
-                          ),
+                          if (userState.user.value?.username != null)
+                            Text(
+                              userState.user.value!.username!,
+                              style: style.fontsize.lg
+                                  .merge(style.text.neutral)
+                                  .merge(style.fontweight.semibold),
+                            ),
                           SizedBox(height: 4),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 42),
-                            child: Text(
-                              '"Je veux changer pour moi, pour me prouver que j\'en suis capable."',
-                              style: style.fontsize.xs.merge(
-                                style.text.neutral,
+                          if (userState.user.value?.leitmotiv != null)
+                            Padding(
+                              padding: const EdgeInsets.only(right: 42),
+                              child: Text(
+                                userState.user.value!.leitmotiv!,
+                                style: style.fontsize.xs.merge(
+                                  style.text.neutral,
+                                ),
                               ),
                             ),
-                          ),
                           SizedBox(height: 32),
                           TotalCaloriesWidget(),
                           SizedBox(height: 4),

@@ -1,11 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/Utils/Input.decoration.dart';
+import 'package:kali/client/widgets/MainButton.widget.dart';
+import 'package:kali/core/models/EditUser.formdata.dart';
+import 'package:kali/core/services/Error.service.dart';
+import 'package:kali/core/services/Navigation.service.dart';
+import 'package:kali/core/services/User.service.dart';
+import 'package:kali/core/states/editProfile.state.dart';
+import 'package:kali/core/states/nutriScore.state.dart';
+import 'package:kali/core/states/user.state.dart';
+import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/Utils/MaxCharactersCountFormatter.utils.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
-import 'package:kali/client/widgets/TotalCalories.widget.dart';
-import 'package:kali/client/widgets/TotalNutriScores.widget.dart';
 import 'package:kali/core/utils/macroIcon.utils.dart';
+
+onClickSave() async {
+  try {
+    editProfileState.isLoading.value = true;
+    final user = await UserService().saveProfile(
+      EditUserFormData(
+        userName: editProfileState.userName.value,
+        leitmotiv: editProfileState.leitmotiv.value,
+        calories: editProfileState.editingCalories.value.toString(),
+        proteins: editProfileState.editingProteins.value.toString(),
+        glucids: editProfileState.editingGlucids.value.toString(),
+        lipids: editProfileState.editingLipids.value.toString(),
+      ),
+    );
+    userState.user.value = user;
+    navigationService.navigateBack();
+  } catch (e, stack) {
+    errorService.notifyError(e: e, stack: stack);
+  } finally {
+    editProfileState.isLoading.value = false;
+  }
+}
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -17,11 +48,40 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
+    editProfileState.leitmotiv.value = userState.user.value?.leitmotiv ?? "";
+    editProfileState.userName.value = userState.user.value?.username ?? "";
+    editProfileState.editingCalories.value =
+        nutriScoreState.personalNutriScore.value?.caloryAmount.toString() ?? "";
+    editProfileState.editingProteins.value =
+        nutriScoreState.personalNutriScore.value?.proteinAmount.toString() ??
+        "";
+    editProfileState.editingGlucids.value =
+        nutriScoreState.personalNutriScore.value?.glucidAmount.toString() ?? "";
+    editProfileState.editingLipids.value =
+        nutriScoreState.personalNutriScore.value?.lipidAmount.toString() ?? "";
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    String calories = context.select(
+      (EditProfileState s) => s.editingCalories.value,
+    );
+    String proteins = context.select(
+      (EditProfileState s) => s.editingProteins.value,
+    );
+    String glucids = context.select(
+      (EditProfileState s) => s.editingGlucids.value,
+    );
+    String lipids = context.select(
+      (EditProfileState s) => s.editingLipids.value,
+    );
+    String userName = context.select((EditProfileState s) => s.userName.value);
+    String leitmotiv = context.select(
+      (EditProfileState s) => s.leitmotiv.value,
+    );
+    bool isLoading = context.select((EditProfileState s) => s.isLoading.value);
+
     return BaseScaffold(
       backButton: true,
       child: Scaffold(
@@ -39,19 +99,25 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       CustomInput(
-                        content: "Mama Kitchen",
+                        content: userName,
                         title: "Ton num d'utilisateur",
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          editProfileState.userName.value = value;
+                        },
                         suffixIcon: Icon(Icons.ac_unit_outlined),
                       ),
                       SizedBox(height: 32),
                       CustomInput(
-                        content:
-                            "Je veux changer pour moi, pour me prouver que j'en suis capable.",
+                        content: leitmotiv,
                         title: "Ton leitmotiv",
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          editProfileState.leitmotiv.value = value;
+                        },
                         suffixIcon: Icon(Icons.ac_unit_outlined),
-                        maxLines: 100,
+                        maxLines: 4,
+                        inputFormatters: [
+                          MaxCharactersCountFormatter(maxLength: 120),
+                        ],
                       ),
                       SizedBox(height: 32),
                       Text(
@@ -81,11 +147,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 ),
                               ),
                             ),
-                            Text(
-                              "1700",
-                              textAlign: TextAlign.start,
-                              style: style.text.neutral.merge(
-                                style.fontsize.sm,
+                            Expanded(
+                              child: TextField(
+                                controller: TextEditingController(
+                                  text: calories,
+                                ),
+                                textAlign: TextAlign.end,
+                                style: style.text.neutral.merge(
+                                  style.fontsize.sm,
+                                ),
+                                decoration: inputDecoration,
+                                onChanged: (value) {
+                                  editProfileState.editingCalories.value =
+                                      value;
+                                },
                               ),
                             ),
                           ],
@@ -114,11 +189,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 ),
                               ),
                             ),
-                            Text(
-                              "140",
-                              textAlign: TextAlign.start,
-                              style: style.text.neutral.merge(
-                                style.fontsize.sm,
+                            Expanded(
+                              child: TextField(
+                                controller: TextEditingController(
+                                  text: proteins,
+                                ),
+                                textAlign: TextAlign.end,
+                                style: style.text.neutral.merge(
+                                  style.fontsize.sm,
+                                ),
+                                decoration: inputDecoration,
+                                onChanged: (value) {
+                                  editProfileState.editingProteins.value =
+                                      value;
+                                },
                               ),
                             ),
                           ],
@@ -147,11 +231,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 ),
                               ),
                             ),
-                            Text(
-                              "135",
-                              textAlign: TextAlign.start,
-                              style: style.text.neutral.merge(
-                                style.fontsize.sm,
+                            Expanded(
+                              child: TextField(
+                                controller: TextEditingController(
+                                  text: glucids,
+                                ),
+                                textAlign: TextAlign.end,
+                                style: style.text.neutral.merge(
+                                  style.fontsize.sm,
+                                ),
+                                decoration: inputDecoration,
+                                onChanged: (value) {
+                                  editProfileState.editingGlucids.value = value;
+                                },
                               ),
                             ),
                           ],
@@ -180,11 +272,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 ),
                               ),
                             ),
-                            Text(
-                              "60",
-                              textAlign: TextAlign.start,
-                              style: style.text.neutral.merge(
-                                style.fontsize.sm,
+                            Expanded(
+                              child: TextField(
+                                controller: TextEditingController(text: lipids),
+                                onChanged: (value) {
+                                  editProfileState.editingLipids.value = value;
+                                },
+                                textAlign: TextAlign.end,
+                                style: style.text.neutral.merge(
+                                  style.fontsize.sm,
+                                ),
+                                decoration: inputDecoration,
                               ),
                             ),
                           ],
@@ -196,6 +294,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
             );
           },
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: MainButtonWidget(
+          onClick: () {
+            navigationService.context = context;
+            onClickSave();
+          },
+          text: "Enregistrer",
+          isLoading: isLoading,
         ),
       ),
     );
