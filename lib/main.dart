@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
@@ -10,6 +14,7 @@ import 'package:kali/core/states/configuration.state.dart';
 import 'package:kali/core/states/editProfile.state.dart';
 import 'package:kali/core/states/topBanner.state.dart';
 import 'package:kali/core/services/Bugsnag.service.dart';
+import 'package:kali/environment.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/core/states/quickAddMeal.state.dart';
@@ -32,6 +37,9 @@ void main() async {
   // Initialize intl
   await initializeDateFormatting();
 
+  // Translation
+  await TranslationService().init();
+
   // Bugsnag Monitoring
   await bugsnagService.init();
 
@@ -39,8 +47,35 @@ void main() async {
   await authenticationService.init();
 
   // Firebase init
-  if (false) {
+  if (!useSimulator && !kIsWeb) {
     await PushNotificationService().refreshNotificationToken();
+
+    if (Firebase.apps.isEmpty) {
+      try {
+        WidgetsFlutterBinding.ensureInitialized();
+        var apiKey =
+            Platform.isAndroid
+                ? environment["FIREBASE_MESSAGING_API_KEY"] as String
+                : environment["FIREBASE_MESSAGING_IOS_API_KEY"] as String;
+
+        var appId =
+            Platform.isAndroid
+                ? environment["FIREBASE_MESSAGING_APP_ID"] as String
+                : environment["FIREBASE_MESSAGING_GOOGLE_APP_ID"] as String;
+
+        await Firebase.initializeApp(
+          options: FirebaseOptions(
+            apiKey: apiKey,
+            appId: appId,
+            messagingSenderId:
+                environment["FIREBASE_MESSAGING_SENDER_ID"] as String,
+            projectId: environment["FIREBASE_MESSAGING_PROJECT_ID"] as String,
+          ),
+        );
+      } catch (e, stackTrace) {
+        errorService.notifyError(e: e, stack: stackTrace);
+      }
+    }
   }
 
   runApp(
@@ -104,7 +139,6 @@ class _AppState extends State<App> {
           try {
             await refreshAppVersion();
             await connexionService.listenToInternetConnexion();
-            await TranslationService().init();
             await UserService().refreshUser();
           } catch (e) {
             errorService.notifyError(e: e, show: false);

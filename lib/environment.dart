@@ -16,7 +16,7 @@ const environment = {
 };
 
 final useFixtures = environment["USE_FIXTURES"];
-final useSimulator = environment["USE_SIMULATOR"];
+final useSimulator = environment["USE_SIMULATOR"] as bool;
 final isInTestEnv = environment["TEST"] == true;
 final isInLocalEnv = environment["ENVIRONMENT"] == "local";
 final isInDevEnv = environment["ENVIRONMENT"] == "development";
