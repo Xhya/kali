@@ -18,6 +18,7 @@ class CustomInput extends StatefulWidget {
     this.textCapitalization = TextCapitalization.none,
     this.errorText,
     this.keyboardType = TextInputType.text,
+    this.readonly = false,
   });
 
   final Function(String)? onChanged;
@@ -32,6 +33,7 @@ class CustomInput extends StatefulWidget {
   final TextCapitalization textCapitalization;
   final String? errorText;
   final TextInputType keyboardType;
+  final bool readonly;
 
   @override
   State<CustomInput> createState() => _CustomInputState();
@@ -94,6 +96,7 @@ class _CustomInputState extends State<CustomInput> {
             ),
             textCapitalization: widget.textCapitalization,
             keyboardType: widget.keyboardType,
+            readOnly: widget.readonly,
           ),
         ),
       ],

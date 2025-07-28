@@ -62,7 +62,6 @@ class _MealPeriodTagWidgetState extends State<QuickAddMealButtonWidget> {
               : null,
       buttonText: "🍴 ajouter",
       onClick: () {
-        HapticFeedback.vibrate();
         navigationService.context = context;
         onClickAddQuickMeal();
       },

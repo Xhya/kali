@@ -9,7 +9,6 @@ import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/services/AI.service.dart';
 import 'package:kali/core/services/Error.service.dart';
-import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 
 onUpdateMeal() async {
@@ -83,6 +82,7 @@ class _MealScreenState extends State<MealScreen> {
                 content: editMealState.editingUserTextMeal.value,
                 onChanged: null,
                 textCapitalization: TextCapitalization.sentences,
+                readonly: true,
                 // suffixIcon: IconButton(
                 //   icon:
                 //       isLoading

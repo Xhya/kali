@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/LoaderIcon.widget.dart';
 
@@ -40,6 +41,7 @@ class _MainButtonState extends State<MainButtonWidget> {
       },
       onTapUp: (_) async {
         if (!widget.disabled) {
+          HapticFeedback.vibrate();
           await Future.delayed(const Duration(milliseconds: 100));
           widget.onClick();
           setState(() {
