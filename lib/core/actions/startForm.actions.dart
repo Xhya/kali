@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/widgets/Register.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/domains/nutriScore.repository.dart';
 import 'package:kali/core/services/Navigation.service.dart';
@@ -12,7 +13,9 @@ void onClickBottomButton() async {
     if (startFormState.personalNutriScore.value != null) {
       await validatePersonalNutriScore();
       startFormState.personalNutriScore.value = null;
-      navigationService.openBottomSheet(widget: WelcomeBottomSheet());
+      navigationService.openBottomSheet(
+        widget: WelcomeBottomSheet(child: RegisterWidget()),
+      );
       navigationService.navigateTo(ScreenEnum.home);
     } else if (startFormState.isFormDone) {
       await computePersonalNutriScore();
@@ -53,19 +56,18 @@ void onClickPrevious() {
 
 Future<void> computePersonalNutriScore() async {
   startFormState.isLoading.value = true;
-  final personalNutriScore = await UserService()
-      .computePersonalNutriScore(
-        PersonalNutriScoreFormData(
-          userName: startFormState.userName.value,
-          leitmotiv: startFormState.leitmotiv.value,
-          birthdate: startFormState.birthdate.value,
-          gender: startFormState.genderOption.value?.label ?? "",
-          height: startFormState.height.value,
-          weight: startFormState.weight.value,
-          targetWeight: startFormState.targetWeight.value,
-          lifeActivity: startFormState.lifeOption.value?.label ?? "",
-        ),
-      );
+  final personalNutriScore = await UserService().computePersonalNutriScore(
+    PersonalNutriScoreFormData(
+      userName: startFormState.userName.value,
+      leitmotiv: startFormState.leitmotiv.value,
+      birthdate: startFormState.birthdate.value,
+      gender: startFormState.genderOption.value?.label ?? "",
+      height: startFormState.height.value,
+      weight: startFormState.weight.value,
+      targetWeight: startFormState.targetWeight.value,
+      lifeActivity: startFormState.lifeOption.value?.label ?? "",
+    ),
+  );
   startFormState.personalNutriScore.value = personalNutriScore;
   startFormState.isLoading.value = false;
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/BottomButton.widget.dart';
+import 'package:kali/client/widgets/Register.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/User.service.dart';
@@ -17,7 +18,9 @@ onClickAddQuickMeal() async {
       quickAddMealState.chosenPeriod.value = computeMealPeriod(DateTime.now());
       navigationService.openBottomSheet(widget: QuickAddMealWidget());
     } else {
-      navigationService.openBottomSheet(widget: WelcomeBottomSheet());
+      navigationService.openBottomSheet(
+        widget: WelcomeBottomSheet(child: RegisterWidget()),
+      );
     }
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);

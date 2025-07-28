@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
-import 'package:kali/client/widgets/Register.widget.dart';
 import 'package:kali/core/utils/linearGradient.utils.dart';
 
 class WelcomeBottomSheet extends StatefulWidget {
-  const WelcomeBottomSheet({super.key});
+  const WelcomeBottomSheet({super.key, required this.child});
+
+  final Widget child;
 
   @override
   State<WelcomeBottomSheet> createState() => _WelcomeBottomSheetState();
@@ -45,7 +46,7 @@ class _WelcomeBottomSheetState extends State<WelcomeBottomSheet> {
                 icon: Icon(Icons.close, color: style.icon.color1.color),
               ),
             ),
-            RegisterWidget(),
+            widget.child,
           ],
         ),
       ),

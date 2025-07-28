@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:kali/client/widgets/Register.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/services/Bugsnag.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
@@ -18,7 +19,9 @@ class ErrorService extends ChangeNotifier {
 
   notifyError({required Object e, StackTrace? stack, bool show = true}) async {
     if (currentResponseError?.statusCode == 410) {
-      navigationService.openBottomSheet(widget: WelcomeBottomSheet());
+      navigationService.openBottomSheet(
+        widget: WelcomeBottomSheet(child: RegisterWidget()),
+      );
       return;
     }
 

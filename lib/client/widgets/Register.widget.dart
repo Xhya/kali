@@ -5,6 +5,7 @@ import 'package:kali/client/widgets/EmailInput.widget.dart';
 import 'package:kali/client/widgets/Login.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/PasswordInput.widget.dart';
+import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/domains/user.repository.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
@@ -149,7 +150,9 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               onTap: () {
                 navigationService.navigateBack();
                 Future.delayed(Duration(milliseconds: 400), () {
-                  navigationService.openBottomSheet(widget: LoginWidget());
+                  navigationService.openBottomSheet(
+                    widget: WelcomeBottomSheet(child: LoginWidget()),
+                  );
                 });
               },
               child: Text(
