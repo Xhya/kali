@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kali/core/models/MealPeriod.enum.dart';
+import 'package:kali/core/states/meal.state.dart';
+import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
@@ -19,9 +22,12 @@ class BarGaugeWidget extends StatefulWidget {
 class _BarGaugeWidgetState extends State<BarGaugeWidget> {
   @override
   Widget build(BuildContext context) {
+    List<MealPeriodEnum> selectedPeriods =
+        context.watch<MealState>().currentMealPeriods.value;
+
     double startValue = 0;
 
-    if (widget.bars.length == 1) {
+    if (selectedPeriods.isEmpty) {
       final entry = widget.bars.entries.elementAt(0);
 
       return SfLinearGauge(
@@ -64,6 +70,9 @@ class _BarGaugeWidgetState extends State<BarGaugeWidget> {
                   ? LinearEdgeStyle.endCurve
                   : LinearEdgeStyle.bothFlat,
         );
+
+        startValue = entry.value.toDouble();
+
         return gauge;
       });
 
