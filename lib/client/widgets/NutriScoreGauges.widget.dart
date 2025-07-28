@@ -3,7 +3,7 @@ import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CircleGauge.widget.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/core/states/editMeal.state.dart';
-import 'package:kali/core/states/nutriScore.state.dart';
+import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/models/MacroType.enum.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
@@ -28,8 +28,7 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
 
   @override
   Widget build(BuildContext context) {
-    NutriScore? currentNutriScore =
-        context.watch<NutriScoreState>().currentNutriScore.value;
+    NutriScore currentNutriScore = context.watch<MealState>().mealsNutriScore;
     NutriScore? personalNutriScore =
         context.watch<UserState>().personalNutriscore;
     NutriScore? editingNutriScore =
@@ -41,7 +40,7 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
 
     final glucidBars = getBars(widget.mealsByPeriods, MacroTypeEnum.glucids);
 
-    if (currentNutriScore != null && personalNutriScore != null) {
+    if (personalNutriScore != null) {
       return Column(
         children: [
           Row(

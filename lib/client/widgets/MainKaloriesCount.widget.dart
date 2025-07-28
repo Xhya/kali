@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
+import 'package:kali/core/models/MealPeriod.enum.dart';
+import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/states/user.state.dart';
-import 'package:kali/core/utils/computeRemainingCalories.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
-import 'package:kali/core/states/nutriScore.state.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
@@ -19,16 +19,13 @@ class MainKaloriesCountWidget extends StatefulWidget {
 class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
   @override
   Widget build(BuildContext context) {
-    NutriScore? currentNutriScore =
-        context.watch<NutriScoreState>().currentNutriScore.value;
+    NutriScore currentNutriScore = context.watch<MealState>().mealsNutriScore;
     NutriScore? personalNutriScore =
         context.watch<UserState>().user.value?.nutriscore;
-    int? remainingCalories = context.select(
-      (NutriScoreState v) => computeRemainingCalories(),
-    );
-    // NutriScoreByPeriod dateTotalNutriscoreByPeriod = getTotalNutriscoreByPeriod(
-    //   widget.meals,
-    // );
+    int remainingCalories = context.watch<MealState>().remainingCalories;
+
+    List<MealPeriodEnum> currentMealPeriods =
+        context.watch<MealState>().currentMealPeriods.value;
 
     return CustomCard(
       padding: EdgeInsets.all(16),
@@ -47,17 +44,15 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (currentNutriScore?.caloryAmount != null &&
-                    personalNutriScore?.caloryAmount != null)
+                if (personalNutriScore?.caloryAmount != null)
                   Text(
-                    "${currentNutriScore?.caloryAmount.toString()} / ${personalNutriScore?.caloryAmount.toString()}",
+                    "${currentNutriScore.caloryAmount.toString()} / ${personalNutriScore?.caloryAmount.toString()}",
                     textAlign: TextAlign.start,
                     style: style.text.neutral
                         .merge(style.fontsize.md)
                         .merge(style.fontweight.bold),
                   ),
-                if (currentNutriScore?.caloryAmount == null ||
-                    personalNutriScore?.caloryAmount == null)
+                if (personalNutriScore?.caloryAmount == null)
                   Text(
                     "...",
                     textAlign: TextAlign.start,
@@ -76,7 +71,7 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              if (remainingCalories != null)
+              if (currentMealPeriods.isEmpty)
                 Text(
                   "$remainingCalories restantes 🔥",
                   textAlign: TextAlign.start,
@@ -101,7 +96,7 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
                     ),
                     barPointers: [
                       LinearBarPointer(
-                        value: currentNutriScore?.caloryAmount.toDouble() ?? 0,
+                        value: currentNutriScore.caloryAmount.toDouble(),
                         color: style.gauge.main.color,
                         thickness: 8,
                         edgeStyle: LinearEdgeStyle.bothCurve,

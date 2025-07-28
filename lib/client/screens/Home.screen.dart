@@ -15,14 +15,12 @@ import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/services/Error.service.dart';
-import 'package:kali/core/utils/computeDayAverages.utils.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 
 initHomeScreen() async {
   try {
     await MealService().refreshMeals();
-    computeDayAverages();
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);
   }
