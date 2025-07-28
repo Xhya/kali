@@ -41,7 +41,6 @@ class _BarGaugeWidgetState extends State<BarGaugeWidget> {
           edgeStyle: LinearEdgeStyle.bothCurve,
           color: style.background.greenDark.color,
           thickness: 8,
-          borderColor: Colors.black,
         ),
         barPointers: [
           LinearBarPointer(
@@ -53,28 +52,41 @@ class _BarGaugeWidgetState extends State<BarGaugeWidget> {
         ],
       );
     } else {
-      final list = List.generate(widget.bars.entries.length, (index) {
-        final entry = widget.bars.entries.elementAt(index);
-        final gauge = LinearGaugeRange(
-          startValue: startValue,
-          endValue: startValue + entry.value.toDouble(),
-          color: entry.key,
+      final list = [
+        LinearGaugeRange(
+          startValue: 0,
+          endValue: widget.maxAmount.toDouble(),
+          color: style.background.greenDark.color,
           startWidth: 8,
           endWidth: 8,
-          edgeStyle:
-              widget.bars.length == 1
-                  ? LinearEdgeStyle.bothCurve
-                  : index == 0
-                  ? LinearEdgeStyle.startCurve
-                  : index == widget.bars.length - 1
-                  ? LinearEdgeStyle.endCurve
-                  : LinearEdgeStyle.bothFlat,
-        );
+          edgeStyle: LinearEdgeStyle.bothCurve,
+        ),
+      ];
 
-        startValue = entry.value.toDouble();
+      list.addAll(
+        List.generate(widget.bars.entries.length, (index) {
+          final entry = widget.bars.entries.elementAt(index);
+          final gauge = LinearGaugeRange(
+            startValue: startValue,
+            endValue: startValue + entry.value.toDouble(),
+            color: entry.key,
+            startWidth: 8,
+            endWidth: 8,
+            edgeStyle:
+                widget.bars.length == 1
+                    ? LinearEdgeStyle.bothCurve
+                    : index == 0
+                    ? LinearEdgeStyle.startCurve
+                    : index == widget.bars.length - 1
+                    ? LinearEdgeStyle.endCurve
+                    : LinearEdgeStyle.bothFlat,
+          );
 
-        return gauge;
-      });
+          startValue = entry.value.toDouble();
+
+          return gauge;
+        }),
+      );
 
       return SfLinearGauge(
         minimum: 0,
@@ -85,9 +97,8 @@ class _BarGaugeWidgetState extends State<BarGaugeWidget> {
         majorTickStyle: LinearTickStyle(length: 20),
         axisTrackStyle: LinearAxisTrackStyle(
           edgeStyle: LinearEdgeStyle.bothCurve,
-          color: style.background.greenDark.color,
           thickness: 8,
-          borderColor: Colors.black,
+          color: Colors.transparent,
         ),
         ranges: list,
       );
