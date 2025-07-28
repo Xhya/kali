@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/widgets/BarGauge.widget.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
+import 'package:kali/core/models/MacroType.enum.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/states/user.state.dart';
+import 'package:kali/core/utils/getBars.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
-import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class MainKaloriesCountWidget extends StatefulWidget {
   const MainKaloriesCountWidget({super.key});
@@ -19,10 +21,14 @@ class MainKaloriesCountWidget extends StatefulWidget {
 class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
   @override
   Widget build(BuildContext context) {
+    final currentMealsByPeriods =
+        context.watch<MealState>().currentMealsByPeriods;
     NutriScore currentNutriScore = context.watch<MealState>().mealsNutriScore;
     NutriScore? personalNutriScore =
         context.watch<UserState>().user.value?.nutriscore;
     int remainingCalories = context.watch<MealState>().remainingCalories;
+
+    final bars = getBars(currentMealsByPeriods, MacroTypeEnum.calories);
 
     List<MealPeriodEnum> currentMealPeriods =
         context.watch<MealState>().currentMealPeriods.value;
@@ -49,7 +55,7 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
                     "${currentNutriScore.caloryAmount.toString()} / ${personalNutriScore?.caloryAmount.toString()}",
                     textAlign: TextAlign.start,
                     style: style.text.neutral
-                        .merge(style.fontsize.md)
+                        .merge(style.fontsize.sm)
                         .merge(style.fontweight.bold),
                   ),
                 if (personalNutriScore?.caloryAmount == null)
@@ -81,27 +87,9 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
               if (personalNutriScore?.caloryAmount != null)
                 SizedBox(
                   width: 150,
-                  child: SfLinearGauge(
-                    minimum: 0,
-                    maximum: personalNutriScore?.caloryAmount.toDouble() ?? 0,
-                    showLabels: false,
-                    showTicks: false,
-                    orientation: LinearGaugeOrientation.horizontal,
-                    majorTickStyle: LinearTickStyle(length: 20),
-                    axisTrackStyle: LinearAxisTrackStyle(
-                      edgeStyle: LinearEdgeStyle.bothCurve,
-                      color: style.background.greenDark.color,
-                      thickness: 8,
-                      borderColor: Colors.black,
-                    ),
-                    barPointers: [
-                      LinearBarPointer(
-                        value: currentNutriScore.caloryAmount.toDouble(),
-                        color: style.gauge.main.color,
-                        thickness: 8,
-                        edgeStyle: LinearEdgeStyle.bothCurve,
-                      ),
-                    ],
+                  child: BarGaugeWidget(
+                    maxAmount: personalNutriScore?.caloryAmount ?? 0,
+                    bars: bars,
                   ),
                 ),
             ],

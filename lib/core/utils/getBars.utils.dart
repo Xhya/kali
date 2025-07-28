@@ -112,19 +112,21 @@ Map<Color, int> getBars(List<MealModel> mealsByPeriods, MacroTypeEnum macroType)
   }
 
   if (macroType == MacroTypeEnum.calories) {
+    
+    final caloryBreakfast = dateTotalNutriscoreByPeriod[MealPeriodEnum.breakfast]!.caloryAmount;
+    final caloryLunch = dateTotalNutriscoreByPeriod[MealPeriodEnum.lunch]!.caloryAmount;
+    final calorySnack = dateTotalNutriscoreByPeriod[MealPeriodEnum.snack]!.caloryAmount;
+    final caloryDinner = dateTotalNutriscoreByPeriod[MealPeriodEnum.dinner]!.caloryAmount;
+
     return <Color, int>{
-      if (selectedPeriods.contains(MealPeriodEnum.breakfast))
-        style.period.breakfastColor.color!:
-            dateTotalNutriscoreByPeriod[MealPeriodEnum.breakfast]!.caloryAmount,
-      if (selectedPeriods.contains(MealPeriodEnum.lunch))
-        style.period.lunchColor.color!:
-            dateTotalNutriscoreByPeriod[MealPeriodEnum.lunch]!.caloryAmount,
-      if (selectedPeriods.contains(MealPeriodEnum.snack))
-        style.period.snackColor.color!:
-            dateTotalNutriscoreByPeriod[MealPeriodEnum.snack]!.caloryAmount,
-      if (selectedPeriods.contains(MealPeriodEnum.dinner))
-        style.period.dinerColor.color!:
-            dateTotalNutriscoreByPeriod[MealPeriodEnum.dinner]!.caloryAmount,
+      if (selectedPeriods.contains(MealPeriodEnum.breakfast) && caloryBreakfast > 0)
+        style.period.breakfastColor.color!: caloryBreakfast,
+      if (selectedPeriods.contains(MealPeriodEnum.lunch) && caloryLunch > 0)
+        style.period.lunchColor.color!: caloryLunch,
+      if (selectedPeriods.contains(MealPeriodEnum.snack) && calorySnack > 0)
+        style.period.snackColor.color!: calorySnack,
+      if (selectedPeriods.contains(MealPeriodEnum.dinner) && caloryDinner > 0)
+        style.period.dinerColor.color!: caloryDinner,
     };
   }
 
