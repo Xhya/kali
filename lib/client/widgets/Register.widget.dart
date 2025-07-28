@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/EmailInput.widget.dart';
+import 'package:kali/client/widgets/Login.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/PasswordInput.widget.dart';
 import 'package:kali/core/domains/user.repository.dart';
@@ -146,7 +147,10 @@ class _RegisterWidgetState extends State<RegisterWidget> {
             ),
             GestureDetector(
               onTap: () {
-                navigationService.navigateTo(ScreenEnum.login);
+                navigationService.navigateBack();
+                Future.delayed(Duration(milliseconds: 400), () {
+                  navigationService.openBottomSheet(widget: LoginWidget());
+                });
               },
               child: Text(
                 "se connecter",
