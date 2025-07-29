@@ -1,5 +1,6 @@
 import 'package:dart_date/dart_date.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
@@ -122,6 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               if (lastMeal != null)
                                 CustomInkwell(
                                   onTap: () {
+                                    HapticFeedback.vibrate();
                                     goToMealsScreen();
                                   },
                                   child: Text(

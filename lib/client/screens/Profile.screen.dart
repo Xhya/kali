@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
@@ -47,6 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: IconButton(
                         padding: EdgeInsets.all(0),
                         onPressed: () {
+                          HapticFeedback.vibrate();
                           navigationService.navigateTo(ScreenEnum.editProfile);
                         },
                         style: ButtonStyle(

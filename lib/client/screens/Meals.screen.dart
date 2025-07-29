@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/client/screens/Home.screen.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
@@ -77,6 +78,7 @@ class _MealsScreenState extends State<MealsScreen> {
                       final meal = currentMealsByPeriods[index];
                       return CustomInkwell(
                         onTap: () {
+                          HapticFeedback.vibrate();
                           goToMealScreen(meal);
                         },
                         child: CustomCard(

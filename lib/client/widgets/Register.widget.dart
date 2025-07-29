@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/EmailInput.widget.dart';
@@ -105,7 +106,9 @@ class _RegisterWidgetState extends State<RegisterWidget> {
         ),
         SizedBox(height: 8),
         CustomInkwell(
-          onTap: () {},
+          onTap: () {
+            HapticFeedback.vibrate();
+          },
           child: ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(16)),
             child: Container(

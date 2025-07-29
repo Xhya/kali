@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/MealPeriodTag.widget.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
@@ -26,6 +27,7 @@ class _MealPeriodsWrapWidgetState extends State<MealPeriodsWrapWidget> {
       children: [
         CustomInkwell(
           onTap: () {
+            HapticFeedback.vibrate();
             widget.onClickSelectPeriod(MealPeriodEnum.breakfast);
           },
           child: MealPeriodTagWidget(
@@ -37,6 +39,7 @@ class _MealPeriodsWrapWidgetState extends State<MealPeriodsWrapWidget> {
         ),
         CustomInkwell(
           onTap: () {
+            HapticFeedback.vibrate();
             widget.onClickSelectPeriod(MealPeriodEnum.lunch);
           },
           child: MealPeriodTagWidget(
@@ -48,6 +51,7 @@ class _MealPeriodsWrapWidgetState extends State<MealPeriodsWrapWidget> {
         ),
         CustomInkwell(
           onTap: () {
+            HapticFeedback.vibrate();
             widget.onClickSelectPeriod(MealPeriodEnum.snack);
           },
           child: MealPeriodTagWidget(
@@ -59,6 +63,7 @@ class _MealPeriodsWrapWidgetState extends State<MealPeriodsWrapWidget> {
         ),
         CustomInkwell(
           onTap: () {
+            HapticFeedback.vibrate();
             widget.onClickSelectPeriod(MealPeriodEnum.dinner);
           },
           child: MealPeriodTagWidget(

@@ -1,5 +1,6 @@
 import 'package:dart_date/dart_date.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/services/Datetime.extension.dart';
@@ -44,6 +45,7 @@ class DateSelector extends StatelessWidget {
           IconButton(
             padding: EdgeInsets.all(0),
             onPressed: () {
+              HapticFeedback.vibrate();
               onClickLeftArrow();
             },
             style: ButtonStyle(

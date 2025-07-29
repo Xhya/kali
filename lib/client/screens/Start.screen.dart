@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/BottomButton.widget.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/utils/paths.utils.dart';
@@ -61,7 +60,6 @@ class _StartFormScreenState extends State<StartScreen> {
                 ),
                 buttonText: "Démarrer",
                 onClick: () {
-                  HapticFeedback.vibrate();
                   navigationService.navigateTo(ScreenEnum.startForm);
                 },
               ),

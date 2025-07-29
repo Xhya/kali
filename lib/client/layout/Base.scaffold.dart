@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/core/services/connexion.service.dart';
 import 'package:kali/core/utils/paths.utils.dart';
@@ -96,6 +97,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
                                 ),
                               ),
                               onTap: () {
+                                HapticFeedback.vibrate();
                                 navigationService.context = context;
                                 navigationService.navigateBack();
                               },
@@ -124,6 +126,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
                                 ),
                               ),
                               onTap: () {
+                                HapticFeedback.vibrate();
                                 navigationService.navigateTo(
                                   ScreenEnum.profile,
                                 );

@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,7 @@ class TitleScaffold extends StatelessWidget {
             size: style.fontsize.xl.fontSize,
           ),
           onPressed: () {
+            HapticFeedback.vibrate();
             Navigator.pop(context);
           },
         ),

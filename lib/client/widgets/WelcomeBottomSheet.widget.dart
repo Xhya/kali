@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/core/utils/linearGradient.utils.dart';
 
@@ -41,6 +42,7 @@ class _WelcomeBottomSheetState extends State<WelcomeBottomSheet> {
               right: 0,
               child: IconButton(
                 onPressed: () {
+                  HapticFeedback.vibrate();
                   Navigator.pop(context);
                 },
                 icon: Icon(Icons.close, color: style.icon.color1.color),

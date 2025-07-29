@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 
@@ -44,6 +45,7 @@ class _CustomSelectWidgetState extends State<CustomSelectWidget> {
           final suffixIcon = isSelected ? Icon(Icons.check, size: 20) : null;
           return CustomInkwell(
             onTap: () {
+              HapticFeedback.vibrate();
               widget.onChanged(it);
             },
             child: Container(

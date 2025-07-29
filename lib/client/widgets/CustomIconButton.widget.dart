@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kali/client/Style.service.dart';
 
 class CustomIconButtonWidget extends StatelessWidget {
@@ -24,6 +25,7 @@ class CustomIconButtonWidget extends StatelessWidget {
       padding: EdgeInsets.all(0),
       onPressed: () {
         if (!disabled) {
+          HapticFeedback.vibrate();
           onPressed();
         }
       },

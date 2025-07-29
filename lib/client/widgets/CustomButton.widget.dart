@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
@@ -70,7 +71,13 @@ class ButtonWidget extends StatelessWidget {
     return SizedBox(
       width: fullWidth ? double.infinity : null,
       child: CustomInkwell(
-        onTap: isButtonDisabled ? () {} : onPressed,
+        onTap:
+            isButtonDisabled
+                ? () {}
+                : () {
+                  HapticFeedback.vibrate();
+                  onPressed();
+                },
         child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(16)),
 

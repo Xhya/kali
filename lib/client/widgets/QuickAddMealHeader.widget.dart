@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/quickAddMeal.state.dart';
@@ -45,6 +46,7 @@ class _QuickAddMealHeaderWidgetState extends State<QuickAddMealHeaderWidget> {
             child: IconButton(
               padding: EdgeInsets.all(0),
               onPressed: () {
+                HapticFeedback.vibrate();
                 onClickCloseQuickAddMode();
               },
               icon: Icon(
