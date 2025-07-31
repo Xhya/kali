@@ -12,6 +12,7 @@ void onClickBottomButton() async {
   try {
     if (startFormState.personalNutriScore.value != null) {
       startFormState.personalNutriScore.value = null;
+      await userService.refreshUser();
       navigationService.openBottomSheet(
         widget: WelcomeBottomSheet(
           child: RegisterWidget(

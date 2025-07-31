@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kali/client/widgets/ValidateCode.widget.dart';
 import 'package:kali/core/states/register.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
@@ -23,6 +24,14 @@ onSubmitRegisterUser() async {
       password: inputState.password.value,
     );
     navigationService.navigateBack();
+    await Future.delayed(const Duration(milliseconds: 100));
+    navigationService.openBottomSheet(
+      widget: WelcomeBottomSheet(
+        child: ValidateCodeWidget(
+          text: "Veuillez entrez le code que vous avez reçu par email",
+        ),
+      ),
+    );
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);
   } finally {
