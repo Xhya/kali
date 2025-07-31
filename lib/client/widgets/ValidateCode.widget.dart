@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kali/core/services/Authentication.service.dart';
 import 'package:kali/core/states/register.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
@@ -10,6 +11,7 @@ import 'package:sms_autofill/sms_autofill.dart';
 onSubmitCode() async {
   try {
     registerState.isLoading.value = true;
+    await authenticationService.verifyAuthCode(registerState.code.value);
     navigationService.navigateBack();
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);

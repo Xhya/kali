@@ -26,9 +26,20 @@ class AuthenticationService {
         currentVersion: await _hardwareService.getCurrentVersion(),
         currentBuild: await _hardwareService.getCurrentBuild(),
         operatingSystem: await _hardwareService.getOperatingSystem(),
-        notificationActivated: await _hardwareService.getNotificationActivated(),
+        notificationActivated:
+            await _hardwareService.getNotificationActivated(),
       );
       isAuthentifiedWithSignature = true;
+    } catch (e, stack) {
+      await errorService.notifyError(e: e, stack: stack, show: false);
+    }
+  }
+
+  verifyAuthCode(String code) async {
+    try {
+      await authenticationRepository.verifyAuthCode(
+        code: code,
+      );
     } catch (e, stack) {
       await errorService.notifyError(e: e, stack: stack, show: false);
     }

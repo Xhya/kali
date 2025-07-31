@@ -35,4 +35,21 @@ class AuthenticationRepository {
       throw Exception();
     }
   }
+
+  Future<void> verifyAuthCode({required String code}) async {
+    Map body = {"code": code};
+
+    final response = await http.post(
+      Uri.parse('$API_URL/users/verify-code'),
+      headers: await headersWithMaybeToken(),
+      body: json.encode(body),
+    );
+
+    if (response.statusCode == 200) {
+      return;
+    } else {
+      errorService.currentResponseError = response;
+      throw Exception();
+    }
+  }
 }

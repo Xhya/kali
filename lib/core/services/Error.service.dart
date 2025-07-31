@@ -18,17 +18,36 @@ class ErrorService extends ChangeNotifier {
   Response? currentResponseError;
 
   notifyError({required Object e, StackTrace? stack, bool show = true}) async {
-    if (currentResponseError?.statusCode == 410) {
-      navigationService.openBottomSheet(
-        widget: WelcomeBottomSheet(
-          child: RegisterWidget(
-            title: "Inscris toi 🔥",
-            subtitle:
-                "Valide ton e-mail pour avoir accès à 3 jours d'essai gratuit",
-          ),
-        ),
+    if (currentResponseError != null) {
+      final Map<String, dynamic> jsonData = json.decode(
+        currentResponseError!.body,
       );
-      return;
+
+      final int hcErrorCode = jsonData['hc_error_code'];
+
+      if (hcErrorCode == 1001) {
+        navigationService.openBottomSheet(
+          widget: WelcomeBottomSheet(
+            child: RegisterWidget(
+              title: "Inscris toi 🔥",
+              subtitle:
+                  "Valide ton e-mail pour avoir accès à 3 jours d'essai gratuit",
+            ),
+          ),
+        );
+        return;
+      } else if (hcErrorCode == 1002) {
+        navigationService.openBottomSheet(
+          widget: WelcomeBottomSheet(
+            child: RegisterWidget(
+              title: "Paye 🔥",
+              subtitle:
+                  "Tu dois payer maintenant!",
+            ),
+          ),
+        );
+        return;
+      }
     }
 
     var extractedMessage;
