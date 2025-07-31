@@ -11,10 +11,14 @@ void onClickBottomButton() async {
   startFormState.isLoading.value = true;
   try {
     if (startFormState.personalNutriScore.value != null) {
-      await validatePersonalNutriScore();
       startFormState.personalNutriScore.value = null;
       navigationService.openBottomSheet(
-        widget: WelcomeBottomSheet(child: RegisterWidget()),
+        widget: WelcomeBottomSheet(
+          child: RegisterWidget(
+            title: "Bienvenu·e à bord 🔥",
+            subtitle: "Valide ton e-mail pour avoir accès à 3 jours d'essai gratuit",
+          ),
+        ),
       );
       navigationService.navigateTo(ScreenEnum.home);
     } else if (startFormState.isFormDone) {

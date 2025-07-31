@@ -23,7 +23,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
         decoration: BoxDecoration(gradient: linearGradient),
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 24),
-          child: Column(children: [SizedBox(height: 8), RegisterWidget()]),
+          child: Column(
+            children: [
+              SizedBox(height: 8),
+              RegisterWidget(title: "Inscris toi 🔥"),
+            ],
+          ),
         ),
       ),
     );

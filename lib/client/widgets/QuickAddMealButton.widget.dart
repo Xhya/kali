@@ -19,7 +19,13 @@ onClickAddQuickMeal() async {
       navigationService.openBottomSheet(widget: QuickAddMealWidget());
     } else {
       navigationService.openBottomSheet(
-        widget: WelcomeBottomSheet(child: RegisterWidget()),
+        widget: WelcomeBottomSheet(
+          child: RegisterWidget(
+            title: "Inscris toi 🔥",
+            subtitle:
+                "Tu as utilisé tous tes crédits. Valide ton e-mail pour avoir accès à 3 jours d'essai gratuit.",
+          ),
+        ),
       );
     }
   } catch (e, stack) {

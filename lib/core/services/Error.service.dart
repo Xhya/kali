@@ -20,7 +20,13 @@ class ErrorService extends ChangeNotifier {
   notifyError({required Object e, StackTrace? stack, bool show = true}) async {
     if (currentResponseError?.statusCode == 410) {
       navigationService.openBottomSheet(
-        widget: WelcomeBottomSheet(child: RegisterWidget()),
+        widget: WelcomeBottomSheet(
+          child: RegisterWidget(
+            title: "Inscris toi 🔥",
+            subtitle:
+                "Valide ton e-mail pour avoir accès à 3 jours d'essai gratuit",
+          ),
+        ),
       );
       return;
     }

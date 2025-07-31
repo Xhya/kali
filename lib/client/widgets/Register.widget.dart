@@ -25,7 +25,10 @@ onSubmitRegisterUser() async {
 }
 
 class RegisterWidget extends StatefulWidget {
-  const RegisterWidget({super.key});
+  const RegisterWidget({super.key, required this.title, this.subtitle});
+
+  final String title;
+  final String? subtitle;
 
   @override
   State<RegisterWidget> createState() => _RegisterWidgetState();
@@ -50,21 +53,22 @@ class _RegisterWidgetState extends State<RegisterWidget> {
       mainAxisSize: MainAxisSize.max,
       children: [
         Text(
-          "Bienvenu·e à bord 🔥",
+          widget.title,
           style: style.fontsize.lg
               .merge(style.text.neutral)
               .merge(style.fontweight.bold),
           textAlign: TextAlign.center,
         ),
-        SizedBox(height: 4),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12),
-          child: Text(
-            "Tu n'es plus qu'à 60 sec de commencer cette nouvelle aventure",
-            style: style.fontsize.sm.merge(style.text.neutralLight),
-            textAlign: TextAlign.center,
+        if (widget.subtitle != null) SizedBox(height: 4),
+        if (widget.subtitle != null)
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12),
+            child: Text(
+              widget.subtitle!,
+              style: style.fontsize.sm.merge(style.text.neutralLight),
+              textAlign: TextAlign.center,
+            ),
           ),
-        ),
         SizedBox(height: 32),
         EmailInputWidget(),
         SizedBox(height: 4),
