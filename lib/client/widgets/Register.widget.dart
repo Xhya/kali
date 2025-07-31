@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kali/core/states/register.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
@@ -16,12 +17,16 @@ import 'package:kali/core/utils/paths.utils.dart';
 
 onSubmitRegisterUser() async {
   try {
+    registerState.isLoading.value = true;
     await UserRepository().register(
       email: inputState.email.value,
       password: inputState.password.value,
     );
+    navigationService.navigateBack();
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);
+  } finally {
+    registerState.isLoading.value = false;
   }
 }
 
@@ -48,7 +53,9 @@ class _RegisterWidgetState extends State<RegisterWidget> {
 
   @override
   Widget build(BuildContext context) {
-    bool areEmailAndPasswordValid = context.watch<InputState>().areEmailAndPasswordValid;
+    bool areEmailAndPasswordValid =
+        context.watch<InputState>().areEmailAndPasswordValid;
+    final isLoading = context.select((RegisterState v) => v.isLoading.value);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -79,12 +86,13 @@ class _RegisterWidgetState extends State<RegisterWidget> {
         SizedBox(height: 32),
         MainButtonWidget(
           onClick: () {
+            navigationService.context = context;
             onSubmitRegisterUser();
           },
           text: "créer un compte",
           iconWidget: Icon(Icons.arrow_forward, size: 20),
           disabled: !areEmailAndPasswordValid,
-          isLoading: false,
+          isLoading: isLoading,
         ),
         SizedBox(height: 40),
         Row(

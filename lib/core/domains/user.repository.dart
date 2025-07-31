@@ -56,7 +56,7 @@ class UserRepository {
 
     final response = await http.post(
       Uri.parse('$API_URL/users/register'),
-      headers: await headersWithoutToken(),
+      headers: await headersWithMaybeToken(),
       body: json.encode(body),
     );
 
