@@ -39,6 +39,7 @@ class _EmailInputState extends State<EmailInputWidget> {
       },
       placeholder: "Email",
       suffixIcon: Icon(Icons.email_outlined),
+      keyboardType: TextInputType.emailAddress,
     );
   }
 }

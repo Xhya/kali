@@ -19,6 +19,7 @@ class CustomInput extends StatefulWidget {
     this.errorText,
     this.keyboardType = TextInputType.text,
     this.readonly = false,
+    this.obscureText = false,
   });
 
   final Function(String)? onChanged;
@@ -34,6 +35,7 @@ class CustomInput extends StatefulWidget {
   final String? errorText;
   final TextInputType keyboardType;
   final bool readonly;
+  final bool obscureText;
 
   @override
   State<CustomInput> createState() => _CustomInputState();
@@ -77,6 +79,7 @@ class _CustomInputState extends State<CustomInput> {
           child: TextField(
             controller: controller,
             onChanged: widget.onChanged,
+            obscureText: widget.obscureText,
             autofocus: false,
             style: style.text.greenDark,
             minLines: widget.minLines,

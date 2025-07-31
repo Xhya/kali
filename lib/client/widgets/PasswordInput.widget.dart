@@ -16,6 +16,7 @@ class PasswordInputWidget extends StatefulWidget {
 
 class _PasswordInputState extends State<PasswordInputWidget> {
   final TextEditingController controller = TextEditingController();
+  bool _obscurePassword = true;
 
   @override
   void initState() {
@@ -38,7 +39,15 @@ class _PasswordInputState extends State<PasswordInputWidget> {
         onUpdateInputPassword(value);
       },
       placeholder: "Password",
-      suffixIcon: Icon(Icons.key_outlined),
+      suffixIcon: IconButton(
+        icon: Icon(_obscurePassword ? Icons.visibility_off : Icons.visibility),
+        onPressed: () {
+          setState(() {
+            _obscurePassword = !_obscurePassword;
+          });
+        },
+      ),
+      obscureText: _obscurePassword,
     );
   }
 }
