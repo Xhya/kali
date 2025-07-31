@@ -19,8 +19,8 @@ class AuthenticationService {
 
   init() async {
     try {
-      await initDeviceId();
-      await generateSignedDeviceId();
+      await _initDeviceId();
+      await _generateSignedDeviceId();
       await authenticationRepository.initUser(
         formattedSignature: await _hardwareService.getFormattedSignature(),
         currentVersion: await _hardwareService.getCurrentVersion(),
@@ -34,7 +34,7 @@ class AuthenticationService {
     }
   }
 
-  Future<String> generateSignedDeviceId() async {
+  Future<String> _generateSignedDeviceId() async {
     var signature = await secureStorage.read(key: signatureKey);
 
     if (signature != null) {
@@ -55,7 +55,7 @@ class AuthenticationService {
     return signature;
   }
 
-  Future<String> initDeviceId() async {
+  Future<String> _initDeviceId() async {
     var deviceId = await secureStorage.read(key: deviceIdKey);
 
     if (deviceId == null) {

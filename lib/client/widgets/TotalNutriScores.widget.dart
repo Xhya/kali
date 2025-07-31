@@ -29,9 +29,6 @@ class _TotalNutriScoresWidgetState extends State<TotalNutriScoresWidget> {
 
   @override
   Widget build(BuildContext context) {
-    NutriScore? personalNutriScore =
-        context.watch<UserState>().personalNutriscore;
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       spacing: 4,
@@ -46,7 +43,7 @@ class _TotalNutriScoresWidgetState extends State<TotalNutriScoresWidget> {
                   style: style.fontsize.xl.merge(style.text.neutral),
                 ),
                 Text(
-                  "${personalNutriScore!.proteinAmount}gr",
+                  "${widget.nutriScore.proteinAmount}gr",
                   style: style.fontsize.sm
                       .merge(style.text.neutral)
                       .merge(style.fontweight.bold),
@@ -71,7 +68,7 @@ class _TotalNutriScoresWidgetState extends State<TotalNutriScoresWidget> {
                   style: style.fontsize.xl.merge(style.text.neutral),
                 ),
                 Text(
-                  "${personalNutriScore.glucidAmount}gr",
+                  "${widget.nutriScore.glucidAmount}gr",
                   style: style.fontsize.sm
                       .merge(style.text.neutral)
                       .merge(style.fontweight.bold),
@@ -95,12 +92,12 @@ class _TotalNutriScoresWidgetState extends State<TotalNutriScoresWidget> {
                   glucidIcon,
                   style: style.fontsize.xl.merge(style.text.neutral),
                 ),
-                Text(
-                  "${personalNutriScore.lipidAmount}gr",
-                  style: style.fontsize.sm
-                      .merge(style.text.neutral)
-                      .merge(style.fontweight.bold),
-                ),
+                  Text(
+                    "${widget.nutriScore.lipidAmount}gr",
+                    style: style.fontsize.sm
+                        .merge(style.text.neutral)
+                        .merge(style.fontweight.bold),
+                  ),
                 SizedBox(height: 16),
                 Text(
                   t('lipids').toLowerCase(),
