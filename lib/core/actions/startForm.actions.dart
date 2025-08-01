@@ -17,7 +17,7 @@ void onClickBottomButton() async {
         widget: WelcomeBottomSheet(
           child: RegisterWidget(
             title: "Bienvenu·e à bord 🔥",
-            subtitle: "Valide ton e-mail pour avoir accès à 3 jours d'essai gratuit",
+            subtitle: "Inscris toi pour avoir accès à 3 jours d'essai gratuit !",
           ),
         ),
       );

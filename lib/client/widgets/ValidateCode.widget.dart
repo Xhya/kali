@@ -74,6 +74,7 @@ class _ValidateCodeWidgetState extends State<ValidateCodeWidget> {
               onCodeChanged: (String? newCode) {
                 registerState.code.value = newCode ?? "";
                 if (registerState.code.value.length == 6) {
+                  navigationService.context = context;
                   onSubmitCode();
                 }
               },
@@ -92,6 +93,7 @@ class _ValidateCodeWidgetState extends State<ValidateCodeWidget> {
         SizedBox(height: 32),
         MainButtonWidget(
           onClick: () {
+            navigationService.context = context;
             onSubmitCode();
           },
           text: "Valider",
