@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-var topBannerState = TopBannerState();
+final topBannerState = TopBannerState();
 
 class TopBannerState extends ChangeNotifier {
   final show = ValueNotifier<bool>(false);

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/BottomButton.widget.dart';
 import 'package:kali/client/widgets/Register.widget.dart';
@@ -9,6 +8,7 @@ import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/states/quickAddMeal.state.dart';
 import 'package:kali/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kali/core/services/Navigation.service.dart';
+import 'package:kali/core/states/Texts.state.dart';
 import 'package:kali/core/utils/computeMealPeriod.utils.dart';
 
 onClickAddQuickMeal() async {
@@ -22,8 +22,7 @@ onClickAddQuickMeal() async {
         widget: WelcomeBottomSheet(
           child: RegisterWidget(
             title: "Inscris toi 🔥",
-            subtitle:
-                "Tu as utilisé tous tes crédits. Valide ton e-mail pour avoir accès à 3 jours d'essai gratuit.",
+            subtitle: textsState.needEmailText.value,
           ),
         ),
       );

@@ -3,7 +3,7 @@ import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/states/Ai.state.dart';
 
-var quickAddMealState = QuickAddMealState();
+final quickAddMealState = QuickAddMealState();
 
 class QuickAddMealState extends ChangeNotifier {
   final isLoading = ValueNotifier<bool>(false);

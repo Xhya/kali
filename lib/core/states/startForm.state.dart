@@ -3,7 +3,7 @@ import 'package:kali/client/widgets/CustomSelect.widget.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/utils/String.extension.dart';
 
-var startFormState = StartFormState();
+final startFormState = StartFormState();
 
 class StartFormState extends ChangeNotifier {
   final controller = ValueNotifier<PageController>(PageController());

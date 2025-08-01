@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-var aiState = AIState();
+final aiState = AIState();
 
 class AIState extends ChangeNotifier {
   final aiNotUnderstandError = ValueNotifier<bool>(false);

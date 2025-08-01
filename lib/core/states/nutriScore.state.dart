@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-var nutriScoreState = NutriScoreState();
+final nutriScoreState = NutriScoreState();
 
 class NutriScoreState extends ChangeNotifier {
   NutriScoreState() {

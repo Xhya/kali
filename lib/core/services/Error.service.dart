@@ -8,6 +8,7 @@ import 'package:kali/core/domains/configurations.repository.dart';
 import 'package:kali/core/services/Bugsnag.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/Translation.service.dart';
+import 'package:kali/core/states/Texts.state.dart';
 import 'package:kali/environment.dart';
 
 var errorService = ErrorService();
@@ -19,11 +20,9 @@ class ErrorService extends ChangeNotifier {
 
   Response? currentResponseError;
 
-  String? needEmailText;
-
   init() async {
-    final tot = await _configurationsRepository.getInitTexts();
-    needEmailText = tot[1].value;
+    final texts = await _configurationsRepository.getInitTexts();
+    textsState.needEmailText.value = texts[1].value ?? "";
   }
 
   notifyError({required Object e, StackTrace? stack, bool show = true}) async {

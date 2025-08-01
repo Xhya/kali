@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/models/User.model.dart';
 
-var userState = UserState();
+final userState = UserState();
 
 class UserState extends ChangeNotifier {
   final user = ValueNotifier<User?>(null);
