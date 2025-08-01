@@ -92,7 +92,6 @@ class _ValidateCodeWidgetState extends State<ValidateCodeWidget> {
         SizedBox(height: 32),
         MainButtonWidget(
           onClick: () {
-            navigationService.context = context;
             onSubmitCode();
           },
           text: "Valider",

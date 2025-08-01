@@ -1,5 +1,6 @@
 import 'package:kali/core/domains/configurations.repository.dart';
 import 'package:kali/core/domains/hardware.repository.dart';
+import 'package:kali/core/models/Configuration.enum.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
 

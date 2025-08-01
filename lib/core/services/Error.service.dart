@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:kali/client/widgets/Register.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
+import 'package:kali/core/domains/configurations.repository.dart';
 import 'package:kali/core/services/Bugsnag.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/Translation.service.dart';
@@ -13,9 +14,17 @@ var errorService = ErrorService();
 
 class ErrorService extends ChangeNotifier {
   final bugsnagService = BugsnagService();
+  final _configurationsRepository = ConfigurationsRepository();
   String? error;
 
   Response? currentResponseError;
+
+  String? needEmailText;
+
+  init() async {
+    final tot = await _configurationsRepository.getInitTexts();
+    needEmailText = tot[1].value;
+  }
 
   notifyError({required Object e, StackTrace? stack, bool show = true}) async {
     if (currentResponseError != null) {
@@ -23,7 +32,7 @@ class ErrorService extends ChangeNotifier {
         currentResponseError!.body,
       );
 
-      final int hcErrorCode = jsonData['hc_error_code'];
+      final int? hcErrorCode = jsonData['hc_error_code'];
 
       if (hcErrorCode == 1001) {
         navigationService.openBottomSheet(
@@ -64,6 +73,9 @@ class ErrorService extends ChangeNotifier {
         print("Error details: $responseJson");
       }
     }
+
+    print(show);
+
 
     if (show) {
       error =

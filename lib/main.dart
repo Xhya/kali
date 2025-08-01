@@ -53,7 +53,6 @@ void main() async {
 
     if (Firebase.apps.isEmpty) {
       try {
-        WidgetsFlutterBinding.ensureInitialized();
         var apiKey =
             Platform.isAndroid
                 ? environment["FIREBASE_MESSAGING_API_KEY"] as String
@@ -142,6 +141,7 @@ class _AppState extends State<App> {
             await refreshAppVersion();
             await connexionService.listenToInternetConnexion();
             await UserService().refreshUser();
+            await errorService.init();
           } catch (e) {
             errorService.notifyError(e: e, show: false);
           }
