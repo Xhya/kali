@@ -55,28 +55,33 @@ class _RoutingState extends State<Routing> {
 
     if (bottomSheet != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        showModalBottomSheet(
-          useSafeArea: true,
-          isScrollControlled: true,
-          context: navigationService.context!,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
-          ),
-          builder: (BuildContext context) {
-            if (navigationService.bottomSheet != null) {
+        final currentContext = navigationService.context;
+        final bottomSheet = navigationService.bottomSheet;
+        if (currentContext != null && bottomSheet != null) {
+          showModalBottomSheet(
+            useSafeArea: true,
+            isScrollControlled: true,
+            context: currentContext,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(24),
+            ),
+            builder: (BuildContext context) {
               return Padding(
                 padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
-                child: navigationService.bottomSheet!,
+                child: bottomSheet,
               );
-            } else {
-              return SizedBox.shrink();
-            }
-          },
-        ).then((_) {
-          navigationService.bottomSheet = null;
-        });
+            },
+          ).then((_) {
+            navigationService.bottomSheet = null;
+          });
+        } else {
+          errorService.notifyError(
+            e: Exception("Missing context in showModalBottomSheet"),
+            show: false,
+          );
+        }
       });
     }
 
@@ -97,7 +102,9 @@ class _RoutingState extends State<Routing> {
               ),
             );
           },
-        );
+        ).then((_) {
+          errorService.error = null;
+        });
       });
     }
 
@@ -108,13 +115,17 @@ class _RoutingState extends State<Routing> {
         duration: Duration(seconds: 2),
       );
 
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        ScaffoldMessenger.of(
-          navigationService.context!,
-        ).showSnackBar(snackBarWidget).closed.then((reason) {
-          navigationService.snackBar = null;
+      final currentContext = navigationService.context;
+
+      if (currentContext != null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          ScaffoldMessenger.of(
+            currentContext,
+          ).showSnackBar(snackBarWidget).closed.then((reason) {
+            navigationService.snackBar = null;
+          });
         });
-      });
+      }
     }
 
     navigationService.popNavigation ??= () {

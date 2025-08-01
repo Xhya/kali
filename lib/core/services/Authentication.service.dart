@@ -36,13 +36,7 @@ class AuthenticationService {
   }
 
   verifyAuthCode(String code) async {
-    try {
-      await authenticationRepository.verifyAuthCode(
-        code: code,
-      );
-    } catch (e, stack) {
-      await errorService.notifyError(e: e, stack: stack, show: false);
-    }
+    await authenticationRepository.verifyAuthCode(code: code);
   }
 
   Future<String> _generateSignedDeviceId() async {
