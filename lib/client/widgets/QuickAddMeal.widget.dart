@@ -14,6 +14,7 @@ import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/Ai.state.dart';
+import 'package:kali/core/states/Texts.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/core/states/quickAddMeal.state.dart';
 import 'package:kali/core/actions/nutriScore.actions.dart';
@@ -119,7 +120,9 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                           },
                           placeholder: "Quel est le menu du jour ?",
                           inputFormatters: [
-                            MaxCharactersCountFormatter(maxLength: 85),
+                            MaxCharactersCountFormatter(
+                              maxLength: textsState.maxCharacterCount.value,
+                            ),
                           ],
                           minLines: 1,
                           maxLines: 2,

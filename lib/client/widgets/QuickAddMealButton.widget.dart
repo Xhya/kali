@@ -22,7 +22,7 @@ onClickAddQuickMeal() async {
         widget: WelcomeBottomSheet(
           child: RegisterWidget(
             title: "Inscris toi 🔥",
-            subtitle: textsState.needEmailText.value,
+            subtitle: textsState.needPaymentText.value,
           ),
         ),
       );

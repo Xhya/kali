@@ -28,17 +28,6 @@ class ErrorService extends ChangeNotifier {
         navigationService.openBottomSheet(
           widget: WelcomeBottomSheet(
             child: RegisterWidget(
-              title: "Inscris toi 🔥",
-              subtitle:
-                  "Valide ton e-mail pour avoir accès à 3 jours d'essai gratuit",
-            ),
-          ),
-        );
-        return;
-      } else if (hcErrorCode == 1002) {
-        navigationService.openBottomSheet(
-          widget: WelcomeBottomSheet(
-            child: RegisterWidget(
               title: "Paye 🔥",
               subtitle:
                   "Tu dois payer maintenant!",
