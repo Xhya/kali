@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kali/core/states/configuration.state.dart';
+import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
@@ -33,6 +35,13 @@ class _ForceUpdateScreenState extends State<ForceUpdateScreen>
 
   @override
   Widget build(BuildContext context) {
+    final currentVersion = context.select(
+      (ConfigurationState s) => s.currentVersion.value,
+    );
+    final minimalVersion = context.select(
+      (ConfigurationState s) => s.minimalVersion.value,
+    );
+
     return BaseScaffold(
       child: Scaffold(
         backgroundColor: style.background.greenTransparent.color,
@@ -40,11 +49,17 @@ class _ForceUpdateScreenState extends State<ForceUpdateScreen>
           builder: (context, constraints) {
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Column(
-                children: [
-                  Text("A new version is available"),
-                  Text("Please update the app to continue"),
-                ],
+              child: Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text("A new version is available"),
+                    Text("Please update the app to continue"),
+                    Text("Votre version actuelle: $currentVersion"),
+                    Text("Nouvelle version: $minimalVersion"),
+                  ],
+                ),
               ),
             );
           },

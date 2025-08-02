@@ -20,6 +20,7 @@ class CustomInput extends StatefulWidget {
     this.keyboardType = TextInputType.text,
     this.readonly = false,
     this.obscureText = false,
+    this.maxLength,
   });
 
   final Function(String)? onChanged;
@@ -36,6 +37,7 @@ class CustomInput extends StatefulWidget {
   final TextInputType keyboardType;
   final bool readonly;
   final bool obscureText;
+  final int? maxLength;
 
   @override
   State<CustomInput> createState() => _CustomInputState();
@@ -60,48 +62,65 @@ class _CustomInputState extends State<CustomInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Stack(
       children: [
-        if (widget.title != null)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: Text(
-              widget.title!,
-              style: style.text.neutral.merge(style.fontsize.sm),
-            ),
-          ),
-        Container(
-          decoration: BoxDecoration(
-            color: style.background.neutral.color,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: TextField(
-            controller: controller,
-            onChanged: widget.onChanged,
-            obscureText: widget.obscureText,
-            autofocus: false,
-            style: style.text.greenDark,
-            minLines: widget.minLines,
-            maxLines: widget.maxLines,
-            inputFormatters: widget.inputFormatters,
-            cursorColor: style.text.greenDark.color,
-            decoration: inputDecoration.copyWith(
-              contentPadding: EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 12,
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (widget.title != null)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Text(
+                  widget.title!,
+                  style: style.text.neutral.merge(style.fontsize.sm),
+                ),
               ),
-              hintStyle: TextStyle(color: Colors.grey),
-              hintText: widget.placeholder,
-              suffixText: widget.suffixText,
-              suffixIcon: widget.suffixIcon,
-              errorText: widget.errorText,
+            Container(
+              decoration: BoxDecoration(
+                color: style.background.neutral.color,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: TextField(
+                controller: controller,
+                onChanged: widget.onChanged,
+                obscureText: widget.obscureText,
+                autofocus: false,
+                style: style.text.greenDark,
+                minLines: widget.minLines,
+                maxLines: widget.maxLines,
+                inputFormatters: widget.inputFormatters,
+                cursorColor: style.text.greenDark.color,
+                decoration: inputDecoration.copyWith(
+                  contentPadding: EdgeInsets.only(
+                    left: 16,
+                    right: widget.maxLength == null ? 16 : 60,
+                    top: 12,
+                    bottom: 12,
+                  ),
+                  hintStyle: TextStyle(color: Colors.grey),
+                  hintText: widget.placeholder,
+                  suffixText: widget.suffixText,
+                  suffixIcon: widget.suffixIcon,
+                  errorText: widget.errorText,
+                ),
+                textCapitalization: widget.textCapitalization,
+                keyboardType: widget.keyboardType,
+                readOnly: widget.readonly,
+              ),
             ),
-            textCapitalization: widget.textCapitalization,
-            keyboardType: widget.keyboardType,
-            readOnly: widget.readonly,
-          ),
+          ],
         ),
+        if (widget.maxLength != null)
+          Positioned(
+            right: 12,
+            bottom: 8,
+            child: Text(
+              '${controller.text.length}/${widget.maxLength}',
+              style: style.text.neutral
+                  .merge(style.fontsize.xs)
+                  .merge(style.text.greenDark),
+            ),
+          ),
       ],
     );
   }

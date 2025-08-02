@@ -131,6 +131,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                               aiNotUnderstandError
                                   ? 'Veuillez être plus précis'
                                   : null,
+                          maxLength: textsState.maxCharacterCount.value,
                         ),
                       ),
                     ),
