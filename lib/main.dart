@@ -143,7 +143,7 @@ class _AppState extends State<App> {
             await refreshAppVersion();
             await connexionService.listenToInternetConnexion();
             await UserService().refreshUser();
-            await errorService.init();
+            await textsState.init();
           } catch (e) {
             errorService.notifyError(e: e, show: false);
           }

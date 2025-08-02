@@ -7,7 +7,7 @@ import 'package:kali/core/services/headers.service.dart';
 import 'package:kali/environment.dart';
 
 class ConfigurationsRepository {
-  Future<List<ConfigurationModel>> getInitTexts() async {
+  Future<List<ConfigurationModel>> getInit() async {
     final response = await http.get(
       Uri.parse('$API_URL/configurations/init'),
       headers: await headersWithMaybeToken(),
