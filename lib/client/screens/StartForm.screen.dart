@@ -37,7 +37,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
         context.watch<StartFormState>().controller.value;
 
     return BaseScaffold(
-      backButton: true,
+      backButton: false,
       child: Scaffold(
         backgroundColor: style.background.greenTransparent.color,
         body: Padding(
@@ -45,7 +45,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const StartFormTopWidget(),
+              if (currentPage < 5) const StartFormTopWidget(),
 
               Expanded(
                 child: IntrinsicHeight(

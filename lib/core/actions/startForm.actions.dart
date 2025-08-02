@@ -47,6 +47,11 @@ void onClickNext() {
 }
 
 void onClickPrevious() {
+  if (startFormState.currentPage.value == 0) {
+    navigationService.navigateBack();
+    return;
+  }
+
   startFormState.personalNutriScore.value = null;
 
   if (startFormState.currentPage.value > 1) {

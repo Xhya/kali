@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/core/actions/startForm.actions.dart';
-import 'package:kali/core/models/NutriScore.model.dart';
+import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:kali/client/widgets/CustomIconButton.widget.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +26,7 @@ class _StartFormTopWidgetState extends State<StartFormTopWidget> {
         children: [
           CustomIconButtonWidget(
             onPressed: () {
+              navigationService.context = context;
               onClickPrevious();
             },
             icon: Icons.chevron_left_outlined,
