@@ -9,10 +9,19 @@ const environment = {
 
   "API_URL": String.fromEnvironment('API_URL'),
 
-  "GOOGLE_AI_API_KEY": String.fromEnvironment('GOOGLE_AI_API_KEY'),
-  "GOOGLE_AI_URL": String.fromEnvironment('GOOGLE_AI_URL'),
   "BUGSNAG_ENV": String.fromEnvironment('BUGSNAG_ENV'),
   "BUGSNAG_API_KEY": String.fromEnvironment('BUGSNAG_API_KEY'),
+
+  "FIREBASE_MESSAGING_SENDER_ID": String.fromEnvironment('FIREBASE_MESSAGING_SENDER_ID'),
+  "FIREBASE_MESSAGING_PROJECT_ID": String.fromEnvironment('FIREBASE_MESSAGING_PROJECT_ID'),
+
+  "FIREBASE_MESSAGING_API_KEY": String.fromEnvironment('FIREBASE_MESSAGING_API_KEY'),
+  "FIREBASE_MESSAGING_APP_ID": String.fromEnvironment('FIREBASE_MESSAGING_APP_ID'),
+
+  "FIREBASE_MESSAGING_IOS_API_KEY": String.fromEnvironment('FIREBASE_MESSAGING_IOS_API_KEY'),
+  "FIREBASE_MESSAGING_GOOGLE_APP_ID": String.fromEnvironment('FIREBASE_MESSAGING_GOOGLE_APP_ID'),
+
+  "STRIPE_PUBLIC_KEY": String.fromEnvironment('STRIPE_PUBLIC_KEY'),
 };
 
 final useFixtures = environment["USE_FIXTURES"];
@@ -28,4 +37,4 @@ final String bugsnagEnvironment = environment["BUGSNAG_ENV"] as String;
 final String bugsnagApiKey = environment["BUGSNAG_API_KEY"] as String;
 // ignore: non_constant_identifier_names
 final String API_URL = environment["API_URL"] as String;
-
+final String STRIPE_PUBLIC_KEY = environment["STRIPE_PUBLIC_KEY"] as String;
