@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/BottomButton.widget.dart';
 import 'package:kali/client/widgets/Register.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/services/Error.service.dart';
-import 'package:kali/core/services/Payment.service.dart';
 import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/states/quickAddMeal.state.dart';
 import 'package:kali/client/widgets/QuickAddMeal.widget.dart';
@@ -76,29 +74,5 @@ class _MealPeriodTagWidgetState extends State<QuickAddMealButtonWidget> {
         onClickAddQuickMeal();
       },
     );
-  }
-}
-
-Future<void> handlePayment(BuildContext context) async {
-  try {
-    final clientSecret = await paymentService.createIntent();
-
-    await Stripe.instance.initPaymentSheet(
-      paymentSheetParameters: SetupPaymentSheetParameters(
-        paymentIntentClientSecret: clientSecret,
-        merchantDisplayName: 'Kali',
-      ),
-    );
-
-    await Stripe.instance.presentPaymentSheet();
-
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text("Paiement réussi 🎉")));
-  } catch (e) {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text("Erreur paiement : $e")));
-    print('Erreur de paiement ❌: $e');
   }
 }
