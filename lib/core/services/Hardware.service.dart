@@ -7,7 +7,7 @@ import 'package:kali/core/models/OperatingSystem.enum.dart';
 import 'package:kali/core/utils/storageKeys.utils.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-var hardwareService = HardwareService();
+final hardwareService = HardwareService();
 
 class HardwareService {
   final _hardwareRepository = HardwareRepository();

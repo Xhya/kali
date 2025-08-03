@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
+import 'package:kali/core/states/configuration.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
@@ -24,6 +25,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String currentVersion = context.select(
+      (ConfigurationState s) => s.currentVersion.value,
+    );
+    String currentBuild = context.select(
+      (ConfigurationState s) => s.currentBuild.value,
+    );
     String? username = context.select((UserState s) => s.user.value?.username);
     String? email = context.select((UserState s) => s.user.value?.email);
     String? leitmotiv = context.select(
@@ -66,6 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       width: double.maxFinite,
                       padding: const EdgeInsets.all(16),
                       child: Column(
+                        mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -107,6 +115,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               nutriScore: personalNutriScore,
                             ),
                         ],
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 10,
+                      left: 0,
+                      right: 0,
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: Text("$currentVersion ($currentBuild)"),
+                        ),
                       ),
                     ),
                   ],
