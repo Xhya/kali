@@ -5,10 +5,15 @@ import 'package:kali/core/services/headers.service.dart';
 import 'package:kali/environment.dart';
 
 class PaymentRepository {
-  Future<String> createIntent() async {
+  Future<String> createIntent(String subscriptionId) async {
+    Map body = {
+      "subscriptionId": subscriptionId,
+    };
+    
     final response = await http.post(
       Uri.parse('$API_URL/payments/intent'),
       headers: await headersWithMaybeToken(),
+      body: json.encode(body),
     );
 
     if (response.statusCode == 200) {
