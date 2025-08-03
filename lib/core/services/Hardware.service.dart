@@ -42,6 +42,8 @@ class HardwareService {
   }
 
   Future<bool> getNotificationActivated() async {
-    return false;
+    return await _hardwareRepository.getPermissionStatus(
+      PermissionTypeEnum.pushNotification,
+    );
   }
 }
