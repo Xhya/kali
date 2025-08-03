@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Utils/Input.decoration.dart';
+import 'package:kali/client/widgets/EmailInput.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/core/models/EditUser.formdata.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/User.service.dart';
+import 'package:kali/core/states/Input.state.dart';
 import 'package:kali/core/states/editProfile.state.dart';
 import 'package:kali/core/states/user.state.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +23,7 @@ onClickSave() async {
     final user = await UserService().saveProfile(
       EditUserFormData(
         userName: editProfileState.userName.value,
+        email: inputState.email.value,
         leitmotiv: editProfileState.leitmotiv.value,
         calories: editProfileState.editingCalories.value.toString(),
         proteins: editProfileState.editingProteins.value.toString(),
@@ -52,6 +55,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   void initState() {
+    inputState.email.value = userState.user.value?.email ?? "";
     editProfileState.leitmotiv.value = userState.user.value?.leitmotiv ?? "";
     editProfileState.userName.value = userState.user.value?.username ?? "";
     editProfileState.editingCalories.value =
@@ -73,18 +77,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String calories = context.select(
-      (EditProfileState s) => s.editingCalories.value,
-    );
-    String proteins = context.select(
-      (EditProfileState s) => s.editingProteins.value,
-    );
-    String glucids = context.select(
-      (EditProfileState s) => s.editingGlucids.value,
-    );
-    String lipids = context.select(
-      (EditProfileState s) => s.editingLipids.value,
-    );
+    context.select((EditProfileState s) => s.editingCalories.value);
+    context.select((EditProfileState s) => s.editingProteins.value);
+    context.select((EditProfileState s) => s.editingGlucids.value);
+    context.select((EditProfileState s) => s.editingLipids.value);
     String userName = context.select((EditProfileState s) => s.userName.value);
     String leitmotiv = context.select(
       (EditProfileState s) => s.leitmotiv.value,
@@ -117,6 +113,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         suffixIcon: Icon(Icons.ac_unit_outlined),
                         textCapitalization: TextCapitalization.sentences,
                       ),
+                      SizedBox(height: 32),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Text(
+                          "Ton email",
+                          style: style.text.neutral.merge(style.fontsize.sm),
+                        ),
+                      ),
+                      EmailInputWidget(),
                       SizedBox(height: 32),
                       CustomInput(
                         content: leitmotiv,
@@ -294,6 +299,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           ],
                         ),
                       ),
+                      SizedBox(height: 120),
                     ],
                   ),
                 ),

@@ -25,6 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     String? username = context.select((UserState s) => s.user.value?.username);
+    String? email = context.select((UserState s) => s.user.value?.email);
     String? leitmotiv = context.select(
       (UserState s) => s.user.value?.leitmotiv,
     );
@@ -74,6 +75,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               style: style.fontsize.lg
                                   .merge(style.text.neutral)
                                   .merge(style.fontweight.semibold),
+                            ),
+                          SizedBox(height: 4),
+                          if (email != null)
+                            Padding(
+                              padding: const EdgeInsets.only(right: 42),
+                              child: Text(
+                                email,
+                                style: style.fontsize.xs.merge(
+                                  style.text.neutral,
+                                ),
+                              ),
                             ),
                           SizedBox(height: 4),
                           if (leitmotiv != null)

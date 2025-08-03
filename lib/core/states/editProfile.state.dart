@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kali/core/states/Input.state.dart';
 import 'package:kali/core/states/user.state.dart';
+import 'package:kali/core/utils/String.extension.dart';
 
 final editProfileState = EditProfileState();
 
@@ -8,6 +10,8 @@ class EditProfileState extends ChangeNotifier {
   get canSave {
     final hasEmptyField =
         userName.value.isEmpty ||
+        inputState.email.value.isEmpty ||
+        !inputState.email.value.isValidEmail() ||
         leitmotiv.value.isEmpty ||
         editingCalories.value.isEmpty ||
         editingProteins.value.isEmpty ||
@@ -18,6 +22,7 @@ class EditProfileState extends ChangeNotifier {
 
     final hasDifference =
         userName.value != user?.username ||
+        inputState.email.value != user?.email ||
         leitmotiv.value != user?.leitmotiv ||
         editingCalories.value != user?.nutriscore?.caloryAmount.toString() ||
         editingProteins.value != user?.nutriscore?.proteinAmount.toString() ||
@@ -38,6 +43,7 @@ class EditProfileState extends ChangeNotifier {
     isLoading.addListener(notifyListeners);
 
     userName.addListener(notifyListeners);
+    inputState.email.addListener(notifyListeners);
     leitmotiv.addListener(notifyListeners);
     editingCalories.addListener(notifyListeners);
     editingProteins.addListener(notifyListeners);
@@ -50,6 +56,7 @@ class EditProfileState extends ChangeNotifier {
     isLoading.dispose();
 
     userName.dispose();
+    inputState.email.dispose();
     leitmotiv.dispose();
     editingCalories.dispose();
     editingProteins.dispose();

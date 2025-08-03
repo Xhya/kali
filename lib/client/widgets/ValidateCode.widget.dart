@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kali/core/services/Authentication.service.dart';
+import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/states/register.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
@@ -12,6 +13,7 @@ onSubmitCode() async {
   try {
     registerState.isLoading.value = true;
     await authenticationService.verifyAuthCode(registerState.code.value);
+    await userService.refreshUser();
     navigationService.navigateBack();
   } catch (e, stack) {
     navigationService.navigateBack();
