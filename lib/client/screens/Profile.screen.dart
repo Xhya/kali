@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kali/core/actions/checkAppVersion.actions.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/states/configuration.state.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +32,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     String currentBuild = context.select(
       (ConfigurationState s) => s.currentBuild.value,
     );
+    String lastVersion = context.select(
+      (ConfigurationState s) => s.lastVersion.value,
+    );
+
     String? username = context.select((UserState s) => s.user.value?.username);
     String? email = context.select((UserState s) => s.user.value?.email);
     String? leitmotiv = context.select(
@@ -121,11 +126,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       bottom: 10,
                       left: 0,
                       right: 0,
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          child: Text("$currentVersion ($currentBuild)"),
-                        ),
+                      child: Column(
+                        children: [
+                          Text("$currentVersion ($currentBuild)"),
+                          SizedBox(height: 2),
+                          if (isVersionLower(currentVersion, lastVersion))
+                            GestureDetector(
+                              onTap: () {
+                                // TODO
+                              },
+                              child: Text(
+                                "nouvelle version disponible",
+                                style: style.fontsize.sm
+                                    .merge(style.text.neutralLight)
+                                    .merge(
+                                      TextStyle(
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
+                              ),
+                            ),
+                          SizedBox(height: 12),
+                        ],
                       ),
                     ),
                   ],

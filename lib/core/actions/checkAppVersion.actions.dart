@@ -12,6 +12,8 @@ Future<void> refreshAppVersion() async {
         await hardwareService.getCurrentBuild();
     configurationState.minimalVersion.value = await ConfigurationsRepository()
         .getConfig(ConfigKeyEnum.forceUpdateVersion);
+    configurationState.lastVersion.value = await ConfigurationsRepository()
+        .getConfig(ConfigKeyEnum.lastVersion);
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack, show: false);
   }
@@ -22,14 +24,14 @@ bool isUpdateRequired() {
     final minimalVersion = configurationState.minimalVersion.value;
     final currentVersion = configurationState.currentVersion.value;
 
-    return _isVersionLower(currentVersion, minimalVersion);
+    return isVersionLower(currentVersion, minimalVersion);
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);
     return true;
   }
 }
 
-bool _isVersionLower(String current, String min) {
+bool isVersionLower(String current, String min) {
   if (min.isEmpty) {
     return false;
   }

@@ -1,7 +1,8 @@
 enum ConfigKeyEnum {
   forceUpdateVersion('force_update_version'),
   computeMaxCharactersCount('compute_max_characters_count'),
-  usedTokensWithoutPaymentText('used_tokens_without_payment_text');
+  usedTokensWithoutPaymentText('used_tokens_without_payment_text'),
+  lastVersion('last_version');
 
   const ConfigKeyEnum(this.label);
   final String label;
