@@ -4,7 +4,27 @@ import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/EmailInput.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/PasswordInput.widget.dart';
+import 'package:kali/core/domains/user.repository.dart';
+import 'package:kali/core/services/Error.service.dart';
+import 'package:kali/core/services/Navigation.service.dart';
+import 'package:kali/core/services/User.service.dart';
+import 'package:kali/core/states/Input.state.dart';
 import 'package:kali/core/utils/paths.utils.dart';
+
+onSubmitLogin() async {
+  try {
+    await UserRepository().login(
+      email: inputState.email.value,
+      password: inputState.password.value,
+    );
+    await userService.refreshUser();
+    navigationService.navigateBack();
+    navigationService.navigateTo(ScreenEnum.home);
+  } catch (e) {
+    navigationService.navigateBack();
+    errorService.notifyError(e: e);
+  }
+}
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({super.key});
@@ -56,7 +76,10 @@ class _LoginWidgetState extends State<LoginWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               MainButtonWidget(
-                onClick: () {},
+                onClick: () {
+                  navigationService.context = context;
+                  onSubmitLogin();
+                },
                 text: "se connecter",
                 iconWidget: Icon(Icons.arrow_forward, size: 20),
                 disabled: false,

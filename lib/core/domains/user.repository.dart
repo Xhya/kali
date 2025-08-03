@@ -26,6 +26,7 @@ class UserRepository {
   Future<User> saveProfile(EditUserFormData formData) async {
     Map body = {
       "username": formData.userName,
+      "email": formData.email,
       "leitmotiv": formData.leitmotiv,
       "calories": formData.calories,
       "proteins": formData.proteins,
@@ -56,6 +57,26 @@ class UserRepository {
 
     final response = await http.post(
       Uri.parse('$API_URL/users/register'),
+      headers: await headersWithMaybeToken(),
+      body: json.encode(body),
+    );
+
+    if (response.statusCode == 200) {
+      return;
+    } else {
+      errorService.currentResponseError = response;
+      throw Exception();
+    }
+  }
+
+  Future<void> login({
+    required String email,
+    required String password,
+  }) async {
+    Map body = {"email": email, "password": password};
+
+    final response = await http.post(
+      Uri.parse('$API_URL/users/login'),
       headers: await headersWithMaybeToken(),
       body: json.encode(body),
     );

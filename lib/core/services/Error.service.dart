@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:kali/client/widgets/Register.widget.dart';
+import 'package:kali/client/widgets/ValidateCode.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/services/Bugsnag.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
@@ -29,8 +30,16 @@ class ErrorService extends ChangeNotifier {
           widget: WelcomeBottomSheet(
             child: RegisterWidget(
               title: "Paye 🔥",
-              subtitle:
-                  "Tu dois payer maintenant!",
+              subtitle: "Tu dois payer maintenant!",
+            ),
+          ),
+        );
+        return;
+      } else if (hcErrorCode == 1002) {
+        navigationService.openBottomSheet(
+          widget: WelcomeBottomSheet(
+            child: ValidateCodeWidget(
+              text: "Vous devez valider votre adresse e-mail.",
             ),
           ),
         );
@@ -54,7 +63,6 @@ class ErrorService extends ChangeNotifier {
     }
 
     print(show);
-
 
     if (show) {
       error =
