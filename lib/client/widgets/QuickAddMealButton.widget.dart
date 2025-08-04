@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/BottomButton.widget.dart';
-import 'package:kali/client/widgets/Register.widget.dart';
-import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
+import 'package:kali/client/widgets/QuickAddMeal.widget.dart';
+import 'package:kali/core/actions/handleCantCompute.actions.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/User.service.dart';
-import 'package:kali/core/states/quickAddMeal.state.dart';
-import 'package:kali/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kali/core/services/Navigation.service.dart';
-import 'package:kali/core/states/Texts.state.dart';
+import 'package:kali/core/states/quickAddMeal.state.dart';
 import 'package:kali/core/utils/computeMealPeriod.utils.dart';
 
 onClickAddQuickMeal() async {
@@ -18,14 +16,7 @@ onClickAddQuickMeal() async {
       quickAddMealState.chosenPeriod.value = computeMealPeriod(DateTime.now());
       navigationService.openBottomSheet(widget: QuickAddMealWidget());
     } else {
-      navigationService.openBottomSheet(
-        widget: WelcomeBottomSheet(
-          child: RegisterWidget(
-            title: "Inscris toi 🔥",
-            subtitle: textsState.needPaymentText.value,
-          ),
-        ),
-      );
+      handleCantCompute();
     }
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);

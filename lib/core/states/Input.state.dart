@@ -21,4 +21,9 @@ class InputState extends ChangeNotifier {
     password.dispose();
     super.dispose();
   }
+
+  reset() {
+    email.value = "";
+    password.value = "";
+  }
 }
