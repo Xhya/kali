@@ -15,6 +15,7 @@ import 'package:kali/core/states/Texts.state.dart';
 import 'package:kali/core/states/configuration.state.dart';
 import 'package:kali/core/states/editProfile.state.dart';
 import 'package:kali/core/states/register.state.dart';
+import 'package:kali/core/states/subscription.state.dart';
 import 'package:kali/core/states/topBanner.state.dart';
 import 'package:kali/core/services/Bugsnag.service.dart';
 import 'package:kali/environment.dart';
@@ -105,6 +106,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => nutriScoreState),
         ChangeNotifierProvider(create: (context) => mealState),
         ChangeNotifierProvider(create: (context) => configurationState),
+        ChangeNotifierProvider(create: (context) => subscriptionState),
       ],
       child: const App(),
     ),
