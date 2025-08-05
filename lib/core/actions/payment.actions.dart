@@ -1,12 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Payment.service.dart';
 
-Future<void> openPaymentBottomSheet(BuildContext context) async {
+Future<void> openPaymentBottomSheet(String subcriptionId) async {
   try {
-    final clientSecret = await paymentService.createIntent(
-      "2428ee4e-1a22-4b5c-909b-b47023ce0ff2",
-    );
+    final clientSecret = await paymentService.createIntent(subcriptionId);
 
     await Stripe.instance.initPaymentSheet(
       paymentSheetParameters: SetupPaymentSheetParameters(
@@ -16,14 +14,15 @@ Future<void> openPaymentBottomSheet(BuildContext context) async {
     );
 
     await Stripe.instance.presentPaymentSheet();
-
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text("Paiement réussi 🎉")));
-  } catch (e) {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text("Erreur paiement : $e")));
+  } on StripeException catch (e, stack) {
+    final failureCode = e.error.code;
+    if (failureCode == FailureCode.Canceled) {
+      print("Le paiement a été annulé par l'utilisateur.");
+    } else {
+      errorService.notifyError(e: e, stack: stack);
+    }
+  } catch (e, stack) {
     print('Erreur de paiement ❌: $e');
+    errorService.notifyError(e: e, stack: stack);
   }
 }

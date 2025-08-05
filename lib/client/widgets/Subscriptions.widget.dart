@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
+import 'package:kali/core/actions/payment.actions.dart';
+import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/subscription.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
@@ -38,8 +40,11 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
       mainAxisSize: MainAxisSize.max,
       children: [
         ...subscriptions.map(
-          (it) => CustomInkwell(
+          (subscription) => CustomInkwell(
             onTap: () {
+              navigationService.context = context;
+              navigationService.navigateBack();
+              openPaymentBottomSheet(subscription.id);
             },
             child: CustomCard(
               padding: EdgeInsets.all(12),
@@ -53,13 +58,19 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text(it.name!), Text(it.description!)],
+                    children: [
+                      Text(subscription.name!),
+                      Text(subscription.description!),
+                    ],
                   ),
                   Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [Text(it.amount!), Text(it.frequency!)],
+                    children: [
+                      Text(subscription.amount!),
+                      Text(subscription.frequency!),
+                    ],
                   ),
                 ],
               ),
