@@ -3,14 +3,14 @@ class SubscriptionModel {
   final String? name;
   final String? description;
   final String? amount;
-  final String? frequency;
+  final String? recurring;
 
   SubscriptionModel({
     required this.id,
     required this.name,
     required this.description,
     required this.amount,
-    required this.frequency,
+    required this.recurring,
   });
 
   factory SubscriptionModel.fromJson(Map<String, dynamic> json) {
@@ -19,7 +19,7 @@ class SubscriptionModel {
       name: json['name'] as String?,
       description: json['description'] as String?,
       amount: json['amount'] as String?,
-      frequency: json['frequency'] as String?,
+      recurring: json['recurring'] as String?,
     );
   }
 }

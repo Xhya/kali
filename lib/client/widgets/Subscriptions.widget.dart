@@ -69,7 +69,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(subscription.amount!),
-                      Text(subscription.frequency!),
+                      Text(subscription.recurring!),
                     ],
                   ),
                 ],
