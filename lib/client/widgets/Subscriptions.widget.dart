@@ -35,6 +35,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
     );
 
     return Column(
+      spacing: 12,
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.max,
