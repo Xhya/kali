@@ -6,11 +6,11 @@ final paymentService = PaymentService();
 class PaymentService {
   final _paymentRepository = PaymentRepository();
 
-  Future<String> createIntent(String subscriptionId) async {
+  Future<CreateSubscriptionModel> createIntent(String subscriptionId) async {
     return await _paymentRepository.createIntent(subscriptionId);
   }
 
-  Future<CreateSubscriptionModel> createSubscription(String subscriptionId) async {
-    return await _paymentRepository.createSubscription(subscriptionId);
+  Future<void> createSubscription(String subscriptionId) async {
+    await _paymentRepository.createSubscription(subscriptionId);
   }
 }

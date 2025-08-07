@@ -1,22 +1,38 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:kali/client/Style.service.dart';
+
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Payment.service.dart';
 
 Future<void> openPaymentBottomSheet(String subscriptionId) async {
   try {
-    final subscriptionData = await paymentService.createSubscription(
-      subscriptionId,
-    );
+    final subscriptionData = await paymentService.createIntent(subscriptionId);
 
-    await Stripe.instance.initCustomerSheet(
-      customerSheetInitParams: CustomerSheetInitParams(
+    await Stripe.instance.initPaymentSheet(
+      paymentSheetParameters: SetupPaymentSheetParameters(
         merchantDisplayName: 'Kali Diet',
         customerId: subscriptionData.customerId,
         customerEphemeralKeySecret: subscriptionData.customerEphemeralKeySecret,
+        setupIntentClientSecret: subscriptionData.setupIntentClientSecret,
+        style: ThemeMode.system,
+        appearance: PaymentSheetAppearance(
+          colors: PaymentSheetAppearanceColors(primary: style.text.green.color),
+        ),
       ),
     );
 
-    await Stripe.instance.presentCustomerSheet();
+    try {
+      await Stripe.instance.presentPaymentSheet();
+
+      await paymentService.createSubscription(subscriptionId);
+    } catch (e) {
+      if (e is StripeException) {
+        print('Erreur Stripe: ${e.error.localizedMessage}');
+      } else {
+        print('Erreur: $e');
+      }
+    }
   } on StripeException catch (e, stack) {
     print('Erreur de paiement ❌: $e');
 

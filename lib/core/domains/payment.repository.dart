@@ -6,7 +6,7 @@ import 'package:kali/core/services/headers.service.dart';
 import 'package:kali/environment.dart';
 
 class PaymentRepository {
-  Future<String> createIntent(String subscriptionId) async {
+  Future<CreateSubscriptionModel> createIntent(String subscriptionId) async {
     Map body = {"subscriptionId": subscriptionId};
 
     final response = await http.post(
@@ -17,14 +17,14 @@ class PaymentRepository {
 
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body) as Map<String, dynamic>;
-      return body['data']['clientSecret'];
+      return CreateSubscriptionModel.fromJson(body['data']);
     } else {
       errorService.currentResponseError = response;
       throw Exception();
     }
   }
 
-  Future<CreateSubscriptionModel> createSubscription(String subscriptionId) async {
+  Future<void> createSubscription(String subscriptionId) async {
     Map body = {"subscriptionId": subscriptionId};
 
     final response = await http.post(
@@ -34,8 +34,7 @@ class PaymentRepository {
     );
 
     if (response.statusCode == 200) {
-      final body = jsonDecode(response.body) as Map<String, dynamic>;
-      return CreateSubscriptionModel.fromJson(body['data']);
+      return;
     } else {
       errorService.currentResponseError = response;
       throw Exception();
