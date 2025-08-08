@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kali/core/services/Payment.service.dart';
 
 class StripePaymentWidget extends StatefulWidget {
   const StripePaymentWidget({super.key});
@@ -11,7 +10,6 @@ class StripePaymentWidget extends StatefulWidget {
 class _StripePaymentWidgetState extends State<StripePaymentWidget> {
   @override
   void initState() {
-    paymentService.createIntent();
     super.initState();
   }
 

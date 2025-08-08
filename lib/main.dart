@@ -50,12 +50,12 @@ void main() async {
   // User identification
   await authenticationService.init();
 
-  Stripe.publishableKey = STRIPE_PUBLIC_KEY; 
+  Stripe.publishableKey = STRIPE_PUBLIC_KEY;
   await Stripe.instance.applySettings();
 
   // Firebase init
   if (!useSimulator && !kIsWeb) {
-    await PushNotificationService().refreshNotificationToken();
+    WidgetsFlutterBinding.ensureInitialized();
 
     if (Firebase.apps.isEmpty) {
       try {
@@ -82,6 +82,8 @@ void main() async {
         errorService.notifyError(e: e, stack: stackTrace);
       }
     }
+
+    await PushNotificationService().refreshNotificationToken();
   }
 
   runApp(
