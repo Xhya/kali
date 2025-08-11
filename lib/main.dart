@@ -82,8 +82,6 @@ void main() async {
         errorService.notifyError(e: e, stack: stackTrace);
       }
     }
-
-    await PushNotificationService().refreshNotificationToken();
   }
 
   runApp(
@@ -152,6 +150,7 @@ class _AppState extends State<App> {
             await connexionService.listenToInternetConnexion();
             await UserService().refreshUser();
             await textsState.init();
+            await PushNotificationService().refreshNotificationToken();
           } catch (e) {
             errorService.notifyError(e: e, show: false);
           }
