@@ -196,7 +196,7 @@ class _RoutingState extends State<Routing> {
     if (isUpdateRequired()) {
       return const ForceUpdateScreen();
     } else if (!authenticationService.isAuthentifiedWithSignature) {
-      return const RegisterScreen();
+      return const StartScreen();
     } else if (userState.user.value?.nutriscore == null) {
       return const StartScreen();
     } else {
