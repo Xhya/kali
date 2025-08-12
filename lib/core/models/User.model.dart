@@ -7,6 +7,7 @@ class User {
   final DateTime? emailVerifiedAt;
   final String? leitmotiv;
   final NutriScore? nutriscore;
+  final bool hasValidSubscription;
 
   User({
     required this.id,
@@ -15,6 +16,7 @@ class User {
     required this.emailVerifiedAt,
     required this.leitmotiv,
     required this.nutriscore,
+    required this.hasValidSubscription,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -31,6 +33,7 @@ class User {
           json['nutriscore'] == null
               ? null
               : NutriScore.fromJson(json['nutriscore']),
+      hasValidSubscription: json['hasValidatedSubscription'] as bool,
     );
   }
 

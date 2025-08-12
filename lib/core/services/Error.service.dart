@@ -2,17 +2,17 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:kali/client/widgets/Register.widget.dart';
-import 'package:kali/client/widgets/ValidateCode.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/services/Bugsnag.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/Translation.service.dart';
+import 'package:kali/core/states/user.state.dart';
 import 'package:kali/environment.dart';
 
 var errorService = ErrorService();
 
 class ErrorService extends ChangeNotifier {
-  final bugsnagService = BugsnagService();
+  final _bugsnagService = BugsnagService();
   String? error;
 
   Response? currentResponseError;
@@ -25,7 +25,8 @@ class ErrorService extends ChangeNotifier {
 
       final int? hcErrorCode = jsonData['hc_error_code'];
 
-      if (hcErrorCode == 1001) {
+      if (hcErrorCode == 1010) {
+        // 1010 is ConsumedAllTokensWithoutPaymentException
         navigationService.openBottomSheet(
           widget: WelcomeBottomSheet(
             child: RegisterWidget(
@@ -35,14 +36,19 @@ class ErrorService extends ChangeNotifier {
           ),
         );
         return;
-      } else if (hcErrorCode == 1002) {
-        navigationService.openBottomSheet(
-          widget: WelcomeBottomSheet(
-            child: ValidateCodeWidget(
-              text: "Vous devez valider votre adresse e-mail.",
+      } else if (hcErrorCode == 1030) {
+        if (userState.user.value?.hasValidSubscription != true) {
+          final message = jsonData['message'] ?? "";
+          navigationService.openBottomSheet(
+            widget: WelcomeBottomSheet(
+              child: RegisterWidget(title: "Inscris-toi", subtitle: message),
             ),
-          ),
-        );
+          );
+          // TODO: afficher un message de bienvenue!
+        } else {
+          // TODO: afficher subscription widget
+        }
+
         return;
       }
     }
@@ -72,14 +78,14 @@ class ErrorService extends ChangeNotifier {
     }
 
     if (isInDevEnv || isInProdEnv) {
-      await bugsnagService.notify(e: e, stack: stack);
+      await _bugsnagService.notify(e: e, stack: stack);
     }
 
     notifyListeners();
   }
 
   _extractErrorMessage(Response response) {
-    var responseJson = jsonDecode(response.body);
+    final responseJson = jsonDecode(response.body);
     return responseJson['message'];
   }
 }
