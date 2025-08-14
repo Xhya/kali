@@ -60,15 +60,13 @@ class ErrorService extends ChangeNotifier {
     }
 
     if (!isInProdEnv) {
-      print("Error message: $extractedMessage");
+      print("Error message: ${extractedMessage ?? e}");
 
       if (currentResponseError != null) {
         var responseJson = jsonDecode(currentResponseError!.body);
         print("Error details: $responseJson");
       }
     }
-
-    print(show);
 
     if (show) {
       error =
