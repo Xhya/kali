@@ -35,6 +35,7 @@ class ValidateCodeWidget extends StatefulWidget {
 class _ValidateCodeWidgetState extends State<ValidateCodeWidget> {
   @override
   void initState() {
+    registerState.code.value = "";
     super.initState();
   }
 
@@ -103,6 +104,16 @@ class _ValidateCodeWidgetState extends State<ValidateCodeWidget> {
           iconWidget: Icon(Icons.arrow_forward, size: 20),
           disabled: code.length < 6,
           isLoading: isLoading,
+        ),
+        SizedBox(height: 8),
+        GestureDetector(
+          onTap: () {
+            authenticationService.resendCode();
+          },
+          child: Text(
+            "Renvoyer un code",
+            style: style.fontsize.sm.merge(style.text.neutralLight),
+          ),
         ),
       ],
     );

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:kali/client/widgets/Register.widget.dart';
+import 'package:kali/client/widgets/ValidateCode.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/actions/ConsumedAllTokensWithoutPaymentError.actions.dart';
 import 'package:kali/core/services/Bugsnag.service.dart';
@@ -31,19 +31,14 @@ class ErrorService extends ChangeNotifier {
         consumedAllTokensWithoutPaymentError();
         return;
       } else if (hcErrorCode == 1030) {
-        // 1030 is ?
-        if (userState.user.value?.hasValidSubscription != true) {
-          final message = jsonData['message'] ?? "";
-          navigationService.openBottomSheet(
-            widget: WelcomeBottomSheet(
-              child: RegisterWidget(title: "Inscris-toi", subtitle: message),
+        // 1030 is MustValideEmailException
+        navigationService.openBottomSheet(
+          widget: WelcomeBottomSheet(
+            child: ValidateCodeWidget(
+              text: "Veuillez entrez le code que vous avez reçu par email",
             ),
-          );
-          // TODO: afficher un message de bienvenue!
-        } else {
-          // TODO: afficher subscription widget
-        }
-
+          ),
+        );
         return;
       }
     }

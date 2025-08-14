@@ -41,6 +41,10 @@ class AuthenticationService {
     await _authenticationRepository.verifyAuthCode(code: code);
   }
 
+  resendCode() async {
+    await _authenticationRepository.resendCode();
+  }
+
   Future<String> _generateSignedDeviceId() async {
     var signature = await _secureStorage.read(key: signatureKey);
 
