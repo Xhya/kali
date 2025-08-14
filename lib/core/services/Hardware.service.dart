@@ -20,6 +20,15 @@ class HardwareService {
     return "$deviceId:$signature";
   }
 
+  Future<void> deleteSignatureStorage() async {
+    await _secureStorage.delete(key: signatureKey);
+    await _secureStorage.delete(key: deviceIdKey);
+  }
+
+  Future<void> deleteTokenStorage() async {
+    // TODO: not yet token
+  }
+
   Future<String> getCurrentVersion() async {
     return await _hardwareRepository.getCurrentVersion();
   }

@@ -31,8 +31,7 @@ class AuthenticationService {
       );
       isAuthentifiedWithSignature = true;
     } catch (e, stack) {
-      await _secureStorage.delete(key: signatureKey);
-      await _secureStorage.delete(key: deviceIdKey);
+      await hardwareService.deleteSignatureStorage();
       await init();
       await errorService.notifyError(e: e, stack: stack, show: false);
     }

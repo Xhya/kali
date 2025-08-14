@@ -180,6 +180,8 @@ class _RoutingState extends State<Routing> {
           navigateTo(const RegisterScreen());
         case ScreenEnum.login:
           navigateTo(const LoginScreen());
+        case ScreenEnum.start:
+          navigateTo(const StartScreen());
         case ScreenEnum.startForm:
           navigateTo(const StartFormScreen());
         case ScreenEnum.meal:

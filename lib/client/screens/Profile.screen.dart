@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kali/client/widgets/CustomButton.widget.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
+import 'package:kali/core/services/Hardware.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
@@ -10,6 +12,11 @@ import 'package:kali/client/widgets/TotalCalories.widget.dart';
 import 'package:kali/client/widgets/TotalNutriScores.widget.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/user.state.dart';
+
+onClickDeconnect() async {
+  await hardwareService.deleteSignatureStorage();
+  navigationService.navigateTo(ScreenEnum.start);
+}
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -128,6 +135,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       right: 0,
                       child: Column(
                         children: [
+                          ButtonWidget(
+                            buttonType: ButtonTypeEnum.outline,
+                            text: "Se déconnecter",
+                            onPressed: () {
+                              onClickDeconnect();
+                            },
+                          ),
+                          SizedBox(height: 12),
                           Text("$currentVersion ($currentBuild)"),
                           SizedBox(height: 2),
                           if (isVersionLower(currentVersion, lastVersion))

@@ -5,6 +5,7 @@ import 'package:kali/core/services/Error.service.dart';
 enum ScreenEnum {
   register,
   login,
+  start,
   startForm,
   home,
   meal,

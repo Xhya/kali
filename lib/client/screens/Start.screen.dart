@@ -86,6 +86,7 @@ class _StartFormScreenState extends State<StartScreen> {
                           ),
                     ),
                   ),
+                  SizedBox(height: 12),
                 ],
               ),
             ],
