@@ -174,7 +174,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                   ),
                 ),
 
-              SizedBox(height: 52),
+              SizedBox(height: 32),
             ],
           ),
         ),

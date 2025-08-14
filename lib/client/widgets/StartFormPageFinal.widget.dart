@@ -41,16 +41,17 @@ class _StartFormPageFinalState extends State<StartFormPageFinal> {
               SizedBox(height: 32),
 
               if (personalNutriScore != null)
-                ExpandedWidget(
-                  height: 220,
-                  child: Column(
+                // ExpandedWidget(
+                //   height: 220,
+                //   child: 
+                  Column(
                     children: [
                       TotalCaloriesWidget(nutriScore: personalNutriScore),
                       SizedBox(height: 4),
                       TotalNutriScoresWidget(nutriScore: personalNutriScore),
                     ],
                   ),
-                ),
+                // ),
               // Text(
               //   "Avec ce plan, tu es en léger déficit. Si tu t'y tiens régulièrement, tu perdras environ 400g par semaine.",
               //   style: style.text.neutral.merge(style.fontsize.xs),
