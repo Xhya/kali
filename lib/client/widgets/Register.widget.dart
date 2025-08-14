@@ -53,6 +53,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
   @override
   void initState() {
     super.initState();
+
+    inputState.reset();
   }
 
   @override

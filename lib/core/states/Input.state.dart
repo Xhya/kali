@@ -8,7 +8,9 @@ class InputState extends ChangeNotifier {
   final password = ValueNotifier<String>("");
 
   bool get areEmailAndPasswordValid =>
-      email.value.isNotEmpty && password.value.isNotEmpty && email.value.isValidEmail();
+      email.value.isNotEmpty &&
+      password.value.isNotEmpty &&
+      email.value.isValidEmail();
 
   InputState() {
     email.addListener(notifyListeners);
