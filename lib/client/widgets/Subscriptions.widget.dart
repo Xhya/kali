@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/core/actions/payment.actions.dart';
 import 'package:kali/core/services/Navigation.service.dart';
+import 'package:kali/core/services/Subscription.service.dart';
 import 'package:kali/core/states/subscription.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
@@ -20,6 +21,13 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       inputState.reset();
     });
+
+    init() async {
+      await subscriptionService.refreshSubscriptions();
+    }
+
+    init();
+
     super.initState();
   }
 
@@ -44,8 +52,8 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
           (subscription) => CustomInkwell(
             onTap: () {
               navigationService.context = context;
-              navigationService.navigateBack();
               openPaymentBottomSheet(subscription.id);
+              navigationService.navigateBack();
             },
             child: CustomCard(
               padding: EdgeInsets.all(12),

@@ -15,8 +15,6 @@ onClickAddQuickMeal() async {
       quickAddMealState.reset();
       quickAddMealState.chosenPeriod.value = computeMealPeriod(DateTime.now());
       navigationService.openBottomSheet(widget: QuickAddMealWidget());
-    } else {
-      handleCantCompute();
     }
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);

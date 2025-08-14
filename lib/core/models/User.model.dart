@@ -33,7 +33,7 @@ class User {
           json['nutriscore'] == null
               ? null
               : NutriScore.fromJson(json['nutriscore']),
-      hasValidSubscription: json['hasValidatedSubscription'] as bool? ?? false,
+      hasValidSubscription: json['hasValidSubscription'] as bool? ?? false,
     );
   }
 

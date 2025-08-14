@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:kali/client/widgets/Register.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
+import 'package:kali/core/actions/ConsumedAllTokensWithoutPaymentError.actions.dart';
 import 'package:kali/core/services/Bugsnag.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/Translation.service.dart';
@@ -27,16 +28,10 @@ class ErrorService extends ChangeNotifier {
 
       if (hcErrorCode == 1010) {
         // 1010 is ConsumedAllTokensWithoutPaymentException
-        navigationService.openBottomSheet(
-          widget: WelcomeBottomSheet(
-            child: RegisterWidget(
-              title: "Paye 🔥",
-              subtitle: "Tu dois payer maintenant!",
-            ),
-          ),
-        );
+        consumedAllTokensWithoutPaymentError();
         return;
       } else if (hcErrorCode == 1030) {
+        // 1030 is ?
         if (userState.user.value?.hasValidSubscription != true) {
           final message = jsonData['message'] ?? "";
           navigationService.openBottomSheet(
