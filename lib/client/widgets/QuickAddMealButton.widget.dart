@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/BottomButton.widget.dart';
 import 'package:kali/client/widgets/QuickAddMeal.widget.dart';
-import 'package:kali/core/actions/handleCantCompute.actions.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
