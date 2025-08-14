@@ -66,11 +66,11 @@ class NavigationService extends ChangeNotifier {
     }
   }
 
-  openBottomSheet({
-    required Widget widget,
-  }) {
-    bottomSheet = widget;
-    notifyListeners();
+  openBottomSheet({required Widget widget}) {
+    if (bottomSheet == null) {
+      bottomSheet = widget;
+      notifyListeners();
+    }
   }
 
   closeBottomSheet() {
@@ -82,9 +82,7 @@ class NavigationService extends ChangeNotifier {
     notifyListeners();
   }
 
-  openSnackBar({
-    required Widget widget,
-  }) {
+  openSnackBar({required Widget widget}) {
     snackBar = widget;
     notifyListeners();
   }
