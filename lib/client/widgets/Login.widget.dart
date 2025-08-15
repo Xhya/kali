@@ -21,7 +21,6 @@ onSubmitLogin() async {
     navigationService.navigateBack();
     navigationService.navigateTo(ScreenEnum.home);
   } catch (e) {
-    navigationService.navigateBack();
     errorService.notifyError(e: e);
   }
 }

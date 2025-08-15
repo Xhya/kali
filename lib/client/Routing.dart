@@ -29,6 +29,8 @@ class Routing extends StatefulWidget {
 }
 
 class _RoutingState extends State<Routing> {
+  Widget? previousBottomBar;
+
   bool backButtonInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
     Navigator.pop(context);
     return true;
@@ -48,16 +50,21 @@ class _RoutingState extends State<Routing> {
 
   @override
   Widget build(BuildContext context) {
-    Widget? bottomSheet = context.watch<NavigationService>().bottomSheet;
-    Widget? snackBar = context.watch<NavigationService>().snackBar;
-    String? error = context.watch<ErrorService>().error;
+    final error = context.select((ErrorService s) => s.error.value);
+    Widget? snackBar = context.select(
+      (NavigationService s) => s.snackBar.value,
+    );
+    Widget? bottomSheet = context.select(
+      (NavigationService s) => s.bottomSheet.value,
+    );
+
     context.watch<ConfigurationState>().currentVersion;
 
-    if (bottomSheet != null) {
+    if (bottomSheet != null && previousBottomBar == null) {
+      previousBottomBar = bottomSheet;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         final currentContext = navigationService.context;
-        final bottomSheet = navigationService.bottomSheet;
-        if (currentContext != null && bottomSheet != null) {
+        if (currentContext != null) {
           showModalBottomSheet(
             useSafeArea: true,
             isScrollControlled: true,
@@ -74,7 +81,8 @@ class _RoutingState extends State<Routing> {
               );
             },
           ).then((_) {
-            navigationService.bottomSheet = null;
+            previousBottomBar = null;
+            navigationService.bottomSheet.value = null;
           });
         } else {
           errorService.notifyError(
@@ -103,7 +111,7 @@ class _RoutingState extends State<Routing> {
             );
           },
         ).then((_) {
-          errorService.error = null;
+          errorService.error.value = null;
         });
       });
     }
@@ -122,7 +130,7 @@ class _RoutingState extends State<Routing> {
           ScaffoldMessenger.of(
             currentContext,
           ).showSnackBar(snackBarWidget).closed.then((reason) {
-            navigationService.snackBar = null;
+            navigationService.snackBar.value = null;
           });
         });
       }

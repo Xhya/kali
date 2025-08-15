@@ -17,13 +17,25 @@ enum ScreenEnum {
 var navigationService = NavigationService();
 
 class NavigationService extends ChangeNotifier {
+  NavigationService() {
+    bottomSheet.addListener(notifyListeners);
+    snackBar.addListener(notifyListeners);
+  }
+
+  @override
+  void dispose() {
+    bottomSheet.dispose();
+    snackBar.dispose();
+    super.dispose();
+  }
+
   bool initialScreenSet = false;
 
   ScreenEnum currentScreen = ScreenEnum.startForm;
   bool userScaffoldObserved = false;
   BuildContext? context;
-  Widget? bottomSheet;
-  Widget? snackBar;
+  final bottomSheet = ValueNotifier<Widget?>(null);
+  final snackBar = ValueNotifier<Widget?>(null);
 
   String screenTitle = "";
 
@@ -67,14 +79,14 @@ class NavigationService extends ChangeNotifier {
   }
 
   openBottomSheet({required Widget widget}) {
-    if (bottomSheet == null) {
-      bottomSheet = widget;
+    if (bottomSheet.value == null) {
+      bottomSheet.value = widget;
       notifyListeners();
     }
   }
 
   closeBottomSheet() {
-    bottomSheet = null;
+    bottomSheet.value = null;
     if (context != null) {
       Navigator.pop(context!);
       context = null;
@@ -83,12 +95,12 @@ class NavigationService extends ChangeNotifier {
   }
 
   openSnackBar({required Widget widget}) {
-    snackBar = widget;
+    snackBar.value = widget;
     notifyListeners();
   }
 
   closeSnackBar() {
-    snackBar = null;
+    snackBar.value = null;
     if (context != null) {
       Navigator.pop(context!);
       context = null;

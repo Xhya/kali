@@ -7,14 +7,23 @@ import 'package:kali/core/actions/ConsumedAllTokensWithoutPaymentError.actions.d
 import 'package:kali/core/services/Bugsnag.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/Translation.service.dart';
-import 'package:kali/core/states/user.state.dart';
 import 'package:kali/environment.dart';
 
 var errorService = ErrorService();
 
 class ErrorService extends ChangeNotifier {
   final _bugsnagService = BugsnagService();
-  String? error;
+  final error = ValueNotifier<String?>(null);
+
+  ErrorService() {
+    error.addListener(notifyListeners);
+  }
+
+  @override
+  void dispose() {
+    error.dispose();
+    super.dispose();
+  }
 
   Response? currentResponseError;
 
@@ -59,7 +68,7 @@ class ErrorService extends ChangeNotifier {
     }
 
     if (show) {
-      error =
+      error.value =
           isInProdEnv
               ? t("error_message")
               : extractedMessage ?? t("error_message");
@@ -68,8 +77,6 @@ class ErrorService extends ChangeNotifier {
     if (isInDevEnv || isInProdEnv) {
       await _bugsnagService.notify(e: e, stack: stack);
     }
-
-    notifyListeners();
   }
 
   _extractErrorMessage(Response response) {
