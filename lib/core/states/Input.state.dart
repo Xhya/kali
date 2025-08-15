@@ -10,6 +10,7 @@ class InputState extends ChangeNotifier {
   bool get areEmailAndPasswordValid =>
       email.value.isNotEmpty &&
       password.value.isNotEmpty &&
+      password.value.isValidPassword() &&
       email.value.isValidEmail();
 
   InputState() {
