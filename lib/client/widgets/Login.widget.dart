@@ -4,7 +4,7 @@ import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/EmailInput.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/PasswordInput.widget.dart';
-import 'package:kali/core/domains/user.repository.dart';
+import 'package:kali/core/domains/authentication.repository.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/User.service.dart';
@@ -13,7 +13,7 @@ import 'package:kali/core/utils/paths.utils.dart';
 
 onSubmitLogin() async {
   try {
-    await UserRepository().login(
+    await AuthenticationRepository().login(
       email: inputState.email.value,
       password: inputState.password.value,
     );

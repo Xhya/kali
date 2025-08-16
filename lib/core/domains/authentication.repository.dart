@@ -36,6 +36,23 @@ class AuthenticationRepository {
     }
   }
 
+  Future<void> login({required String email, required String password}) async {
+    Map body = {"email": email, "password": password};
+
+    final response = await http.post(
+      Uri.parse('$API_URL/users/login'),
+      headers: await headersWithMaybeToken(),
+      body: json.encode(body),
+    );
+
+    if (response.statusCode == 200) {
+      return;
+    } else {
+      errorService.currentResponseError = response;
+      throw Exception();
+    }
+  }
+
   Future<void> verifyAuthCode({required String code}) async {
     Map body = {"code": code};
 
