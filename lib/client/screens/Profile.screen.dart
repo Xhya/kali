@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
+import 'package:kali/core/services/Authentication.service.dart';
 import 'package:kali/core/services/Hardware.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,7 @@ import 'package:kali/core/states/user.state.dart';
 
 onClickDeconnect() async {
   await hardwareService.deleteSignatureStorage();
+  await authenticationService.init();
   navigationService.navigateTo(ScreenEnum.start);
 }
 
