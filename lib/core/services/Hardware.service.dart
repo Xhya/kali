@@ -26,7 +26,7 @@ class HardwareService {
   }
 
   Future<void> deleteTokenStorage() async {
-    // TODO: not yet token
+    await _secureStorage.delete(key: tokenKey);
   }
 
   Future<String> getCurrentVersion() async {

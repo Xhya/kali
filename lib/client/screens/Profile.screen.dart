@@ -16,6 +16,7 @@ import 'package:kali/core/states/user.state.dart';
 
 onClickDeconnect() async {
   await hardwareService.deleteSignatureStorage();
+  await hardwareService.deleteTokenStorage();
   await authenticationService.init();
   navigationService.navigateTo(ScreenEnum.start);
 }
@@ -137,13 +138,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       right: 0,
                       child: Column(
                         children: [
-                          ButtonWidget(
-                            buttonType: ButtonTypeEnum.outline,
-                            text: "Se déconnecter",
-                            onPressed: () {
-                              onClickDeconnect();
-                            },
-                          ),
+                          if (userState.user.value?.emailVerified())
+                            ButtonWidget(
+                              buttonType: ButtonTypeEnum.outline,
+                              text: "Se déconnecter",
+                              onPressed: () {
+                                onClickDeconnect();
+                              },
+                            ),
                           SizedBox(height: 12),
                           Text("$currentVersion ($currentBuild)"),
                           SizedBox(height: 2),

@@ -38,6 +38,6 @@ class User {
   }
 
   emailVerified() {
-    return emailVerifiedAt != null;
+    return email != null && email!.isNotEmpty && emailVerifiedAt != null;
   }
 }

@@ -46,6 +46,9 @@ class AuthenticationRepository {
     );
 
     if (response.statusCode == 200) {
+      final body = jsonDecode(response.body) as Map<String, dynamic>;
+      final token = body["data"]["token"];
+      await storeToken(token);
       return;
     } else {
       errorService.currentResponseError = response;

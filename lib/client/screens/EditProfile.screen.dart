@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Utils/Input.decoration.dart';
+import 'package:kali/client/widgets/CustomButton.widget.dart';
 import 'package:kali/client/widgets/EmailInput.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
+import 'package:kali/client/widgets/Register.widget.dart';
+import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/models/EditUser.formdata.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
@@ -121,7 +124,24 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           style: style.text.neutral.merge(style.fontsize.sm),
                         ),
                       ),
-                      EmailInputWidget(),
+
+                      if (userState.user.value?.emailVerified())
+                        EmailInputWidget(),
+                      if (!userState.user.value?.emailVerified())
+                        ButtonWidget(
+                          text: "S'enregistrer",
+                          onPressed: () {
+                            navigationService.context = context;
+                            navigationService.openBottomSheet(
+                              widget: WelcomeBottomSheet(
+                                child: RegisterWidget(
+                                  title: "Inscris-toi",
+                                ),
+                              ),
+                            );
+                          },
+                          buttonType: ButtonTypeEnum.outline,
+                        ),
                       SizedBox(height: 32),
                       CustomInput(
                         content: leitmotiv,
