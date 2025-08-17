@@ -17,7 +17,7 @@ import 'package:kali/core/states/user.state.dart';
 onClickDeconnect() async {
   await hardwareService.deleteSignatureStorage();
   await hardwareService.deleteTokenStorage();
-  await authenticationService.init();
+  await authenticationService.initSignature();
   navigationService.navigateTo(ScreenEnum.start);
 }
 

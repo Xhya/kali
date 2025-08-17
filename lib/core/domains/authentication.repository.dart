@@ -23,7 +23,7 @@ class AuthenticationRepository {
 
     final response = await http.post(
       Uri.parse('$API_URL/users/init'),
-      headers: await headersWithoutToken(),
+      headers: await headersWithMaybeToken(),
       body: json.encode(body),
     );
 
@@ -41,6 +41,29 @@ class AuthenticationRepository {
 
     final response = await http.post(
       Uri.parse('$API_URL/users/login'),
+      headers: await headersWithMaybeToken(),
+      body: json.encode(body),
+    );
+
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body) as Map<String, dynamic>;
+      final token = body["data"]["token"];
+      await storeToken(token);
+      return;
+    } else {
+      errorService.currentResponseError = response;
+      throw Exception();
+    }
+  }
+
+  Future<void> register({
+    required String email,
+    required String password,
+  }) async {
+    Map body = {"email": email, "password": password};
+
+    final response = await http.post(
+      Uri.parse('$API_URL/users/register'),
       headers: await headersWithMaybeToken(),
       body: json.encode(body),
     );

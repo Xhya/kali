@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/ValidateCode.widget.dart';
+import 'package:kali/core/domains/authentication.repository.dart';
 import 'package:kali/core/states/register.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
@@ -10,7 +11,6 @@ import 'package:kali/client/widgets/Login.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/PasswordInput.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
-import 'package:kali/core/domains/user.repository.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/Input.state.dart';
@@ -19,7 +19,7 @@ import 'package:kali/core/utils/paths.utils.dart';
 onSubmitRegisterUser() async {
   try {
     registerState.isLoading.value = true;
-    await UserRepository().register(
+    await AuthenticationRepository().register(
       email: inputState.email.value,
       password: inputState.password.value,
     );

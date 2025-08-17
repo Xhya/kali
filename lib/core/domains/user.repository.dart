@@ -11,7 +11,7 @@ class UserRepository {
   Future<User?> refreshUser() async {
     final response = await http.get(
       Uri.parse('$API_URL/users'),
-      headers: await headersWithoutToken(),
+      headers: await headersWithMaybeToken(),
     );
 
     if (response.statusCode == 200) {
@@ -36,33 +36,13 @@ class UserRepository {
 
     final response = await http.patch(
       Uri.parse('$API_URL/users'),
-      headers: await headersWithoutToken(),
+      headers: await headersWithMaybeToken(),
       body: json.encode(body),
     );
 
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body) as Map<String, dynamic>;
       return User.fromJson(body['data']);
-    } else {
-      errorService.currentResponseError = response;
-      throw Exception();
-    }
-  }
-
-  Future<void> register({
-    required String email,
-    required String password,
-  }) async {
-    Map body = {"email": email, "password": password};
-
-    final response = await http.post(
-      Uri.parse('$API_URL/users/register'),
-      headers: await headersWithMaybeToken(),
-      body: json.encode(body),
-    );
-
-    if (response.statusCode == 200) {
-      return;
     } else {
       errorService.currentResponseError = response;
       throw Exception();

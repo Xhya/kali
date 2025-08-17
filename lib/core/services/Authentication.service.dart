@@ -1,5 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kali/core/services/Hardware.service.dart';
+import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/utils/storageKeys.utils.dart';
 import 'package:kali/environment.dart';
 import 'package:uuid/uuid.dart';
@@ -14,27 +15,51 @@ class AuthenticationService {
   final _authenticationRepository = AuthenticationRepository();
   final _hardwareService = HardwareService();
   final _secureStorage = FlutterSecureStorage();
+  final _userService = UserService();
 
   bool isAuthentifiedWithSignature = false;
+  bool isAuthentifiedWithToken = false;
+  get isAuthentified => isAuthentifiedWithSignature || isAuthentifiedWithToken;
 
   init() async {
+    final token = await _secureStorage.read(key: tokenKey);
+    if (token != null) {
+      try {
+        await _initUser();
+        await _userService.refreshUser();
+        isAuthentifiedWithToken = true;
+      } catch (e) {
+        isAuthentifiedWithToken = false;
+        await hardwareService.deleteTokenStorage();
+      }
+    } else {
+      await initSignature();
+    }
+  }
+
+  initSignature() async {
     try {
       await _initDeviceId();
       await _generateSignedDeviceId();
-      await _authenticationRepository.initUser(
-        formattedSignature: await _hardwareService.getFormattedSignature(),
-        currentVersion: await _hardwareService.getCurrentVersion(),
-        currentBuild: await _hardwareService.getCurrentBuild(),
-        operatingSystem: await _hardwareService.getOperatingSystem(),
-        notificationActivated:
-            await _hardwareService.getNotificationActivated(),
-      );
+      await _initUser();
       isAuthentifiedWithSignature = true;
     } catch (e, stack) {
       await hardwareService.deleteSignatureStorage();
-      await init();
+      await initSignature();
       await errorService.notifyError(e: e, stack: stack, show: false);
     }
+  }
+
+  _initUser() async {
+    await _authenticationRepository.initUser(
+      formattedSignature:
+          await _hardwareService
+              .getFormattedSignature(), // TODO: should be in another function
+      currentVersion: await _hardwareService.getCurrentVersion(),
+      currentBuild: await _hardwareService.getCurrentBuild(),
+      operatingSystem: await _hardwareService.getOperatingSystem(),
+      notificationActivated: await _hardwareService.getNotificationActivated(),
+    );
   }
 
   verifyAuthCode(String code) async {
