@@ -26,7 +26,6 @@ class UserRepository {
   Future<User> saveProfile(EditUserFormData formData) async {
     Map body = {
       "username": formData.userName,
-      "email": formData.email,
       "leitmotiv": formData.leitmotiv,
       "calories": formData.calories,
       "proteins": formData.proteins,

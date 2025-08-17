@@ -26,7 +26,6 @@ onClickSave() async {
     final user = await UserService().saveProfile(
       EditUserFormData(
         userName: editProfileState.userName.value,
-        email: inputState.email.value,
         leitmotiv: editProfileState.leitmotiv.value,
         calories: editProfileState.editingCalories.value.toString(),
         proteins: editProfileState.editingProteins.value.toString(),
@@ -134,9 +133,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             navigationService.context = context;
                             navigationService.openBottomSheet(
                               widget: WelcomeBottomSheet(
-                                child: RegisterWidget(
-                                  title: "Inscris-toi",
-                                ),
+                                child: RegisterWidget(title: "Inscris-toi"),
                               ),
                             );
                           },
