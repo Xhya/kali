@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/widgets/AnimatedLoading.widget.dart';
+import 'package:kali/client/widgets/FullScreenBottomSheet.widget.dart';
 import 'package:kali/client/widgets/Register.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/domains/nutriScore.repository.dart';
@@ -17,13 +19,21 @@ void onClickBottomButton() async {
         widget: WelcomeBottomSheet(
           child: RegisterWidget(
             title: "Bienvenu·e à bord 🔥",
-            subtitle: "Inscris toi pour avoir accès à 3 jours d'essai gratuit !",
+            subtitle:
+                "Inscris toi pour avoir accès à 3 jours d'essai gratuit !",
           ),
         ),
       );
       navigationService.navigateTo(ScreenEnum.home);
     } else if (startFormState.isFormDone) {
+      navigationService.openBottomSheet(
+        widget: FullScreenBottomSheet(
+          canClose: false,
+          child: Center(child: AnimatedLoadingWidget()),
+        ),
+      );
       await computePersonalNutriScore();
+      navigationService.navigateBack();
       onClickNext();
     } else {
       onClickNext();
