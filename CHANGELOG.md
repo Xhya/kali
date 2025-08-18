@@ -7,6 +7,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ## [1.0.3]
 
 - fix error and bottom sheet
+- authentication with token
+- congratulations and animated loading screens
 
 ## [1.0.2]
 
