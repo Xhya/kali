@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Utils/Input.decoration.dart';
-import 'package:kali/client/widgets/Congratulation.widget.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
 import 'package:kali/client/widgets/EmailInput.widget.dart';
-import 'package:kali/client/widgets/FullScreenBottomSheet.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/Register.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
+import 'package:kali/core/actions/congratulationNextAction.actions.dart';
 import 'package:kali/core/models/EditUser.formdata.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
@@ -134,22 +133,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           onPressed: () {
                             navigationService.context = context;
                             navigationService.nextAction = () async {
-                              navigationService.context = context;
+                              await congratulationNextAction(context);
                               await Future.delayed(
-                                const Duration(milliseconds: 500),
+                                const Duration(milliseconds: 100),
                               );
-
-                              navigationService.openBottomSheet(
-                                widget: FullScreenBottomSheet(
-                                  child: CongratulationWidget(),
-                                ),
-                              );
-
-                              await Future.delayed(const Duration(seconds: 3));
-
-                              navigationService.closeBottomSheet();
-                                const Duration(milliseconds: 500);
-
                               navigationService.context = context;
                               navigationService.navigateBack();
                             };
