@@ -14,9 +14,10 @@ onSubmitCode() async {
     registerState.isLoading.value = true;
     await authenticationService.verifyAuthCode(registerState.code.value);
     await userService.refreshUser();
-    navigationService.navigateBack();
+    navigationService.closeBottomSheet();
+    navigationService.nextAction?.call();
   } catch (e, stack) {
-    navigationService.navigateBack();
+    navigationService.closeBottomSheet();
     errorService.notifyError(e: e, stack: stack);
   } finally {
     registerState.isLoading.value = false;

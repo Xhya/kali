@@ -36,6 +36,7 @@ class NavigationService extends ChangeNotifier {
   BuildContext? context;
   final bottomSheet = ValueNotifier<Widget?>(null);
   final snackBar = ValueNotifier<Widget?>(null);
+  Function? nextAction;
 
   String screenTitle = "";
 
