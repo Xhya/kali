@@ -24,6 +24,7 @@ onClickSelectPeriod(MealPeriodEnum period) {
 }
 
 onInputUpdateUserMealText(String value) {
+  quickAddMealState.meal.value?.removeNutriScore();
   quickAddMealState.userMealText.value = value;
 }
 
@@ -80,6 +81,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
     );
     NutriScore? nutriScore =
         context.watch<QuickAddMealState>().meal.value?.nutriscore;
+    bool computed = context.watch<QuickAddMealState>().computed.value;
 
     return SingleChildScrollView(
       child: Container(
@@ -154,7 +156,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                 ],
               ),
 
-              if (nutriScore != null)
+              if (computed)
                 ExpandedWidget(
                   child: Column(
                     children: [
@@ -169,6 +171,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                         },
                         iconWidget: Icon(Icons.add),
                         text: "Ajouter à la journée",
+                        disabled: nutriScore == null,
                       ),
                     ],
                   ),

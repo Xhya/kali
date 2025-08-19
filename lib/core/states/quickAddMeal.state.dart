@@ -7,6 +7,7 @@ final quickAddMealState = QuickAddMealState();
 
 class QuickAddMealState extends ChangeNotifier {
   final isLoading = ValueNotifier<bool>(false);
+  final computed = ValueNotifier<bool>(false);
   final userMealText = ValueNotifier<String>("");
   final chosenPeriod = ValueNotifier<MealPeriodEnum?>(null);
   final meal = ValueNotifier<MealModel?>(null);

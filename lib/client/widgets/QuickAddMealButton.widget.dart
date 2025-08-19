@@ -11,6 +11,7 @@ import 'package:kali/core/utils/computeMealPeriod.utils.dart';
 onClickAddQuickMeal() async {
   try {
     if (await userService.canCompute()) {
+      quickAddMealState.computed.value = false;
       quickAddMealState.reset();
       quickAddMealState.chosenPeriod.value = computeMealPeriod(DateTime.now());
       navigationService.openBottomSheet(widget: QuickAddMealWidget());

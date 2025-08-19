@@ -12,6 +12,7 @@ computeNutriScoreAction() async {
     final meal = await MealService().computeMealNutriScore(userText);
     quickAddMealState.meal.value = meal;
     quickAddMealState.isLoading.value = false;
+    quickAddMealState.computed.value = true;
   } catch (e, stack) {
     errorService.notifyError(
       e: e,

@@ -6,7 +6,7 @@ class MealModel {
   final DateTime? date;
   final String? userText;
   final MealPeriodEnum? period;
-  final NutriScore? nutriscore;
+  NutriScore? nutriscore;
 
   MealModel({
     required this.id,
@@ -41,5 +41,9 @@ class MealModel {
       'period': period?.label,
       'nutriscore': nutriscore?.toJson(),
     };
+  }
+
+  removeNutriScore() {
+    nutriscore = null;
   }
 }
