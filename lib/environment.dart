@@ -22,6 +22,9 @@ const environment = {
   "FIREBASE_MESSAGING_GOOGLE_APP_ID": String.fromEnvironment('FIREBASE_MESSAGING_GOOGLE_APP_ID'),
 
   "STRIPE_PUBLIC_KEY": String.fromEnvironment('STRIPE_PUBLIC_KEY'),
+
+  "GOOGLE_SIGN_IN_CLIENT_ID": String.fromEnvironment('GOOGLE_SIGN_IN_CLIENT_ID'),
+  "GOOGLE_SIGN_IN_SERVER_ID": String.fromEnvironment('GOOGLE_SIGN_IN_SERVER_ID'),
 };
 
 final useFixtures = environment["USE_FIXTURES"];
@@ -35,6 +38,8 @@ final String signatureSecretKey = environment["SIGNATURE_SECRET_KEY"] as String;
 final String googleAIUrl = environment["GOOGLE_AI_URL"] as String;
 final String bugsnagEnvironment = environment["BUGSNAG_ENV"] as String;
 final String bugsnagApiKey = environment["BUGSNAG_API_KEY"] as String;
+final String googleSignInClientId = environment["GOOGLE_SIGN_IN_CLIENT_ID"] as String;
+final String googleSignInServerId = environment["GOOGLE_SIGN_IN_SERVER_ID"] as String;
 // ignore: non_constant_identifier_names
 final String API_URL = environment["API_URL"] as String;
 final String STRIPE_PUBLIC_KEY = environment["STRIPE_PUBLIC_KEY"] as String;
