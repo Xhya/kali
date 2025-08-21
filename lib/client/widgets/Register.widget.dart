@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kali/client/widgets/GoogleSignInButton.widget.dart';
 import 'package:kali/client/widgets/ValidateCode.widget.dart';
 import 'package:kali/core/domains/authentication.repository.dart';
 import 'package:kali/core/states/register.state.dart';
@@ -14,7 +15,6 @@ import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/Input.state.dart';
-import 'package:kali/core/utils/paths.utils.dart';
 
 onSubmitRegisterUser() async {
   try {
@@ -131,41 +131,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
           ],
         ),
         SizedBox(height: 8),
-        CustomInkwell(
-          onTap: () {
-            HapticFeedback.vibrate();
-          },
-          child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(16)),
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-              decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.5),
-                border: Border.all(color: Colors.white),
-                borderRadius: BorderRadius.all(Radius.circular(16)),
-              ),
-              child: Row(
-                spacing: 8,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    '$imagesPath/google_logo.png',
-                    width: 20,
-                    height: 20,
-                    fit: BoxFit.cover,
-                  ),
-                  Text(
-                    "se connecter avec Google",
-                    textAlign: TextAlign.center,
-                    style: style.fontsize.sm
-                        .merge(style.text.neutral)
-                        .merge(style.fontweight.semibold),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
+        GoogleSignInButton(action: 'register'),
         SizedBox(height: 32),
         Row(
           spacing: 8,

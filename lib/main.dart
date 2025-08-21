@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
+import 'package:kali/core/actions/googleSignIn.actions.dart';
 import 'package:kali/core/services/Authentication.service.dart';
 import 'package:kali/core/services/PushNotification.service.dart';
 import 'package:kali/core/services/User.service.dart';
@@ -14,6 +15,7 @@ import 'package:kali/core/states/Input.state.dart';
 import 'package:kali/core/states/Texts.state.dart';
 import 'package:kali/core/states/configuration.state.dart';
 import 'package:kali/core/states/editProfile.state.dart';
+import 'package:kali/core/states/googleSignIn.state.dart';
 import 'package:kali/core/states/register.state.dart';
 import 'package:kali/core/states/subscription.state.dart';
 import 'package:kali/core/states/topBanner.state.dart';
@@ -52,6 +54,8 @@ void main() async {
 
   Stripe.publishableKey = STRIPE_PUBLIC_KEY;
   await Stripe.instance.applySettings();
+
+  await initGoogleSignIn();
 
   // Firebase init
   if (!useSimulator && !kIsWeb) {
@@ -102,6 +106,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => inputState),
         ChangeNotifierProvider(create: (context) => registerState),
         ChangeNotifierProvider(create: (context) => textsState),
+        ChangeNotifierProvider(create: (context) => googleSignInState),
 
         ChangeNotifierProvider(create: (context) => nutriScoreState),
         ChangeNotifierProvider(create: (context) => mealState),

@@ -17,7 +17,6 @@ onSubmitCode() async {
     navigationService.closeBottomSheet();
     navigationService.nextAction?.call();
   } catch (e, stack) {
-    navigationService.closeBottomSheet();
     errorService.notifyError(e: e, stack: stack);
   } finally {
     registerState.isLoading.value = false;

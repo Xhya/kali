@@ -114,7 +114,9 @@ class _LoginWidgetState extends State<LoginWidget> {
             ],
           ),
           SizedBox(height: 12),
-          GoogleSignInButton(),
+          GoogleSignInButton(
+            action: 'login',
+          ),
         ],
       ),
     );

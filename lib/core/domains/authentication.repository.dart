@@ -56,6 +56,27 @@ class AuthenticationRepository {
     }
   }
 
+  Future<void> loginWithGoogle({
+    required String email,
+    required String googleToken,
+  }) async {
+    Map body = {"email": email, "googleToken": googleToken};
+
+    final response = await http.post(
+      Uri.parse('$API_URL/users/login-google'),
+      headers: await headersWithMaybeToken(),
+      body: json.encode(body),
+    );
+
+    if (response.statusCode == 200) {
+      await storeToken(googleToken);
+      return;
+    } else {
+      errorService.currentResponseError = response;
+      throw Exception();
+    }
+  }
+
   Future<void> register({
     required String email,
     required String password,
@@ -72,6 +93,27 @@ class AuthenticationRepository {
       final body = jsonDecode(response.body) as Map<String, dynamic>;
       final token = body["data"]["token"];
       await storeToken(token);
+      return;
+    } else {
+      errorService.currentResponseError = response;
+      throw Exception();
+    }
+  }
+
+  Future<void> registerWithGoogle({
+    required String email,
+    required String googleToken,
+  }) async {
+    Map body = {"email": email, "googleToken": googleToken};
+
+    final response = await http.post(
+      Uri.parse('$API_URL/users/register-google'),
+      headers: await headersWithMaybeToken(),
+      body: json.encode(body),
+    );
+
+    if (response.statusCode == 200) {
+      await storeToken(googleToken);
       return;
     } else {
       errorService.currentResponseError = response;

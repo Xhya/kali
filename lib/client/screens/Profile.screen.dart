@@ -6,6 +6,7 @@ import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/Authentication.service.dart';
 import 'package:kali/core/services/Hardware.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
+import 'package:kali/core/states/googleSignIn.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
@@ -18,6 +19,7 @@ onClickDeconnect() async {
   await hardwareService.deleteSignatureStorage();
   await hardwareService.deleteTokenStorage();
   await authenticationService.initSignature();
+  await googleSignInState.signInGoogle.value?.signOut();
   navigationService.navigateTo(ScreenEnum.start);
 }
 
