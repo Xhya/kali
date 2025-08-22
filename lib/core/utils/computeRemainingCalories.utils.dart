@@ -6,7 +6,5 @@ int computeRemainingCalories(
 ) {
   if (personalNutriScore == null) return 0;
 
-  return (personalNutriScore.caloryAmount -
-          nutriscore.caloryAmount / personalNutriScore.caloryAmount * 100)
-      .toInt();
+  return (personalNutriScore.caloryAmount - nutriscore.caloryAmount).toInt();
 }
