@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
+import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/widgets/MealPeriodTag.widget.dart';
 import 'package:kali/client/widgets/NutriScoreGauges.widget.dart';
@@ -83,6 +84,7 @@ class _MealScreenState extends State<MealScreen> {
                 onChanged: null,
                 textCapitalization: TextCapitalization.sentences,
                 readonly: true,
+                maxLines: 100,
                 // suffixIcon: IconButton(
                 //   icon:
                 //       isLoading
@@ -93,6 +95,32 @@ class _MealScreenState extends State<MealScreen> {
                 //   },
                 // ),
               ),
+              SizedBox(height: 16),
+              CustomCard(
+                padding: EdgeInsets.all(16),
+                child: Row(
+                  spacing: 12,
+                  children: [
+                    Text(
+                      "⚖️",
+                      textAlign: TextAlign.start,
+                      style: style.text.green
+                          .merge(style.fontsize.md)
+                          .merge(style.fontweight.bold),
+                    ),
+
+                    if (meal?.nutriscore?.caloryAmount != null)
+                      Text(
+                        "${meal!.nutriscore!.caloryAmount.toString()} calories",
+                        textAlign: TextAlign.start,
+                        style: style.text.neutral
+                            .merge(style.fontsize.sm)
+                            .merge(style.fontweight.bold),
+                      ),
+                  ],
+                ),
+              ),
+
               SizedBox(height: 16),
               NutriScoreGaugesWidget(mealsByPeriods: [meal!], withTotal: false),
             ],
