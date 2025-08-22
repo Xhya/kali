@@ -28,7 +28,7 @@ class StartFormState extends ChangeNotifier {
   final isLoading = ValueNotifier<bool>(false);
   bool get isNextButtonDisabled {
     if (currentPage.value == 0) {
-      return userName.value.trim().isEmpty || leitmotiv.value.trim().isEmpty;
+      return userName.value.trim().isEmpty;
     } else if (currentPage.value == 1) {
       return !birthdate.value.trim().isValidDate() ||
           genderOption.value == null;
