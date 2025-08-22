@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/widgets/AnimatedLoading.widget.dart';
+import 'package:kali/client/widgets/Congratulation.widget.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/core/actions/payment.actions.dart';
 import 'package:kali/core/services/Navigation.service.dart';
@@ -38,6 +40,12 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
 
   @override
   Widget build(BuildContext context) {
+    bool isPaymentLoading = context.select(
+      (SubscriptionState s) => s.isPaymentLoading.value,
+    );
+    bool paymentDone = context.select(
+      (SubscriptionState s) => s.paymentDone.value,
+    );
     final subscriptions = context.select(
       (SubscriptionState s) => s.subscriptions.value,
     );
@@ -48,44 +56,46 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.max,
       children: [
-        ...subscriptions.map(
-          (subscription) => CustomInkwell(
-            onTap: () {
-              navigationService.context = context;
-              openPaymentBottomSheet(subscription.id);
-              navigationService.navigateBack();
-            },
-            child: CustomCard(
-              padding: EdgeInsets.all(12),
-              height: 80,
-              width: double.maxFinite,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(subscription.name!),
-                      Text(subscription.description!),
-                    ],
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(subscription.amount!),
-                      Text(subscription.recurring!),
-                    ],
-                  ),
-                ],
+        if (!isPaymentLoading && !paymentDone)
+          ...subscriptions.map(
+            (subscription) => CustomInkwell(
+              onTap: () {
+                navigationService.context = context;
+                openPaymentBottomSheet(subscription.id);
+              },
+              child: CustomCard(
+                padding: EdgeInsets.all(12),
+                height: 80,
+                width: double.maxFinite,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(subscription.name!),
+                        Text(subscription.description!),
+                      ],
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(subscription.amount!),
+                        Text(subscription.recurring!),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
+        if (isPaymentLoading && !paymentDone) AnimatedLoadingWidget(),
+        if (!isPaymentLoading && paymentDone) CongratulationWidget(),
       ],
     );
   }

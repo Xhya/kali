@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_confetti/flutter_confetti.dart';
-import 'package:kali/client/Style.service.dart';
 
 class CongratulationWidget extends StatefulWidget {
   const CongratulationWidget({super.key});

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:kali/client/Style.service.dart';
-
 import 'package:kali/core/services/Error.service.dart';
+import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/Payment.service.dart';
+import 'package:kali/core/states/subscription.state.dart';
 
 Future<void> openPaymentBottomSheet(String subscriptionId) async {
   try {
@@ -24,8 +25,13 @@ Future<void> openPaymentBottomSheet(String subscriptionId) async {
 
     try {
       await Stripe.instance.presentPaymentSheet();
-
+      subscriptionState.isPaymentLoading.value = true;
       await paymentService.createSubscription(subscriptionId);
+      subscriptionState.isPaymentLoading.value = false;
+      subscriptionState.paymentDone.value = true;
+      await Future.delayed(const Duration(seconds: 5));
+      navigationService.closeBottomSheet();
+      subscriptionState.paymentDone.value = false;
     } catch (e) {
       if (e is StripeException) {
         print('Erreur Stripe: ${e.error.localizedMessage}');
