@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/Utils/Input.decoration.dart';
+import 'package:kali/client/widgets/CustomIcon.widget.dart';
 
 class CustomInput extends StatefulWidget {
   const CustomInput({
@@ -23,6 +24,7 @@ class CustomInput extends StatefulWidget {
     this.maxLength,
     this.onSubmitted,
     this.textInputAction,
+    this.customIcon,
   });
 
   final Function(String)? onChanged;
@@ -42,6 +44,7 @@ class CustomInput extends StatefulWidget {
   final int? maxLength;
   final Function(String)? onSubmitted;
   final TextInputAction? textInputAction;
+  final CustomIconWidget? customIcon;
 
   @override
   State<CustomInput> createState() => _CustomInputState();
@@ -104,7 +107,7 @@ class _CustomInputState extends State<CustomInput> {
                   hintStyle: TextStyle(color: Colors.grey),
                   hintText: widget.placeholder,
                   suffixText: widget.suffixText,
-                  suffixIcon: widget.suffixIcon,
+                  suffixIcon: widget.customIcon,
                   errorText: widget.errorText,
                 ),
                 textCapitalization: widget.textCapitalization,

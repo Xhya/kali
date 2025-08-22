@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/core/actions/startForm.actions.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:provider/provider.dart';
@@ -44,7 +45,10 @@ class _StartFormPage1State extends State<StartFormPage1> {
                 startFormState.userName.value = value;
               },
               placeholder: "Mama kitchen",
-              suffixIcon: Icon(Icons.person),
+              customIcon: CustomIconWidget(
+                format: CustomIconFormat.svg,
+                icon: "assets/icons/user.svg",
+              ),
               textCapitalization: TextCapitalization.sentences,
               textInputAction: TextInputAction.next,
             ),
@@ -58,7 +62,10 @@ class _StartFormPage1State extends State<StartFormPage1> {
                 startFormState.leitmotiv.value = value;
               },
               placeholder: "Je veux me prouver...",
-              suffixIcon: Icon(Icons.edit),
+              customIcon: CustomIconWidget(
+                format: CustomIconFormat.svg,
+                icon: "assets/icons/stylo.svg",
+              ),
               maxLines: 4,
               textCapitalization: TextCapitalization.sentences,
               onSubmitted: (String value) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/Utils/InputWithTextFormatter.utils.dart';
 import 'package:kali/client/Utils/MaxDigitsCountFormatter.utils.dart';
+import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/core/actions/startForm.actions.dart';
 import 'package:kali/core/utils/formatters.utils.dart';
@@ -52,7 +53,10 @@ class _StartFormPage3State extends State<StartFormPage3> {
                 InputWithTextFormatter(extension: "cm"),
                 MaxDigitsCountFormatter(maxLength: 3),
               ],
-              suffixIcon: Icon(Icons.rule),
+              customIcon: CustomIconWidget(
+                format: CustomIconFormat.svg,
+                icon: "assets/icons/regle.svg",
+              ),
               keyboardType: TextInputType.datetime,
               textInputAction: TextInputAction.next,
             ),
@@ -70,6 +74,10 @@ class _StartFormPage3State extends State<StartFormPage3> {
                 InputWithTextFormatter(extension: "kg"),
                 MaxDigitsCountFormatter(maxLength: 3),
               ],
+              customIcon: CustomIconWidget(
+                format: CustomIconFormat.svg,
+                icon: "assets/icons/balance.svg",
+              ),
               suffixIcon: Icon(Icons.rule),
               keyboardType: TextInputType.datetime,
               textInputAction: TextInputAction.next,

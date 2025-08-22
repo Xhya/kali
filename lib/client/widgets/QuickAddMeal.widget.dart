@@ -140,18 +140,14 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                   ),
 
                   CustomIconWidget(
-                    icon:
-                        isLoading
-                            ? LoaderIcon()
-                            : Icon(
-                              Icons.calculate_outlined,
-                              color: style.icon.color1.color,
-                              size: 22,
-                            ),
+                    icon: "assets/icons/calculette.svg",
+                    format: CustomIconFormat.svg,
+                    isLoading: isLoading,
                     onClick: () {
                       onClickSuffixIcon();
                     },
                     disabled: userMealText.isEmpty || chosenPeriod == null,
+                    type: CustomIconType.filled,
                   ),
                 ],
               ),

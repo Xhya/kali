@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/DateInput.widget.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:provider/provider.dart';
@@ -15,8 +16,9 @@ class StartFormPage2 extends StatefulWidget {
 class _StartFormPage2State extends State<StartFormPage2> {
   @override
   Widget build(BuildContext context) {
-    SelectOption? genderOption =
-        context.select((StartFormState s) => s.genderOption.value);
+    SelectOption? genderOption = context.select(
+      (StartFormState s) => s.genderOption.value,
+    );
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -68,17 +70,26 @@ class _StartFormPage2State extends State<StartFormPage2> {
                 SelectOption(
                   value: "woman",
                   label: "Femme",
-                  icon: Icon(Icons.female),
+                  icon: CustomIconWidget(
+                    format: CustomIconFormat.svg,
+                    icon: "assets/icons/femme.svg",
+                  ),
                 ),
                 SelectOption(
                   value: "man",
                   label: "Homme",
-                  icon: Icon(Icons.male),
+                  icon: CustomIconWidget(
+                    format: CustomIconFormat.svg,
+                    icon: "assets/icons/homme.svg",
+                  ),
                 ),
                 SelectOption(
                   value: "other",
                   label: "Autre",
-                  icon: Icon(Icons.apple),
+                  icon: CustomIconWidget(
+                    format: CustomIconFormat.svg,
+                    icon: "assets/icons/gender-x.svg",
+                  ),
                 ),
               ],
               selected: genderOption,

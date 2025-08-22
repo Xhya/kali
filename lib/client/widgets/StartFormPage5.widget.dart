@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/CustomSelect.widget.dart';
 import 'package:kali/core/models/StartForm.enum.dart';
 import 'package:kali/core/states/startForm.state.dart';
@@ -15,7 +16,9 @@ class StartFormPage5 extends StatefulWidget {
 class _StartFormPage5State extends State<StartFormPage5> {
   @override
   Widget build(BuildContext context) {
-    SelectOption? lifeOption = context.select((StartFormState s) => s.lifeOption.value);
+    SelectOption? lifeOption = context.select(
+      (StartFormState s) => s.lifeOption.value,
+    );
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -36,7 +39,7 @@ class _StartFormPage5State extends State<StartFormPage5> {
             ),
 
             SizedBox(height: 32),
-            
+
             CustomSelectWidget(
               onChanged: (SelectOption? value) {
                 startFormState.lifeOption.value = value;
@@ -45,17 +48,26 @@ class _StartFormPage5State extends State<StartFormPage5> {
                 SelectOption(
                   value: LifeOptionEnum.sit.label,
                   label: "Principalement assis",
-                  icon: Icon(Icons.abc),
+                  icon: CustomIconWidget(
+                    format: CustomIconFormat.svg,
+                    icon: "assets/icons/chaise.svg",
+                  ),
                 ),
                 SelectOption(
                   value: LifeOptionEnum.stand.label,
                   label: "Principalement debout",
-                  icon: Icon(Icons.alternate_email),
+                  icon: CustomIconWidget(
+                    format: CustomIconFormat.svg,
+                    icon: "assets/icons/walk.svg",
+                  ),
                 ),
                 SelectOption(
                   value: LifeOptionEnum.active.label,
                   label: "Très actif",
-                  icon: Icon(Icons.apple),
+                  icon: CustomIconWidget(
+                    format: CustomIconFormat.svg,
+                    icon: "assets/icons/feu.svg",
+                  ),
                 ),
               ],
               selected: lifeOption,

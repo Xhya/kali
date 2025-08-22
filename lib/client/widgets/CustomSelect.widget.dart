@@ -49,7 +49,7 @@ class _CustomSelectWidgetState extends State<CustomSelectWidget> {
               widget.onChanged(it);
             },
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
               width: double.maxFinite,
               decoration: BoxDecoration(
                 color: backgroundColor,
@@ -59,7 +59,7 @@ class _CustomSelectWidgetState extends State<CustomSelectWidget> {
               child: Row(
                 children: [
                   if (it.icon != null) it.icon!,
-                  const SizedBox(width: 8),
+                  const SizedBox(width: 4),
                   Expanded(child: Text(it.label)),
                   if (suffixIcon != null) suffixIcon,
                 ],
