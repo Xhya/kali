@@ -69,7 +69,7 @@ class MealRepository {
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body) as Map<String, dynamic>;
       return MealModel.fromJson(body["data"]);
-    } else if (response.statusCode == 422) {
+    } else if (response.statusCode == 2000) {
       aiState.aiNotUnderstandError.value = true;
       return null;
     } else {
