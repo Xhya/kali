@@ -29,8 +29,9 @@ Future<void> openPaymentBottomSheet(String subscriptionId) async {
       await paymentService.createSubscription(subscriptionId);
       subscriptionState.isPaymentLoading.value = false;
       subscriptionState.paymentDone.value = true;
-      await Future.delayed(const Duration(seconds: 5));
+      await Future.delayed(const Duration(milliseconds: 2500));
       navigationService.closeBottomSheet();
+      await Future.delayed(const Duration(seconds: 1));
       subscriptionState.paymentDone.value = false;
     } catch (e) {
       if (e is StripeException) {
