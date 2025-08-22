@@ -27,37 +27,34 @@ class _StartFormPageFinalState extends State<StartFormPageFinal> {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: Expanded(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 12),
-              Text(
-                "➡ Et voici ton plan personnalisé 🔥",
-                style: style.text.neutral.merge(style.fontsize.lg),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 12),
+            Text(
+              "➡ Et voici ton plan personnalisé 🔥",
+              style: style.text.neutral.merge(style.fontsize.lg),
+            ),
+
+            SizedBox(height: 32),
+
+            if (personalNutriScore != null)
+              ExpandedWidget(
+                height: 220,
+                child: Column(
+                  children: [
+                    TotalCaloriesWidget(nutriScore: personalNutriScore),
+                    SizedBox(height: 4),
+                    TotalNutriScoresWidget(nutriScore: personalNutriScore),
+                  ],
+                ),
               ),
-
-              SizedBox(height: 32),
-
-              if (personalNutriScore != null)
-                // ExpandedWidget(
-                //   height: 220,
-                //   child: 
-                  Column(
-                    children: [
-                      TotalCaloriesWidget(nutriScore: personalNutriScore),
-                      SizedBox(height: 4),
-                      TotalNutriScoresWidget(nutriScore: personalNutriScore),
-                    ],
-                  ),
-                // ),
-              // Text(
-              //   "Avec ce plan, tu es en léger déficit. Si tu t'y tiens régulièrement, tu perdras environ 400g par semaine.",
-              //   style: style.text.neutral.merge(style.fontsize.xs),
-              // ),
-            ],
-          ),
+            // Text(
+            //   "Avec ce plan, tu es en léger déficit. Si tu t'y tiens régulièrement, tu perdras environ 400g par semaine.",
+            //   style: style.text.neutral.merge(style.fontsize.xs),
+            // ),
+          ],
         ),
       ),
     );
