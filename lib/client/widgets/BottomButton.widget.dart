@@ -23,7 +23,7 @@ class _BottomButtonState extends State<BottomButtonWidget> {
   Widget build(BuildContext context) {
     final backgroundColor =
         widget.left != null
-            ? style.background.grey.color
+            ? style.background.grey.color?.withOpacity(0.2)
             : Colors.transparent;
 
     return IntrinsicHeight(

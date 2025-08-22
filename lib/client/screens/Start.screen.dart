@@ -56,8 +56,8 @@ class _StartFormScreenState extends State<StartScreen> {
                       children: [
                         Text("🚀", style: TextStyle(fontSize: 24)),
                         Text(
-                          "Le suivi quotidien est l'outil idéal pour t'aider à atteindre tes objectifs",
-                          style: style.fontsize.xs.merge(style.text.neutral),
+                          "L'app qui s'invite une minute… et reste dans ton quotidien",
+                          style: style.fontsize.xs.merge(style.text.reverse_neutral),
                           maxLines: 5,
                         ),
                       ],
