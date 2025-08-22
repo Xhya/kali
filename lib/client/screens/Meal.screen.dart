@@ -94,7 +94,7 @@ class _MealScreenState extends State<MealScreen> {
                 // ),
               ),
               SizedBox(height: 16),
-              NutriScoreGaugesWidget(mealsByPeriods: [meal!]),
+              NutriScoreGaugesWidget(mealsByPeriods: [meal!], withTotal: false),
             ],
           ),
         ),

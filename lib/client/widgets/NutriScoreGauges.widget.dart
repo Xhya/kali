@@ -14,9 +14,14 @@ import 'package:provider/provider.dart';
 import 'package:kali/core/services/Translation.service.dart';
 
 class NutriScoreGaugesWidget extends StatefulWidget {
-  const NutriScoreGaugesWidget({super.key, required this.mealsByPeriods});
+  const NutriScoreGaugesWidget({
+    super.key,
+    required this.mealsByPeriods,
+    this.withTotal = true,
+  });
 
   final List<MealModel> mealsByPeriods;
+  final bool withTotal;
 
   @override
   State<NutriScoreGaugesWidget> createState() => _NutriScoreGaugesWidgetState();
@@ -57,7 +62,9 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                         style: style.fontsize.xl.merge(style.text.neutral),
                       ),
                       Text(
-                        "${currentNutriScore.proteinAmount} / ${personalNutriScore.proteinAmount}g",
+                        widget.withTotal
+                            ? "${currentNutriScore.proteinAmount} / ${personalNutriScore.proteinAmount}g"
+                            : "${currentNutriScore.proteinAmount}g",
                         style: style.fontsize.sm
                             .merge(style.text.neutral)
                             .merge(style.fontweight.bold),
@@ -93,7 +100,9 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                         style: style.fontsize.xl.merge(style.text.neutral),
                       ),
                       Text(
-                        "${currentNutriScore.glucidAmount} / ${personalNutriScore.glucidAmount}g",
+                        widget.withTotal
+                            ? "${currentNutriScore.glucidAmount} / ${personalNutriScore.glucidAmount}g"
+                            : "${currentNutriScore.glucidAmount}g",
                         style: style.fontsize.sm
                             .merge(style.text.neutral)
                             .merge(style.fontweight.bold),
@@ -129,7 +138,9 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                         style: style.fontsize.xl.merge(style.text.neutral),
                       ),
                       Text(
-                        "${currentNutriScore.lipidAmount} / ${personalNutriScore.lipidAmount}g",
+                        widget.withTotal
+                            ? "${currentNutriScore.lipidAmount} / ${personalNutriScore.lipidAmount}g"
+                            : "${currentNutriScore.lipidAmount}g",
                         style: style.fontsize.sm
                             .merge(style.text.neutral)
                             .merge(style.fontweight.bold),
