@@ -21,6 +21,8 @@ class CustomInput extends StatefulWidget {
     this.readonly = false,
     this.obscureText = false,
     this.maxLength,
+    this.onSubmitted,
+    this.textInputAction,
   });
 
   final Function(String)? onChanged;
@@ -38,6 +40,8 @@ class CustomInput extends StatefulWidget {
   final bool readonly;
   final bool obscureText;
   final int? maxLength;
+  final Function(String)? onSubmitted;
+  final TextInputAction? textInputAction;
 
   @override
   State<CustomInput> createState() => _CustomInputState();
@@ -106,6 +110,10 @@ class _CustomInputState extends State<CustomInput> {
                 textCapitalization: widget.textCapitalization,
                 keyboardType: widget.keyboardType,
                 readOnly: widget.readonly,
+                onSubmitted: (value) {
+                  widget.onSubmitted?.call(value);
+                },
+                textInputAction: widget.textInputAction,
               ),
             ),
           ],

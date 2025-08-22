@@ -14,11 +14,13 @@ class BaseScaffold extends StatefulWidget {
     required this.child,
     this.backButton = false,
     this.profileButton = false,
+    this.resizeToAvoidBottomInset = true,
   });
 
   final Widget child;
   final bool backButton;
   final bool profileButton;
+  final bool resizeToAvoidBottomInset;
 
   @override
   State<BaseScaffold> createState() => _BaseScaffoldState();
@@ -34,7 +36,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
     double headerHeight = hasInternetConnexion ? 80 : 105;
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(headerHeight),
         child: AppBar(

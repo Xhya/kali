@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kali/client/Utils/InputWithTextFormatter.utils.dart';
 import 'package:kali/client/Utils/MaxDigitsCountFormatter.utils.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
+import 'package:kali/core/actions/startForm.actions.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:kali/core/utils/formatters.utils.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,9 @@ class StartFormPage4 extends StatefulWidget {
 class _StartFormPage4State extends State<StartFormPage4> {
   @override
   Widget build(BuildContext context) {
-    String targetWeight = context.select((StartFormState s) => s.targetWeight.value);
+    String targetWeight = context.select(
+      (StartFormState s) => s.targetWeight.value,
+    );
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -52,7 +55,11 @@ class _StartFormPage4State extends State<StartFormPage4> {
                 MaxDigitsCountFormatter(maxLength: 3),
               ],
               suffixIcon: Icon(Icons.rule),
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.datetime,
+              textInputAction: TextInputAction.next,
+              onSubmitted: (value) {
+                onClickNext();
+              },
             ),
           ],
         ),

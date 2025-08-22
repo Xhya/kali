@@ -26,7 +26,7 @@ class _StartFormPage2State extends State<StartFormPage2> {
           children: [
             SizedBox(height: 12),
             Text(
-              "Ton profil santé 🩺",
+              "Tes informations personnelles 🩺",
               style: style.text.neutral.merge(style.fontsize.lg),
             ),
             SizedBox(height: 4),

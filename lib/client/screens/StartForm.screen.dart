@@ -37,8 +37,10 @@ class _StartFormScreenState extends State<StartFormScreen> {
         context.watch<StartFormState>().controller.value;
 
     return BaseScaffold(
+      resizeToAvoidBottomInset: false,
       backButton: false,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: style.background.greenTransparent.color,
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 12),

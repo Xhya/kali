@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
+import 'package:kali/core/actions/startForm.actions.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
@@ -30,7 +31,7 @@ class _StartFormPage1State extends State<StartFormPage1> {
             ),
             SizedBox(height: 4),
             Text(
-              "Choisis ton pseudo et partage ton pourquoi. C'est ton point de départ.",
+              "Choisis ton pseudo et ton pourquoi. Il sera ton moteur au quotidien, ton guide quand tu en auras besoin.",
               style: style.text.neutral.merge(style.fontsize.xs),
             ),
 
@@ -43,8 +44,9 @@ class _StartFormPage1State extends State<StartFormPage1> {
                 startFormState.userName.value = value;
               },
               placeholder: "Mama kitchen",
-              suffixIcon: Icon(Icons.monitor_weight_outlined),
+              suffixIcon: Icon(Icons.person),
               textCapitalization: TextCapitalization.sentences,
+              textInputAction: TextInputAction.next,
             ),
 
             SizedBox(height: 32),
@@ -55,13 +57,15 @@ class _StartFormPage1State extends State<StartFormPage1> {
               onChanged: (String value) {
                 startFormState.leitmotiv.value = value;
               },
-              placeholder:
-                  "Je veux changer pour moi, pour me prouver que j'en suis capable.",
-              suffixIcon: Icon(Icons.note_outlined),
-              minLines: 3,
+              placeholder: "Je veux me prouver...",
+              suffixIcon: Icon(Icons.edit),
               maxLines: 4,
               textCapitalization: TextCapitalization.sentences,
+              onSubmitted: (String value) {
+                onClickNext();
+              },
             ),
+            SizedBox(height: 400),
           ],
         ),
       ),

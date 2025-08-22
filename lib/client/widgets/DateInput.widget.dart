@@ -84,6 +84,7 @@ class _DateInputWidgetState extends State<DateInputWidget> {
               suffixIcon: Icon(Icons.calendar_today),
             ),
             keyboardType: TextInputType.datetime,
+            textInputAction: TextInputAction.next,
           ),
         ),
         if (birthdateErrorText != null)

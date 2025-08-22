@@ -3,6 +3,7 @@ import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/Utils/InputWithTextFormatter.utils.dart';
 import 'package:kali/client/Utils/MaxDigitsCountFormatter.utils.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
+import 'package:kali/core/actions/startForm.actions.dart';
 import 'package:kali/core/utils/formatters.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/core/states/startForm.state.dart';
@@ -52,7 +53,8 @@ class _StartFormPage3State extends State<StartFormPage3> {
                 MaxDigitsCountFormatter(maxLength: 3),
               ],
               suffixIcon: Icon(Icons.rule),
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.datetime,
+              textInputAction: TextInputAction.next,
             ),
 
             SizedBox(height: 4),
@@ -69,7 +71,11 @@ class _StartFormPage3State extends State<StartFormPage3> {
                 MaxDigitsCountFormatter(maxLength: 3),
               ],
               suffixIcon: Icon(Icons.rule),
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.datetime,
+              textInputAction: TextInputAction.next,
+              onSubmitted: (value) {
+                onClickNext();
+              },
             ),
           ],
         ),
