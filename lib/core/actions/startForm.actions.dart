@@ -64,7 +64,7 @@ void onClickPrevious() {
 
   startFormState.personalNutriScore.value = null;
 
-  if (startFormState.currentPage.value > 1) {
+  if (startFormState.currentPage.value >= 1) {
     startFormState.currentPage.value = startFormState.currentPage.value - 1;
     startFormState.controller.value.animateToPage(
       startFormState.currentPage.value,
