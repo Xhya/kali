@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kali/client/Utils/InputWithTextFormatter.utils.dart';
-import 'package:kali/client/Utils/MaxDigitsCountFormatter.utils.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
-import 'package:kali/client/widgets/CustomInput.dart';
-import 'package:kali/core/actions/startForm.actions.dart';
+import 'package:kali/client/widgets/CustomSelect.widget.dart';
+import 'package:kali/core/models/StartForm.enum.dart';
 import 'package:kali/core/states/startForm.state.dart';
-import 'package:kali/core/utils/formatters.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 
@@ -19,8 +16,8 @@ class StartFormPage4 extends StatefulWidget {
 class _StartFormPage4State extends State<StartFormPage4> {
   @override
   Widget build(BuildContext context) {
-    String targetWeight = context.select(
-      (StartFormState s) => s.targetWeight.value,
+    SelectOption? lifeOption = context.select(
+      (StartFormState s) => s.lifeOption.value,
     );
 
     return Padding(
@@ -31,40 +28,51 @@ class _StartFormPage4State extends State<StartFormPage4> {
           children: [
             SizedBox(height: 12),
             Text(
-              "Quel est ton objectif ? 🎯",
+              "Ton rythme de vie 🔄",
               style: style.text.neutral.merge(style.fontsize.lg),
             ),
             SizedBox(height: 4),
 
             Text(
-              "Kali s'adapte à ce que tu veux vraiment atteindre.",
+              "Dis-moi comment tu bouges au quotidien, je m'occupe du reste.",
               style: style.text.neutral.merge(style.fontsize.xs),
             ),
 
             SizedBox(height: 32),
 
-            CustomInput(
-              title: "Ton poids cible",
-              content: targetWeight,
-              onChanged: (String value) {
-                startFormState.targetWeight.value = value;
+            CustomSelectWidget(
+              onChanged: (SelectOption? value) {
+                startFormState.lifeOption.value = value;
               },
-              placeholder: "70 kg",
-              inputFormatters: [
-                onlyNumbersFormatter(),
-                InputWithTextFormatter(extension: "kg"),
-                MaxDigitsCountFormatter(maxLength: 3),
+              options: [
+                SelectOption(
+                  value: LifeOptionEnum.sit.label,
+                  label: "Principalement assis",
+                  icon: CustomIconWidget(
+                    format: CustomIconFormat.svg,
+                    icon: "assets/icons/chaise.svg",
+                  ),
+                ),
+                SelectOption(
+                  value: LifeOptionEnum.stand.label,
+                  label: "Principalement debout",
+                  icon: CustomIconWidget(
+                    format: CustomIconFormat.svg,
+                    icon: "assets/icons/walk.svg",
+                  ),
+                ),
+                SelectOption(
+                  value: LifeOptionEnum.active.label,
+                  label: "Très actif",
+                  icon: CustomIconWidget(
+                    format: CustomIconFormat.svg,
+                    icon: "assets/icons/feu.svg",
+                  ),
+                ),
               ],
-              customIcon: CustomIconWidget(
-                format: CustomIconFormat.svg,
-                icon: "assets/icons/cible.svg",
-              ),
-              keyboardType: TextInputType.datetime,
-              textInputAction: TextInputAction.next,
-              onSubmitted: (value) {
-                onClickNext();
-              },
+              selected: lifeOption,
             ),
+            SizedBox(height: 400),
           ],
         ),
       ),

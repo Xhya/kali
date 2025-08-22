@@ -43,24 +43,26 @@ class CustomIconWidget extends StatelessWidget {
         isLoading
             ? LoaderIcon()
             : format == CustomIconFormat.svg
-            ? SvgPicture.asset(icon as String, width: 10, height: 20)
+            ? SvgPicture.asset(icon as String, width: 20, height: 20)
             : null;
 
-    return IconButton.filled(
-      disabledColor: style.iconBackground.color2.color,
-      padding: EdgeInsets.all(0),
-      onPressed:
-          disabled
-              ? null
-              : () {
-                onClick?.call();
-              },
-      style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(backgroundColor),
-      ),
-      icon: iconToDisplay ?? Icon(Icons.abc),
-      color: iconColor,
-      iconSize: 20,
-    );
+    return format == CustomIconFormat.flutter
+        ? IconButton.filled(
+          disabledColor: style.iconBackground.color2.color,
+          padding: EdgeInsets.all(0),
+          onPressed:
+              disabled
+                  ? null
+                  : () {
+                    onClick?.call();
+                  },
+          style: ButtonStyle(
+            backgroundColor: WidgetStateProperty.all(backgroundColor),
+          ),
+          icon: iconToDisplay ?? Icon(Icons.abc),
+          color: iconColor,
+          iconSize: 20,
+        )
+        : SvgPicture.asset(icon as String, width: 20, height: 20);
   }
 }

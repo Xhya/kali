@@ -4,7 +4,6 @@ import 'package:kali/client/widgets/StartFormPage1.widget.dart';
 import 'package:kali/client/widgets/StartFormPage2.widget.dart';
 import 'package:kali/client/widgets/StartFormPage3.widget.dart';
 import 'package:kali/client/widgets/StartFormPage4.widget.dart';
-import 'package:kali/client/widgets/StartFormPage5.widget.dart';
 import 'package:kali/client/widgets/StartFormPageFinal.widget.dart';
 import 'package:kali/client/widgets/StartFormTop.widget.dart';
 import 'package:kali/core/services/Navigation.service.dart';
@@ -47,7 +46,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (currentPage < 5) const StartFormTopWidget(),
+              if (currentPage < 4) const StartFormTopWidget(),
 
               Expanded(
                 child: IntrinsicHeight(
@@ -66,8 +65,6 @@ class _StartFormScreenState extends State<StartFormScreen> {
                         case 3:
                           return StartFormPage4();
                         case 4:
-                          return StartFormPage5();
-                        case 5:
                           return StartFormPageFinal();
                         default:
                           return StartFormPage1();

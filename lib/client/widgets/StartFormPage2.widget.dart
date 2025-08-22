@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/Utils/InputWithTextFormatter.utils.dart';
+import 'package:kali/client/Utils/MaxDigitsCountFormatter.utils.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
+import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/widgets/DateInput.widget.dart';
+import 'package:kali/core/actions/startForm.actions.dart';
 import 'package:kali/core/states/startForm.state.dart';
+import 'package:kali/core/utils/formatters.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomSelect.widget.dart';
@@ -16,8 +21,10 @@ class StartFormPage2 extends StatefulWidget {
 class _StartFormPage2State extends State<StartFormPage2> {
   @override
   Widget build(BuildContext context) {
-    SelectOption? genderOption = context.select(
-      (StartFormState s) => s.genderOption.value,
+    String weight = context.select((StartFormState s) => s.weight.value);
+    String height = context.select((StartFormState s) => s.height.value);
+    String targetWeight = context.select(
+      (StartFormState s) => s.targetWeight.value,
     );
 
     return Padding(
@@ -28,72 +35,85 @@ class _StartFormPage2State extends State<StartFormPage2> {
           children: [
             SizedBox(height: 12),
             Text(
-              "Tes informations personnelles 🩺",
+              "Ton objectif 🎯",
               style: style.text.neutral.merge(style.fontsize.lg),
             ),
             SizedBox(height: 4),
             Text(
-              "Ces infos nous aident à calculer ton métabolisme de base avec précision.",
+              "Visualise ton objectif, et avance avec Kali, un jour à la fois.",
               style: style.text.neutral.merge(style.fontsize.xs),
-            ),
-
-            SizedBox(height: 44),
-
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: Text(
-                "Ta date de naissance",
-                style: style.text.neutral.merge(style.fontsize.sm),
-              ),
-            ),
-            DateInputWidget(
-              onUpdateDate: (String value) {
-                startFormState.birthdate.value = value;
-              },
             ),
 
             SizedBox(height: 32),
 
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: Text(
-                "Ton sexe",
-                style: style.text.neutral.merge(style.fontsize.sm),
+            CustomInput(
+              title: "Ton poids actuel",
+              content: weight,
+              onChanged: (String value) {
+                startFormState.weight.value = value;
+              },
+              placeholder: "70 kg",
+              inputFormatters: [
+                onlyNumbersFormatter(),
+                InputWithTextFormatter(extension: "kg"),
+                MaxDigitsCountFormatter(maxLength: 3),
+              ],
+              customIcon: CustomIconWidget(
+                format: CustomIconFormat.svg,
+                icon: "assets/icons/balance.svg",
               ),
+              suffixIcon: Icon(Icons.rule),
+              keyboardType: TextInputType.datetime,
+              textInputAction: TextInputAction.next,
             ),
 
-            CustomSelectWidget(
-              onChanged: (SelectOption? value) {
-                startFormState.genderOption.value = value;
+            SizedBox(height: 8),
+
+            CustomInput(
+              title: "Ton poids cible",
+              content: targetWeight,
+              onChanged: (String value) {
+                startFormState.targetWeight.value = value;
               },
-              options: [
-                SelectOption(
-                  value: "woman",
-                  label: "Femme",
-                  icon: CustomIconWidget(
-                    format: CustomIconFormat.svg,
-                    icon: "assets/icons/femme.svg",
-                  ),
-                ),
-                SelectOption(
-                  value: "man",
-                  label: "Homme",
-                  icon: CustomIconWidget(
-                    format: CustomIconFormat.svg,
-                    icon: "assets/icons/homme.svg",
-                  ),
-                ),
-                SelectOption(
-                  value: "other",
-                  label: "Autre",
-                  icon: CustomIconWidget(
-                    format: CustomIconFormat.svg,
-                    icon: "assets/icons/gender-x.svg",
-                  ),
-                ),
+              placeholder: "70 kg",
+              inputFormatters: [
+                onlyNumbersFormatter(),
+                InputWithTextFormatter(extension: "kg"),
+                MaxDigitsCountFormatter(maxLength: 3),
               ],
-              selected: genderOption,
+              customIcon: CustomIconWidget(
+                format: CustomIconFormat.svg,
+                icon: "assets/icons/cible.svg",
+              ),
+              keyboardType: TextInputType.datetime,
+              textInputAction: TextInputAction.next,
             ),
+
+            SizedBox(height: 32),
+
+            CustomInput(
+              title: "Ta taille",
+              content: height,
+              onChanged: (String value) {
+                startFormState.height.value = value;
+              },
+              placeholder: "170 cm",
+              inputFormatters: [
+                onlyNumbersFormatter(),
+                InputWithTextFormatter(extension: "cm"),
+                MaxDigitsCountFormatter(maxLength: 3),
+              ],
+              customIcon: CustomIconWidget(
+                format: CustomIconFormat.svg,
+                icon: "assets/icons/regle.svg",
+              ),
+              keyboardType: TextInputType.datetime,
+              textInputAction: TextInputAction.done,
+              onSubmitted: (value) {
+                onClickNext();
+              },
+            ),
+            SizedBox(height: 400),
           ],
         ),
       ),

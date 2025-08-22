@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
+import 'package:kali/client/widgets/CustomSelect.widget.dart';
+import 'package:kali/client/widgets/DateInput.widget.dart';
 import 'package:kali/core/actions/startForm.actions.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +19,9 @@ class _StartFormPage1State extends State<StartFormPage1> {
   @override
   Widget build(BuildContext context) {
     String userName = context.select((StartFormState s) => s.userName.value);
-    String leitmotiv = context.select((StartFormState s) => s.leitmotiv.value);
+    SelectOption? genderOption = context.select(
+      (StartFormState s) => s.genderOption.value,
+    );
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -27,16 +31,16 @@ class _StartFormPage1State extends State<StartFormPage1> {
           children: [
             SizedBox(height: 12),
             Text(
-              "Faisons connaissance 👋🏼",
+              "Tes infos personnelles 👋🏼",
               style: style.text.neutral.merge(style.fontsize.lg),
             ),
             SizedBox(height: 4),
             Text(
-              "Choisis ton pseudo et ton pourquoi. Il sera ton moteur au quotidien, ton guide quand tu en auras besoin.",
+              "Donne-moi ces quelques infos pour un suivi qui te ressemble.",
               style: style.text.neutral.merge(style.fontsize.xs),
             ),
 
-            SizedBox(height: 44),
+            SizedBox(height: 32),
 
             CustomInput(
               title: "Ton nom d'utilisateur",
@@ -55,22 +59,60 @@ class _StartFormPage1State extends State<StartFormPage1> {
 
             SizedBox(height: 32),
 
-            CustomInput(
-              title: "Ton leitmotiv",
-              content: leitmotiv,
-              onChanged: (String value) {
-                startFormState.leitmotiv.value = value;
-              },
-              placeholder: "Je veux me prouver...",
-              customIcon: CustomIconWidget(
-                format: CustomIconFormat.svg,
-                icon: "assets/icons/stylo.svg",
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Text(
+                "Ta date de naissance",
+                style: style.text.neutral.merge(style.fontsize.sm),
               ),
-              maxLines: 4,
-              textCapitalization: TextCapitalization.sentences,
-              onSubmitted: (String value) {
-                onClickNext();
+            ),
+            DateInputWidget(
+              onUpdateDate: (String value) {
+                startFormState.birthdate.value = value;
               },
+            ),
+
+            SizedBox(height: 32),
+
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Text(
+                "Ton sexe",
+                style: style.text.neutral.merge(style.fontsize.sm),
+              ),
+            ),
+
+            CustomSelectWidget(
+              onChanged: (SelectOption? value) {
+                startFormState.genderOption.value = value;
+              },
+              options: [
+                SelectOption(
+                  value: "woman",
+                  label: "Femme",
+                  icon: CustomIconWidget(
+                    format: CustomIconFormat.svg,
+                    icon: "assets/icons/femme.svg",
+                  ),
+                ),
+                SelectOption(
+                  value: "man",
+                  label: "Homme",
+                  icon: CustomIconWidget(
+                    format: CustomIconFormat.svg,
+                    icon: "assets/icons/homme.svg",
+                  ),
+                ),
+                SelectOption(
+                  value: "other",
+                  label: "Autre",
+                  icon: CustomIconWidget(
+                    format: CustomIconFormat.svg,
+                    icon: "assets/icons/gender-x.svg",
+                  ),
+                ),
+              ],
+              selected: genderOption,
             ),
             SizedBox(height: 400),
           ],

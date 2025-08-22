@@ -11,7 +11,7 @@ class StartFormState extends ChangeNotifier {
   var personalNutriScore = ValueNotifier<NutriScore?>(null);
 
   final currentPage = ValueNotifier<int>(0);
-  bool get isFormDone => currentPage.value == 4;
+  bool get isFormDone => currentPage.value == 3;
 
   final userName = ValueNotifier<String>("");
   final leitmotiv = ValueNotifier<String>("");
@@ -28,15 +28,16 @@ class StartFormState extends ChangeNotifier {
   final isLoading = ValueNotifier<bool>(false);
   bool get isNextButtonDisabled {
     if (currentPage.value == 0) {
-      return userName.value.trim().isEmpty;
-    } else if (currentPage.value == 1) {
-      return !birthdate.value.trim().isValidDate() ||
+      return userName.value.trim().isEmpty ||
+          !birthdate.value.trim().isValidDate() ||
           genderOption.value == null;
+    } else if (currentPage.value == 1) {
+      return height.value.trim().isEmpty ||
+          weight.value.trim().isEmpty ||
+          targetWeight.value.trim().isEmpty;
     } else if (currentPage.value == 2) {
-      return height.value.trim().isEmpty || weight.value.trim().isEmpty;
+      return false;
     } else if (currentPage.value == 3) {
-      return targetWeight.value.trim().isEmpty;
-    } else if (currentPage.value == 4) {
       return lifeOption.value == null;
     } else {
       return false;

@@ -49,7 +49,7 @@ class _CustomSelectWidgetState extends State<CustomSelectWidget> {
               widget.onChanged(it);
             },
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
               width: double.maxFinite,
               decoration: BoxDecoration(
                 color: backgroundColor,
