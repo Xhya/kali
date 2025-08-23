@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
-import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/EmailInput.widget.dart';
 import 'package:kali/client/widgets/GoogleSignInButton.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
@@ -36,13 +35,7 @@ class LoginWidget extends StatefulWidget {
 class _LoginWidgetState extends State<LoginWidget> {
   @override
   void initState() {
-    init() async {
-      await googleSignInState.signInGoogle.value?.signOut();
-      await googleSignInState.signInGoogle.value?.disconnect();
-    }
-
     super.initState();
-    init();
     inputState.reset();
   }
 

@@ -54,13 +54,7 @@ class RegisterWidget extends StatefulWidget {
 class _RegisterWidgetState extends State<RegisterWidget> {
   @override
   void initState() {
-    init() async {
-      await googleSignInState.signInGoogle.value?.signOut();
-      await googleSignInState.signInGoogle.value?.disconnect();
-    }
-
     super.initState();
-    init();
     inputState.reset();
   }
 

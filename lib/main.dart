@@ -55,8 +55,6 @@ void main() async {
   Stripe.publishableKey = STRIPE_PUBLIC_KEY;
   await Stripe.instance.applySettings();
 
-  await initGoogleSignIn();
-
   // Firebase init
   if (!useSimulator && !kIsWeb) {
     WidgetsFlutterBinding.ensureInitialized();
@@ -87,6 +85,8 @@ void main() async {
       }
     }
   }
+
+  await initGoogleSignIn();
 
   runApp(
     MultiProvider(

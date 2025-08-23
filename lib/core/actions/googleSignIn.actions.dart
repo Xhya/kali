@@ -22,23 +22,29 @@ initGoogleSignIn() async {
                   : googleSignInClientIdAndroid,
           serverClientId: googleSignInServerId,
         )
-        .then((_) {
-          googleSignInState.signInGoogle.value!.authenticationEvents
-              .listen(_handleAuthenticationEvent)
-              .onError((e) {
-                errorService.notifyError(e: e);
-              });
-
-          googleSignInState.signInGoogle.value!
-              .attemptLightweightAuthentication();
-        }),
   );
 }
 
 signInWithGoogle() async {
   try {
     if (googleSignInState.signInGoogle.value!.supportsAuthenticate()) {
-      await googleSignInState.signInGoogle.value!.authenticate();
+      GoogleSignInServerAuthorization? authServer = await googleSignInState
+          .signInGoogle
+          .value
+          ?.authorizationClient
+          .authorizeServer(<String>['openid', 'email', 'profile']);
+
+      GoogleSignInAccount? account =
+          await googleSignInState.signInGoogle.value!
+              .attemptLightweightAuthentication();
+
+      googleSignInState.email.value = account?.email ?? "";
+      googleSignInState.authCode.value = authServer?.serverAuthCode ?? "";
+
+      if (googleSignInState.authCode.value.isNotEmpty &&
+          googleSignInState.email.value.isNotEmpty) {
+        _loginOrRegister();
+      }
     } else {
       errorService.notifyError(e: Exception("Google Sign-In not supported"));
     }
@@ -51,31 +57,10 @@ signInWithGoogle() async {
   }
 }
 
-Future<void> _handleAuthenticationEvent(
-  GoogleSignInAuthenticationEvent event,
-) async {
-  final GoogleSignInAccount? user = switch (event) {
-    GoogleSignInAuthenticationEventSignIn() => event.user,
-    GoogleSignInAuthenticationEventSignOut() => null,
-  };
-
-  List<String> scopes = <String>['openid', 'email', 'profile'];
-
-  final GoogleSignInClientAuthorization? authorization = await user
-      ?.authorizationClient
-      .authorizationForScopes(scopes);
-
-  if (user != null && authorization != null) {
-    googleSignInState.email.value = user.email;
-    googleSignInState.token.value = authorization.accessToken;
-    _loginOrRegister();
-  }
-}
-
 onRegisterWithGoogle() async {
   await authenticationService.registerWithGoogle(
     email: googleSignInState.email.value,
-    googleToken: googleSignInState.token.value,
+    authCode: googleSignInState.authCode.value,
   );
   navigationService.navigateBack();
   await Future.delayed(const Duration(milliseconds: 100));
@@ -91,7 +76,7 @@ onRegisterWithGoogle() async {
 onLoginWithGoogle() async {
   await authenticationService.loginWithGoogle(
     email: googleSignInState.email.value,
-    googleToken: googleSignInState.token.value,
+    authCode: googleSignInState.authCode.value,
   );
   navigationService.navigateTo(ScreenEnum.home);
 }
