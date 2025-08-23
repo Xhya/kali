@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
+import 'package:kali/client/widgets/MacroElementRow.widget.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/Authentication.service.dart';
 import 'package:kali/core/services/Hardware.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
 import 'package:kali/core/states/googleSignIn.state.dart';
+import 'package:kali/core/utils/macroIcon.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
@@ -117,19 +119,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Padding(
                               padding: const EdgeInsets.only(right: 42),
                               child: Text(
-                                leitmotiv,
+                                '"$leitmotiv"',
                                 style: style.fontsize.xs.merge(
                                   style.text.neutral,
                                 ),
                               ),
                             ),
                           SizedBox(height: 32),
+                          Text(
+                            "Ton plan personnalisé",
+                            style: style.fontsize.sm.merge(style.text.neutral),
+                          ),
+                          SizedBox(height: 8),
                           if (personalNutriScore != null)
-                            TotalCaloriesWidget(nutriScore: personalNutriScore),
-                          SizedBox(height: 4),
-                          if (personalNutriScore != null)
-                            TotalNutriScoresWidget(
-                              nutriScore: personalNutriScore,
+                            Column(
+                              spacing: 4,
+                              children: [
+                                MacroElementRow(
+                                  icon: caloryIcon,
+                                  text:
+                                      personalNutriScore.caloryAmount
+                                          .toString(),
+                                ),
+                                MacroElementRow(
+                                  icon: proteinIcon,
+                                  text:
+                                      personalNutriScore.proteinAmount
+                                          .toString(),
+                                ),
+                                MacroElementRow(
+                                  icon: glucidIcon,
+                                  text:
+                                      personalNutriScore.glucidAmount
+                                          .toString(),
+                                ),
+                                MacroElementRow(
+                                  icon: lipidIcon,
+                                  text:
+                                      personalNutriScore.lipidAmount.toString(),
+                                ),
+                              ],
                             ),
                         ],
                       ),
