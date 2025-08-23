@@ -70,7 +70,7 @@ class _MainButtonState extends State<MainButtonWidget> {
           ),
           duration: const Duration(milliseconds: 100),
           child: Container(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
             decoration: BoxDecoration(
               color: backgroundColor,
               borderRadius: BorderRadius.circular(12),
@@ -84,8 +84,10 @@ class _MainButtonState extends State<MainButtonWidget> {
                         if (widget.iconWidget != null) widget.iconWidget!,
                         const SizedBox(width: 8),
                         Text(
-                          widget.text!,
-                          style: TextStyle(color: style.text.neutral.color!),
+                          widget.text,
+                          style: TextStyle(color: style.text.neutral.color!)
+                              .merge(style.fontsize.md)
+                              .merge(style.fontweight.bold),
                         ),
                       ],
                     ),

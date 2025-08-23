@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/BottomButton.widget.dart';
+import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/User.service.dart';
@@ -31,6 +32,14 @@ class QuickAddMealButtonWidget extends StatefulWidget {
 class _MealPeriodTagWidgetState extends State<QuickAddMealButtonWidget> {
   @override
   Widget build(BuildContext context) {
+    return MainButtonWidget(
+      onClick: () {
+        navigationService.context = context;
+        onClickAddQuickMeal();
+      },
+      text: "🍴 ajouter",
+    );
+
     return BottomButtonWidget(
       left:
           false

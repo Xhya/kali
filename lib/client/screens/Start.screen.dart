@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kali/client/widgets/BottomButton.widget.dart';
 import 'package:kali/client/widgets/Login.widget.dart';
+import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/utils/paths.utils.dart';
@@ -49,23 +49,48 @@ class _StartFormScreenState extends State<StartScreen> {
                 ],
               ),
               Column(
+                spacing: 16,
                 children: [
-                  BottomButtonWidget(
-                    left: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("🚀", style: TextStyle(fontSize: 24)),
-                        Text(
-                          "L'app qui s'invite une minute… et reste dans ton quotidien",
-                          style: style.fontsize.xs.merge(style.text.reverse_neutral),
-                          maxLines: 5,
+                  IntrinsicHeight(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 16,
+                      ),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 20,
                         ),
-                      ],
+                        decoration: BoxDecoration(
+                          color: style.background.grey.color?.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Column(
+                          spacing: 12,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            MainButtonWidget(
+                              onClick: () {
+                                navigationService.navigateTo(
+                                  ScreenEnum.startForm,
+                                );
+                              },
+                              text: "Démarrer",
+                            ),
+                            Text(
+                              "Il n'est pas nécessaire d'aller vite, le tout est de ne pas s'arrêter.",
+                              textAlign: TextAlign.center,
+                              style: style.fontsize.xs.merge(
+                                style.text.reverse_neutral,
+                              ),
+                              maxLines: 5,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    buttonText: "Démarrer",
-                    onClick: () {
-                      navigationService.navigateTo(ScreenEnum.startForm);
-                    },
                   ),
                   GestureDetector(
                     onTap: () {
