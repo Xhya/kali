@@ -7,19 +7,19 @@ class GoogleSignInState extends ChangeNotifier {
   final signInGoogle = ValueNotifier<GoogleSignIn?>(null);
   final action = ValueNotifier<String>("");
   final email = ValueNotifier<String>("");
-  final token = ValueNotifier<String>("");
+  final authCode = ValueNotifier<String>("");
 
   GoogleSignInState() {
     action.addListener(notifyListeners);
     email.addListener(notifyListeners);
-    token.addListener(notifyListeners);
+    authCode.addListener(notifyListeners);
   }
 
   @override
   void dispose() {
     action.dispose();
     email.dispose();
-    token.dispose();
+    authCode.dispose();
     super.dispose();
   }
 }

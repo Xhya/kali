@@ -52,21 +52,21 @@ class AuthenticationService {
 
   loginWithGoogle({
     required String email,
-    required String googleToken,
+    required String authCode,
   }) async {
     await _authenticationRepository.loginWithGoogle(
       email: email,
-      googleToken: googleToken,
+      authCode: authCode,
     );
   }
 
   registerWithGoogle({
     required String email,
-    required String googleToken,
+    required String authCode,
   }) async {
     await _authenticationRepository.registerWithGoogle(
       email: email,
-      googleToken: googleToken,
+      authCode: authCode,
     );
   }
 

@@ -58,9 +58,9 @@ class AuthenticationRepository {
 
   Future<void> loginWithGoogle({
     required String email,
-    required String googleToken,
+    required String authCode,
   }) async {
-    Map body = {"email": email, "googleToken": googleToken};
+    Map body = {"email": email, "authCode": authCode};
 
     final response = await http.post(
       Uri.parse('$API_URL/users/login-google'),
@@ -69,7 +69,7 @@ class AuthenticationRepository {
     );
 
     if (response.statusCode == 200) {
-      await storeToken(googleToken);
+      await storeToken(authCode);
       return;
     } else {
       errorService.currentResponseError = response;
@@ -102,9 +102,9 @@ class AuthenticationRepository {
 
   Future<void> registerWithGoogle({
     required String email,
-    required String googleToken,
+    required String authCode,
   }) async {
-    Map body = {"email": email, "googleToken": googleToken};
+    Map body = {"email": email, "authCode": authCode};
 
     final response = await http.post(
       Uri.parse('$API_URL/users/register-google'),
@@ -113,7 +113,7 @@ class AuthenticationRepository {
     );
 
     if (response.statusCode == 200) {
-      await storeToken(googleToken);
+      await storeToken(authCode);
       return;
     } else {
       errorService.currentResponseError = response;
