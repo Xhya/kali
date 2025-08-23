@@ -54,9 +54,10 @@ class ButtonWidget extends StatelessWidget {
     switch (buttonType) {
       case ButtonTypeEnum.filled:
         backgroungColor =
-            isButtonDisabled ? Colors.grey : style.background.greenDark.color;
-        textColor = style.text.green.color;
-        borderColor = null;
+            isButtonDisabled ? Colors.grey : style.background.greenLight.color;
+        textColor = style.text.greenDark.color;
+        borderColor = style.border.color.color3.color;
+        borderSize = style.border.size.light;
       case ButtonTypeEnum.outline:
         backgroungColor = Colors.transparent;
         textColor = style.text.neutral.color;
@@ -79,25 +80,26 @@ class ButtonWidget extends StatelessWidget {
                   onPressed();
                 },
         child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(16)),
+          borderRadius: BorderRadius.all(Radius.circular(100)),
 
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
               color: backgroungColor,
               border:
                   borderColor != null
                       ? Border.all(width: borderSize, color: borderColor)
                       : null,
-              borderRadius: BorderRadius.all(Radius.circular(16)),
+              borderRadius: BorderRadius.all(Radius.circular(100)),
             ),
             child:
                 isLoading
                     ? LoaderIcon()
                     : Text(
                       currentText,
+                      maxLines: 1,
                       textAlign: TextAlign.center,
-                      style: style.fontsize.md
+                      style: style.fontsize.sm
                           .merge(style.fontweight.semibold)
                           .merge(TextStyle(color: textColor)),
                     ),
