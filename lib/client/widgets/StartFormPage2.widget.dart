@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Utils/InputWithTextFormatter.utils.dart';
 import 'package:kali/client/Utils/MaxDigitsCountFormatter.utils.dart';
+import 'package:kali/client/Utils/OnlyNumbersFormatter.utils.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
-import 'package:kali/client/widgets/DateInput.widget.dart';
 import 'package:kali/core/actions/startForm.actions.dart';
 import 'package:kali/core/states/startForm.state.dart';
-import 'package:kali/core/utils/formatters.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
-import 'package:kali/client/widgets/CustomSelect.widget.dart';
 
 class StartFormPage2 extends StatefulWidget {
   const StartFormPage2({super.key});
