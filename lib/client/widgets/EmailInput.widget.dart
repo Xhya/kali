@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/core/states/Input.state.dart';
@@ -38,7 +39,7 @@ class _EmailInputState extends State<EmailInputWidget> {
         onUpdateInputEmail(value);
       },
       placeholder: "Email",
-      suffixIcon: Icon(Icons.email_outlined),
+      customIcon: CustomIconWidget(icon: Icon(Icons.email_outlined)),
       keyboardType: TextInputType.emailAddress,
     );
   }

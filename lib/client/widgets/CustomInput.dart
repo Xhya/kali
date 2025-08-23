@@ -107,10 +107,13 @@ class _CustomInputState extends State<CustomInput> {
                   hintStyle: TextStyle(color: Colors.grey),
                   hintText: widget.placeholder,
                   suffixText: widget.suffixText,
-                  suffixIcon: Container(
-                    padding: const EdgeInsets.all(12),
-                    child: widget.customIcon,
-                  ),
+                  suffixIcon:
+                      widget.customIcon != null
+                          ? Container(
+                            padding: const EdgeInsets.all(12),
+                            child: widget.customIcon,
+                          )
+                          : null,
                   errorText: widget.errorText,
                 ),
                 textCapitalization: widget.textCapitalization,

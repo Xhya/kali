@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Utils/Input.decoration.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
+import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/EmailInput.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/Register.widget.dart';
@@ -109,11 +110,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     children: [
                       CustomInput(
                         content: userName,
-                        title: "Ton num d'utilisateur",
+                        title: "Ton nom d'utilisateur",
                         onChanged: (value) {
                           editProfileState.userName.value = value;
                         },
-                        suffixIcon: Icon(Icons.ac_unit_outlined),
+                        customIcon: CustomIconWidget(
+                          format: CustomIconFormat.svg,
+                          icon: "assets/icons/user.svg",
+                        ),
                         textCapitalization: TextCapitalization.sentences,
                       ),
                       SizedBox(height: 32),
@@ -155,7 +159,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         onChanged: (value) {
                           editProfileState.leitmotiv.value = value;
                         },
-                        suffixIcon: Icon(Icons.ac_unit_outlined),
+                        customIcon: CustomIconWidget(
+                          format: CustomIconFormat.svg,
+                          icon: "assets/icons/stylo.svg",
+                        ),
                         maxLines: 4,
                         inputFormatters: [
                           MaxCharactersCountFormatter(maxLength: 120),

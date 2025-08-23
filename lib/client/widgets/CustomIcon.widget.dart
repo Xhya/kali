@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/LoaderIcon.widget.dart';
 
 enum CustomIconFormat { svg, png, flutter }
@@ -42,27 +43,34 @@ class CustomIconWidget extends StatelessWidget {
     final iconToDisplay =
         isLoading
             ? LoaderIcon()
-            : format == CustomIconFormat.svg
-            ? SvgPicture.asset(icon as String, width: 20, height: 20)
-            : null;
+            : format == CustomIconFormat.flutter
+            ? icon
+            : SvgPicture.asset(icon as String, width: 20, height: 20);
 
-    return format == CustomIconFormat.flutter
-        ? IconButton.filled(
-          disabledColor: style.iconBackground.color2.color,
-          padding: EdgeInsets.all(0),
-          onPressed:
-              disabled
-                  ? null
-                  : () {
-                    onClick?.call();
-                  },
-          style: ButtonStyle(
-            backgroundColor: WidgetStateProperty.all(backgroundColor),
-          ),
-          icon: iconToDisplay ?? Icon(Icons.abc),
-          color: iconColor,
-          iconSize: 20,
-        )
-        : SvgPicture.asset(icon as String, width: 20, height: 20);
+    if (type == CustomIconType.filled) {
+      return IconButton.filled(
+        disabledColor: style.iconBackground.color2.color,
+        padding: EdgeInsets.all(0),
+        onPressed:
+            disabled
+                ? null
+                : () {
+                  onClick?.call();
+                },
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.all(backgroundColor),
+        ),
+        icon: iconToDisplay as Widget,
+        color: iconColor,
+        iconSize: 20,
+      );
+    } else if (type == CustomIconType.base) {
+      return CustomInkwell(
+        onTap: onClick,
+        child: iconToDisplay as Widget,
+      );
+    } else {
+      return Text("Not configured");
+    }
   }
 }

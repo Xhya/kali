@@ -85,15 +85,6 @@ class _MealScreenState extends State<MealScreen> {
                 textCapitalization: TextCapitalization.sentences,
                 readonly: true,
                 maxLines: 100,
-                // suffixIcon: IconButton(
-                //   icon:
-                //       isLoading
-                //           ? LoaderIcon()
-                //           : Icon(Icons.save, color: style.icon.color1.color),
-                //   onPressed: () {
-                //     onUpdateMeal();
-                //   },
-                // ),
               ),
               SizedBox(height: 16),
               CustomCard(

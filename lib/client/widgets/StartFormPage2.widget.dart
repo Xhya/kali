@@ -62,7 +62,6 @@ class _StartFormPage2State extends State<StartFormPage2> {
                 format: CustomIconFormat.svg,
                 icon: "assets/icons/balance.svg",
               ),
-              suffixIcon: Icon(Icons.rule),
               keyboardType: TextInputType.datetime,
               textInputAction: TextInputAction.next,
             ),

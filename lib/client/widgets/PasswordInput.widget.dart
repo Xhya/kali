@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/core/states/Input.state.dart';
@@ -39,9 +40,9 @@ class _PasswordInputState extends State<PasswordInputWidget> {
         onUpdateInputPassword(value);
       },
       placeholder: "Password",
-      suffixIcon: IconButton(
+      customIcon: CustomIconWidget(
         icon: Icon(_obscurePassword ? Icons.visibility_off : Icons.visibility),
-        onPressed: () {
+        onClick: () {
           setState(() {
             _obscurePassword = !_obscurePassword;
           });
