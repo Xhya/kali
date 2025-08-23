@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
+import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/MacroElementRow.widget.dart';
+import 'package:kali/client/widgets/Register.widget.dart';
+import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
+import 'package:kali/core/actions/congratulationNextAction.actions.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/Authentication.service.dart';
 import 'package:kali/core/services/Hardware.service.dart';
@@ -12,8 +16,6 @@ import 'package:kali/core/utils/macroIcon.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
-import 'package:kali/client/widgets/TotalCalories.widget.dart';
-import 'package:kali/client/widgets/TotalNutriScores.widget.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/user.state.dart';
 
@@ -23,6 +25,16 @@ onClickDeconnect() async {
   await authenticationService.initSignature();
   await googleSignInState.signInGoogle.value?.signOut();
   navigationService.navigateTo(ScreenEnum.start);
+}
+
+onClickRegister(BuildContext context) async {
+  navigationService.context = context;
+  navigationService.nextAction = () async {
+    await congratulationNextAction(context);
+  };
+  navigationService.openBottomSheet(
+    widget: WelcomeBottomSheet(child: RegisterWidget(title: "Inscris-toi")),
+  );
 }
 
 class ProfileScreen extends StatefulWidget {
@@ -125,6 +137,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ),
                             ),
+                          SizedBox(height: 16),
+                          CustomCard(
+                            padding: EdgeInsets.all(16),
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Fin de l'essai dans ...",
+                                        style: style.fontsize.sm,
+                                      ),
+                                      Text(
+                                        "Ce serait dommage de s'arrêter là..",
+                                        style: style.fontsize.xs,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                ButtonWidget(
+                                  text: "s'abonner",
+                                  onPressed: () {
+                                    onClickRegister(context);
+                                  },
+                                  buttonType: ButtonTypeEnum.filled,
+                                ),
+                              ],
+                            ),
+                          ),
                           SizedBox(height: 32),
                           Text(
                             "Ton plan personnalisé",

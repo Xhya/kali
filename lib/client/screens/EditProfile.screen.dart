@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Utils/Input.decoration.dart';
-import 'package:kali/client/widgets/CustomButton.widget.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/EmailInput.widget.dart';
+import 'package:kali/client/widgets/MacroElementRow.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
-import 'package:kali/client/widgets/Register.widget.dart';
-import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
-import 'package:kali/core/actions/congratulationNextAction.actions.dart';
 import 'package:kali/core/models/EditUser.formdata.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
@@ -120,38 +117,24 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         textCapitalization: TextCapitalization.sentences,
                       ),
-                      SizedBox(height: 32),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Text(
-                          "Ton email",
-                          style: style.text.neutral.merge(style.fontsize.sm),
-                        ),
-                      ),
-
                       if (userState.user.value?.emailVerified())
-                        EmailInputWidget(),
-                      if (!userState.user.value?.emailVerified())
-                        ButtonWidget(
-                          text: "S'enregistrer",
-                          onPressed: () {
-                            navigationService.context = context;
-                            navigationService.nextAction = () async {
-                              await congratulationNextAction(context);
-                              await Future.delayed(
-                                const Duration(milliseconds: 100),
-                              );
-                              navigationService.context = context;
-                              navigationService.navigateBack();
-                            };
-                            navigationService.openBottomSheet(
-                              widget: WelcomeBottomSheet(
-                                child: RegisterWidget(title: "Inscris-toi"),
+                        Column(
+                          children: [
+                            SizedBox(height: 32),
+                            if (userState.user.value?.emailVerified())
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: Text(
+                                  "Ton email",
+                                  style: style.text.neutral.merge(
+                                    style.fontsize.sm,
+                                  ),
+                                ),
                               ),
-                            );
-                          },
-                          buttonType: ButtonTypeEnum.outline,
+                              EmailInputWidget(),
+                          ],
                         ),
+
                       SizedBox(height: 32),
                       CustomInput(
                         content: leitmotiv,
@@ -215,44 +198,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                       ),
                       SizedBox(height: 4),
-                      CustomCard(
-                        padding: EdgeInsets.all(16),
-                        child: Row(
-                          spacing: 12,
-                          children: [
-                            Text(
-                              proteinIcon,
-                              textAlign: TextAlign.start,
-                              style: style.text.green
-                                  .merge(style.fontsize.md)
-                                  .merge(style.fontweight.bold),
-                            ),
-
-                            Expanded(
-                              child: Text(
-                                "protéines",
-                                textAlign: TextAlign.start,
-                                style: style.text.neutral.merge(
-                                  style.fontsize.sm,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: TextField(
-                                controller: proteinController,
-                                textAlign: TextAlign.end,
-                                style: style.text.neutral.merge(
-                                  style.fontsize.sm,
-                                ),
-                                decoration: inputDecoration,
-                                onChanged: (value) {
-                                  editProfileState.editingProteins.value =
-                                      value;
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
+                      MacroElementRow(
+                        icon: proteinIcon,
+                        text: editProfileState.editingProteins.value,
                       ),
                       SizedBox(height: 4),
                       CustomCard(
