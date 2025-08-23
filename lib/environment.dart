@@ -23,7 +23,8 @@ const environment = {
 
   "STRIPE_PUBLIC_KEY": String.fromEnvironment('STRIPE_PUBLIC_KEY'),
 
-  "GOOGLE_SIGN_IN_CLIENT_ID": String.fromEnvironment('GOOGLE_SIGN_IN_CLIENT_ID'),
+  "GOOGLE_SIGN_IN_CLIENT_ID_IOS": String.fromEnvironment('GOOGLE_SIGN_IN_CLIENT_ID_IOS'),
+  "GOOGLE_SIGN_IN_CLIENT_ID_ANDROID": String.fromEnvironment('GOOGLE_SIGN_IN_CLIENT_ID_ANDROID'),
   "GOOGLE_SIGN_IN_SERVER_ID": String.fromEnvironment('GOOGLE_SIGN_IN_SERVER_ID'),
 };
 
@@ -38,7 +39,8 @@ final String signatureSecretKey = environment["SIGNATURE_SECRET_KEY"] as String;
 final String googleAIUrl = environment["GOOGLE_AI_URL"] as String;
 final String bugsnagEnvironment = environment["BUGSNAG_ENV"] as String;
 final String bugsnagApiKey = environment["BUGSNAG_API_KEY"] as String;
-final String googleSignInClientId = environment["GOOGLE_SIGN_IN_CLIENT_ID"] as String;
+final String googleSignInClientIdIos = environment["GOOGLE_SIGN_IN_CLIENT_ID_IOS"] as String;
+final String googleSignInClientIdAndroid = environment["GOOGLE_SIGN_IN_CLIENT_ID_ANDROID"] as String;
 final String googleSignInServerId = environment["GOOGLE_SIGN_IN_SERVER_ID"] as String;
 // ignore: non_constant_identifier_names
 final String API_URL = environment["API_URL"] as String;

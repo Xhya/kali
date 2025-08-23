@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/GoogleSignInButton.widget.dart';
 import 'package:kali/client/widgets/ValidateCode.widget.dart';
 import 'package:kali/core/domains/authentication.repository.dart';
+import 'package:kali/core/states/googleSignIn.state.dart';
 import 'package:kali/core/states/register.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
@@ -52,8 +54,13 @@ class RegisterWidget extends StatefulWidget {
 class _RegisterWidgetState extends State<RegisterWidget> {
   @override
   void initState() {
-    super.initState();
+    init() async {
+      await googleSignInState.signInGoogle.value?.signOut();
+      await googleSignInState.signInGoogle.value?.disconnect();
+    }
 
+    super.initState();
+    init();
     inputState.reset();
   }
 

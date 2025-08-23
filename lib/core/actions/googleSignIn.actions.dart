@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kali/client/widgets/ValidateCode.widget.dart';
@@ -15,7 +16,10 @@ initGoogleSignIn() async {
   unawaited(
     googleSignInState.signInGoogle.value!
         .initialize(
-          clientId: googleSignInClientId,
+          clientId:
+              Platform.operatingSystem == 'ios'
+                  ? googleSignInClientIdIos
+                  : googleSignInClientIdAndroid,
           serverClientId: googleSignInServerId,
         )
         .then((_) {
@@ -33,12 +37,16 @@ initGoogleSignIn() async {
 
 signInWithGoogle() async {
   try {
-    if (GoogleSignIn.instance.supportsAuthenticate()) {
-      await GoogleSignIn.instance.authenticate();
+    if (googleSignInState.signInGoogle.value!.supportsAuthenticate()) {
+      await googleSignInState.signInGoogle.value!.authenticate();
     } else {
       errorService.notifyError(e: Exception("Google Sign-In not supported"));
     }
   } catch (e, stack) {
+    if (e is GoogleSignInException) {
+      await googleSignInState.signInGoogle.value!.signOut();
+      await googleSignInState.signInGoogle.value!.disconnect();
+    }
     errorService.notifyError(e: e, stack: stack);
   }
 }

@@ -10,7 +10,7 @@ import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/states/Input.state.dart';
-import 'package:kali/core/utils/paths.utils.dart';
+import 'package:kali/core/states/googleSignIn.state.dart';
 
 onSubmitLogin() async {
   try {
@@ -36,8 +36,14 @@ class LoginWidget extends StatefulWidget {
 class _LoginWidgetState extends State<LoginWidget> {
   @override
   void initState() {
-    inputState.reset();
+    init() async {
+      await googleSignInState.signInGoogle.value?.signOut();
+      await googleSignInState.signInGoogle.value?.disconnect();
+    }
+
     super.initState();
+    init();
+    inputState.reset();
   }
 
   @override
@@ -114,9 +120,7 @@ class _LoginWidgetState extends State<LoginWidget> {
             ],
           ),
           SizedBox(height: 12),
-          GoogleSignInButton(
-            action: 'login',
-          ),
+          GoogleSignInButton(action: 'login'),
         ],
       ),
     );
