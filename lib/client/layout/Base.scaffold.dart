@@ -53,7 +53,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                     height: 80,
                     width: double.maxFinite,
                     child: Stack(
