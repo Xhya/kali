@@ -1,7 +1,5 @@
-import 'dart:async';
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_confetti/flutter_confetti.dart';
+import 'package:kali/core/actions/confetti.actions.dart';
 
 class CongratulationWidget extends StatefulWidget {
   const CongratulationWidget({super.key});
@@ -14,46 +12,7 @@ class _CongratulationWidgetState extends State<CongratulationWidget> {
   @override
   void initState() {
     super.initState();
-    double randomInRange(double min, double max) {
-      return min + Random().nextDouble() * (max - min);
-    }
-
-    int total = 4;
-    int progress = 0;
-
-    Timer.periodic(const Duration(milliseconds: 250), (timer) {
-      progress++;
-
-      if (progress >= total) {
-        timer.cancel();
-        return;
-      }
-
-      int count = ((1 - progress / total) * 50).toInt();
-
-      Confetti.launch(
-        context,
-        options: ConfettiOptions(
-          particleCount: count,
-          startVelocity: 30,
-          spread: 360,
-          ticks: 60,
-          x: randomInRange(0.1, 0.3),
-          y: Random().nextDouble() - 0.2,
-        ),
-      );
-      Confetti.launch(
-        context,
-        options: ConfettiOptions(
-          particleCount: count,
-          startVelocity: 30,
-          spread: 360,
-          ticks: 60,
-          x: randomInRange(0.7, 0.9),
-          y: Random().nextDouble() - 0.2,
-        ),
-      );
-    });
+    launchConfetti();
   }
 
   @override

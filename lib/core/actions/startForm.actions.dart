@@ -3,6 +3,7 @@ import 'package:kali/client/widgets/AnimatedLoading.widget.dart';
 import 'package:kali/client/widgets/FullScreenBottomSheet.widget.dart';
 import 'package:kali/client/widgets/Register.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
+import 'package:kali/core/actions/confetti.actions.dart';
 import 'package:kali/core/domains/nutriScore.repository.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/User.service.dart';
@@ -25,6 +26,7 @@ void onClickBottomButton() async {
         ),
       );
       navigationService.navigateTo(ScreenEnum.home);
+      launchConfetti();
     } else if (startFormState.isFormDone) {
       navigationService.openBottomSheet(
         widget: FullScreenBottomSheet(

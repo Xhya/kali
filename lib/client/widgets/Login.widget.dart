@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/EmailInput.widget.dart';
-import 'package:kali/client/widgets/GoogleSignInButton.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/PasswordInput.widget.dart';
+import 'package:kali/core/actions/confetti.actions.dart';
 import 'package:kali/core/domains/authentication.repository.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/states/Input.state.dart';
-import 'package:kali/core/states/googleSignIn.state.dart';
 
 onSubmitLogin() async {
   try {
@@ -20,6 +19,7 @@ onSubmitLogin() async {
     await userService.refreshUser();
     navigationService.navigateBack();
     navigationService.navigateTo(ScreenEnum.home);
+    launchConfetti();
   } catch (e) {
     errorService.notifyError(e: e);
   }
