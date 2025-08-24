@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:kali/client/widgets/Login.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
@@ -48,46 +49,51 @@ class _StartFormScreenState extends State<StartScreen> {
                   ),
                 ],
               ),
+
               Column(
                 spacing: 16,
                 children: [
-                  IntrinsicHeight(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 16,
-                      ),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 20,
-                        ),
-                        decoration: BoxDecoration(
-                          color: style.background.grey.color?.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Column(
-                          spacing: 12,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            MainButtonWidget(
-                              onClick: () {
-                                navigationService.navigateTo(
-                                  ScreenEnum.startForm,
-                                );
-                              },
-                              text: "Démarrer",
-                            ),
-                            Text(
-                              "Il n'est pas nécessaire d'aller vite, le tout est de ne pas s'arrêter.",
-                              textAlign: TextAlign.center,
-                              style: style.fontsize.xs.merge(
-                                style.text.reverse_neutral,
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 16,
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 20,
+                          ),
+                          alignment: Alignment.center,
+                          color: Colors.white.withOpacity(
+                            0.2,
+                          ), 
+                          child: Column(
+                            spacing: 12,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              MainButtonWidget(
+                                onClick: () {
+                                  navigationService.navigateTo(
+                                    ScreenEnum.startForm,
+                                  );
+                                },
+                                text: "Démarrer",
                               ),
-                              maxLines: 5,
-                            ),
-                          ],
+                              Text(
+                                "Il n'est pas nécessaire d'aller vite, le tout est de ne pas s'arrêter.",
+                                textAlign: TextAlign.center,
+                                style: style.fontsize.xs.merge(
+                                  style.text.reverse_neutral,
+                                ),
+                                maxLines: 5,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
