@@ -53,12 +53,8 @@ class _StartFormPageFinalState extends State<StartFormPageFinal> {
                 ),
               ),
 
-            CustomCard(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              secondary: true,
-              child: Text(
-                "✨ Kali s'adapte ! Tu pourras modifier ton plan à tout moment dans tes paramètres.",
-              ),
+            Text(
+              "Psst : Kali s’adapte ! Tu pourras modifier ton plan à tout moment dans tes paramètres.",
             ),
           ],
         ),
