@@ -88,32 +88,32 @@ class _LoginWidgetState extends State<LoginWidget> {
             ],
           ),
           SizedBox(height: 40),
-          Row(
-            spacing: 8,
-            children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: style.border.color.color2.color!),
-                  ),
-                ),
-              ),
-              Text(
-                "Ou se connecter via",
-                style: style.fontsize.sm.merge(style.text.neutralLight),
-                textAlign: TextAlign.center,
-              ),
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: style.border.color.color2.color!),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 12),
-          GoogleSignInButton(action: 'login'),
+          // Row(
+          //   spacing: 8,
+          //   children: [
+          //     Expanded(
+          //       child: Container(
+          //         decoration: BoxDecoration(
+          //           border: Border.all(color: style.border.color.color2.color!),
+          //         ),
+          //       ),
+          //     ),
+          //     Text(
+          //       "Ou se connecter via",
+          //       style: style.fontsize.sm.merge(style.text.neutralLight),
+          //       textAlign: TextAlign.center,
+          //     ),
+          //     Expanded(
+          //       child: Container(
+          //         decoration: BoxDecoration(
+          //           border: Border.all(color: style.border.color.color2.color!),
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // SizedBox(height: 12),
+          // GoogleSignInButton(action: 'login'),
         ],
       ),
     );
