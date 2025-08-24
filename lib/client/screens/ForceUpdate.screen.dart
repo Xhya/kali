@@ -1,8 +1,10 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/core/states/configuration.state.dart';
+import 'package:kali/core/utils/paths.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
-import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
 
 class ForceUpdateScreen extends StatefulWidget {
@@ -42,27 +44,94 @@ class _ForceUpdateScreenState extends State<ForceUpdateScreen>
       (ConfigurationState s) => s.minimalVersion.value,
     );
 
-    return BaseScaffold(
-      child: Scaffold(
-        backgroundColor: style.background.greenTransparent.color,
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text("A new version is available"),
-                    Text("Please update the app to continue"),
-                    Text("Votre version actuelle: $currentVersion"),
-                    Text("Nouvelle version: $minimalVersion"),
-                  ],
-                ),
+    return Scaffold(
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("$imagesPath/header-photo.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 16),
+                  Image.asset('$imagesPath/logo-white-700.png', height: 32),
+                  SizedBox(height: 4),
+                  Text(
+                    "tu racontes, je compte",
+                    style: style.text.reverse_neutral.merge(style.fontsize.sm),
+                  ),
+                ],
               ),
-            );
-          },
+
+              Column(
+                spacing: 16,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 16,
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 20,
+                          ),
+                          alignment: Alignment.center,
+                          color: Colors.white.withOpacity(0.2),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Nouvelle mise à jour",
+                                textAlign: TextAlign.center,
+                                style: style.fontsize.md.merge(
+                                  style.text.reverse_neutral,
+                                ),
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                "Pour être au top de ses performances,",
+                                textAlign: TextAlign.center,
+                                style: style.fontsize.xs.merge(
+                                  style.text.reverse_neutral,
+                                ),
+                              ),
+                              Text(
+                                "Kali a besoin d'être mise à jour",
+                                textAlign: TextAlign.center,
+                                style: style.fontsize.xs.merge(
+                                  style.text.reverse_neutral,
+                                ),
+                              ),
+                              SizedBox(height: 24),
+                              MainButtonWidget(
+                                onClick: () {},
+                                text: "mettre à jour",
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
