@@ -14,11 +14,14 @@
   "lipids": "lipides",
   "lunch": "déjeuner",
   "meal": "repas",
+  "month": "mois",
   "no_internet_connexion": "Pas de connexion Internet",
   "proteins": "protéines",
   "see_all": "voir tout",
   "size": "taille",
   "snack": "goûter",
   "validate": "valider",
-  "weight": "poids"
+  "weight": "poids",
+  "year": "année"
+
 }

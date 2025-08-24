@@ -30,6 +30,8 @@ subscribeAction(BuildContext context) async {
     await congratulationNextAction(context);
   };
   navigationService.openBottomSheet(
-    widget: WelcomeBottomSheet(child: SubscriptionWidget()),
+    widget: WelcomeBottomSheet(
+      child: SubscriptionWidget(title: "Abonne-toi et rejoins l'aventure"),
+    ),
   );
 }

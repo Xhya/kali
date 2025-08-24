@@ -167,6 +167,8 @@ PODS:
     - StripeUICore (= 24.7.0)
   - StripeUICore (24.7.0):
     - StripeCore (= 24.7.0)
+  - url_launcher_ios (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - bugsnag_flutter (from `.symlinks/plugins/bugsnag_flutter/ios`)
@@ -182,6 +184,7 @@ DEPENDENCIES:
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - sms_autofill (from `.symlinks/plugins/sms_autofill/ios`)
   - stripe_ios (from `.symlinks/plugins/stripe_ios/ios`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 SPEC REPOS:
   trunk:
@@ -236,6 +239,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sms_autofill/ios"
   stripe_ios:
     :path: ".symlinks/plugins/stripe_ios/ios"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
   AppAuth: 1c1a8afa7e12f2ec3a294d9882dfa5ab7d3cb063
@@ -274,6 +279,7 @@ SPEC CHECKSUMS:
   StripePaymentSheet: 1810187cbdbc73410b8fb86cecafaaa41c1481fc
   StripePaymentsUI: 326376e23caa369d1f58041bdb858c89c2b17ed4
   StripeUICore: 17a4f3adb81ae05ab885e1b353022a430176eab1
+  url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
 
 PODFILE CHECKSUM: 251cb053df7158f337c0712f2ab29f4e0fa474ce
 

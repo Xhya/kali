@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kali/client/widgets/AnimatedLoading.widget.dart';
 import 'package:kali/client/widgets/Congratulation.widget.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
+import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/core/actions/payment.actions.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/Subscription.service.dart';
@@ -9,9 +10,12 @@ import 'package:kali/core/states/subscription.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/core/states/Input.state.dart';
+import 'package:kali/client/Style.service.dart';
 
 class SubscriptionWidget extends StatefulWidget {
-  const SubscriptionWidget({super.key});
+  const SubscriptionWidget({super.key, required this.title});
+
+  final String title;
 
   @override
   State<SubscriptionWidget> createState() => _SubscriptionWidgetState();
@@ -29,6 +33,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
     }
 
     init();
+    subscriptionState.selectedSubscriptionId.value = null;
 
     super.initState();
   }
@@ -49,55 +54,162 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
     final subscriptions = context.select(
       (SubscriptionState s) => s.subscriptions.value,
     );
+    final selectedSubscriptionId = context.select(
+      (SubscriptionState s) => s.selectedSubscriptionId.value,
+    );
+    final isInitPaymentLoading = context.select(
+      (SubscriptionState s) => s.isInitPaymentLoading.value,
+    );
 
-    return Column(
-      spacing: 12,
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        if (!isPaymentLoading && !paymentDone)
+    if (!isPaymentLoading && !paymentDone) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          SizedBox(height: 32),
+          Text(
+            widget.title,
+            textAlign: TextAlign.center,
+            style: style.fontsize.lg
+                .merge(style.text.neutral)
+                .merge(style.fontweight.bold),
+          ),
+          SizedBox(height: 4),
+          Center(
+            child: Text(
+              "Pourquoi continuer l'aventure avec Kali ?",
+              textAlign: TextAlign.center,
+              style: style.fontsize.sm.merge(style.text.neutral),
+            ),
+          ),
+
+          SizedBox(height: 32),
+
+          Text(
+            "🍜 Créer de bonnes habitudes",
+            textAlign: TextAlign.start,
+            style: style.fontsize.sm.merge(style.text.neutral),
+          ),
+          SizedBox(height: 8),
+          Text(
+            "🍕 Suivre d'un rapide coup d'oeil sa journée",
+            textAlign: TextAlign.start,
+            style: style.fontsize.sm.merge(style.text.neutral),
+          ),
+          SizedBox(height: 8),
+          Text(
+            "🧘🏻‍♀️ Conscientiser son alimentation",
+            textAlign: TextAlign.start,
+            style: style.fontsize.sm.merge(style.text.neutral),
+          ),
+          SizedBox(height: 8),
+          Text(
+            "👌🏻 Alléger sa charge mentale",
+            textAlign: TextAlign.start,
+            style: style.fontsize.sm.merge(style.text.neutral),
+          ),
+
+          SizedBox(height: 32),
+
           ...subscriptions.map(
-            (subscription) => CustomInkwell(
-              onTap: () {
-                navigationService.context = context;
-                openPaymentBottomSheet(subscription.id);
-              },
-              child: CustomCard(
-                padding: EdgeInsets.all(12),
-                height: 80,
-                width: double.maxFinite,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(subscription.name!),
-                        Text(subscription.description!),
-                      ],
-                    ),
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(subscription.amount!),
-                        Text(subscription.recurring!),
-                      ],
-                    ),
-                  ],
+            (subscription) => Padding(
+              padding: EdgeInsets.only(bottom: 4),
+
+              child: CustomInkwell(
+                onTap: () {
+                  subscriptionState.selectedSubscriptionId.value =
+                      subscription.id;
+                },
+                child: CustomCard(
+                  withBorder: selectedSubscriptionId == subscription.id,
+                  padding: EdgeInsets.all(12),
+                  width: double.maxFinite,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (subscription.name != null)
+                              Text(
+                                subscription.name!,
+                                style: style.fontsize.md.merge(
+                                  style.text.neutral,
+                                ),
+                              ),
+                            if (subscription.description != null)
+                              Text(
+                                subscription.description!,
+                                maxLines: 2,
+                                style: style.fontsize.xs.merge(
+                                  style.text.neutral,
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            if (subscription.amountText != null)
+                              Text(
+                                subscription.amountText!,
+                                style: style.fontsize.sm
+                                    .merge(style.text.neutral)
+                                    .merge(style.fontweight.bold),
+                              ),
+                            if (subscription.subamountText != null)
+                              Text(
+                                subscription.subamountText!,
+                                style: style.fontsize.xs.merge(
+                                  style.text.neutralLight,
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        if (isPaymentLoading && !paymentDone)
-          AnimatedLoadingWidget(title: "", subtitle: ""),
-        if (!isPaymentLoading && paymentDone) CongratulationWidget(),
-      ],
-    );
+
+          SizedBox(height: 32),
+
+          Center(
+            child: MainButtonWidget(
+              onClick: () {
+                navigationService.context = context;
+                openPaymentBottomSheet();
+              },
+              text: "s'abonner",
+              iconWidget: Icon(Icons.arrow_forward, size: 20),
+              disabled: selectedSubscriptionId == null,
+              isLoading: isInitPaymentLoading,
+            ),
+          ),
+        ],
+      );
+    }
+    if (isPaymentLoading && !paymentDone) {
+      return AnimatedLoadingWidget(
+        title: "Paiement en cours",
+        subtitle: "Plus que quelques secondes d'attente...",
+      );
+    }
+    if (!isPaymentLoading && paymentDone) {
+      return CongratulationWidget();
+    }
+
+    return SizedBox.shrink();
   }
 }

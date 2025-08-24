@@ -6,9 +6,16 @@ import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/Payment.service.dart';
 import 'package:kali/core/states/subscription.state.dart';
 
-Future<void> openPaymentBottomSheet(String subscriptionId) async {
+Future<void> openPaymentBottomSheet() async {
+  final subscriptionId = subscriptionState.selectedSubscriptionId.value;
   try {
+    subscriptionState.isInitPaymentLoading.value = true;
+    if (subscriptionId == null) {
+      return;
+    }
+
     final subscriptionData = await paymentService.createIntent(subscriptionId);
+    subscriptionState.isInitPaymentLoading.value = false;
 
     await Stripe.instance.initPaymentSheet(
       paymentSheetParameters: SetupPaymentSheetParameters(
@@ -52,5 +59,7 @@ Future<void> openPaymentBottomSheet(String subscriptionId) async {
   } catch (e, stack) {
     print('Erreur de paiement ❌: $e');
     errorService.notifyError(e: e, stack: stack);
+  } finally {
+    subscriptionState.isInitPaymentLoading.value = false;
   }
 }

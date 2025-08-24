@@ -16,7 +16,9 @@ consumedAllTokensWithoutPaymentError() async {
     );
   } else {
     navigationService.openBottomSheet(
-      widget: WelcomeBottomSheet(child: SubscriptionWidget()),
+      widget: WelcomeBottomSheet(
+        child: SubscriptionWidget(title: "Ton essai est maintenant terminé"),
+      ),
     );
   }
 }

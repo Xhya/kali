@@ -19,7 +19,7 @@ class _CongratulationWidgetState extends State<CongratulationWidget> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Center(child: Text("🎉 Bravo !", style: TextStyle(fontSize: 24))),
+        Center(child: Text("🎉 Bienvenue dans l'aventure !", style: TextStyle(fontSize: 24))),
       ],
     );
   }

@@ -10,6 +10,7 @@ class CustomCard extends StatelessWidget {
     this.width,
     this.padding,
     this.secondary = false,
+    this.withBorder = false,
   });
 
   final Widget child;
@@ -18,6 +19,7 @@ class CustomCard extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final VoidCallback? onClick;
   final bool secondary;
+  final bool withBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +28,27 @@ class CustomCard extends StatelessWidget {
             ? style.background.greenLight.color
             : style.background.neutral.color;
 
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(16),
-      child: GestureDetector(
-        onTap: onClick,
-        child: Container(
-          padding: padding,
-          height: height,
-          width: width,
-          color: bgColor,
-          child: child,
+    final decoration =
+        withBorder
+            ? BoxDecoration(
+              border: Border.all(color: Colors.black, width: 2),
+              borderRadius: BorderRadius.circular(16),
+            )
+            : null;
+
+    return Container(
+      decoration: decoration,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: GestureDetector(
+          onTap: onClick,
+          child: Container(
+            padding: padding,
+            height: height,
+            width: width,
+            color: bgColor,
+            child: child,
+          ),
         ),
       ),
     );

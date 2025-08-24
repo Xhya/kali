@@ -4,6 +4,8 @@ class SubscriptionModel {
   final String? description;
   final String? amount;
   final String? recurring;
+  final String? amountText;
+  final String? subamountText;
 
   SubscriptionModel({
     required this.id,
@@ -11,6 +13,8 @@ class SubscriptionModel {
     required this.description,
     required this.amount,
     required this.recurring,
+    required this.amountText,
+    required this.subamountText,
   });
 
   factory SubscriptionModel.fromJson(Map<String, dynamic> json) {
@@ -20,6 +24,8 @@ class SubscriptionModel {
       description: json['description'] as String?,
       amount: json['amount'] as String?,
       recurring: json['recurring'] as String?,
+      amountText: json['amountText'] as String?,
+      subamountText: json['subamountText'] as String?,
     );
   }
 }
