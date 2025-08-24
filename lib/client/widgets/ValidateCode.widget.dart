@@ -15,6 +15,7 @@ onSubmitCode() async {
     await authenticationService.verifyAuthCode(registerState.code.value);
     await userService.refreshUser();
     navigationService.closeBottomSheet();
+    await Future.delayed(const Duration(milliseconds: 500));
     navigationService.nextAction?.call();
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);

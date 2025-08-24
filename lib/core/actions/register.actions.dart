@@ -9,19 +9,27 @@ import 'package:kali/core/states/user.state.dart';
 onClickSubscribe(BuildContext context) async {
   navigationService.context = context;
   if (userState.user.value?.emailVerifiedAt == null) {
-    onClickRegister(context);
+    navigationService.nextAction = () async {
+      await subscribeAction(context);
+    };
+    registerAction(context);
   } else {
-    navigationService.openBottomSheet(
-      widget: WelcomeBottomSheet(child: SubscriptionWidget()),
-    );
+    subscribeAction(context);
   }
 }
 
-onClickRegister(BuildContext context) async {
+registerAction(BuildContext context) async {
+  navigationService.openBottomSheet(
+    widget: WelcomeBottomSheet(child: RegisterWidget(title: "Inscris-toi")),
+  );
+}
+
+subscribeAction(BuildContext context) async {
+  navigationService.context = context;
   navigationService.nextAction = () async {
     await congratulationNextAction(context);
   };
   navigationService.openBottomSheet(
-    widget: WelcomeBottomSheet(child: RegisterWidget(title: "Inscris-toi")),
+    widget: WelcomeBottomSheet(child: SubscriptionWidget()),
   );
 }

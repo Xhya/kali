@@ -5,7 +5,7 @@ import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/user.state.dart';
 
 consumedAllTokensWithoutPaymentError() async {
-  if (userState.user.value?.email == null) {
+  if (userState.user.value?.emailVerifiedAt == null) {
     navigationService.openBottomSheet(
       widget: WelcomeBottomSheet(
         child: RegisterWidget(
