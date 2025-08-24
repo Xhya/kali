@@ -9,6 +9,7 @@ class CustomCard extends StatelessWidget {
     this.height,
     this.width,
     this.padding,
+    this.secondary = false,
   });
 
   final Widget child;
@@ -16,9 +17,15 @@ class CustomCard extends StatelessWidget {
   final double? width;
   final EdgeInsetsGeometry? padding;
   final VoidCallback? onClick;
+  final bool secondary;
 
   @override
   Widget build(BuildContext context) {
+    final bgColor =
+        secondary
+            ? style.background.greenLight.color
+            : style.background.neutral.color;
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
       child: GestureDetector(
@@ -27,7 +34,7 @@ class CustomCard extends StatelessWidget {
           padding: padding,
           height: height,
           width: width,
-          color: style.background.neutral.color,
+          color: bgColor,
           child: child,
         ),
       ),

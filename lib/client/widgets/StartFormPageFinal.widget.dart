@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/TotalCalories.widget.dart';
@@ -47,13 +48,18 @@ class _StartFormPageFinalState extends State<StartFormPageFinal> {
                     TotalCaloriesWidget(nutriScore: personalNutriScore),
                     SizedBox(height: 4),
                     TotalNutriScoresWidget(nutriScore: personalNutriScore),
+                    SizedBox(height: 16),
                   ],
                 ),
               ),
-            // Text(
-            //   "Avec ce plan, tu es en léger déficit. Si tu t'y tiens régulièrement, tu perdras environ 400g par semaine.",
-            //   style: style.text.neutral.merge(style.fontsize.xs),
-            // ),
+
+            CustomCard(
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              secondary: true,
+              child: Text(
+                "✨ Kali s'adapte ! Tu pourras modifier ton plan à tout moment dans tes paramètres.",
+              ),
+            ),
           ],
         ),
       ),
