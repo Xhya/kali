@@ -31,7 +31,13 @@ void onClickBottomButton() async {
       navigationService.openBottomSheet(
         widget: FullScreenBottomSheet(
           canClose: false,
-          child: Center(child: AnimatedLoadingWidget()),
+          child: Center(
+            child: AnimatedLoadingWidget(
+              title: "Kali fait ses comptes.. ⚖️",
+              subtitle:
+                  "D'après toutes les informations que tu viens de me donner, je réfléchis au meilleur des plans",
+            ),
+          ),
         ),
       );
       await computePersonalNutriScore();

@@ -1,36 +1,23 @@
 import 'dart:async';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:kali/client/Style.service.dart';
 
-void main() => runApp(const AnimatedLoadingWidget());
+class AnimatedLoadingWidget extends StatefulWidget {
+  const AnimatedLoadingWidget({
+    super.key,
+    required this.title,
+    required this.subtitle,
+  });
 
-class AnimatedLoadingWidget extends StatelessWidget {
-  const AnimatedLoadingWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    // ICI on définit l'écran d'accueil de l'app avec notre loader au centre
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        body: Center(
-          child: EmojiLoader(), // ← on affiche le loader ici
-        ),
-      ),
-    );
-  }
-}
-
-/// --- LE WIDGET DU LOADER ---
-class EmojiLoader extends StatefulWidget {
-  const EmojiLoader({super.key});
+  final String title;
+  final String subtitle;
 
   @override
-  State<EmojiLoader> createState() => _EmojiLoaderState();
+  State<AnimatedLoadingWidget> createState() => _AnimatedLoadingWidgetState();
 }
 
-class _EmojiLoaderState extends State<EmojiLoader>
+class _AnimatedLoadingWidgetState extends State<AnimatedLoadingWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   int _currentIndex = 0;
@@ -75,35 +62,59 @@ class _EmojiLoaderState extends State<EmojiLoader>
   Widget build(BuildContext context) {
     const double size = 150;
 
-    return SizedBox(
-      width: size,
-      height: size,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          // Cercle spinner
-          AnimatedBuilder(
-            animation: _controller,
-            builder: (context, child) {
-              return CustomPaint(
-                painter: _SpinnerPainter(
-                  progress: _controller.value,
-                  color: _colors[_currentIndex],
-                ),
-                size: const Size(size, size),
-              );
-            },
-          ),
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 54, horizontal: 12),
 
-          // Emoji au centre avec petite transition
-          AnimatedSwitcher(
-            duration: const Duration(milliseconds: 250),
-            transitionBuilder:
-                (child, anim) => ScaleTransition(scale: anim, child: child),
-            child: Text(
-              _emojis[_currentIndex],
-              key: ValueKey(_emojis[_currentIndex]),
-              style: const TextStyle(fontSize: 50),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            widget.title,
+            style: style.text.neutral
+                .merge(style.fontsize.lg)
+                .merge(style.fontweight.bold),
+          ),
+          SizedBox(height: 8),
+          Text(
+            widget.subtitle,
+            style: style.text.neutral.merge(style.fontsize.sm),
+          ),
+          SizedBox(height: 54),
+          Center(
+            child: SizedBox(
+              width: size,
+              height: size,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  AnimatedBuilder(
+                    animation: _controller,
+                    builder: (context, child) {
+                      return CustomPaint(
+                        painter: _SpinnerPainter(
+                          progress: _controller.value,
+                          color: _colors[_currentIndex],
+                        ),
+                        size: const Size(size, size),
+                      );
+                    },
+                  ),
+
+                  // Emoji au centre avec petite transition
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 250),
+                    transitionBuilder:
+                        (child, anim) =>
+                            ScaleTransition(scale: anim, child: child),
+                    child: Text(
+                      _emojis[_currentIndex],
+                      key: ValueKey(_emojis[_currentIndex]),
+                      style: const TextStyle(fontSize: 50),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

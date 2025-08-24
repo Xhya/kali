@@ -94,7 +94,8 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
               ),
             ),
           ),
-        if (isPaymentLoading && !paymentDone) AnimatedLoadingWidget(),
+        if (isPaymentLoading && !paymentDone)
+          AnimatedLoadingWidget(title: "", subtitle: ""),
         if (!isPaymentLoading && paymentDone) CongratulationWidget(),
       ],
     );
