@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/BottomButton.widget.dart';
+import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/QuickAddMeal.widget.dart';
 import 'package:kali/core/services/Error.service.dart';
@@ -37,7 +38,11 @@ class _MealPeriodTagWidgetState extends State<QuickAddMealButtonWidget> {
         navigationService.context = context;
         onClickAddQuickMeal();
       },
-      text: "🍴 ajouter",
+      text: "ajouter",
+      iconWidget: CustomIconWidget(
+        format: CustomIconFormat.svg,
+        icon: "assets/icons/fourchette.svg",
+      ),
     );
 
     return BottomButtonWidget(
