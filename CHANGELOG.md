@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.2]
+
+- update force udpate screen
+- animated loading
+- confetti
+- end of test period element + subscription
+- macro element edition
+- update start form final
+- update main button
+- update profile
+- use server auth code for google sign in
+
 ## [1.2.1]
 
 - fix des custom inputs
