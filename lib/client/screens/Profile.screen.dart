@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
+import 'package:kali/client/widgets/EndOfTestPeriod.widget.dart';
 import 'package:kali/client/widgets/MacroElementRow.widget.dart';
 import 'package:kali/client/widgets/Register.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
@@ -76,31 +77,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
         backgroundColor: style.background.greenTransparent.color,
         body: LayoutBuilder(
           builder: (context, constraints) {
-            return SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                child: Stack(
-                  children: [
-                    Positioned(
-                      top: 10,
-                      right: 10,
-                      child: IconButton(
-                        padding: EdgeInsets.all(0),
-                        onPressed: () {
-                          HapticFeedback.vibrate();
-                          navigationService.navigateTo(ScreenEnum.editProfile);
-                        },
-                        style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all(
-                            style.iconBackground.color1.color,
-                          ),
+            return ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              child: Stack(
+                children: [
+                  Positioned(
+                    top: 10,
+                    right: 10,
+                    child: IconButton(
+                      padding: EdgeInsets.all(0),
+                      onPressed: () {
+                        HapticFeedback.vibrate();
+                        navigationService.navigateTo(ScreenEnum.editProfile);
+                      },
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStateProperty.all(
+                          style.iconBackground.color1.color,
                         ),
-                        icon: Icon(Icons.edit_outlined),
-                        color: style.icon.color1.color,
-                        iconSize: style.fontsize.lg.fontSize,
                       ),
+                      icon: Icon(Icons.edit_outlined),
+                      color: style.icon.color1.color,
+                      iconSize: style.fontsize.lg.fontSize,
                     ),
-                    Container(
+                  ),
+                  SingleChildScrollView(
+                    child: Container(
                       width: double.maxFinite,
                       padding: const EdgeInsets.all(16),
                       child: Column(
@@ -142,22 +143,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             padding: EdgeInsets.all(16),
                             child: Row(
                               children: [
-                                Flexible(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Fin de l'essai dans ...",
-                                        style: style.fontsize.sm,
-                                      ),
-                                      Text(
-                                        "Ce serait dommage de s'arrêter là..",
-                                        style: style.fontsize.xs,
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                Flexible(child: EndOfTestPeriodWidget()),
                                 ButtonWidget(
                                   text: "s'abonner",
                                   onPressed: () {
@@ -208,48 +194,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ],
                             ),
+                          SizedBox(height: 200),
                         ],
                       ),
                     ),
-                    Positioned(
-                      bottom: 10,
-                      left: 0,
-                      right: 0,
-                      child: Column(
-                        children: [
-                          if (userState.user.value?.emailVerified())
-                            ButtonWidget(
-                              buttonType: ButtonTypeEnum.outline,
-                              text: "Se déconnecter",
-                              onPressed: () {
-                                onClickDeconnect();
-                              },
-                            ),
-                          SizedBox(height: 12),
-                          Text("$currentVersion ($currentBuild)"),
-                          SizedBox(height: 2),
-                          if (isVersionLower(currentVersion, lastVersion))
-                            GestureDetector(
-                              onTap: () {
-                                // TODO
-                              },
-                              child: Text(
-                                "nouvelle version disponible",
-                                style: style.fontsize.sm
-                                    .merge(style.text.neutralLight)
-                                    .merge(
-                                      TextStyle(
-                                        decoration: TextDecoration.underline,
-                                      ),
+                  ),
+                  Positioned(
+                    bottom: 10,
+                    left: 0,
+                    right: 0,
+                    child: Column(
+                      children: [
+                        if (userState.user.value?.emailVerified())
+                          ButtonWidget(
+                            buttonType: ButtonTypeEnum.outline,
+                            text: "Se déconnecter",
+                            onPressed: () {
+                              onClickDeconnect();
+                            },
+                          ),
+                        SizedBox(height: 12),
+                        Text("$currentVersion ($currentBuild)"),
+                        SizedBox(height: 2),
+                        if (isVersionLower(currentVersion, lastVersion))
+                          GestureDetector(
+                            onTap: () {
+                              // TODO
+                            },
+                            child: Text(
+                              "nouvelle version disponible",
+                              style: style.fontsize.sm
+                                  .merge(style.text.neutralLight)
+                                  .merge(
+                                    TextStyle(
+                                      decoration: TextDecoration.underline,
                                     ),
-                              ),
+                                  ),
                             ),
-                          SizedBox(height: 12),
-                        ],
-                      ),
+                          ),
+                        SizedBox(height: 12),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             );
           },
