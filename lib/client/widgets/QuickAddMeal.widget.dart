@@ -4,7 +4,6 @@ import 'package:kali/client/Utils/MaxCharactersCountFormatter.utils.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/widgets/Expanded.widget.dart';
-import 'package:kali/client/widgets/LoaderIcon.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/MealPeriodsWrap.widget.dart';
 import 'package:kali/client/widgets/NutriScore2by2.widget.dart';
@@ -58,6 +57,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
   @override
   void initState() {
     super.initState();
+    quickAddMealState.isLoading.value = false;
 
     quickAddMealState.meal.addListener(() {
       final nutri = quickAddMealState.meal.value?.nutriscore;

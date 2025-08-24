@@ -34,6 +34,8 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
 
     init();
     subscriptionState.selectedSubscriptionId.value = null;
+    subscriptionState.isPaymentLoading.value = false;
+    subscriptionState.isInitPaymentLoading.value = false;
 
     super.initState();
   }

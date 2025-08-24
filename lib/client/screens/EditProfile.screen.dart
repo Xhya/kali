@@ -49,6 +49,8 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
+    editProfileState.isLoading.value = false;
+
     inputState.email.value = userState.user.value?.email ?? "";
     editProfileState.leitmotiv.value = userState.user.value?.leitmotiv ?? "";
     editProfileState.userName.value = userState.user.value?.username ?? "";

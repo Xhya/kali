@@ -37,6 +37,7 @@ class _ValidateCodeWidgetState extends State<ValidateCodeWidget> {
   @override
   void initState() {
     registerState.code.value = "";
+    registerState.isLoading.value = false;
     super.initState();
   }
 

@@ -24,6 +24,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
   @override
   void initState() {
     super.initState();
+    startFormState.isLoading.value = false;
   }
 
   @override
