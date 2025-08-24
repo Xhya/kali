@@ -160,57 +160,6 @@ class _HomeScreenState extends State<HomeScreen> {
         floatingActionButton:
             currentDate.isToday ? QuickAddMealButtonWidget() : null,
       ),
-
-      // bottomSheet:
-      // Container(
-      //   width: double.infinity,
-      //   padding: const EdgeInsets.only(
-      //     left: 16,
-      //     right: 16,
-      //     top: 16,
-      //     bottom: 24,
-      //   ),
-      //   child: Row(
-      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //     children: [
-      //       GestureDetector(
-      //         onTap: () {
-      //           navigationService.context = context;
-      //           onClickPeriodToQuickAddMeal(period: MealPeriodEnum.breakfast);
-      //         },
-      //         child: Text(t("breakfast")),
-      //       ),
-      //       GestureDetector(
-      //         onTap: () {
-      //           navigationService.context = context;
-      //           onClickPeriodToQuickAddMeal(period: MealPeriodEnum.lunch);
-      //         },
-      //         child: Text(t("lunch")),
-      //       ),
-      //       GestureDetector(
-      //         onTap: () {
-      //           navigationService.context = context;
-      //           onClickPeriodToQuickAddMeal(period: MealPeriodEnum.snack);
-      //         },
-      //         child: Text(t("snack")),
-      //       ),
-      //       GestureDetector(
-      //         onTap: () {
-      //           navigationService.context = context;
-      //           onClickPeriodToQuickAddMeal(period: MealPeriodEnum.dinner);
-      //         },
-      //         child: Text(t("dinner")),
-      //       ),
-      //     ],
-      //   ),
-      //   //  ButtonWidget(
-      //   //   text: "+",
-      //   //   onPressed: () async {
-
-      //   //   },
-      //   //   buttonType: ButtonTypeEnum.filled,
-      //   // ),
-      // ),
     );
   }
 }
