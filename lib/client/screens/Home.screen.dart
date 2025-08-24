@@ -83,6 +83,10 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: EndOfTestPeriodWidget(),
+              ),
               DateSelector(currentDate: currentDate),
               SizedBox(height: 16),
               MealPeriodsHorizontalWidget(
@@ -163,13 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
         floatingActionButton: Column(
           spacing: 12,
           mainAxisSize: MainAxisSize.min,
-          children: [
-            if (currentDate.isToday) QuickAddMealButtonWidget(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: EndOfTestPeriodWidget(),
-            ),
-          ],
+          children: [if (currentDate.isToday) QuickAddMealButtonWidget()],
         ),
       ),
     );

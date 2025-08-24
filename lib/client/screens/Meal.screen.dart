@@ -76,7 +76,6 @@ class _MealScreenState extends State<MealScreen> {
               MealPeriodTagWidget(
                 mealPeriod: meal!.period,
                 disabled: false,
-                fullwidth: true,
               ),
               SizedBox(height: 16),
               CustomInput(

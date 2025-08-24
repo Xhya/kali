@@ -8,6 +8,7 @@ class User {
   final String? leitmotiv;
   final NutriScore? nutriscore;
   final bool hasValidSubscription;
+  final DateTime? subscriptionDeadline;
 
   User({
     required this.id,
@@ -17,6 +18,7 @@ class User {
     required this.leitmotiv,
     required this.nutriscore,
     required this.hasValidSubscription,
+    required this.subscriptionDeadline,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -34,6 +36,23 @@ class User {
               ? null
               : NutriScore.fromJson(json['nutriscore']),
       hasValidSubscription: json['hasValidSubscription'] as bool? ?? false,
+      subscriptionDeadline:
+          json['subscriptionDeadline'] != null
+              ? DateTime.parse(json['subscriptionDeadline']).toLocal()
+              : null,
     );
+  }
+
+  bool isInTestPeriod() {
+    if (subscriptionDeadline != null) {
+      return DateTime.now().isBefore(subscriptionDeadline!);
+    } else {
+      return false;
+    }
+  }
+
+  bool hasPassedDeadline() {
+    if (subscriptionDeadline == null) return false;
+    return DateTime.now().isAfter(subscriptionDeadline!);
   }
 }
