@@ -36,8 +36,4 @@ class User {
       hasValidSubscription: json['hasValidSubscription'] as bool? ?? false,
     );
   }
-
-  emailVerified() {
-    return email != null && email!.isNotEmpty && emailVerifiedAt != null;
-  }
 }

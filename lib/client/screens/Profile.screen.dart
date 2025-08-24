@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
-import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/EndOfTestPeriod.widget.dart';
 import 'package:kali/client/widgets/MacroElementRow.widget.dart';
-import 'package:kali/client/widgets/Register.widget.dart';
-import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
-import 'package:kali/core/actions/congratulationNextAction.actions.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/Authentication.service.dart';
 import 'package:kali/core/services/Hardware.service.dart';
@@ -26,16 +22,6 @@ onClickDeconnect() async {
   await authenticationService.initSignature();
   await googleSignInState.signInGoogle.value?.signOut();
   navigationService.navigateTo(ScreenEnum.start);
-}
-
-onClickRegister(BuildContext context) async {
-  navigationService.context = context;
-  navigationService.nextAction = () async {
-    await congratulationNextAction(context);
-  };
-  navigationService.openBottomSheet(
-    widget: WelcomeBottomSheet(child: RegisterWidget(title: "Inscris-toi")),
-  );
 }
 
 class ProfileScreen extends StatefulWidget {
@@ -139,21 +125,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                             ),
                           SizedBox(height: 16),
-                          CustomCard(
-                            padding: EdgeInsets.all(16),
-                            child: Row(
-                              children: [
-                                Flexible(child: EndOfTestPeriodWidget()),
-                                ButtonWidget(
-                                  text: "s'abonner",
-                                  onPressed: () {
-                                    onClickRegister(context);
-                                  },
-                                  buttonType: ButtonTypeEnum.filled,
-                                ),
-                              ],
-                            ),
-                          ),
+                          EndOfTestPeriodWidget(),
                           SizedBox(height: 32),
                           Text(
                             "Ton plan personnalisé",
@@ -205,7 +177,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     right: 0,
                     child: Column(
                       children: [
-                        if (userState.user.value?.emailVerified())
+                        if (userState.user.value?.emailVerifiedAt != null)
                           ButtonWidget(
                             buttonType: ButtonTypeEnum.outline,
                             text: "Se déconnecter",

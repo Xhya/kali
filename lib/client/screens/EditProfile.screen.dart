@@ -113,11 +113,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         textCapitalization: TextCapitalization.sentences,
                       ),
-                      if (userState.user.value?.emailVerified())
+                      if (userState.user.value?.emailVerifiedAt != null)
                         Column(
                           children: [
                             SizedBox(height: 32),
-                            if (userState.user.value?.emailVerified())
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 8.0),
                                 child: Text(

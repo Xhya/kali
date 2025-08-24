@@ -1,6 +1,7 @@
 import 'package:dart_date/dart_date.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kali/client/widgets/EndOfTestPeriod.widget.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
@@ -157,8 +158,17 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton:
-            currentDate.isToday ? QuickAddMealButtonWidget() : null,
+        floatingActionButton: Column(
+          spacing: 12,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (currentDate.isToday) QuickAddMealButtonWidget(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: EndOfTestPeriodWidget(),
+            ),
+          ],
+        ),
       ),
     );
   }
