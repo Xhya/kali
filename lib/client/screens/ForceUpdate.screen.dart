@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'dart:ui';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/core/states/configuration.state.dart';
@@ -6,6 +8,19 @@ import 'package:kali/core/utils/paths.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
+
+onClickUpdateApplicationOnStore() async {
+  final String url =
+      Platform.isAndroid
+          ? "https://play.google.com/store/apps/details?id=com.horace.kali"
+          : "https://apps.apple.com/app/6748620253";
+
+  if (await canLaunchUrl(Uri.parse(url))) {
+    await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+  } else {
+    throw "Impossible d'ouvrir le store: $url";
+  }
+}
 
 class ForceUpdateScreen extends StatefulWidget {
   const ForceUpdateScreen({super.key});
@@ -119,7 +134,9 @@ class _ForceUpdateScreenState extends State<ForceUpdateScreen>
                               ),
                               SizedBox(height: 24),
                               MainButtonWidget(
-                                onClick: () {},
+                                onClick: () {
+                                  onClickUpdateApplicationOnStore();
+                                },
                                 text: "mettre à jour",
                               ),
                             ],
