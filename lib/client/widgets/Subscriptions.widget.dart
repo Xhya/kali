@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/widgets/AnimatedLoading.widget.dart';
+import 'package:kali/client/widgets/Benefits.widget.dart';
 import 'package:kali/client/widgets/Congratulation.widget.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
@@ -88,29 +89,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
 
           SizedBox(height: 32),
 
-          Text(
-            "🍜 Créer de bonnes habitudes",
-            textAlign: TextAlign.start,
-            style: style.fontsize.sm.merge(style.text.neutral),
-          ),
-          SizedBox(height: 8),
-          Text(
-            "🍕 Suivre d'un rapide coup d'oeil sa journée",
-            textAlign: TextAlign.start,
-            style: style.fontsize.sm.merge(style.text.neutral),
-          ),
-          SizedBox(height: 8),
-          Text(
-            "🧘🏻‍♀️ Conscientiser son alimentation",
-            textAlign: TextAlign.start,
-            style: style.fontsize.sm.merge(style.text.neutral),
-          ),
-          SizedBox(height: 8),
-          Text(
-            "👌🏻 Alléger sa charge mentale",
-            textAlign: TextAlign.start,
-            style: style.fontsize.sm.merge(style.text.neutral),
-          ),
+          BenefitsWidget(),
 
           SizedBox(height: 32),
 

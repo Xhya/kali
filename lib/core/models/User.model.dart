@@ -51,8 +51,9 @@ class User {
     }
   }
 
-  bool hasPassedDeadline() {
-    if (subscriptionDeadline == null) return false;
-    return DateTime.now().isAfter(subscriptionDeadline!);
+  bool hasFinishedTestPeriod() {
+    if (hasValidSubscription) return true;
+    if (subscriptionDeadline == null) return true;
+    return !hasValidSubscription && DateTime.now().isAfter(subscriptionDeadline!);
   }
 }

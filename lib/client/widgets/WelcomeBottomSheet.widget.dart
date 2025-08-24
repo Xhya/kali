@@ -4,9 +4,10 @@ import 'package:kali/client/Style.service.dart';
 import 'package:kali/core/utils/linearGradient.utils.dart';
 
 class WelcomeBottomSheet extends StatefulWidget {
-  const WelcomeBottomSheet({super.key, required this.child});
+  const WelcomeBottomSheet({super.key, required this.child, this.size = 'medium'});
 
   final Widget child;
+  final String size;
 
   @override
   State<WelcomeBottomSheet> createState() => _WelcomeBottomSheetState();
@@ -25,6 +26,10 @@ class _WelcomeBottomSheetState extends State<WelcomeBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final height = widget.size == 'small'
+        ? 400.0
+        : MediaQuery.of(context).size.height - 80;
+
     return ClipRRect(
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(24),
@@ -32,7 +37,7 @@ class _WelcomeBottomSheetState extends State<WelcomeBottomSheet> {
       ),
       child: Container(
         width: double.maxFinite,
-        height: MediaQuery.of(context).size.height - 80,
+        height: height,
         decoration: BoxDecoration(gradient: linearGradient),
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         child: Stack(

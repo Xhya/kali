@@ -1,5 +1,7 @@
 import 'dart:async';
-
+import 'package:kali/client/widgets/Subscriptions.widget.dart';
+import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
+import 'package:kali/core/services/Navigation.service.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
@@ -30,17 +32,24 @@ class _EndOfTestPeriodWidgetState extends State<EndOfTestPeriodWidget> {
   }
 
   void _startCountdown() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      if (_seconds > 0) {
-        setState(() {
-          _seconds--;
-        });
-      } else {
-        _timer?.cancel();
-        // ici tu peux déclencher une action quand le temps est fini
-        print("Compteur terminé !");
-      }
-    });
+    if (_seconds > 0) {
+      _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+        if (_seconds > 0) {
+          setState(() {
+            _seconds--;
+          });
+        } else {
+          _timer?.cancel();
+          navigationService.openBottomSheet(
+            widget: WelcomeBottomSheet(
+              child: SubscriptionWidget(
+                title: "Ton essai est maintenant terminé",
+              ),
+            ),
+          );
+        }
+      });
+    }
   }
 
   @override
@@ -63,6 +72,9 @@ class _EndOfTestPeriodWidgetState extends State<EndOfTestPeriodWidget> {
   Widget build(BuildContext context) {
     bool isInTestPeriod = context.select(
       (UserState s) => s.user.value?.isInTestPeriod() ?? false,
+    );
+    bool hasFinishedTestPeriod = context.select(
+      (UserState s) => s.user.value?.hasFinishedTestPeriod() ?? false,
     );
 
     if (isInTestPeriod) {
@@ -89,6 +101,24 @@ class _EndOfTestPeriodWidgetState extends State<EndOfTestPeriodWidget> {
                 ),
               ),
             ),
+            ButtonWidget(
+              text: "s'abonner",
+              onPressed: () {
+                onClickSubscribe(context);
+              },
+              buttonType: ButtonTypeEnum.filled,
+            ),
+          ],
+        ),
+      );
+    } else if (hasFinishedTestPeriod) {
+      return CustomCard(
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        secondary: true,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(child: Text("Ta période d'essai est terminée.")),
             ButtonWidget(
               text: "s'abonner",
               onPressed: () {
