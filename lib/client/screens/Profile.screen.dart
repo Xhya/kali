@@ -179,26 +179,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               spacing: 4,
                               children: [
                                 MacroElementRow(
+                                  text: "calories",
                                   icon: caloryIcon,
-                                  text:
+                                  amount:
                                       personalNutriScore.caloryAmount
                                           .toString(),
                                 ),
                                 MacroElementRow(
+                                  text: "protéines",
+
                                   icon: proteinIcon,
-                                  text:
+                                  amount:
                                       personalNutriScore.proteinAmount
                                           .toString(),
                                 ),
                                 MacroElementRow(
+                                  text: "glucides",
                                   icon: glucidIcon,
-                                  text:
+                                  amount:
                                       personalNutriScore.glucidAmount
                                           .toString(),
                                 ),
                                 MacroElementRow(
+                                  text: "lipides",
                                   icon: lipidIcon,
-                                  text:
+                                  amount:
                                       personalNutriScore.lipidAmount.toString(),
                                 ),
                               ],

@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/Utils/Input.decoration.dart';
+import 'package:kali/client/Utils/OnlyNumbersFormatter.utils.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
-import 'package:kali/core/states/editProfile.state.dart';
 
 class MacroElementRow extends StatefulWidget {
   const MacroElementRow({
     super.key,
     required this.icon,
     required this.text,
-    this.readonly = true,
+    required this.amount,
+    this.onUpdate,
   });
 
   final String icon;
   final String text;
-  final bool readonly;
+  final String amount;
+  final Function(String)? onUpdate;
 
   @override
   State<MacroElementRow> createState() => _MacroElementRowState();
@@ -24,7 +26,6 @@ class _MacroElementRowState extends State<MacroElementRow> {
   final _controller = TextEditingController();
   @override
   void initState() {
-    _controller.text = widget.text;
     super.initState();
   }
 
@@ -36,6 +37,7 @@ class _MacroElementRowState extends State<MacroElementRow> {
 
   @override
   Widget build(BuildContext context) {
+    _controller.text = widget.amount;
     return CustomCard(
       padding: EdgeInsets.all(16),
       child: Row(
@@ -51,24 +53,20 @@ class _MacroElementRowState extends State<MacroElementRow> {
 
           Expanded(
             child: Text(
-              "protéines",
+              widget.text,
               textAlign: TextAlign.start,
               style: style.text.neutral.merge(style.fontsize.sm),
             ),
           ),
           Expanded(
             child: TextField(
-              enabled: !widget.readonly,
+              enabled: widget.onUpdate != null,
               controller: _controller,
               textAlign: TextAlign.end,
               style: style.text.neutral.merge(style.fontsize.sm),
               decoration: inputDecoration,
-              onChanged:
-                  widget.readonly
-                      ? null
-                      : (value) {
-                        editProfileState.editingProteins.value = value;
-                      },
+              onChanged: widget.onUpdate,
+              inputFormatters: [onlyNumbersFormatter()],
             ),
           ),
         ],

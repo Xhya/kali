@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kali/client/Utils/Input.decoration.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/EmailInput.widget.dart';
 import 'package:kali/client/widgets/MacroElementRow.widget.dart';
@@ -15,7 +14,6 @@ import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/Utils/MaxCharactersCountFormatter.utils.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
-import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/core/utils/macroIcon.utils.dart';
 
@@ -49,11 +47,6 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  final caloryController = TextEditingController();
-  final proteinController = TextEditingController();
-  final glucidController = TextEditingController();
-  final lipidController = TextEditingController();
-
   @override
   void initState() {
     inputState.email.value = userState.user.value?.email ?? "";
@@ -68,20 +61,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     editProfileState.editingLipids.value =
         userState.personalNutriscore?.lipidAmount.toString() ?? "";
 
-    caloryController.text = editProfileState.editingCalories.value;
-    proteinController.text = editProfileState.editingProteins.value;
-    glucidController.text = editProfileState.editingGlucids.value;
-    lipidController.text = editProfileState.editingLipids.value;
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    context.select((EditProfileState s) => s.editingCalories.value);
-    context.select((EditProfileState s) => s.editingProteins.value);
-    context.select((EditProfileState s) => s.editingGlucids.value);
-    context.select((EditProfileState s) => s.editingLipids.value);
+    final editingCalories = context.select(
+      (EditProfileState s) => s.editingCalories.value,
+    );
+    final editingProteins = context.select(
+      (EditProfileState s) => s.editingProteins.value,
+    );
+    final editingGlucids = context.select(
+      (EditProfileState s) => s.editingGlucids.value,
+    );
+    final editingLipids = context.select(
+      (EditProfileState s) => s.editingLipids.value,
+    );
     String userName = context.select((EditProfileState s) => s.userName.value);
     String leitmotiv = context.select(
       (EditProfileState s) => s.leitmotiv.value,
@@ -131,7 +127,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   ),
                                 ),
                               ),
-                              EmailInputWidget(),
+                            EmailInputWidget(),
                           ],
                         ),
 
@@ -158,127 +154,40 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         style: style.text.neutral.merge(style.fontsize.sm),
                       ),
                       SizedBox(height: 4),
-                      CustomCard(
-                        padding: EdgeInsets.all(16),
-                        child: Row(
-                          spacing: 12,
-                          children: [
-                            Text(
-                              "⚖️",
-                              textAlign: TextAlign.start,
-                              style: style.text.green
-                                  .merge(style.fontsize.md)
-                                  .merge(style.fontweight.bold),
-                            ),
-
-                            Expanded(
-                              child: Text(
-                                "calories",
-                                textAlign: TextAlign.start,
-                                style: style.text.neutral.merge(
-                                  style.fontsize.sm,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: TextField(
-                                controller: caloryController,
-                                textAlign: TextAlign.end,
-                                style: style.text.neutral.merge(
-                                  style.fontsize.sm,
-                                ),
-                                decoration: inputDecoration,
-                                onChanged: (value) {
-                                  editProfileState.editingCalories.value =
-                                      value;
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
+                      MacroElementRow(
+                        text: "calories",
+                        icon: caloryIcon,
+                        amount: editingCalories,
+                        onUpdate: (String value) {
+                          editProfileState.editingCalories.value = value;
+                        },
                       ),
                       SizedBox(height: 4),
                       MacroElementRow(
+                        text: "protéines",
                         icon: proteinIcon,
-                        text: editProfileState.editingProteins.value,
+                        amount: editingProteins,
+                        onUpdate: (String value) {
+                          editProfileState.editingProteins.value = value;
+                        },
                       ),
                       SizedBox(height: 4),
-                      CustomCard(
-                        padding: EdgeInsets.all(16),
-                        child: Row(
-                          spacing: 12,
-                          children: [
-                            Text(
-                              glucidIcon,
-                              textAlign: TextAlign.start,
-                              style: style.text.green
-                                  .merge(style.fontsize.md)
-                                  .merge(style.fontweight.bold),
-                            ),
-
-                            Expanded(
-                              child: Text(
-                                "glucides",
-                                textAlign: TextAlign.start,
-                                style: style.text.neutral.merge(
-                                  style.fontsize.sm,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: TextField(
-                                controller: glucidController,
-                                textAlign: TextAlign.end,
-                                style: style.text.neutral.merge(
-                                  style.fontsize.sm,
-                                ),
-                                decoration: inputDecoration,
-                                onChanged: (value) {
-                                  editProfileState.editingGlucids.value = value;
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
+                      MacroElementRow(
+                        text: "glucides",
+                        icon: glucidIcon,
+                        amount: editingGlucids,
+                        onUpdate: (String value) {
+                          editProfileState.editingGlucids.value = value;
+                        },
                       ),
                       SizedBox(height: 4),
-                      CustomCard(
-                        padding: EdgeInsets.all(16),
-                        child: Row(
-                          spacing: 12,
-                          children: [
-                            Text(
-                              lipidIcon,
-                              textAlign: TextAlign.start,
-                              style: style.text.green
-                                  .merge(style.fontsize.md)
-                                  .merge(style.fontweight.bold),
-                            ),
-
-                            Expanded(
-                              child: Text(
-                                "lipides",
-                                textAlign: TextAlign.start,
-                                style: style.text.neutral.merge(
-                                  style.fontsize.sm,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: TextField(
-                                controller: lipidController,
-                                onChanged: (value) {
-                                  editProfileState.editingLipids.value = value;
-                                },
-                                textAlign: TextAlign.end,
-                                style: style.text.neutral.merge(
-                                  style.fontsize.sm,
-                                ),
-                                decoration: inputDecoration,
-                              ),
-                            ),
-                          ],
-                        ),
+                      MacroElementRow(
+                        text: "lipides",
+                        icon: lipidIcon,
+                        amount: editingLipids,
+                        onUpdate: (String value) {
+                          editProfileState.editingLipids.value = value;
+                        },
                       ),
                       SizedBox(height: 120),
                     ],
