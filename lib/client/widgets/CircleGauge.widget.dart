@@ -11,11 +11,13 @@ class CircleGaugeWidget extends StatefulWidget {
     required this.maxAmount,
     this.editingAmount,
     this.bars = const {},
+    this.textCenter,
   });
 
   final int maxAmount;
   final int? editingAmount;
   final Map<Color, int> bars;
+  final String? textCenter;
 
   @override
   State<CircleGaugeWidget> createState() => _CircleGaugeWidgetState();
@@ -54,6 +56,15 @@ class _CircleGaugeWidgetState extends State<CircleGaugeWidget> {
                 cornerStyle: CornerStyle.bothCurve,
                 enableAnimation: true,
               ),
+            ],
+            annotations: <GaugeAnnotation>[
+              if (widget.textCenter != null)
+                GaugeAnnotation(
+                  widget: Text(
+                    widget.textCenter!,
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                ),
             ],
           ),
         ],
