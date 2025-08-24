@@ -67,25 +67,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               constraints: BoxConstraints(minHeight: constraints.maxHeight),
               child: Stack(
                 children: [
-                  Positioned(
-                    top: 10,
-                    right: 10,
-                    child: IconButton(
-                      padding: EdgeInsets.all(0),
-                      onPressed: () {
-                        HapticFeedback.vibrate();
-                        navigationService.navigateTo(ScreenEnum.editProfile);
-                      },
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStateProperty.all(
-                          style.iconBackground.color1.color,
-                        ),
-                      ),
-                      icon: Icon(Icons.edit_outlined),
-                      color: style.icon.color1.color,
-                      iconSize: style.fontsize.lg.fontSize,
-                    ),
-                  ),
                   SingleChildScrollView(
                     child: Container(
                       width: double.maxFinite,
@@ -169,6 +150,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(height: 200),
                         ],
                       ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 10,
+                    right: 10,
+                    child: IconButton(
+                      padding: EdgeInsets.all(0),
+                      onPressed: () {
+                        HapticFeedback.vibrate();
+                        navigationService.navigateTo(ScreenEnum.editProfile);
+                      },
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStateProperty.all(
+                          style.iconBackground.color1.color,
+                        ),
+                      ),
+                      icon: Icon(Icons.edit_outlined),
+                      color: style.icon.color1.color,
+                      iconSize: style.fontsize.lg.fontSize,
                     ),
                   ),
                   Positioned(
