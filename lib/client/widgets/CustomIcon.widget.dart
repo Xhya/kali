@@ -17,6 +17,7 @@ class CustomIconWidget extends StatelessWidget {
     this.isLoading = false,
     this.format = CustomIconFormat.flutter,
     this.type = CustomIconType.base,
+    this.isTransparent = false,
   });
 
   final GestureTapCallback? onClick;
@@ -25,6 +26,7 @@ class CustomIconWidget extends StatelessWidget {
   final CustomIconFormat format;
   final bool isLoading;
   final CustomIconType type;
+  final bool isTransparent;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,9 @@ class CustomIconWidget extends StatelessWidget {
             : style.iconBackground.color1.color;
 
     final iconColor =
-        type == CustomIconType.base
+        isTransparent
+            ? Colors.transparent
+            : type == CustomIconType.base
             ? style.icon.color1.color
             : style.icon.color3.color;
 
@@ -45,7 +49,12 @@ class CustomIconWidget extends StatelessWidget {
             ? LoaderIcon()
             : format == CustomIconFormat.flutter
             ? icon
-            : SvgPicture.asset(icon as String, width: 20, height: 20);
+            : SvgPicture.asset(
+              icon as String,
+              width: 20,
+              height: 20,
+              color: iconColor,
+            );
 
     if (type == CustomIconType.filled) {
       return IconButton.filled(
@@ -65,10 +74,7 @@ class CustomIconWidget extends StatelessWidget {
         iconSize: 20,
       );
     } else if (type == CustomIconType.base) {
-      return CustomInkwell(
-        onTap: onClick,
-        child: iconToDisplay as Widget,
-      );
+      return CustomInkwell(onTap: onClick, child: iconToDisplay as Widget);
     } else {
       return Text("Not configured");
     }

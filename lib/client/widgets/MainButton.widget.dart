@@ -31,16 +31,21 @@ class _MainButtonState extends State<MainButtonWidget> {
     final backgroundColor =
         widget.disabled ? Colors.grey : style.background.green.color;
 
+    final textColor =
+        widget.isLoading
+            ? TextStyle(color: Colors.transparent)
+            : TextStyle(color: style.text.neutral.color!);
+
     return GestureDetector(
       onTapDown: (_) async {
-        if (!widget.disabled) {
+        if (!widget.disabled && !widget.isLoading) {
           setState(() {
             _bottomPadding = 1;
           });
         }
       },
       onTapUp: (_) async {
-        if (!widget.disabled) {
+        if (!widget.disabled && !widget.isLoading) {
           HapticFeedback.vibrate();
           await Future.delayed(const Duration(milliseconds: 100));
           widget.onClick();
@@ -75,22 +80,25 @@ class _MainButtonState extends State<MainButtonWidget> {
               color: backgroundColor,
               borderRadius: BorderRadius.circular(12),
             ),
-            child:
-                widget.isLoading
-                    ? LoaderIcon()
-                    : Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if (widget.iconWidget != null) widget.iconWidget!,
-                        const SizedBox(width: 8),
-                        Text(
-                          widget.text,
-                          style: TextStyle(color: style.text.neutral.color!)
-                              .merge(style.fontsize.md)
-                              .merge(style.fontweight.bold),
-                        ),
-                      ],
+            child: Stack(
+              alignment: AlignmentDirectional.center,
+              children: [
+                if (widget.isLoading) LoaderIcon(),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (widget.iconWidget != null) widget.iconWidget!,
+                    const SizedBox(width: 8),
+                    Text(
+                      widget.text,
+                      style: style.fontsize.md
+                          .merge(style.fontweight.bold)
+                          .merge(textColor),
                     ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
