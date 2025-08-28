@@ -15,7 +15,7 @@ plugins {
 
 android {
     namespace = "com.horace.kali"
-    compileSdk = 35
+    compileSdk = flutter.compileSdkVersion
     ndkVersion = "29.0.13599879"
 
     compileOptions {
