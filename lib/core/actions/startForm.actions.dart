@@ -10,18 +10,21 @@ import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/states/startForm.state.dart';
 
-void onClickBottomButton() async {
+void onClickBottomButton(BuildContext context) async {
   startFormState.isLoading.value = true;
   try {
     if (startFormState.personalNutriScore.value != null) {
       startFormState.personalNutriScore.value = null;
       await userService.refreshUser();
+      navigationService.nextAction = () async {
+        navigationService.context = context;
+        await launchConfetti();
+      };
       navigationService.openBottomSheet(
         widget: WelcomeBottomSheet(
           child: RegisterWidget(
             title: "Bienvenu·e à bord 🔥",
-            subtitle:
-                "Inscris toi pour avoir accès à 3 jours d'essai gratuit !",
+            subtitle: "Inscris toi pour ne pas perdre tes progrès !",
           ),
         ),
       );
