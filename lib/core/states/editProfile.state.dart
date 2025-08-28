@@ -36,7 +36,7 @@ class EditProfileState extends ChangeNotifier {
       hasDifference = inputState.email.value != user?.email;
     }
 
-    return !hasEmptyField && hasDifference;
+    return !hasEmptyField || hasDifference;
   }
 
   final userName = ValueNotifier<String>("");
