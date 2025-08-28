@@ -4,7 +4,6 @@ import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/headers.service.dart';
-import 'package:kali/core/states/Ai.state.dart';
 import 'package:kali/environment.dart';
 
 class MealRepository {
@@ -69,9 +68,6 @@ class MealRepository {
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body) as Map<String, dynamic>;
       return MealModel.fromJson(body["data"]);
-    } else if (response.statusCode == 2000) {
-      aiState.aiNotUnderstandError.value = true;
-      return null;
     } else {
       errorService.currentResponseError = response;
       throw Exception();

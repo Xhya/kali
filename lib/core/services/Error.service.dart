@@ -9,6 +9,7 @@ import 'package:kali/core/services/Bugsnag.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/Translation.service.dart';
 import 'package:kali/environment.dart';
+import 'package:kali/core/states/Ai.state.dart';
 
 var errorService = ErrorService();
 
@@ -56,10 +57,15 @@ class ErrorService extends ChangeNotifier {
           widget: WelcomeBottomSheet(
             child: RegisterWidget(
               title: "Inscris toi 🔥",
-              subtitle: "Enregistre ton e-mail pour ne pas perdre tes progrès !",
+              subtitle:
+                  "Enregistre ton e-mail pour ne pas perdre tes progrès !",
             ),
           ),
         );
+        return;
+      } else if (hcErrorCode == 2000) {
+        // 2000 is
+        aiState.aiNotUnderstandError.value = true;
         return;
       }
     }
