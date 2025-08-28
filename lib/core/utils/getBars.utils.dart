@@ -17,6 +17,8 @@ Map<Color, int> getBars(
 
   final selectedPeriods = mealState.currentMealPeriods.value;
 
+  selectedPeriods.sort((a, b) => a.order.compareTo(b.order));
+
   if (selectedPeriods.isEmpty) {
     if (macroType == MacroTypeEnum.proteins) {
       return <Color, int>{

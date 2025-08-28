@@ -82,7 +82,7 @@ class _CircleGaugeWidgetState extends State<CircleGaugeWidget> {
           endWidth: 6,
         );
 
-        startValue = entry.value.toDouble();
+        startValue = startValue + entry.value.toDouble();
 
         return gauge;
       });

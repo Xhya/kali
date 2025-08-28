@@ -108,7 +108,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
                         if (widget.profileButton)
                           Positioned(
                             top: 5,
-                            right: 5,
+                            right: 0,
                             child: CustomInkwell(
                               child: Container(
                                 width: 40,
