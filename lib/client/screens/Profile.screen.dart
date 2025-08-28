@@ -179,12 +179,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         if (userState.user.value?.emailVerifiedAt != null)
                           ButtonWidget(
-                            buttonType: ButtonTypeEnum.outline,
+                            buttonType: ButtonTypeEnum.filled,
                             text: "Se déconnecter",
                             onPressed: () {
                               onClickDeconnect();
                             },
                           ),
+
                         SizedBox(height: 12),
                         Text("$currentVersion ($currentBuild)"),
                         SizedBox(height: 2),

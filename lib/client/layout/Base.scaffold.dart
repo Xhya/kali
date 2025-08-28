@@ -33,7 +33,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
       (ConnexionService v) => v.hasInternetConnexion.value,
     );
 
-    double headerHeight = hasInternetConnexion ? 80 : 105;
+    double headerHeight = hasInternetConnexion ? 100 : 105;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -54,7 +54,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
                 children: [
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                    height: 80,
+                    height: 100,
                     width: double.maxFinite,
                     child: Stack(
                       alignment: Alignment.center,
@@ -108,7 +108,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
                         if (widget.profileButton)
                           Positioned(
                             top: 5,
-                            right: 0,
+                            right: 5,
                             child: CustomInkwell(
                               child: Container(
                                 width: 40,

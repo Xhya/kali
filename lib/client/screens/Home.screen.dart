@@ -93,10 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: EndOfTestPeriodWidget(),
-              ),
+              EndOfTestPeriodWidget(padding: 16),
               DateSelector(currentDate: currentDate),
               SizedBox(height: 16),
               MealPeriodsHorizontalWidget(
@@ -111,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(16)),
                     child: SizedBox(
-                      height: MediaQuery.of(context).size.height,
+                      height: MediaQuery.of(context).size.height - 200,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

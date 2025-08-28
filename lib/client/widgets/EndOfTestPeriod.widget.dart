@@ -12,7 +12,9 @@ import 'package:kali/core/actions/register.actions.dart';
 import 'package:kali/core/states/user.state.dart';
 
 class EndOfTestPeriodWidget extends StatefulWidget {
-  const EndOfTestPeriodWidget({super.key});
+  const EndOfTestPeriodWidget({super.key, this.padding = 0});
+
+  final int padding;
 
   @override
   State<EndOfTestPeriodWidget> createState() => _EndOfTestPeriodWidgetState();
@@ -83,37 +85,40 @@ class _EndOfTestPeriodWidgetState extends State<EndOfTestPeriodWidget> {
     );
 
     if (isInTestPeriod) {
-      return CustomCard(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        secondary: true,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Flexible(
-              child: RichText(
-                text: TextSpan(
-                  style: TextStyle(
-                    fontSize: style.fontsize.sm.fontSize,
-                    color: style.text.neutral.color,
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(text: "Fin de l'essai dans "),
-                    TextSpan(
-                      text: _formatTime(_seconds),
-                      style: TextStyle(fontWeight: FontWeight.bold),
+      return Padding(
+        padding: EdgeInsets.only(bottom: widget.padding.toDouble()),
+        child: CustomCard(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          secondary: true,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: RichText(
+                  text: TextSpan(
+                    style: TextStyle(
+                      fontSize: style.fontsize.sm.fontSize,
+                      color: style.text.neutral.color,
                     ),
-                  ],
+                    children: <TextSpan>[
+                      TextSpan(text: "Fin de l'essai dans "),
+                      TextSpan(
+                        text: _formatTime(_seconds),
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            ButtonWidget(
-              text: "s'abonner",
-              onPressed: () {
-                onClickSubscribe(context);
-              },
-              buttonType: ButtonTypeEnum.filled,
-            ),
-          ],
+              ButtonWidget(
+                text: "s'abonner",
+                onPressed: () {
+                  onClickSubscribe(context);
+                },
+                buttonType: ButtonTypeEnum.filled,
+              ),
+            ],
+          ),
         ),
       );
     } else if (hasFinishedTestPeriod) {
