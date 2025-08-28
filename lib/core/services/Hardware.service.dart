@@ -22,7 +22,7 @@ class HardwareService {
 
   Future<void> deleteSignatureStorage() async {
     await _secureStorage.delete(key: signatureKey);
-    await _secureStorage.delete(key: deviceIdKey);
+    // await _secureStorage.delete(key: deviceIdKey);
   }
 
   Future<void> deleteTokenStorage() async {

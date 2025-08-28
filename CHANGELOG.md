@@ -4,8 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.2.4]
+## [1.3.0]
 
+- sdkmin 23
+- ios 15
 - add subscription activated configuration
 - add confetti on login
 
