@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.4]
+
+- add subscription activated configuration
+- add confetti on login
+
 ## [1.2.3]
 
 - update logo
