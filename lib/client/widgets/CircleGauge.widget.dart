@@ -115,6 +115,15 @@ class _CircleGaugeWidgetState extends State<CircleGaugeWidget> {
                   endWidth: 5,
                 ),
             ],
+            annotations: <GaugeAnnotation>[
+              if (widget.textCenter != null)
+                GaugeAnnotation(
+                  widget: Text(
+                    widget.textCenter!,
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                ),
+            ],
           ),
         ],
       );
