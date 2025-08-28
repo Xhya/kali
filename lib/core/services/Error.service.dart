@@ -54,7 +54,10 @@ class ErrorService extends ChangeNotifier {
         // 1040 is MustValideEmailException
         navigationService.openBottomSheet(
           widget: WelcomeBottomSheet(
-            child: RegisterWidget(title: "Veuillez vous inscrire"),
+            child: RegisterWidget(
+              title: "Inscris toi 🔥",
+              subtitle: "Enregistre ton e-mail pour ne pas perdre tes progrès !",
+            ),
           ),
         );
         return;
