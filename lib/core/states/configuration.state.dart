@@ -7,12 +7,14 @@ class ConfigurationState extends ChangeNotifier {
   final currentBuild = ValueNotifier<String>("");
   final minimalVersion = ValueNotifier<String>("");
   final lastVersion = ValueNotifier<String>("");
+  final subscriptionActivated = ValueNotifier<bool>(false);
 
   ConfigurationState() {
     minimalVersion.addListener(notifyListeners);
     currentVersion.addListener(notifyListeners);
     currentBuild.addListener(notifyListeners);
     lastVersion.addListener(notifyListeners);
+    subscriptionActivated.addListener(notifyListeners);
   }
 
   @override
@@ -21,6 +23,7 @@ class ConfigurationState extends ChangeNotifier {
     currentVersion.dispose();
     currentBuild.dispose();
     lastVersion.dispose();
+    subscriptionActivated.dispose();
     super.dispose();
   }
 }

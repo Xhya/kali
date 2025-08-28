@@ -14,6 +14,13 @@ Future<void> refreshAppVersion() async {
         .getConfig(ConfigKeyEnum.forceUpdateVersion);
     configurationState.lastVersion.value = await ConfigurationsRepository()
         .getConfig(ConfigKeyEnum.lastVersion);
+
+    final activateSubscription = await ConfigurationsRepository().getConfig(
+      ConfigKeyEnum.activateSubscription,
+    );
+
+    configurationState.subscriptionActivated.value =
+        activateSubscription.toLowerCase() == "true";
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack, show: false);
   }

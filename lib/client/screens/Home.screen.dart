@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/EndOfTestPeriod.widget.dart';
 import 'package:kali/client/widgets/TestPeriodBottomSheet.widget.dart';
 import 'package:kali/core/services/Navigation.service.dart';
+import 'package:kali/core/states/configuration.state.dart';
 import 'package:kali/core/states/user.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
@@ -55,7 +56,8 @@ class _HomeScreenState extends State<HomeScreen> {
     navigationService.context = context;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       initHomeScreen();
-      if (userState.user.value?.isInTestPeriod() == true) {
+      if (userState.user.value?.isInTestPeriod() == true &&
+          configurationState.subscriptionActivated.value) {
         navigationService.context = context;
         navigationService.openBottomSheet(
           widget: TestPeriodBottomSheetWidget(),

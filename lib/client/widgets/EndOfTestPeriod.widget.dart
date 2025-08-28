@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:kali/client/widgets/Subscriptions.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/services/Navigation.service.dart';
+import 'package:kali/core/states/configuration.state.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
@@ -70,6 +71,10 @@ class _EndOfTestPeriodWidgetState extends State<EndOfTestPeriodWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (!configurationState.subscriptionActivated.value) {
+      return SizedBox.shrink();
+    }
+
     bool isInTestPeriod = context.select(
       (UserState s) => s.user.value?.isInTestPeriod() ?? false,
     );
