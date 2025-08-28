@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:kali/client/widgets/Register.widget.dart';
 import 'package:kali/client/widgets/ValidateCode.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/actions/ConsumedAllTokensWithoutPaymentError.actions.dart';
@@ -40,12 +41,20 @@ class ErrorService extends ChangeNotifier {
         consumedAllTokensWithoutPaymentError();
         return;
       } else if (hcErrorCode == 1030) {
-        // 1030 is MustValideEmailException
+        // 1030 is MustValideCodeException
         navigationService.openBottomSheet(
           widget: WelcomeBottomSheet(
             child: ValidateCodeWidget(
               text: "Veuillez entrez le code que vous avez reçu par email",
             ),
+          ),
+        );
+        return;
+      } else if (hcErrorCode == 1040) {
+        // 1040 is MustValideEmailException
+        navigationService.openBottomSheet(
+          widget: WelcomeBottomSheet(
+            child: RegisterWidget(title: "Veuillez vous inscrire"),
           ),
         );
         return;
