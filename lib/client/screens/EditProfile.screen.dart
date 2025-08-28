@@ -117,6 +117,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                       if (userState.user.value?.emailVerifiedAt != null)
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(height: 32),
                               Padding(

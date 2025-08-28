@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/Utils/LowercaseFormatter.utils.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
@@ -41,6 +42,9 @@ class _EmailInputState extends State<EmailInputWidget> {
       placeholder: "Email",
       customIcon: CustomIconWidget(icon: Icon(Icons.email_outlined)),
       keyboardType: TextInputType.emailAddress,
+      inputFormatters: [
+        LowerCaseTextFormatter(),
+      ],
     );
   }
 }
