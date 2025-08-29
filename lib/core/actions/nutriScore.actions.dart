@@ -32,7 +32,11 @@ addMealAction() async {
     final meal = quickAddMealState.meal.value;
 
     if (meal != null) {
-      await MealService().addMeal(meal.id, period);
+      await MealService().addMeal(
+        mealId: meal.id,
+        period: period,
+        date: quickAddMealState.date.value,
+      );
     }
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);

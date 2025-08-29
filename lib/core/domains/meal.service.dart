@@ -26,9 +26,13 @@ class MealService {
     }
   }
 
-  addMeal(String mealId, MealPeriodEnum period) async {
+  addMeal({
+    required String mealId,
+    required MealPeriodEnum period,
+    required DateTime? date,
+  }) async {
     try {
-      await _mealRepository.addMeal(mealId, period);
+      await _mealRepository.addMeal(mealId: mealId, period: period, date: date);
       await refreshMeals();
     } catch (e, stack) {
       errorService.notifyError(e: e, stack: stack);

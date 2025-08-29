@@ -6,6 +6,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [1.3.2]
 
+- add date on add meal
+- fix scroll
 - fix gauges
 - handle ai error
 

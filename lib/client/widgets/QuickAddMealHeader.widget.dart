@@ -1,3 +1,5 @@
+import 'package:kali/core/services/Datetime.extension.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kali/client/Style.service.dart';
@@ -21,18 +23,53 @@ class QuickAddMealHeaderWidget extends StatefulWidget {
 class _QuickAddMealHeaderWidgetState extends State<QuickAddMealHeaderWidget> {
   TextEditingController controller = TextEditingController();
 
+  openDatePicker() async {
+    var newDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now().add(Duration(days: 31)),
+    );
+
+    if (newDate != null) {
+      quickAddMealState.date.value = newDate;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    DateTime date = context.select((QuickAddMealState s) => s.date.value);
+
     return Container(
       padding: EdgeInsets.only(left: 4),
       width: double.maxFinite,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            "Ajouter un repas",
-            textAlign: TextAlign.start,
-            style: style.text.neutral.merge(style.fontsize.md),
+          Expanded(
+            child: Row(
+              spacing: 4,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  "Ajouter un repas",
+                  style: style.text.neutral.merge(style.fontsize.md),
+                ),
+                Flexible(
+                  child: Text(
+                    date.formateDate("EE dd MMMM"),
+                    style: style.text.neutral.merge(style.fontsize.sm),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    openDatePicker();
+                  },
+                  child: Icon(Icons.calendar_month, size: 24),
+                ),
+              ],
+            ),
           ),
 
           Container(

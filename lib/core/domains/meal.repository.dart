@@ -24,8 +24,18 @@ class MealRepository {
     }
   }
 
-  Future<MealModel> addMeal(String mealId, MealPeriodEnum period) async {
-    Map body = {"period": period.label};
+  Future<MealModel> addMeal({
+    required String mealId,
+    required MealPeriodEnum period,
+    required DateTime? date,
+  }) async {
+    Map body = {
+      "period": period.label,
+      "date":
+          date != null
+              ? '${date.toUtc().toIso8601String().split('.').first}+00:00'
+              : null,
+    };
 
     final response = await http.patch(
       Uri.parse('$API_URL/meals/$mealId'),
@@ -49,7 +59,7 @@ class MealRepository {
     );
 
     if (response.statusCode == 200) {
-      return; 
+      return;
     } else {
       errorService.currentResponseError = response;
       throw Exception();

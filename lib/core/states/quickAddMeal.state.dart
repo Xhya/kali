@@ -12,6 +12,7 @@ class QuickAddMealState extends ChangeNotifier {
   final chosenPeriod = ValueNotifier<MealPeriodEnum?>(null);
   final meal = ValueNotifier<MealModel?>(null);
   final isExpanded = ValueNotifier<bool>(false);
+  final date = ValueNotifier<DateTime>(DateTime.now());
 
   QuickAddMealState() {
     isLoading.addListener(notifyListeners);
@@ -19,6 +20,7 @@ class QuickAddMealState extends ChangeNotifier {
     chosenPeriod.addListener(notifyListeners);
     meal.addListener(notifyListeners);
     isExpanded.addListener(notifyListeners);
+    date.addListener(notifyListeners);
   }
 
   @override
@@ -28,6 +30,7 @@ class QuickAddMealState extends ChangeNotifier {
     chosenPeriod.dispose();
     meal.dispose();
     isExpanded.dispose();
+    date.dispose();
     super.dispose();
   }
 
