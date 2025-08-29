@@ -14,20 +14,21 @@ import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/Ai.state.dart';
 import 'package:kali/core/states/Texts.state.dart';
+import 'package:kali/core/states/meal.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/core/states/quickAddMeal.state.dart';
 import 'package:kali/core/actions/nutriScore.actions.dart';
 
-onClickSelectPeriod(MealPeriodEnum period) {
+void onClickSelectPeriod(MealPeriodEnum period) {
   quickAddMealState.chosenPeriod.value = period;
 }
 
-onInputUpdateUserMealText(String value) {
+void onInputUpdateUserMealText(String value) {
   quickAddMealState.meal.value?.removeNutriScore();
   quickAddMealState.userMealText.value = value;
 }
 
-onClickSuffixIcon() async {
+Future<void> onClickSuffixIcon() async {
   aiState.aiNotUnderstandError.value = false;
   if (!quickAddMealState.isLoading.value &&
       quickAddMealState.userMealText.value.isNotEmpty &&
@@ -36,7 +37,7 @@ onClickSuffixIcon() async {
   }
 }
 
-onClickAddMealToDay() async {
+Future<void> onClickAddMealToDay() async {
   try {
     await addMealAction();
     quickAddMealState.userMealText.value = "";
@@ -58,6 +59,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
   void initState() {
     super.initState();
     quickAddMealState.isLoading.value = false;
+    quickAddMealState.date.value = mealState.currentDate.value;
 
     quickAddMealState.meal.addListener(() {
       final nutri = quickAddMealState.meal.value?.nutriscore;

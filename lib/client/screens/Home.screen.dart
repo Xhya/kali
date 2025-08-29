@@ -1,4 +1,3 @@
-import 'package:dart_date/dart_date.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/EndOfTestPeriod.widget.dart';
@@ -24,7 +23,7 @@ import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 
-initHomeScreen() async {
+Future<void> initHomeScreen() async {
   try {
     await MealService().refreshMeals();
   } catch (e, stack) {
@@ -32,7 +31,7 @@ initHomeScreen() async {
   }
 }
 
-onClickSelectPeriod(MealPeriodEnum? period) {
+void onClickSelectPeriod(MealPeriodEnum? period) {
   final periods = mealState.currentMealPeriods.value;
   if (period == null) {
     mealState.currentMealPeriods.value = [];
@@ -175,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
         floatingActionButton: Column(
           spacing: 12,
           mainAxisSize: MainAxisSize.min,
-          children: [if (currentDate.isToday) QuickAddMealButtonWidget()],
+          children: [QuickAddMealButtonWidget()],
         ),
       ),
     );

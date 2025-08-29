@@ -33,7 +33,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
       (ConnexionService v) => v.hasInternetConnexion.value,
     );
 
-    double headerHeight = hasInternetConnexion ? 100 : 105;
+    double headerHeight = hasInternetConnexion ? 100 : 125;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,

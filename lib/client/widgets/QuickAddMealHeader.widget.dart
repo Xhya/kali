@@ -23,10 +23,10 @@ class QuickAddMealHeaderWidget extends StatefulWidget {
 class _QuickAddMealHeaderWidgetState extends State<QuickAddMealHeaderWidget> {
   TextEditingController controller = TextEditingController();
 
-  openDatePicker() async {
+  Future<void> openDatePicker() async {
     var newDate = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: quickAddMealState.date.value,
       firstDate: DateTime(1900),
       lastDate: DateTime.now().add(Duration(days: 31)),
     );

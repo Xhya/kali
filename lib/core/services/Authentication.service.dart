@@ -1,6 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kali/core/services/Hardware.service.dart';
 import 'package:kali/core/services/User.service.dart';
+import 'package:kali/core/services/connexion.service.dart';
 import 'package:kali/core/utils/storageKeys.utils.dart';
 import 'package:kali/environment.dart';
 import 'package:uuid/uuid.dart';
@@ -22,6 +23,12 @@ class AuthenticationService {
   get isAuthentified => isAuthentifiedWithSignature || isAuthentifiedWithToken;
 
   init() async {
+    final hasInternetConnexion = await connexionService.getHasInternetConnexion();
+
+    if (!hasInternetConnexion) {
+      return;
+    }
+
     final token = await _secureStorage.read(key: tokenKey);
     if (token != null) {
       try {
@@ -50,20 +57,14 @@ class AuthenticationService {
     }
   }
 
-  loginWithGoogle({
-    required String email,
-    required String authCode,
-  }) async {
+  loginWithGoogle({required String email, required String authCode}) async {
     await _authenticationRepository.loginWithGoogle(
       email: email,
       authCode: authCode,
     );
   }
 
-  registerWithGoogle({
-    required String email,
-    required String authCode,
-  }) async {
+  registerWithGoogle({required String email, required String authCode}) async {
     await _authenticationRepository.registerWithGoogle(
       email: email,
       authCode: authCode,

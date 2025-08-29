@@ -38,11 +38,7 @@ class CustomIconWidget extends StatelessWidget {
             : style.iconBackground.color1.color;
 
     final iconColor =
-        isTransparent
-            ? Colors.transparent
-            : type == CustomIconType.base
-            ? style.icon.color1.color
-            : style.icon.color3.color;
+        isTransparent ? Colors.transparent : style.icon.color1.color;
 
     final iconToDisplay =
         isLoading
