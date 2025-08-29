@@ -8,7 +8,7 @@ import 'package:kali/core/states/meal.state.dart';
 class MealService {
   final MealRepository _mealRepository = MealRepository();
 
-  refreshMeals() async {
+  Future<void> refreshMeals() async {
     try {
       final List<MealModel> meals = await _mealRepository.getMeals();
       mealState.currentMeals.value =
@@ -26,13 +26,13 @@ class MealService {
     }
   }
 
-  addMeal({
+  Future<void> updateMeal({
     required String mealId,
-    required MealPeriodEnum period,
-    required DateTime? date,
+    MealPeriodEnum? period,
+    DateTime? date,
   }) async {
     try {
-      await _mealRepository.addMeal(mealId: mealId, period: period, date: date);
+      await _mealRepository.updateMeal(mealId: mealId, period: period, date: date);
       await refreshMeals();
     } catch (e, stack) {
       errorService.notifyError(e: e, stack: stack);

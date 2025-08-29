@@ -4,7 +4,7 @@ import 'package:kali/core/domains/meal.service.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/utils/computeMealPeriod.utils.dart';
 
-computeNutriScoreAction() async {
+Future<void> computeNutriScoreAction() async {
   try {
     quickAddMealState.isLoading.value = true;
     final userText = quickAddMealState.userMealText.value;
@@ -24,7 +24,7 @@ computeNutriScoreAction() async {
   }
 }
 
-addMealAction() async {
+Future<void> addMealAction() async {
   try {
     final period =
         quickAddMealState.chosenPeriod.value ??
@@ -32,7 +32,7 @@ addMealAction() async {
     final meal = quickAddMealState.meal.value;
 
     if (meal != null) {
-      await MealService().addMeal(
+      await MealService().updateMeal(
         mealId: meal.id,
         period: period,
         date: quickAddMealState.date.value,

@@ -2,15 +2,15 @@ import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 
-goToMealScreen(MealModel meal) {
+void goToMealScreen(MealModel meal) {
   mealState.currentMeal.value = meal;
   navigationService.navigateTo(ScreenEnum.meal);
 }
 
-goToMealsScreen() {
+void goToMealsScreen() {
   navigationService.navigateTo(ScreenEnum.meals);
 }
 
-goToRegisterScreen() {
+void goToRegisterScreen() {
   navigationService.navigateTo(ScreenEnum.register);
 }

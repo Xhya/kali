@@ -9,10 +9,12 @@ class MealPeriodsHorizontalWidget extends StatefulWidget {
     super.key,
     required this.onClickSelectPeriod,
     required this.chosenPeriods,
+    this.withAll = true,
   });
 
   final Function(MealPeriodEnum?) onClickSelectPeriod;
   final List<MealPeriodEnum> chosenPeriods;
+  final bool withAll;
 
   @override
   State<MealPeriodsHorizontalWidget> createState() =>
@@ -30,16 +32,17 @@ class _MealPeriodsHorizontalWidgetState
         spacing: 8,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          CustomInkwell(
-            onTap: () {
-              HapticFeedback.vibrate();
-              widget.onClickSelectPeriod(null);
-            },
-            child: MealPeriodTagWidget(
-              mealPeriod: null,
-              disabled: widget.chosenPeriods.isNotEmpty,
+          if (widget.withAll)
+            CustomInkwell(
+              onTap: () {
+                HapticFeedback.vibrate();
+                widget.onClickSelectPeriod(null);
+              },
+              child: MealPeriodTagWidget(
+                mealPeriod: null,
+                disabled: widget.chosenPeriods.isNotEmpty,
+              ),
             ),
-          ),
           CustomInkwell(
             onTap: () {
               HapticFeedback.vibrate();
@@ -47,7 +50,8 @@ class _MealPeriodsHorizontalWidgetState
             },
             child: MealPeriodTagWidget(
               mealPeriod: MealPeriodEnum.breakfast,
-              disabled: !widget.chosenPeriods.contains(MealPeriodEnum.breakfast),
+              disabled:
+                  !widget.chosenPeriods.contains(MealPeriodEnum.breakfast),
             ),
           ),
           CustomInkwell(

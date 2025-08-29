@@ -24,13 +24,13 @@ class MealRepository {
     }
   }
 
-  Future<MealModel> addMeal({
+  Future<MealModel> updateMeal({
     required String mealId,
-    required MealPeriodEnum period,
-    required DateTime? date,
+    MealPeriodEnum? period,
+    DateTime? date,
   }) async {
     Map body = {
-      "period": period.label,
+      "period": period?.label,
       "date":
           date != null
               ? '${date.toUtc().toIso8601String().split('.').first}+00:00'

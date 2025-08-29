@@ -4,7 +4,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.3.2]
+## [1.3.5]
+
+- can edit meal
+- date picker in french
+
+## [1.3.4]
 
 - add date on add meal
 - fix scroll

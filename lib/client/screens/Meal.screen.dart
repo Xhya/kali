@@ -1,23 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/widgets/MainButton.widget.dart';
+import 'package:kali/core/domains/meal.service.dart';
+import 'package:kali/core/services/Navigation.service.dart';
+import 'package:provider/provider.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
-import 'package:kali/client/widgets/MealPeriodTag.widget.dart';
+import 'package:kali/client/widgets/MealPeriodsHorizontal.widget.dart';
 import 'package:kali/client/widgets/NutriScoreGauges.widget.dart';
 import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/states/editMeal.state.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
-import 'package:kali/core/services/AI.service.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/client/Style.service.dart';
 
-onUpdateMeal() async {
+Future<void> onUpdateMeal() async {
   try {
     editMealState.isLoading.value = true;
-    final userText = editMealState.editingUserTextMeal.value;
-    final nutriScore = await aiService.computeNutriScore(userText);
-    editMealState.editingNutriScore.value = nutriScore;
+    // final userText = editMealState.editingUserTextMeal.value;
+    // final nutriScore = await aiService.computeNutriScore(userText);
+    // editMealState.editingNutriScore.value = nutriScore;
+    final meal = mealState.currentMeal.value;
+    if (meal != null) {
+      await MealService().updateMeal(
+        mealId: meal.id,
+        period: editMealState.editingMealPeriod.value,
+      );
+      navigationService.navigateBack();
+    }
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);
   } finally {
@@ -25,7 +36,7 @@ onUpdateMeal() async {
   }
 }
 
-onClickSelectPeriod(MealPeriodEnum? period) {
+void onClickSelectPeriod(MealPeriodEnum? period) {
   editMealState.editingMealPeriod.value = period;
 }
 
@@ -44,9 +55,9 @@ class _MealScreenState extends State<MealScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
         meal = mealState.currentMeal.value;
-        editMealState.editingUserTextMeal.value = meal?.userText ?? "";
-        editMealState.editingMealPeriod.value = meal?.period;
       });
+      editMealState.editingUserTextMeal.value = meal?.userText ?? "";
+      editMealState.editingMealPeriod.value = meal?.period;
     });
     super.initState();
   }
@@ -59,6 +70,12 @@ class _MealScreenState extends State<MealScreen> {
 
   @override
   Widget build(BuildContext context) {
+    MealPeriodEnum? mealPeriod = context.select(
+      (EditMealState s) => s.editingMealPeriod.value,
+    );
+    bool canSave = context.select((EditMealState s) => s.canSave);
+    bool isLoading = context.select((EditMealState s) => s.isLoading.value);
+
     if (meal == null) {
       return SizedBox.shrink();
     }
@@ -73,9 +90,12 @@ class _MealScreenState extends State<MealScreen> {
           padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           child: Column(
             children: [
-              MealPeriodTagWidget(
-                mealPeriod: meal!.period,
-                disabled: false,
+              MealPeriodsHorizontalWidget(
+                withAll: false,
+                onClickSelectPeriod: (period) {
+                  onClickSelectPeriod(period);
+                },
+                chosenPeriods: mealPeriod != null ? [mealPeriod] : [],
               ),
               SizedBox(height: 16),
               CustomInput(
@@ -115,6 +135,15 @@ class _MealScreenState extends State<MealScreen> {
               NutriScoreGaugesWidget(mealsByPeriods: [meal!], withTotal: false),
             ],
           ),
+        ),
+        floatingActionButton: MainButtonWidget(
+          onClick: () {
+            navigationService.context = context;
+            onUpdateMeal();
+          },
+          text: "Enregistrer",
+          isLoading: isLoading,
+          disabled: !canSave,
         ),
       ),
     );
