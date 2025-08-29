@@ -17,7 +17,7 @@ import 'package:kali/core/models/Meal.model.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 
-onRemoveMeal(MealModel meal) async {
+Future<void> onRemoveMeal(MealModel meal) async {
   try {
     await MealService().deleteMeal(meal.id);
     await MealService().refreshMeals();
@@ -60,7 +60,7 @@ class _MealsScreenState extends State<MealsScreen> {
           child: Column(
             children: [
               SizedBox(height: 10),
-              DateSelector(currentDate: currentDate, canNavigate: false),
+              DateSelector(currentDate: currentDate, canNavigate: true),
               SizedBox(height: 24),
               MealPeriodsHorizontalWidget(
                 onClickSelectPeriod: (period) {

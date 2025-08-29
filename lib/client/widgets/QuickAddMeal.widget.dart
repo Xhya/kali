@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
-import 'package:kali/client/Utils/MaxCharactersCountFormatter.utils.dart';
-import 'package:kali/client/widgets/CustomIcon.widget.dart';
-import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/widgets/Expanded.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
+import 'package:kali/client/widgets/MealComputerInput.widget.dart';
 import 'package:kali/client/widgets/MealPeriodsWrap.widget.dart';
 import 'package:kali/client/widgets/NutriScore2by2.widget.dart';
 import 'package:kali/client/widgets/QuickAddMealHeader.widget.dart';
@@ -12,15 +10,19 @@ import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
-import 'package:kali/core/states/Ai.state.dart';
-import 'package:kali/core/states/Texts.state.dart';
 import 'package:kali/core/states/meal.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/core/states/quickAddMeal.state.dart';
 import 'package:kali/core/actions/nutriScore.actions.dart';
+import 'package:kali/core/states/Ai.state.dart';
 
-void onClickSelectPeriod(MealPeriodEnum period) {
-  quickAddMealState.chosenPeriod.value = period;
+Future<void> onComputeQuickAddMeal() async {
+  aiState.aiNotUnderstandError.value = false;
+  if (!quickAddMealState.isLoading.value &&
+      quickAddMealState.userMealText.value.isNotEmpty &&
+      quickAddMealState.chosenPeriod.value != null) {
+    await computeNutriScoreAction();
+  }
 }
 
 void onInputUpdateUserMealText(String value) {
@@ -28,13 +30,8 @@ void onInputUpdateUserMealText(String value) {
   quickAddMealState.userMealText.value = value;
 }
 
-Future<void> onClickSuffixIcon() async {
-  aiState.aiNotUnderstandError.value = false;
-  if (!quickAddMealState.isLoading.value &&
-      quickAddMealState.userMealText.value.isNotEmpty &&
-      quickAddMealState.chosenPeriod.value != null) {
-    await computeNutriScoreAction();
-  }
+void onClickSelectPeriod(MealPeriodEnum period) {
+  quickAddMealState.chosenPeriod.value = period;
 }
 
 Future<void> onClickAddMealToDay() async {
@@ -75,16 +72,13 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
     MealPeriodEnum? chosenPeriod = context.select(
       (QuickAddMealState s) => s.chosenPeriod.value,
     );
-    bool isLoading = context.select((QuickAddMealState s) => s.isLoading.value);
-    String userMealText = context.select(
-      (QuickAddMealState s) => s.userMealText.value,
-    );
-    bool aiNotUnderstandError = context.select(
-      (AIState s) => s.aiNotUnderstandError.value,
-    );
     NutriScore? nutriScore =
         context.watch<QuickAddMealState>().meal.value?.nutriscore;
     bool computed = context.watch<QuickAddMealState>().computed.value;
+    String userMealText = context.select(
+      (QuickAddMealState s) => s.userMealText.value,
+    );
+    bool isLoading = context.select((QuickAddMealState s) => s.isLoading.value);
 
     return SingleChildScrollView(
       child: Container(
@@ -110,49 +104,16 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
               ),
               SizedBox(height: 16),
 
-              Row(
-                spacing: 8,
-                children: [
-                  Expanded(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: CustomInput(
-                          content: userMealText,
-                          onChanged: (value) {
-                            onInputUpdateUserMealText(value);
-                          },
-                          placeholder: "Quel est le menu du jour ?",
-                          inputFormatters: [
-                            MaxCharactersCountFormatter(
-                              maxLength: textsState.maxCharacterCount.value,
-                            ),
-                          ],
-                          minLines: 1,
-                          maxLines: 2,
-                          textCapitalization: TextCapitalization.sentences,
-                          errorText:
-                              aiNotUnderstandError
-                                  ? 'Veuillez être plus précis'
-                                  : null,
-                          maxLength: textsState.maxCharacterCount.value,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  CustomIconWidget(
-                    icon: "assets/icons/calculette.svg",
-                    format: CustomIconFormat.svg,
-                    type: CustomIconType.filled,
-                    isLoading: isLoading,
-                    onClick: () {
-                      onClickSuffixIcon();
-                    },
-                    disabled: userMealText.isEmpty || chosenPeriod == null,
-                  ),
-                ],
+              MealComputerInput(
+                mealText: userMealText,
+                onUpdate: (value) {
+                  onInputUpdateUserMealText(value);
+                },
+                onCompute: () {
+                  onComputeQuickAddMeal();
+                },
+                isLoading: isLoading,
+                disabled: userMealText.isEmpty || chosenPeriod == null,
               ),
 
               if (computed)
