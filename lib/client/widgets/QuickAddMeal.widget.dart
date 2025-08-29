@@ -40,6 +40,7 @@ Future<void> onClickSuffixIcon() async {
 Future<void> onClickAddMealToDay() async {
   try {
     await addMealAction();
+    mealState.currentDate.value = quickAddMealState.date.value;
     quickAddMealState.userMealText.value = "";
     navigationService.closeBottomSheet();
   } catch (e, stack) {
