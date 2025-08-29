@@ -29,6 +29,7 @@ class _QuickAddMealHeaderWidgetState extends State<QuickAddMealHeaderWidget> {
       initialDate: quickAddMealState.date.value,
       firstDate: DateTime(1900),
       lastDate: DateTime.now().add(Duration(days: 31)),
+      locale: const Locale('fr', 'FR'),
     );
 
     if (newDate != null) {

@@ -1,5 +1,6 @@
 import 'dart:io';
-
+// ignore: depend_on_referenced_packages
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -148,6 +149,12 @@ class _AppState extends State<App> {
           seedColor: style.background.green.color!,
         ),
       ),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [Locale('fr', 'FR')],
       home: AsyncInitWidget(
         initFunction: () async {
           try {
