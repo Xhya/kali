@@ -17,6 +17,8 @@ class _StartFormPage3State extends State<StartFormPage3> {
   @override
   Widget build(BuildContext context) {
     String leitmotiv = context.select((StartFormState s) => s.leitmotiv.value);
+    bool isNextButtonDisabled =
+        context.watch<StartFormState>().isNextButtonDisabled;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -53,7 +55,9 @@ class _StartFormPage3State extends State<StartFormPage3> {
               maxLines: 10,
               textCapitalization: TextCapitalization.sentences,
               onSubmitted: (String value) {
-                onClickNext();
+                if (!isNextButtonDisabled) {
+                  onClickNext();
+                }
               },
             ),
             SizedBox(height: 400),

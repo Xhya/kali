@@ -81,9 +81,10 @@ class _HomeScreenState extends State<HomeScreen> {
     DateTime currentDate = context.select((MealState s) => s.currentDate.value);
     List<MealPeriodEnum> currentMealPeriods =
         context.watch<MealState>().currentMealPeriods.value;
-
-    final lastMeal =
-        currentMealsByPeriods.isNotEmpty ? currentMealsByPeriods.last : null;
+    MealModel? lastMeal =
+        context.watch<MealState>().currentMealsByPeriods.isNotEmpty
+            ? currentMealsByPeriods.last
+            : null;
 
     return BaseScaffold(
       profileButton: true,

@@ -5,6 +5,7 @@ import 'package:kali/client/Utils/OnlyNumbersFormatter.utils.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/core/actions/startForm.actions.dart';
+import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
@@ -24,6 +25,8 @@ class _StartFormPage2State extends State<StartFormPage2> {
     String targetWeight = context.select(
       (StartFormState s) => s.targetWeight.value,
     );
+    bool isNextButtonDisabled =
+        context.watch<StartFormState>().isNextButtonDisabled;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -107,7 +110,9 @@ class _StartFormPage2State extends State<StartFormPage2> {
               keyboardType: TextInputType.datetime,
               textInputAction: TextInputAction.done,
               onSubmitted: (value) {
-                onClickNext();
+                if (!isNextButtonDisabled) {
+                  onClickNext();
+                }
               },
             ),
             SizedBox(height: 400),

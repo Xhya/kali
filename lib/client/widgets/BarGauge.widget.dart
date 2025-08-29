@@ -82,7 +82,7 @@ class _BarGaugeWidgetState extends State<BarGaugeWidget> {
                     : LinearEdgeStyle.bothFlat,
           );
 
-          startValue = entry.value.toDouble();
+          startValue = startValue + entry.value.toDouble();
 
           return gauge;
         }),
