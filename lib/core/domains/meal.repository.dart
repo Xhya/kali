@@ -28,6 +28,8 @@ class MealRepository {
     required String mealId,
     MealPeriodEnum? period,
     DateTime? date,
+    String? userText,
+    String? nutriscoreId,
   }) async {
     Map body = {
       "period": period?.label,
@@ -35,6 +37,8 @@ class MealRepository {
           date != null
               ? '${date.toUtc().toIso8601String().split('.').first}+00:00'
               : null,
+      "nutriscoreId": nutriscoreId,
+      "text": userText,
     };
 
     final response = await http.patch(

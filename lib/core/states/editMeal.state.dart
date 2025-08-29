@@ -6,20 +6,30 @@ import 'package:kali/core/states/meal.state.dart';
 final editMealState = EditMealState();
 
 class EditMealState extends ChangeNotifier {
-  final isLoading = ValueNotifier<bool>(false);
+  final isComputeLoading = ValueNotifier<bool>(false);
+  final isRegisterLoading = ValueNotifier<bool>(false);
   final editingNutriScore = ValueNotifier<NutriScore?>(null);
   final editingUserTextMeal = ValueNotifier<String>("");
   final editingMealPeriod = ValueNotifier<MealPeriodEnum?>(null);
   bool get canSave {
     final currentMeal = mealState.currentMeal.value;
 
-    final hasDifference = editingMealPeriod.value != currentMeal?.period;
+    final hasDifference =
+        editingMealPeriod.value != currentMeal?.period ||
+        editingNutriScore.value != null;
 
     return hasDifference;
   }
 
+  bool get canCompute {
+    final currentMeal = mealState.currentMeal.value;
+    return editingUserTextMeal.value != currentMeal?.userText &&
+        editingNutriScore.value == null;
+  }
+
   EditMealState() {
-    isLoading.addListener(notifyListeners);
+    isComputeLoading.addListener(notifyListeners);
+    isRegisterLoading.addListener(notifyListeners);
     editingNutriScore.addListener(notifyListeners);
     editingUserTextMeal.addListener(notifyListeners);
     editingMealPeriod.addListener(notifyListeners);
@@ -27,7 +37,8 @@ class EditMealState extends ChangeNotifier {
 
   @override
   void dispose() {
-    isLoading.dispose();
+    isComputeLoading.dispose();
+    isRegisterLoading.dispose();
     editingNutriScore.dispose();
     editingUserTextMeal.dispose();
     editingMealPeriod.dispose();

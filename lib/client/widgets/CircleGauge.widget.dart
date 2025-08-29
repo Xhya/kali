@@ -56,6 +56,15 @@ class _CircleGaugeWidgetState extends State<CircleGaugeWidget> {
                 cornerStyle: CornerStyle.bothCurve,
                 enableAnimation: true,
               ),
+              if (widget.editingAmount != null)
+                RangePointer(
+                  value: widget.editingAmount!.toDouble(),
+                  width: 0.05,
+                  color: Colors.red,
+                  sizeUnit: GaugeSizeUnit.factor,
+                  cornerStyle: CornerStyle.bothCurve,
+                  enableAnimation: true,
+                ),
             ],
             annotations: <GaugeAnnotation>[
               if (widget.textCenter != null)
@@ -103,18 +112,7 @@ class _CircleGaugeWidgetState extends State<CircleGaugeWidget> {
               thicknessUnit: GaugeSizeUnit.factor,
             ),
             pointers: <GaugePointer>[],
-            ranges: [
-              ...list,
-
-              if (widget.editingAmount != null)
-                GaugeRange(
-                  startValue: 0,
-                  endValue: widget.editingAmount!.toDouble(),
-                  color: Colors.blue,
-                  startWidth: 5,
-                  endWidth: 5,
-                ),
-            ],
+            ranges: list,
             annotations: <GaugeAnnotation>[
               if (widget.textCenter != null)
                 GaugeAnnotation(

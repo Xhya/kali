@@ -30,9 +30,17 @@ class MealService {
     required String mealId,
     MealPeriodEnum? period,
     DateTime? date,
+    String? userText,
+    String? nutriscoreId,
   }) async {
     try {
-      await _mealRepository.updateMeal(mealId: mealId, period: period, date: date);
+      await _mealRepository.updateMeal(
+        mealId: mealId,
+        period: period,
+        date: date,
+        userText: userText,
+        nutriscoreId: nutriscoreId,
+      );
       await refreshMeals();
     } catch (e, stack) {
       errorService.notifyError(e: e, stack: stack);

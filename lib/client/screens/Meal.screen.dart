@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
+import 'package:kali/client/widgets/MealComputerInput.widget.dart';
 import 'package:kali/core/domains/meal.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
-import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/widgets/MealPeriodsHorizontal.widget.dart';
 import 'package:kali/client/widgets/NutriScoreGauges.widget.dart';
 import 'package:kali/core/states/meal.state.dart';
@@ -14,30 +14,48 @@ import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/client/Style.service.dart';
+import 'package:kali/core/states/Ai.state.dart';
 
 Future<void> onUpdateMeal() async {
   try {
-    editMealState.isLoading.value = true;
-    // final userText = editMealState.editingUserTextMeal.value;
-    // final nutriScore = await aiService.computeNutriScore(userText);
-    // editMealState.editingNutriScore.value = nutriScore;
+    editMealState.isRegisterLoading.value = true;
     final meal = mealState.currentMeal.value;
     if (meal != null) {
       await MealService().updateMeal(
         mealId: meal.id,
         period: editMealState.editingMealPeriod.value,
+        userText: editMealState.editingUserTextMeal.value,
+        nutriscoreId: editMealState.editingNutriScore.value?.id,
       );
+      editMealState.editingNutriScore.value = null;
       navigationService.navigateBack();
     }
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);
   } finally {
-    editMealState.isLoading.value = false;
+    editMealState.isRegisterLoading.value = false;
   }
 }
 
 void onClickSelectPeriod(MealPeriodEnum? period) {
   editMealState.editingMealPeriod.value = period;
+}
+
+Future<void> onComputeEditingMeal() async {
+  try {
+    aiState.aiNotUnderstandError.value = false;
+    editMealState.editingNutriScore.value = null;
+    if (!editMealState.isComputeLoading.value &&
+        editMealState.editingUserTextMeal.value.isNotEmpty == true) {
+      editMealState.isComputeLoading.value = true;
+      final meal = await MealService().computeMealNutriScore(
+        editMealState.editingUserTextMeal.value,
+      );
+      editMealState.editingNutriScore.value = meal?.nutriscore;
+    }
+  } finally {
+    editMealState.isComputeLoading.value = false;
+  }
 }
 
 class MealScreen extends StatefulWidget {
@@ -52,6 +70,9 @@ class _MealScreenState extends State<MealScreen> {
 
   @override
   void initState() {
+    editMealState.isComputeLoading.value = false;
+    editMealState.isRegisterLoading.value = false;
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
         meal = mealState.currentMeal.value;
@@ -74,7 +95,12 @@ class _MealScreenState extends State<MealScreen> {
       (EditMealState s) => s.editingMealPeriod.value,
     );
     bool canSave = context.select((EditMealState s) => s.canSave);
-    bool isLoading = context.select((EditMealState s) => s.isLoading.value);
+    bool canCompute = context.select((EditMealState s) => s.canCompute);
+    bool isComputeLoading = context.select((EditMealState s) => s.isComputeLoading.value);
+    bool isRegisterLoading = context.select((EditMealState s) => s.isRegisterLoading.value);
+    String editingUserTextMeal = context.select(
+      (EditMealState s) => s.editingUserTextMeal.value,
+    );
 
     if (meal == null) {
       return SizedBox.shrink();
@@ -98,11 +124,17 @@ class _MealScreenState extends State<MealScreen> {
                 chosenPeriods: mealPeriod != null ? [mealPeriod] : [],
               ),
               SizedBox(height: 16),
-              CustomInput(
-                content: editMealState.editingUserTextMeal.value,
-                onChanged: null,
-                textCapitalization: TextCapitalization.sentences,
-                readonly: true,
+              MealComputerInput(
+                mealText: editingUserTextMeal,
+                onUpdate: (value) {
+                  editMealState.editingNutriScore.value = null;
+                  editMealState.editingUserTextMeal.value = value;
+                },
+                onCompute: () {
+                  onComputeEditingMeal();
+                },
+                isLoading: isComputeLoading,
+                disabled: !canCompute,
                 maxLines: 100,
               ),
               SizedBox(height: 16),
@@ -142,7 +174,7 @@ class _MealScreenState extends State<MealScreen> {
             onUpdateMeal();
           },
           text: "Enregistrer",
-          isLoading: isLoading,
+          isLoading: isRegisterLoading,
           disabled: !canSave,
         ),
       ),
