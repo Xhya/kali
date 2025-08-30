@@ -105,65 +105,59 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: 16),
               Expanded(
                 child: SingleChildScrollView(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height - 200,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 8),
+
+                      MainKaloriesCountWidget(),
+
+                      SizedBox(height: 4),
+
+                      NutriScoreGaugesWidget(
+                        mealsByPeriods: currentMealsByPeriods,
+                      ),
+
+                      SizedBox(height: 32),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SizedBox(height: 8),
-
-                          MainKaloriesCountWidget(),
-
-                          SizedBox(height: 4),
-
-                          NutriScoreGaugesWidget(
-                            mealsByPeriods: currentMealsByPeriods,
-                          ),
-
-                          SizedBox(height: 32),
-
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              if (lastMeal != null)
-                                Text(
-                                  "Derniers ajouts",
-                                  style: style.fontsize.xs.merge(
-                                    style.text.greenDark,
-                                  ),
-                                ),
-                              if (lastMeal != null)
-                                CustomInkwell(
-                                  onTap: () {
-                                    HapticFeedback.vibrate();
-                                    goToMealsScreen();
-                                  },
-                                  child: Text(
-                                    "Afficher tout",
-                                    style: style.fontsize.xs
-                                        .merge(style.text.green)
-                                        .merge(style.fontweight.bold),
-                                  ),
-                                ),
-                            ],
-                          ),
-                          SizedBox(height: 8),
                           if (lastMeal != null)
-                            CustomCard(
-                              onClick: () {
-                                goToMealScreen(lastMeal);
-                              },
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 16,
+                            Text(
+                              "Derniers ajouts",
+                              style: style.fontsize.xs.merge(
+                                style.text.greenDark,
                               ),
-                              child: MealRowWidget(meal: lastMeal),
+                            ),
+                          if (lastMeal != null)
+                            CustomInkwell(
+                              onTap: () {
+                                HapticFeedback.vibrate();
+                                goToMealsScreen();
+                              },
+                              child: Text(
+                                "Afficher tout",
+                                style: style.fontsize.xs
+                                    .merge(style.text.green)
+                                    .merge(style.fontweight.bold),
+                              ),
                             ),
                         ],
                       ),
-                    ),
+                      SizedBox(height: 8),
+                      if (lastMeal != null)
+                        CustomCard(
+                          onClick: () {
+                            goToMealScreen(lastMeal);
+                          },
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 16,
+                          ),
+                          child: MealRowWidget(meal: lastMeal),
+                        ),
+                    ],
                   ),
                 ),
               ),
