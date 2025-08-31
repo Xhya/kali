@@ -157,6 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           child: MealRowWidget(meal: lastMeal),
                         ),
+                      SizedBox(height: 120),
                     ],
                   ),
                 ),
