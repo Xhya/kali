@@ -159,9 +159,9 @@ class _AppState extends State<App> {
         initFunction: () async {
           try {
             await refreshAppVersion();
+            await initConfigurations();
             await connexionService.listenToInternetConnexion();
             await UserService().refreshUser();
-            await textsState.init();
             await PushNotificationService().refreshNotificationToken();
           } catch (e) {
             errorService.notifyError(e: e, show: false);

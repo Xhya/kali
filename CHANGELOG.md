@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.6]
+
+- authentication refactor
+- remove scroll if not need on home screen
+
 ## [1.3.5]
 
 - can edit meal

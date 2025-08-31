@@ -1,7 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kali/core/services/Hardware.service.dart';
 import 'package:kali/core/services/User.service.dart';
-import 'package:kali/core/services/connexion.service.dart';
 import 'package:kali/core/utils/storageKeys.utils.dart';
 import 'package:kali/environment.dart';
 import 'package:uuid/uuid.dart';
@@ -20,19 +19,13 @@ class AuthenticationService {
 
   bool isAuthentifiedWithSignature = false;
   bool isAuthentifiedWithToken = false;
-  get isAuthentified => isAuthentifiedWithSignature || isAuthentifiedWithToken;
+  bool get isAuthentified =>
+      isAuthentifiedWithSignature || isAuthentifiedWithToken;
 
-  init() async {
-    final hasInternetConnexion = await connexionService.getHasInternetConnexion();
-
-    if (!hasInternetConnexion) {
-      return;
-    }
-
+  Future<void> init() async {
     final token = await _secureStorage.read(key: tokenKey);
     if (token != null) {
       try {
-        await _initUser();
         await _userService.refreshUser();
         isAuthentifiedWithToken = true;
       } catch (e) {
@@ -40,11 +33,20 @@ class AuthenticationService {
         await hardwareService.deleteTokenStorage();
       }
     } else {
-      await initSignature();
+      try {
+        final signature = await _secureStorage.read(key: signatureKey);
+        if (signature != null) {
+          isAuthentifiedWithSignature = true;
+          await _userService.refreshUser();
+        }
+      } catch (e) {
+        isAuthentifiedWithSignature = false;
+        await hardwareService.deleteSignatureStorage();
+      }
     }
   }
 
-  initSignature() async {
+  Future<void> initSignature() async {
     try {
       await _initDeviceId();
       await _generateSignedDeviceId();
@@ -57,21 +59,27 @@ class AuthenticationService {
     }
   }
 
-  loginWithGoogle({required String email, required String authCode}) async {
+  Future<void> loginWithGoogle({
+    required String email,
+    required String authCode,
+  }) async {
     await _authenticationRepository.loginWithGoogle(
       email: email,
       authCode: authCode,
     );
   }
 
-  registerWithGoogle({required String email, required String authCode}) async {
+  Future<void> registerWithGoogle({
+    required String email,
+    required String authCode,
+  }) async {
     await _authenticationRepository.registerWithGoogle(
       email: email,
       authCode: authCode,
     );
   }
 
-  _initUser() async {
+  Future<void> _initUser() async {
     await _authenticationRepository.initUser(
       formattedSignature:
           await _hardwareService
@@ -83,11 +91,11 @@ class AuthenticationService {
     );
   }
 
-  verifyAuthCode(String code) async {
+  Future<void> verifyAuthCode(String code) async {
     await _authenticationRepository.verifyAuthCode(code: code);
   }
 
-  resendCode() async {
+  Future<void> resendCode() async {
     await _authenticationRepository.resendCode();
   }
 

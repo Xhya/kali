@@ -42,7 +42,7 @@ class _StartFormPageFinalState extends State<StartFormPageFinal> {
 
             if (personalNutriScore != null)
               ExpandedWidget(
-                height: 220,
+                height: 250,
                 child: Column(
                   children: [
                     TotalCaloriesWidget(nutriScore: personalNutriScore),

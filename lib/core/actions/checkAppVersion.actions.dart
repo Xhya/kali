@@ -3,6 +3,25 @@ import 'package:kali/core/models/Configuration.enum.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Hardware.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
+import 'package:kali/core/states/texts.state.dart';
+
+Future<void> initConfigurations() async {
+  try {
+    final configurationsRepository = ConfigurationsRepository();
+    final activateSubscription = await configurationsRepository.getConfig(
+      ConfigKeyEnum.activateSubscription,
+    );
+    configurationState.subscriptionActivated.value =
+        activateSubscription.toLowerCase() == "true";
+
+    final maxCountStr = await configurationsRepository.getConfig(
+      ConfigKeyEnum.computeMaxCharactersCount,
+    );
+    textsState.maxCharacterCount.value = int.parse(maxCountStr);
+  } catch (e, stack) {
+    errorService.notifyError(e: e, stack: stack, show: false);
+  }
+}
 
 Future<void> refreshAppVersion() async {
   try {
@@ -14,13 +33,6 @@ Future<void> refreshAppVersion() async {
         .getConfig(ConfigKeyEnum.forceUpdateVersion);
     configurationState.lastVersion.value = await ConfigurationsRepository()
         .getConfig(ConfigKeyEnum.lastVersion);
-
-    final activateSubscription = await ConfigurationsRepository().getConfig(
-      ConfigKeyEnum.activateSubscription,
-    );
-
-    configurationState.subscriptionActivated.value =
-        activateSubscription.toLowerCase() == "true";
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack, show: false);
   }

@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:kali/core/domains/pushNotification.repository.dart';
+import 'package:kali/core/states/user.state.dart';
 import 'package:kali/environment.dart';
 
 class PushNotificationService {
@@ -13,7 +14,10 @@ class PushNotificationService {
   }
 
   Future<void> refreshNotificationToken() async {
-    if (!isInTestEnv && !kIsWeb && !useSimulator) {
+    if (!isInTestEnv &&
+        !kIsWeb &&
+        !useSimulator &&
+        userState.user.value != null) {
       String? token = await _getToken();
 
       if (token != null) {

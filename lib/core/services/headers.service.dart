@@ -27,7 +27,7 @@ Future<Map<String, String>> getBaseHeaders() async {
   };
 }
 
-headersWithToken() async {
+Future<Map<String, String>> headersWithToken() async {
   final customUserAgent = await getUserAgent();
 
   String? token = await getToken();
@@ -43,7 +43,7 @@ headersWithToken() async {
   };
 }
 
-headersWithMaybeToken() async {
+Future<Map<String, String>> headersWithMaybeToken() async {
   final customUserAgent = await getUserAgent();
 
   String? token = await getToken();
@@ -55,7 +55,7 @@ headersWithMaybeToken() async {
   };
 }
 
-headersWithoutToken() async {
+Future<Map<String, String>> headersWithoutToken() async {
   final customUserAgent = await getUserAgent();
 
   return {...await getBaseHeaders(), 'User-Agent': customUserAgent};

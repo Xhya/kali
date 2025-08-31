@@ -5,7 +5,6 @@ import 'package:kali/client/widgets/EndOfTestPeriod.widget.dart';
 import 'package:kali/client/widgets/MacroElementRow.widget.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
-import 'package:kali/core/services/Authentication.service.dart';
 import 'package:kali/core/services/Hardware.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
 import 'package:kali/core/states/googleSignIn.state.dart';
@@ -16,10 +15,9 @@ import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/user.state.dart';
 
-onClickDeconnect() async {
+Future<void> onClickDeconnect() async {
   await hardwareService.deleteSignatureStorage();
   await hardwareService.deleteTokenStorage();
-  await authenticationService.initSignature();
   await googleSignInState.signInGoogle.value?.signOut();
   navigationService.navigateTo(ScreenEnum.start);
 }

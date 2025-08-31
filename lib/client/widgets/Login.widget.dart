@@ -10,7 +10,7 @@ import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/states/Input.state.dart';
 
-onSubmitLogin() async {
+Future<void> onSubmitLogin() async {
   try {
     await AuthenticationRepository().login(
       email: inputState.email.value,

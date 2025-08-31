@@ -41,7 +41,7 @@ class AuthenticationRepository {
 
     final response = await http.post(
       Uri.parse('$API_URL/users/login'),
-      headers: await headersWithMaybeToken(),
+      headers: await headersWithoutToken(),
       body: json.encode(body),
     );
 
