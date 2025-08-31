@@ -5,6 +5,7 @@ import 'package:kali/client/widgets/Register.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/actions/confetti.actions.dart';
 import 'package:kali/core/domains/nutriScore.repository.dart';
+import 'package:kali/core/services/Authentication.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/services/Error.service.dart';
@@ -14,38 +15,9 @@ void onClickBottomButton(BuildContext context) async {
   startFormState.isLoading.value = true;
   try {
     if (startFormState.personalNutriScore.value != null) {
-      startFormState.personalNutriScore.value = null;
-      await userService.refreshUser();
-      navigationService.nextAction = () async {
-        navigationService.context = context;
-        await launchConfetti();
-      };
-      navigationService.openBottomSheet(
-        widget: WelcomeBottomSheet(
-          child: RegisterWidget(
-            title: "Bienvenu·e à bord 🔥",
-            subtitle: "Inscris toi pour ne pas perdre tes progrès !",
-          ),
-        ),
-      );
-      navigationService.navigateTo(ScreenEnum.home);
-      launchConfetti();
+      await _onClickConfirmPersonalNutriscore();
     } else if (startFormState.isFormDone) {
-      navigationService.openBottomSheet(
-        widget: FullScreenBottomSheet(
-          canClose: false,
-          child: Center(
-            child: AnimatedLoadingWidget(
-              title: "Kali fait ses comptes.. ⚖️",
-              subtitle:
-                  "D'après toutes les informations que tu viens de me donner, je réfléchis au meilleur des plans",
-            ),
-          ),
-        ),
-      );
-      await computePersonalNutriScore();
-      navigationService.navigateBack();
-      onClickNext();
+      await _submitFormAndComputeNutriscore();
     } else {
       onClickNext();
     }
@@ -54,6 +26,45 @@ void onClickBottomButton(BuildContext context) async {
   } finally {
     startFormState.isLoading.value = false;
   }
+}
+
+Future<void> _submitFormAndComputeNutriscore() async {
+  navigationService.openBottomSheet(
+    widget: FullScreenBottomSheet(
+      canClose: false,
+      child: Center(
+        child: AnimatedLoadingWidget(
+          title: "Kali fait ses comptes.. ⚖️",
+          subtitle:
+              "D'après toutes les informations que tu viens de me donner, je réfléchis au meilleur des plans",
+        ),
+      ),
+    ),
+  );
+  await authenticationService.initSignature();
+  await computePersonalNutriScore();
+  navigationService.navigateBack();
+  onClickNext();
+}
+
+Future<void> _onClickConfirmPersonalNutriscore() async {
+  var currentContext = navigationService.context;
+  startFormState.personalNutriScore.value = null;
+  await userService.refreshUser();
+  navigationService.nextAction = () async {
+    navigationService.context = currentContext;
+    await launchConfetti();
+  };
+  navigationService.openBottomSheet(
+    widget: WelcomeBottomSheet(
+      child: RegisterWidget(
+        title: "Bienvenu·e à bord 🔥",
+        subtitle: "Inscris toi pour ne pas perdre tes progrès !",
+      ),
+    ),
+  );
+  navigationService.navigateTo(ScreenEnum.home);
+  launchConfetti();
 }
 
 void onClickNext() {
