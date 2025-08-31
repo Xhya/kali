@@ -4,7 +4,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
 import 'package:kali/core/actions/googleSignIn.actions.dart';
@@ -52,9 +51,6 @@ void main() async {
 
   // User identification
   await authenticationService.init();
-
-  Stripe.publishableKey = STRIPE_PUBLIC_KEY;
-  await Stripe.instance.applySettings();
 
   // Firebase init
   if (!useSimulator && !kIsWeb) {
