@@ -62,4 +62,18 @@ class UserRepository {
       throw Exception();
     }
   }
+
+  Future<void> testNotification() async {
+    final response = await http.post(
+      Uri.parse('$API_URL/users/test-notification'),
+      headers: await headersWithToken(),
+    );
+
+    if (response.statusCode == 200) {
+      return;
+    } else {
+      errorService.currentResponseError = response;
+      throw Exception();
+    }
+  }
 }

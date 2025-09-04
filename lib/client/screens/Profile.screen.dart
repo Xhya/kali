@@ -4,6 +4,7 @@ import 'package:kali/client/widgets/CustomButton.widget.dart';
 import 'package:kali/client/widgets/EndOfTestPeriod.widget.dart';
 import 'package:kali/client/widgets/MacroElementRow.widget.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
+import 'package:kali/core/domains/user.repository.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/Hardware.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
@@ -185,7 +186,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
 
                         SizedBox(height: 12),
-                        Text("$currentVersion ($currentBuild)"),
+                        GestureDetector(
+                          onTap: () {
+                            if (userState.user.value?.email ==
+                                "alexia.souvane@gmail.com") {
+                              UserRepository().testNotification();
+                            }
+                          },
+                          child: Text("$currentVersion ($currentBuild)"),
+                        ),
                         SizedBox(height: 2),
                         if (isVersionLower(currentVersion, lastVersion))
                           GestureDetector(
