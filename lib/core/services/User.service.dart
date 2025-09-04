@@ -14,10 +14,8 @@ class UserService {
   final _userNutriscoreRepository = UserNutriscoreRepository();
 
   Future<void> refreshUser() async {
-    if (authenticationService.isAuthentified) {
-      User? user = await _userRepository.refreshUser();
-      userState.user.value = user;
-    }
+    User? user = await _userRepository.refreshUser();
+    userState.user.value = user;
   }
 
   Future<bool> canCompute() async {

@@ -126,7 +126,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
                             if (subscription.description != null)
                               Text(
                                 subscription.description!,
-                                maxLines: 2,
+                                maxLines: 5,
                                 style: style.fontsize.xs.merge(
                                   style.text.neutral,
                                 ),

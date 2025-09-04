@@ -68,9 +68,7 @@ class _StartFormScreenState extends State<StartScreen> {
                             vertical: 20,
                           ),
                           alignment: Alignment.center,
-                          color: Colors.white.withOpacity(
-                            0.2,
-                          ), 
+                          color: Colors.white.withOpacity(0.2),
                           child: Column(
                             spacing: 12,
                             mainAxisAlignment: MainAxisAlignment.center,
