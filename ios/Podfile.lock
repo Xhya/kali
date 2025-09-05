@@ -15,6 +15,9 @@ PODS:
     - Flutter
   - connectivity_plus (0.0.1):
     - Flutter
+  - CwlCatchException (2.2.1):
+    - CwlCatchExceptionSupport (~> 2.2.1)
+  - CwlCatchExceptionSupport (2.2.1)
   - Firebase/CoreOnly (12.0.0):
     - FirebaseCore (~> 12.0.0)
   - Firebase/Messaging (12.0.0):
@@ -117,6 +120,10 @@ PODS:
     - FlutterMacOS
   - sms_autofill (0.0.1):
     - Flutter
+  - speech_to_text (7.2.0):
+    - CwlCatchException
+    - Flutter
+    - FlutterMacOS
   - url_launcher_ios (0.0.1):
     - Flutter
 
@@ -135,6 +142,7 @@ DEPENDENCIES:
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sms_autofill (from `.symlinks/plugins/sms_autofill/ios`)
+  - speech_to_text (from `.symlinks/plugins/speech_to_text/darwin`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 SPEC REPOS:
@@ -142,6 +150,8 @@ SPEC REPOS:
     - AppAuth
     - AppCheckCore
     - Bugsnag
+    - CwlCatchException
+    - CwlCatchExceptionSupport
     - Firebase
     - FirebaseCore
     - FirebaseCoreInternal
@@ -184,6 +194,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   sms_autofill:
     :path: ".symlinks/plugins/sms_autofill/ios"
+  speech_to_text:
+    :path: ".symlinks/plugins/speech_to_text/darwin"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
@@ -193,6 +205,8 @@ SPEC CHECKSUMS:
   Bugsnag: 4f9b8e6beab17d7903b67959915d707ad9d96911
   bugsnag_flutter: 76cece0aa346fac201b9ac857bc3f70001efaa66
   connectivity_plus: 2a701ffec2c0ae28a48cf7540e279787e77c447d
+  CwlCatchException: 7acc161b299a6de7f0a46a6ed741eae2c8b4d75a
+  CwlCatchExceptionSupport: 54ccab8d8c78907b57f99717fb19d4cc3bce02dc
   Firebase: 800d487043c0557d9faed71477a38d9aafb08a41
   firebase_core: c70f903d70ec229c08c2f49aba5a8c1338546d40
   firebase_messaging: efa3a73cad64b05131bfe138c139a65e0daebe78
@@ -217,6 +231,7 @@ SPEC CHECKSUMS:
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   sms_autofill: c461043483362c3f1709ee76eaae6eb570b31686
+  speech_to_text: 87bf9298952e8d9073be1b6aade6d5758db5170c
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
 
 PODFILE CHECKSUM: 53a6aebc29ccee84c41f92f409fc20cd4ca011f1

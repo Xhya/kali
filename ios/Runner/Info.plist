@@ -53,6 +53,10 @@
 	<string>Main</string>
 	<key>UIStatusBarHidden</key>
 	<false/>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>This app use speech recognition to transcribe user meals</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app use micro to transcribe user meals.</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
