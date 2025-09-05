@@ -32,8 +32,11 @@ class _RoutingState extends State<Routing> {
   Widget? previousBottomBar;
 
   bool backButtonInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    Navigator.pop(context);
-    return true;
+    if (Navigator.canPop(context)) {
+      Navigator.pop(context);
+      return true;
+    }
+    return false;
   }
 
   @override
