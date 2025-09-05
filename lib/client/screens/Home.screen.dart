@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/EndOfTestPeriod.widget.dart';
 import 'package:kali/client/widgets/TestPeriodBottomSheet.widget.dart';
+import 'package:kali/core/services/Authentication.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
 import 'package:kali/core/states/user.state.dart';
@@ -31,6 +32,7 @@ Future<void> initHomeScreen() async {
       badge: true,
       sound: true,
     );
+    await authenticationService.initUser();
     await MealService().refreshMeals();
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);

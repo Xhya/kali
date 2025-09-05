@@ -50,11 +50,10 @@ class AuthenticationService {
     try {
       await _initDeviceId();
       await _generateSignedDeviceId();
-      await _initUser();
+      await _initSignature();
       isAuthentifiedWithSignature = true;
     } catch (e, stack) {
       await hardwareService.deleteSignatureStorage();
-      await initSignature();
       await errorService.notifyError(e: e, stack: stack, show: false);
     }
   }
@@ -79,11 +78,14 @@ class AuthenticationService {
     );
   }
 
-  Future<void> _initUser() async {
+  Future<void> _initSignature() async {
+    await _authenticationRepository.initSignature(
+      formattedSignature: await _hardwareService.getFormattedSignature(),
+    );
+  }
+
+  Future<void> initUser() async {
     await _authenticationRepository.initUser(
-      formattedSignature:
-          await _hardwareService
-              .getFormattedSignature(), // TODO: should be in another function
       currentVersion: await _hardwareService.getCurrentVersion(),
       currentBuild: await _hardwareService.getCurrentBuild(),
       operatingSystem: await _hardwareService.getOperatingSystem(),

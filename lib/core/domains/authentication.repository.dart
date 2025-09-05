@@ -7,14 +7,12 @@ import 'package:kali/environment.dart';
 
 class AuthenticationRepository {
   Future<void> initUser({
-    required String formattedSignature,
     required String currentVersion,
     required String currentBuild,
     required OperatingSystemEnum operatingSystem,
     required bool notificationActivated,
   }) async {
     Map body = {
-      "formattedSignature": formattedSignature,
       "currentVersion": currentVersion,
       "currentBuild": currentVersion,
       "operatingSystem": operatingSystem.label,
@@ -23,6 +21,28 @@ class AuthenticationRepository {
 
     final response = await http.post(
       Uri.parse('$API_URL/users/init'),
+      headers: await headersWithMaybeToken(),
+      body: json.encode(body),
+    );
+
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body) as Map<String, dynamic>;
+      return body["data"];
+    } else {
+      errorService.currentResponseError = response;
+      throw Exception();
+    }
+  }
+
+  Future<void> initSignature({
+    required String formattedSignature,
+  }) async {
+    Map body = {
+      "formattedSignature": formattedSignature,
+    };
+
+    final response = await http.post(
+      Uri.parse('$API_URL/users/init-signature'),
       headers: await headersWithMaybeToken(),
       body: json.encode(body),
     );
