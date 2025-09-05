@@ -13,8 +13,8 @@ import 'package:kali/core/utils/computeMealPeriod.utils.dart';
 
 Future<void> onClickAddQuickMeal() async {
   try {
+    quickAddMealState.isAddingLoading.value = true;
     if (await userService.canCompute()) {
-      quickAddMealState.isAddingLoading.value = true;
       quickAddMealState.computed.value = false;
       quickAddMealState.reset();
       quickAddMealState.chosenPeriod.value = computeMealPeriod(DateTime.now());

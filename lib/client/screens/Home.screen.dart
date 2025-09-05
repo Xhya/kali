@@ -1,7 +1,7 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/EndOfTestPeriod.widget.dart';
+import 'package:kali/client/widgets/PushNotificationPermission.widget.dart';
 import 'package:kali/client/widgets/TestPeriodBottomSheet.widget.dart';
 import 'package:kali/core/services/Authentication.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
@@ -27,11 +27,6 @@ import 'package:kali/client/layout/Base.scaffold.dart';
 
 Future<void> initHomeScreen() async {
   try {
-    await FirebaseMessaging.instance.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
     await authenticationService.initUser();
     await MealService().refreshMeals();
   } catch (e, stack) {
@@ -101,6 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Column(
             children: [
+              PushNotificationPermissionWidget(padding: 16),
               EndOfTestPeriodWidget(padding: 16),
               DateSelector(currentDate: currentDate),
               SizedBox(height: 16),
