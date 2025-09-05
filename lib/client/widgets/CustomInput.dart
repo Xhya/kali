@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/Utils/Input.decoration.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
+import 'package:kali/client/widgets/SpeechToText.widget.dart';
 
 class CustomInput extends StatefulWidget {
   const CustomInput({
@@ -25,6 +26,7 @@ class CustomInput extends StatefulWidget {
     this.onSubmitted,
     this.textInputAction = TextInputAction.continueAction,
     this.customIcon,
+    this.withSpeechToText = false,
   });
 
   final Function(String)? onChanged;
@@ -45,6 +47,7 @@ class CustomInput extends StatefulWidget {
   final Function(String)? onSubmitted;
   final TextInputAction textInputAction;
   final CustomIconWidget? customIcon;
+  final bool withSpeechToText;
 
   @override
   State<CustomInput> createState() => _CustomInputState();
@@ -129,7 +132,7 @@ class _CustomInputState extends State<CustomInput> {
         ),
         if (widget.maxLength != null)
           Positioned(
-            right: 12,
+            right: widget.withSpeechToText ? 38 : 12,
             bottom: 8,
             child: Text(
               '${controller.text.length}/${widget.maxLength}',
@@ -138,6 +141,9 @@ class _CustomInputState extends State<CustomInput> {
                   .merge(style.text.greenDark),
             ),
           ),
+
+        if (widget.withSpeechToText)
+          Positioned(right: 12, bottom: 8, child: SpeechToTextWidget()),
       ],
     );
   }

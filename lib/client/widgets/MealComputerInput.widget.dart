@@ -62,6 +62,7 @@ class _MealComputerInputState extends State<MealComputerInput> {
                 maxLength: textsState.maxCharacterCount.value,
                 keyboardType: TextInputType.multiline,
                 textInputAction: TextInputAction.newline,
+                withSpeechToText: true,
               ),
             ),
           ),
