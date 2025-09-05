@@ -6,6 +6,7 @@ import 'package:kali/client/widgets/MealComputerInput.widget.dart';
 import 'package:kali/client/widgets/MealPeriodsWrap.widget.dart';
 import 'package:kali/client/widgets/NutriScore2by2.widget.dart';
 import 'package:kali/client/widgets/QuickAddMealHeader.widget.dart';
+import 'package:kali/client/widgets/ThinkingWidget.widget.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/Error.service.dart';
@@ -118,12 +119,15 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
 
               if (computed)
                 ExpandedWidget(
+                  height: 260,
                   child: Column(
                     children: [
                       SizedBox(height: 16),
                       Expanded(
                         child: NutriScore2by2Widget(nutriScore: nutriScore),
                       ),
+                      if (nutriScore?.thinking != null)
+                        ThinkingWidget(thinking: nutriScore!.thinking!),
                       SizedBox(height: 16),
                       MainButtonWidget(
                         onClick: () {

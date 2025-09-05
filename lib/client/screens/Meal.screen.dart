@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/MealComputerInput.widget.dart';
+import 'package:kali/client/widgets/ThinkingWidget.widget.dart';
 import 'package:kali/core/domains/meal.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:provider/provider.dart';
@@ -96,8 +97,12 @@ class _MealScreenState extends State<MealScreen> {
     );
     bool canSave = context.select((EditMealState s) => s.canSave);
     bool canCompute = context.select((EditMealState s) => s.canCompute);
-    bool isComputeLoading = context.select((EditMealState s) => s.isComputeLoading.value);
-    bool isRegisterLoading = context.select((EditMealState s) => s.isRegisterLoading.value);
+    bool isComputeLoading = context.select(
+      (EditMealState s) => s.isComputeLoading.value,
+    );
+    bool isRegisterLoading = context.select(
+      (EditMealState s) => s.isRegisterLoading.value,
+    );
     String editingUserTextMeal = context.select(
       (EditMealState s) => s.editingUserTextMeal.value,
     );
@@ -115,6 +120,7 @@ class _MealScreenState extends State<MealScreen> {
           color: style.background.greenTransparent.color,
           padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               MealPeriodsHorizontalWidget(
                 withAll: false,
@@ -164,7 +170,15 @@ class _MealScreenState extends State<MealScreen> {
               ),
 
               SizedBox(height: 16),
+
               NutriScoreGaugesWidget(mealsByPeriods: [meal!], withTotal: false),
+
+              SizedBox(height: 16),
+
+              if (mealState.currentMeal.value?.nutriscore?.thinking != null)
+              ThinkingWidget(
+                thinking: mealState.currentMeal.value!.nutriscore!.thinking!,
+              ),  
             ],
           ),
         ),
