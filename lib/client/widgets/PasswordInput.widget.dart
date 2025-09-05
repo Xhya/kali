@@ -39,7 +39,7 @@ class _PasswordInputState extends State<PasswordInputWidget> {
       onChanged: (value) {
         onUpdateInputPassword(value);
       },
-      placeholder: "Password",
+      placeholder: "Mot de passe",
       customIcon: CustomIconWidget(
         icon: Icon(_obscurePassword ? Icons.visibility_off : Icons.visibility),
         onClick: () {

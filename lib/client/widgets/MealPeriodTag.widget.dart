@@ -76,6 +76,7 @@ class _MealPeriodTagWidgetState extends State<MealPeriodTagWidget> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(icon, style: style.fontsize.xs),
+              const SizedBox(width: 2),
               Text(
                 t(widget.mealPeriod?.label ?? "all_meals"),
                 style: textColor.merge(style.fontsize.xs),

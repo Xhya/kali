@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kali/client/widgets/CustomIcon.widget.dart';
+import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/widgets/ValidateCode.widget.dart';
 import 'package:kali/core/domains/authentication.repository.dart';
 import 'package:kali/core/states/register.state.dart';
@@ -15,7 +17,7 @@ import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/Input.state.dart';
 
-onSubmitRegisterUser() async {
+Future<void> onSubmitRegisterUser() async {
   try {
     registerState.isLoading.value = true;
     await AuthenticationRepository().register(
@@ -49,6 +51,9 @@ class RegisterWidget extends StatefulWidget {
 }
 
 class _RegisterWidgetState extends State<RegisterWidget> {
+  String passwordCopy = "";
+  bool obscurePassword = true;
+
   @override
   void initState() {
     registerState.isLoading.value = false;
@@ -93,6 +98,27 @@ class _RegisterWidgetState extends State<RegisterWidget> {
         EmailInputWidget(),
         SizedBox(height: 4),
         PasswordInputWidget(),
+        SizedBox(height: 4),
+        CustomInput(
+          content: passwordCopy,
+          onChanged: (value) {
+            setState(() {
+              passwordCopy = value;
+            });
+          },
+          placeholder: "Répéter le mot de passe",
+          customIcon: CustomIconWidget(
+            icon: Icon(
+              obscurePassword ? Icons.visibility_off : Icons.visibility,
+            ),
+            onClick: () {
+              setState(() {
+                obscurePassword = !obscurePassword;
+              });
+            },
+          ),
+          obscureText: obscurePassword,
+        ),
         SizedBox(height: 32),
         MainButtonWidget(
           onClick: () {
@@ -101,7 +127,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
           },
           text: "créer un compte",
           iconWidget: Icon(Icons.arrow_forward, size: 20),
-          disabled: !areEmailAndPasswordValid,
+          disabled: !areEmailAndPasswordValid || passwordCopy != inputState.password.value,
           isLoading: isLoading,
         ),
         // SizedBox(height: 40),
