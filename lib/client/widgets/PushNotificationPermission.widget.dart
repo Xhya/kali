@@ -1,11 +1,5 @@
-import 'dart:async';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
-import 'package:kali/client/widgets/Subscriptions.widget.dart';
-import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
-import 'package:kali/core/services/Navigation.service.dart';
-import 'package:kali/core/states/configuration.state.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';

@@ -23,7 +23,7 @@ class CustomInput extends StatefulWidget {
     this.obscureText = false,
     this.maxLength,
     this.onSubmitted,
-    this.textInputAction,
+    this.textInputAction = TextInputAction.continueAction,
     this.customIcon,
   });
 
@@ -43,7 +43,7 @@ class CustomInput extends StatefulWidget {
   final bool obscureText;
   final int? maxLength;
   final Function(String)? onSubmitted;
-  final TextInputAction? textInputAction;
+  final TextInputAction textInputAction;
   final CustomIconWidget? customIcon;
 
   @override

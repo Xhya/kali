@@ -60,9 +60,11 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
   @override
   void initState() {
     super.initState();
-    quickAddMealState.isComputingLoading.value = false;
-    quickAddMealState.isAddingLoading.value = false;
-    quickAddMealState.date.value = mealState.currentDate.value;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      quickAddMealState.isComputingLoading.value = false;
+      quickAddMealState.isAddingLoading.value = false;
+      quickAddMealState.date.value = mealState.currentDate.value;
+    });
 
     quickAddMealState.meal.addListener(() {
       final nutri = quickAddMealState.meal.value?.nutriscore;
@@ -83,8 +85,12 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
     String userMealText = context.select(
       (QuickAddMealState s) => s.userMealText.value,
     );
-    bool isComputingLoading = context.select((QuickAddMealState s) => s.isComputingLoading.value);
-    bool isAddingLoading = context.select((QuickAddMealState s) => s.isAddingLoading.value);
+    bool isComputingLoading = context.select(
+      (QuickAddMealState s) => s.isComputingLoading.value,
+    );
+    bool isAddingLoading = context.select(
+      (QuickAddMealState s) => s.isAddingLoading.value,
+    );
 
     return SingleChildScrollView(
       child: Container(

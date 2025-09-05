@@ -60,6 +60,8 @@ class _MealComputerInputState extends State<MealComputerInput> {
                 errorText:
                     aiNotUnderstandError ? 'Veuillez être plus précis' : null,
                 maxLength: textsState.maxCharacterCount.value,
+                keyboardType: TextInputType.multiline,
+                textInputAction: TextInputAction.newline,
               ),
             ),
           ),
