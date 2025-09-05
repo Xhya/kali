@@ -13,7 +13,7 @@ class PushNotificationService {
   }
 
   Future<void> refreshNotificationToken() async {
-    if (!isInTestEnv && !kIsWeb && !useSimulator) {
+    if (!isInTestEnv && !kIsWeb) {
       String? token = await _getToken();
 
       if (token != null) {

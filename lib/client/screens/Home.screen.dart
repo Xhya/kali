@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/EndOfTestPeriod.widget.dart';
@@ -25,6 +26,11 @@ import 'package:kali/client/layout/Base.scaffold.dart';
 
 Future<void> initHomeScreen() async {
   try {
+    await FirebaseMessaging.instance.requestPermission(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
     await MealService().refreshMeals();
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);
