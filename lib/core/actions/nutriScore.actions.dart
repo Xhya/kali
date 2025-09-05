@@ -6,12 +6,12 @@ import 'package:kali/core/utils/computeMealPeriod.utils.dart';
 
 Future<void> computeNutriScoreAction() async {
   try {
-    quickAddMealState.isLoading.value = true;
+    quickAddMealState.isComputingLoading.value = true;
     final userText = quickAddMealState.userMealText.value;
 
     final meal = await MealService().computeMealNutriScore(userText);
     quickAddMealState.meal.value = meal;
-    quickAddMealState.isLoading.value = false;
+    quickAddMealState.isComputingLoading.value = false;
     quickAddMealState.computed.value = true;
   } catch (e, stack) {
     errorService.notifyError(
@@ -20,7 +20,7 @@ Future<void> computeNutriScoreAction() async {
       show: !aiState.aiNotUnderstandError.value,
     );
   } finally {
-    quickAddMealState.isLoading.value = false;
+    quickAddMealState.isComputingLoading.value = false;
   }
 }
 
@@ -41,6 +41,6 @@ Future<void> addMealAction() async {
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);
   } finally {
-    quickAddMealState.isLoading.value = false;
+    quickAddMealState.isComputingLoading.value = false;
   }
 }

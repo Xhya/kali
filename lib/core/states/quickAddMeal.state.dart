@@ -6,7 +6,8 @@ import 'package:kali/core/states/Ai.state.dart';
 final quickAddMealState = QuickAddMealState();
 
 class QuickAddMealState extends ChangeNotifier {
-  final isLoading = ValueNotifier<bool>(false);
+  final isComputingLoading = ValueNotifier<bool>(false);
+  final isAddingLoading = ValueNotifier<bool>(false);
   final computed = ValueNotifier<bool>(false);
   final userMealText = ValueNotifier<String>("");
   final chosenPeriod = ValueNotifier<MealPeriodEnum?>(null);
@@ -15,7 +16,8 @@ class QuickAddMealState extends ChangeNotifier {
   final date = ValueNotifier<DateTime>(DateTime.now());
 
   QuickAddMealState() {
-    isLoading.addListener(notifyListeners);
+    isComputingLoading.addListener(notifyListeners);
+    isAddingLoading.addListener(notifyListeners);
     userMealText.addListener(notifyListeners);
     chosenPeriod.addListener(notifyListeners);
     meal.addListener(notifyListeners);
@@ -25,7 +27,8 @@ class QuickAddMealState extends ChangeNotifier {
 
   @override
   void dispose() {
-    isLoading.dispose();
+    isComputingLoading.dispose();
+    isAddingLoading.dispose();
     userMealText.dispose();
     chosenPeriod.dispose();
     meal.dispose();
@@ -35,7 +38,7 @@ class QuickAddMealState extends ChangeNotifier {
   }
 
   reset() {
-    isLoading.value = false;
+    isComputingLoading.value = false;
     userMealText.value = "";
     chosenPeriod.value = null;
     meal.value = null;

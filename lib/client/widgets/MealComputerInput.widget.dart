@@ -54,7 +54,7 @@ class _MealComputerInputState extends State<MealComputerInput> {
                     maxLength: textsState.maxCharacterCount.value,
                   ),
                 ],
-                minLines: 1,
+                minLines: 2,
                 maxLines: widget.maxLines,
                 textCapitalization: TextCapitalization.sentences,
                 errorText:

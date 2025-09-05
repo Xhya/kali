@@ -19,7 +19,7 @@ import 'package:kali/core/states/Ai.state.dart';
 
 Future<void> onComputeQuickAddMeal() async {
   aiState.aiNotUnderstandError.value = false;
-  if (!quickAddMealState.isLoading.value &&
+  if (!quickAddMealState.isComputingLoading.value &&
       quickAddMealState.userMealText.value.isNotEmpty &&
       quickAddMealState.chosenPeriod.value != null) {
     await computeNutriScoreAction();
@@ -37,12 +37,15 @@ void onClickSelectPeriod(MealPeriodEnum period) {
 
 Future<void> onClickAddMealToDay() async {
   try {
+    quickAddMealState.isAddingLoading.value = true;
     await addMealAction();
     mealState.currentDate.value = quickAddMealState.date.value;
     quickAddMealState.userMealText.value = "";
     navigationService.closeBottomSheet();
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);
+  } finally {
+    quickAddMealState.isAddingLoading.value = false;
   }
 }
 
@@ -57,7 +60,8 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
   @override
   void initState() {
     super.initState();
-    quickAddMealState.isLoading.value = false;
+    quickAddMealState.isComputingLoading.value = false;
+    quickAddMealState.isAddingLoading.value = false;
     quickAddMealState.date.value = mealState.currentDate.value;
 
     quickAddMealState.meal.addListener(() {
@@ -79,7 +83,8 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
     String userMealText = context.select(
       (QuickAddMealState s) => s.userMealText.value,
     );
-    bool isLoading = context.select((QuickAddMealState s) => s.isLoading.value);
+    bool isComputingLoading = context.select((QuickAddMealState s) => s.isComputingLoading.value);
+    bool isAddingLoading = context.select((QuickAddMealState s) => s.isAddingLoading.value);
 
     return SingleChildScrollView(
       child: Container(
@@ -113,8 +118,9 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                 onCompute: () {
                   onComputeQuickAddMeal();
                 },
-                isLoading: isLoading,
+                isLoading: isComputingLoading,
                 disabled: userMealText.isEmpty || chosenPeriod == null,
+                maxLines: 5,
               ),
 
               if (computed)
@@ -136,6 +142,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
                         iconWidget: Icon(Icons.add),
                         text: "Ajouter à la journée",
                         disabled: nutriScore == null,
+                        isLoading: isAddingLoading,
                       ),
                     ],
                   ),

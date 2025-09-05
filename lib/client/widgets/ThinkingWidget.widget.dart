@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/core/states/Input.state.dart';
 
@@ -32,7 +34,17 @@ class _ThinkingWidgetState extends State<ThinkingWidget> {
           builder: (context) {
             return AlertDialog(
               title: Text("Détails nutritionnels"),
-              content: SingleChildScrollView(child: Text(widget.thinking)),
+              content: SizedBox(
+                width: double.maxFinite,
+                child: Markdown(
+                  data: widget.thinking,
+                  onTapLink: (text, href, title) {
+                    if (href != null) {
+                      launchUrl(Uri.parse(href));
+                    }
+                  },
+                ),
+              ),
               actions: [
                 TextButton(
                   onPressed: () {
