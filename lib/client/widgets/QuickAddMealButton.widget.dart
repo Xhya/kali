@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/BottomButton.widget.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
@@ -10,9 +11,10 @@ import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/quickAddMeal.state.dart';
 import 'package:kali/core/utils/computeMealPeriod.utils.dart';
 
-onClickAddQuickMeal() async {
+Future<void> onClickAddQuickMeal() async {
   try {
     if (await userService.canCompute()) {
+      quickAddMealState.isAddingLoading.value = true;
       quickAddMealState.computed.value = false;
       quickAddMealState.reset();
       quickAddMealState.chosenPeriod.value = computeMealPeriod(DateTime.now());
@@ -20,6 +22,8 @@ onClickAddQuickMeal() async {
     }
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);
+  } finally {
+    quickAddMealState.isAddingLoading.value = false;
   }
 }
 
@@ -32,7 +36,17 @@ class QuickAddMealButtonWidget extends StatefulWidget {
 
 class _MealPeriodTagWidgetState extends State<QuickAddMealButtonWidget> {
   @override
+  initState() {
+    super.initState();
+    quickAddMealState.isAddingLoading.value = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    bool isAddingLoading = context.select(
+      (QuickAddMealState s) => s.isAddingLoading.value,
+    );
+
     return MainButtonWidget(
       onClick: () {
         navigationService.context = context;
@@ -43,6 +57,7 @@ class _MealPeriodTagWidgetState extends State<QuickAddMealButtonWidget> {
         format: CustomIconFormat.svg,
         icon: "assets/icons/fourchette.svg",
       ),
+      isLoading: isAddingLoading,
     );
 
     return BottomButtonWidget(

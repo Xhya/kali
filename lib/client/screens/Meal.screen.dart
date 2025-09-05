@@ -3,6 +3,7 @@ import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/MealComputerInput.widget.dart';
 import 'package:kali/client/widgets/ThinkingWidget.widget.dart';
 import 'package:kali/core/domains/meal.service.dart';
+import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
@@ -106,6 +107,9 @@ class _MealScreenState extends State<MealScreen> {
     String editingUserTextMeal = context.select(
       (EditMealState s) => s.editingUserTextMeal.value,
     );
+    NutriScore? editingNutriScore = context.select(
+      (EditMealState s) => s.editingNutriScore.value,
+    );
 
     if (meal == null) {
       return SizedBox.shrink();
@@ -163,7 +167,24 @@ class _MealScreenState extends State<MealScreen> {
                         textAlign: TextAlign.start,
                         style: style.text.neutral
                             .merge(style.fontsize.sm)
-                            .merge(style.fontweight.bold),
+                            .merge(style.fontweight.bold)
+                            .merge(
+                              TextStyle(
+                                decoration:
+                                    editingNutriScore == null
+                                        ? TextDecoration.none
+                                        : TextDecoration.lineThrough,
+                              ),
+                            ),
+                      ),
+                    if (editingNutriScore != null)
+                      Text(
+                        "${editingNutriScore.caloryAmount.toString()} calories",
+                        textAlign: TextAlign.start,
+                        style: style.text.neutral
+                            .merge(style.fontsize.sm)
+                            .merge(style.fontweight.bold)
+                            .merge(TextStyle(decoration: TextDecoration.none)),
                       ),
                   ],
                 ),
@@ -176,9 +197,12 @@ class _MealScreenState extends State<MealScreen> {
               SizedBox(height: 16),
 
               if (mealState.currentMeal.value?.nutriscore?.thinking != null)
-              ThinkingWidget(
-                thinking: mealState.currentMeal.value!.nutriscore!.thinking!,
-              ),  
+                ThinkingWidget(
+                  thinking:
+                      editingNutriScore == null || editingNutriScore.thinking == null
+                          ? mealState.currentMeal.value!.nutriscore!.thinking!
+                          : editingNutriScore.thinking!,
+                ),
             ],
           ),
         ),
