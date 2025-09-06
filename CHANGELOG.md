@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0]
+
+- update URL with application
+
+## [1.3.9]
+
+- add speech to text
+- push notification widget
+- fix can pop
+- improve meal edition
+- add thinking
+- repeat password
+- refactor init user and signature
+- prevent cant pop
+- push notif config iOS
+
+## [1.3.8]
+
+- update refresh token push notification
+
 ## [1.3.7]
 
 - test notifications

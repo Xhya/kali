@@ -4,7 +4,6 @@ import 'package:kali/core/domains/userNutriscore.repository.dart';
 import 'package:kali/core/models/EditUser.formdata.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/models/User.model.dart';
-import 'package:kali/core/services/Authentication.service.dart';
 import 'package:kali/core/states/user.state.dart';
 
 final userService = UserService();
