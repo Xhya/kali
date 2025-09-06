@@ -4,8 +4,18 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0]
+
+- add evolution screen
+- split personal nutriscore screen
+
 ## [1.4.0]
 
+- update error style on login
+- can connect on profile
+- add thinking to personal nutriscore
+- improve edit profile
+- refresh home screen
 - update URL with application
 
 ## [1.3.9]
