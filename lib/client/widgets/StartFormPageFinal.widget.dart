@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kali/client/widgets/CustomCard.widget.dart';
+import 'package:kali/client/widgets/ThinkingWidget.widget.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/TotalCalories.widget.dart';
@@ -53,8 +53,14 @@ class _StartFormPageFinalState extends State<StartFormPageFinal> {
                 ),
               ),
 
+            if (personalNutriScore?.thinking != null)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: ThinkingWidget(thinking: personalNutriScore!.thinking!),
+              ),
+
             Text(
-              "Psst : Kali s’adapte ! Tu pourras modifier ton plan à tout moment dans tes paramètres.",
+              "Psst : Kali s'adapte ! Tu pourras modifier ton plan à tout moment dans tes paramètres.",
             ),
           ],
         ),
