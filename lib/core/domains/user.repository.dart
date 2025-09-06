@@ -31,6 +31,7 @@ class UserRepository {
       "proteins": formData.proteins,
       "glucids": formData.glucids,
       "lipids": formData.lipids,
+      "email": formData.email,
     };
 
     final response = await http.patch(

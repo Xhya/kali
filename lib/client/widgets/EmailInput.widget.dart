@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/core/states/Input.state.dart';
 
-onUpdateInputEmail(String value) {
+void onUpdateInputEmail(String value) {
   inputState.email.value = value;
 }
 

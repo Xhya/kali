@@ -5,6 +5,7 @@ class EditUserFormData {
   final String proteins;
   final String lipids;
   final String glucids;
+  final String email;
 
   EditUserFormData({
     required this.userName,
@@ -13,5 +14,6 @@ class EditUserFormData {
     required this.proteins,
     required this.lipids,
     required this.glucids,
+    required this.email,
   });
 }

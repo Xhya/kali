@@ -7,16 +7,19 @@ final editProfileState = EditProfileState();
 
 class EditProfileState extends ChangeNotifier {
   final isLoading = ValueNotifier<bool>(false);
-  get canSave {
+  bool get canSave {
+    final user = userState.user.value;
+
+    if (user?.email != null && !inputState.email.value.isValidEmail()) {
+      return false;
+    }
+
     var hasEmptyField =
         userName.value.isEmpty ||
-        leitmotiv.value.isEmpty ||
         editingCalories.value.isEmpty ||
         editingProteins.value.isEmpty ||
         editingLipids.value.isEmpty ||
         editingGlucids.value.isEmpty;
-
-    final user = userState.user.value;
 
     if (!hasEmptyField && user?.email != null) {
       hasEmptyField =
@@ -24,9 +27,11 @@ class EditProfileState extends ChangeNotifier {
           !inputState.email.value.isValidEmail();
     }
 
+    String userLeitmotiv = user?.leitmotiv ?? "";
+
     var hasDifference =
         userName.value != user?.username ||
-        leitmotiv.value != user?.leitmotiv ||
+        leitmotiv.value != userLeitmotiv ||
         editingCalories.value != user?.nutriscore?.caloryAmount.toString() ||
         editingProteins.value != user?.nutriscore?.proteinAmount.toString() ||
         editingLipids.value != user?.nutriscore?.lipidAmount.toString() ||
@@ -36,7 +41,7 @@ class EditProfileState extends ChangeNotifier {
       hasDifference = inputState.email.value != user?.email;
     }
 
-    return hasEmptyField || hasDifference;
+    return !hasEmptyField && hasDifference;
   }
 
   final userName = ValueNotifier<String>("");

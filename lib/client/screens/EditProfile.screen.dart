@@ -28,6 +28,7 @@ Future<void> onClickSave() async {
         proteins: editProfileState.editingProteins.value.toString(),
         glucids: editProfileState.editingGlucids.value.toString(),
         lipids: editProfileState.editingLipids.value.toString(),
+        email: inputState.email.value,
       ),
     );
     userState.user.value = user;
