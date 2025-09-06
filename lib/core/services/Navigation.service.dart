@@ -12,6 +12,7 @@ enum ScreenEnum {
   meals,
   profile,
   editProfile,
+  personalNutriscore,
 }
 
 var navigationService = NavigationService();
@@ -55,13 +56,13 @@ class NavigationService extends ChangeNotifier {
   Function? popNavigation;
   Function? showDialog;
 
-  navigateTo(ScreenEnum screen) {
+  void navigateTo(ScreenEnum screen) {
     currentScreen = screen;
     pushNavigation?.call();
     notifyListeners();
   }
 
-  navigateBack() {
+  void navigateBack() {
     if (context != null && popNavigation != null) {
       popNavigation?.call();
     } else {
@@ -69,7 +70,7 @@ class NavigationService extends ChangeNotifier {
     }
   }
 
-  onClickMenuTab(int index) {
+  void onClickMenuTab(int index) {
     switch (index) {
       case 0:
         navigateTo(ScreenEnum.home);
@@ -79,14 +80,14 @@ class NavigationService extends ChangeNotifier {
     }
   }
 
-  openBottomSheet({required Widget widget}) {
+  void openBottomSheet({required Widget widget}) {
     if (bottomSheet.value == null) {
       bottomSheet.value = widget;
       notifyListeners();
     }
   }
 
-  closeBottomSheet() {
+  void closeBottomSheet() {
     bottomSheet.value = null;
     if (context != null) {
       Navigator.pop(context!);
@@ -95,12 +96,12 @@ class NavigationService extends ChangeNotifier {
     notifyListeners();
   }
 
-  openSnackBar({required Widget widget}) {
+  void openSnackBar({required Widget widget}) {
     snackBar.value = widget;
     notifyListeners();
   }
 
-  closeSnackBar() {
+  void closeSnackBar() {
     snackBar.value = null;
     if (context != null) {
       Navigator.pop(context!);
@@ -109,7 +110,7 @@ class NavigationService extends ChangeNotifier {
     notifyListeners();
   }
 
-  notify() {
+  void notify() {
     notifyListeners();
   }
 }

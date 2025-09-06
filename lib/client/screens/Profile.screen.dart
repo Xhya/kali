@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
+import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/EndOfTestPeriod.widget.dart';
-import 'package:kali/client/widgets/MacroElementRow.widget.dart';
 import 'package:kali/client/widgets/Register.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
@@ -101,7 +101,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 navigationService.context = context;
                                 navigationService.openBottomSheet(
                                   widget: WelcomeBottomSheet(
-                                    child: RegisterWidget(title: "Crée un compte"),
+                                    child: RegisterWidget(
+                                      title: "Crée un compte",
+                                    ),
                                   ),
                                 );
                               },
@@ -130,45 +132,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(height: 16),
                           EndOfTestPeriodWidget(),
                           SizedBox(height: 32),
-                          Text(
-                            "Ton plan personnalisé",
-                            style: style.fontsize.sm.merge(style.text.neutral),
-                          ),
-                          SizedBox(height: 8),
-                          if (personalNutriScore != null)
-                            Column(
-                              spacing: 4,
-                              children: [
-                                MacroElementRow(
-                                  text: "calories",
-                                  icon: caloryIcon,
-                                  amount:
-                                      personalNutriScore.caloryAmount
-                                          .toString(),
-                                ),
-                                MacroElementRow(
-                                  text: "protéines",
 
-                                  icon: proteinIcon,
-                                  amount:
-                                      personalNutriScore.proteinAmount
-                                          .toString(),
-                                ),
-                                MacroElementRow(
-                                  text: "glucides",
-                                  icon: glucidIcon,
-                                  amount:
-                                      personalNutriScore.glucidAmount
-                                          .toString(),
-                                ),
-                                MacroElementRow(
-                                  text: "lipides",
-                                  icon: lipidIcon,
-                                  amount:
-                                      personalNutriScore.lipidAmount.toString(),
-                                ),
-                              ],
-                            ),
+                          CustomCard(
+                            onClick: () {
+                              navigationService.navigateTo(ScreenEnum.personalNutriscore);
+                            },
+                            width: double.infinity,
+                            padding: EdgeInsets.all(16),
+                            child: Text("Ton plan personnalisé"),
+                          ),
+
                           SizedBox(height: 80),
                         ],
                       ),
