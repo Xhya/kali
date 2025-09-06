@@ -17,7 +17,7 @@ import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/core/utils/macroIcon.utils.dart';
 
-onClickSave() async {
+Future<void> onClickSave() async {
   try {
     editProfileState.isLoading.value = true;
     final user = await UserService().saveProfile(
