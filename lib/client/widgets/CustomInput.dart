@@ -86,6 +86,7 @@ class _CustomInputState extends State<CustomInput> {
                 ),
               ),
             Container(
+              padding: EdgeInsets.only(bottom: widget.maxLength != null ? 32 : 0),
               decoration: BoxDecoration(
                 color: style.background.neutral.color,
                 borderRadius: BorderRadius.circular(16),
@@ -103,7 +104,7 @@ class _CustomInputState extends State<CustomInput> {
                 decoration: inputDecoration.copyWith(
                   contentPadding: EdgeInsets.only(
                     left: 16,
-                    right: widget.maxLength == null ? 16 : 60,
+                    right: 16,
                     top: 12,
                     bottom: 12,
                   ),
