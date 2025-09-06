@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/EndOfTestPeriod.widget.dart';
+import 'package:kali/client/widgets/LoaderIcon.widget.dart';
 import 'package:kali/client/widgets/PushNotificationPermission.widget.dart';
 import 'package:kali/client/widgets/Refresh.widget.dart';
 import 'package:kali/client/widgets/TestPeriodBottomSheet.widget.dart';
@@ -61,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
     navigationService.context = context;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       initHomeScreen();
+      mealState.isLoading.value = false;
       if (userState.user.value?.isInTestPeriod() == true &&
           configurationState.subscriptionActivated.value) {
         navigationService.context = context;
@@ -90,6 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
         context.watch<MealState>().currentMealsByPeriods.isNotEmpty
             ? currentMealsByPeriods.last
             : null;
+    bool isLoading = context.select((MealState s) => s.isLoading.value);
 
     return BaseScaffold(
       profileButton: true,
@@ -109,72 +112,82 @@ class _HomeScreenState extends State<HomeScreen> {
                 EndOfTestPeriodWidget(padding: 16),
                 DateSelector(currentDate: currentDate),
                 SizedBox(height: 16),
-                MealPeriodsHorizontalWidget(
-                  onClickSelectPeriod: (period) {
-                    onClickSelectPeriod(period);
-                  },
-                  chosenPeriods: currentMealPeriods,
-                ),
-                SizedBox(height: 16),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 8),
-
-                        MainKaloriesCountWidget(),
-
-                        SizedBox(height: 4),
-
-                        NutriScoreGaugesWidget(
-                          mealsByPeriods: currentMealsByPeriods,
-                        ),
-
-                        SizedBox(height: 32),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            if (lastMeal != null)
-                              Text(
-                                "Derniers ajouts",
-                                style: style.fontsize.xs.merge(
-                                  style.text.greenDark,
-                                ),
-                              ),
-                            if (lastMeal != null)
-                              CustomInkwell(
-                                onTap: () {
-                                  HapticFeedback.vibrate();
-                                  goToMealsScreen();
-                                },
-                                child: Text(
-                                  "Afficher tout",
-                                  style: style.fontsize.xs
-                                      .merge(style.text.green)
-                                      .merge(style.fontweight.bold),
-                                ),
-                              ),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        if (lastMeal != null)
-                          CustomCard(
-                            onClick: () {
-                              goToMealScreen(lastMeal);
+                isLoading
+                    ? LoaderIcon()
+                    : Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          MealPeriodsHorizontalWidget(
+                            onClickSelectPeriod: (period) {
+                              onClickSelectPeriod(period);
                             },
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 16,
-                            ),
-                            child: MealRowWidget(meal: lastMeal),
+                            chosenPeriods: currentMealPeriods,
                           ),
-                        SizedBox(height: 120),
-                      ],
+                          SizedBox(height: 16),
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(height: 8),
+
+                                  MainKaloriesCountWidget(),
+
+                                  SizedBox(height: 4),
+
+                                  NutriScoreGaugesWidget(
+                                    mealsByPeriods: currentMealsByPeriods,
+                                  ),
+
+                                  SizedBox(height: 32),
+
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      if (lastMeal != null)
+                                        Text(
+                                          "Derniers ajouts",
+                                          style: style.fontsize.xs.merge(
+                                            style.text.greenDark,
+                                          ),
+                                        ),
+                                      if (lastMeal != null)
+                                        CustomInkwell(
+                                          onTap: () {
+                                            HapticFeedback.vibrate();
+                                            goToMealsScreen();
+                                          },
+                                          child: Text(
+                                            "Afficher tout",
+                                            style: style.fontsize.xs
+                                                .merge(style.text.green)
+                                                .merge(style.fontweight.bold),
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 8),
+                                  if (lastMeal != null)
+                                    CustomCard(
+                                      onClick: () {
+                                        goToMealScreen(lastMeal);
+                                      },
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 16,
+                                        vertical: 16,
+                                      ),
+                                      child: MealRowWidget(meal: lastMeal),
+                                    ),
+                                  SizedBox(height: 120),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ),
               ],
             ),
           ),

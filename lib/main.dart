@@ -53,7 +53,7 @@ void main() async {
   await authenticationService.init();
 
   // Firebase init
-  if (!useSimulator && !kIsWeb) {
+  if (!kIsWeb) {
     WidgetsFlutterBinding.ensureInitialized();
 
     if (Firebase.apps.isEmpty) {

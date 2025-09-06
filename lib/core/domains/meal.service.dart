@@ -10,6 +10,7 @@ class MealService {
 
   Future<void> refreshMeals() async {
     try {
+      mealState.isLoading.value = true;
       final List<MealModel> meals = await _mealRepository.getMeals();
       mealState.currentMeals.value =
           meals
@@ -23,6 +24,8 @@ class MealService {
               .cast<MealModel>();
     } catch (e, stack) {
       errorService.notifyError(e: e, stack: stack);
+    } finally {
+      mealState.isLoading.value = false;
     }
   }
 

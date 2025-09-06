@@ -5,13 +5,13 @@ import 'package:kali/client/Style.service.dart';
 import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/services/Datetime.extension.dart';
 
-onClickLeftArrow() {
+void onClickLeftArrow() {
   mealState.currentDate.value = mealState.currentDate.value.subtract(
     Duration(days: 1),
   );
 }
 
-onClickRightArrow() {
+void onClickRightArrow() {
   mealState.currentDate.value = mealState.currentDate.value.add(
     Duration(days: 1),
   );
