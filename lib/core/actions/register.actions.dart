@@ -20,7 +20,12 @@ onClickSubscribe(BuildContext context) async {
 
 registerAction(BuildContext context) async {
   navigationService.openBottomSheet(
-    widget: WelcomeBottomSheet(child: RegisterWidget(title: "Inscris-toi")),
+    widget: WelcomeBottomSheet(
+      child: RegisterWidget(
+        title: "S'abonner",
+        subtitle: "Créer un compte pour s'abonner",
+      ),
+    ),
   );
 }
 

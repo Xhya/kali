@@ -167,10 +167,9 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               style: style.fontsize.sm.merge(style.text.neutralLight),
             ),
             GestureDetector(
-              onTap: () {
+              onTap: () async {
                 navigationService.navigateBack();
-                Future.delayed(Duration(milliseconds: 400), () {
-                  navigationService.context = context;
+                await Future.delayed(Duration(milliseconds: 400), () {
                   navigationService.openBottomSheet(
                     widget: WelcomeBottomSheet(child: LoginWidget()),
                   );
