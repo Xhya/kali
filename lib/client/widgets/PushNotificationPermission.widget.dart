@@ -1,8 +1,12 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/widgets/CloseButton.widget.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
+import 'package:kali/core/utils/storageKeys.utils.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class PushNotificationPermissionWidget extends StatefulWidget {
   const PushNotificationPermissionWidget({super.key, this.padding = 0});
@@ -17,6 +21,7 @@ class PushNotificationPermissionWidget extends StatefulWidget {
 class _PushNotificationPermissionWidgetState
     extends State<PushNotificationPermissionWidget> {
   var show = false;
+  var alreadySet = false;
 
   @override
   void initState() {
@@ -24,8 +29,18 @@ class _PushNotificationPermissionWidgetState
 
     init() async {
       final notif = await FirebaseMessaging.instance.getNotificationSettings();
+      final lastDateStr = await FlutterSecureStorage().read(
+        key: lastDatePushNotificationShowedKey,
+      );
+      final lastDate =
+          lastDateStr != null ? DateTime.parse(lastDateStr).toLocal() : null;
       setState(() {
-        show = notif.authorizationStatus != AuthorizationStatus.authorized;
+        alreadySet =
+            notif.authorizationStatus != AuthorizationStatus.notDetermined;
+        show =
+            notif.authorizationStatus == AuthorizationStatus.notDetermined ||
+            lastDate == null ||
+            lastDate.isAfter(DateTime.now());
       });
     }
 
@@ -41,6 +56,7 @@ class _PushNotificationPermissionWidgetState
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           secondary: true,
           child: Row(
+            spacing: 12,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
@@ -58,18 +74,33 @@ class _PushNotificationPermissionWidgetState
                         recognizer:
                             TapGestureRecognizer()
                               ..onTap = () async {
-                                await FirebaseMessaging.instance
-                                    .requestPermission(
-                                      alert: true,
-                                      badge: true,
-                                      sound: true,
-                                    );
+                                if (alreadySet) {
+                                  openAppSettings();
+                                } else {
+                                  await FirebaseMessaging.instance
+                                      .requestPermission(
+                                        alert: true,
+                                        badge: true,
+                                        sound: true,
+                                      );
+                                }
                               },
                       ),
                       TextSpan(text: " pour continuer dans la bonne direction"),
                     ],
                   ),
                 ),
+              ),
+              CloseButtonWidget(
+                onClose: () async {
+                  await FlutterSecureStorage().write(
+                    key: lastDatePushNotificationShowedKey,
+                    value: DateTime.now().toIso8601String(),
+                  );
+                  setState(() {
+                    show = false;
+                  });
+                },
               ),
             ],
           ),

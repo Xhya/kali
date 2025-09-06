@@ -1,3 +1,4 @@
+import 'package:kali/client/widgets/CloseButton.widget.dart';
 import 'package:kali/core/services/Datetime.extension.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,7 @@ import 'package:kali/client/Style.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/quickAddMeal.state.dart';
 
-onClickCloseQuickAddMode() {
+void onClickCloseQuickAddMode() {
   navigationService.closeBottomSheet();
   quickAddMealState.chosenPeriod.value = null;
   quickAddMealState.userMealText.value = "";
@@ -73,26 +74,11 @@ class _QuickAddMealHeaderWidgetState extends State<QuickAddMealHeaderWidget> {
             ),
           ),
 
-          Container(
-            height: 32,
-            width: 32,
-            padding: EdgeInsets.all(0),
-            decoration: BoxDecoration(
-              border: Border.all(color: style.icon.color1.color!, width: 1),
-              borderRadius: BorderRadius.circular(100),
-            ),
-            child: IconButton(
-              padding: EdgeInsets.all(0),
-              onPressed: () {
-                HapticFeedback.vibrate();
-                onClickCloseQuickAddMode();
-              },
-              icon: Icon(
-                Icons.close,
-                color: style.icon.color1.color,
-                size: style.fontsize.md.fontSize,
-              ),
-            ),
+          CloseButtonWidget(
+            onClose: () {
+              HapticFeedback.vibrate();
+              onClickCloseQuickAddMode();
+            },
           ),
         ],
       ),
