@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/widgets/ValidateCode.widget.dart';
@@ -34,7 +33,9 @@ Future<void> onSubmitRegisterUser() async {
       ),
     );
   } catch (e, stack) {
-    errorService.notifyError(e: e, stack: stack);
+    final extractedMessage = errorService.extractCurrentErrorMessage();
+    registerState.error.value = extractedMessage;
+    errorService.notifyError(e: e, stack: stack, show: false);
   } finally {
     registerState.isLoading.value = false;
   }
@@ -57,6 +58,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
   @override
   void initState() {
     registerState.isLoading.value = false;
+    registerState.error.value = null;
     super.initState();
     inputState.reset();
   }
@@ -119,15 +121,25 @@ class _RegisterWidgetState extends State<RegisterWidget> {
           ),
           obscureText: obscurePassword,
         ),
+        SizedBox(height: 4),
+        if (registerState.error.value != null)
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12),
+            child: Text(
+              registerState.error.value!,
+              style: style.text.error.merge(style.fontsize.sm),
+            ),
+          ),
         SizedBox(height: 32),
         MainButtonWidget(
           onClick: () {
-            navigationService.context = context;
             onSubmitRegisterUser();
           },
           text: "créer un compte",
           iconWidget: Icon(Icons.arrow_forward, size: 20),
-          disabled: !areEmailAndPasswordValid || passwordCopy != inputState.password.value,
+          disabled:
+              !areEmailAndPasswordValid ||
+              passwordCopy != inputState.password.value,
           isLoading: isLoading,
         ),
         // SizedBox(height: 40),

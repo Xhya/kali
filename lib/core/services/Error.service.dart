@@ -29,7 +29,7 @@ class ErrorService extends ChangeNotifier {
 
   Response? currentResponseError;
 
-  notifyError({required Object e, StackTrace? stack, bool show = true}) async {
+  Future<void> notifyError({required Object e, StackTrace? stack, bool show = true}) async {
     if (currentResponseError != null) {
       final Map<String, dynamic> jsonData = json.decode(
         currentResponseError!.body,
@@ -97,8 +97,14 @@ class ErrorService extends ChangeNotifier {
     }
   }
 
-  _extractErrorMessage(Response response) {
+  dynamic _extractErrorMessage(Response response) {
     final responseJson = jsonDecode(response.body);
     return responseJson['message'];
+  }
+
+  dynamic extractCurrentErrorMessage() {
+    if (currentResponseError != null) {
+      return _extractErrorMessage(currentResponseError!);
+    }
   }
 }
