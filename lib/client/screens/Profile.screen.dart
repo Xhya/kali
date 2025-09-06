@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
 import 'package:kali/client/widgets/EndOfTestPeriod.widget.dart';
 import 'package:kali/client/widgets/MacroElementRow.widget.dart';
+import 'package:kali/client/widgets/Register.widget.dart';
+import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
 import 'package:kali/core/domains/user.repository.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
@@ -91,6 +93,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 style: style.fontsize.xs.merge(
                                   style.text.neutral,
                                 ),
+                              ),
+                            ),
+                          if (email == null)
+                            GestureDetector(
+                              onTap: () {
+                                navigationService.context = context;
+                                navigationService.openBottomSheet(
+                                  widget: WelcomeBottomSheet(
+                                    child: RegisterWidget(title: "Crée un compte"),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                "créer un compte",
+                                style: style.fontsize.sm
+                                    .merge(style.text.neutralLight)
+                                    .merge(
+                                      TextStyle(
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
                               ),
                             ),
                           SizedBox(height: 4),
