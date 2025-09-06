@@ -1,5 +1,6 @@
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/screens/EditProfile.screen.dart';
+import 'package:kali/client/screens/Evolution.screen.dart';
 import 'package:kali/client/screens/ForceUpdate.screen.dart';
 import 'package:kali/client/screens/Home.screen.dart';
 import 'package:kali/client/screens/Login.screen.dart';
@@ -206,6 +207,8 @@ class _RoutingState extends State<Routing> {
           navigateTo(const EditProfileScreen());
         case ScreenEnum.personalNutriscore:
           navigateTo(const PersonalNutriscoreScreen());
+        case ScreenEnum.evolution:
+          navigateTo(const EvolutionScreen());
       }
     };
 

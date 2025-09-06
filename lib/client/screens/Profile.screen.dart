@@ -135,11 +135,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                           CustomCard(
                             onClick: () {
-                              navigationService.navigateTo(ScreenEnum.personalNutriscore);
+                              navigationService.navigateTo(
+                                ScreenEnum.personalNutriscore,
+                              );
                             },
                             width: double.infinity,
                             padding: EdgeInsets.all(16),
                             child: Text("Ton plan personnalisé"),
+                          ),
+
+                          CustomCard(
+                            onClick: () {
+                              navigationService.navigateTo(
+                                ScreenEnum.evolution,
+                              );
+                            },
+                            width: double.infinity,
+                            padding: EdgeInsets.all(16),
+                            child: Text("Ton évolution"),
                           ),
 
                           SizedBox(height: 80),

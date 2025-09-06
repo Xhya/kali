@@ -13,6 +13,7 @@ enum ScreenEnum {
   profile,
   editProfile,
   personalNutriscore,
+  evolution,
 }
 
 var navigationService = NavigationService();
