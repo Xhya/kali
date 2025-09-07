@@ -199,7 +199,8 @@ class _MealScreenState extends State<MealScreen> {
               if (mealState.currentMeal.value?.nutriscore?.thinking != null)
                 ThinkingWidget(
                   thinking:
-                      editingNutriScore == null || editingNutriScore.thinking == null
+                      editingNutriScore == null ||
+                              editingNutriScore.thinking == null
                           ? mealState.currentMeal.value!.nutriscore!.thinking!
                           : editingNutriScore.thinking!,
                 ),

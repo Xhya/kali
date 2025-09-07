@@ -15,6 +15,10 @@ class MealState extends ChangeNotifier {
   NutriScore get mealsNutriScore => computeDayAverages(currentMealsByPeriods);
   int get remainingCalories =>
       computeRemainingCalories(mealsNutriScore, userState.personalNutriscore);
+  MealModel? get lastMeal =>
+      currentMealsByPeriods.isNotEmpty
+          ? currentMealsByPeriods.last
+          : null;
 
   List<MealModel> get currentMealsByPeriods {
     currentMeals.value.sort((MealModel a, MealModel b) {

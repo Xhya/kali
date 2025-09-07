@@ -23,7 +23,7 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
   Widget build(BuildContext context) {
     final currentMealsByPeriods =
         context.watch<MealState>().currentMealsByPeriods;
-    NutriScore currentNutriScore = context.watch<MealState>().mealsNutriScore;
+    NutriScore mealsNutriScore = context.watch<MealState>().mealsNutriScore;
     NutriScore? personalNutriScore =
         context.watch<UserState>().user.value?.nutriscore;
     int remainingCalories = context.watch<MealState>().remainingCalories;
@@ -52,7 +52,7 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
               children: [
                 if (personalNutriScore?.caloryAmount != null)
                   Text(
-                    "${currentNutriScore.caloryAmount.toString()} / ${personalNutriScore?.caloryAmount.toString()}",
+                    "${mealsNutriScore.caloryAmount.toString()} / ${personalNutriScore?.caloryAmount.toString()}",
                     textAlign: TextAlign.start,
                     style: style.text.neutral
                         .merge(style.fontsize.sm)
