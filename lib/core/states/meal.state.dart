@@ -16,14 +16,23 @@ class MealState extends ChangeNotifier {
   int get remainingCalories =>
       computeRemainingCalories(mealsNutriScore, userState.personalNutriscore);
 
-  List<MealModel> get currentMealsByPeriods =>
-      currentMeals.value.where((it) {
-        if (currentMealPeriods.value.isEmpty) {
-          return true;
-        } else {
-          return currentMealPeriods.value.contains(it.period);
-        }
-      }).toList();
+  List<MealModel> get currentMealsByPeriods {
+    currentMeals.value.sort((MealModel a, MealModel b) {
+      if (a.period != null && b.period != null) {
+        return a.period!.order.compareTo(b.period!.order);
+      } else {
+        return 0;
+      }
+    });
+
+    return currentMeals.value.where((it) {
+      if (currentMealPeriods.value.isEmpty) {
+        return true;
+      } else {
+        return currentMealPeriods.value.contains(it.period);
+      }
+    }).toList();
+  }
 
   final currentDate = ValueNotifier<DateTime>(DateTime.now());
   final currentMealPeriods = ValueNotifier<List<MealPeriodEnum>>([]);
