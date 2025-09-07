@@ -7,11 +7,10 @@ import 'package:kali/client/widgets/Register.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
 import 'package:kali/core/domains/user.repository.dart';
-import 'package:kali/core/models/NutriScore.model.dart';
+import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Hardware.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
 import 'package:kali/core/states/googleSignIn.state.dart';
-import 'package:kali/core/utils/macroIcon.utils.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
@@ -19,10 +18,17 @@ import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/user.state.dart';
 
 Future<void> onClickDeconnect() async {
-  await hardwareService.deleteSignatureStorage();
-  await hardwareService.deleteTokenStorage();
-  await googleSignInState.signInGoogle.value?.signOut();
-  navigationService.navigateTo(ScreenEnum.start);
+  try {
+    userState.isDeconnectLoading.value = true;
+    await hardwareService.deleteSignatureStorage();
+    await hardwareService.deleteTokenStorage();
+    await googleSignInState.signInGoogle.value?.signOut();
+    navigationService.navigateTo(ScreenEnum.start);
+  } catch (e, stack) {
+    errorService.notifyError(e: e, stack: stack);
+  } finally {
+    userState.isDeconnectLoading.value = false;
+  }
 }
 
 class ProfileScreen extends StatefulWidget {
@@ -55,8 +61,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     String? leitmotiv = context.select(
       (UserState s) => s.user.value?.leitmotiv,
     );
-    NutriScore? personalNutriScore =
-        context.watch<UserState>().personalNutriscore;
+    bool isDeconnectLoading = context.select(
+      (UserState s) => s.isDeconnectLoading.value,
+    );
 
     return BaseScaffold(
       backButton: true,
@@ -192,6 +199,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             onPressed: () {
                               onClickDeconnect();
                             },
+                            isLoading: isDeconnectLoading,
                           ),
 
                         SizedBox(height: 12),
