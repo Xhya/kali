@@ -38,8 +38,8 @@ void onClickSelectPeriod(MealPeriodEnum period) {
 Future<void> onClickAddMealToDay() async {
   try {
     quickAddMealState.isAddingLoading.value = true;
-    await addMealAction();
     mealState.currentDate.value = quickAddMealState.date.value;
+    await addMealAction();
     quickAddMealState.userMealText.value = "";
     navigationService.closeBottomSheet();
   } catch (e, stack) {
