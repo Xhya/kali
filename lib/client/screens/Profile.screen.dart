@@ -162,6 +162,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: Text("Ton évolution"),
                           ),
 
+                          CustomCard(
+                            onClick: () {
+                              navigationService.url =
+                                  "https://forms.gle/qGX2M9UXuVPJ1Z2x7";
+                              navigationService.navigateTo(ScreenEnum.webview);
+                            },
+                            width: double.infinity,
+                            padding: EdgeInsets.all(16),
+                            child: Text("Ton feedback"),
+                          ),
+
                           SizedBox(height: 80),
                         ],
                       ),

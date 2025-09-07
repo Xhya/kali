@@ -11,6 +11,7 @@ import 'package:kali/client/screens/Profile.screen.dart';
 import 'package:kali/client/screens/Register.screen.dart';
 import 'package:kali/client/screens/Start.screen.dart';
 import 'package:kali/client/screens/StartForm.screen.dart';
+import 'package:kali/client/screens/Webview.screen.dart';
 import 'package:kali/client/widgets/RegisterBanner.widget.dart';
 import 'package:kali/client/widgets/TopBanner.widget.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
@@ -209,6 +210,8 @@ class _RoutingState extends State<Routing> {
           navigateTo(const PersonalNutriscoreScreen());
         case ScreenEnum.evolution:
           navigateTo(const EvolutionScreen());
+        case ScreenEnum.webview:
+          navigateTo(const WebviewScreen());
       }
     };
 

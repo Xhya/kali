@@ -14,6 +14,7 @@ enum ScreenEnum {
   editProfile,
   personalNutriscore,
   evolution,
+  webview,
 }
 
 var navigationService = NavigationService();
@@ -39,6 +40,7 @@ class NavigationService extends ChangeNotifier {
   final bottomSheet = ValueNotifier<Widget?>(null);
   final snackBar = ValueNotifier<Widget?>(null);
   Function? nextAction;
+  String? url;
 
   String screenTitle = "";
 
