@@ -142,13 +142,6 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                                 ],
                                 series: <CartesianSeries<ChartData, String>>[
                                   LineSeries<ChartData, String>(
-                                    name: 'Poids',
-                                    dataSource: weightData,
-                                    xValueMapper: (ChartData data, _) => data.x,
-                                    yValueMapper: (ChartData data, _) => data.y,
-                                    color: Colors.amber,
-                                  ),
-                                  LineSeries<ChartData, String>(
                                     name: 'Calories',
                                     dataSource: evolution,
                                     xValueMapper: (ChartData data, _) => data.x,
@@ -159,10 +152,21 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                                     color: Style().text.green.color,
                                     yAxisName: 'CaloriesAxis',
                                   ),
+                                  LineSeries<ChartData, String>(
+                                    name: 'Poids',
+                                    dataSource: weightData,
+                                    xValueMapper: (ChartData data, _) => data.x,
+                                    yValueMapper: (ChartData data, _) => data.y,
+                                    color: Colors.amber,
+                                  ),
                                 ],
                               ),
                           weightState.isRefreshLoading.value
-                              ? LoaderIcon()
+                              ? Container(
+                                height: 200,
+                                alignment: Alignment.center,
+                                child: LoaderIcon(),
+                              )
                               : ListView.separated(
                                 shrinkWrap: true,
                                 itemCount: weights.length,
@@ -205,7 +209,7 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                     ),
                   ),
                   Positioned(
-                    bottom: 0,
+                    bottom: 12,
                     right: 24,
                     child: SafeArea(
                       child: MainButtonWidget(

@@ -4,8 +4,13 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.1]
+
+- can add weight
+
 ## [1.5.0]
 
+- fix max digits
 - loading on meals
 - order meals
 - add evolution screen
