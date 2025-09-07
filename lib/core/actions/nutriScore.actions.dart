@@ -9,7 +9,7 @@ Future<void> computeNutriScoreAction() async {
     quickAddMealState.isComputingLoading.value = true;
     final userText = quickAddMealState.userMealText.value;
 
-    final meal = await MealService().computeMealNutriScore(userText);
+    final meal = await MealService().computeMealNutriScore(userText: userText);
     quickAddMealState.meal.value = meal;
     quickAddMealState.isComputingLoading.value = false;
     quickAddMealState.computed.value = true;

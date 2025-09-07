@@ -50,8 +50,14 @@ class MealService {
     }
   }
 
-  Future<MealModel?> computeMealNutriScore(String userText) async {
-    return await _mealRepository.computeMealNutriScore(userText);
+  Future<MealModel?> computeMealNutriScore({
+    required String userText,
+    String? mealId,
+  }) async {
+    return await _mealRepository.computeMealNutriScore(
+      userText: userText,
+      mealId: mealId,
+    );
   }
 
   Future<void> deleteMeal(String mealId) async {

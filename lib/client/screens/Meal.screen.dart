@@ -52,7 +52,8 @@ Future<void> onComputeEditingMeal() async {
         editMealState.editingUserTextMeal.value.isNotEmpty == true) {
       editMealState.isComputeLoading.value = true;
       final meal = await MealService().computeMealNutriScore(
-        editMealState.editingUserTextMeal.value,
+        userText: editMealState.editingUserTextMeal.value,
+        mealId: mealState.currentMeal.value?.id,
       );
       editMealState.editingNutriScore.value = meal?.nutriscore;
     }

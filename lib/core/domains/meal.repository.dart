@@ -70,8 +70,11 @@ class MealRepository {
     }
   }
 
-  Future<MealModel?> computeMealNutriScore(String userText) async {
-    Map body = {"userText": userText};
+  Future<MealModel?> computeMealNutriScore({
+    required String userText,
+    String? mealId,
+  }) async {
+    Map body = {"userText": userText, "mealId": mealId};
 
     final response = await http.post(
       Uri.parse('$API_URL/meals/compute'),
