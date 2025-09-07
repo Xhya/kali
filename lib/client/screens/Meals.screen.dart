@@ -105,11 +105,16 @@ class _MealsScreenState extends State<MealsScreen> {
                         },
                       ),
                     ),
-              if (!isLoadingDate && currentMealsByPeriods.isEmpty)
-                Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Text("Pas de repas trouvé", style: style.fontsize.sm),
-                ),
+              if (currentMealsByPeriods.isEmpty)
+                isLoadingDate
+                    ? LoaderIcon()
+                    : Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Text(
+                        "Pas de repas trouvé",
+                        style: style.fontsize.sm,
+                      ),
+                    ),
             ],
           ),
         ),
