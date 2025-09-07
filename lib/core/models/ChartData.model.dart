@@ -4,10 +4,10 @@ import 'package:kali/core/services/Datetime.extension.dart';
 class ChartData {
   ChartData(this.x, this.y);
   final String x;
-  final int y;
+  final double y;
 
   factory ChartData.fromJson(Map<String, dynamic> json) {
-    return ChartData(json['x'] as String, (json['y'] as int));
+    return ChartData(json['x'] as String, (json['y'] as int).toDouble());
   }
 
   factory ChartData.fromWeight(WeightModel weight) {

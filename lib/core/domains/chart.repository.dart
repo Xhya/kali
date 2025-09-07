@@ -15,7 +15,7 @@ class ChartRepository {
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body) as Map<String, dynamic>;
       return (body["data"] as List)
-          .map((meal) => ChartData.fromJson(meal))
+          .map((item) => ChartData.fromJson(item))
           .toList();
     } else {
       errorService.currentResponseError = response;

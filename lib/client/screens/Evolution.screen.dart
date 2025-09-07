@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/Utils/DecimalFormatter.utils.dart';
 import 'package:kali/client/Utils/InputWithTextFormatter.utils.dart';
 import 'package:kali/client/Utils/MaxDigitsCountFormatter.utils.dart';
-import 'package:kali/client/Utils/OnlyNumbersFormatter.utils.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
@@ -43,10 +43,10 @@ void onClickOpenAddWeight(BuildContext context) {
           child: CustomInput(
             onChanged: (String text) {
               String number = text.split(" ")[0];
-              weightState.newWeight.value = int.parse(number);
+              weightState.newWeight.value = double.parse(number);
             },
             inputFormatters: [
-              onlyNumbersFormatter(),
+              decimalFormatter(),
               InputWithTextFormatter(extension: "kg"),
               MaxDigitsCountFormatter(maxLength: 3),
             ],
@@ -161,7 +161,7 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                                   ),
                                 ],
                               ),
-                          weightState.isRefreshLoading.value
+                          isRefreshLoading
                               ? Container(
                                 height: 200,
                                 alignment: Alignment.center,

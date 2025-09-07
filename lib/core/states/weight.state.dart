@@ -5,7 +5,7 @@ final weightState = WeightState();
 
 class WeightState extends ChangeNotifier {
   final weights = ValueNotifier<List<WeightModel>>([]);
-  final newWeight = ValueNotifier<int?>(null);
+  final newWeight = ValueNotifier<double?>(null);
   final isAddingWeightLoading = ValueNotifier<bool>(false);
   final isRefreshLoading = ValueNotifier<bool>(false);
 

@@ -23,8 +23,8 @@ class WeightRepository {
     }
   }
 
-  Future<List<WeightModel>> addWeight({required int weight}) async {
-    Map body = {"weight": weight};
+  Future<List<WeightModel>> addWeight({required double weight}) async {
+    Map body = {"weight": weight.toDouble()};
 
     final response = await http.post(
       Uri.parse('$API_URL/weights'),
