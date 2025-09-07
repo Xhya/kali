@@ -28,6 +28,7 @@ Future<void> onUpdateMeal() async {
         period: editMealState.editingMealPeriod.value,
         userText: editMealState.editingUserTextMeal.value,
         nutriscoreId: editMealState.editingNutriScore.value?.id,
+        date: meal.date,
       );
       editMealState.editingNutriScore.value = null;
       navigationService.navigateBack();
