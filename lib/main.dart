@@ -21,6 +21,7 @@ import 'package:kali/core/states/register.state.dart';
 import 'package:kali/core/states/subscription.state.dart';
 import 'package:kali/core/states/topBanner.state.dart';
 import 'package:kali/core/services/Bugsnag.service.dart';
+import 'package:kali/core/states/weight.state.dart';
 import 'package:kali/environment.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
@@ -111,6 +112,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => configurationState),
         ChangeNotifierProvider(create: (context) => subscriptionState),
         ChangeNotifierProvider(create: (context) => chartState),
+        ChangeNotifierProvider(create: (context) => weightState),
       ],
       child: const App(),
     ),

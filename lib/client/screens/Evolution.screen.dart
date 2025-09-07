@@ -1,12 +1,82 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/Utils/InputWithTextFormatter.utils.dart';
+import 'package:kali/client/Utils/MaxDigitsCountFormatter.utils.dart';
+import 'package:kali/client/Utils/OnlyNumbersFormatter.utils.dart';
+import 'package:kali/client/widgets/CustomCard.widget.dart';
+import 'package:kali/client/widgets/CustomIcon.widget.dart';
+import 'package:kali/client/widgets/CustomInkwell.widget.dart';
+import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/widgets/LoaderIcon.widget.dart';
+import 'package:kali/client/widgets/MainButton.widget.dart';
+import 'package:kali/client/widgets/SlidableItem.widget.dart';
 import 'package:kali/core/domains/chart.service.dart';
+import 'package:kali/core/domains/weight.service.dart';
 import 'package:kali/core/models/ChartData.model.dart';
+import 'package:kali/core/models/Weight.model.dart';
+import 'package:kali/core/services/Datetime.extension.dart';
+import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/states/chart.state.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
+import 'package:kali/core/states/weight.state.dart';
+
+Future<void> onClickAddWeight() async {
+  try {
+    weightState.isAddingWeightLoading.value = true;
+    await weightService.addWeight();
+  } catch (e, stack) {
+    errorService.notifyError(e: e, stack: stack);
+  } finally {
+    weightState.isAddingWeightLoading.value = false;
+  }
+}
+
+void onClickOpenAddWeight(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text("Ajouter une pesée"),
+        content: IntrinsicHeight(
+          child: CustomInput(
+            onChanged: (String text) {
+              String number = text.split(" ")[0];
+              weightState.newWeight.value = int.parse(number);
+            },
+            inputFormatters: [
+              onlyNumbersFormatter(),
+              InputWithTextFormatter(extension: "kg"),
+              MaxDigitsCountFormatter(maxLength: 3),
+            ],
+            customIcon: CustomIconWidget(
+              format: CustomIconFormat.svg,
+              icon: "assets/icons/balance.svg",
+            ),
+            keyboardType: TextInputType.datetime,
+            textInputAction: TextInputAction.next,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text("Annuler"),
+          ),
+          TextButton(
+            onPressed: () {
+              onClickAddWeight();
+              Navigator.of(context).pop();
+            },
+            child: Text("Ajouter"),
+          ),
+        ],
+      );
+    },
+  );
+}
 
 class EvolutionScreen extends StatefulWidget {
   const EvolutionScreen({super.key});
@@ -20,6 +90,7 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
   void initState() {
     super.initState();
     chartService.refreshEvolution();
+    weightService.refreshWeights();
   }
 
   @override
@@ -28,6 +99,10 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
       (ChartState s) => s.isRefreshLoading.value,
     );
     final evolution = context.select((ChartState s) => s.evolution.value);
+    final List<WeightModel> weights = context.select(
+      (WeightState s) => s.weights.value,
+    );
+    final weightData = weights.map((w) => ChartData.fromWeight(w)).toList();
 
     return BaseScaffold(
       backButton: true,
@@ -40,49 +115,106 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
               child: Stack(
                 children: [
                   SingleChildScrollView(
-                    child:
-                        isRefreshLoading
-                            ? Container(
-                              height: 200,
-                              alignment: Alignment.center,
-                              child: LoaderIcon(),
-                            )
-                            : Container(
-                              width: double.maxFinite,
-                              padding: const EdgeInsets.all(16),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  SfCartesianChart(
-                                    primaryXAxis: CategoryAxis(),
-                                    legend: Legend(isVisible: true),
-                                    tooltipBehavior: TooltipBehavior(
-                                      enable: true,
+                    child: Container(
+                      width: double.maxFinite,
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          isRefreshLoading
+                              ? Container(
+                                height: 200,
+                                alignment: Alignment.center,
+                                child: LoaderIcon(),
+                              )
+                              : SfCartesianChart(
+                                primaryXAxis: CategoryAxis(),
+                                legend: Legend(isVisible: true),
+                                tooltipBehavior: TooltipBehavior(enable: true),
+                                axes: <ChartAxis>[
+                                  NumericAxis(
+                                    name: 'CaloriesAxis',
+                                    opposedPosition: true,
+                                    isVisible: false,
+                                  ),
+                                ],
+                                series: <CartesianSeries<ChartData, String>>[
+                                  LineSeries<ChartData, String>(
+                                    name: 'Poids',
+                                    dataSource: weightData,
+                                    xValueMapper: (ChartData data, _) => data.x,
+                                    yValueMapper: (ChartData data, _) => data.y,
+                                    color: Colors.amber,
+                                  ),
+                                  LineSeries<ChartData, String>(
+                                    name: 'Calories',
+                                    dataSource: evolution,
+                                    xValueMapper: (ChartData data, _) => data.x,
+                                    yValueMapper: (ChartData data, _) => data.y,
+                                    dataLabelSettings: DataLabelSettings(
+                                      isVisible: true,
                                     ),
-                                    series: <
-                                      CartesianSeries<ChartData, String>
-                                    >[
-                                      LineSeries<ChartData, String>(
-                                        name:
-                                            'Quantité calories quotidienne (g)',
-                                        dataSource: evolution,
-                                        xValueMapper:
-                                            (ChartData sales, _) => sales.x,
-                                        yValueMapper:
-                                            (ChartData sales, _) => sales.y,
-                                        dataLabelSettings: DataLabelSettings(
-                                          isVisible: true,
-                                        ),
-                                        color: Style().text.green.color,
-                                      ),
-                                    ],
+                                    color: Style().text.green.color,
+                                    yAxisName: 'CaloriesAxis',
                                   ),
                                 ],
                               ),
-                            ),
+                          weightState.isRefreshLoading.value
+                              ? LoaderIcon()
+                              : ListView.separated(
+                                shrinkWrap: true,
+                                itemCount: weights.length,
+                                separatorBuilder:
+                                    (context, index) => SizedBox(height: 4),
+                                itemBuilder: (BuildContext context, int index) {
+                                  final weight = weights[index];
+                                  return CustomInkwell(
+                                    onTap: () {},
+                                    child: CustomCard(
+                                      child: SlidableItem(
+                                        onRemove: () {},
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                            vertical: 8,
+                                            horizontal: 16,
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                weight.date.formateDate(
+                                                  "EE dd MMM",
+                                                ),
+                                              ),
+                                              Text(
+                                                "${weight.value.toString()} kg",
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    right: 24,
+                    child: SafeArea(
+                      child: MainButtonWidget(
+                        onClick: () {
+                          onClickOpenAddWeight(context);
+                        },
+                        text: "+",
+                      ),
+                    ),
                   ),
                 ],
               ),
