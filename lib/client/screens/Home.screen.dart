@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
     navigationService.context = context;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       initHomeScreen();
-      mealState.isLoading.value = false;
+      mealState.isLoadingDate.value = false;
       if (userState.user.value?.isInTestPeriod() == true &&
           configurationState.subscriptionActivated.value) {
         navigationService.context = context;
@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
         context.watch<MealState>().currentMealsByPeriods.isNotEmpty
             ? currentMealsByPeriods.last
             : null;
-    bool isLoading = context.select((MealState s) => s.isLoading.value);
+    bool isLoadingDate = context.select((MealState s) => s.isLoadingDate.value);
 
     return BaseScaffold(
       profileButton: true,
@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 EndOfTestPeriodWidget(padding: 16),
                 DateSelector(currentDate: currentDate),
                 SizedBox(height: 16),
-                isLoading
+                isLoadingDate
                     ? LoaderIcon()
                     : Expanded(
                       child: Column(

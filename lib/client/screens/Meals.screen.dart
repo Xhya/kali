@@ -5,6 +5,7 @@ import 'package:kali/client/screens/Home.screen.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/DateSelector.widget.dart';
+import 'package:kali/client/widgets/LoaderIcon.widget.dart';
 import 'package:kali/client/widgets/MealPeriodsHorizontal.widget.dart';
 import 'package:kali/client/widgets/MealRow.widget.dart';
 import 'package:kali/client/widgets/SlidableItem.widget.dart';
@@ -49,6 +50,8 @@ class _MealsScreenState extends State<MealsScreen> {
     DateTime currentDate = context.select((MealState s) => s.currentDate.value);
     List<MealPeriodEnum> currentMealPeriods =
         context.watch<MealState>().currentMealPeriods.value;
+    bool isLoadingDate = context.select((MealState s) => s.isLoadingDate.value);
+
     return BaseScaffold(
       backButton: true,
       child: Scaffold(
@@ -70,35 +73,38 @@ class _MealsScreenState extends State<MealsScreen> {
               ),
               SizedBox(height: 24),
               if (currentMealsByPeriods.isNotEmpty)
-                Expanded(
-                  child: ListView.separated(
-                    itemCount: currentMealsByPeriods.length,
-                    separatorBuilder: (context, index) => SizedBox(height: 4),
-                    itemBuilder: (BuildContext context, int index) {
-                      final meal = currentMealsByPeriods[index];
-                      return CustomInkwell(
-                        onTap: () {
-                          HapticFeedback.vibrate();
-                          goToMealScreen(meal);
-                        },
-                        child: CustomCard(
-                          child: SlidableItem(
-                            onRemove: () {
-                              onRemoveMeal(meal);
+                isLoadingDate
+                    ? LoaderIcon()
+                    : Expanded(
+                      child: ListView.separated(
+                        itemCount: currentMealsByPeriods.length,
+                        separatorBuilder:
+                            (context, index) => SizedBox(height: 4),
+                        itemBuilder: (BuildContext context, int index) {
+                          final meal = currentMealsByPeriods[index];
+                          return CustomInkwell(
+                            onTap: () {
+                              HapticFeedback.vibrate();
+                              goToMealScreen(meal);
                             },
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                vertical: 8,
-                                horizontal: 16,
+                            child: CustomCard(
+                              child: SlidableItem(
+                                onRemove: () {
+                                  onRemoveMeal(meal);
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: 8,
+                                    horizontal: 16,
+                                  ),
+                                  child: MealRowWidget(meal: meal),
+                                ),
                               ),
-                              child: MealRowWidget(meal: meal),
                             ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                          );
+                        },
+                      ),
+                    ),
               if (currentMealsByPeriods.isEmpty)
                 Padding(
                   padding: EdgeInsets.all(16),

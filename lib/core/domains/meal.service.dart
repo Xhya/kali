@@ -10,7 +10,7 @@ class MealService {
 
   Future<void> refreshMeals() async {
     try {
-      mealState.isLoading.value = true;
+      mealState.isLoadingDate.value = true;
       final List<MealModel> meals = await _mealRepository.getMeals();
       mealState.currentMeals.value =
           meals
@@ -25,7 +25,7 @@ class MealService {
     } catch (e, stack) {
       errorService.notifyError(e: e, stack: stack);
     } finally {
-      mealState.isLoading.value = false;
+      mealState.isLoadingDate.value = false;
     }
   }
 

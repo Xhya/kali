@@ -9,7 +9,7 @@ import 'package:kali/core/utils/computeRemainingCalories.utils.dart';
 final mealState = MealState();
 
 class MealState extends ChangeNotifier {
-  final isLoading = ValueNotifier<bool>(false);
+  final isLoadingDate = ValueNotifier<bool>(false);
   final currentMeal = ValueNotifier<MealModel?>(null);
   final currentMeals = ValueNotifier<List<MealModel>>([]);
   NutriScore get mealsNutriScore => computeDayAverages(currentMealsByPeriods);
@@ -29,7 +29,7 @@ class MealState extends ChangeNotifier {
   final currentMealPeriods = ValueNotifier<List<MealPeriodEnum>>([]);
 
   MealState() {
-    isLoading.addListener(notifyListeners);
+    isLoadingDate.addListener(notifyListeners);
     currentMeals.addListener(notifyListeners);
     currentMeal.addListener(notifyListeners);
     currentDate.addListener(notifyListeners);
@@ -38,7 +38,7 @@ class MealState extends ChangeNotifier {
 
   @override
   void dispose() {
-    isLoading.dispose();
+    isLoadingDate.dispose();
     currentMeals.dispose();
     currentMeal.dispose();
     currentDate.dispose();
