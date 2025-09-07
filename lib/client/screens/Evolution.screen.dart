@@ -76,6 +76,7 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                                         dataLabelSettings: DataLabelSettings(
                                           isVisible: true,
                                         ),
+                                        color: Style().text.green.color,
                                       ),
                                     ],
                                   ),
