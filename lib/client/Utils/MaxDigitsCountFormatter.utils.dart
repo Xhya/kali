@@ -13,7 +13,11 @@ class MaxDigitsCountFormatter extends TextInputFormatter {
     final regex = RegExp(r'\d+');
     final match = regex.firstMatch(newValue.text);
 
-    if (match?.group(0) != null && match!.group(0)!.length <= maxLength) {
+    if (match?.group(0) == null) {
+      return newValue.copyWith(text: "");
+    }
+
+    if (match!.group(0)!.length <= maxLength) {
       return newValue;
     }
 
