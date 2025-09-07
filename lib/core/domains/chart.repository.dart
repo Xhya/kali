@@ -6,7 +6,7 @@ import 'package:kali/core/services/headers.service.dart';
 import 'package:kali/environment.dart';
 
 class ChartRepository {
-  Future<List<ChartData>?> getEvolution() async {
+  Future<List<ChartData>> getEvolution() async {
     final response = await http.get(
       Uri.parse('$API_URL/charts/evolution'),
       headers: await headersWithToken(),
