@@ -8,6 +8,7 @@ import 'package:kali/core/models/MacroType.enum.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/states/user.state.dart';
+import 'package:kali/core/utils/computeDayAverages.utils.dart';
 import 'package:kali/core/utils/getBars.utils.dart';
 import 'package:kali/core/utils/macroIcon.utils.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +34,7 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
 
   @override
   Widget build(BuildContext context) {
-    NutriScore currentNutriScore = context.watch<MealState>().mealsNutriScore;
+    NutriScore mealsNutriScore = computeDayAverages(widget.mealsByPeriods);
     NutriScore? personalNutriScore =
         context.watch<UserState>().personalNutriscore;
     NutriScore? editingNutriScore =
@@ -71,8 +72,8 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                       SizedBox(height: 16),
                       Text(
                         widget.withTotal
-                            ? "${currentNutriScore.proteinAmount}/${personalNutriScore.proteinAmount}g"
-                            : "${currentNutriScore.proteinAmount}g",
+                            ? "${mealsNutriScore.proteinAmount}/${personalNutriScore.proteinAmount}g"
+                            : "${mealsNutriScore.proteinAmount}g",
                         style: style.fontsize.sm
                             .merge(style.text.neutral)
                             .merge(style.fontweight.bold),
@@ -105,8 +106,8 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                       SizedBox(height: 16),
                       Text(
                         widget.withTotal
-                            ? "${currentNutriScore.glucidAmount}/${personalNutriScore.glucidAmount}g"
-                            : "${currentNutriScore.glucidAmount}g",
+                            ? "${mealsNutriScore.glucidAmount}/${personalNutriScore.glucidAmount}g"
+                            : "${mealsNutriScore.glucidAmount}g",
                         style: style.fontsize.sm
                             .merge(style.text.neutral)
                             .merge(style.fontweight.bold),
@@ -138,8 +139,8 @@ class _NutriScoreGaugesWidgetState extends State<NutriScoreGaugesWidget> {
                       SizedBox(height: 16),
                       Text(
                         widget.withTotal
-                            ? "${currentNutriScore.lipidAmount}/${personalNutriScore.lipidAmount}g"
-                            : "${currentNutriScore.lipidAmount}g",
+                            ? "${mealsNutriScore.lipidAmount}/${personalNutriScore.lipidAmount}g"
+                            : "${mealsNutriScore.lipidAmount}g",
                         style: style.fontsize.sm
                             .merge(style.text.neutral)
                             .merge(style.fontweight.bold),
