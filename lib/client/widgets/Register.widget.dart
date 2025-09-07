@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/widgets/ValidateCode.widget.dart';
 import 'package:kali/core/domains/authentication.repository.dart';
 import 'package:kali/core/states/register.state.dart';
-import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/EmailInput.widget.dart';
 import 'package:kali/client/widgets/Login.widget.dart';
@@ -73,6 +73,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
     bool areEmailAndPasswordValid =
         context.watch<InputState>().areEmailAndPasswordValid;
     final isLoading = context.select((RegisterState v) => v.isLoading.value);
+    final error = context.select((RegisterState v) => v.error.value);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -122,7 +123,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
           obscureText: obscurePassword,
         ),
         SizedBox(height: 4),
-        if (registerState.error.value != null)
+        if (error != null)
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 12),
             child: Text(

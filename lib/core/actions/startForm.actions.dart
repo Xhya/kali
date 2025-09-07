@@ -114,7 +114,7 @@ Future<void> computePersonalNutriScore() async {
   startFormState.isLoading.value = false;
 }
 
-validatePersonalNutriScore() async {
+Future<void> validatePersonalNutriScore() async {
   if (startFormState.personalNutriScore.value != null) {
     await userService.setPersonalNutriScore(
       startFormState.personalNutriScore.value!,

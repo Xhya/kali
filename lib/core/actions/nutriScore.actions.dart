@@ -1,3 +1,4 @@
+import 'package:kali/core/domains/nutriscore.service.dart';
 import 'package:kali/core/states/Ai.state.dart';
 import 'package:kali/core/states/quickAddMeal.state.dart';
 import 'package:kali/core/domains/meal.service.dart';
@@ -9,8 +10,8 @@ Future<void> computeNutriScoreAction() async {
     quickAddMealState.isComputingLoading.value = true;
     final userText = quickAddMealState.userMealText.value;
 
-    final meal = await MealService().computeMealNutriScore(userText: userText);
-    quickAddMealState.meal.value = meal;
+    final meal = await nutriscoreService.computeNutriScore(userText: userText);
+    quickAddMealState.nutriscore.value = meal;
     quickAddMealState.isComputingLoading.value = false;
     quickAddMealState.computed.value = true;
   } catch (e, stack) {
@@ -29,13 +30,12 @@ Future<void> addMealAction() async {
     final period =
         quickAddMealState.chosenPeriod.value ??
         computeMealPeriod(DateTime.now());
-    final meal = quickAddMealState.meal.value;
 
-    if (meal != null) {
-      await MealService().updateMeal(
-        mealId: meal.id,
+    if (quickAddMealState.nutriscore.value?.id != null) {
+      await MealService().createMeal(
         period: period,
         date: quickAddMealState.date.value,
+        nutriscoreId: quickAddMealState.nutriscore.value!.id!,
       );
     }
   } catch (e, stack) {

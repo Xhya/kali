@@ -24,6 +24,35 @@ class MealRepository {
     }
   }
 
+  Future<MealModel> createMeal({
+    MealPeriodEnum? period,
+    DateTime? date,
+    String? nutriscoreId,
+  }) async {
+    Map body = {
+      "period": period?.label,
+      "date":
+          date != null
+              ? '${date.toUtc().toIso8601String().split('.').first}+00:00'
+              : null,
+      "nutriscoreId": nutriscoreId,
+    };
+
+    final response = await http.post(
+      Uri.parse('$API_URL/meals'),
+      headers: await headersWithMaybeToken(),
+      body: json.encode(body),
+    );
+
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body) as Map<String, dynamic>;
+      return MealModel.fromJson(body["data"]);
+    } else {
+      errorService.currentResponseError = response;
+      throw Exception();
+    }
+  }
+
   Future<MealModel> updateMeal({
     required String mealId,
     MealPeriodEnum? period,
@@ -64,27 +93,6 @@ class MealRepository {
 
     if (response.statusCode == 200) {
       return;
-    } else {
-      errorService.currentResponseError = response;
-      throw Exception();
-    }
-  }
-
-  Future<MealModel?> computeMealNutriScore({
-    required String userText,
-    String? mealId,
-  }) async {
-    Map body = {"userText": userText, "mealId": mealId};
-
-    final response = await http.post(
-      Uri.parse('$API_URL/meals/compute'),
-      headers: await headersWithMaybeToken(),
-      body: json.encode(body),
-    );
-
-    if (response.statusCode == 200) {
-      final body = jsonDecode(response.body) as Map<String, dynamic>;
-      return MealModel.fromJson(body["data"]);
     } else {
       errorService.currentResponseError = response;
       throw Exception();

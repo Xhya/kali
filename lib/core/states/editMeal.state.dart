@@ -23,7 +23,7 @@ class EditMealState extends ChangeNotifier {
 
   bool get canCompute {
     final currentMeal = mealState.currentMeal.value;
-    return editingUserTextMeal.value != currentMeal?.userText &&
+    return editingUserTextMeal.value != currentMeal?.nutriscore?.userText &&
         editingNutriScore.value == null;
   }
 

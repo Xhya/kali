@@ -27,7 +27,7 @@ Future<void> onComputeQuickAddMeal() async {
 }
 
 void onInputUpdateUserMealText(String value) {
-  quickAddMealState.meal.value?.removeNutriScore();
+  quickAddMealState.nutriscore.value = null;
   quickAddMealState.userMealText.value = value;
 }
 
@@ -66,8 +66,8 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
       quickAddMealState.date.value = mealState.currentDate.value;
     });
 
-    quickAddMealState.meal.addListener(() {
-      final nutri = quickAddMealState.meal.value?.nutriscore;
+    quickAddMealState.nutriscore.addListener(() {
+      final nutri = quickAddMealState.nutriscore.value;
       if (nutri != null && !quickAddMealState.isExpanded.value) {
         quickAddMealState.isExpanded.value = true;
       }
@@ -80,7 +80,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
       (QuickAddMealState s) => s.chosenPeriod.value,
     );
     NutriScore? nutriScore =
-        context.watch<QuickAddMealState>().meal.value?.nutriscore;
+        context.watch<QuickAddMealState>().nutriscore.value;
     bool computed = context.watch<QuickAddMealState>().computed.value;
     String userMealText = context.select(
       (QuickAddMealState s) => s.userMealText.value,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/EmailInput.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
@@ -9,6 +10,7 @@ import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/states/Input.state.dart';
+import 'package:kali/core/states/register.state.dart';
 
 Future<void> onSubmitLogin() async {
   try {
@@ -20,8 +22,10 @@ Future<void> onSubmitLogin() async {
     navigationService.navigateBack();
     navigationService.navigateTo(ScreenEnum.home);
     launchConfetti();
-  } catch (e) {
-    errorService.notifyError(e: e);
+  } catch (e, stack) {
+    final extractedMessage = errorService.extractCurrentErrorMessage();
+    registerState.error.value = extractedMessage;
+    errorService.notifyError(e: e, stack: stack, show: false);
   }
 }
 
@@ -46,6 +50,8 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final error = context.select((RegisterState v) => v.error.value);
+
     return Padding(
       padding: EdgeInsets.all(12),
       child: Column(
@@ -70,6 +76,15 @@ class _LoginWidgetState extends State<LoginWidget> {
           EmailInputWidget(),
           SizedBox(height: 4),
           PasswordInputWidget(),
+          SizedBox(height: 4),
+          if (error != null)
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: Text(
+                registerState.error.value!,
+                style: style.text.error.merge(style.fontsize.sm),
+              ),
+            ),
           SizedBox(height: 32),
           Flex(
             direction: Axis.horizontal,

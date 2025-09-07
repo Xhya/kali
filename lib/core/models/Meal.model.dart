@@ -4,14 +4,12 @@ import 'package:kali/core/models/NutriScore.model.dart';
 class MealModel {
   final String id;
   final DateTime? date;
-  final String? userText;
   final MealPeriodEnum? period;
   NutriScore? nutriscore;
 
   MealModel({
     required this.id,
     required this.date,
-    required this.userText,
     required this.period,
     required this.nutriscore,
   });
@@ -21,7 +19,6 @@ class MealModel {
       id: json['id'] as String,
       date:
           json['date'] == null ? null : DateTime.parse(json['date']).toLocal(),
-      userText: json['userText'] as String,
       period:
           json['period'] == null
               ? null
@@ -37,13 +34,8 @@ class MealModel {
     return {
       'id': id,
       'date': date?.toIso8601String(),
-      'userText': userText,
       'period': period?.label,
       'nutriscore': nutriscore?.toJson(),
     };
-  }
-
-  removeNutriScore() {
-    nutriscore = null;
   }
 }

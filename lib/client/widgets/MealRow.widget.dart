@@ -24,9 +24,9 @@ class _MealPeriodTagWidgetState extends State<MealRowWidget> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (widget.meal.userText != null)
+              if (widget.meal.nutriscore?.userText != null)
                 Text(
-                  widget.meal.userText!,
+                  widget.meal.nutriscore!.userText!,
                   style: style.fontsize.sm.merge(style.text.neutral),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,

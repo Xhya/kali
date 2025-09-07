@@ -3,6 +3,7 @@ import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/MealComputerInput.widget.dart';
 import 'package:kali/client/widgets/ThinkingWidget.widget.dart';
 import 'package:kali/core/domains/meal.service.dart';
+import 'package:kali/core/domains/nutriscore.service.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:provider/provider.dart';
@@ -51,11 +52,10 @@ Future<void> onComputeEditingMeal() async {
     if (!editMealState.isComputeLoading.value &&
         editMealState.editingUserTextMeal.value.isNotEmpty == true) {
       editMealState.isComputeLoading.value = true;
-      final meal = await MealService().computeMealNutriScore(
+      final nutriscore = await nutriscoreService.computeNutriScore(
         userText: editMealState.editingUserTextMeal.value,
-        mealId: mealState.currentMeal.value?.id,
       );
-      editMealState.editingNutriScore.value = meal?.nutriscore;
+      editMealState.editingNutriScore.value = nutriscore;
     }
   } finally {
     editMealState.isComputeLoading.value = false;
@@ -81,7 +81,7 @@ class _MealScreenState extends State<MealScreen> {
       setState(() {
         meal = mealState.currentMeal.value;
       });
-      editMealState.editingUserTextMeal.value = meal?.userText ?? "";
+      editMealState.editingUserTextMeal.value = meal?.nutriscore?.userText ?? "";
       editMealState.editingMealPeriod.value = meal?.period;
     });
     super.initState();

@@ -29,6 +29,23 @@ class MealService {
     }
   }
 
+  Future<void> createMeal({
+    required MealPeriodEnum period,
+    required DateTime date,
+    required String nutriscoreId,
+  }) async {
+    try {
+      await _mealRepository.createMeal(
+        period: period,
+        date: date,
+        nutriscoreId: nutriscoreId,
+      );
+      await refreshMeals();
+    } catch (e, stack) {
+      errorService.notifyError(e: e, stack: stack);
+    }
+  }
+
   Future<void> updateMeal({
     required String mealId,
     MealPeriodEnum? period,
@@ -48,16 +65,6 @@ class MealService {
     } catch (e, stack) {
       errorService.notifyError(e: e, stack: stack);
     }
-  }
-
-  Future<MealModel?> computeMealNutriScore({
-    required String userText,
-    String? mealId,
-  }) async {
-    return await _mealRepository.computeMealNutriScore(
-      userText: userText,
-      mealId: mealId,
-    );
   }
 
   Future<void> deleteMeal(String mealId) async {
