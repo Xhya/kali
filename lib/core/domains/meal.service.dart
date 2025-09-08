@@ -3,6 +3,7 @@ import 'package:kali/core/domains/meal.repository.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/services/Error.service.dart';
+import 'package:kali/core/states/date.state.dart';
 import 'package:kali/core/states/meal.state.dart';
 
 class MealService {
@@ -17,7 +18,7 @@ class MealService {
               .where(
                 (it) =>
                     it.date != null
-                        ? it.date!.isSameDay(mealState.currentDate.value)
+                        ? it.date!.isSameDay(dateState.currentDate.value)
                         : false,
               )
               .toList()

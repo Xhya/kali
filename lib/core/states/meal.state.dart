@@ -38,14 +38,12 @@ class MealState extends ChangeNotifier {
     }).toList();
   }
 
-  final currentDate = ValueNotifier<DateTime>(DateTime.now());
   final currentMealPeriods = ValueNotifier<List<MealPeriodEnum>>([]);
 
   MealState() {
     isLoadingDate.addListener(notifyListeners);
     currentMeals.addListener(notifyListeners);
     currentMeal.addListener(notifyListeners);
-    currentDate.addListener(notifyListeners);
     currentMealPeriods.addListener(notifyListeners);
   }
 
@@ -54,7 +52,6 @@ class MealState extends ChangeNotifier {
     isLoadingDate.dispose();
     currentMeals.dispose();
     currentMeal.dispose();
-    currentDate.dispose();
     currentMealPeriods.dispose();
     super.dispose();
   }

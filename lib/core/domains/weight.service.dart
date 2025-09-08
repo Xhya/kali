@@ -7,16 +7,16 @@ final weightService = WeightService();
 class WeightService {
   final WeightRepository _weightRepository = WeightRepository();
 
-  Future<void> refreshWeights() async {
-    try {
-      weightState.isRefreshLoading.value = true;
-      weightState.weights.value = await _weightRepository.getWeights();
-    } catch (e, stack) {
-      errorService.notifyError(e: e, stack: stack);
-    } finally {
-      weightState.isRefreshLoading.value = false;
-    }
-  }
+  // Future<void> refreshWeights() async {
+  //   try {
+  //     weightState.isRefreshLoading.value = true;
+  //     weightState.weights.value = await _weightRepository.getWeights();
+  //   } catch (e, stack) {
+  //     errorService.notifyError(e: e, stack: stack);
+  //   } finally {
+  //     weightState.isRefreshLoading.value = false;
+  //   }
+  // }
 
   Future<void> addWeight() async {
     if (weightState.newWeight.value == null) {

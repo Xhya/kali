@@ -13,6 +13,7 @@ import 'package:kali/core/actions/Goto.actions.dart';
 import 'package:kali/core/domains/meal.service.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/services/Error.service.dart';
+import 'package:kali/core/states/date.state.dart';
 import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +48,7 @@ class _MealsScreenState extends State<MealsScreen> {
   Widget build(BuildContext context) {
     List<MealModel> currentMealsByPeriods =
         context.watch<MealState>().currentMealsByPeriods;
-    DateTime currentDate = context.select((MealState s) => s.currentDate.value);
+    DateTime currentDate = context.select((DateState s) => s.currentDate.value);
     List<MealPeriodEnum> currentMealPeriods =
         context.watch<MealState>().currentMealPeriods.value;
     bool isLoadingDate = context.select((MealState s) => s.isLoadingDate.value);

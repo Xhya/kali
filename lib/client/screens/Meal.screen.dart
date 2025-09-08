@@ -7,6 +7,7 @@ import 'package:kali/core/domains/meal.service.dart';
 import 'package:kali/core/domains/nutriscore.service.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/Navigation.service.dart';
+import 'package:kali/core/states/date.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
@@ -88,15 +89,15 @@ class _MealScreenState extends State<MealScreen> {
       editMealState.editingDate.value = meal?.date;
     });
     super.initState();
-    mealState.currentDate.addListener(() {
-      editMealState.editingDate.value = mealState.currentDate.value;
+    dateState.currentDate.addListener(() {
+      editMealState.editingDate.value = dateState.currentDate.value;
     });
   }
 
   @override
   void dispose() {
     editMealState.editingNutriScore.value = null;
-    mealState.currentDate.removeListener(() {
+    dateState.currentDate.removeListener(() {
       editMealState.editingDate.value = null;
     });
     super.dispose();

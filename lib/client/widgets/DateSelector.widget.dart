@@ -2,17 +2,17 @@ import 'package:dart_date/dart_date.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kali/client/Style.service.dart';
-import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/services/Datetime.extension.dart';
+import 'package:kali/core/states/date.state.dart';
 
 void onClickLeftArrow() {
-  mealState.currentDate.value = mealState.currentDate.value.subtract(
+  dateState.currentDate.value = dateState.currentDate.value.subtract(
     Duration(days: 1),
   );
 }
 
 void onClickRightArrow() {
-  mealState.currentDate.value = mealState.currentDate.value.add(
+  dateState.currentDate.value = dateState.currentDate.value.add(
     Duration(days: 1),
   );
 }
@@ -47,7 +47,7 @@ class DateSelector extends StatelessWidget {
       );
 
       if (newDate != null) {
-        mealState.currentDate.value = newDate;
+        dateState.currentDate.value = newDate;
       }
     }
 

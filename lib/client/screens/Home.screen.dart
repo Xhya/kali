@@ -5,11 +5,13 @@ import 'package:kali/client/widgets/LoaderIcon.widget.dart';
 import 'package:kali/client/widgets/PushNotificationPermission.widget.dart';
 import 'package:kali/client/widgets/Refresh.widget.dart';
 import 'package:kali/client/widgets/TestPeriodBottomSheet.widget.dart';
+import 'package:kali/client/widgets/WeekJourney.widget.dart';
 import 'package:kali/core/services/Authentication.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
 import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
+import 'package:kali/core/states/date.state.dart';
 import 'package:kali/core/states/user.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
@@ -72,12 +74,12 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     });
     super.initState();
-    mealState.currentDate.addListener(MealService().refreshMeals);
+    dateState.currentDate.addListener(MealService().refreshMeals);
   }
 
   @override
   void dispose() {
-    mealState.currentDate.removeListener(MealService().refreshMeals);
+    dateState.currentDate.removeListener(MealService().refreshMeals);
     super.dispose();
   }
 
@@ -85,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     List<MealModel> currentMealsByPeriods =
         context.watch<MealState>().currentMealsByPeriods;
-    DateTime currentDate = context.select((MealState s) => s.currentDate.value);
+    DateTime currentDate = context.select((DateState s) => s.currentDate.value);
     List<MealPeriodEnum> currentMealPeriods =
         context.watch<MealState>().currentMealPeriods.value;
     bool isLoadingDate = context.select((MealState s) => s.isLoadingDate.value);
@@ -107,6 +109,9 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 PushNotificationPermissionWidget(padding: 16),
                 // EndOfTestPeriodWidget(padding: 16),
+                
+                WeekJourneyWidget(),
+                
                 DateSelector(currentDate: currentDate),
                 SizedBox(height: 16),
                 isLoadingDate

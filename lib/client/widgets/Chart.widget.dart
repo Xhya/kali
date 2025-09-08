@@ -3,7 +3,6 @@ import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/LoaderIcon.widget.dart';
 import 'package:kali/core/models/ChartData.model.dart';
 import 'package:kali/core/states/chart.state.dart';
-import 'package:kali/core/states/weight.state.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
