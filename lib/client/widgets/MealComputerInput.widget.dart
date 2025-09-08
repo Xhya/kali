@@ -3,7 +3,7 @@ import 'package:kali/client/Utils/MaxCharactersCountFormatter.utils.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/core/states/Ai.state.dart';
-import 'package:kali/core/states/Texts.state.dart';
+import 'package:kali/core/states/configuration.state.dart';
 import 'package:provider/provider.dart';
 
 class MealComputerInput extends StatefulWidget {
@@ -51,7 +51,7 @@ class _MealComputerInputState extends State<MealComputerInput> {
                 placeholder: "Quel est le menu du jour ?",
                 inputFormatters: [
                   MaxCharactersCountFormatter(
-                    maxLength: textsState.maxCharacterCount.value,
+                    maxLength: configurationState.maxCharacterCount.value,
                   ),
                 ],
                 minLines: 2,
@@ -59,7 +59,7 @@ class _MealComputerInputState extends State<MealComputerInput> {
                 textCapitalization: TextCapitalization.sentences,
                 errorText:
                     aiNotUnderstandError ? 'Veuillez être plus précis' : null,
-                maxLength: textsState.maxCharacterCount.value,
+                maxLength: configurationState.maxCharacterCount.value,
                 keyboardType: TextInputType.multiline,
                 textInputAction: TextInputAction.newline,
                 withSpeechToText: false,

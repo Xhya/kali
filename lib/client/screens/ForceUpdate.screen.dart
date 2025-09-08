@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
 
-onClickUpdateApplicationOnStore() async {
+Future<void> onClickUpdateApplicationOnStore() async {
   final String url =
       Platform.isAndroid
           ? "https://play.google.com/store/apps/details?id=com.horace.kali"

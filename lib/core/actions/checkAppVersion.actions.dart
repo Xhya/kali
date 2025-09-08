@@ -3,7 +3,6 @@ import 'package:kali/core/models/Configuration.enum.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Hardware.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
-import 'package:kali/core/states/texts.state.dart';
 
 Future<void> initConfigurations() async {
   try {
@@ -13,11 +12,14 @@ Future<void> initConfigurations() async {
     );
     configurationState.subscriptionActivated.value =
         activateSubscription.toLowerCase() == "true";
-
     final maxCountStr = await configurationsRepository.getConfig(
       ConfigKeyEnum.computeMaxCharactersCount,
     );
-    textsState.maxCharacterCount.value = int.parse(maxCountStr);
+    configurationState.maxCharacterCount.value = int.parse(maxCountStr);
+    configurationState.minimalVersion.value = await configurationsRepository
+        .getConfig(ConfigKeyEnum.forceUpdateVersion);
+    configurationState.lastVersion.value = await configurationsRepository
+        .getConfig(ConfigKeyEnum.lastVersion);
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack, show: false);
   }
@@ -29,10 +31,6 @@ Future<void> refreshAppVersion() async {
         await hardwareService.getCurrentVersion();
     configurationState.currentBuild.value =
         await hardwareService.getCurrentBuild();
-    configurationState.minimalVersion.value = await ConfigurationsRepository()
-        .getConfig(ConfigKeyEnum.forceUpdateVersion);
-    configurationState.lastVersion.value = await ConfigurationsRepository()
-        .getConfig(ConfigKeyEnum.lastVersion);
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack, show: false);
   }

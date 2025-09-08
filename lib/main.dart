@@ -12,7 +12,6 @@ import 'package:kali/core/services/PushNotification.service.dart';
 import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/states/Ai.state.dart';
 import 'package:kali/core/states/Input.state.dart';
-import 'package:kali/core/states/Texts.state.dart';
 import 'package:kali/core/states/chart.state.dart';
 import 'package:kali/core/states/configuration.state.dart';
 import 'package:kali/core/states/editProfile.state.dart';
@@ -104,7 +103,6 @@ void main() async {
         ChangeNotifierProvider(create: (context) => topBannerState),
         ChangeNotifierProvider(create: (context) => inputState),
         ChangeNotifierProvider(create: (context) => registerState),
-        ChangeNotifierProvider(create: (context) => textsState),
         ChangeNotifierProvider(create: (context) => googleSignInState),
 
         ChangeNotifierProvider(create: (context) => nutriScoreState),

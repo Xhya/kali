@@ -8,6 +8,7 @@ class ConfigurationState extends ChangeNotifier {
   final minimalVersion = ValueNotifier<String>("");
   final lastVersion = ValueNotifier<String>("");
   final subscriptionActivated = ValueNotifier<bool>(false);
+  final maxCharacterCount = ValueNotifier<int>(300);
 
   ConfigurationState() {
     minimalVersion.addListener(notifyListeners);
@@ -15,6 +16,7 @@ class ConfigurationState extends ChangeNotifier {
     currentBuild.addListener(notifyListeners);
     lastVersion.addListener(notifyListeners);
     subscriptionActivated.addListener(notifyListeners);
+    maxCharacterCount.addListener(notifyListeners);
   }
 
   @override
@@ -24,6 +26,7 @@ class ConfigurationState extends ChangeNotifier {
     currentBuild.dispose();
     lastVersion.dispose();
     subscriptionActivated.dispose();
+    maxCharacterCount.dispose();
     super.dispose();
   }
 }
