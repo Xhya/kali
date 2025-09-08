@@ -107,7 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 showRegisterEmailBottomSheet(
                                   context: context,
                                   subtitle:
-                                      "Pour créer un compte, entrez votre email.",
+                                      "Veuillez entrer votre email.",
                                 );
                               },
                               child: Text(
@@ -149,9 +149,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                           CustomCard(
                             onClick: () {
-                              navigationService.navigateTo(
-                                ScreenEnum.evolution,
-                              );
+                              if (userState.user.value?.emailVerifiedAt !=
+                                  null) {
+                                navigationService.navigateTo(
+                                  ScreenEnum.evolution,
+                                );
+                              } else {
+                                showRegisterEmailBottomSheet(
+                                  context: context,
+                                  subtitle:
+                                      "Crée un compte pour utiliser cette fonctionnalité",
+                                );
+                              }
                             },
                             width: double.infinity,
                             padding: EdgeInsets.all(16),

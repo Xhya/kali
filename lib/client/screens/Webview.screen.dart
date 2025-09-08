@@ -1,6 +1,5 @@
 // ignore: depend_on_referenced_packages
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/core/services/Navigation.service.dart';
@@ -20,7 +19,6 @@ class _WebviewScreenState extends State<WebviewScreen> {
   void initState() {
     super.initState();
     final url = navigationService.url;
-    print(url);
     if (url != null) {
       mobileController =
           WebViewController()
@@ -28,14 +26,11 @@ class _WebviewScreenState extends State<WebviewScreen> {
             ..setNavigationDelegate(
               NavigationDelegate(
                 onPageStarted: (url) {
-                  print("start");
                   setState(() {
                     isLoading = true;
                   });
                 },
                 onPageFinished: (url) {
-                  print("finished");
-
                   setState(() {
                     isLoading = false;
                   });
