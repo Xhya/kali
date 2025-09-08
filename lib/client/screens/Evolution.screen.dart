@@ -50,7 +50,6 @@ void onClickOpenAddWeight(BuildContext context) {
               ),
             ],
             suffixText: "kg",
-            keyboardType: TextInputType.datetime,
             textInputAction: TextInputAction.next,
           ),
         ),
