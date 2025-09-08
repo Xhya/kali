@@ -31,7 +31,7 @@ class _SlidableItemState extends State<SlidableItem> {
         alignment: Alignment.centerRight,
         child: Padding(
           padding: const EdgeInsets.only(right: 18),
-          child: const Icon(Icons.tram_sharp, color: Colors.white, size: 30),
+          child: const Icon(Icons.delete, color: Colors.white, size: 30),
         ),
       ),
       key: Key(widget.key.toString()),
