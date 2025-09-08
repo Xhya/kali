@@ -30,6 +30,37 @@ Future<void> onClickDeconnect() async {
   }
 }
 
+Future<void> onClickEvolution(BuildContext context) async {
+  if (userState.user.value?.emailVerifiedAt != null) {
+    navigationService.navigateTo(ScreenEnum.evolution);
+  } else {
+    showRegisterEmailBottomSheet(
+      context: context,
+      subtitle: "Crée un compte pour utiliser cette fonctionnalité",
+    );
+  }
+}
+
+Future<void> onClickPersonalPlan(BuildContext context) async {
+  navigationService.navigateTo(ScreenEnum.personalNutriscore);
+}
+
+Future<void> onClickFeedback(BuildContext context) async {
+  if (userState.user.value?.emailVerifiedAt != null) {
+    final email = userState.user.value?.email;
+    if (email != null) {
+      navigationService.url =
+          "${configurationState.feedbackUrl.value}&entry.807671233=$email";
+      navigationService.navigateTo(ScreenEnum.webview);
+    }
+  } else {
+    showRegisterEmailBottomSheet(
+      context: context,
+      subtitle: "Crée un compte pour utiliser cette fonctionnalité",
+    );
+  }
+}
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -106,8 +137,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               onTap: () {
                                 showRegisterEmailBottomSheet(
                                   context: context,
-                                  subtitle:
-                                      "Veuillez entrer votre email.",
+                                  subtitle: "Veuillez entrer votre email.",
                                 );
                               },
                               child: Text(
@@ -138,45 +168,65 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                           CustomCard(
                             onClick: () {
-                              navigationService.navigateTo(
-                                ScreenEnum.personalNutriscore,
-                              );
+                              onClickPersonalPlan(context);
                             },
                             width: double.infinity,
                             padding: EdgeInsets.all(16),
-                            child: Text("Ton plan personnalisé"),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Ton plan personnalisé",
+                                  style: style.text.neutral.merge(
+                                    style.fontsize.sm,
+                                  ),
+                                ),
+                                Icon(Icons.arrow_forward_ios_outlined),
+                              ],
+                            ),
                           ),
 
                           CustomCard(
                             onClick: () {
-                              if (userState.user.value?.emailVerifiedAt !=
-                                  null) {
-                                navigationService.navigateTo(
-                                  ScreenEnum.evolution,
-                                );
-                              } else {
-                                showRegisterEmailBottomSheet(
-                                  context: context,
-                                  subtitle:
-                                      "Crée un compte pour utiliser cette fonctionnalité",
-                                );
-                              }
+                              onClickEvolution(context);
                             },
                             width: double.infinity,
                             padding: EdgeInsets.all(16),
-                            child: Text("Ton évolution"),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Ton évolution",
+                                  style: style.text.neutral.merge(
+                                    style.fontsize.sm,
+                                  ),
+                                ),
+                                Icon(Icons.arrow_forward_ios_outlined),
+                              ],
+                            ),
                           ),
 
-                          CustomCard(
-                            onClick: () {
-                              navigationService.url =
-                                  "https://forms.gle/qGX2M9UXuVPJ1Z2x7";
-                              navigationService.navigateTo(ScreenEnum.webview);
-                            },
-                            width: double.infinity,
-                            padding: EdgeInsets.all(16),
-                            child: Text("Ton feedback"),
-                          ),
+                          if (configurationState.feedbackUrl.value.isNotEmpty)
+                            CustomCard(
+                              onClick: () {
+                                onClickFeedback(context);
+                              },
+                              width: double.infinity,
+                              padding: EdgeInsets.all(16),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Ton feedback",
+                                    style: style.text.neutral.merge(
+                                      style.fontsize.sm,
+                                    ),
+                                  ),
+                                  Icon(Icons.arrow_forward_ios_outlined),
+                                ],
+                              ),
+                            ),
 
                           SizedBox(height: 80),
                         ],
