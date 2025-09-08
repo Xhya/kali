@@ -149,7 +149,7 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                               )
                               : SfCartesianChart(
                                 primaryXAxis: CategoryAxis(),
-                                legend: Legend(isVisible: true),
+                                legend: Legend(isVisible: false),
                                 tooltipBehavior: TooltipBehavior(enable: true),
                                 axes: <ChartAxis>[
                                   NumericAxis(
@@ -204,6 +204,75 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                                   ),
                                 ],
                               ),
+
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                Row(
+                                  children: [
+                                    Checkbox(
+                                      value: true,
+                                      onChanged: (value) {},
+                                      activeColor: style.macroColors.calories,
+                                    ),
+                                    Text(
+                                      "calories",
+                                      style: style.fontsize.xxs.merge(
+                                        style.text.neutral,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Checkbox(
+                                      value: true,
+                                      onChanged: (value) {},
+                                      activeColor: style.macroColors.proteins,
+                                    ),
+                                    Text(
+                                      "protéines",
+                                      style: style.fontsize.xxs.merge(
+                                        style.text.neutral,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Checkbox(
+                                      value: true,
+                                      onChanged: (value) {},
+                                      activeColor: style.macroColors.glucids,
+                                    ),
+                                    Text(
+                                      "glucides",
+                                      style: style.fontsize.xxs.merge(
+                                        style.text.neutral,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Checkbox(
+                                      value: true,
+                                      onChanged: (value) {},
+                                      activeColor: style.macroColors.lipids,
+                                    ),
+                                    Text(
+                                      "lipids",
+                                      style: style.fontsize.xxs.merge(
+                                        style.text.neutral,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+
                           isRefreshLoading
                               ? Container(
                                 height: 200,
