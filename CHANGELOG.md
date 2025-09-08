@@ -4,8 +4,17 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0]
+
+- add prevention message to user that informations are indicative
+- weight as decimal
+- logged menus
+- user text in nutriscore
+
 ## [1.5.1]
 
+- fix edition date
+- feedback
 - can add weight
 
 ## [1.5.0]
