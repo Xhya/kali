@@ -73,7 +73,7 @@ class _StartFormPageFinalState extends State<StartFormPageFinal> {
               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
               secondary: true,
               child: Text(
-                "Ces informations sont données à titre indicatif par un agent nutritionnel. Elles ne remplacent en aucun cas l'avis d'un expert.",
+                "Ces informations sont données à titre indicatif par un agent nutritionnel et sont approximatives. Elles ne remplacent en aucun cas l'avis d'un expert.",
               ),
             ),
           ],

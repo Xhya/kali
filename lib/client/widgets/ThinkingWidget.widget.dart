@@ -40,7 +40,7 @@ class _ThinkingWidgetState extends State<ThinkingWidget> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "Ces informations sont fournies à titre indicatif et ne remplacent pas l'avis d'un expert nutritionnel.",
+                      "Ces informations sont fournies à titre indicatif et sont approximatives. Elles ne remplacent pas l'avis d'un expert nutritionnel.",
                       style: style.text.neutral
                           .merge(style.fontsize.sm)
                           .merge(style.fontweight.bold),
