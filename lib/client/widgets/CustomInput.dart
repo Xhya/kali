@@ -86,7 +86,6 @@ class _CustomInputState extends State<CustomInput> {
                 ),
               ),
             Container(
-              padding: EdgeInsets.only(bottom: widget.maxLength != null ? 32 : 0),
               decoration: BoxDecoration(
                 color: style.background.neutral.color,
                 borderRadius: BorderRadius.circular(16),
@@ -105,8 +104,18 @@ class _CustomInputState extends State<CustomInput> {
                   contentPadding: EdgeInsets.only(
                     left: 16,
                     right: 16,
-                    top: 12,
-                    bottom: 12,
+                    top:
+                        widget.errorText != null
+                            ? 12
+                            : widget.maxLength != null
+                            ? 0
+                            : 12,
+                    bottom:
+                        widget.errorText != null
+                            ? 0
+                            : widget.maxLength != null
+                            ? 44
+                            : 12,
                   ),
                   hintStyle: TextStyle(color: Colors.grey),
                   hintText: widget.placeholder,

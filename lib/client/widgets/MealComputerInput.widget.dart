@@ -36,6 +36,7 @@ class _MealComputerInputState extends State<MealComputerInput> {
     );
 
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
       spacing: 8,
       children: [
         Expanded(

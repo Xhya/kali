@@ -12,7 +12,6 @@ final inputDecoration = InputDecoration(
     borderRadius: BorderRadius.circular(16),
   ),
   contentPadding: EdgeInsets.symmetric(
-    //vertical: 20,
     horizontal: 16,
   ),
   labelStyle: style.text.greenDark,
