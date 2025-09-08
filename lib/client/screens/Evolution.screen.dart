@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Utils/DecimalFormatter.utils.dart';
-import 'package:kali/client/Utils/InputWithTextFormatter.utils.dart';
-import 'package:kali/client/Utils/MaxDigitsCountFormatter.utils.dart';
+import 'package:kali/client/Utils/MaxDecimalDigitsCountFormatter.utils.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
-import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/widgets/LoaderIcon.widget.dart';
@@ -42,18 +40,16 @@ void onClickOpenAddWeight(BuildContext context) {
         content: IntrinsicHeight(
           child: CustomInput(
             onChanged: (String text) {
-              String number = text.split(" ")[0];
-              weightState.newWeight.value = double.parse(number);
+              weightState.newWeight.value = double.parse(text);
             },
             inputFormatters: [
               decimalFormatter(),
-              InputWithTextFormatter(extension: "kg"),
-              MaxDigitsCountFormatter(maxLength: 3),
+              MaxDecimalDigitsCountFormatter(
+                maxDigitsBeforeDecimal: 3,
+                maxDigitsAfterDecimal: 3,
+              ),
             ],
-            customIcon: CustomIconWidget(
-              format: CustomIconFormat.svg,
-              icon: "assets/icons/balance.svg",
-            ),
+            suffixText: "kg",
             keyboardType: TextInputType.datetime,
             textInputAction: TextInputAction.next,
           ),
