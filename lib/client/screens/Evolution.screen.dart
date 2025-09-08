@@ -93,7 +93,7 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
     final isRefreshLoading = context.select(
       (ChartState s) => s.isRefreshLoading.value,
     );
-    final evolution = context.select((ChartState s) => s.evolution.value);
+    final caloriesData = context.select((ChartState s) => s.caloriesData.value);
     final List<WeightModel> weights = context.select(
       (WeightState s) => s.weights.value,
     );
@@ -138,7 +138,7 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                                 series: <CartesianSeries<ChartData, String>>[
                                   SplineSeries<ChartData, String>(
                                     name: 'Calories',
-                                    dataSource: evolution,
+                                    dataSource: caloriesData,
                                     xValueMapper: (ChartData data, _) => data.x,
                                     yValueMapper: (ChartData data, _) => data.y,
                                     dataLabelSettings: DataLabelSettings(

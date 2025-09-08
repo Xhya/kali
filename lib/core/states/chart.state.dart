@@ -5,17 +5,17 @@ final chartState = ChartState();
 
 class ChartState extends ChangeNotifier {
   final isRefreshLoading = ValueNotifier<bool>(false);
-  final evolution = ValueNotifier<List<ChartData>>([]);
+  final caloriesData = ValueNotifier<List<ChartData>>([]);
 
   ChartState() {
     isRefreshLoading.addListener(notifyListeners);
-    evolution.addListener(notifyListeners);
+    caloriesData.addListener(notifyListeners);
   }
 
   @override
   void dispose() {
     isRefreshLoading.dispose();
-    evolution.dispose();
+    caloriesData.dispose();
     super.dispose();
   }
 }
