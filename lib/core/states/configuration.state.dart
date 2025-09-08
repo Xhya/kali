@@ -7,6 +7,7 @@ class ConfigurationState extends ChangeNotifier {
   final currentBuild = ValueNotifier<String>("");
   final minimalVersion = ValueNotifier<String>("");
   final lastVersion = ValueNotifier<String>("");
+  final feedbackUrl = ValueNotifier<String>("");
   final subscriptionActivated = ValueNotifier<bool>(false);
   final maxCharacterCount = ValueNotifier<int>(300);
 

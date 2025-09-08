@@ -2,7 +2,8 @@ enum ConfigKeyEnum {
   forceUpdateVersion('force_update_version'),
   computeMaxCharactersCount('compute_max_characters_count'),
   activateSubscription('activate_subscription'),
-  lastVersion('last_version');
+  lastVersion('last_version'),
+  feedbackFormUrl('feedback_form_url');
 
   const ConfigKeyEnum(this.label);
   final String label;

@@ -20,6 +20,8 @@ Future<void> initConfigurations() async {
         .getConfig(ConfigKeyEnum.forceUpdateVersion);
     configurationState.lastVersion.value = await configurationsRepository
         .getConfig(ConfigKeyEnum.lastVersion);
+    configurationState.feedbackUrl.value = await configurationsRepository
+        .getConfig(ConfigKeyEnum.feedbackFormUrl);
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack, show: false);
   }
