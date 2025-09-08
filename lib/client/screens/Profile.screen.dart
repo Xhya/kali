@@ -3,9 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/EndOfTestPeriod.widget.dart';
-import 'package:kali/client/widgets/Register.widget.dart';
-import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
+import 'package:kali/core/actions/navigation.actions.dart';
 import 'package:kali/core/domains/user.repository.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Hardware.service.dart';
@@ -105,13 +104,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           if (email == null)
                             GestureDetector(
                               onTap: () {
-                                navigationService.context = context;
-                                navigationService.openBottomSheet(
-                                  widget: WelcomeBottomSheet(
-                                    child: RegisterWidget(
-                                      title: "Crée un compte",
-                                    ),
-                                  ),
+                                showRegisterEmailBottomSheet(
+                                  context: context,
+                                  subtitle:
+                                      "Pour créer un compte, entrez votre email.",
                                 );
                               },
                               child: Text(
