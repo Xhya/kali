@@ -16,7 +16,38 @@ import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/user.state.dart';
 
-Future<void> onClickDeconnect() async {
+void onClickDeconnect(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        content: SizedBox(
+          width: double.maxFinite,
+          child: Text(
+            "Souhaitez-vous vous déconnecter ?",
+            style: style.text.neutral.merge(style.fontsize.md),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text("Annuler"),
+          ),
+          TextButton(
+            onPressed: () {
+              onClickConfirmDeconnect();
+            },
+            child: Text("Confirmer"),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+Future<void> onClickConfirmDeconnect() async {
   try {
     userState.isDeconnectLoading.value = true;
     await hardwareService.deleteSignatureStorage();
@@ -263,7 +294,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             buttonType: ButtonTypeEnum.filled,
                             text: "Se déconnecter",
                             onPressed: () {
-                              onClickDeconnect();
+                              onClickDeconnect(context);
                             },
                             isLoading: isDeconnectLoading,
                           ),

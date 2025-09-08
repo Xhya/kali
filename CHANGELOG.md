@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [1.6.0]
 
+- add confirm on deconnect
 - add prevention message to user that informations are indicative
 - weight as decimal
 - logged menus
