@@ -94,10 +94,33 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
       (ChartState s) => s.isRefreshLoading.value,
     );
     final caloriesData = context.select((ChartState s) => s.caloriesData.value);
+    final glucidsData = context.select((ChartState s) => s.glucidsData.value);
+    final proteinsData = context.select((ChartState s) => s.proteinsData.value);
+    final lipidsData = context.select((ChartState s) => s.lipidsData.value);
     final List<WeightModel> weights = context.select(
       (WeightState s) => s.weights.value,
     );
     final weightData = weights.map((w) => ChartData.fromWeight(w)).toList();
+
+    createSeries({
+      required String name,
+      required List<ChartData> dataSource,
+      required String yAxisName,
+      required Color? color,
+      bool visibleMark = true,
+    }) {
+      return SplineSeries<ChartData, String>(
+        name: name,
+        dataSource: dataSource,
+        color: color,
+        yAxisName: yAxisName,
+        xValueMapper: (ChartData data, _) => data.x,
+        yValueMapper: (ChartData data, _) => data.y,
+        dataLabelSettings: DataLabelSettings(isVisible: true),
+        markerSettings: MarkerSettings(isVisible: visibleMark),
+        splineType: SplineType.natural,
+      );
+    }
 
     return BaseScaffold(
       backButton: true,
@@ -130,24 +153,43 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                                 tooltipBehavior: TooltipBehavior(enable: true),
                                 axes: <ChartAxis>[
                                   NumericAxis(
-                                    name: 'CaloriesAxis',
+                                    name: 'rightAxis',
+                                    opposedPosition: true,
+                                    isVisible: false,
+                                  ),
+                                  NumericAxis(
+                                    name: 'rightSecondAxis',
                                     opposedPosition: true,
                                     isVisible: false,
                                   ),
                                 ],
                                 series: <CartesianSeries<ChartData, String>>[
-                                  SplineSeries<ChartData, String>(
+                                  createSeries(
                                     name: 'Calories',
                                     dataSource: caloriesData,
-                                    xValueMapper: (ChartData data, _) => data.x,
-                                    yValueMapper: (ChartData data, _) => data.y,
-                                    dataLabelSettings: DataLabelSettings(
-                                      isVisible: true,
-                                    ),
-                                    color: Style().text.green.color,
-                                    yAxisName: 'CaloriesAxis',
-                                    markerSettings: MarkerSettings(isVisible: true),
-                                    splineType: SplineType.natural,
+                                    yAxisName: 'rightAxis',
+                                    color: style.macroColors.calories,
+                                  ),
+                                  createSeries(
+                                    name: 'Glucides',
+                                    dataSource: glucidsData,
+                                    yAxisName: 'rightSecondAxis',
+                                    color: style.macroColors.glucids,
+                                    visibleMark: false,
+                                  ),
+                                  createSeries(
+                                    name: 'Protéines',
+                                    dataSource: proteinsData,
+                                    yAxisName: 'rightSecondAxis',
+                                    color: style.macroColors.proteins,
+                                    visibleMark: false,
+                                  ),
+                                  createSeries(
+                                    name: 'Lipides',
+                                    dataSource: lipidsData,
+                                    yAxisName: 'rightSecondAxis',
+                                    color: style.macroColors.lipids,
+                                    visibleMark: false,
                                   ),
                                   SplineSeries<ChartData, String>(
                                     name: 'Poids',
@@ -155,7 +197,9 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                                     xValueMapper: (ChartData data, _) => data.x,
                                     yValueMapper: (ChartData data, _) => data.y,
                                     color: Colors.amber,
-                                    markerSettings: MarkerSettings(isVisible: true),
+                                    markerSettings: MarkerSettings(
+                                      isVisible: true,
+                                    ),
                                     splineType: SplineType.natural,
                                   ),
                                 ],

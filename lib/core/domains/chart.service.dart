@@ -10,7 +10,11 @@ class ChartService {
   Future<void> refreshEvolution() async {
     try {
       chartState.isRefreshLoading.value = true;
-      chartState.caloriesData.value = await _chartRepository.getEvolution();
+      final evolution = await _chartRepository.getEvolution();
+      chartState.caloriesData.value = evolution.calories;
+      chartState.glucidsData.value = evolution.glucids;
+      chartState.proteinsData.value = evolution.proteins;
+      chartState.lipidsData.value = evolution.lipids;
     } catch (e, stack) {
       errorService.notifyError(e: e, stack: stack);
     } finally {

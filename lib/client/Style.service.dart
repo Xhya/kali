@@ -5,6 +5,7 @@ final style = Style();
 
 class Style {
   final text = TextColors();
+  final macroColors = MacroColors();
   final background = BackgroundColors();
   final border = CustomBorder();
   final button = ButtonColors();
@@ -82,6 +83,13 @@ class TextColors {
   final error = TextStyle(color: Colors.red);
 
   final reverse_neutral = TextStyle(color: _white);
+}
+
+class MacroColors {
+  final calories = _green_600;
+  final glucids = Colors.yellow[600];
+  final proteins = Colors.red[800];
+  final lipids = Colors.grey[700];
 }
 
 class ButtonColors {}
