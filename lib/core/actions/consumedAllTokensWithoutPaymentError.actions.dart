@@ -4,13 +4,13 @@ import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/user.state.dart';
 
-consumedAllTokensWithoutPaymentError() async {
+Future<void> consumedAllTokensWithoutPaymentError() async {
   if (userState.user.value?.emailVerifiedAt == null) {
     navigationService.openBottomSheet(
       widget: WelcomeBottomSheet(
         child: RegisterWidget(
-          title: "Paye 🔥",
-          subtitle: "Tu dois payer maintenant!",
+          title: "Abonne-toi",
+          subtitle: "Abonne-toi pour continuer à profiter de l'application.",
         ),
       ),
     );

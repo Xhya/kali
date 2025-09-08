@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               children: [
                 PushNotificationPermissionWidget(padding: 16),
-                EndOfTestPeriodWidget(padding: 16),
+                // EndOfTestPeriodWidget(padding: 16),
                 DateSelector(currentDate: currentDate),
                 SizedBox(height: 16),
                 isLoadingDate

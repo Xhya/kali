@@ -33,7 +33,7 @@ Future<Map<String, String>> headersWithToken() async {
   String? token = await getToken();
 
   if (token == null) {
-    throw Exception();
+    throw Exception("Missing token");
   }
 
   return {

@@ -58,7 +58,7 @@ class ErrorService extends ChangeNotifier {
             child: RegisterWidget(
               title: "Inscris toi 🔥",
               subtitle:
-                  "Enregistre ton e-mail pour ne pas perdre tes progrès !",
+                  "Tu commences à avoir pas mal de données, enregistre ton e-mail pour ne pas perdre tes progrès !",
             ),
           ),
         );
