@@ -5,7 +5,6 @@ import 'package:kali/client/Utils/OnlyNumbersFormatter.utils.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/core/actions/startForm.actions.dart';
-import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
@@ -20,9 +19,9 @@ class StartFormPage2 extends StatefulWidget {
 class _StartFormPage2State extends State<StartFormPage2> {
   @override
   Widget build(BuildContext context) {
-    String weight = context.select((StartFormState s) => s.weight.value);
-    String height = context.select((StartFormState s) => s.height.value);
-    String targetWeight = context.select(
+    double? weight = context.select((StartFormState s) => s.weight.value);
+    double? height = context.select((StartFormState s) => s.height.value);
+    double? targetWeight = context.select(
       (StartFormState s) => s.targetWeight.value,
     );
     bool isNextButtonDisabled =
@@ -49,9 +48,14 @@ class _StartFormPage2State extends State<StartFormPage2> {
 
             CustomInput(
               title: "Ton poids actuel",
-              content: weight,
-              onChanged: (String value) {
-                startFormState.weight.value = value;
+              content: weight != null ? weight.toString() : "",
+              onChanged: (String text) {
+                final value = text.split(" ").first;
+                try {
+                  startFormState.weight.value = double.parse(value);
+                } on FormatException catch (_) {
+                  startFormState.weight.value = null;
+                }
               },
               placeholder: "70 kg",
               inputFormatters: [
@@ -71,9 +75,14 @@ class _StartFormPage2State extends State<StartFormPage2> {
 
             CustomInput(
               title: "Ton poids cible",
-              content: targetWeight,
-              onChanged: (String value) {
-                startFormState.targetWeight.value = value;
+              content: targetWeight != null ? targetWeight.toString() : "",
+              onChanged: (String text) {
+                final value = text.split(" ").first;
+                try {
+                  startFormState.targetWeight.value = double.parse(value);
+                } on FormatException catch (_) {
+                  startFormState.targetWeight.value = null;
+                }
               },
               placeholder: "70 kg",
               inputFormatters: [
@@ -93,9 +102,14 @@ class _StartFormPage2State extends State<StartFormPage2> {
 
             CustomInput(
               title: "Ta taille",
-              content: height,
-              onChanged: (String value) {
-                startFormState.height.value = value;
+              content: height != null ? height.toString() : "",
+              onChanged: (String text) {
+                final value = text.split(" ").first;
+                try {
+                  startFormState.height.value = double.parse(value);
+                } on FormatException catch (_) {
+                  startFormState.height.value = null;
+                }
               },
               placeholder: "170 cm",
               inputFormatters: [

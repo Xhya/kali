@@ -98,20 +98,26 @@ void onClickPrevious() {
 
 Future<void> computePersonalNutriScore() async {
   startFormState.isLoading.value = true;
-  final personalNutriScore = await UserService().computePersonalNutriScore(
-    PersonalNutriScoreFormData(
-      userName: startFormState.userName.value,
-      leitmotiv: startFormState.leitmotiv.value,
-      birthdate: startFormState.birthdate.value,
-      gender: startFormState.genderOption.value?.label ?? "",
-      height: startFormState.height.value,
-      weight: startFormState.weight.value,
-      targetWeight: startFormState.targetWeight.value,
-      lifeActivity: startFormState.lifeOption.value?.label ?? "",
-    ),
-  );
-  startFormState.personalNutriScore.value = personalNutriScore;
-  startFormState.isLoading.value = false;
+  if (startFormState.height.value != null &&
+      startFormState.weight.value != null &&
+      startFormState.targetWeight.value != null) {
+        
+    final personalNutriScore = await UserService().computePersonalNutriScore(
+      PersonalNutriScoreFormData(
+        userName: startFormState.userName.value,
+        leitmotiv: startFormState.leitmotiv.value,
+        birthdate: startFormState.birthdate.value,
+        gender: startFormState.genderOption.value?.label ?? "",
+        height: startFormState.height.value!,
+        weight: startFormState.weight.value!,
+        targetWeight: startFormState.targetWeight.value!,
+        lifeActivity: startFormState.lifeOption.value?.label ?? "",
+      ),
+    );
+
+    startFormState.personalNutriScore.value = personalNutriScore;
+    startFormState.isLoading.value = false;
+  }
 }
 
 Future<void> validatePersonalNutriScore() async {

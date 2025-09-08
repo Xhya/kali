@@ -10,9 +10,9 @@ class PersonalNutriScoreFormData {
   final String leitmotiv;
   final String birthdate;
   final String gender;
-  final String height;
-  final String weight;
-  final String targetWeight;
+  final double height;
+  final double weight;
+  final double targetWeight;
   final String lifeActivity;
 
   PersonalNutriScoreFormData({
