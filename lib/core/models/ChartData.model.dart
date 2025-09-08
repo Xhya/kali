@@ -7,7 +7,7 @@ class ChartData {
   final double y;
 
   factory ChartData.fromJson(Map<String, dynamic> json) {
-    return ChartData(json['x'] as String, (json['y'] as int).toDouble());
+    return ChartData(json['x'] as String, json['y'].toDouble());
   }
 
   factory ChartData.fromWeight(WeightModel weight) {

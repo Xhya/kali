@@ -24,10 +24,8 @@ class _ChartWidgetState extends State<ChartWidget> {
     final glucidsData = context.select((ChartState s) => s.glucidsData.value);
     final proteinsData = context.select((ChartState s) => s.proteinsData.value);
     final lipidsData = context.select((ChartState s) => s.lipidsData.value);
-    final weightData = context.select(
-      (WeightState s) =>
-          s.weights.value.map((w) => ChartData.fromWeight(w)).toList(),
-    );
+    final weightData = context.select((ChartState s) => s.weightsData.value);
+
     bool showCalories = context.select((ChartState s) => s.showCalories.value);
     bool showGlucids = context.select((ChartState s) => s.showGlucids.value);
     bool showLipids = context.select((ChartState s) => s.showLipids.value);
@@ -47,7 +45,7 @@ class _ChartWidgetState extends State<ChartWidget> {
         yAxisName: yAxisName,
         xValueMapper: (ChartData data, _) => data.x,
         yValueMapper: (ChartData data, _) => data.y,
-        dataLabelSettings: DataLabelSettings(isVisible: true),
+        dataLabelSettings: DataLabelSettings(isVisible: visibleMark),
         markerSettings: MarkerSettings(isVisible: visibleMark),
         splineType: SplineType.natural,
       );

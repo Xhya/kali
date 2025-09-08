@@ -15,6 +15,7 @@ class ChartService {
       chartState.glucidsData.value = evolution.glucids;
       chartState.proteinsData.value = evolution.proteins;
       chartState.lipidsData.value = evolution.lipids;
+      chartState.weightsData.value = evolution.weights;
     } catch (e, stack) {
       errorService.notifyError(e: e, stack: stack);
     } finally {

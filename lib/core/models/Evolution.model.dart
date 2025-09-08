@@ -5,12 +5,14 @@ class EvolutionModel {
   final List<ChartData> glucids;
   final List<ChartData> proteins;
   final List<ChartData> lipids;
+  final List<ChartData> weights;
 
   EvolutionModel({
     required this.calories,
     required this.proteins,
     required this.lipids,
     required this.glucids,
+    required this.weights,
   });
 
   factory EvolutionModel.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,10 @@ class EvolutionModel {
               .toList(),
       lipids:
           (json['lipids'] as List)
+              .map((item) => ChartData.fromJson(item))
+              .toList(),
+      weights:
+          (json['weights'] as List)
               .map((item) => ChartData.fromJson(item))
               .toList(),
     );

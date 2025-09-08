@@ -9,11 +9,12 @@ class ChartState extends ChangeNotifier {
   final glucidsData = ValueNotifier<List<ChartData>>([]);
   final proteinsData = ValueNotifier<List<ChartData>>([]);
   final lipidsData = ValueNotifier<List<ChartData>>([]);
+  final weightsData = ValueNotifier<List<ChartData>>([]);
 
   final showCalories = ValueNotifier<bool>(true);
-  final showGlucids = ValueNotifier<bool>(true);
-  final showLipids = ValueNotifier<bool>(true);
-  final showProteins = ValueNotifier<bool>(true);
+  final showGlucids = ValueNotifier<bool>(false);
+  final showLipids = ValueNotifier<bool>(false);
+  final showProteins = ValueNotifier<bool>(false);
 
   ChartState() {
     isRefreshLoading.addListener(notifyListeners);
@@ -21,6 +22,7 @@ class ChartState extends ChangeNotifier {
     glucidsData.addListener(notifyListeners);
     proteinsData.addListener(notifyListeners);
     lipidsData.addListener(notifyListeners);
+    weightsData.addListener(notifyListeners);
 
     showCalories.addListener(notifyListeners);
     showGlucids.addListener(notifyListeners);
@@ -35,6 +37,7 @@ class ChartState extends ChangeNotifier {
     glucidsData.dispose();
     proteinsData.dispose();
     lipidsData.dispose();
+    weightsData.dispose();
 
     showCalories.dispose();
     showGlucids.dispose();
