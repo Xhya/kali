@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/widgets/DateSelector.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/MealComputerInput.widget.dart';
 import 'package:kali/client/widgets/ThinkingWidget.widget.dart';
@@ -29,7 +30,7 @@ Future<void> onUpdateMeal() async {
         period: editMealState.editingMealPeriod.value,
         userText: editMealState.editingUserTextMeal.value,
         nutriscoreId: editMealState.editingNutriScore.value?.id,
-        date: meal.date,
+        date: editMealState.editingDate.value,
       );
       editMealState.editingNutriScore.value = null;
       navigationService.navigateBack();
@@ -81,15 +82,23 @@ class _MealScreenState extends State<MealScreen> {
       setState(() {
         meal = mealState.currentMeal.value;
       });
-      editMealState.editingUserTextMeal.value = meal?.nutriscore?.userText ?? "";
+      editMealState.editingUserTextMeal.value =
+          meal?.nutriscore?.userText ?? "";
       editMealState.editingMealPeriod.value = meal?.period;
+      editMealState.editingDate.value = meal?.date;
     });
     super.initState();
+    mealState.currentDate.addListener(() {
+      editMealState.editingDate.value = mealState.currentDate.value;
+    });
   }
 
   @override
   void dispose() {
     editMealState.editingNutriScore.value = null;
+    mealState.currentDate.removeListener(() {
+      editMealState.editingDate.value = null;
+    });
     super.dispose();
   }
 
@@ -112,6 +121,9 @@ class _MealScreenState extends State<MealScreen> {
     NutriScore? editingNutriScore = context.select(
       (EditMealState s) => s.editingNutriScore.value,
     );
+    DateTime? editingDate = context.select(
+      (EditMealState s) => s.editingDate.value,
+    );
 
     if (meal == null) {
       return SizedBox.shrink();
@@ -128,6 +140,9 @@ class _MealScreenState extends State<MealScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              if (editingDate != null)
+                DateSelector(currentDate: editingDate, canNavigate: false),
+              SizedBox(height: 16),
               MealPeriodsHorizontalWidget(
                 withAll: false,
                 onClickSelectPeriod: (period) {

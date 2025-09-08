@@ -37,6 +37,20 @@ class DateSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> openDatePicker() async {
+      var newDate = await showDatePicker(
+        context: context,
+        initialDate: currentDate,
+        firstDate: DateTime(1900),
+        lastDate: DateTime.now().add(Duration(days: 31)),
+        locale: const Locale('fr', 'FR'),
+      );
+
+      if (newDate != null) {
+        mealState.currentDate.value = newDate;
+      }
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       spacing: 12,
@@ -58,10 +72,15 @@ class DateSelector extends StatelessWidget {
             iconSize: style.fontsize.xl2.fontSize,
           ),
         Expanded(
-          child: Text(
-            getFormattedDate(currentDate),
-            style: style.text.neutral.merge(style.fontsize.md),
-            textAlign: TextAlign.center,
+          child: GestureDetector(
+            onTap: () {
+              openDatePicker();
+            },
+            child: Text(
+              getFormattedDate(currentDate),
+              style: style.text.neutral.merge(style.fontsize.md),
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
         if (canNavigate)

@@ -9,6 +9,7 @@ class EditMealState extends ChangeNotifier {
   final isComputeLoading = ValueNotifier<bool>(false);
   final isRegisterLoading = ValueNotifier<bool>(false);
   final editingNutriScore = ValueNotifier<NutriScore?>(null);
+  final editingDate = ValueNotifier<DateTime?>(null);
   final editingUserTextMeal = ValueNotifier<String>("");
   final editingMealPeriod = ValueNotifier<MealPeriodEnum?>(null);
   bool get canSave {
@@ -16,7 +17,8 @@ class EditMealState extends ChangeNotifier {
 
     final hasDifference =
         editingMealPeriod.value != currentMeal?.period ||
-        editingNutriScore.value != null;
+        editingNutriScore.value != null ||
+        editingDate.value != currentMeal?.date;
 
     return hasDifference;
   }
@@ -33,6 +35,7 @@ class EditMealState extends ChangeNotifier {
     editingNutriScore.addListener(notifyListeners);
     editingUserTextMeal.addListener(notifyListeners);
     editingMealPeriod.addListener(notifyListeners);
+    editingDate.addListener(notifyListeners);
   }
 
   @override
@@ -42,6 +45,7 @@ class EditMealState extends ChangeNotifier {
     editingNutriScore.dispose();
     editingUserTextMeal.dispose();
     editingMealPeriod.dispose();
+    editingDate.dispose();
     super.dispose();
   }
 }
