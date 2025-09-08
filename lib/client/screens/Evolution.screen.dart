@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/widgets/ChartCheckboxes.widget.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Utils/DecimalFormatter.utils.dart';
 import 'package:kali/client/Utils/MaxDecimalDigitsCountFormatter.utils.dart';
@@ -97,6 +98,10 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
       (WeightState s) =>
           s.weights.value.map((w) => ChartData.fromWeight(w)).toList(),
     );
+    bool showCalories = context.select((ChartState s) => s.showCalories.value);
+    bool showGlucids = context.select((ChartState s) => s.showGlucids.value);
+    bool showLipids = context.select((ChartState s) => s.showLipids.value);
+    bool showProteins = context.select((ChartState s) => s.showProteins.value);
 
     createSeries({
       required String name,
@@ -160,39 +165,44 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                                   ),
                                 ],
                                 series: <CartesianSeries<ChartData, String>>[
-                                  createSeries(
-                                    name: 'Calories',
-                                    dataSource: caloriesData,
-                                    yAxisName: 'rightAxis',
-                                    color: style.macroColors.calories,
-                                  ),
-                                  createSeries(
-                                    name: 'Glucides',
-                                    dataSource: glucidsData,
-                                    yAxisName: 'rightSecondAxis',
-                                    color: style.macroColors.glucids,
-                                    visibleMark: false,
-                                  ),
-                                  createSeries(
-                                    name: 'Protéines',
-                                    dataSource: proteinsData,
-                                    yAxisName: 'rightSecondAxis',
-                                    color: style.macroColors.proteins,
-                                    visibleMark: false,
-                                  ),
-                                  createSeries(
-                                    name: 'Lipides',
-                                    dataSource: lipidsData,
-                                    yAxisName: 'rightSecondAxis',
-                                    color: style.macroColors.lipids,
-                                    visibleMark: false,
-                                  ),
+                                  if (showCalories)
+                                    createSeries(
+                                      name: 'Calories',
+                                      dataSource: caloriesData,
+                                      yAxisName: 'rightAxis',
+                                      color: style.macroColors.calories,
+                                    ),
+                                  if (showGlucids)
+                                    createSeries(
+                                      name: 'Glucides',
+                                      dataSource: glucidsData,
+                                      yAxisName: 'rightSecondAxis',
+                                      color: style.macroColors.glucids,
+                                      visibleMark: false,
+                                    ),
+                                  if (showProteins)
+                                    createSeries(
+                                      name: 'Protéines',
+                                      dataSource: proteinsData,
+                                      yAxisName: 'rightSecondAxis',
+                                      color: style.macroColors.proteins,
+                                      visibleMark: false,
+                                    ),
+
+                                  if (showLipids)
+                                    createSeries(
+                                      name: 'Lipides',
+                                      dataSource: lipidsData,
+                                      yAxisName: 'rightSecondAxis',
+                                      color: style.macroColors.lipids,
+                                      visibleMark: false,
+                                    ),
                                   SplineSeries<ChartData, String>(
                                     name: 'Poids',
                                     dataSource: weightData,
                                     xValueMapper: (ChartData data, _) => data.x,
                                     yValueMapper: (ChartData data, _) => data.y,
-                                    color: Colors.amber,
+                                    color: Colors.blue,
                                     markerSettings: MarkerSettings(
                                       isVisible: true,
                                     ),
@@ -201,84 +211,11 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                                 ],
                               ),
 
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                Row(
-                                  children: [
-                                    // Checkbox(
-                                    //   value: showCalories,
-                                    //   onChanged: (value) {
-                                    //     chartState.showCalories.value =
-                                    //         chartState.showCalories.value;
-                                    //   },
-                                    //   activeColor: style.macroColors.calories,
-                                    // ),
-                                    Text(
-                                      "calories",
-                                      style: style.fontsize.xxs.merge(
-                                        style.text.neutral,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Checkbox(
-                                      value: true,
-                                      onChanged: (value) {},
-                                      activeColor: style.macroColors.proteins,
-                                    ),
-                                    Text(
-                                      "protéines",
-                                      style: style.fontsize.xxs.merge(
-                                        style.text.neutral,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Checkbox(
-                                      value: true,
-                                      onChanged: (value) {},
-                                      activeColor: style.macroColors.glucids,
-                                    ),
-                                    Text(
-                                      "glucides",
-                                      style: style.fontsize.xxs.merge(
-                                        style.text.neutral,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Checkbox(
-                                      value: true,
-                                      onChanged: (value) {},
-                                      activeColor: style.macroColors.lipids,
-                                    ),
-                                    Text(
-                                      "lipids",
-                                      style: style.fontsize.xxs.merge(
-                                        style.text.neutral,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
+                          ChartCheckboxesWidget(),
 
-                          isRefreshLoading
-                              ? Container(
-                                height: 200,
-                                alignment: Alignment.center,
-                                child: LoaderIcon(),
-                              )
-                              : WeightsWidget(),
+                          SizedBox(height: 24),
+
+                          WeightsWidget(),
                         ],
                       ),
                     ),
