@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/ThinkingWidget.widget.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:provider/provider.dart';
@@ -42,7 +43,7 @@ class _StartFormPageFinalState extends State<StartFormPageFinal> {
 
             if (personalNutriScore != null)
               ExpandedWidget(
-                height: 250,
+                height: 230,
                 child: Column(
                   children: [
                     TotalCaloriesWidget(nutriScore: personalNutriScore),
@@ -59,8 +60,21 @@ class _StartFormPageFinalState extends State<StartFormPageFinal> {
                 child: ThinkingWidget(thinking: personalNutriScore!.thinking!),
               ),
 
-            Text(
-              "Psst : Kali s'adapte ! Tu pourras modifier ton plan à tout moment dans tes paramètres.",
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: Text(
+                "Psst : Kali s'adapte ! Tu pourras modifier ton plan à tout moment dans tes paramètres.",
+              ),
+            ),
+
+            SizedBox(height: 16),
+
+            CustomCard(
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+              secondary: true,
+              child: Text(
+                "Ces informations sont données à titre indicatif par un agent nutritionnel. Elles ne remplacent en aucun cas l'avis d'un expert.",
+              ),
             ),
           ],
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/Utils/MaxCharactersCountFormatter.utils.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
@@ -35,52 +36,64 @@ class _MealComputerInputState extends State<MealComputerInput> {
       (AIState s) => s.aiNotUnderstandError.value,
     );
 
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      spacing: 8,
+    return Column(
       children: [
-        Expanded(
-          child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(8)),
-            child: Container(
-              alignment: Alignment.center,
-              child: CustomInput(
-                content: widget.mealText,
-                onChanged: (value) {
-                  widget.onUpdate(value);
-                },
-                placeholder: "Quel est le menu du jour ?",
-                inputFormatters: [
-                  MaxCharactersCountFormatter(
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          spacing: 8,
+          children: [
+            Expanded(
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+                child: Container(
+                  alignment: Alignment.center,
+                  child: CustomInput(
+                    content: widget.mealText,
+                    onChanged: (value) {
+                      widget.onUpdate(value);
+                    },
+                    placeholder: "Quel est le menu du jour ?",
+                    inputFormatters: [
+                      MaxCharactersCountFormatter(
+                        maxLength: configurationState.maxCharacterCount.value,
+                      ),
+                    ],
+                    minLines: 2,
+                    maxLines: widget.maxLines,
+                    textCapitalization: TextCapitalization.sentences,
+                    errorText:
+                        aiNotUnderstandError
+                            ? 'Veuillez être plus précis'
+                            : null,
                     maxLength: configurationState.maxCharacterCount.value,
+                    keyboardType: TextInputType.multiline,
+                    textInputAction: TextInputAction.newline,
+                    withSpeechToText: false,
                   ),
-                ],
-                minLines: 2,
-                maxLines: widget.maxLines,
-                textCapitalization: TextCapitalization.sentences,
-                errorText:
-                    aiNotUnderstandError ? 'Veuillez être plus précis' : null,
-                maxLength: configurationState.maxCharacterCount.value,
-                keyboardType: TextInputType.multiline,
-                textInputAction: TextInputAction.newline,
-                withSpeechToText: false,
+                ),
               ),
             ),
-          ),
-        ),
 
-        CustomIconWidget(
-          icon: "assets/icons/calculette.svg",
-          format: CustomIconFormat.svg,
-          type: CustomIconType.filled,
-          isLoading: widget.isLoading,
-          onClick: () {
-            widget.onCompute();
-          },
-          disabled: widget.disabled,
+            CustomIconWidget(
+              icon: "assets/icons/calculette.svg",
+              format: CustomIconFormat.svg,
+              type: CustomIconType.filled,
+              isLoading: widget.isLoading,
+              onClick: () {
+                widget.onCompute();
+              },
+              disabled: widget.disabled,
+            ),
+          ],
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          child: Text(
+            "Pour obtenir des calculs précis, veuillez être le plus précis possible.",
+            style: style.text.neutralLight.merge(style.fontsize.xxs),
+          ),
         ),
       ],
     );
-    ;
   }
 }

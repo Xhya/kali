@@ -36,13 +36,27 @@ class _ThinkingWidgetState extends State<ThinkingWidget> {
               title: Text("Détails nutritionnels"),
               content: SizedBox(
                 width: double.maxFinite,
-                child: Markdown(
-                  data: widget.thinking,
-                  onTapLink: (text, href, title) {
-                    if (href != null) {
-                      launchUrl(Uri.parse(href));
-                    }
-                  },
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Ces informations sont fournies à titre indicatif et ne remplacent pas l'avis d'un expert nutritionnel.",
+                      style: style.text.neutral
+                          .merge(style.fontsize.sm)
+                          .merge(style.fontweight.bold),
+                    ),
+                    Expanded(
+                      child: Markdown(
+                        data: widget.thinking,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        onTapLink: (text, href, title) {
+                          if (href != null) {
+                            launchUrl(Uri.parse(href));
+                          }
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
               actions: [

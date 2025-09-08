@@ -120,6 +120,8 @@ class IconBackground {
 }
 
 class FontSizes {
+  TextStyle get xxs =>
+      TextStyle(fontSize: !screenService.isSmallScreen ? 12 : 10);
   TextStyle get xs =>
       TextStyle(fontSize: !screenService.isSmallScreen ? 14 : 12);
   TextStyle get sm =>
