@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:kali/client/Utils/DecimalFormatter.utils.dart';
 import 'package:kali/client/Utils/MaxDecimalDigitsCountFormatter.utils.dart';
-import 'package:kali/client/widgets/CustomCard.widget.dart';
-import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/widgets/LoaderIcon.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
-import 'package:kali/client/widgets/SlidableItem.widget.dart';
+import 'package:kali/client/widgets/Weights.widget.dart';
 import 'package:kali/core/domains/chart.service.dart';
 import 'package:kali/core/domains/weight.service.dart';
 import 'package:kali/core/models/ChartData.model.dart';
-import 'package:kali/core/models/Weight.model.dart';
-import 'package:kali/core/services/Datetime.extension.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/states/chart.state.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/core/states/weight.state.dart';
@@ -97,10 +93,10 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
     final glucidsData = context.select((ChartState s) => s.glucidsData.value);
     final proteinsData = context.select((ChartState s) => s.proteinsData.value);
     final lipidsData = context.select((ChartState s) => s.lipidsData.value);
-    final List<WeightModel> weights = context.select(
-      (WeightState s) => s.weights.value,
+    final weightData = context.select(
+      (WeightState s) =>
+          s.weights.value.map((w) => ChartData.fromWeight(w)).toList(),
     );
-    final weightData = weights.map((w) => ChartData.fromWeight(w)).toList();
 
     createSeries({
       required String name,
@@ -211,11 +207,14 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                               children: [
                                 Row(
                                   children: [
-                                    Checkbox(
-                                      value: true,
-                                      onChanged: (value) {},
-                                      activeColor: style.macroColors.calories,
-                                    ),
+                                    // Checkbox(
+                                    //   value: showCalories,
+                                    //   onChanged: (value) {
+                                    //     chartState.showCalories.value =
+                                    //         chartState.showCalories.value;
+                                    //   },
+                                    //   activeColor: style.macroColors.calories,
+                                    // ),
                                     Text(
                                       "calories",
                                       style: style.fontsize.xxs.merge(
@@ -279,43 +278,7 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                                 alignment: Alignment.center,
                                 child: LoaderIcon(),
                               )
-                              : ListView.separated(
-                                shrinkWrap: true,
-                                itemCount: weights.length,
-                                separatorBuilder:
-                                    (context, index) => SizedBox(height: 4),
-                                itemBuilder: (BuildContext context, int index) {
-                                  final weight = weights[index];
-                                  return CustomInkwell(
-                                    onTap: () {},
-                                    child: CustomCard(
-                                      child: SlidableItem(
-                                        onRemove: () {},
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                            vertical: 8,
-                                            horizontal: 16,
-                                          ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                weight.date.formateDate(
-                                                  "EE dd MMM",
-                                                ),
-                                              ),
-                                              Text(
-                                                "${weight.value.toString()} kg",
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
+                              : WeightsWidget(),
                         ],
                       ),
                     ),

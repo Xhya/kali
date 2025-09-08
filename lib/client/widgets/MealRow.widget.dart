@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/MealPeriodTag.widget.dart';
 import 'package:kali/core/models/Meal.model.dart';
-import 'package:kali/core/services/Datetime.extension.dart';
 
 class MealRowWidget extends StatefulWidget {
   const MealRowWidget({super.key, required this.meal});
