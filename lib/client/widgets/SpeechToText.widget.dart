@@ -21,11 +21,22 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget> {
 
   /// Each time to start a speech recognition session
   void _startListening() async {
-    final enabled = await _speechToText.initialize();
-    await _speechToText.listen(onResult: _onSpeechResult);
-    setState(() {
-      _speechEnabled = enabled;
-    });
+    final enabled = await _speechToText.initialize(
+      onStatus: (status) {
+        print("Speech recognition status changed");
+        print(status);
+      },
+      onError: (error) {
+        print(error);
+      },
+    );
+
+    if (enabled) {
+      await _speechToText.listen(onResult: _onSpeechResult);
+      setState(() {
+        _speechEnabled = enabled;
+      });
+    }
   }
 
   /// Manually stop the active speech recognition session
@@ -40,6 +51,8 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget> {
   /// This is the callback that the SpeechToText plugin calls when
   /// the platform returns recognized words.
   void _onSpeechResult(SpeechRecognitionResult result) {
+    print("result");
+    print(result);
     setState(() {
       _lastWords = result.recognizedWords;
     });
@@ -47,18 +60,19 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (_speechToText.isAvailable) {
-      return GestureDetector(
-        onTap: () {
-          _speechToText.isNotListening ? _startListening() : _stopListening();
-        },
-        child: Icon(
-          _speechToText.isNotListening ? Icons.mic_off : Icons.mic,
-          size: 20,
+    return Row(
+      children: [
+        Text(_lastWords),
+        GestureDetector(
+          onTap: () {
+            _speechToText.isNotListening ? _startListening() : _stopListening();
+          },
+          child: Icon(
+            _speechToText.isListening ? Icons.mic : Icons.mic_off,
+            size: 20,
+          ),
         ),
-      );
-    } else {
-      return SizedBox.shrink();
-    }
+      ],
+    );
   }
 }

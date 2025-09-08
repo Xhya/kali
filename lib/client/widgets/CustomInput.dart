@@ -24,7 +24,7 @@ class CustomInput extends StatefulWidget {
     this.obscureText = false,
     this.maxLength,
     this.onSubmitted,
-    this.textInputAction = TextInputAction.continueAction,
+    this.textInputAction = TextInputAction.done,
     this.customIcon,
     this.withSpeechToText = false,
   });
