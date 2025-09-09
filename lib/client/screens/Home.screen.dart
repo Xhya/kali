@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kali/client/widgets/EndOfTestPeriod.widget.dart';
 import 'package:kali/client/widgets/LoaderIcon.widget.dart';
 import 'package:kali/client/widgets/PushNotificationPermission.widget.dart';
 import 'package:kali/client/widgets/Refresh.widget.dart';
@@ -111,9 +110,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 // EndOfTestPeriodWidget(padding: 16),
                 
                 WeekJourneyWidget(),
-                
-                DateSelector(currentDate: currentDate),
+
                 SizedBox(height: 16),
+
+                DateSelector(currentDate: currentDate),
+                
+                SizedBox(height: 16),
+                
                 isLoadingDate
                     ? LoaderIcon()
                     : Expanded(

@@ -10,6 +10,7 @@ final mealState = MealState();
 
 class MealState extends ChangeNotifier {
   final isLoadingDate = ValueNotifier<bool>(false);
+  final allMeals = ValueNotifier<List<MealModel>>([]);
   final currentMeal = ValueNotifier<MealModel?>(null);
   final currentMeals = ValueNotifier<List<MealModel>>([]);
   NutriScore get mealsNutriScore => computeDayAverages(currentMealsByPeriods);

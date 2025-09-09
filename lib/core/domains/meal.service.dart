@@ -12,9 +12,9 @@ class MealService {
   Future<void> refreshMeals() async {
     try {
       mealState.isLoadingDate.value = true;
-      final List<MealModel> meals = await _mealRepository.getMeals();
+      mealState.allMeals.value = await _mealRepository.getMeals();
       mealState.currentMeals.value =
-          meals
+          mealState.allMeals.value
               .where(
                 (it) =>
                     it.date != null
