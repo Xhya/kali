@@ -1,4 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.horace.kali">
     <application
         android:label="kali"
         android:name="${applicationName}"
@@ -31,7 +31,10 @@
                 <category android:name="android.intent.category.BROWSABLE"/>
                 
                 <data android:scheme="horace" />
-                <data android:scheme="https" android:host="horace-organization.com"/>
+                <data 
+                    android:scheme="https"
+                    android:host="horace-organization.com"
+                    android:pathPrefix="/"/>
             </intent-filter>
 
         </activity>
