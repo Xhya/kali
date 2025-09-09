@@ -2,6 +2,7 @@ import 'package:dart_date/dart_date.dart';
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
+import 'package:kali/client/widgets/LoaderIcon.widget.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/Datetime.extension.dart';
 import 'package:kali/core/states/date.state.dart';
@@ -24,6 +25,7 @@ class _WeekJourneyWidgetState extends State<WeekJourneyWidget> {
     DateTime? currentStartDate = context.select(
       (DateState s) => s.currentStartDate.value,
     );
+    bool isLoadingDate = context.select((MealState s) => s.isLoadingDate.value);
 
     if (currentStartDate == null) {
       return SizedBox.shrink();
@@ -56,7 +58,7 @@ class _WeekJourneyWidgetState extends State<WeekJourneyWidget> {
               child: Column(
                 children: [
                   Text(date.formateDate('E')[0].toUpperCase()),
-                  getJourneyIcon(date),
+                  getJourneyIcon(date, isLoadingDate),
                 ],
               ),
             ),
@@ -67,7 +69,7 @@ class _WeekJourneyWidgetState extends State<WeekJourneyWidget> {
   }
 }
 
-Widget getJourneyIcon(DateTime date) {
+Widget getJourneyIcon(DateTime date, bool isLoadingDate) {
   final weekMeals = mealState.weekMeals.value;
 
   final mealsOfDate =
@@ -79,7 +81,17 @@ Widget getJourneyIcon(DateTime date) {
 
   final totalCalories = computeDayAverages(mealsOfDate).caloryAmount;
 
-  return date.isToday
+  return isLoadingDate
+      ? Container(
+        width: 20,
+        height: 20,
+        decoration: BoxDecoration(
+          color: style.background.grey.color,
+          borderRadius: BorderRadius.circular(100),
+        ),
+        child: LoaderIcon(size: 10),
+      )
+      : date.isToday
       ? Container(
         width: 20,
         height: 20,
