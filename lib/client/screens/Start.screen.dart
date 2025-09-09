@@ -4,6 +4,7 @@ import 'package:kali/client/widgets/Login.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/services/Navigation.service.dart';
+import 'package:kali/core/states/register.state.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:kali/core/utils/paths.utils.dart';
 import 'package:kali/client/Style.service.dart';
@@ -101,6 +102,7 @@ class _StartFormScreenState extends State<StartScreen> {
                   GestureDetector(
                     onTap: () {
                       navigationService.context = context;
+                      registerState.error.value = null;
                       navigationService.openBottomSheet(
                         widget: WelcomeBottomSheet(child: LoginWidget()),
                       );

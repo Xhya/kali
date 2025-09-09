@@ -5,6 +5,7 @@ import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/actions/congratulationNextAction.actions.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/user.state.dart';
+import 'package:kali/core/states/register.state.dart';
 
 Future<void> onClickSubscribe(BuildContext context) async {
   navigationService.context = context;
@@ -19,6 +20,7 @@ Future<void> onClickSubscribe(BuildContext context) async {
 }
 
 Future<void> registerAction(BuildContext context) async {
+  registerState.error.value = null;
   navigationService.openBottomSheet(
     widget: WelcomeBottomSheet(
       child: RegisterWidget(

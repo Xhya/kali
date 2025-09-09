@@ -10,8 +10,9 @@ import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/Translation.service.dart';
 import 'package:kali/environment.dart';
 import 'package:kali/core/states/Ai.state.dart';
+import 'package:kali/core/states/register.state.dart';
 
-var errorService = ErrorService();
+final errorService = ErrorService();
 
 class ErrorService extends ChangeNotifier {
   final _bugsnagService = BugsnagService();
@@ -57,6 +58,7 @@ class ErrorService extends ChangeNotifier {
         return;
       } else if (hcErrorCode == 1040) {
         // 1040 is MustValideEmailException
+        registerState.error.value = null;
         navigationService.openBottomSheet(
           widget: WelcomeBottomSheet(
             child: RegisterWidget(

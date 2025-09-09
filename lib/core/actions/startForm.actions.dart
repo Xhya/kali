@@ -10,6 +10,7 @@ import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/states/startForm.state.dart';
+import 'package:kali/core/states/register.state.dart';
 
 void onClickBottomButton(BuildContext context) async {
   startFormState.isLoading.value = true;
@@ -55,6 +56,7 @@ Future<void> _onClickConfirmPersonalNutriscore() async {
     navigationService.context = currentContext;
     await launchConfetti();
   };
+  registerState.error.value = null;
   navigationService.openBottomSheet(
     widget: WelcomeBottomSheet(
       child: RegisterWidget(

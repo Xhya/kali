@@ -183,6 +183,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               onTap: () async {
                 navigationService.navigateBack();
                 await Future.delayed(Duration(milliseconds: 400), () {
+                  registerState.error.value = null;
                   navigationService.openBottomSheet(
                     widget: WelcomeBottomSheet(child: LoginWidget()),
                   );
