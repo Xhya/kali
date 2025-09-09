@@ -14,4 +14,8 @@ extension DateTimeExtension on DateTime {
 
     return DateFormat(pattern, locale).format(this);
   }
+
+  String toApiFormat() {
+    return  '${toUtc().toIso8601String().split('.').first}+00:00';
+  }
 }

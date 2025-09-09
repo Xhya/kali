@@ -2,7 +2,6 @@ import 'package:dart_date/dart_date.dart';
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
-import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/Datetime.extension.dart';
 import 'package:kali/core/states/date.state.dart';
@@ -22,24 +21,20 @@ class _WeekJourneyWidgetState extends State<WeekJourneyWidget> {
   @override
   Widget build(BuildContext context) {
     DateTime currentDate = context.select((DateState s) => s.currentDate.value);
-    List<MealModel> allMeals = context.select(
-      (MealState s) => s.allMeals.value,
+    DateTime? currentStartDate = context.select(
+      (DateState s) => s.currentStartDate.value,
     );
 
-    DateTime getMonday(DateTime date) {
-      // Dart, monday = 1, sunday = 7
-      final int daysToSubtract = date.weekday - DateTime.monday;
-      return date.subtract(Duration(days: daysToSubtract));
+    if (currentStartDate == null) {
+      return SizedBox.shrink();
     }
-
-    DateTime monday = getMonday(currentDate);
 
     return CustomCard(
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: List.generate(7, (index) {
-          final date = monday.add(Duration(days: index));
+          final date = currentStartDate.add(Duration(days: index));
           bool isCurrentDate = date.isSameDay(currentDate);
           // var challengeItem = widget.period.challengeItems[index];
           return GestureDetector(
@@ -61,7 +56,7 @@ class _WeekJourneyWidgetState extends State<WeekJourneyWidget> {
               child: Column(
                 children: [
                   Text(date.formateDate('E')[0].toUpperCase()),
-                  getJourneyIcon(allMeals, date),
+                  getJourneyIcon(date),
                 ],
               ),
             ),
@@ -72,9 +67,11 @@ class _WeekJourneyWidgetState extends State<WeekJourneyWidget> {
   }
 }
 
-Widget getJourneyIcon(List<MealModel> allMeals, DateTime date) {
+Widget getJourneyIcon(DateTime date) {
+  final weekMeals = mealState.weekMeals.value;
+
   final mealsOfDate =
-      allMeals
+      weekMeals
           .where((it) => it.date != null ? it.date!.isSameDay(date) : false)
           .toList();
 
@@ -112,7 +109,7 @@ Widget getJourneyIcon(List<MealModel> allMeals, DateTime date) {
         ),
         child: Text("N/A", style: style.fontsize.xxxs),
       )
-      : totalCalories > personalNutriscore!.caloryAmount
+      : totalCalories > personalNutriscore!.caloryAmount + 150
       ? Container(
         width: 20,
         height: 20,

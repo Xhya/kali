@@ -10,9 +10,9 @@ final mealState = MealState();
 
 class MealState extends ChangeNotifier {
   final isLoadingDate = ValueNotifier<bool>(false);
-  final allMeals = ValueNotifier<List<MealModel>>([]);
+  final weekMeals = ValueNotifier<List<MealModel>>([]);
   final currentMeal = ValueNotifier<MealModel?>(null);
-  final currentMeals = ValueNotifier<List<MealModel>>([]);
+  final currentDayMeals = ValueNotifier<List<MealModel>>([]);
   NutriScore get mealsNutriScore => computeDayAverages(currentMealsByPeriods);
   int get remainingCalories =>
       computeRemainingCalories(mealsNutriScore, userState.personalNutriscore);
@@ -22,7 +22,7 @@ class MealState extends ChangeNotifier {
           : null;
 
   List<MealModel> get currentMealsByPeriods {
-    currentMeals.value.sort((MealModel a, MealModel b) {
+    currentDayMeals.value.sort((MealModel a, MealModel b) {
       if (a.period != null && b.period != null) {
         return a.period!.order.compareTo(b.period!.order);
       } else {
@@ -30,7 +30,7 @@ class MealState extends ChangeNotifier {
       }
     });
 
-    return currentMeals.value.where((it) {
+    return currentDayMeals.value.where((it) {
       if (currentMealPeriods.value.isEmpty) {
         return true;
       } else {
@@ -43,7 +43,7 @@ class MealState extends ChangeNotifier {
 
   MealState() {
     isLoadingDate.addListener(notifyListeners);
-    currentMeals.addListener(notifyListeners);
+    currentDayMeals.addListener(notifyListeners);
     currentMeal.addListener(notifyListeners);
     currentMealPeriods.addListener(notifyListeners);
   }
@@ -51,7 +51,7 @@ class MealState extends ChangeNotifier {
   @override
   void dispose() {
     isLoadingDate.dispose();
-    currentMeals.dispose();
+    currentDayMeals.dispose();
     currentMeal.dispose();
     currentMealPeriods.dispose();
     super.dispose();

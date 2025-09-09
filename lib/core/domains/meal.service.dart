@@ -1,4 +1,5 @@
 import 'package:dart_date/dart_date.dart';
+import 'package:kali/client/Utils/getMonday.utils.dart';
 import 'package:kali/core/domains/meal.repository.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
@@ -11,10 +12,25 @@ class MealService {
 
   Future<void> refreshMeals() async {
     try {
-      mealState.isLoadingDate.value = true;
-      mealState.allMeals.value = await _mealRepository.getMeals();
-      mealState.currentMeals.value =
-          mealState.allMeals.value
+      if (dateState.currentStartDate.value == null ||
+          dateState.currentDate.value.isBefore(
+            dateState.currentStartDate.value!,
+          ) ||
+          dateState.currentDate.value.isAfter(dateState.currentEndDate!)) {
+        mealState.isLoadingDate.value = true;
+        dateState.currentStartDate.value = getMonday(
+          dateState.currentDate.value,
+        );
+
+        mealState.weekMeals.value = await _mealRepository.getMeals(
+          startDate: dateState.currentStartDate.value!,
+          endDate: dateState.currentEndDate!,
+        );
+        print(mealState.weekMeals.value);
+      }
+
+      mealState.currentDayMeals.value =
+          mealState.weekMeals.value
               .where(
                 (it) =>
                     it.date != null

@@ -2,14 +2,21 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
+import 'package:kali/core/services/Datetime.extension.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/headers.service.dart';
 import 'package:kali/environment.dart';
 
 class MealRepository {
-  Future<List<MealModel>> getMeals() async {
+  Future<List<MealModel>> getMeals({
+    required DateTime startDate,
+    required DateTime endDate,
+  }) async {
+    final start = Uri.encodeComponent(startDate.toApiFormat());
+    final end = Uri.encodeComponent(endDate.toApiFormat());
+
     final response = await http.get(
-      Uri.parse('$API_URL/meals'),
+      Uri.parse('$API_URL/meals?start=$start&end=$end'),
       headers: await headersWithMaybeToken(),
     );
 
@@ -31,10 +38,7 @@ class MealRepository {
   }) async {
     Map body = {
       "period": period?.label,
-      "date":
-          date != null
-              ? '${date.toUtc().toIso8601String().split('.').first}+00:00'
-              : null,
+      "date": date?.toApiFormat(),
       "nutriscoreId": nutriscoreId,
     };
 
