@@ -15,12 +15,14 @@ class BaseScaffold extends StatefulWidget {
     this.backButton = false,
     this.profileButton = false,
     this.resizeToAvoidBottomInset = true,
+    this.onNavigateBack,
   });
 
   final Widget child;
   final bool backButton;
   final bool profileButton;
   final bool resizeToAvoidBottomInset;
+  final Function? onNavigateBack;
 
   @override
   State<BaseScaffold> createState() => _BaseScaffoldState();
@@ -100,6 +102,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
                               ),
                               onTap: () {
                                 HapticFeedback.vibrate();
+                                widget.onNavigateBack?.call();
                                 navigationService.context = context;
                                 navigationService.navigateBack();
                               },

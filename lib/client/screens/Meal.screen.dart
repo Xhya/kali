@@ -96,7 +96,6 @@ class _MealScreenState extends State<MealScreen> {
 
   @override
   void dispose() {
-    editMealState.editingNutriScore.value = null;
     dateState.currentDate.removeListener(() {
       editMealState.editingDate.value = null;
     });
@@ -132,6 +131,9 @@ class _MealScreenState extends State<MealScreen> {
 
     return BaseScaffold(
       backButton: true,
+      onNavigateBack: () {
+        editMealState.editingNutriScore.value = null;
+      },
       child: Scaffold(
         body: Container(
           height: MediaQuery.of(context).size.height,

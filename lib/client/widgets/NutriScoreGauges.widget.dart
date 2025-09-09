@@ -3,7 +3,6 @@ import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CircleGauge.widget.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/core/states/editMeal.state.dart';
-import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/models/MacroType.enum.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
