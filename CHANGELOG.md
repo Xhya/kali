@@ -6,6 +6,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [1.6.1]
 
+- get meals by week
+- week journey
 - metrics with all macros
 
 ## [1.6.0]
