@@ -11,12 +11,12 @@ class MealService {
   final MealRepository _mealRepository = MealRepository();
 
   Future<void> refreshMeals() async {
-    try {
-      if (dateState.currentStartDate.value == null ||
-          dateState.currentDate.value.isBefore(
-            dateState.currentStartDate.value!,
-          ) ||
-          dateState.currentDate.value.isAfter(dateState.currentEndDate!)) {
+    if (dateState.currentStartDate.value == null ||
+        dateState.currentDate.value.isBefore(
+          dateState.currentStartDate.value!,
+        ) ||
+        dateState.currentDate.value.isAfter(dateState.currentEndDate!)) {
+      try {
         mealState.isLoadingDate.value = true;
         dateState.currentStartDate.value = getMonday(
           dateState.currentDate.value,
@@ -26,24 +26,23 @@ class MealService {
           startDate: dateState.currentStartDate.value!,
           endDate: dateState.currentEndDate!,
         );
-        print(mealState.weekMeals.value);
+      } catch (e, stack) {
+        errorService.notifyError(e: e, stack: stack);
+      } finally {
+        mealState.isLoadingDate.value = false;
       }
-
-      mealState.currentDayMeals.value =
-          mealState.weekMeals.value
-              .where(
-                (it) =>
-                    it.date != null
-                        ? it.date!.isSameDay(dateState.currentDate.value)
-                        : false,
-              )
-              .toList()
-              .cast<MealModel>();
-    } catch (e, stack) {
-      errorService.notifyError(e: e, stack: stack);
-    } finally {
-      mealState.isLoadingDate.value = false;
     }
+
+    mealState.currentDayMeals.value =
+        mealState.weekMeals.value
+            .where(
+              (it) =>
+                  it.date != null
+                      ? it.date!.isSameDay(dateState.currentDate.value)
+                      : false,
+            )
+            .toList()
+            .cast<MealModel>();
   }
 
   Future<void> createMeal({
