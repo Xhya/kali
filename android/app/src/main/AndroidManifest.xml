@@ -31,6 +31,7 @@
                 <category android:name="android.intent.category.BROWSABLE"/>
                 
                 <data android:scheme="horace" />
+                <data android:scheme="https" android:host="horace-organization.com"/>
             </intent-filter>
 
         </activity>

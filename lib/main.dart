@@ -86,6 +86,9 @@ void main() async {
     }
   }
 
+  // Push notification init
+  PushNotificationService().initDeepLinks();
+
   await initGoogleSignIn();
 
   runApp(

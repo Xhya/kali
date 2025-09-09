@@ -248,7 +248,10 @@ class _MealScreenState extends State<MealScreen> {
               Positioned(
                 top: 0,
                 right: 0,
-                child: ShareButtonWidget(message: "checkout https://google.com"),
+                child: ShareButtonWidget(
+                  message:
+                      "Voici le repas que l'on a probablement partagé ! Ajoute-le toi aussi 😉 https://horace-organization.com/home/quick-add?text=${Uri.encodeComponent(editingUserTextMeal)}",
+                ),
               ),
             ],
           ),
