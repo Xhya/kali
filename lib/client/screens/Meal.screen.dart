@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kali/client/widgets/DateSelector.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/MealComputerInput.widget.dart';
+import 'package:kali/client/widgets/ShareButton.widget.dart';
 import 'package:kali/client/widgets/ThinkingWidget.widget.dart';
 import 'package:kali/core/domains/meal.service.dart';
 import 'package:kali/core/domains/nutriscore.service.dart';
@@ -247,18 +248,7 @@ class _MealScreenState extends State<MealScreen> {
               Positioned(
                 top: 0,
                 right: 0,
-                child: IconButton(
-                  padding: EdgeInsets.all(0),
-                  onPressed: () {},
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(
-                      style.iconBackground.color1.color,
-                    ),
-                  ),
-                  icon: Icon(Icons.share),
-                  color: style.icon.color1.color,
-                  iconSize: style.fontsize.lg.fontSize,
-                ),
+                child: ShareButtonWidget(message: "checkout https://google.com"),
               ),
             ],
           ),
