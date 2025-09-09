@@ -96,107 +96,106 @@ class _HomeScreenState extends State<HomeScreen> {
       profileButton: true,
       child: Scaffold(
         backgroundColor: style.background.greenTransparent.color,
-        body: RefreshWidget(
-          onRefresh: () async {
-            await userService.refreshUser();
-            initHomeScreen();
-            await initConfigurations();
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            child: Column(
-              children: [
-                PushNotificationPermissionWidget(padding: 16),
-                // EndOfTestPeriodWidget(padding: 16),
-                
-                WeekJourneyWidget(),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: Column(
+            children: [
+              PushNotificationPermissionWidget(padding: 16),
 
-                SizedBox(height: 16),
+              // EndOfTestPeriodWidget(padding: 16),
+              WeekJourneyWidget(),
 
-                DateSelector(currentDate: currentDate),
-                
-                SizedBox(height: 16),
-                
-                isLoadingDate
-                    ? LoaderIcon()
-                    : Expanded(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          MealPeriodsHorizontalWidget(
-                            onClickSelectPeriod: (period) {
-                              onClickSelectPeriod(period);
+              SizedBox(height: 16),
+
+              DateSelector(currentDate: currentDate),
+
+              SizedBox(height: 16),
+
+              isLoadingDate
+                  ? LoaderIcon()
+                  : Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        MealPeriodsHorizontalWidget(
+                          onClickSelectPeriod: (period) {
+                            onClickSelectPeriod(period);
+                          },
+                          chosenPeriods: currentMealPeriods,
+                        ),
+                        SizedBox(height: 16),
+                        Expanded(
+                          child: RefreshWidget(
+                            onRefresh: () async {
+                              await userService.refreshUser();
+                              initHomeScreen();
+                              await initConfigurations();
                             },
-                            chosenPeriods: currentMealPeriods,
-                          ),
-                          SizedBox(height: 16),
-                          Expanded(
-                            child: SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(height: 8),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: 8),
 
-                                  MainKaloriesCountWidget(),
+                                MainKaloriesCountWidget(),
 
-                                  SizedBox(height: 4),
+                                SizedBox(height: 4),
 
-                                  NutriScoreGaugesWidget(
-                                    mealsByPeriods: currentMealsByPeriods,
-                                  ),
+                                NutriScoreGaugesWidget(
+                                  mealsByPeriods: currentMealsByPeriods,
+                                ),
 
-                                  SizedBox(height: 32),
+                                SizedBox(height: 32),
 
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      if (lastMeal != null)
-                                        Text(
-                                          "Derniers ajouts",
-                                          style: style.fontsize.xs.merge(
-                                            style.text.greenDark,
-                                          ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    if (lastMeal != null)
+                                      Text(
+                                        "Derniers ajouts",
+                                        style: style.fontsize.xs.merge(
+                                          style.text.greenDark,
                                         ),
-                                      if (lastMeal != null)
-                                        CustomInkwell(
-                                          onTap: () {
-                                            HapticFeedback.vibrate();
-                                            goToMealsScreen();
-                                          },
-                                          child: Text(
-                                            "Afficher tout",
-                                            style: style.fontsize.xs
-                                                .merge(style.text.green)
-                                                .merge(style.fontweight.bold),
-                                          ),
-                                        ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 8),
-                                  if (lastMeal != null)
-                                    CustomCard(
-                                      onClick: () {
-                                        goToMealScreen(lastMeal);
-                                      },
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 16,
-                                        vertical: 16,
                                       ),
-                                      child: MealRowWidget(meal: lastMeal),
+                                    if (lastMeal != null)
+                                      CustomInkwell(
+                                        onTap: () {
+                                          HapticFeedback.vibrate();
+                                          goToMealsScreen();
+                                        },
+                                        child: Text(
+                                          "Afficher tout",
+                                          style: style.fontsize.xs
+                                              .merge(style.text.green)
+                                              .merge(style.fontweight.bold),
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                                SizedBox(height: 8),
+                                if (lastMeal != null)
+                                  CustomCard(
+                                    onClick: () {
+                                      goToMealScreen(lastMeal);
+                                    },
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                      vertical: 16,
                                     ),
-                                  SizedBox(height: 120),
-                                ],
-                              ),
+                                    child: MealRowWidget(meal: lastMeal),
+                                  ),
+                                SizedBox(height: 120),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-              ],
-            ),
+                  ),
+            ],
           ),
         ),
+
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Column(
           spacing: 12,
