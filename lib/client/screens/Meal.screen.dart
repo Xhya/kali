@@ -140,90 +140,126 @@ class _MealScreenState extends State<MealScreen> {
           width: MediaQuery.of(context).size.width,
           color: style.background.greenTransparent.color,
           padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Stack(
             children: [
-              if (editingDate != null)
-                DateSelector(currentDate: editingDate, canNavigate: false),
-              SizedBox(height: 16),
-              MealPeriodsHorizontalWidget(
-                withAll: false,
-                onClickSelectPeriod: (period) {
-                  onClickSelectPeriod(period);
-                },
-                chosenPeriods: mealPeriod != null ? [mealPeriod] : [],
-              ),
-              SizedBox(height: 16),
-              MealComputerInput(
-                mealText: editingUserTextMeal,
-                onUpdate: (value) {
-                  editMealState.editingNutriScore.value = null;
-                  editMealState.editingUserTextMeal.value = value;
-                },
-                onCompute: () {
-                  onComputeEditingMeal();
-                },
-                isLoading: isComputeLoading,
-                disabled: !canCompute,
-                maxLines: 100,
-              ),
-              SizedBox(height: 16),
-              CustomCard(
-                padding: EdgeInsets.all(16),
-                child: Row(
-                  spacing: 12,
+              SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "⚖️",
-                      textAlign: TextAlign.start,
-                      style: style.text.green
-                          .merge(style.fontsize.md)
-                          .merge(style.fontweight.bold),
+                    SizedBox(height: 12),
+                    if (editingDate != null)
+                      DateSelector(
+                        currentDate: editingDate,
+                        canNavigate: false,
+                      ),
+                    SizedBox(height: 32),
+                    MealPeriodsHorizontalWidget(
+                      withAll: false,
+                      onClickSelectPeriod: (period) {
+                        onClickSelectPeriod(period);
+                      },
+                      chosenPeriods: mealPeriod != null ? [mealPeriod] : [],
+                    ),
+                    SizedBox(height: 24),
+                    MealComputerInput(
+                      mealText: editingUserTextMeal,
+                      onUpdate: (value) {
+                        editMealState.editingNutriScore.value = null;
+                        editMealState.editingUserTextMeal.value = value;
+                      },
+                      onCompute: () {
+                        onComputeEditingMeal();
+                      },
+                      isLoading: isComputeLoading,
+                      disabled: !canCompute,
+                      maxLines: 100,
+                    ),
+                    SizedBox(height: 16),
+                    CustomCard(
+                      padding: EdgeInsets.all(16),
+                      child: Row(
+                        spacing: 12,
+                        children: [
+                          Text(
+                            "⚖️",
+                            textAlign: TextAlign.start,
+                            style: style.text.green
+                                .merge(style.fontsize.md)
+                                .merge(style.fontweight.bold),
+                          ),
+
+                          if (meal?.nutriscore?.caloryAmount != null)
+                            Text(
+                              "${meal!.nutriscore!.caloryAmount.toString()} calories",
+                              textAlign: TextAlign.start,
+                              style: style.text.neutral
+                                  .merge(style.fontsize.sm)
+                                  .merge(style.fontweight.bold)
+                                  .merge(
+                                    TextStyle(
+                                      decoration:
+                                          editingNutriScore == null
+                                              ? TextDecoration.none
+                                              : TextDecoration.lineThrough,
+                                    ),
+                                  ),
+                            ),
+                          if (editingNutriScore != null)
+                            Text(
+                              "${editingNutriScore.caloryAmount.toString()} calories",
+                              textAlign: TextAlign.start,
+                              style: style.text.neutral
+                                  .merge(style.fontsize.sm)
+                                  .merge(style.fontweight.bold)
+                                  .merge(
+                                    TextStyle(decoration: TextDecoration.none),
+                                  ),
+                            ),
+                        ],
+                      ),
                     ),
 
-                    if (meal?.nutriscore?.caloryAmount != null)
-                      Text(
-                        "${meal!.nutriscore!.caloryAmount.toString()} calories",
-                        textAlign: TextAlign.start,
-                        style: style.text.neutral
-                            .merge(style.fontsize.sm)
-                            .merge(style.fontweight.bold)
-                            .merge(
-                              TextStyle(
-                                decoration:
-                                    editingNutriScore == null
-                                        ? TextDecoration.none
-                                        : TextDecoration.lineThrough,
-                              ),
-                            ),
-                      ),
-                    if (editingNutriScore != null)
-                      Text(
-                        "${editingNutriScore.caloryAmount.toString()} calories",
-                        textAlign: TextAlign.start,
-                        style: style.text.neutral
-                            .merge(style.fontsize.sm)
-                            .merge(style.fontweight.bold)
-                            .merge(TextStyle(decoration: TextDecoration.none)),
+                    SizedBox(height: 16),
+
+                    NutriScoreGaugesWidget(
+                      mealsByPeriods: [meal!],
+                      withTotal: false,
+                    ),
+
+                    SizedBox(height: 16),
+
+                    if (mealState.currentMeal.value?.nutriscore?.thinking !=
+                        null)
+                      ThinkingWidget(
+                        thinking:
+                            editingNutriScore == null ||
+                                    editingNutriScore.thinking == null
+                                ? mealState
+                                    .currentMeal
+                                    .value!
+                                    .nutriscore!
+                                    .thinking!
+                                : editingNutriScore.thinking!,
                       ),
                   ],
                 ),
               ),
-
-              SizedBox(height: 16),
-
-              NutriScoreGaugesWidget(mealsByPeriods: [meal!], withTotal: false),
-
-              SizedBox(height: 16),
-
-              if (mealState.currentMeal.value?.nutriscore?.thinking != null)
-                ThinkingWidget(
-                  thinking:
-                      editingNutriScore == null ||
-                              editingNutriScore.thinking == null
-                          ? mealState.currentMeal.value!.nutriscore!.thinking!
-                          : editingNutriScore.thinking!,
+              Positioned(
+                top: 0,
+                right: 0,
+                child: IconButton(
+                  padding: EdgeInsets.all(0),
+                  onPressed: () {},
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all(
+                      style.iconBackground.color1.color,
+                    ),
+                  ),
+                  icon: Icon(Icons.share),
+                  color: style.icon.color1.color,
+                  iconSize: style.fontsize.lg.fontSize,
                 ),
+              ),
             ],
           ),
         ),
