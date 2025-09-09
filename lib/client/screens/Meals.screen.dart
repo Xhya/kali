@@ -22,7 +22,7 @@ import 'package:kali/client/Style.service.dart';
 Future<void> onRemoveMeal(MealModel meal) async {
   try {
     await MealService().deleteMeal(meal.id);
-    await MealService().refreshMeals();
+    await MealService().refreshMeals(force: true);
   } catch (e) {
     errorService.notifyError(e: e);
   }

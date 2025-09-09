@@ -11,7 +11,6 @@ import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
-import 'package:kali/core/states/meal.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/core/states/quickAddMeal.state.dart';
 import 'package:kali/core/actions/nutriScore.actions.dart';

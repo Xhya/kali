@@ -33,7 +33,7 @@ import 'package:kali/client/layout/Base.scaffold.dart';
 Future<void> initHomeScreen() async {
   try {
     await authenticationService.initUser();
-    await MealService().refreshMeals();
+    await MealService().refreshMeals(force: true);
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);
   }
@@ -110,20 +110,20 @@ class _HomeScreenState extends State<HomeScreen> {
               DateSelector(currentDate: currentDate),
 
               SizedBox(height: 16),
-
+              MealPeriodsHorizontalWidget(
+                onClickSelectPeriod: (period) {
+                  onClickSelectPeriod(period);
+                },
+                chosenPeriods: currentMealPeriods,
+              ),
+              SizedBox(height: 8),
+              
               isLoadingDate
                   ? LoaderIcon()
                   : Expanded(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        MealPeriodsHorizontalWidget(
-                          onClickSelectPeriod: (period) {
-                            onClickSelectPeriod(period);
-                          },
-                          chosenPeriods: currentMealPeriods,
-                        ),
-                        SizedBox(height: 16),
                         Expanded(
                           child: RefreshWidget(
                             onRefresh: () async {
@@ -134,8 +134,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(height: 8),
-
                                 MainKaloriesCountWidget(),
 
                                 SizedBox(height: 4),

@@ -10,12 +10,14 @@ import 'package:kali/core/states/meal.state.dart';
 class MealService {
   final MealRepository _mealRepository = MealRepository();
 
-  Future<void> refreshMeals() async {
-    if (dateState.currentStartDate.value == null ||
+  Future<void> refreshMeals({bool force = false}) async {
+    bool refresh =
+        force ||
         dateState.currentDate.value.isBefore(
-          dateState.currentStartDate.value!,
+          dateState.currentStartDate.value,
         ) ||
-        dateState.currentDate.value.isAfter(dateState.currentEndDate!)) {
+        dateState.currentDate.value.isAfter(dateState.currentEndDate);
+    if (refresh) {
       try {
         mealState.isLoadingDate.value = true;
         dateState.currentStartDate.value = getMonday(
@@ -23,8 +25,8 @@ class MealService {
         );
 
         mealState.weekMeals.value = await _mealRepository.getMeals(
-          startDate: dateState.currentStartDate.value!,
-          endDate: dateState.currentEndDate!,
+          startDate: dateState.currentStartDate.value,
+          endDate: dateState.currentEndDate,
         );
       } catch (e, stack) {
         errorService.notifyError(e: e, stack: stack);
@@ -56,7 +58,7 @@ class MealService {
         date: date,
         nutriscoreId: nutriscoreId,
       );
-      await refreshMeals();
+      await refreshMeals(force: true);
     } catch (e, stack) {
       errorService.notifyError(e: e, stack: stack);
     }
@@ -77,7 +79,7 @@ class MealService {
         userText: userText,
         nutriscoreId: nutriscoreId,
       );
-      await refreshMeals();
+      await refreshMeals(force: true);
     } catch (e, stack) {
       errorService.notifyError(e: e, stack: stack);
     }

@@ -43,6 +43,5 @@ class _ShareButtonWidgetState extends State<ShareButtonWidget> {
       color: style.icon.color1.color,
       iconSize: style.fontsize.lg.fontSize,
     );
-    ;
   }
 }
