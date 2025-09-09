@@ -1,3 +1,4 @@
+import 'package:toastification/toastification.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/screens/EditProfile.screen.dart';
 import 'package:kali/client/screens/Evolution.screen.dart';
@@ -101,24 +102,31 @@ class _RoutingState extends State<Routing> {
 
     if (error != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        showDialog(
-          useSafeArea: false,
-          barrierDismissible: true,
+        toastification.show(
           context: context,
-          builder: (BuildContext context) {
-            return Dialog(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-                child: Text(error),
-              ),
-            );
-          },
-        ).then((_) {
-          errorService.error.value = null;
-        });
+          title: Text(error),
+          autoCloseDuration: const Duration(seconds: 5),
+          style: ToastificationStyle.flat,
+          type: ToastificationType.error,
+        );
+        // showDialog(
+        //   useSafeArea: false,
+        //   barrierDismissible: true,
+        //   context: context,
+        //   builder: (BuildContext context) {
+        //     // return Dialog(
+        //     //   shape: RoundedRectangleBorder(
+        //     //     borderRadius: BorderRadius.circular(8.0),
+        //     //   ),
+        //     //   child: Padding(
+        //     //     padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+        //     //     child: Text(error),
+        //     //   ),
+        //     // );
+        //   },
+        // ).then((_) {
+        //   errorService.error.value = null;
+        // });
       });
     }
 

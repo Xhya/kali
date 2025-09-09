@@ -38,6 +38,7 @@ import 'package:kali/core/services/Locale.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/Translation.service.dart';
 import 'package:kali/core/services/connexion.service.dart';
+import 'package:toastification/toastification.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -141,33 +142,35 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'kali',
-      theme: ThemeData(
-        fontFamily: 'BeVietnamPro',
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: style.background.green.color!,
+    return ToastificationWrapper(
+      child: MaterialApp(
+        title: 'kali',
+        theme: ThemeData(
+          fontFamily: 'BeVietnamPro',
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: style.background.green.color!,
+          ),
         ),
-      ),
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [Locale('fr', 'FR')],
-      home: AsyncInitWidget(
-        initFunction: () async {
-          try {
-            await refreshAppVersion();
-            await initConfigurations();
-            await connexionService.listenToInternetConnexion();
-            await UserService().refreshUser();
-            await PushNotificationService().refreshNotificationToken();
-          } catch (e) {
-            errorService.notifyError(e: e, show: false);
-          }
-        },
-        child: const Scaffold(body: Routing()),
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [Locale('fr', 'FR')],
+        home: AsyncInitWidget(
+          initFunction: () async {
+            try {
+              await refreshAppVersion();
+              await initConfigurations();
+              await connexionService.listenToInternetConnexion();
+              await UserService().refreshUser();
+              await PushNotificationService().refreshNotificationToken();
+            } catch (e) {
+              errorService.notifyError(e: e, show: false);
+            }
+          },
+          child: const Scaffold(body: Routing()),
+        ),
       ),
     );
   }

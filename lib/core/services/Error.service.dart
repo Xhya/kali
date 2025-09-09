@@ -29,7 +29,11 @@ class ErrorService extends ChangeNotifier {
 
   Response? currentResponseError;
 
-  Future<void> notifyError({required Object e, StackTrace? stack, bool show = true}) async {
+  Future<void> notifyError({
+    required Object e,
+    StackTrace? stack,
+    bool show = true,
+  }) async {
     if (currentResponseError != null) {
       final Map<String, dynamic> jsonData = json.decode(
         currentResponseError!.body,
