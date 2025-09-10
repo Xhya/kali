@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [1.6.2]
 
+- handle app refresh on api call
 - search nutriscore
 - fix loading date
 - deconnect user call
