@@ -8,6 +8,7 @@ import 'package:kali/core/actions/navigation.actions.dart';
 import 'package:kali/core/domains/user.repository.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Hardware.service.dart';
+import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
 import 'package:kali/core/states/googleSignIn.state.dart';
 import 'package:provider/provider.dart';
@@ -53,6 +54,7 @@ Future<void> onClickConfirmDeconnect() async {
     await hardwareService.deleteSignatureStorage();
     await hardwareService.deleteTokenStorage();
     await googleSignInState.signInGoogle.value?.signOut();
+    await userService.deconnectUser();
     navigationService.navigateTo(ScreenEnum.start);
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);

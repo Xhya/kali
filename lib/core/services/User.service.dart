@@ -22,6 +22,15 @@ class UserService {
     }
   }
 
+  Future<void> deconnectUser() async {
+    try {
+      await _userRepository.deconnectUser();
+      userState.user.value = null;
+    } catch (e, stack) {
+      errorService.notifyError(e: e, stack: stack);
+    }
+  }
+
   Future<bool> canCompute() async {
     return await _userRepository.canCompute();
   }

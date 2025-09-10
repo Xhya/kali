@@ -23,6 +23,20 @@ class UserRepository {
     }
   }
 
+  Future<void> deconnectUser() async {
+    final response = await http.get(
+      Uri.parse('$API_URL/users/deconnect'),
+      headers: await headersWithMaybeToken(),
+    );
+
+    if (response.statusCode == 200) {
+      return;
+    } else {
+      errorService.currentResponseError = response;
+      throw Exception();
+    }
+  }
+
   Future<User> saveProfile(EditUserFormData formData) async {
     Map body = {
       "username": formData.userName,
