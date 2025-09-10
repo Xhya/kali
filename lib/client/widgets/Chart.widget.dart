@@ -25,6 +25,11 @@ class _ChartWidgetState extends State<ChartWidget> {
     final lipidsData = context.select((ChartState s) => s.lipidsData.value);
     final weightData = context.select((ChartState s) => s.weightsData.value);
 
+    final maxWeight =
+        weightData.isNotEmpty
+            ? weightData.map((e) => e.y).reduce((a, b) => a > b ? a : b)
+            : 0;
+
     bool showCalories = context.select((ChartState s) => s.showCalories.value);
     bool showGlucids = context.select((ChartState s) => s.showGlucids.value);
     bool showLipids = context.select((ChartState s) => s.showLipids.value);
@@ -72,6 +77,11 @@ class _ChartWidgetState extends State<ChartWidget> {
               isVisible: false,
             ),
           ],
+          primaryYAxis: NumericAxis(
+            minimum: 0,
+            maximum: maxWeight + 10,
+            interval: 5,
+          ),
           series: <CartesianSeries<ChartData, String>>[
             if (showCalories)
               createSeries(
