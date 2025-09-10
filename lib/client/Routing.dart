@@ -108,6 +108,11 @@ class _RoutingState extends State<Routing> {
           autoCloseDuration: const Duration(seconds: 5),
           style: ToastificationStyle.flat,
           type: ToastificationType.error,
+          callbacks: ToastificationCallbacks(
+            onDismissed: (reason) {
+              errorService.error.value = null;
+            },
+          ),
         );
         // showDialog(
         //   useSafeArea: false,
