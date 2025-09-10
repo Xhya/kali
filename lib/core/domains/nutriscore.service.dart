@@ -9,4 +9,10 @@ class NutriscoreService {
   Future<NutriScore?> computeNutriScore({required String userText}) async {
     return await _nutriScoreRepository.computeNutriScore(userText: userText);
   }
+
+  Future<NutriScore?> getNutriscore({required String nutriscoreId}) async {
+    return await _nutriScoreRepository.getNutriscore(
+      nutriscoreId: nutriscoreId,
+    );
+  }
 }

@@ -28,6 +28,21 @@ class PersonalNutriScoreFormData {
 }
 
 class NutriScoreRepository {
+  Future<NutriScore?> getNutriscore({required String nutriscoreId}) async {
+    final response = await http.get(
+      Uri.parse('$API_URL/nutriscores/$nutriscoreId'),
+      headers: await headersWithMaybeToken(),
+    );
+
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body) as Map<String, dynamic>;
+      return NutriScore.fromJson(body["data"]);
+    } else {
+      errorService.currentResponseError = response;
+      throw Exception();
+    }
+  }
+
   Future<NutriScore?> computeNutriScore({required String userText}) async {
     Map body = {"userText": userText};
 
