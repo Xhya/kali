@@ -233,14 +233,13 @@ class _MealScreenState extends State<MealScreen> {
                         null)
                       ThinkingWidget(
                         thinking:
-                            editingNutriScore == null ||
-                                    editingNutriScore.thinking == null
+                            editingNutriScore?.thinking == null
                                 ? mealState
                                     .currentMeal
                                     .value!
                                     .nutriscore!
                                     .thinking!
-                                : editingNutriScore.thinking!,
+                                : editingNutriScore!.thinking!,
                       ),
                   ],
                 ),
