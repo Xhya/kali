@@ -36,8 +36,9 @@ class PushNotificationService {
     _appLinks.uriLinkStream.listen((uri) async {
       if (uri.path == '/home/quick-add') {
         if (userState.user.value == null) {
-          errorService.error.value =
-              "Vous devez être connecté pour ajouter un repas.";
+          errorService.setError(
+            "Vous devez être connecté pour ajouter un repas.",
+          );
         } else {
           final nutriscoreId = uri.queryParameters['id'] ?? "";
           await quickAddMealOnPush(nutriscoreId);

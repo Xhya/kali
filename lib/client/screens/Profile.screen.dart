@@ -51,10 +51,10 @@ void onClickDeconnect(BuildContext context) {
 Future<void> onClickConfirmDeconnect() async {
   try {
     userState.isDeconnectLoading.value = true;
+    await userService.deconnectUser();
     await hardwareService.deleteSignatureStorage();
     await hardwareService.deleteTokenStorage();
     await googleSignInState.signInGoogle.value?.signOut();
-    await userService.deconnectUser();
     navigationService.navigateTo(ScreenEnum.start);
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack);

@@ -28,6 +28,12 @@ class ErrorService extends ChangeNotifier {
     super.dispose();
   }
 
+  void setError(String message) {
+    if (error.value != message) {
+      error.value = message;
+    }
+  }
+
   Response? currentResponseError;
 
   Future<void> notifyError({
@@ -92,10 +98,11 @@ class ErrorService extends ChangeNotifier {
     }
 
     if (show) {
-      error.value =
-          isInProdEnv
-              ? t("error_message")
-              : extractedMessage ?? t("error_message");
+      setError(
+        isInProdEnv
+            ? t("error_message")
+            : extractedMessage ?? t("error_message"),
+      );
     }
 
     if (isInDevEnv || isInProdEnv) {
