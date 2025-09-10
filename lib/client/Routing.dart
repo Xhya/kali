@@ -33,8 +33,6 @@ class Routing extends StatefulWidget {
 }
 
 class _RoutingState extends State<Routing> {
-  Widget? previousBottomBar;
-
   bool backButtonInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
     if (Navigator.canPop(context)) {
       Navigator.pop(context);
@@ -64,11 +62,12 @@ class _RoutingState extends State<Routing> {
     Widget? bottomSheet = context.select(
       (NavigationService s) => s.bottomSheet.value,
     );
+    final previousBottomBar = navigationService.previousBottomBar;
 
     context.watch<ConfigurationState>().currentVersion;
 
     if (bottomSheet != null && previousBottomBar == null) {
-      previousBottomBar = bottomSheet;
+      navigationService.previousBottomBar = bottomSheet;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         final currentContext = navigationService.context;
         if (currentContext != null) {
@@ -88,7 +87,7 @@ class _RoutingState extends State<Routing> {
               );
             },
           ).then((_) {
-            previousBottomBar = null;
+            navigationService.previousBottomBar = null;
             navigationService.bottomSheet.value = null;
           });
         } else {

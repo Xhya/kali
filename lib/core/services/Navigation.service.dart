@@ -37,6 +37,7 @@ class NavigationService extends ChangeNotifier {
   ScreenEnum currentScreen = ScreenEnum.startForm;
   bool userScaffoldObserved = false;
   BuildContext? context;
+  Widget? previousBottomBar;
   final bottomSheet = ValueNotifier<Widget?>(null);
   final snackBar = ValueNotifier<Widget?>(null);
   Function? nextAction;

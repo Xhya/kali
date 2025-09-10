@@ -48,6 +48,10 @@ class PushNotificationService {
   }
 
   Future<void> quickAddMealOnPush(String nutriscoreId) async {
+    navigationService.previousBottomBar = null;
+    navigationService.bottomSheet.value = null;
+    errorService.error.value = null;
+    
     navigationService.navigateTo(ScreenEnum.home);
 
     final nutriscore = await nutriscoreService.getNutriscore(
