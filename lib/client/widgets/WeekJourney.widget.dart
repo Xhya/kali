@@ -43,7 +43,7 @@ class _WeekJourneyWidgetState extends State<WeekJourneyWidget> {
             children: List.generate(7, (index) {
               final date = currentStartDate.add(Duration(days: index));
               bool isCurrentDate = date.isSameDay(currentDate);
-              // var challengeItem = widget.period.challengeItems[index];
+
               return GestureDetector(
                 onTap: () {
                   dateState.currentDate.value = date;

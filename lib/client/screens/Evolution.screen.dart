@@ -78,6 +78,7 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
   void initState() {
     super.initState();
     chartService.refreshEvolution();
+    weightService.refreshWeights();
   }
 
   @override
