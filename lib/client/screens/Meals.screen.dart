@@ -4,16 +4,15 @@ import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/client/screens/Home.screen.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
-import 'package:kali/client/widgets/DateSelector.widget.dart';
 import 'package:kali/client/widgets/LoaderIcon.widget.dart';
 import 'package:kali/client/widgets/MealPeriodsHorizontal.widget.dart';
 import 'package:kali/client/widgets/MealRow.widget.dart';
 import 'package:kali/client/widgets/SlidableItem.widget.dart';
+import 'package:kali/client/widgets/WeekJourney.widget.dart';
 import 'package:kali/core/actions/Goto.actions.dart';
 import 'package:kali/core/domains/meal.service.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/services/Error.service.dart';
-import 'package:kali/core/states/date.state.dart';
 import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:provider/provider.dart';
@@ -48,7 +47,6 @@ class _MealsScreenState extends State<MealsScreen> {
   Widget build(BuildContext context) {
     List<MealModel> currentMealsByPeriods =
         context.watch<MealState>().currentMealsByPeriods;
-    DateTime currentDate = context.select((DateState s) => s.currentDate.value);
     List<MealPeriodEnum> currentMealPeriods =
         context.watch<MealState>().currentMealPeriods.value;
     bool isLoadingDate = context.select((MealState s) => s.isLoadingDate.value);
@@ -64,7 +62,8 @@ class _MealsScreenState extends State<MealsScreen> {
           child: Column(
             children: [
               SizedBox(height: 10),
-              DateSelector(currentDate: currentDate, canNavigate: true),
+              WeekJourneyWidget(),
+
               SizedBox(height: 24),
               MealPeriodsHorizontalWidget(
                 onClickSelectPeriod: (period) {
