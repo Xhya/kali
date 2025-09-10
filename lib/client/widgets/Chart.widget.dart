@@ -30,6 +30,11 @@ class _ChartWidgetState extends State<ChartWidget> {
             ? weightData.map((e) => e.y).reduce((a, b) => a > b ? a : b)
             : 0;
 
+    final maxCalories =
+        caloriesData.isNotEmpty
+            ? caloriesData.map((e) => e.y).reduce((a, b) => a > b ? a : b)
+            : 0;
+
     bool showCalories = context.select((ChartState s) => s.showCalories.value);
     bool showGlucids = context.select((ChartState s) => s.showGlucids.value);
     bool showLipids = context.select((ChartState s) => s.showLipids.value);
@@ -41,6 +46,7 @@ class _ChartWidgetState extends State<ChartWidget> {
       required String yAxisName,
       required Color? color,
       bool visibleMark = true,
+      bool animation = true,
     }) {
       return SplineSeries<ChartData, String>(
         name: name,
@@ -52,6 +58,7 @@ class _ChartWidgetState extends State<ChartWidget> {
         dataLabelSettings: DataLabelSettings(isVisible: visibleMark),
         markerSettings: MarkerSettings(isVisible: visibleMark),
         splineType: SplineType.natural,
+        animationDuration: animation ? 1500 : 0.00001,
       );
     }
 
@@ -67,14 +74,18 @@ class _ChartWidgetState extends State<ChartWidget> {
           tooltipBehavior: TooltipBehavior(enable: true),
           axes: <ChartAxis>[
             NumericAxis(
-              name: 'rightAxis',
+              name: 'caloriesAxis',
               opposedPosition: true,
               isVisible: false,
+              minimum: 0,
+              maximum: maxCalories + 100,
             ),
             NumericAxis(
-              name: 'rightSecondAxis',
+              name: 'macrosAxis',
               opposedPosition: true,
               isVisible: false,
+              minimum: 0,
+              maximum: 300,
             ),
           ],
           primaryYAxis: NumericAxis(
@@ -83,38 +94,6 @@ class _ChartWidgetState extends State<ChartWidget> {
             interval: 5,
           ),
           series: <CartesianSeries<ChartData, String>>[
-            if (showCalories)
-              createSeries(
-                name: 'Calories',
-                dataSource: caloriesData,
-                yAxisName: 'rightAxis',
-                color: style.macroColors.calories,
-              ),
-            if (showGlucids)
-              createSeries(
-                name: 'Glucides',
-                dataSource: glucidsData,
-                yAxisName: 'rightSecondAxis',
-                color: style.macroColors.glucids,
-                visibleMark: false,
-              ),
-            if (showProteins)
-              createSeries(
-                name: 'Protéines',
-                dataSource: proteinsData,
-                yAxisName: 'rightSecondAxis',
-                color: style.macroColors.proteins,
-                visibleMark: false,
-              ),
-
-            if (showLipids)
-              createSeries(
-                name: 'Lipides',
-                dataSource: lipidsData,
-                yAxisName: 'rightSecondAxis',
-                color: style.macroColors.lipids,
-                visibleMark: false,
-              ),
             SplineSeries<ChartData, String>(
               name: 'Poids',
               dataSource: weightData,
@@ -124,6 +103,40 @@ class _ChartWidgetState extends State<ChartWidget> {
               markerSettings: MarkerSettings(isVisible: true),
               splineType: SplineType.natural,
             ),
+
+            if (showCalories)
+              createSeries(
+                name: 'Calories',
+                dataSource: caloriesData,
+                yAxisName: 'caloriesAxis',
+                color: style.macroColors.calories,
+              ),
+
+            if (showGlucids)
+              createSeries(
+                name: 'Glucides',
+                dataSource: glucidsData,
+                yAxisName: 'macrosAxis',
+                color: style.macroColors.glucids,
+                visibleMark: false,
+              ),
+            if (showProteins)
+              createSeries(
+                name: 'Protéines',
+                dataSource: proteinsData,
+                yAxisName: 'macrosAxis',
+                color: style.macroColors.proteins,
+                visibleMark: false,
+              ),
+
+            if (showLipids)
+              createSeries(
+                name: 'Lipides',
+                dataSource: lipidsData,
+                yAxisName: 'macrosAxis',
+                color: style.macroColors.lipids,
+                visibleMark: false,
+              ),
           ],
         );
   }
