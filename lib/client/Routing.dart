@@ -111,6 +111,12 @@ class _RoutingState extends State<Routing> {
             onDismissed: (reason) {
               errorService.error.value = null;
             },
+            onAutoCompleteCompleted: (reason) {
+              errorService.error.value = null;
+            },
+            onCloseButtonTap: (reason) {
+              errorService.error.value = null;
+            },
           ),
         );
         // showDialog(
