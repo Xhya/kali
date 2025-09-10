@@ -94,6 +94,14 @@ class _ChartWidgetState extends State<ChartWidget> {
             interval: 5,
           ),
           series: <CartesianSeries<ChartData, String>>[
+            if (showCalories)
+              createSeries(
+                name: 'Calories',
+                dataSource: caloriesData,
+                yAxisName: 'caloriesAxis',
+                color: style.macroColors.calories,
+              ),
+
             SplineSeries<ChartData, String>(
               name: 'Poids',
               dataSource: weightData,
@@ -103,14 +111,6 @@ class _ChartWidgetState extends State<ChartWidget> {
               markerSettings: MarkerSettings(isVisible: true),
               splineType: SplineType.natural,
             ),
-
-            if (showCalories)
-              createSeries(
-                name: 'Calories',
-                dataSource: caloriesData,
-                yAxisName: 'caloriesAxis',
-                color: style.macroColors.calories,
-              ),
 
             if (showGlucids)
               createSeries(
