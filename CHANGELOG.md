@@ -6,6 +6,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [1.6.2]
 
+- search nutriscore
+- fix loading date
 - deconnect user call
 - share meal with id
 - update date selector

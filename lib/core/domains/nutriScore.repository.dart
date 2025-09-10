@@ -43,6 +43,25 @@ class NutriScoreRepository {
     }
   }
 
+  Future<List<NutriScore>> searchNutriscore({required String text}) async {
+    final formattedText = Uri.encodeComponent(text);
+
+    final response = await http.get(
+      Uri.parse('$API_URL/nutriscores/search?text=$formattedText'),
+      headers: await headersWithMaybeToken(),
+    );
+
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body) as Map<String, dynamic>;
+      return (body["data"] as List)
+          .map((it) => NutriScore.fromJson(it))
+          .toList();
+    } else {
+      errorService.currentResponseError = response;
+      throw Exception();
+    }
+  }
+
   Future<NutriScore?> computeNutriScore({required String userText}) async {
     Map body = {"userText": userText};
 

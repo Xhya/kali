@@ -107,13 +107,16 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
             mainAxisSize: MainAxisSize.min,
             children: [
               QuickAddMealHeaderWidget(),
+
               SizedBox(height: 24),
+
               MealPeriodsWrapWidget(
                 onClickSelectPeriod: (MealPeriodEnum period) {
                   onClickSelectPeriod(period);
                 },
                 chosenPeriod: chosenPeriod,
               ),
+
               SizedBox(height: 16),
 
               MealComputerInput(
