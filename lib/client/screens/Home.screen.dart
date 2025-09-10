@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
     navigationService.context = context;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       initHomeScreen();
-      mealState.isLoadingDate.value = false;
+      mealState.isLoadingAmount.value = 0;
       if (userState.user.value?.isInTestPeriod() == true &&
           configurationState.subscriptionActivated.value) {
         navigationService.context = context;
@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
         context.watch<MealState>().currentMealsByPeriods;
     List<MealPeriodEnum> currentMealPeriods =
         context.watch<MealState>().currentMealPeriods.value;
-    bool isLoadingDate = context.select((MealState s) => s.isLoadingDate.value);
+    bool isLoadingDate = context.select((MealState s) => s.isLoadingDate);
     MealModel? lastMeal = context.select((MealState s) => s.lastMeal);
 
     return BaseScaffold(

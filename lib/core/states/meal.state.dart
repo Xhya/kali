@@ -9,7 +9,8 @@ import 'package:kali/core/utils/computeRemainingCalories.utils.dart';
 final mealState = MealState();
 
 class MealState extends ChangeNotifier {
-  final isLoadingDate = ValueNotifier<bool>(false);
+  final isLoadingAmount = ValueNotifier<int>(0);
+  bool get isLoadingDate => isLoadingAmount.value > 0;
   final weekMeals = ValueNotifier<List<MealModel>>([]);
   final currentMeal = ValueNotifier<MealModel?>(null);
   final currentDayMeals = ValueNotifier<List<MealModel>>([]);
@@ -42,7 +43,7 @@ class MealState extends ChangeNotifier {
   final currentMealPeriods = ValueNotifier<List<MealPeriodEnum>>([]);
 
   MealState() {
-    isLoadingDate.addListener(notifyListeners);
+    isLoadingAmount.addListener(notifyListeners);
     currentDayMeals.addListener(notifyListeners);
     currentMeal.addListener(notifyListeners);
     currentMealPeriods.addListener(notifyListeners);
@@ -50,7 +51,7 @@ class MealState extends ChangeNotifier {
 
   @override
   void dispose() {
-    isLoadingDate.dispose();
+    isLoadingAmount.dispose();
     currentDayMeals.dispose();
     currentMeal.dispose();
     currentMealPeriods.dispose();

@@ -26,7 +26,7 @@ class _WeekJourneyWidgetState extends State<WeekJourneyWidget> {
     DateTime? currentStartDate = context.select(
       (DateState s) => s.currentStartDate.value,
     );
-    bool isLoadingDate = context.select((MealState s) => s.isLoadingDate.value);
+    bool isLoadingDate = context.select((MealState s) => s.isLoadingDate);
 
     if (currentStartDate == null) {
       return SizedBox.shrink();

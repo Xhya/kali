@@ -49,7 +49,7 @@ class _MealsScreenState extends State<MealsScreen> {
         context.watch<MealState>().currentMealsByPeriods;
     List<MealPeriodEnum> currentMealPeriods =
         context.watch<MealState>().currentMealPeriods.value;
-    bool isLoadingDate = context.select((MealState s) => s.isLoadingDate.value);
+    bool isLoadingDate = context.select((MealState s) => s.isLoadingDate);
 
     return BaseScaffold(
       backButton: true,

@@ -17,9 +17,10 @@ class MealService {
           dateState.currentStartDate.value,
         ) ||
         dateState.currentDate.value.isAfter(dateState.currentEndDate);
+
     if (refresh) {
       try {
-        mealState.isLoadingDate.value = true;
+        mealState.isLoadingAmount.value += 1;
         dateState.currentStartDate.value = getMonday(
           dateState.currentDate.value,
         );
@@ -31,7 +32,9 @@ class MealService {
       } catch (e, stack) {
         errorService.notifyError(e: e, stack: stack);
       } finally {
-        mealState.isLoadingDate.value = false;
+        if (mealState.isLoadingAmount.value > 0) {
+          mealState.isLoadingAmount.value -= 1;
+        }
       }
     }
 
