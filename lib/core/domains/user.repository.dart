@@ -24,7 +24,7 @@ class UserRepository {
   }
 
   Future<void> deconnectUser() async {
-    final response = await http.get(
+    final response = await http.post(
       Uri.parse('$API_URL/users/deconnect'),
       headers: await headersWithMaybeToken(),
     );
