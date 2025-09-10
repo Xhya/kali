@@ -111,7 +111,7 @@ class ErrorService extends ChangeNotifier {
     }
 
     if (isInDevEnv || isInProdEnv) {
-      await _bugsnagService.notify(e: e, stack: stack);
+      // await _bugsnagService.notify(e: e, stack: stack);
     }
   }
 
