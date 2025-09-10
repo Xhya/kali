@@ -14,7 +14,7 @@ class AuthenticationRepository {
   }) async {
     Map body = {
       "currentVersion": currentVersion,
-      "currentBuild": currentVersion,
+      "currentBuild": currentBuild,
       "operatingSystem": operatingSystem.label,
       "notificationActivated": notificationActivated,
     };
