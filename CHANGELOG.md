@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.2]
+
+- deconnect user call
+- share meal with id
+- update date selector
+- chart max and min
+
 ## [1.6.1]
 
 - share meal

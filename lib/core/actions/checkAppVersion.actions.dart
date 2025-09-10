@@ -2,6 +2,7 @@ import 'package:kali/core/domains/configurations.repository.dart';
 import 'package:kali/core/models/Configuration.enum.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Hardware.service.dart';
+import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
 
 Future<void> initConfigurations() async {
@@ -22,6 +23,8 @@ Future<void> initConfigurations() async {
         .getConfig(ConfigKeyEnum.lastVersion);
     configurationState.feedbackUrl.value = await configurationsRepository
         .getConfig(ConfigKeyEnum.feedbackFormUrl);
+    navigationService.bottomSheet.value = null;
+    errorService.error.value = null;
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack, show: false);
   }
