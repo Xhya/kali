@@ -2,6 +2,7 @@ import 'package:dart_date/dart_date.dart';
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
+import 'package:kali/client/widgets/DateSelector.widget.dart';
 import 'package:kali/client/widgets/LoaderIcon.widget.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/services/Datetime.extension.dart';
@@ -33,37 +34,45 @@ class _WeekJourneyWidgetState extends State<WeekJourneyWidget> {
 
     return CustomCard(
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 4),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: List.generate(7, (index) {
-          final date = currentStartDate.add(Duration(days: index));
-          bool isCurrentDate = date.isSameDay(currentDate);
-          // var challengeItem = widget.period.challengeItems[index];
-          return GestureDetector(
-            onTap: () {
-              dateState.currentDate.value = date;
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                border: Border.all(
-                  color:
-                      isCurrentDate
-                          ? style.border.color.color2.color!.withOpacity(0.5)
-                          : Colors.transparent,
-                  width: 1,
+      child: Column(
+        children: [
+          DateSelector(currentDate: currentDate),
+          SizedBox(height: 4),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: List.generate(7, (index) {
+              final date = currentStartDate.add(Duration(days: index));
+              bool isCurrentDate = date.isSameDay(currentDate);
+              // var challengeItem = widget.period.challengeItems[index];
+              return GestureDetector(
+                onTap: () {
+                  dateState.currentDate.value = date;
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    border: Border.all(
+                      color:
+                          isCurrentDate
+                              ? style.border.color.color2.color!.withOpacity(
+                                0.5,
+                              )
+                              : Colors.transparent,
+                      width: 1,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Text(date.formateDate('E')[0].toUpperCase()),
+                      getJourneyIcon(date, isLoadingDate),
+                    ],
+                  ),
                 ),
-              ),
-              child: Column(
-                children: [
-                  Text(date.formateDate('E')[0].toUpperCase()),
-                  getJourneyIcon(date, isLoadingDate),
-                ],
-              ),
-            ),
-          );
-        }),
+              );
+            }),
+          ),
+        ],
       ),
     );
   }

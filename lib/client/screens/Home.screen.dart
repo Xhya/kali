@@ -15,7 +15,6 @@ import 'package:kali/core/states/user.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
-import 'package:kali/client/widgets/DateSelector.widget.dart';
 import 'package:kali/client/widgets/MainKaloriesCount.widget.dart';
 import 'package:kali/client/widgets/MealPeriodsHorizontal.widget.dart';
 import 'package:kali/client/widgets/MealRow.widget.dart';
@@ -86,7 +85,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     List<MealModel> currentMealsByPeriods =
         context.watch<MealState>().currentMealsByPeriods;
-    DateTime currentDate = context.select((DateState s) => s.currentDate.value);
     List<MealPeriodEnum> currentMealPeriods =
         context.watch<MealState>().currentMealPeriods.value;
     bool isLoadingDate = context.select((MealState s) => s.isLoadingDate.value);
@@ -104,10 +102,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
               // EndOfTestPeriodWidget(padding: 16),
               WeekJourneyWidget(),
-
-              SizedBox(height: 16),
-
-              DateSelector(currentDate: currentDate),
 
               SizedBox(height: 16),
               MealPeriodsHorizontalWidget(

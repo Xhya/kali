@@ -62,11 +62,11 @@ class DateSelector extends StatelessWidget {
               HapticFeedback.vibrate();
               onClickLeftArrow();
             },
-            style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(
-                style.iconBackground.color1.color,
-              ),
-            ),
+            // style: ButtonStyle(
+            //   backgroundColor: WidgetStateProperty.all(
+            //     style.iconBackground.color1.color,
+            //   ),
+            // ),
             icon: Icon(Icons.chevron_left_outlined),
             color: style.icon.color1.color,
             iconSize: style.fontsize.xl2.fontSize,
@@ -84,16 +84,16 @@ class DateSelector extends StatelessWidget {
           ),
         ),
         if (canNavigate)
-          IconButton.filled(
+          IconButton(
             padding: EdgeInsets.all(0),
             onPressed: () {
               onClickRightArrow();
             },
-            style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(
-                style.iconBackground.color1.color,
-              ),
-            ),
+            // style: ButtonStyle(
+            //   backgroundColor: WidgetStateProperty.all(
+            //     style.iconBackground.color1.color,
+            //   ),
+            // ),
             icon: Icon(Icons.chevron_right_outlined),
             color: style.icon.color1.color,
             iconSize: style.fontsize.xl2.fontSize,
