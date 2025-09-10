@@ -5,6 +5,7 @@ import 'package:kali/client/widgets/Register.widget.dart';
 import 'package:kali/client/widgets/ValidateCode.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/actions/ConsumedAllTokensWithoutPaymentError.actions.dart';
+import 'package:kali/core/actions/checkAppVersion.actions.dart';
 import 'package:kali/core/services/Bugsnag.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/Translation.service.dart';
@@ -29,7 +30,7 @@ class ErrorService extends ChangeNotifier {
   }
 
   void setError(String message) {
-    if (error.value != message) {
+    if (error.value == null) {
       error.value = message;
     }
   }
@@ -78,6 +79,10 @@ class ErrorService extends ChangeNotifier {
       } else if (hcErrorCode == 2000) {
         // 2000 is
         aiState.aiNotUnderstandError.value = true;
+        return;
+      } else if (hcErrorCode == 3000) {
+        // 3000 is MustRefreshAppVersion
+        await refreshAppVersion();
         return;
       }
     }
