@@ -3,6 +3,8 @@ import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/EmailInput.widget.dart';
 import 'package:kali/client/widgets/MacroElementRow.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
+import 'package:kali/client/widgets/UpdatePassword.widget.dart';
+import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/models/EditUser.formdata.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
@@ -121,17 +123,43 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(height: 32),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 8.0),
-                                child: Text(
-                                  "Ton email",
-                                  style: style.text.neutral.merge(
-                                    style.fontsize.sm,
-                                  ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Text(
+                                "Ton email",
+                                style: style.text.neutral.merge(
+                                  style.fontsize.sm,
                                 ),
                               ),
+                            ),
                             EmailInputWidget(),
                           ],
+                        ),
+  
+                      if (userState.user.value?.emailVerifiedAt != null)
+                        SizedBox(height: 8),
+
+                      if (userState.user.value?.emailVerifiedAt != null)
+                        GestureDetector(
+                          onTap: () async {
+                            navigationService.context = context;
+                            navigationService.openBottomSheet(
+                              widget: WelcomeBottomSheet(
+                                child: UpdatePasswordWidget(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "Changer mon mot de passe",
+                            style: style.fontsize.sm
+                                .merge(style.text.neutral)
+                                .merge(
+                                  TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: style.text.neutral.color,
+                                  ),
+                                ),
+                          ),
                         ),
 
                       SizedBox(height: 32),

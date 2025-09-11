@@ -26,8 +26,7 @@ class AuthenticationRepository {
     );
 
     if (response.statusCode == 200) {
-      final body = jsonDecode(response.body) as Map<String, dynamic>;
-      return body["data"];
+      return;
     } else {
       errorService.currentResponseError = response;
       throw Exception();
@@ -44,8 +43,27 @@ class AuthenticationRepository {
     );
 
     if (response.statusCode == 200) {
-      final body = jsonDecode(response.body) as Map<String, dynamic>;
-      return body["data"];
+      return;
+    } else {
+      errorService.currentResponseError = response;
+      throw Exception();
+    }
+  }
+
+  Future<void> updatePasswordRequest({
+    required String newPassword,
+    required String oldPassword,
+  }) async {
+    Map body = {"newPassword": newPassword, "oldPassword": oldPassword};
+
+    final response = await http.patch(
+      Uri.parse('$API_URL/users/update-password'),
+      headers: await headersWithMaybeToken(),
+      body: json.encode(body),
+    );
+
+    if (response.statusCode == 200) {
+      return;
     } else {
       errorService.currentResponseError = response;
       throw Exception();
