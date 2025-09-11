@@ -1,5 +1,6 @@
 import 'dart:io';
 // ignore: depend_on_referenced_packages
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -88,6 +89,8 @@ void main() async {
 
   // Push notification init
   PushNotificationService().initDeepLinks();
+
+  FirebaseAnalytics.instance;
 
   await initGoogleSignIn();
 

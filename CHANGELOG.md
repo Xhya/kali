@@ -6,7 +6,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [1.7.0]
 
-- iOS payment
+- add analytics
+- update start form
 - temp remove bugsnag
 
 ## [1.6.2]
