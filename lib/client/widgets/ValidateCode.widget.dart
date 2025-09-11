@@ -9,7 +9,7 @@ import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
-onSubmitCode() async {
+Future<void> onSubmitCode() async {
   try {
     registerState.isLoading.value = true;
     await authenticationService.verifyAuthCode(registerState.code.value);

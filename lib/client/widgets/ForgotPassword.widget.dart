@@ -1,44 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:kali/client/widgets/ForgotPassword.widget.dart';
-import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
+import 'package:kali/core/domains/authentication.repository.dart';
+import 'package:kali/core/services/Error.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/EmailInput.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
-import 'package:kali/client/widgets/PasswordInput.widget.dart';
-import 'package:kali/core/actions/confetti.actions.dart';
-import 'package:kali/core/domains/authentication.repository.dart';
-import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
-import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/states/Input.state.dart';
 import 'package:kali/core/states/register.state.dart';
 
-Future<void> onSubmitLogin() async {
+Future<void> onSubmitSentForgotPasswordLink(BuildContext context) async {
   try {
-    await AuthenticationRepository().login(
+    await AuthenticationRepository().forgotPasswordRequest(
       email: inputState.email.value,
-      password: inputState.password.value,
     );
-    await userService.refreshUser();
-    navigationService.navigateBack();
-    navigationService.navigateTo(ScreenEnum.home);
-    launchConfetti();
+    navigationService.closeBottomSheet();
   } catch (e, stack) {
-    final extractedMessage = errorService.extractCurrentErrorMessage();
-    registerState.error.value = extractedMessage;
-    errorService.notifyError(e: e, stack: stack, show: false);
+    errorService.notifyError(e: e, stack: stack);
   }
 }
 
-class LoginWidget extends StatefulWidget {
-  const LoginWidget({super.key});
+class ForgotPasswordWidget extends StatefulWidget {
+  const ForgotPasswordWidget({super.key});
 
   @override
-  State<LoginWidget> createState() => _LoginWidgetState();
+  State<ForgotPasswordWidget> createState() => _ForgotPasswordWidgetState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
+class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
   @override
   void initState() {
     super.initState();
@@ -62,7 +51,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Text(
-            "Ravie de te revoir 👋🏼",
+            "Oops ! Renseigne ton addresse e-mail",
             style: style.fontsize.lg
                 .merge(style.text.neutral)
                 .merge(style.fontweight.bold),
@@ -70,15 +59,12 @@ class _LoginWidgetState extends State<LoginWidget> {
           ),
           SizedBox(height: 4),
           Text(
-            "Il est temps de se remettre en route vers le changement ",
+            "Si tu fais partie de la team Kali, un lien de réinitialisation te sera envoyé.",
             style: style.fontsize.sm.merge(style.text.neutralLight),
             textAlign: TextAlign.start,
           ),
           SizedBox(height: 32),
           EmailInputWidget(),
-          SizedBox(height: 4),
-          PasswordInputWidget(),
-          SizedBox(height: 4),
           if (error != null)
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12),
@@ -87,27 +73,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                 style: style.text.error.merge(style.fontsize.sm),
               ),
             ),
-          SizedBox(height: 4),
-          GestureDetector(
-            onTap: () async {
-              navigationService.navigateBack();
-              await Future.delayed(Duration(milliseconds: 500));
-              navigationService.openBottomSheet(
-                widget: WelcomeBottomSheet(child: ForgotPasswordWidget()),
-              );
-            },
-            child: Text(
-              "j'ai oublié mon mot de passe",
-              style: style.fontsize.sm
-                  .merge(style.text.neutral)
-                  .merge(
-                    TextStyle(
-                      decoration: TextDecoration.underline,
-                      decorationColor: style.text.neutral.color,
-                    ),
-                  ),
-            ),
-          ),
           SizedBox(height: 32),
           Flex(
             direction: Axis.horizontal,
@@ -115,10 +80,9 @@ class _LoginWidgetState extends State<LoginWidget> {
             children: [
               MainButtonWidget(
                 onClick: () {
-                  navigationService.context = context;
-                  onSubmitLogin();
+                  onSubmitSentForgotPasswordLink(context);
                 },
-                text: "se connecter",
+                text: "envoyer un lien",
                 iconWidget: Icon(Icons.arrow_forward, size: 20),
                 disabled: false,
                 isLoading: false,
