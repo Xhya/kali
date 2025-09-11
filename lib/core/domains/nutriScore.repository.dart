@@ -14,6 +14,7 @@ class PersonalNutriScoreFormData {
   final double weight;
   final double targetWeight;
   final String lifeActivity;
+  final String workActivity;
 
   PersonalNutriScoreFormData({
     required this.userName,
@@ -24,6 +25,7 @@ class PersonalNutriScoreFormData {
     required this.weight,
     required this.targetWeight,
     required this.lifeActivity,
+    required this.workActivity,
   });
 }
 

@@ -19,6 +19,9 @@ class _StartFormPage4State extends State<StartFormPage4> {
     SelectOption? lifeOption = context.select(
       (StartFormState s) => s.lifeOption.value,
     );
+    SelectOption? workActivityOption = context.select(
+      (StartFormState s) => s.workActivityOption.value,
+    );
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -40,6 +43,14 @@ class _StartFormPage4State extends State<StartFormPage4> {
 
             SizedBox(height: 32),
 
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Text(
+                "Hors travail",
+                style: style.text.neutral.merge(style.fontsize.sm),
+              ),
+            ),
+
             CustomSelectWidget(
               onChanged: (SelectOption? value) {
                 startFormState.lifeOption.value = value;
@@ -48,6 +59,14 @@ class _StartFormPage4State extends State<StartFormPage4> {
                 SelectOption(
                   value: LifeOptionEnum.sit.label,
                   label: "Principalement assis",
+                  icon: CustomIconWidget(
+                    format: CustomIconFormat.svg,
+                    icon: "assets/icons/chaise.svg",
+                  ),
+                ),
+                SelectOption(
+                  value: LifeOptionEnum.neutral.label,
+                  label: "Parfois debout, parfois assis",
                   icon: CustomIconWidget(
                     format: CustomIconFormat.svg,
                     icon: "assets/icons/chaise.svg",
@@ -72,6 +91,58 @@ class _StartFormPage4State extends State<StartFormPage4> {
               ],
               selected: lifeOption,
             ),
+
+            SizedBox(height: 32),
+
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Text(
+                "Au travail",
+                style: style.text.neutral.merge(style.fontsize.sm),
+              ),
+            ),
+
+            CustomSelectWidget(
+              onChanged: (SelectOption? value) {
+                startFormState.workActivityOption.value = value;
+              },
+              options: [
+                SelectOption(
+                  value: LifeOptionEnum.sit.label,
+                  label: "Principalement assis",
+                  icon: CustomIconWidget(
+                    format: CustomIconFormat.svg,
+                    icon: "assets/icons/chaise.svg",
+                  ),
+                ),
+                SelectOption(
+                  value: LifeOptionEnum.neutral.label,
+                  label: "Parfois debout, parfois assis",
+                  icon: CustomIconWidget(
+                    format: CustomIconFormat.svg,
+                    icon: "assets/icons/chaise.svg",
+                  ),
+                ),
+                SelectOption(
+                  value: LifeOptionEnum.stand.label,
+                  label: "Principalement debout",
+                  icon: CustomIconWidget(
+                    format: CustomIconFormat.svg,
+                    icon: "assets/icons/walk.svg",
+                  ),
+                ),
+                SelectOption(
+                  value: LifeOptionEnum.active.label,
+                  label: "Très actif",
+                  icon: CustomIconWidget(
+                    format: CustomIconFormat.svg,
+                    icon: "assets/icons/feu.svg",
+                  ),
+                ),
+              ],
+              selected: workActivityOption,
+            ),
+
             SizedBox(height: 400),
           ],
         ),

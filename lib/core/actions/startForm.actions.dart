@@ -114,6 +114,7 @@ Future<void> computePersonalNutriScore() async {
         weight: startFormState.weight.value!,
         targetWeight: startFormState.targetWeight.value!,
         lifeActivity: startFormState.lifeOption.value?.label ?? "",
+        workActivity: startFormState.workActivityOption.value?.label ?? "",
       ),
     );
 

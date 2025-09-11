@@ -38,6 +38,7 @@ enum ObjectiveOptionEnum {
 
 enum LifeOptionEnum {
   sit('sit'),
+  neutral('neutral'),
   stand('stand'),
   active('active');
 

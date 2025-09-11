@@ -35,6 +35,7 @@ class UserNutriscoreRepository {
       "weight": formData.weight,
       "targetWeight": formData.targetWeight,
       "lifeActivity": formData.lifeActivity,
+      "workActivity": formData.workActivity,
     };
 
     final response = await http.post(

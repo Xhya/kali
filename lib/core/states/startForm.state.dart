@@ -24,6 +24,7 @@ class StartFormState extends ChangeNotifier {
   final targetWeight = ValueNotifier<double?>(null);
 
   final lifeOption = ValueNotifier<SelectOption?>(null);
+  final workActivityOption = ValueNotifier<SelectOption?>(null);
 
   final isLoading = ValueNotifier<bool>(false);
   bool get isNextButtonDisabled {
@@ -38,7 +39,7 @@ class StartFormState extends ChangeNotifier {
     } else if (currentPage.value == 2) {
       return false;
     } else if (currentPage.value == 3) {
-      return lifeOption.value == null;
+      return lifeOption.value == null || workActivityOption.value == null;
     } else {
       return false;
     }
@@ -59,6 +60,7 @@ class StartFormState extends ChangeNotifier {
     targetWeight.addListener(notifyListeners);
 
     lifeOption.addListener(notifyListeners);
+    workActivityOption.addListener(notifyListeners);
   }
 
   @override
@@ -77,6 +79,7 @@ class StartFormState extends ChangeNotifier {
     targetWeight.dispose();
 
     lifeOption.dispose();
+    workActivityOption.dispose();
 
     super.dispose();
   }
