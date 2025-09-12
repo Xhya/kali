@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/widgets/ForgotPassword.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
+import 'package:kali/core/services/Translation.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/EmailInput.widget.dart';
@@ -62,7 +63,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Text(
-            "Ravie de te revoir 👋🏼",
+            t('nice_to_see_you_again'),
             style: style.fontsize.lg
                 .merge(style.text.neutral)
                 .merge(style.fontweight.bold),
@@ -70,7 +71,7 @@ class _LoginWidgetState extends State<LoginWidget> {
           ),
           SizedBox(height: 4),
           Text(
-            "Il est temps de se remettre en route vers le changement ",
+            t('time_to_get_back'),
             style: style.fontsize.sm.merge(style.text.neutralLight),
             textAlign: TextAlign.start,
           ),
@@ -92,12 +93,13 @@ class _LoginWidgetState extends State<LoginWidget> {
             onTap: () async {
               navigationService.navigateBack();
               await Future.delayed(Duration(milliseconds: 500));
+              registerState.error.value = null;
               navigationService.openBottomSheet(
                 widget: WelcomeBottomSheet(child: ForgotPasswordWidget()),
               );
             },
             child: Text(
-              "j'ai oublié mon mot de passe",
+              t('i_forgot_password'),
               style: style.fontsize.sm
                   .merge(style.text.neutral)
                   .merge(
@@ -115,10 +117,9 @@ class _LoginWidgetState extends State<LoginWidget> {
             children: [
               MainButtonWidget(
                 onClick: () {
-                  navigationService.context = context;
                   onSubmitLogin();
                 },
-                text: "se connecter",
+                text: t('connect'),
                 iconWidget: Icon(Icons.arrow_forward, size: 20),
                 disabled: false,
                 isLoading: false,

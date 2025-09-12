@@ -4,6 +4,7 @@ import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/widgets/PasswordInput.widget.dart';
 import 'package:kali/core/domains/authentication.repository.dart';
 import 'package:kali/core/services/Error.service.dart';
+import 'package:kali/core/services/Translation.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
@@ -57,7 +58,7 @@ class _UpdatePasswordWidgetState extends State<UpdatePasswordWidget> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Text(
-            "Change ton mot de passe",
+            t('change_password'),
             style: style.fontsize.lg
                 .merge(style.text.neutral)
                 .merge(style.fontweight.bold),
@@ -67,7 +68,7 @@ class _UpdatePasswordWidgetState extends State<UpdatePasswordWidget> {
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child: Text(
-              "Ton ancien mot de passe",
+              t('your_old_password'),
               style: style.text.neutral.merge(style.fontsize.sm),
             ),
           ),
@@ -76,7 +77,7 @@ class _UpdatePasswordWidgetState extends State<UpdatePasswordWidget> {
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child: Text(
-              "Ton nouveau mot de passe",
+              t('your_new_password'),
               style: style.text.neutral.merge(style.fontsize.sm),
             ),
           ),
@@ -84,7 +85,7 @@ class _UpdatePasswordWidgetState extends State<UpdatePasswordWidget> {
             onChanged: (value) {
               newPassword = value;
             },
-            placeholder: "Nouveau mot de passe",
+            placeholder: t('new_password'),
             customIcon: CustomIconWidget(
               icon: Icon(
                 obscurePassword ? Icons.visibility_off : Icons.visibility,

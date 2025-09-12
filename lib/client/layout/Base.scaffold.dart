@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
+import 'package:kali/core/services/Translation.service.dart';
 import 'package:kali/core/services/connexion.service.dart';
 import 'package:kali/core/utils/paths.utils.dart';
 import 'package:provider/provider.dart';
@@ -71,7 +72,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
                               height: 32,
                             ),
                             Text(
-                              "tu racontes, je compte",
+                              t('you_tell_i_count'),
                               style: style.text.reverse_neutral.merge(
                                 style.fontsize.sm,
                               ),

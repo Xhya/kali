@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:kali/core/services/Translation.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
@@ -109,7 +110,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               passwordCopy = value;
             });
           },
-          placeholder: "Répéter le mot de passe",
+          placeholder: t('repeat_password'),
           customIcon: CustomIconWidget(
             icon: Icon(
               obscurePassword ? Icons.visibility_off : Icons.visibility,

@@ -4,6 +4,7 @@ import 'package:kali/client/widgets/Login.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/services/Navigation.service.dart';
+import 'package:kali/core/services/Translation.service.dart';
 import 'package:kali/core/states/register.state.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:kali/core/utils/paths.utils.dart';
@@ -46,7 +47,7 @@ class _StartFormScreenState extends State<StartScreen> {
                   Image.asset('$imagesPath/logo-white-700.png', height: 32),
                   SizedBox(height: 4),
                   Text(
-                    "tu racontes, je compte",
+                    t('you_tell_i_count'),
                     style: style.text.reverse_neutral.merge(style.fontsize.sm),
                   ),
                 ],
@@ -83,10 +84,10 @@ class _StartFormScreenState extends State<StartScreen> {
                                     ScreenEnum.startForm,
                                   );
                                 },
-                                text: "Démarrer",
+                                text: t('get_started'),
                               ),
                               Text(
-                                "Il n'est pas nécessaire d'aller vite, le tout est de ne pas s'arrêter.",
+                                t('get_started_subtitle'),
                                 textAlign: TextAlign.center,
                                 style: style.fontsize.xs.merge(
                                   style.text.reverse_neutral,
@@ -108,7 +109,7 @@ class _StartFormScreenState extends State<StartScreen> {
                       );
                     },
                     child: Text(
-                      "j'ai déjà un compte",
+                      t('alrealdy_have_account'),
                       style: style.fontsize.sm
                           .merge(style.text.reverse_neutral)
                           .merge(

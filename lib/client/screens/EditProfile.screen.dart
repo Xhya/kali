@@ -8,6 +8,7 @@ import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/models/EditUser.formdata.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
+import 'package:kali/core/services/Translation.service.dart';
 import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/states/Input.state.dart';
 import 'package:kali/core/states/editProfile.state.dart';
@@ -150,7 +151,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             );
                           },
                           child: Text(
-                            "Changer mon mot de passe",
+                            t('change_password'),
                             style: style.fontsize.sm
                                 .merge(style.text.neutral)
                                 .merge(

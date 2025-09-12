@@ -8,6 +8,7 @@ import 'package:kali/core/actions/navigation.actions.dart';
 import 'package:kali/core/domains/user.repository.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Hardware.service.dart';
+import 'package:kali/core/services/Translation.service.dart';
 import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
 import 'package:kali/core/states/googleSignIn.state.dart';
@@ -25,7 +26,7 @@ void onClickDeconnect(BuildContext context) {
         content: SizedBox(
           width: double.maxFinite,
           child: Text(
-            "Souhaitez-vous vous déconnecter ?",
+            t('confirm_logout'),
             style: style.text.neutral.merge(style.fontsize.md),
           ),
         ),
@@ -34,13 +35,13 @@ void onClickDeconnect(BuildContext context) {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text("Annuler"),
+            child: Text(t('cancel')),
           ),
           TextButton(
             onPressed: () {
               onClickConfirmDeconnect();
             },
-            child: Text("Confirmer"),
+            child: Text(t('confirm')),
           ),
         ],
       );
@@ -174,7 +175,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 );
                               },
                               child: Text(
-                                "créer un compte",
+                                t('create_account'),
                                 style: style.fontsize.sm
                                     .merge(style.text.neutralLight)
                                     .merge(
@@ -209,7 +210,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "Ton plan personnalisé",
+                                  t('your_personal_plan'),
                                   style: style.text.neutral.merge(
                                     style.fontsize.sm,
                                   ),
@@ -229,7 +230,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "Ton évolution",
+                                  t('your_evolution'),
                                   style: style.text.neutral.merge(
                                     style.fontsize.sm,
                                   ),
@@ -251,7 +252,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "Ton feedback",
+                                    t('your_feedback'),
                                     style: style.text.neutral.merge(
                                       style.fontsize.sm,
                                     ),
@@ -318,7 +319,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               // TODO
                             },
                             child: Text(
-                              "nouvelle version disponible",
+                              t('new_available_version'),
                               style: style.fontsize.sm
                                   .merge(style.text.neutralLight)
                                   .merge(

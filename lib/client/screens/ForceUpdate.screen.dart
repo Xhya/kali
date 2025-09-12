@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
+import 'package:kali/core/services/Translation.service.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
@@ -81,7 +82,7 @@ class _ForceUpdateScreenState extends State<ForceUpdateScreen>
                   Image.asset('$imagesPath/logo-white-700.png', height: 32),
                   SizedBox(height: 4),
                   Text(
-                    "tu racontes, je compte",
+                    t('you_tell_i_count'),
                     style: style.text.reverse_neutral.merge(style.fontsize.sm),
                   ),
                 ],
