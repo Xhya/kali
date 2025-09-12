@@ -262,6 +262,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                             ),
 
+                          CustomCard(
+                            onClick: () {},
+                            width: double.infinity,
+                            padding: EdgeInsets.all(16),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    t('vote_for_next_feature'),
+                                    style: style.text.neutral.merge(
+                                      style.fontsize.sm,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                  ),
+                                ),
+                                Icon(Icons.arrow_forward_ios_outlined),
+                              ],
+                            ),
+                          ),
+
                           SizedBox(height: 80),
                         ],
                       ),
