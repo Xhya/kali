@@ -28,12 +28,12 @@ class _ChartWidgetState extends State<ChartWidget> {
     final maxWeight =
         weightData.isNotEmpty
             ? weightData.map((e) => e.y).reduce((a, b) => a > b ? a : b)
-            : 0;
+            : 80;
 
     final maxCalories =
         caloriesData.isNotEmpty
             ? caloriesData.map((e) => e.y).reduce((a, b) => a > b ? a : b)
-            : 0;
+            : 150;
 
     bool showCalories = context.select((ChartState s) => s.showCalories.value);
     bool showGlucids = context.select((ChartState s) => s.showGlucids.value);
