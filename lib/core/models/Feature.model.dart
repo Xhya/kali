@@ -5,12 +5,14 @@ class FeatureModel {
   final String name;
   final String? description;
   final FeatureTypeEnum type;
+  final bool isVoted;
 
   FeatureModel({
     required this.id,
     required this.name,
     required this.description,
     required this.type,
+    required this.isVoted,
   });
 
   factory FeatureModel.fromJson(Map<String, dynamic> json) {
@@ -19,6 +21,7 @@ class FeatureModel {
       name: json['name'] as String,
       description: json['description'] as String?,
       type: FeatureTypeEnum.fromText(json['type'] as String),
+      isVoted: json['isVoted'] as bool,
     );
   }
 }

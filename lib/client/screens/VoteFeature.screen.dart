@@ -4,11 +4,20 @@ import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/LoaderIcon.widget.dart';
 import 'package:kali/core/models/Feature.model.dart';
+import 'package:kali/core/services/Error.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/core/domains/feature.service.dart';
 import 'package:kali/core/states/feature.state.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
+
+Future<void> onClickVote(String featureId) async {
+  try {
+    await featureService.voteFeature(featureId);
+  } catch (e, stack) {
+    errorService.notifyError(e: e, stack: stack);
+  }
+}
 
 class VoteFeatureScreen extends StatefulWidget {
   const VoteFeatureScreen({super.key});
@@ -26,7 +35,14 @@ class _VoteFeatureScreenState extends State<VoteFeatureScreen> {
     super.initState();
 
     init() async {
-      await featureService.refreshFeatures();
+      try {
+        featureState.isLoadingFeatures.value = true;
+        await featureService.refreshFeatures();
+      } catch (e, stack) {
+        errorService.notifyError(e: e, stack: stack);
+      } finally {
+        featureState.isLoadingFeatures.value = false;
+      }
     }
 
     init();
@@ -61,6 +77,11 @@ class _VoteFeatureScreenState extends State<VoteFeatureScreen> {
                   separatorBuilder: (context, index) => SizedBox(height: 4),
                   itemBuilder: (BuildContext context, int index) {
                     final feature = features[index];
+                    final icon =
+                        feature.isVoted
+                            ? Icon(Icons.heart_broken, color: Colors.red)
+                            : Icon(Icons.heart_broken_outlined);
+
                     return CustomCard(
                       padding: EdgeInsets.symmetric(
                         horizontal: 16,
@@ -84,7 +105,12 @@ class _VoteFeatureScreenState extends State<VoteFeatureScreen> {
                                   maxLines: 2,
                                 ),
                               ),
-                              Icon(Icons.heart_broken_outlined),
+                              GestureDetector(
+                                onTap: () {
+                                  onClickVote(feature.id);
+                                },
+                                child: icon,
+                              ),
                             ],
                           ),
 

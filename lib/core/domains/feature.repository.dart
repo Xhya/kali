@@ -8,7 +8,7 @@ import 'package:kali/environment.dart';
 class FeatureRepository {
   Future<List<FeatureModel>> getNextFeatures() async {
     final response = await http.get(
-      Uri.parse('$API_URL/features'),
+      Uri.parse('$API_URL/users/features'),
       headers: await headersWithMaybeToken(),
     );
 
