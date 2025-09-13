@@ -8,7 +8,14 @@ Future<void> congratulationNextAction(BuildContext context) async {
   await Future.delayed(const Duration(milliseconds: 500));
 
   navigationService.openBottomSheet(
-    widget: FullScreenBottomSheet(child: CongratulationWidget()),
+    widget: FullScreenBottomSheet(
+      child: CongratulationWidget(
+        child: Text(
+          "🎉 Bienvenue dans l'aventure !",
+          style: TextStyle(fontSize: 24),
+        ),
+      ),
+    ),
   );
 
   await Future.delayed(const Duration(seconds: 3));

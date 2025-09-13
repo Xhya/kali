@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:kali/core/actions/confetti.actions.dart';
 
 class CongratulationWidget extends StatefulWidget {
-  const CongratulationWidget({super.key});
+  const CongratulationWidget({super.key, required this.child});
+
+  final Widget child;
 
   @override
   State<CongratulationWidget> createState() => _CongratulationWidgetState();
@@ -17,10 +19,6 @@ class _CongratulationWidgetState extends State<CongratulationWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Center(child: Text("🎉 Bienvenue dans l'aventure !", style: TextStyle(fontSize: 24))),
-      ],
-    );
+    return Stack(children: [Center(child: widget.child)]);
   }
 }
