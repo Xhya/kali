@@ -49,28 +49,15 @@ class _QuickAddMealHeaderWidgetState extends State<QuickAddMealHeaderWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            child: Row(
-              spacing: 4,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  "Ajouter un repas",
-                  style: style.text.neutral.merge(style.fontsize.md),
-                ),
-                Flexible(
-                  child: Text(
-                    date.formateDate("EE dd MMMM"),
-                    style: style.text.neutral.merge(style.fontsize.sm),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    openDatePicker();
-                  },
-                  child: Icon(Icons.calendar_month, size: 24),
-                ),
-              ],
+            child: GestureDetector(
+              onTap: () {
+                openDatePicker();
+              },
+              child: Text(
+                date.formateDate("EEEE dd MMMM"),
+                style: style.text.neutral.merge(style.fontsize.sm),
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ),
 

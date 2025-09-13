@@ -111,7 +111,7 @@ class _MealComputerInputState extends State<MealComputerInput> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               child: Text(
-                "Pour obtenir des calculs précis, veuillez être le plus précis possible.",
+                "Précision = résultats 🎯 Sois précis dans tes descriptions de repas pour que Kali les estime correctement",
                 style: style.text.neutralLight.merge(style.fontsize.xxs),
               ),
             ),

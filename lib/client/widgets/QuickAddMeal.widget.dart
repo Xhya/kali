@@ -95,7 +95,7 @@ class _QuickAddMealWidgetState extends State<QuickAddMealWidget> {
     return SingleChildScrollView(
       child: Container(
         color: style.background.greenTransparent.color,
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: ClipRRect(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(16),
