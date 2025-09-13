@@ -21,7 +21,7 @@ class PushNotificationPermissionWidget extends StatefulWidget {
 class _PushNotificationPermissionWidgetState
     extends State<PushNotificationPermissionWidget> {
   var show = false;
-  var alreadySet = false;
+  var notDetermined = true;
 
   @override
   void initState() {
@@ -35,12 +35,12 @@ class _PushNotificationPermissionWidgetState
       final lastDate =
           lastDateStr != null ? DateTime.parse(lastDateStr).toLocal() : null;
       setState(() {
-        alreadySet =
-            notif.authorizationStatus != AuthorizationStatus.notDetermined;
+        notDetermined =
+            notif.authorizationStatus == AuthorizationStatus.notDetermined;
+
         show =
-            notif.authorizationStatus == AuthorizationStatus.notDetermined ||
-            lastDate == null ||
-            lastDate.isAfter(DateTime.now());
+            notDetermined &&
+            (lastDate == null || lastDate.isAfter(DateTime.now()));
       });
     }
 
@@ -74,7 +74,7 @@ class _PushNotificationPermissionWidgetState
                         recognizer:
                             TapGestureRecognizer()
                               ..onTap = () async {
-                                if (alreadySet) {
+                                if (!notDetermined) {
                                   openAppSettings();
                                 } else {
                                   await FirebaseMessaging.instance
