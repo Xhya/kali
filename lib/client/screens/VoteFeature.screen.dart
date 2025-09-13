@@ -77,8 +77,8 @@ class _VoteFeatureScreenState extends State<VoteFeatureScreen> {
                     final feature = features[index];
                     final icon =
                         feature.isVoted
-                            ? Icon(Icons.heart_broken, color: Colors.red)
-                            : Icon(Icons.heart_broken_outlined);
+                            ? Icon(Icons.favorite, color: Colors.red)
+                            : Icon(Icons.favorite_border);
 
                     return CustomCard(
                       padding: EdgeInsets.symmetric(
