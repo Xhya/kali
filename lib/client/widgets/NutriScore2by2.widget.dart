@@ -38,7 +38,7 @@ class _NutriScore2by2WidgetState extends State<NutriScore2by2Widget> {
         CustomCard(
           child: SizedBox(
             height: 50,
-            width: MediaQuery.of(context).size.width / 2 - 12 * 2,
+            width: MediaQuery.of(context).size.width / 2 - 14 * 2,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -61,7 +61,7 @@ class _NutriScore2by2WidgetState extends State<NutriScore2by2Widget> {
         CustomCard(
           child: SizedBox(
             height: 50,
-            width: MediaQuery.of(context).size.width / 2 - 12 * 2,
+            width: MediaQuery.of(context).size.width / 2 - 14 * 2,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -84,7 +84,7 @@ class _NutriScore2by2WidgetState extends State<NutriScore2by2Widget> {
         CustomCard(
           child: SizedBox(
             height: 50,
-            width: MediaQuery.of(context).size.width / 2 - 12 * 2,
+            width: MediaQuery.of(context).size.width / 2 - 14 * 2,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -107,7 +107,7 @@ class _NutriScore2by2WidgetState extends State<NutriScore2by2Widget> {
         CustomCard(
           child: SizedBox(
             height: 50,
-            width: MediaQuery.of(context).size.width / 2 - 12 * 2,
+            width: MediaQuery.of(context).size.width / 2 - 14 * 2,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
