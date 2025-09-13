@@ -36,7 +36,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
       (ConnexionService v) => v.hasInternetConnexion.value,
     );
 
-    double headerHeight = hasInternetConnexion ? 100 : 125;
+    double headerHeight = hasInternetConnexion ? 72 : 72 + 25;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -57,7 +57,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
                 children: [
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                    height: 100,
+                    height: 72,
                     width: double.maxFinite,
                     child: Stack(
                       alignment: Alignment.center,
@@ -71,64 +71,70 @@ class _BaseScaffoldState extends State<BaseScaffold> {
                               '$imagesPath/logo-white-700.png',
                               height: 32,
                             ),
-                            Text(
-                              t('you_tell_i_count'),
-                              style: style.text.reverse_neutral.merge(
-                                style.fontsize.sm,
-                              ),
-                            ),
+                            // Text(
+                            //   t('less_computing_more_result'),
+                            //   style: style.text.reverse_neutral.merge(
+                            //     style.fontsize.sm,
+                            //   ),
+                            // ),
                           ],
                         ),
                         if (widget.backButton)
                           Positioned(
-                            top: 5,
+                            top: 0,
+                            bottom: 0,
                             left: 0,
-                            child: CustomInkwell(
-                              child: Container(
-                                width: 40,
-                                height: 40,
-                                padding: EdgeInsets.zero,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.white,
-                                    width: 2,
+                            child: Center(
+                              child: CustomInkwell(
+                                child: Container(
+                                  width: 40,
+                                  height: 40,
+                                  padding: EdgeInsets.zero,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.white,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(100),
                                   ),
-                                  borderRadius: BorderRadius.circular(100),
+                                  child: Icon(
+                                    Icons.arrow_back,
+                                    color: style.icon.color3.color,
+                                    size: style.fontsize.lg.fontSize,
+                                  ),
                                 ),
-                                child: Icon(
-                                  Icons.arrow_back,
-                                  color: style.icon.color3.color,
-                                  size: style.fontsize.lg.fontSize,
-                                ),
+                                onTap: () {
+                                  HapticFeedback.vibrate();
+                                  widget.onNavigateBack?.call();
+                                  navigationService.context = context;
+                                  navigationService.navigateBack();
+                                },
                               ),
-                              onTap: () {
-                                HapticFeedback.vibrate();
-                                widget.onNavigateBack?.call();
-                                navigationService.context = context;
-                                navigationService.navigateBack();
-                              },
                             ),
                           ),
                         if (widget.profileButton)
                           Positioned(
-                            top: 5,
+                            top: 0,
+                            bottom: 0,
                             right: 0,
                             child: CustomInkwell(
-                              child: Container(
-                                width: 40,
-                                height: 40,
-                                padding: EdgeInsets.zero,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.white,
-                                    width: 2,
+                              child: Center(
+                                child: Container(
+                                  width: 40,
+                                  height: 40,
+                                  padding: EdgeInsets.zero,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.white,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(100),
                                   ),
-                                  borderRadius: BorderRadius.circular(100),
-                                ),
-                                child: Icon(
-                                  Icons.person_outline,
-                                  color: style.icon.color3.color,
-                                  size: style.fontsize.lg.fontSize,
+                                  child: Icon(
+                                    Icons.person_outline,
+                                    color: style.icon.color3.color,
+                                    size: style.fontsize.lg.fontSize,
+                                  ),
                                 ),
                               ),
                               onTap: () {

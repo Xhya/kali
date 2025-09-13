@@ -32,48 +32,44 @@ class _WeekJourneyWidgetState extends State<WeekJourneyWidget> {
       return SizedBox.shrink();
     }
 
-    return CustomCard(
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 4),
-      child: Column(
-        children: [
-          DateSelector(currentDate: currentDate),
-          SizedBox(height: 4),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: List.generate(7, (index) {
-              final date = currentStartDate.add(Duration(days: index));
-              bool isCurrentDate = date.isSameDay(currentDate);
+    return Column(
+      children: [
+        DateSelector(currentDate: currentDate),
+        SizedBox(height: 4),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: List.generate(7, (index) {
+            final date = currentStartDate.add(Duration(days: index));
+            bool isCurrentDate = date.isSameDay(currentDate);
 
-              return GestureDetector(
-                onTap: () {
-                  dateState.currentDate.value = date;
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    border: Border.all(
-                      color:
-                          isCurrentDate
-                              ? style.border.color.color2.color!.withOpacity(
-                                0.5,
-                              )
-                              : Colors.transparent,
-                      width: 1,
-                    ),
+            return GestureDetector(
+              onTap: () {
+                dateState.currentDate.value = date;
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color:
+                        isCurrentDate
+                            ? style.border.color.color2.color!.withOpacity(0.9)
+                            : Colors.transparent,
+                    width: 1,
                   ),
-                  child: Column(
-                    children: [
-                      Text(date.formateDate('E')[0].toUpperCase()),
-                      getJourneyIcon(date, isLoadingDate),
-                    ],
-                  ),
+                  color: Colors.white,
                 ),
-              );
-            }),
-          ),
-        ],
-      ),
+                child: Column(
+                  children: [
+                    Text(date.formateDate('E')[0].toUpperCase()),
+                    getJourneyIcon(date, isLoadingDate),
+                  ],
+                ),
+              ),
+            );
+          }),
+        ),
+      ],
     );
   }
 }
@@ -135,10 +131,10 @@ Widget getJourneyIcon(DateTime date, bool isLoadingDate) {
         width: 20,
         height: 20,
         decoration: BoxDecoration(
-          color: style.background.error.color,
+          color: style.background.red.color,
           borderRadius: BorderRadius.circular(100),
         ),
-        child: Icon(Icons.close, size: 20, color: Colors.white),
+        child: Icon(Icons.close, size: 18, color: style.icon.color2.color),
       )
       : Container(
         width: 20,
@@ -147,6 +143,6 @@ Widget getJourneyIcon(DateTime date, bool isLoadingDate) {
           color: style.background.green.color,
           borderRadius: BorderRadius.circular(100),
         ),
-        child: Icon(Icons.check, size: 20, color: Colors.white),
+        child: Icon(Icons.check, size: 18, color: style.icon.color2.color),
       );
 }

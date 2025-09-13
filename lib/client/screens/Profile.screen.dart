@@ -166,14 +166,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   .merge(style.text.neutral)
                                   .merge(style.fontweight.semibold),
                             ),
-                          SizedBox(height: 4),
+                          SizedBox(height: 2),
                           if (email != null)
                             Padding(
                               padding: const EdgeInsets.only(right: 42),
                               child: Text(
                                 email,
                                 style: style.fontsize.xs.merge(
-                                  style.text.neutral,
+                                  style.text.neutralLight,
                                 ),
                               ),
                             ),
@@ -196,20 +196,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                               ),
                             ),
-                          SizedBox(height: 4),
+                          SizedBox(height: 16),
                           if (leitmotiv != null)
                             Padding(
                               padding: const EdgeInsets.only(right: 42),
                               child: Text(
                                 '"$leitmotiv"',
-                                style: style.fontsize.xs.merge(
+                                style: style.fontsize.sm.merge(
                                   style.text.neutral,
                                 ),
                               ),
                             ),
                           SizedBox(height: 16),
                           EndOfTestPeriodWidget(),
-                          SizedBox(height: 32),
+                          SizedBox(height: 20),
 
                           CustomCard(
                             onClick: () {
@@ -226,7 +226,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     style.fontsize.sm,
                                   ),
                                 ),
-                                Icon(Icons.arrow_forward_ios_outlined),
+                                Icon(Icons.arrow_forward_ios_outlined, size: 15),
                               ],
                             ),
                           ),
@@ -246,7 +246,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     style.fontsize.sm,
                                   ),
                                 ),
-                                Icon(Icons.arrow_forward_ios_outlined),
+                                Icon(Icons.arrow_forward_ios_outlined, size: 15),
                               ],
                             ),
                           ),
@@ -258,6 +258,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             width: double.infinity,
                             padding: EdgeInsets.all(16),
                             child: Row(
+                              spacing: 12,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
@@ -270,7 +271,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     maxLines: 2,
                                   ),
                                 ),
-                                Icon(Icons.arrow_forward_ios_outlined),
+                                Icon(Icons.arrow_forward_ios_outlined, size: 15),
                               ],
                             ),
                           ),
@@ -292,7 +293,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       style.fontsize.sm,
                                     ),
                                   ),
-                                  Icon(Icons.arrow_forward_ios_outlined),
+                                  Icon(Icons.arrow_forward_ios_outlined, size: 15),
                                 ],
                               ),
                             ),

@@ -45,6 +45,8 @@ Color _green_600 = const Color(0xFF01b829);
 Color _green_800 = const Color(0xFF0a7122);
 Color _green_950 = const Color(0xFF00340d);
 
+Color _red = const Color(0xFFFEBAA7);
+
 class Period {
   final breakfastColor = TextStyle(color: _breakfastColor);
   final breakfastColorLight = TextStyle(color: _breakfastColor_light);
@@ -66,6 +68,7 @@ class BackgroundColors {
   final greenDark = TextStyle(color: _green_950);
   final grey = TextStyle(color: _grey_light);
   final error = TextStyle(color: Colors.red);
+  final red = TextStyle(color: _red);
 }
 
 class Gauge {
@@ -119,6 +122,7 @@ class BorderRadiuses {
 
 class IconsColors {
   final color1 = TextStyle(color: _green_950);
+  final color2 = TextStyle(color: _grey_middle);
   final color3 = TextStyle(color: _white);
 }
 

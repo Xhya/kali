@@ -140,122 +140,120 @@ class _MealScreenState extends State<MealScreen> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           color: style.background.greenTransparent.color,
-          padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-          child: Stack(
-            children: [
-              SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Stack(
                   children: [
-                    SizedBox(height: 12),
-                    if (editingDate != null)
-                      DateSelector(
-                        currentDate: editingDate,
-                        canNavigate: false,
-                      ),
-                    SizedBox(height: 32),
-                    MealPeriodsHorizontalWidget(
-                      withAll: false,
-                      onClickSelectPeriod: (period) {
-                        onClickSelectPeriod(period);
-                      },
-                      chosenPeriods: mealPeriod != null ? [mealPeriod] : [],
-                    ),
-                    SizedBox(height: 24),
-                    MealComputerInput(
-                      mealText: editingUserTextMeal,
-                      onUpdate: (value) {
-                        editMealState.editingNutriScore.value = null;
-                        editMealState.editingUserTextMeal.value = value;
-                      },
-                      onCompute: () {
-                        onComputeEditingMeal();
-                      },
-                      isLoading: isComputeLoading,
-                      disabled: !canCompute,
-                      maxLines: 100,
-                    ),
-                    SizedBox(height: 16),
-                    CustomCard(
-                      padding: EdgeInsets.all(16),
-                      child: Row(
-                        spacing: 12,
-                        children: [
-                          Text(
-                            "⚖️",
-                            textAlign: TextAlign.start,
-                            style: style.text.green
-                                .merge(style.fontsize.md)
-                                .merge(style.fontweight.bold),
+                    if (meal?.nutriscore?.id != null)
+                      if (editingDate != null)
+                        Padding(
+                          padding: EdgeInsets.only(top: 18, bottom: 24),
+                          child: DateSelector(
+                            currentDate: editingDate,
+                            canNavigate: false,
                           ),
-
-                          if (meal?.nutriscore?.caloryAmount != null)
-                            Text(
-                              "${meal!.nutriscore!.caloryAmount.toString()} calories",
-                              textAlign: TextAlign.start,
-                              style: style.text.neutral
-                                  .merge(style.fontsize.sm)
-                                  .merge(style.fontweight.bold)
-                                  .merge(
-                                    TextStyle(
-                                      decoration:
-                                          editingNutriScore == null
-                                              ? TextDecoration.none
-                                              : TextDecoration.lineThrough,
-                                    ),
-                                  ),
-                            ),
-                          if (editingNutriScore != null)
-                            Text(
-                              "${editingNutriScore.caloryAmount.toString()} calories",
-                              textAlign: TextAlign.start,
-                              style: style.text.neutral
-                                  .merge(style.fontsize.sm)
-                                  .merge(style.fontweight.bold)
-                                  .merge(
-                                    TextStyle(decoration: TextDecoration.none),
-                                  ),
-                            ),
-                        ],
+                        ),
+                    Positioned(
+                      top: 8,
+                      right: 0,
+                      child: ShareButtonWidget(
+                        message:
+                            "Voici le repas que l'on a probablement partagé ! Ajoute-le toi aussi 😉 https://horace-organization.com/home/quick-add?id=${meal!.nutriscore!.id}",
                       ),
                     ),
-
-                    SizedBox(height: 16),
-
-                    NutriScoreGaugesWidget(
-                      mealsByPeriods: [meal!],
-                      withTotal: false,
-                    ),
-
-                    SizedBox(height: 16),
-
-                    if (mealState.currentMeal.value?.nutriscore?.thinking !=
-                        null)
-                      ThinkingWidget(
-                        thinking:
-                            editingNutriScore?.thinking == null
-                                ? mealState
-                                    .currentMeal
-                                    .value!
-                                    .nutriscore!
-                                    .thinking!
-                                : editingNutriScore!.thinking!,
-                      ),
                   ],
                 ),
-              ),
-              if (meal?.nutriscore?.id != null)
-                Positioned(
-                  top: 0,
-                  right: 0,
-                  child: ShareButtonWidget(
-                    message:
-                        "Voici le repas que l'on a probablement partagé ! Ajoute-le toi aussi 😉 https://horace-organization.com/home/quick-add?id=${meal!.nutriscore!.id}",
+
+                MealPeriodsHorizontalWidget(
+                  withAll: false,
+                  onClickSelectPeriod: (period) {
+                    onClickSelectPeriod(period);
+                  },
+                  chosenPeriods: mealPeriod != null ? [mealPeriod] : [],
+                ),
+                SizedBox(height: 8),
+                MealComputerInput(
+                  mealText: editingUserTextMeal,
+                  onUpdate: (value) {
+                    editMealState.editingNutriScore.value = null;
+                    editMealState.editingUserTextMeal.value = value;
+                  },
+                  onCompute: () {
+                    onComputeEditingMeal();
+                  },
+                  isLoading: isComputeLoading,
+                  disabled: !canCompute,
+                  maxLines: 100,
+                ),
+                SizedBox(height: 16),
+                CustomCard(
+                  padding: EdgeInsets.all(16),
+                  child: Row(
+                    spacing: 12,
+                    children: [
+                      Text(
+                        "⚖️",
+                        textAlign: TextAlign.start,
+                        style: style.text.green
+                            .merge(style.fontsize.md)
+                            .merge(style.fontweight.bold),
+                      ),
+
+                      if (meal?.nutriscore?.caloryAmount != null)
+                        Text(
+                          "${meal!.nutriscore!.caloryAmount.toString()} calories",
+                          textAlign: TextAlign.start,
+                          style: style.text.neutral
+                              .merge(style.fontsize.sm)
+                              .merge(style.fontweight.bold)
+                              .merge(
+                                TextStyle(
+                                  decoration:
+                                      editingNutriScore == null
+                                          ? TextDecoration.none
+                                          : TextDecoration.lineThrough,
+                                ),
+                              ),
+                        ),
+                      if (editingNutriScore != null)
+                        Text(
+                          "${editingNutriScore.caloryAmount.toString()} calories",
+                          textAlign: TextAlign.start,
+                          style: style.text.neutral
+                              .merge(style.fontsize.sm)
+                              .merge(style.fontweight.bold)
+                              .merge(
+                                TextStyle(decoration: TextDecoration.none),
+                              ),
+                        ),
+                    ],
                   ),
                 ),
-            ],
+
+                SizedBox(height: 4),
+
+                NutriScoreGaugesWidget(
+                  mealsByPeriods: [meal!],
+                  withTotal: false,
+                ),
+
+                SizedBox(height: 16),
+
+                if (mealState.currentMeal.value?.nutriscore?.thinking != null)
+                  ThinkingWidget(
+                    thinking:
+                        editingNutriScore?.thinking == null
+                            ? mealState.currentMeal.value!.nutriscore!.thinking!
+                            : editingNutriScore!.thinking!,
+                  ),
+              ],
+            ),
           ),
         ),
+
         floatingActionButton: MainButtonWidget(
           onClick: () {
             navigationService.context = context;

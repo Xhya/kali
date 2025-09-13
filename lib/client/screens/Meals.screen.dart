@@ -4,15 +4,16 @@ import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/client/screens/Home.screen.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
+import 'package:kali/client/widgets/DateSelector.widget.dart';
 import 'package:kali/client/widgets/LoaderIcon.widget.dart';
 import 'package:kali/client/widgets/MealPeriodsHorizontal.widget.dart';
 import 'package:kali/client/widgets/MealRow.widget.dart';
 import 'package:kali/client/widgets/SlidableItem.widget.dart';
-import 'package:kali/client/widgets/WeekJourney.widget.dart';
 import 'package:kali/core/actions/Goto.actions.dart';
 import 'package:kali/core/domains/meal.service.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/services/Error.service.dart';
+import 'package:kali/core/states/date.state.dart';
 import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:provider/provider.dart';
@@ -50,6 +51,7 @@ class _MealsScreenState extends State<MealsScreen> {
     List<MealPeriodEnum> currentMealPeriods =
         context.watch<MealState>().currentMealPeriods.value;
     bool isLoadingDate = context.select((MealState s) => s.isLoadingDate);
+    DateTime currentDate = context.select((DateState s) => s.currentDate.value);
 
     return BaseScaffold(
       backButton: true,
@@ -58,20 +60,20 @@ class _MealsScreenState extends State<MealsScreen> {
         body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Column(
             children: [
-              SizedBox(height: 10),
-              WeekJourneyWidget(),
+              DateSelector(currentDate: currentDate, canNavigate: true),
 
-              SizedBox(height: 24),
+              SizedBox(height: 16),
+              
               MealPeriodsHorizontalWidget(
                 onClickSelectPeriod: (period) {
                   onClickSelectPeriod(period);
                 },
                 chosenPeriods: currentMealPeriods,
               ),
-              SizedBox(height: 24),
+              SizedBox(height: 8),
               if (currentMealsByPeriods.isNotEmpty)
                 isLoadingDate
                     ? LoaderIcon()

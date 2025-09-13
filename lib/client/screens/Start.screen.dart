@@ -47,7 +47,7 @@ class _StartFormScreenState extends State<StartScreen> {
                   Image.asset('$imagesPath/logo-white-700.png', height: 32),
                   SizedBox(height: 4),
                   Text(
-                    t('you_tell_i_count'),
+                    t('less_computing_more_result'),
                     style: style.text.reverse_neutral.merge(style.fontsize.sm),
                   ),
                 ],
