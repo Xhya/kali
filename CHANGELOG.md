@@ -6,6 +6,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [1.7.0]
 
+- fix ios applink (disabled deeplink)
+- vote next feature
 - reset password
 - update password
 - add analytics
