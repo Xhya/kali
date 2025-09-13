@@ -15,6 +15,7 @@ enum ScreenEnum {
   personalNutriscore,
   evolution,
   webview,
+  voteFeature,
 }
 
 var navigationService = NavigationService();

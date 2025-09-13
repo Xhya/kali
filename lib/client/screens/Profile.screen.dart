@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/EndOfTestPeriod.widget.dart';
@@ -12,7 +13,6 @@ import 'package:kali/core/services/Translation.service.dart';
 import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/states/configuration.state.dart';
 import 'package:kali/core/states/googleSignIn.state.dart';
-import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/core/services/Navigation.service.dart';
@@ -87,6 +87,17 @@ Future<void> onClickFeedback(BuildContext context) async {
           "${configurationState.feedbackUrl.value}&entry.807671233=$email";
       navigationService.navigateTo(ScreenEnum.webview);
     }
+  } else {
+    showRegisterEmailBottomSheet(
+      context: context,
+      subtitle: "Crée un compte pour utiliser cette fonctionnalité",
+    );
+  }
+}
+
+Future<void> onClickVote(BuildContext context) async {
+  if (userState.user.value?.emailVerifiedAt != null) {
+    navigationService.navigateTo(ScreenEnum.voteFeature);
   } else {
     showRegisterEmailBottomSheet(
       context: context,
@@ -240,6 +251,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
 
+                          CustomCard(
+                            onClick: () {
+                              onClickVote(context);
+                            },
+                            width: double.infinity,
+                            padding: EdgeInsets.all(16),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    t('vote_for_next_feature'),
+                                    style: style.text.neutral.merge(
+                                      style.fontsize.sm,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                  ),
+                                ),
+                                Icon(Icons.arrow_forward_ios_outlined),
+                              ],
+                            ),
+                          ),
+
                           if (configurationState.feedbackUrl.value.isNotEmpty)
                             CustomCard(
                               onClick: () {
@@ -261,28 +296,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ],
                               ),
                             ),
-
-                          CustomCard(
-                            onClick: () {},
-                            width: double.infinity,
-                            padding: EdgeInsets.all(16),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    t('vote_for_next_feature'),
-                                    style: style.text.neutral.merge(
-                                      style.fontsize.sm,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 2,
-                                  ),
-                                ),
-                                Icon(Icons.arrow_forward_ios_outlined),
-                              ],
-                            ),
-                          ),
 
                           SizedBox(height: 80),
                         ],

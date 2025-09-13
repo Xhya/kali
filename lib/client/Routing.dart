@@ -1,3 +1,4 @@
+import 'package:kali/client/screens/VoteFeature.screen.dart';
 import 'package:toastification/toastification.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/screens/EditProfile.screen.dart';
@@ -230,6 +231,8 @@ class _RoutingState extends State<Routing> {
           navigateTo(const EvolutionScreen());
         case ScreenEnum.webview:
           navigateTo(const WebviewScreen());
+        case ScreenEnum.voteFeature:
+          navigateTo(const VoteFeatureScreen());
       }
     };
 

@@ -17,6 +17,7 @@ import 'package:kali/core/states/chart.state.dart';
 import 'package:kali/core/states/configuration.state.dart';
 import 'package:kali/core/states/date.state.dart';
 import 'package:kali/core/states/editProfile.state.dart';
+import 'package:kali/core/states/feature.state.dart';
 import 'package:kali/core/states/googleSignIn.state.dart';
 import 'package:kali/core/states/register.state.dart';
 import 'package:kali/core/states/subscription.state.dart';
@@ -120,6 +121,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => chartState),
         ChangeNotifierProvider(create: (context) => weightState),
         ChangeNotifierProvider(create: (context) => dateState),
+        ChangeNotifierProvider(create: (context) => featureState),
       ],
       child: const App(),
     ),
