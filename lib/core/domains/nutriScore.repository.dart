@@ -32,7 +32,7 @@ class PersonalNutriScoreFormData {
 class NutriScoreRepository {
   Future<NutriScore?> getNutriscore({required String nutriscoreId}) async {
     final response = await http.get(
-      Uri.parse('$API_URL/nutriscores/$nutriscoreId'),
+      Uri.parse('$API_URL/users/nutriscores/$nutriscoreId'),
       headers: await headersWithMaybeToken(),
     );
 
@@ -49,7 +49,7 @@ class NutriScoreRepository {
     final formattedText = Uri.encodeComponent(text);
 
     final response = await http.get(
-      Uri.parse('$API_URL/nutriscores/search?text=$formattedText'),
+      Uri.parse('$API_URL/users/nutriscores/search?text=$formattedText'),
       headers: await headersWithMaybeToken(),
     );
 
@@ -68,7 +68,7 @@ class NutriScoreRepository {
     Map body = {"userText": userText};
 
     final response = await http.post(
-      Uri.parse('$API_URL/nutriscores/compute'),
+      Uri.parse('$API_URL/users/nutriscores/compute'),
       headers: await headersWithMaybeToken(),
       body: json.encode(body),
     );

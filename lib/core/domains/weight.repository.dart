@@ -8,7 +8,7 @@ import 'package:kali/environment.dart';
 class WeightRepository {
   Future<List<WeightModel>> getWeights() async {
     final response = await http.get(
-      Uri.parse('$API_URL/weights'),
+      Uri.parse('$API_URL/users/weights'),
       headers: await headersWithToken(),
     );
 
@@ -27,7 +27,7 @@ class WeightRepository {
     Map body = {"weight": weight.toDouble()};
 
     final response = await http.post(
-      Uri.parse('$API_URL/weights'),
+      Uri.parse('$API_URL/users/weights'),
       headers: await headersWithToken(),
       body: json.encode(body),
     );

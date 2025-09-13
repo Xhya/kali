@@ -8,7 +8,7 @@ import 'package:kali/environment.dart';
 class ChartRepository {
   Future<EvolutionModel> getEvolution() async {
     final response = await http.get(
-      Uri.parse('$API_URL/charts/evolution'),
+      Uri.parse('$API_URL/users/charts/evolution'),
       headers: await headersWithToken(),
     );
 
