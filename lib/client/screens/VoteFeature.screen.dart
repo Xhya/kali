@@ -157,6 +157,7 @@ class _VoteFeatureScreenState extends State<VoteFeatureScreen> {
                                         ),
                                         child: IconButton(
                                           onPressed: () {
+                                            navigationService.context = context;
                                             onClickVote(
                                               feature.id,
                                               feature.isVoted,
