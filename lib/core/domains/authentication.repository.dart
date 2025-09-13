@@ -80,8 +80,7 @@ class AuthenticationRepository {
     );
 
     if (response.statusCode == 200) {
-      final body = jsonDecode(response.body) as Map<String, dynamic>;
-      return body["data"];
+      return;
     } else {
       errorService.currentResponseError = response;
       throw Exception();

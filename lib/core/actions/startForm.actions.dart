@@ -51,7 +51,6 @@ Future<void> _submitFormAndComputeNutriscore() async {
 Future<void> _onClickConfirmPersonalNutriscore() async {
   var currentContext = navigationService.context;
   startFormState.personalNutriScore.value = null;
-  await userService.refreshUser();
   navigationService.nextAction = () async {
     navigationService.context = currentContext;
     await launchConfetti();
@@ -67,6 +66,7 @@ Future<void> _onClickConfirmPersonalNutriscore() async {
   );
   navigationService.navigateTo(ScreenEnum.home);
   launchConfetti();
+  await userService.refreshUser();
 }
 
 void onClickNext() {
