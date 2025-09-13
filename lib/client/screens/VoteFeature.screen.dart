@@ -8,6 +8,7 @@ import 'package:kali/client/widgets/WelcomeBottomSheet.widget.dart';
 import 'package:kali/core/models/Feature.model.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
+import 'package:kali/core/services/Translation.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/core/domains/feature.service.dart';
 import 'package:kali/core/states/feature.state.dart';
@@ -87,79 +88,105 @@ class _VoteFeatureScreenState extends State<VoteFeatureScreen> {
 
     return BaseScaffold(
       backButton: true,
-      child: Container(
-        padding: EdgeInsets.all(12),
-        child: Column(
-          children: [
-            if (isLoadingFeatures)
-              Container(
-                height: 200,
-                alignment: Alignment.center,
-                child: LoaderIcon(),
-              ),
-
-            if (!isLoadingFeatures)
-              Expanded(
-                child: ListView.separated(
-                  itemCount: features.length,
-                  separatorBuilder: (context, index) => SizedBox(height: 4),
-                  itemBuilder: (BuildContext context, int index) {
-                    final feature = features[index];
-                    final icon =
-                        feature.isVoted
-                            ? Icon(Icons.favorite, color: Colors.red)
-                            : Icon(Icons.favorite_border);
-
-                    return CustomCard(
-                      padding: EdgeInsets.only(left: 16, bottom: 12),
-                      child: Column(
-                        spacing: 8,
-                        children: [
-                          Row(
-                            spacing: 16,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsets.only(top: 12),
-                                  child: Text(
-                                    feature.name,
-                                    style: style.fontsize.md.merge(
-                                      style.fontweight.bold,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 2,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(right: 8, top: 4),
-                                child: IconButton(
-                                  onPressed: () {
-                                    onClickVote(feature.id, feature.isVoted);
-                                  },
-                                  icon: icon,
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          if (feature.description != null)
-                            Padding(
-                              padding: EdgeInsets.only(right: 16),
-                              child: Text(
-                                feature.description!,
-                                style: style.fontsize.sm,
-                              ),
-                            ),
-                        ],
+      child: Scaffold(
+        backgroundColor: style.background.greenTransparent.color,
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            return ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    Text(
+                      t('vote_for_next_feature'),
+                      style: style.fontsize.lg
+                          .merge(style.text.neutral)
+                          .merge(style.fontweight.semibold),
+                    ),
+                    SizedBox(height: 24),
+                    if (isLoadingFeatures)
+                      Container(
+                        height: 200,
+                        alignment: Alignment.center,
+                        child: LoaderIcon(),
                       ),
-                    );
-                  },
+
+                    if (!isLoadingFeatures)
+                      Expanded(
+                        child: ListView.separated(
+                          itemCount: features.length,
+                          separatorBuilder:
+                              (context, index) => SizedBox(height: 4),
+                          itemBuilder: (BuildContext context, int index) {
+                            final feature = features[index];
+                            final icon =
+                                feature.isVoted
+                                    ? Icon(Icons.favorite, color: Colors.red)
+                                    : Icon(Icons.favorite_border);
+
+                            return CustomCard(
+                              padding: EdgeInsets.only(left: 16, bottom: 12),
+                              child: Column(
+                                spacing: 8,
+                                children: [
+                                  Row(
+                                    spacing: 16,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Padding(
+                                          padding: EdgeInsets.only(top: 12),
+                                          child: Text(
+                                            feature.name,
+                                            style: style.fontsize.md.merge(
+                                              style.fontweight.bold,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 2,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          right: 8,
+                                          top: 4,
+                                        ),
+                                        child: IconButton(
+                                          onPressed: () {
+                                            onClickVote(
+                                              feature.id,
+                                              feature.isVoted,
+                                            );
+                                          },
+                                          icon: icon,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                  if (feature.description != null)
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 16),
+                                      child: Text(
+                                        feature.description!,
+                                        style: style.fontsize.sm,
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                  ],
                 ),
               ),
-          ],
+            );
+          },
         ),
       ),
     );

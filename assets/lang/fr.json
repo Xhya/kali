@@ -17,6 +17,8 @@
   "describe_your_meal": "décrivez votre [0]",
   "dinner": "dîner",
   "error_message": "une erreur est survenue. Nos équipes ont été notifié et sont sur le coup!",
+  "evolution": "évolution",
+  "feedback": "retour d'expérience",
   "get_started": "démarrer",
   "get_started_subtitle": "il n'est pas nécessaire d'aller vite, le tout est de ne pas s'arrêter.",
   "glucids": "glucides",
@@ -31,6 +33,7 @@
   "nice_to_see_you_again": "ravie de te revoir 👋🏼",
   "no_internet_connexion": "pas de connexion Internet",
   "password": "mot de passe",
+  "personal_plan": "plan personnalisé",
   "proteins": "protéines",
   "repeat_password": "répéter le mot de passe",
   "see_all": "voir tout",
@@ -38,7 +41,7 @@
   "snack": "goûter",
   "time_to_get_back": "il est temps de se remettre en route vers le changement",
   "validate": "valider",
-  "vote_for_next_feature": "voter pour la prochaine fonctionnalité",
+  "vote_for_next_feature": "vote pour la prochaine fonctionnalité",
   "weight": "poids",
   "year": "année",
   "you_tell_i_count": "tu racontes, je compte",
@@ -46,5 +49,6 @@
   "your_feedback": "ton feedback",
   "your_personal_plan": "ton plan personnalisé",
   "your_new_password": "ton nouveau mot de passe",
-  "your_old_password": "ton ancien mot de passe"
+  "your_old_password": "ton ancien mot de passe",
+  "your_opinion_counts": "ton avis compte"
 }

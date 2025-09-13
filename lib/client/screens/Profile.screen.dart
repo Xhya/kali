@@ -221,7 +221,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  t('your_personal_plan'),
+                                  t('personal_plan'),
                                   style: style.text.neutral.merge(
                                     style.fontsize.sm,
                                   ),
@@ -241,7 +241,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  t('your_evolution'),
+                                  t('evolution'),
                                   style: style.text.neutral.merge(
                                     style.fontsize.sm,
                                   ),
@@ -288,7 +288,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    t('your_feedback'),
+                                    t('feedback'),
                                     style: style.text.neutral.merge(
                                       style.fontsize.sm,
                                     ),

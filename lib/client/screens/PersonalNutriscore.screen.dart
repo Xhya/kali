@@ -47,12 +47,13 @@ class _PersonalNutriscoreScreenState extends State<PersonalNutriscoreScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SizedBox(height: 32),
                           Text(
-                            "Ton plan personnalisé",
-                            style: style.fontsize.sm.merge(style.text.neutral),
+                            "Plan personnalisé",
+                            style: style.fontsize.lg
+                                .merge(style.text.neutral)
+                                .merge(style.fontweight.semibold),
                           ),
-                          SizedBox(height: 8),
+                          SizedBox(height: 24),
                           if (personalNutriScore != null)
                             Column(
                               spacing: 4,

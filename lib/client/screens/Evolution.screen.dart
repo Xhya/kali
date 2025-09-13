@@ -11,6 +11,7 @@ import 'package:kali/core/domains/weight.service.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
+import 'package:kali/core/services/Translation.service.dart';
 import 'package:kali/core/states/weight.state.dart';
 
 Future<void> onClickAddWeight() async {
@@ -51,7 +52,7 @@ void onClickOpenAddWeight(BuildContext context) {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text("Annuler"),
+            child: Text(t('cancel')),
           ),
           TextButton(
             onPressed: () {
@@ -102,6 +103,14 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          Text(
+                           t('evolution'),
+                            style: style.fontsize.lg
+                                .merge(style.text.neutral)
+                                .merge(style.fontweight.semibold),
+                          ),
+                          SizedBox(height: 24),
+
                           ChartWidget(),
 
                           ChartCheckboxesWidget(),
