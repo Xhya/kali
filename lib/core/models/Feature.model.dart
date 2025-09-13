@@ -5,7 +5,7 @@ class FeatureModel {
   final String name;
   final String? description;
   final FeatureTypeEnum type;
-  final bool isVoted;
+  bool isVoted;
 
   FeatureModel({
     required this.id,

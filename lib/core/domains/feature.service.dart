@@ -1,3 +1,4 @@
+import 'package:kali/core/domains/feature.data.dart';
 import 'package:kali/core/domains/feature.repository.dart';
 import 'package:kali/core/states/feature.state.dart';
 
@@ -11,6 +12,12 @@ class FeatureService {
   }
 
   Future<void> voteFeature(String featureId) async {
-    await _featureRepository.voteNextFeature(featureId: featureId);
+    featureState.features.value = featureData.voteFeature(featureId);
+    try {
+      await _featureRepository.voteNextFeature(featureId: featureId);
+    } catch (e) {
+      featureData.resetChange();
+      rethrow;
+    }
   }
 }

@@ -55,9 +55,7 @@ class _VoteFeatureScreenState extends State<VoteFeatureScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<FeatureModel> features = context.select(
-      (FeatureState s) => s.features.value,
-    );
+    List<FeatureModel> features = context.watch<FeatureState>().features.value;
     bool isLoadingFeatures = context.select(
       (FeatureState s) => s.isLoadingFeatures.value,
     );
