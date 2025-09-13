@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:kali/core/states/lang.state.dart';
 import 'package:kali/core/utils/storageKeys.utils.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -24,6 +25,7 @@ Future<Map<String, String>> getBaseHeaders() async {
     'Accept': 'application/json',
     'X-Device-ID': deviceId ?? "",
     'X-Device-Signature': signature ?? "",
+    'Accept-Language': langState.currentLang.value.label,
   };
 }
 
