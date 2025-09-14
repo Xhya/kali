@@ -111,9 +111,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 chosenPeriods: currentMealPeriods,
               ),
               SizedBox(height: 8),
-              
+
               isLoadingDate
-                  ? LoaderIcon()
+                  ? SizedBox(height: 200, child: Center(child: LoaderIcon()))
                   : Expanded(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
