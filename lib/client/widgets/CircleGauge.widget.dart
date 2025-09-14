@@ -35,8 +35,8 @@ class _CircleGaugeWidgetState extends State<CircleGaugeWidget> {
       return SfRadialGauge(
         axes: <RadialAxis>[
           RadialAxis(
-            startAngle: 180,
-            endAngle: 180 + 360,
+            startAngle: 270,
+            endAngle: 270 + 360,
             minimum: 0,
             maximum: widget.maxAmount.toDouble(),
             showLabels: false,
