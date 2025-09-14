@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:kali/client/widgets/AndroidSubscriptions.widget.dart';
 import 'package:kali/client/widgets/AnimatedLoading.widget.dart';
 import 'package:kali/client/widgets/Benefits.widget.dart';
 import 'package:kali/client/widgets/Congratulation.widget.dart';
-import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
-import 'package:kali/core/actions/payment.actions.dart';
-import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/Subscription.service.dart';
 import 'package:kali/core/states/subscription.state.dart';
 import 'package:provider/provider.dart';
@@ -79,87 +77,26 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
                 .merge(style.fontweight.bold),
           ),
           SizedBox(height: 4),
-          Center(
-            child: Text(
-              "Pourquoi continuer l'aventure avec Kali ?",
-              textAlign: TextAlign.center,
-              style: style.fontsize.sm.merge(style.text.neutral),
-            ),
-          ),
-
-          SizedBox(height: 32),
-
-          BenefitsWidget(),
-
-          SizedBox(height: 32),
-
-          ...subscriptions.map(
-            (subscription) => Padding(
-              padding: EdgeInsets.only(bottom: 4),
-
-              child: CustomInkwell(
-                onTap: () {
-                  subscriptionState.selectedSubscriptionId.value =
-                      subscription.id;
-                },
-                child: CustomCard(
-                  withBorder: selectedSubscriptionId == subscription.id,
-                  padding: EdgeInsets.all(12),
-                  width: double.maxFinite,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Flexible(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (subscription.name != null)
-                              Text(
-                                subscription.name!,
-                                style: style.fontsize.md.merge(
-                                  style.text.neutral,
-                                ),
-                              ),
-                            if (subscription.description != null)
-                              Text(
-                                subscription.description!,
-                                maxLines: 5,
-                                style: style.fontsize.xs.merge(
-                                  style.text.neutral,
-                                ),
-                              ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            if (subscription.amountText != null)
-                              Text(
-                                subscription.amountText!,
-                                style: style.fontsize.sm
-                                    .merge(style.text.neutral)
-                                    .merge(style.fontweight.bold),
-                              ),
-                            if (subscription.subamountText != null)
-                              Text(
-                                subscription.subamountText!,
-                                style: style.fontsize.xs.merge(
-                                  style.text.neutralLight,
-                                ),
-                              ),
-                          ],
-                        ),
-                      ),
-                    ],
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Center(
+                    child: Text(
+                      "Pourquoi continuer l'aventure avec Kali ?",
+                      textAlign: TextAlign.center,
+                      style: style.fontsize.sm.merge(style.text.neutral),
+                    ),
                   ),
-                ),
+
+                  SizedBox(height: 32),
+
+                  BenefitsWidget(),
+
+                  SizedBox(height: 32),
+
+                  AndroidSubscriptionsWidget(),
+                ],
               ),
             ),
           ),
@@ -169,8 +106,9 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
           Center(
             child: MainButtonWidget(
               onClick: () {
-                navigationService.context = context;
-                openPaymentBottomSheet();
+                //navigationService.context = context;
+                //openPaymentBottomSheet();
+                subscriptionService.buySubscription();
               },
               text: "s'abonner",
               iconWidget: Icon(Icons.arrow_forward, size: 20),
@@ -188,7 +126,12 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
       );
     }
     if (!isPaymentLoading && paymentDone) {
-      return CongratulationWidget();
+      return CongratulationWidget(
+        child: Text(
+          "🎉 Bienvenue dans l'aventure !",
+          style: TextStyle(fontSize: 24),
+        ),
+      );
     }
 
     return SizedBox.shrink();

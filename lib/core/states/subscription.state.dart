@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kali/core/models/Subscription.model.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 final subscriptionState = SubscriptionState();
 
@@ -7,7 +7,7 @@ class SubscriptionState extends ChangeNotifier {
   final isInitPaymentLoading = ValueNotifier<bool>(false);
   final isPaymentLoading = ValueNotifier<bool>(false);
   final paymentDone = ValueNotifier<bool>(false);
-  final subscriptions = ValueNotifier<List<SubscriptionModel>>([]);
+  final subscriptions = ValueNotifier<List<ProductDetails>>([]);
   final selectedSubscriptionId = ValueNotifier<String?>(null);
 
   SubscriptionState() {
