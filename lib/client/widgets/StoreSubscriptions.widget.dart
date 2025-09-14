@@ -6,16 +6,16 @@ import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/core/services/Subscription.service.dart';
 
-class AndroidSubscriptionsWidget extends StatefulWidget {
-  const AndroidSubscriptionsWidget({super.key});
+class StoreSubscriptionsWidget extends StatefulWidget {
+  const StoreSubscriptionsWidget({super.key});
 
   @override
-  State<AndroidSubscriptionsWidget> createState() =>
-      _AndroidSubscriptionsWidgetState();
+  State<StoreSubscriptionsWidget> createState() =>
+      _StoreSubscriptionsWidgetState();
 }
 
-class _AndroidSubscriptionsWidgetState
-    extends State<AndroidSubscriptionsWidget> {
+class _StoreSubscriptionsWidgetState
+    extends State<StoreSubscriptionsWidget> {
   @override
   void initState() {
     Future<void> initStore() async {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kali/client/widgets/AndroidSubscriptions.widget.dart';
+import 'package:kali/client/widgets/StoreSubscriptions.widget.dart';
 import 'package:kali/client/widgets/AnimatedLoading.widget.dart';
 import 'package:kali/client/widgets/Benefits.widget.dart';
 import 'package:kali/client/widgets/Congratulation.widget.dart';
@@ -95,7 +95,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
 
                   SizedBox(height: 32),
 
-                  AndroidSubscriptionsWidget(),
+                  StoreSubscriptionsWidget(),
                 ],
               ),
             ),
