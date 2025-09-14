@@ -13,12 +13,10 @@ class SubscriptionService {
       return;
     }
 
-    const Set<String> ids = {
-      'premium_monthly',
-      'promotional-sept-2025-premium-monthly',
-    };
+    const Set<String> ids = {'premium_monthly', 'premium_annually'};
     final ProductDetailsResponse response = await iap.queryProductDetails(ids);
     if (response.notFoundIDs.isNotEmpty) {
+      print("IDs not found: ${response.notFoundIDs}");
       errorService.notifyError(e: "IDs not found: ${response.notFoundIDs}");
     }
 

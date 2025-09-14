@@ -7,7 +7,6 @@ import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/core/services/Subscription.service.dart';
 import 'package:kali/core/states/subscription.state.dart';
 import 'package:provider/provider.dart';
-import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/core/states/Input.state.dart';
 import 'package:kali/client/Style.service.dart';
 
@@ -27,11 +26,11 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
       inputState.reset();
     });
 
-    init() async {
-      await subscriptionService.refreshSubscriptions();
-    }
+    // init() async {
+    //   await subscriptionService.refreshSubscriptions();
+    // }
+    // init();
 
-    init();
     subscriptionState.selectedSubscriptionId.value = null;
     subscriptionState.isPaymentLoading.value = false;
     subscriptionState.isInitPaymentLoading.value = false;
@@ -51,9 +50,6 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
     );
     bool paymentDone = context.select(
       (SubscriptionState s) => s.paymentDone.value,
-    );
-    final subscriptions = context.select(
-      (SubscriptionState s) => s.subscriptions.value,
     );
     final selectedSubscriptionId = context.select(
       (SubscriptionState s) => s.selectedSubscriptionId.value,

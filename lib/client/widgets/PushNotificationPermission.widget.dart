@@ -86,7 +86,7 @@ class _PushNotificationPermissionWidgetState
                                 }
                               },
                       ),
-                      TextSpan(text: " pour continuer dans la bonne direction"),
+                      TextSpan(text: " pour ne pas oublier de repas"),
                     ],
                   ),
                 ),
