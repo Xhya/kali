@@ -52,7 +52,7 @@ void main() async {
   await TranslationService().init();
 
   // Bugsnag Monitoring
-  await bugsnagService.init();
+  // await bugsnagService.init();
 
   // User identification
   await authenticationService.init();
