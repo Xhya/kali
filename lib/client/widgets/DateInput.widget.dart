@@ -20,7 +20,7 @@ class _DateInputWidgetState extends State<DateInputWidget> {
       final dateRegex = RegExp(
         r'^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/(\d{4})$',
       );
-      if (newValue.length > 7 && !dateRegex.hasMatch(newValue)) {
+      if (newValue.length >= 10 && !dateRegex.hasMatch(newValue)) {
         setState(() {
           birthdateErrorText = "Format invalide (jj/mm/yyyy)";
         });
@@ -43,7 +43,8 @@ class _DateInputWidgetState extends State<DateInputWidget> {
 
       if (splitted.length > 1) {
         final secondTwoDigits = splitted[1];
-        if (int.parse(secondTwoDigits) < 1 || int.parse(secondTwoDigits) > 12) {
+        if (secondTwoDigits.length >= 2 && int.parse(secondTwoDigits) < 1 ||
+            int.parse(secondTwoDigits) > 12) {
           setState(() {
             birthdateErrorText = "Les mois doivent etre entre 01 et 12";
           });
@@ -52,7 +53,7 @@ class _DateInputWidgetState extends State<DateInputWidget> {
 
       if (splitted.length > 2) {
         final thirdTwoDigits = splitted[2];
-        if (int.parse(thirdTwoDigits) < 1900 ||
+        if (thirdTwoDigits.length >= 4 && int.parse(thirdTwoDigits) < 1900 ||
             int.parse(thirdTwoDigits) > DateTime.now().year) {
           setState(() {
             birthdateErrorText =
