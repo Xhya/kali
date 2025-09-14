@@ -33,6 +33,7 @@ class _ThinkingWidgetState extends State<ThinkingWidget> {
           context: context,
           builder: (context) {
             return AlertDialog(
+              insetPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
               title: Text("Détails nutritionnels"),
               content: SizedBox(
                 width: double.maxFinite,
