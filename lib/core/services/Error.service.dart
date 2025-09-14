@@ -9,6 +9,7 @@ import 'package:kali/core/actions/checkAppVersion.actions.dart';
 import 'package:kali/core/services/Bugsnag.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/Translation.service.dart';
+import 'package:kali/core/states/configuration.state.dart';
 import 'package:kali/environment.dart';
 import 'package:kali/core/states/Ai.state.dart';
 import 'package:kali/core/states/register.state.dart';
@@ -82,7 +83,7 @@ class ErrorService extends ChangeNotifier {
         return;
       } else if (hcErrorCode == 3000) {
         // 3000 is MustRefreshAppVersion
-        await refreshAppVersion();
+        configurationState.needForceUpdate.value = true;
         return;
       }
     }

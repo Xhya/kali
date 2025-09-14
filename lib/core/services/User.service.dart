@@ -18,7 +18,8 @@ class UserService {
       User? user = await _userRepository.refreshUser();
       userState.user.value = user;
     } catch (e, stack) {
-      errorService.notifyError(e: e, stack: stack, show: false);
+      final show = errorService.currentResponseError?.statusCode != 401;
+      errorService.notifyError(e: e, stack: stack, show: show);
     }
   }
 

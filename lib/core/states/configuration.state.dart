@@ -10,6 +10,7 @@ class ConfigurationState extends ChangeNotifier {
   final feedbackUrl = ValueNotifier<String>("");
   final subscriptionActivated = ValueNotifier<bool>(false);
   final maxCharacterCount = ValueNotifier<int>(300);
+  final needForceUpdate = ValueNotifier<bool>(false);
 
   ConfigurationState() {
     minimalVersion.addListener(notifyListeners);
@@ -18,6 +19,7 @@ class ConfigurationState extends ChangeNotifier {
     lastVersion.addListener(notifyListeners);
     subscriptionActivated.addListener(notifyListeners);
     maxCharacterCount.addListener(notifyListeners);
+    needForceUpdate.addListener(notifyListeners);
   }
 
   @override
@@ -28,6 +30,7 @@ class ConfigurationState extends ChangeNotifier {
     lastVersion.dispose();
     subscriptionActivated.dispose();
     maxCharacterCount.dispose();
+    needForceUpdate.dispose();
     super.dispose();
   }
 }

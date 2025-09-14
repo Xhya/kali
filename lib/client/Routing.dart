@@ -63,6 +63,9 @@ class _RoutingState extends State<Routing> {
     Widget? bottomSheet = context.select(
       (NavigationService s) => s.bottomSheet.value,
     );
+    bool needForceUpdate = context.select(
+      (ConfigurationState s) => s.needForceUpdate.value,
+    );
     final previousBottomBar = navigationService.previousBottomBar;
 
     context.watch<ConfigurationState>().currentVersion;
@@ -236,7 +239,7 @@ class _RoutingState extends State<Routing> {
       }
     };
 
-    if (isUpdateRequired()) {
+    if (isUpdateRequired() || needForceUpdate) {
       return const ForceUpdateScreen();
     } else if (!authenticationService.isAuthentified) {
       return const StartScreen();
