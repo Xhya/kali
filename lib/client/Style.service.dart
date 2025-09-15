@@ -150,6 +150,8 @@ class FontSizes {
       TextStyle(fontSize: !screenService.isSmallScreen ? 30 : 30);
   TextStyle get big =>
       TextStyle(fontSize: !screenService.isSmallScreen ? 50 : 40);
+  TextStyle get xbig =>
+      TextStyle(fontSize: !screenService.isSmallScreen ? 72 : 52);
   TextStyle get huge =>
       TextStyle(fontSize: !screenService.isSmallScreen ? 100 : 50);
 }

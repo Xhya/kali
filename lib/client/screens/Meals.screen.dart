@@ -66,7 +66,7 @@ class _MealsScreenState extends State<MealsScreen> {
               DateSelector(currentDate: currentDate, canNavigate: true),
 
               SizedBox(height: 16),
-              
+
               MealPeriodsHorizontalWidget(
                 onClickSelectPeriod: (period) {
                   onClickSelectPeriod(period);
@@ -111,10 +111,15 @@ class _MealsScreenState extends State<MealsScreen> {
                 isLoadingDate
                     ? LoaderIcon()
                     : Padding(
-                      padding: EdgeInsets.all(16),
-                      child: Text(
-                        "Pas de repas trouvé",
-                        style: style.fontsize.sm,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 54,
+                      ),
+                      child: Column(
+                        children: [
+                          Text("🍽️", style: style.fontsize.xbig),
+                          Text("Aucun repas trouvé", style: style.fontsize.md),
+                        ],
                       ),
                     ),
             ],

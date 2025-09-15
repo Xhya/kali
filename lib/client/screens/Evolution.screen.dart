@@ -104,7 +104,7 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                           t('evolution'),
+                            t('evolution'),
                             style: style.fontsize.lg
                                 .merge(style.text.neutral)
                                 .merge(style.fontweight.semibold),
@@ -118,6 +118,8 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                           SizedBox(height: 24),
 
                           WeightsWidget(),
+
+                          SizedBox(height: 24),
                         ],
                       ),
                     ),
