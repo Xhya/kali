@@ -37,10 +37,11 @@ enum ObjectiveOptionEnum {
 }
 
 enum LifeOptionEnum {
-  sit('sit'),
-  neutral('neutral'),
-  stand('stand'),
-  active('active');
+  sit('sedentary'),
+  light('light'),
+  neutral('moderate'),
+  stand('intense'),
+  active('very_intense');
 
   const LifeOptionEnum(this.label);
   final String label;

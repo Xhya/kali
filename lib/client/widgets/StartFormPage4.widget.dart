@@ -65,6 +65,14 @@ class _StartFormPage4State extends State<StartFormPage4> {
                   ),
                 ),
                 SelectOption(
+                  value: LifeOptionEnum.light.label,
+                  label: "Parfois assis",
+                  icon: CustomIconWidget(
+                    format: CustomIconFormat.svg,
+                    icon: "assets/icons/chaise.svg",
+                  ),
+                ),
+                SelectOption(
                   value: LifeOptionEnum.neutral.label,
                   label: "Parfois debout, parfois assis",
                   icon: CustomIconWidget(
@@ -110,6 +118,14 @@ class _StartFormPage4State extends State<StartFormPage4> {
                 SelectOption(
                   value: LifeOptionEnum.sit.label,
                   label: "Principalement assis",
+                  icon: CustomIconWidget(
+                    format: CustomIconFormat.svg,
+                    icon: "assets/icons/chaise.svg",
+                  ),
+                ),
+                SelectOption(
+                  value: LifeOptionEnum.light.label,
+                  label: "Parfois assis",
                   icon: CustomIconWidget(
                     format: CustomIconFormat.svg,
                     icon: "assets/icons/chaise.svg",
