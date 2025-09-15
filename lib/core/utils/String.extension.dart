@@ -2,7 +2,14 @@ import 'package:intl/intl.dart';
 
 extension StringExtension on String {
   String capitalize() {
-    return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
+    return split('.')
+        .map((sentence) {
+          sentence = sentence.trim();
+          if (sentence.isEmpty) return '';
+          return sentence[0].toUpperCase() +
+              sentence.substring(1).toLowerCase();
+        })
+        .join('. ');
   }
 
   bool isValidDate() {

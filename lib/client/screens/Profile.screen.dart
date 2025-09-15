@@ -25,9 +25,22 @@ void onClickDeconnect(BuildContext context) {
       return AlertDialog(
         content: SizedBox(
           width: double.maxFinite,
-          child: Text(
-            t('confirm_logout'),
-            style: style.text.neutral.merge(style.fontsize.md),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                t('confirm_logout'),
+                style: style.text.neutral.merge(style.fontsize.md),
+              ),
+              if (userState.user.value?.emailVerifiedAt == null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Text(
+                    t('confirm_logout_no_email'),
+                    style: style.text.neutral.merge(style.fontsize.sm),
+                  ),
+                ),
+            ],
           ),
         ),
         actions: [
@@ -226,7 +239,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     style.fontsize.sm,
                                   ),
                                 ),
-                                Icon(Icons.arrow_forward_ios_outlined, size: 15),
+                                Icon(
+                                  Icons.arrow_forward_ios_outlined,
+                                  size: 15,
+                                ),
                               ],
                             ),
                           ),
@@ -246,7 +262,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     style.fontsize.sm,
                                   ),
                                 ),
-                                Icon(Icons.arrow_forward_ios_outlined, size: 15),
+                                Icon(
+                                  Icons.arrow_forward_ios_outlined,
+                                  size: 15,
+                                ),
                               ],
                             ),
                           ),
@@ -271,7 +290,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     maxLines: 2,
                                   ),
                                 ),
-                                Icon(Icons.arrow_forward_ios_outlined, size: 15),
+                                Icon(
+                                  Icons.arrow_forward_ios_outlined,
+                                  size: 15,
+                                ),
                               ],
                             ),
                           ),
@@ -293,7 +315,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       style.fontsize.sm,
                                     ),
                                   ),
-                                  Icon(Icons.arrow_forward_ios_outlined, size: 15),
+                                  Icon(
+                                    Icons.arrow_forward_ios_outlined,
+                                    size: 15,
+                                  ),
                                 ],
                               ),
                             ),
@@ -328,15 +353,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     right: 0,
                     child: Column(
                       children: [
-                        if (userState.user.value?.emailVerifiedAt != null)
-                          ButtonWidget(
-                            buttonType: ButtonTypeEnum.filled,
-                            text: "Se déconnecter",
-                            onPressed: () {
-                              onClickDeconnect(context);
-                            },
-                            isLoading: isDeconnectLoading,
-                          ),
+                        ButtonWidget(
+                          buttonType: ButtonTypeEnum.filled,
+                          text: "Se déconnecter",
+                          onPressed: () {
+                            onClickDeconnect(context);
+                          },
+                          isLoading: isDeconnectLoading,
+                        ),
 
                         SizedBox(height: 12),
                         GestureDetector(

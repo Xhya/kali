@@ -11,6 +11,7 @@
   "change_password": "changer le mot de passe",
   "confirm": "confirmer",
   "confirm_logout": "souhaitez-vous vous déconnecter ?",
+  "confirm_logout_no_email": "vous êtes sur le point de vous déconnecter. N'ayant pas créer de compte, vous perdrez l'ensemble de vos données. Souhaitez-vous vous déconnecter ?",
   "connect": "se connecter",
   "compute": "calculer",
   "create_account": "créer un compte",

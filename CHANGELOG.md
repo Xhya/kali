@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [1.8.0]
 
+- can logout even if no email
 - fix force update
 - payment
 
