@@ -239,7 +239,7 @@ class _RoutingState extends State<Routing> {
       }
     };
 
-    if (isUpdateRequired() || needForceUpdate) {
+    if (needForceUpdate) {
       return const ForceUpdateScreen();
     } else if (!authenticationService.isAuthentified) {
       return const StartScreen();

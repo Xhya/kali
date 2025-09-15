@@ -168,8 +168,8 @@ class _AppState extends State<App> {
         home: AsyncInitWidget(
           initFunction: () async {
             try {
-              await refreshAppVersion();
               await initConfigurations();
+              await refreshAppVersion();
               await connexionService.listenToInternetConnexion();
               await UserService().refreshUser();
               await PushNotificationService().refreshNotificationToken();

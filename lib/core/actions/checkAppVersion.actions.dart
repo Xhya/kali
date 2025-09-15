@@ -33,6 +33,7 @@ Future<void> refreshAppVersion() async {
         await hardwareService.getCurrentVersion();
     configurationState.currentBuild.value =
         await hardwareService.getCurrentBuild();
+    configurationState.needForceUpdate.value = isUpdateRequired();
   } catch (e, stack) {
     errorService.notifyError(e: e, stack: stack, show: false);
   }

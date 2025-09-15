@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
+import 'package:kali/client/widgets/Refresh.widget.dart';
 import 'package:kali/core/services/Translation.service.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
@@ -70,85 +71,92 @@ class _ForceUpdateScreenState extends State<ForceUpdateScreen>
             fit: BoxFit.cover,
           ),
         ),
-        child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 16),
-                  Image.asset('$imagesPath/logo-white-700.png', height: 32),
-                  SizedBox(height: 4),
-                  Text(
-                    t('less_computing_more_result'),
-                    style: style.text.reverse_neutral.merge(style.fontsize.sm),
-                  ),
-                ],
-              ),
-
-              Column(
-                spacing: 16,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 16,
+        child: RefreshWidget(
+          onRefresh: () async {
+            await refreshAppVersion();
+          },
+          child: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 16),
+                    Image.asset('$imagesPath/logo-white-700.png', height: 32),
+                    SizedBox(height: 4),
+                    Text(
+                      t('less_computing_more_result'),
+                      style: style.text.reverse_neutral.merge(
+                        style.fontsize.sm,
+                      ),
                     ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 20,
-                          ),
-                          alignment: Alignment.center,
-                          color: Colors.white.withOpacity(0.2),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Nouvelle mise à jour",
-                                textAlign: TextAlign.center,
-                                style: style.fontsize.md.merge(
-                                  style.text.reverse_neutral,
+                  ],
+                ),
+
+                Column(
+                  spacing: 16,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 16,
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 20,
+                            ),
+                            alignment: Alignment.center,
+                            color: Colors.white.withOpacity(0.2),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Nouvelle mise à jour",
+                                  textAlign: TextAlign.center,
+                                  style: style.fontsize.md.merge(
+                                    style.text.reverse_neutral,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 4),
-                              Text(
-                                "Pour être au top de ses performances,",
-                                textAlign: TextAlign.center,
-                                style: style.fontsize.xs.merge(
-                                  style.text.reverse_neutral,
+                                SizedBox(height: 4),
+                                Text(
+                                  "Pour être au top de ses performances,",
+                                  textAlign: TextAlign.center,
+                                  style: style.fontsize.xs.merge(
+                                    style.text.reverse_neutral,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "Kali a besoin d'être mise à jour",
-                                textAlign: TextAlign.center,
-                                style: style.fontsize.xs.merge(
-                                  style.text.reverse_neutral,
+                                Text(
+                                  "Kali a besoin d'être mise à jour",
+                                  textAlign: TextAlign.center,
+                                  style: style.fontsize.xs.merge(
+                                    style.text.reverse_neutral,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 24),
-                              MainButtonWidget(
-                                onClick: () {
-                                  onClickUpdateApplicationOnStore();
-                                },
-                                text: "mettre à jour",
-                              ),
-                            ],
+                                SizedBox(height: 24),
+                                MainButtonWidget(
+                                  onClick: () {
+                                    onClickUpdateApplicationOnStore();
+                                  },
+                                  text: "mettre à jour",
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
