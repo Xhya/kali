@@ -109,7 +109,7 @@ Future<void> computePersonalNutriScore() async {
         userName: startFormState.userName.value,
         leitmotiv: startFormState.leitmotiv.value,
         birthdate: startFormState.birthdate.value,
-        gender: startFormState.genderOption.value?.label ?? "",
+        gender: startFormState.genderOption.value?.value ?? "",
         height: startFormState.height.value!,
         weight: startFormState.weight.value!,
         targetWeight: startFormState.targetWeight.value!,
