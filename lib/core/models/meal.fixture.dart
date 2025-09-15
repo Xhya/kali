@@ -10,7 +10,6 @@ final fixtureMeals = [
 final fixtureMeal1 = MealModel(
   id: "0",
   date: DateTime.now(),
-  userText: "100g Pizza",
   period: MealPeriodEnum.breakfast,
   nutriscore: fixtureNutriScore1,
 );
@@ -18,7 +17,6 @@ final fixtureMeal1 = MealModel(
 final fixtureMeal2 = MealModel(
   id: "1",
   date: DateTime.now(),
-  userText: "200g viande",
   period: MealPeriodEnum.lunch,
   nutriscore: fixtureNutriScore2,
 );
