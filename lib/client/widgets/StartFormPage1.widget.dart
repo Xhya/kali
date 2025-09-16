@@ -3,6 +3,7 @@ import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/CustomSelect.widget.dart';
 import 'package:kali/client/widgets/DateInput.widget.dart';
+import 'package:kali/core/services/Translation.service.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
@@ -30,24 +31,24 @@ class _StartFormPage1State extends State<StartFormPage1> {
           children: [
             SizedBox(height: 12),
             Text(
-              "Tes infos personnelles 👋🏼",
+              t('startformpage1_title'),
               style: style.text.neutral.merge(style.fontsize.lg),
             ),
             SizedBox(height: 4),
             Text(
-              "Donne-moi ces quelques infos pour un suivi qui te ressemble.",
+              t('startformpage1_subtitle'),
               style: style.text.neutral.merge(style.fontsize.xs),
             ),
 
             SizedBox(height: 32),
 
             CustomInput(
-              title: "Ton nom d'utilisateur",
+              title: t('your_user_name'),
               content: userName,
               onChanged: (String value) {
                 startFormState.userName.value = value;
               },
-              placeholder: "Mama kitchen",
+              placeholder: t('your_user_name_placeholder'),
               customIcon: CustomIconWidget(
                 format: CustomIconFormat.svg,
                 icon: "assets/icons/user.svg",
@@ -61,7 +62,7 @@ class _StartFormPage1State extends State<StartFormPage1> {
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: Text(
-                "Ta date de naissance",
+                t('your_birthdate'),
                 style: style.text.neutral.merge(style.fontsize.sm),
               ),
             ),
@@ -76,7 +77,7 @@ class _StartFormPage1State extends State<StartFormPage1> {
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: Text(
-                "Ton sexe",
+                t('your_gender'),
                 style: style.text.neutral.merge(style.fontsize.sm),
               ),
             ),
@@ -88,7 +89,7 @@ class _StartFormPage1State extends State<StartFormPage1> {
               options: [
                 SelectOption(
                   value: "woman",
-                  label: "Femme",
+                  label: t('woman'),
                   icon: CustomIconWidget(
                     format: CustomIconFormat.svg,
                     icon: "assets/icons/femme.svg",
@@ -96,7 +97,7 @@ class _StartFormPage1State extends State<StartFormPage1> {
                 ),
                 SelectOption(
                   value: "man",
-                  label: "Homme",
+                  label: t('man'),
                   icon: CustomIconWidget(
                     format: CustomIconFormat.svg,
                     icon: "assets/icons/homme.svg",
@@ -104,7 +105,7 @@ class _StartFormPage1State extends State<StartFormPage1> {
                 ),
                 SelectOption(
                   value: "other",
-                  label: "Autre",
+                  label: t('other'),
                   icon: CustomIconWidget(
                     format: CustomIconFormat.svg,
                     icon: "assets/icons/gender-x.svg",
