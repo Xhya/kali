@@ -3,8 +3,6 @@ import 'package:kali/core/models/Feature.model.dart';
 final featureData = FeatureData();
 
 class FeatureData {
-  // final _storage = const FlutterSecureStorage();
-
   List<FeatureModel> _previousFeatures = [];
   List<FeatureModel> _features = [];
 

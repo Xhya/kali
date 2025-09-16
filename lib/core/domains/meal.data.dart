@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:kali/core/domains/localStorage.repository.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/meal.fixture.dart';
 import 'package:kali/core/utils/storageKeys.utils.dart';
@@ -8,15 +8,13 @@ import 'package:kali/environment.dart';
 final mealData = MealData();
 
 class MealData {
-  final _storage = const FlutterSecureStorage();
-
   List<MealModel> _meals = [];
 
   MealData() {
     reset();
   }
 
-  reset() async {
+  Future<void> reset() async {
     if (!isInTestEnv) {
       _meals = await getMeals();
     } else {
@@ -24,15 +22,15 @@ class MealData {
     }
   }
 
-  _store() async {
+  Future<void> _store() async {
     if (!isInTestEnv) {
-      await _storage.write(key: mealStoreKey, value: jsonEncode(_meals));
+      await localStorageRepository.write(mealStoreKey, jsonEncode(_meals));
     }
   }
 
   Future<List<MealModel>> getMeals() async {
     if (!isInTestEnv) {
-      var str = await _storage.read(key: mealStoreKey);
+      var str = await localStorageRepository.read(mealStoreKey);
       if (str == null) {
         return _meals;
       }
@@ -45,7 +43,7 @@ class MealData {
 
   Future<void> addMeal(MealModel meal) async {
     if (!isInTestEnv) {
-      var str = await _storage.read(key: mealStoreKey);
+      var str = await localStorageRepository.read(mealStoreKey);
       str ??= "[]";
       var json = jsonDecode(str);
       final meals = json.map((e) => MealModel.fromJson(e)).toList();

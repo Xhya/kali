@@ -1,6 +1,5 @@
 import 'dart:io';
-
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:kali/core/domains/localStorage.repository.dart';
 import 'package:kali/core/states/lang.state.dart';
 import 'package:kali/core/utils/storageKeys.utils.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -15,10 +14,8 @@ Future<String> getUserAgent() async {
 }
 
 Future<Map<String, String>> getBaseHeaders() async {
-  final secureStorage = FlutterSecureStorage();
-
-  final signature = await secureStorage.read(key: signatureKey);
-  final deviceId = await secureStorage.read(key: deviceIdKey);
+  final signature = await localStorageRepository.read(signatureKey);
+  final deviceId = await localStorageRepository.read(deviceIdKey);
 
   return {
     "Content-Type": "application/json",
@@ -69,11 +66,9 @@ Future<bool> asToken() async {
 }
 
 Future<String?> getToken() async {
-  const storage = FlutterSecureStorage();
-  return await storage.read(key: tokenKey);
+  return await localStorageRepository.read(tokenKey);
 }
 
 Future<void> storeToken(String token) async {
-  const storage = FlutterSecureStorage();
-  await storage.write(key: tokenKey, value: token);
+  await localStorageRepository.write(tokenKey, token);
 }

@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kali/core/domains/hardware.repository.dart';
+import 'package:kali/core/domains/localStorage.repository.dart';
 import 'package:kali/core/models/OperatingSystem.enum.dart';
 import 'package:kali/core/utils/storageKeys.utils.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -11,22 +11,21 @@ final hardwareService = HardwareService();
 
 class HardwareService {
   final _hardwareRepository = HardwareRepository();
-  FlutterSecureStorage _secureStorage = FlutterSecureStorage();
 
   Future<String> getFormattedSignature() async {
-    final signature = await _secureStorage.read(key: signatureKey);
-    final deviceId = await _secureStorage.read(key: deviceIdKey);
+    final signature = await localStorageRepository.read(signatureKey);
+    final deviceId = await localStorageRepository.read(deviceIdKey);
 
     return "$deviceId:$signature";
   }
 
   Future<void> deleteSignatureStorage() async {
-    await _secureStorage.delete(key: signatureKey);
-    await _secureStorage.delete(key: deviceIdKey);
+    await localStorageRepository.delete(signatureKey);
+    await localStorageRepository.delete(deviceIdKey);
   }
 
   Future<void> deleteTokenStorage() async {
-    await _secureStorage.delete(key: tokenKey);
+    await localStorageRepository.delete(tokenKey);
   }
 
   Future<String> getCurrentVersion() async {

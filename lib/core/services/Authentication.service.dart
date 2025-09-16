@@ -1,4 +1,4 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:kali/core/domains/localStorage.repository.dart';
 import 'package:kali/core/services/Hardware.service.dart';
 import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/utils/storageKeys.utils.dart';
@@ -14,7 +14,6 @@ final authenticationService = AuthenticationService();
 class AuthenticationService {
   final _authenticationRepository = AuthenticationRepository();
   final _hardwareService = HardwareService();
-  final _secureStorage = FlutterSecureStorage();
   final _userService = UserService();
 
   bool isAuthentifiedWithSignature = false;
@@ -23,7 +22,7 @@ class AuthenticationService {
       isAuthentifiedWithSignature || isAuthentifiedWithToken;
 
   Future<void> init() async {
-    final token = await _secureStorage.read(key: tokenKey);
+    final token = await localStorageRepository.read(tokenKey);
     if (token != null) {
       try {
         await _userService.refreshUser();
@@ -34,7 +33,7 @@ class AuthenticationService {
       }
     } else {
       try {
-        final signature = await _secureStorage.read(key: signatureKey);
+        final signature = await localStorageRepository.read(signatureKey);
         if (signature != null) {
           isAuthentifiedWithSignature = true;
           await _userService.refreshUser();
@@ -102,13 +101,13 @@ class AuthenticationService {
   }
 
   Future<String> _generateSignedDeviceId() async {
-    var signature = await _secureStorage.read(key: signatureKey);
+    var signature = await localStorageRepository.read(signatureKey);
 
     if (signature != null) {
       return signature;
     }
 
-    final deviceId = await _secureStorage.read(key: deviceIdKey);
+    final deviceId = await localStorageRepository.read(deviceIdKey);
 
     if (deviceId == null) {
       throw Exception("Device ID not found");
@@ -117,17 +116,17 @@ class AuthenticationService {
     final hmac = Hmac(sha256, utf8.encode(signatureSecretKey));
     signature = hmac.convert(utf8.encode(deviceId)).toString();
 
-    await _secureStorage.write(key: signatureKey, value: signature);
+    await localStorageRepository.write(signatureKey, signature);
 
     return signature;
   }
 
   Future<String> _initDeviceId() async {
-    var deviceId = await _secureStorage.read(key: deviceIdKey);
+    var deviceId = await localStorageRepository.read(deviceIdKey);
 
     if (deviceId == null) {
       deviceId = Uuid().v4();
-      await _secureStorage.write(key: deviceIdKey, value: deviceId);
+      await localStorageRepository.write(deviceIdKey, deviceId);
     }
 
     return deviceId;

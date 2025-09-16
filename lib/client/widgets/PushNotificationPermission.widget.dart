@@ -5,6 +5,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CloseButton.widget.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
+import 'package:kali/core/domains/localStorage.repository.dart';
 import 'package:kali/core/utils/storageKeys.utils.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -29,8 +30,8 @@ class _PushNotificationPermissionWidgetState
 
     init() async {
       final notif = await FirebaseMessaging.instance.getNotificationSettings();
-      final lastDateStr = await FlutterSecureStorage().read(
-        key: lastDatePushNotificationShowedKey,
+      final lastDateStr = await localStorageRepository.read(
+        lastDatePushNotificationShowedKey,
       );
       final lastDate =
           lastDateStr != null ? DateTime.parse(lastDateStr).toLocal() : null;
@@ -93,9 +94,9 @@ class _PushNotificationPermissionWidgetState
               ),
               CloseButtonWidget(
                 onClose: () async {
-                  await FlutterSecureStorage().write(
-                    key: lastDatePushNotificationShowedKey,
-                    value: DateTime.now().toIso8601String(),
+                  await localStorageRepository.write(
+                    lastDatePushNotificationShowedKey,
+                    DateTime.now().toIso8601String(),
                   );
                   setState(() {
                     show = false;

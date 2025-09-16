@@ -71,6 +71,10 @@ class AuthenticationRepository {
   }
 
   Future<void> initSignature({required String formattedSignature}) async {
+    if (isInTestEnv) {
+      return;
+    }
+
     Map body = {"formattedSignature": formattedSignature};
 
     final response = await http.post(

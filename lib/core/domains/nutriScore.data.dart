@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:kali/core/domains/localStorage.repository.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/utils/storageKeys.utils.dart';
 import 'package:kali/environment.dart';
@@ -7,8 +7,6 @@ import 'package:kali/environment.dart';
 final nutriScoreData = NutriScoreData();
 
 class NutriScoreData {
-  final _storage = const FlutterSecureStorage();
-
   NutriScore? _nutriScore;
 
   NutriScoreData() {
@@ -23,19 +21,19 @@ class NutriScoreData {
     }
   }
 
-  _store() async {
+  Future<void> _store() async {
     if (!isInTestEnv) {
-      await _storage.write(
-        key: personalNutriScoreStoreKey,
-        value: jsonEncode(_nutriScore),
+      await localStorageRepository.write(
+        personalNutriScoreStoreKey,
+        jsonEncode(_nutriScore),
       );
     }
   }
 
-  _get() async {
+  Future _get() async {
     //await _storage.delete(key: personalNutriScoreStoreKey);
 
-    var str = await _storage.read(key: personalNutriScoreStoreKey);
+    var str = await localStorageRepository.read(personalNutriScoreStoreKey);
     if (str == null) {
       return null;
     }
