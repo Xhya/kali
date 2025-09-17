@@ -34,7 +34,8 @@ class _DateInputWidgetState extends State<DateInputWidget> {
 
       if (splitted.isNotEmpty) {
         final firstTwoDigits = splitted[0];
-        if (int.parse(firstTwoDigits) < 1 || int.parse(firstTwoDigits) > 31) {
+        if (firstTwoDigits.length >= 2 &&
+            (int.parse(firstTwoDigits) < 1 || int.parse(firstTwoDigits) > 31)) {
           setState(() {
             birthdateErrorText = "Les jours doivent etre entre 01 et 31";
           });
@@ -43,8 +44,8 @@ class _DateInputWidgetState extends State<DateInputWidget> {
 
       if (splitted.length > 1) {
         final secondTwoDigits = splitted[1];
-        if (secondTwoDigits.length >= 2 && int.parse(secondTwoDigits) < 1 ||
-            int.parse(secondTwoDigits) > 12) {
+        if (secondTwoDigits.length >= 2 && (int.parse(secondTwoDigits) < 1 ||
+            int.parse(secondTwoDigits) > 12)) {
           setState(() {
             birthdateErrorText = "Les mois doivent etre entre 01 et 12";
           });
@@ -53,8 +54,9 @@ class _DateInputWidgetState extends State<DateInputWidget> {
 
       if (splitted.length > 2) {
         final thirdTwoDigits = splitted[2];
-        if (thirdTwoDigits.length >= 4 && int.parse(thirdTwoDigits) < 1900 ||
-            int.parse(thirdTwoDigits) > DateTime.now().year) {
+        if (thirdTwoDigits.length >= 4 &&
+            (int.parse(thirdTwoDigits) < 1900 ||
+                int.parse(thirdTwoDigits) > DateTime.now().year)) {
           setState(() {
             birthdateErrorText =
                 "Les années doivent etre entre 1900 et ${DateTime.now().year}";
