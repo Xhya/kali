@@ -31,6 +31,7 @@ class _CircleGaugeWidgetState extends State<CircleGaugeWidget> {
 
     if (selectedPeriods.isEmpty) {
       final entry = widget.bars.entries.elementAt(0);
+      final isOverMax = entry.value > widget.maxAmount;
 
       return SfRadialGauge(
         axes: <RadialAxis>[
@@ -52,7 +53,7 @@ class _CircleGaugeWidgetState extends State<CircleGaugeWidget> {
                 value: entry.value.toDouble(),
                 width: 0.15,
                 sizeUnit: GaugeSizeUnit.factor,
-                color: entry.key,
+                color: isOverMax ? Colors.red : entry.key,
                 cornerStyle: CornerStyle.bothCurve,
                 enableAnimation: true,
               ),
