@@ -141,7 +141,14 @@ class _MealComputerInputState extends State<MealComputerInput> {
                           quickAddMealState.computed.value = true;
                           nutriScoreState.searchNutriscores.value = [];
                         },
-                        child: Text(nutriscore.userText ?? ""),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 4,
+                            horizontal: 8,
+                          ),
+                          width: double.maxFinite,
+                          child: Text(nutriscore.userText ?? ""),
+                        ),
                       );
                     }),
                   ),
