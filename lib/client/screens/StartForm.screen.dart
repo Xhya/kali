@@ -80,7 +80,7 @@ class _StartFormScreenState extends State<StartFormScreen> {
         floatingActionButton: MainButtonWidget(
           onClick: () {
             navigationService.context = context;
-            onClickBottomButton(context);
+            onClickBottomButton();
           },
           text:
               startFormState.personalNutriScore.value != null

@@ -12,7 +12,11 @@ import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:kali/core/states/register.state.dart';
 
-void onClickBottomButton(BuildContext context) async {
+Future<void> onClickBottomButton() async {
+  if (startFormState.isNextButtonDisabled) {
+    return;
+  }
+
   startFormState.isLoading.value = true;
   try {
     if (startFormState.personalNutriScore.value != null) {
@@ -72,12 +76,16 @@ Future<void> _onClickConfirmPersonalNutriscore() async {
 void onClickNext() {
   if (startFormState.currentPage.value < 5) {
     startFormState.currentPage.value = startFormState.currentPage.value + 1;
-    startFormState.controller.value.animateToPage(
-      startFormState.currentPage.value,
-      duration: const Duration(milliseconds: 400),
-      curve: Curves.easeInOut,
-    );
+    changePage();
   }
+}
+
+void changePage() {
+  startFormState.controller.value.animateToPage(
+    startFormState.currentPage.value,
+    duration: const Duration(milliseconds: 400),
+    curve: Curves.easeInOut,
+  );
 }
 
 void onClickPrevious() {
@@ -90,11 +98,7 @@ void onClickPrevious() {
 
   if (startFormState.currentPage.value >= 1) {
     startFormState.currentPage.value = startFormState.currentPage.value - 1;
-    startFormState.controller.value.animateToPage(
-      startFormState.currentPage.value,
-      duration: const Duration(milliseconds: 400),
-      curve: Curves.easeInOut,
-    );
+    changePage();
   }
 }
 
@@ -103,7 +107,7 @@ Future<void> computePersonalNutriScore() async {
   if (startFormState.height.value != null &&
       startFormState.weight.value != null &&
       startFormState.targetWeight.value != null) {
-        
+
     final personalNutriScore = await UserService().computePersonalNutriScore(
       PersonalNutriScoreFormData(
         userName: startFormState.userName.value,
@@ -117,7 +121,6 @@ Future<void> computePersonalNutriScore() async {
         workActivity: startFormState.workActivityOption.value?.value ?? "",
       ),
     );
-
     startFormState.personalNutriScore.value = personalNutriScore;
     startFormState.isLoading.value = false;
   }

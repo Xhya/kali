@@ -10,6 +10,11 @@ import 'package:kali/core/states/startForm.state.dart';
 import 'package:kali/core/utils/paths.utils.dart';
 import 'package:kali/client/Style.service.dart';
 
+void onClickStart() {
+  startFormState.currentPage.value = 0;
+  navigationService.navigateTo(ScreenEnum.startForm);
+}
+
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
 
@@ -79,10 +84,7 @@ class _StartFormScreenState extends State<StartScreen> {
                             children: [
                               MainButtonWidget(
                                 onClick: () {
-                                  startFormState.currentPage.value = 0;
-                                  navigationService.navigateTo(
-                                    ScreenEnum.startForm,
-                                  );
+                                  onClickStart();
                                 },
                                 text: t('get_started'),
                               ),

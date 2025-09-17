@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:kali/core/domains/nutriScore.repository.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
+import 'package:kali/core/models/nutriScore.fixture.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/headers.service.dart';
 import 'package:kali/environment.dart';
@@ -26,6 +27,10 @@ class UserNutriscoreRepository {
   Future<NutriScore?> computePersonalNutriScore(
     PersonalNutriScoreFormData formData,
   ) async {
+    if (isInTestEnv) {
+      return fixturePersonalNutriScore;
+    }
+
     Map body = {
       "name": formData.userName,
       "leitmotiv": formData.leitmotiv,

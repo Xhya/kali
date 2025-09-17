@@ -25,7 +25,16 @@ final fixtureNutriScore2 = NutriScore(
   caloryAmount: 544,
 );
 
-final thinking1 = '''Pour estimer les apports nutritionnels quotidiens nécessaires, plusieurs facteurs sont à prendre en compte : l'âge, le sexe, la taille, le poids actuel, le niveau d'activité physique et l'objectif de poids.
+final fixturePersonalNutriScore = NutriScore(
+  id: "2",
+  proteinAmount: 120,
+  lipidAmount: 70,
+  glucidAmount: 130,
+  caloryAmount: 2000,
+);
+
+final thinking1 =
+    '''Pour estimer les apports nutritionnels quotidiens nécessaires, plusieurs facteurs sont à prendre en compte : l'âge, le sexe, la taille, le poids actuel, le niveau d'activité physique et l'objectif de poids.
 
 1. **Calcul du métabolisme de base (MB)** :
    Pour une femme, la formule de Mifflin-St Jeor est utilisée :
