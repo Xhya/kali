@@ -4,9 +4,10 @@ import 'package:kali/client/widgets/MealPeriodTag.widget.dart';
 import 'package:kali/core/models/Meal.model.dart';
 
 class MealRowWidget extends StatefulWidget {
-  const MealRowWidget({super.key, required this.meal});
+  const MealRowWidget({super.key, required this.meal, this.bold = false});
 
   final MealModel meal;
+  final bool bold;
 
   @override
   State<MealRowWidget> createState() => _MealPeriodTagWidgetState();
@@ -26,7 +27,13 @@ class _MealPeriodTagWidgetState extends State<MealRowWidget> {
               if (widget.meal.nutriscore?.userText != null)
                 Text(
                   widget.meal.nutriscore!.userText!,
-                  style: style.fontsize.sm.merge(style.text.neutral),
+                  style: style.fontsize.sm
+                      .merge(style.text.neutral)
+                      .merge(
+                        widget.bold
+                            ? style.fontweight.bold
+                            : style.fontweight.semibold,
+                      ),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                 ),

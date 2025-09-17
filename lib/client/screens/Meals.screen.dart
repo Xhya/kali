@@ -99,7 +99,59 @@ class _MealsScreenState extends State<MealsScreen> {
                                     vertical: 8,
                                     horizontal: 16,
                                   ),
-                                  child: MealRowWidget(meal: meal),
+                                  child: Column(
+                                    spacing: 4,
+                                    children: [
+                                      MealRowWidget(meal: meal, bold: true),
+                                      Row(
+                                        spacing: 8,
+                                        children: [
+                                          Text(
+                                            "Cal: ${meal.nutriscore?.caloryAmount}g",
+                                            style: style.fontsize.xxs.merge(
+                                              style.text.neutral,
+                                            ),
+                                          ),
+                                          Text(
+                                            "/",
+                                            style: style.fontsize.xxs.merge(
+                                              style.text.neutral,
+                                            ),
+                                          ),
+                                          Text(
+                                            "Prot: ${meal.nutriscore?.proteinAmount}g",
+                                            style: style.fontsize.xxs.merge(
+                                              style.text.neutral,
+                                            ),
+                                          ),
+                                          Text(
+                                            "/",
+                                            style: style.fontsize.xxs.merge(
+                                              style.text.neutral,
+                                            ),
+                                          ),
+                                          Text(
+                                            "Glu: ${meal.nutriscore?.glucidAmount}g",
+                                            style: style.fontsize.xxs.merge(
+                                              style.text.neutral,
+                                            ),
+                                          ),
+                                          Text(
+                                            "/",
+                                            style: style.fontsize.xxs.merge(
+                                              style.text.neutral,
+                                            ),
+                                          ),
+                                          Text(
+                                            "Lip: ${meal.nutriscore?.lipidAmount}g",
+                                            style: style.fontsize.xxs.merge(
+                                              style.text.neutral,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
