@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dart_date/dart_date.dart';
 import 'package:http/http.dart' as http;
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
@@ -12,8 +13,8 @@ class MealRepository {
     required DateTime startDate,
     required DateTime endDate,
   }) async {
-    final start = Uri.encodeComponent(startDate.toApiFormat());
-    final end = Uri.encodeComponent(endDate.toApiFormat());
+    final start = Uri.encodeComponent(startDate.startOfDay.toApiFormat());
+    final end = Uri.encodeComponent(endDate.endOfDay.toApiFormat());
 
     final response = await http.get(
       Uri.parse('$API_URL/meals?start=$start&end=$end'),
