@@ -48,7 +48,7 @@ class _MealComputerInputState extends State<MealComputerInput> {
       (NutriScoreState s) => s.searchNutriscores.value,
     );
 
-    return Stack(
+    return Column(
       children: [
         Column(
           children: [
@@ -107,6 +107,44 @@ class _MealComputerInputState extends State<MealComputerInput> {
                 ),
               ],
             ),
+            
+            if (searchNutriscores.isNotEmpty)
+              SizedBox(
+                height: 150,
+                child: SingleChildScrollView(
+                  child: CustomCard(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8,
+                      horizontal: 8,
+                    ),
+                    width: 350,
+                    child: Column(
+                      children: List.generate(searchNutriscores.length, (
+                        index,
+                      ) {
+                        final nutriscore = searchNutriscores[index];
+                        return CustomInkwell(
+                          onTap: () {
+                            quickAddMealState.nutriscore.value = nutriscore;
+                            quickAddMealState.userMealText.value =
+                                nutriscore.userText ?? "";
+                            quickAddMealState.computed.value = true;
+                            nutriScoreState.searchNutriscores.value = [];
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 8,
+                              horizontal: 8,
+                            ),
+                            width: double.maxFinite,
+                            child: Text(nutriscore.userText ?? ""),
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
+                ),
+              ),
 
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -117,45 +155,6 @@ class _MealComputerInputState extends State<MealComputerInput> {
             ),
           ],
         ),
-        if (searchNutriscores.isNotEmpty)
-          Positioned(
-            top: 95,
-            left: 0,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomCard(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 8,
-                  ),
-                  width: 350,
-                  child: Column(
-                    children: List.generate(searchNutriscores.length, (index) {
-                      final nutriscore = searchNutriscores[index];
-                      return CustomInkwell(
-                        onTap: () {
-                          quickAddMealState.nutriscore.value = nutriscore;
-                          quickAddMealState.userMealText.value =
-                              nutriscore.userText ?? "";
-                          quickAddMealState.computed.value = true;
-                          nutriScoreState.searchNutriscores.value = [];
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 4,
-                            horizontal: 8,
-                          ),
-                          width: double.maxFinite,
-                          child: Text(nutriscore.userText ?? ""),
-                        ),
-                      );
-                    }),
-                  ),
-                ),
-              ],
-            ),
-          ),
       ],
     );
   }
