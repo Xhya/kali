@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';
 import 'package:kali/client/screens/Home.screen.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
+import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
+import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/widgets/DateSelector.widget.dart';
 import 'package:kali/client/widgets/LoaderIcon.widget.dart';
 import 'package:kali/client/widgets/MealPeriodsHorizontal.widget.dart';
@@ -16,6 +18,7 @@ import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/states/date.state.dart';
 import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/models/Meal.model.dart';
+import 'package:kali/core/states/search.state.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';
 
@@ -46,12 +49,24 @@ class _MealsScreenState extends State<MealsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<MealModel> currentMealsByPeriods =
+    final currentMealsByPeriods =
         context.watch<MealState>().currentMealsByPeriods;
+    String searchText = context.select((SearchState s) => s.searchText.value);
     List<MealPeriodEnum> currentMealPeriods =
         context.watch<MealState>().currentMealPeriods.value;
     bool isLoadingDate = context.select((MealState s) => s.isLoadingDate);
     DateTime currentDate = context.select((DateState s) => s.currentDate.value);
+
+    List<MealModel> searchMeals =
+        currentMealsByPeriods
+            .where(
+              (it) =>
+                  it.nutriscore?.userText?.toLowerCase().contains(
+                    searchText.toLowerCase(),
+                  ) ??
+                  false,
+            )
+            .toList();
 
     return BaseScaffold(
       backButton: true,
@@ -74,16 +89,27 @@ class _MealsScreenState extends State<MealsScreen> {
                 chosenPeriods: currentMealPeriods,
               ),
               SizedBox(height: 8),
-              if (currentMealsByPeriods.isNotEmpty)
+
+              CustomInput(
+                onChanged: (value) {
+                  searchState.searchText.value = value;
+                },
+                content: searchText,
+                customIcon: CustomIconWidget(icon: Icon(Icons.search)),
+              ),
+
+              SizedBox(height: 8),
+
+              if (searchMeals.isNotEmpty)
                 isLoadingDate
                     ? LoaderIcon()
                     : Expanded(
                       child: ListView.separated(
-                        itemCount: currentMealsByPeriods.length,
+                        itemCount: searchMeals.length,
                         separatorBuilder:
                             (context, index) => SizedBox(height: 4),
                         itemBuilder: (BuildContext context, int index) {
-                          final meal = currentMealsByPeriods[index];
+                          final meal = searchMeals[index];
                           return CustomInkwell(
                             onTap: () {
                               HapticFeedback.vibrate();
@@ -159,7 +185,7 @@ class _MealsScreenState extends State<MealsScreen> {
                         },
                       ),
                     ),
-              if (currentMealsByPeriods.isEmpty)
+              if (searchMeals.isEmpty)
                 isLoadingDate
                     ? LoaderIcon()
                     : Padding(

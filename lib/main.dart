@@ -20,9 +20,9 @@ import 'package:kali/core/states/editProfile.state.dart';
 import 'package:kali/core/states/feature.state.dart';
 import 'package:kali/core/states/googleSignIn.state.dart';
 import 'package:kali/core/states/register.state.dart';
+import 'package:kali/core/states/search.state.dart';
 import 'package:kali/core/states/subscription.state.dart';
 import 'package:kali/core/states/topBanner.state.dart';
-import 'package:kali/core/services/Bugsnag.service.dart';
 import 'package:kali/core/states/weight.state.dart';
 import 'package:kali/environment.dart';
 import 'package:provider/provider.dart';
@@ -122,6 +122,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => weightState),
         ChangeNotifierProvider(create: (context) => dateState),
         ChangeNotifierProvider(create: (context) => featureState),
+        ChangeNotifierProvider(create: (context) => searchState),
       ],
       child: const App(),
     ),

@@ -12,7 +12,6 @@ class CustomInput extends StatefulWidget {
     this.content,
     this.placeholder,
     this.suffixText,
-    this.suffixIcon,
     this.inputFormatters,
     this.title,
     this.minLines = 1,
@@ -33,7 +32,6 @@ class CustomInput extends StatefulWidget {
   final String? content;
   final String? placeholder;
   final String? suffixText;
-  final Widget? suffixIcon;
   final List<TextInputFormatter>? inputFormatters;
   final String? title;
   final int minLines;
