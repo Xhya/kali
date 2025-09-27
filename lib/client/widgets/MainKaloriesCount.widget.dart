@@ -33,6 +33,20 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
     List<MealPeriodEnum> currentMealPeriods =
         context.watch<MealState>().currentMealPeriods.value;
 
+    var textColor = style.text.neutral;
+    if (currentMealPeriods.isEmpty && personalNutriScore != null) {
+      if (bars.entries.elementAt(0).value >
+          personalNutriScore.caloryAmount.toInt() * 1.1) {
+        textColor = style.statuses.notGood;
+      }
+      if (bars.entries.elementAt(0).value <
+              personalNutriScore.caloryAmount.toInt() * 1.1 &&
+          bars.entries.elementAt(0).value >
+              personalNutriScore.caloryAmount.toInt() * 0.9) {
+        textColor = style.statuses.average;
+      }
+    }
+
     return CustomCard(
       padding: EdgeInsets.all(16),
       child: Row(
@@ -81,7 +95,9 @@ class _MainKaloriesCountWidgetState extends State<MainKaloriesCountWidget> {
                 Text(
                   "$remainingCalories restantes 🔥",
                   textAlign: TextAlign.start,
-                  style: style.text.neutralLight.merge(style.fontsize.sm),
+                  style: style.text.neutralLight
+                      .merge(style.fontsize.sm)
+                      .merge(textColor),
                 ),
               SizedBox(height: 4),
               if (personalNutriScore?.caloryAmount != null)

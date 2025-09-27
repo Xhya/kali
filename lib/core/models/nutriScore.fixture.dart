@@ -25,6 +25,14 @@ final fixtureNutriScore2 = NutriScore(
   caloryAmount: 544,
 );
 
+final fixtureNutriScore3 = NutriScore(
+  id: "3",
+  proteinAmount: 60,
+  lipidAmount: 60,
+  glucidAmount: 310,
+  caloryAmount: 1804,
+);
+
 final fixturePersonalNutriScore = NutriScore(
   id: "2",
   proteinAmount: 120,

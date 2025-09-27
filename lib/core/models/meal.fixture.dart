@@ -20,3 +20,10 @@ final fixtureMeal2 = MealModel(
   period: MealPeriodEnum.lunch,
   nutriscore: fixtureNutriScore2,
 );
+
+final fixtureMeal3 = MealModel(
+  id: "2",
+  date: DateTime.now(),
+  period: MealPeriodEnum.lunch,
+  nutriscore: fixtureNutriScore3,
+);

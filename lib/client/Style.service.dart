@@ -16,6 +16,7 @@ class Style {
   final padding = CustomPadding();
   final gauge = Gauge();
   final period = Period();
+  final statuses = Statuses();
 }
 
 Color _breakfastColor = const Color(0xFFF8895D);
@@ -46,6 +47,12 @@ Color _green_800 = const Color(0xFF0a7122);
 Color _green_950 = const Color(0xFF00340d);
 
 Color _red = const Color(0xFFFEBAA7);
+
+class Statuses {
+  final notGood = TextStyle(color: Colors.red);
+  final average = TextStyle(color: Colors.orange);
+  final good = TextStyle(color: _green_300);
+}
 
 class Period {
   final breakfastColor = TextStyle(color: _breakfastColor);

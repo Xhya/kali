@@ -31,7 +31,15 @@ class _CircleGaugeWidgetState extends State<CircleGaugeWidget> {
 
     if (selectedPeriods.isEmpty) {
       final entry = widget.bars.entries.elementAt(0);
-      final isOverMax = entry.value > widget.maxAmount;
+      var gaugeColor = entry.key;
+
+      if (entry.value > widget.maxAmount * 1.1) {
+        gaugeColor = style.statuses.notGood.color!;
+      }
+      if (entry.value < widget.maxAmount * 1.1 &&
+          entry.value > widget.maxAmount * 0.9) {
+        gaugeColor = style.statuses.average.color!;
+      }
 
       return SfRadialGauge(
         axes: <RadialAxis>[
@@ -53,7 +61,7 @@ class _CircleGaugeWidgetState extends State<CircleGaugeWidget> {
                 value: entry.value.toDouble(),
                 width: 0.15,
                 sizeUnit: GaugeSizeUnit.factor,
-                color: isOverMax ? Colors.red : entry.key,
+                color: gaugeColor,
                 cornerStyle: CornerStyle.bothCurve,
                 enableAnimation: true,
               ),

@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.1]
+
+- fix custom input
+- gauges colors
+
 ## [1.8.0]
 
 - can logout even if no email

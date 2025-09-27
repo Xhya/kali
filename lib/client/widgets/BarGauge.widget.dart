@@ -30,6 +30,16 @@ class _BarGaugeWidgetState extends State<BarGaugeWidget> {
     if (selectedPeriods.isEmpty) {
       final entry = widget.bars.entries.elementAt(0);
 
+      var gaugeColor = style.gauge.main.color;
+
+      if (entry.value > widget.maxAmount * 1.1) {
+        gaugeColor = style.statuses.notGood.color!;
+      }
+      if (entry.value < widget.maxAmount * 1.1 &&
+          entry.value > widget.maxAmount * 0.9) {
+        gaugeColor = style.statuses.average.color!;
+      }
+
       return SfLinearGauge(
         minimum: 0,
         maximum: widget.maxAmount.toDouble(),
@@ -45,7 +55,7 @@ class _BarGaugeWidgetState extends State<BarGaugeWidget> {
         barPointers: [
           LinearBarPointer(
             value: entry.value.toDouble(),
-            color: style.gauge.main.color,
+            color: gaugeColor,
             thickness: 8,
             edgeStyle: LinearEdgeStyle.bothCurve,
           ),
