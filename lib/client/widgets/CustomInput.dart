@@ -70,10 +70,15 @@ class _CustomInputState extends State<CustomInput> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.content != null) {
+    final hasDifferentLength =
+        widget.content!.isNotEmpty &&
+        controller.text.substring(0, controller.text.length - 1).length !=
+            widget.content!.substring(0, widget.content!.length - 1).length;
+
+    if (widget.content != null && hasDifferentLength) {
       controller.text = widget.content!;
     }
-    
+
     return Stack(
       children: [
         Column(
