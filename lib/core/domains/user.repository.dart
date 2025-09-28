@@ -63,6 +63,20 @@ class UserRepository {
     }
   }
 
+  Future<void> deleteAccount() async {
+    final response = await http.delete(
+      Uri.parse('$API_URL/users'),
+      headers: await headersWithToken(),
+    );
+
+    if (response.statusCode == 200) {
+      return;
+    } else {
+      errorService.currentResponseError = response;
+      throw Exception();
+    }
+  }
+
   Future<bool> canCompute() async {
     final response = await http.get(
       Uri.parse('$API_URL/users/can-compute'),

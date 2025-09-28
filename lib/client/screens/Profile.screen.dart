@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomButton.widget.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
@@ -119,6 +120,60 @@ Future<void> onClickVote(BuildContext context) async {
   }
 }
 
+Future<void> onDeleteAccount(BuildContext context) async {
+  if (userState.user.value?.emailVerifiedAt != null) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        var currentText = "";
+
+        return AlertDialog(
+          title: Text("Supprimer mon compte"),
+          content: Wrap(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: Text(
+                  "Vous êtes sur le point de supprimer votre compte. Tous les données liées à votre compte seront définitivement supprimées.",
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 24),
+                child: Text(
+                  "Pour confirmer la suppression de compte, veuillez saisir le mot 'supprimer' ci-dessous",
+                ),
+              ),
+              CustomInput(
+                content: currentText,
+                onChanged: (value) {
+                  currentText = value.toLowerCase();
+                },
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(t('cancel')),
+            ),
+            TextButton(
+              onPressed: () async {
+                if (currentText == "supprimer") {
+                  await userService.deleteAccount();
+                  navigationService.navigateTo(ScreenEnum.start);
+                }
+              },
+              child: Text("Supprimer"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -151,6 +206,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
     bool isDeconnectLoading = context.select(
       (UserState s) => s.isDeconnectLoading.value,
+    );
+    bool isUserConnected = context.select(
+      (UserState s) => s.user.value?.emailVerifiedAt != null,
     );
 
     return BaseScaffold(
@@ -313,6 +371,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     t('feedback'),
                                     style: style.text.neutral.merge(
                                       style.fontsize.sm,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios_outlined,
+                                    size: 15,
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                          if (isUserConnected)
+                            CustomCard(
+                              onClick: () {
+                                onDeleteAccount(context);
+                              },
+                              width: double.infinity,
+                              padding: EdgeInsets.all(16),
+                              child: Row(
+                                spacing: 12,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      "Supprimer mon compte",
+                                      style: style.text.neutral.merge(
+                                        style.fontsize.sm,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
                                   Icon(

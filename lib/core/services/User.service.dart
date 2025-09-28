@@ -20,6 +20,7 @@ class UserService {
     } catch (e, stack) {
       final show = errorService.currentResponseError?.statusCode != 401;
       errorService.notifyError(e: e, stack: stack, show: show);
+      rethrow;
     }
   }
 
@@ -48,5 +49,9 @@ class UserService {
 
   Future<User> saveProfile(EditUserFormData formData) async {
     return await _userRepository.saveProfile(formData);
+  }
+
+  Future<void> deleteAccount() async {
+    return await _userRepository.deleteAccount();
   }
 }
