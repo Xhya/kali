@@ -48,7 +48,7 @@ class _StartFormPage2State extends State<StartFormPage2> {
 
             CustomInput(
               title: "Ton poids actuel",
-              content: weight != null ? weight.toString() : "",
+              content: weight != null ? weight.toStringAsFixed(0) : "",
               onChanged: (String text) {
                 final value = text.split(" ").first;
                 try {
@@ -75,7 +75,7 @@ class _StartFormPage2State extends State<StartFormPage2> {
 
             CustomInput(
               title: "Ton poids cible",
-              content: targetWeight != null ? targetWeight.toString() : "",
+              content: targetWeight != null ? targetWeight.toStringAsFixed(0) : "",
               onChanged: (String text) {
                 final value = text.split(" ").first;
                 try {
@@ -102,7 +102,7 @@ class _StartFormPage2State extends State<StartFormPage2> {
 
             CustomInput(
               title: "Ta taille",
-              content: height != null ? height.toString() : "",
+              content: height != null ? height.toStringAsFixed(0) : "",
               onChanged: (String text) {
                 final value = text.split(" ").first;
                 try {
