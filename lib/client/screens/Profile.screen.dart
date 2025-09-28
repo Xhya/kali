@@ -162,6 +162,10 @@ Future<void> onDeleteAccount(BuildContext context) async {
               onPressed: () async {
                 if (currentText == "supprimer") {
                   await userService.deleteAccount();
+                  userState.user.value = null;
+                  await hardwareService.deleteSignatureStorage();
+                  await hardwareService.deleteTokenStorage();
+                  await googleSignInState.signInGoogle.value?.signOut();
                   navigationService.navigateTo(ScreenEnum.start);
                 }
               },
