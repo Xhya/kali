@@ -8,7 +8,7 @@ import 'package:kali/environment.dart';
 class PersonalNutriScoreFormData {
   final String userName;
   final String leitmotiv;
-  final String birthdate;
+  final int age;
   final String gender;
   final double height;
   final double weight;
@@ -19,7 +19,7 @@ class PersonalNutriScoreFormData {
   PersonalNutriScoreFormData({
     required this.userName,
     required this.leitmotiv,
-    required this.birthdate,
+    required this.age,
     required this.gender,
     required this.height,
     required this.weight,

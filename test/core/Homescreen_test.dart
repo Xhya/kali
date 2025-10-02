@@ -46,8 +46,8 @@ void main() {
     await onClickNextMock();
     expect(startFormState.currentPage.value, 0);
 
-    startFormState.birthdate.value = "01/01/2000";
-    expect(startFormState.birthdate.value, "01/01/2000");
+    startFormState.age.value = 18;
+    expect(startFormState.age.value, 18);
 
     await onClickNextMock();
     expect(startFormState.currentPage.value, 1);

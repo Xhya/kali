@@ -34,7 +34,7 @@ class UserNutriscoreRepository {
     Map body = {
       "name": formData.userName,
       "leitmotiv": formData.leitmotiv,
-      "birthdate": formData.birthdate,
+      "age": formData.age,
       "gender": formData.gender,
       "height": formData.height,
       "weight": formData.weight,

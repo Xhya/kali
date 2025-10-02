@@ -106,13 +106,13 @@ Future<void> computePersonalNutriScore() async {
   startFormState.isLoading.value = true;
   if (startFormState.height.value != null &&
       startFormState.weight.value != null &&
-      startFormState.targetWeight.value != null) {
-
+      startFormState.targetWeight.value != null &&
+      startFormState.age.value != null) {
     final personalNutriScore = await UserService().computePersonalNutriScore(
       PersonalNutriScoreFormData(
         userName: startFormState.userName.value,
         leitmotiv: startFormState.leitmotiv.value,
-        birthdate: startFormState.birthdate.value,
+        age: startFormState.age.value!,
         gender: startFormState.genderOption.value?.value ?? "",
         height: startFormState.height.value!,
         weight: startFormState.weight.value!,

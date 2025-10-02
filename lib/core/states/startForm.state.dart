@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/widgets/CustomSelect.widget.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
-import 'package:kali/core/utils/String.extension.dart';
 
 final startFormState = StartFormState();
 
@@ -16,7 +15,8 @@ class StartFormState extends ChangeNotifier {
   final userName = ValueNotifier<String>("");
   final leitmotiv = ValueNotifier<String>("");
 
-  final birthdate = ValueNotifier<String>("");
+  // final birthdate = ValueNotifier<String>("");
+  final age = ValueNotifier<int?>(null);
   final genderOption = ValueNotifier<SelectOption?>(null);
 
   final height = ValueNotifier<double?>(null);
@@ -30,7 +30,7 @@ class StartFormState extends ChangeNotifier {
   bool get isNextButtonDisabled {
     if (currentPage.value == 0) {
       return userName.value.trim().isEmpty ||
-          !birthdate.value.trim().isValidDate() ||
+          age.value != null ||
           genderOption.value == null;
     } else if (currentPage.value == 1) {
       return height.value == null ||
@@ -52,7 +52,7 @@ class StartFormState extends ChangeNotifier {
     userName.addListener(notifyListeners);
     leitmotiv.addListener(notifyListeners);
 
-    birthdate.addListener(notifyListeners);
+    age.addListener(notifyListeners);
     genderOption.addListener(notifyListeners);
 
     height.addListener(notifyListeners);
@@ -71,7 +71,7 @@ class StartFormState extends ChangeNotifier {
     userName.dispose();
     leitmotiv.dispose();
 
-    birthdate.dispose();
+    age.dispose();
     genderOption.dispose();
 
     height.dispose();

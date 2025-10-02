@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kali/client/Style.service.dart';
+import 'package:kali/client/Utils/InputWithTextFormatter.utils.dart';
+import 'package:kali/client/Utils/MaxDigitsCountFormatter.utils.dart';
+import 'package:kali/client/Utils/OnlyNumbersFormatter.utils.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/CustomSelect.widget.dart';
-import 'package:kali/client/widgets/DateInput.widget.dart';
 import 'package:kali/core/services/Translation.service.dart';
 import 'package:kali/core/states/startForm.state.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +21,7 @@ class _StartFormPage1State extends State<StartFormPage1> {
   @override
   Widget build(BuildContext context) {
     String userName = context.select((StartFormState s) => s.userName.value);
+    int? age = context.select((StartFormState s) => s.age.value);
     SelectOption? genderOption = context.select(
       (StartFormState s) => s.genderOption.value,
     );
@@ -59,17 +62,28 @@ class _StartFormPage1State extends State<StartFormPage1> {
 
             SizedBox(height: 32),
 
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: Text(
-                t('your_birthdate'),
-                style: style.text.neutral.merge(style.fontsize.sm),
-              ),
-            ),
-            DateInputWidget(
-              onUpdateDate: (String value) {
-                startFormState.birthdate.value = value;
+            CustomInput(
+              title: t('your_age'),
+              placeholder: "30 ans",
+              content: age == null ? "" : age.toString(),
+              onChanged: (String text) {
+                final value = text.split(" ").first;
+                try {
+                  startFormState.age.value = int.parse(value);
+                } on FormatException catch (_) {
+                  startFormState.age.value = null;
+                }
               },
+              customIcon: CustomIconWidget(
+                format: CustomIconFormat.flutter,
+                icon: Icon(Icons.calendar_today),
+              ),
+              textInputAction: TextInputAction.next,
+              inputFormatters: [
+                onlyNumbersFormatter(),
+                InputWithTextFormatter(extension: "ans"),
+                MaxDigitsCountFormatter(maxLength: 3),
+              ],
             ),
 
             SizedBox(height: 32),
