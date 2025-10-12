@@ -140,6 +140,21 @@ class _ForceUpdateScreenState extends State<ForceUpdateScreen>
                                     style.text.reverse_neutral,
                                   ),
                                 ),
+                                SizedBox(height: 12),
+                                Text(
+                                  "Version actuelle: $currentVersion",
+                                  textAlign: TextAlign.center,
+                                  style: style.fontsize.xs.merge(
+                                    style.text.reverse_neutral,
+                                  ),
+                                ),
+                                Text(
+                                  "Version requise: $minimalVersion",
+                                  textAlign: TextAlign.center,
+                                  style: style.fontsize.xs.merge(
+                                    style.text.reverse_neutral,
+                                  ),
+                                ),
                                 SizedBox(height: 24),
                                 MainButtonWidget(
                                   onClick: () {
