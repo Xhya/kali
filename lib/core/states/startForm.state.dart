@@ -30,7 +30,7 @@ class StartFormState extends ChangeNotifier {
   bool get isNextButtonDisabled {
     if (currentPage.value == 0) {
       return userName.value.trim().isEmpty ||
-          age.value != null ||
+          age.value == null ||
           genderOption.value == null;
     } else if (currentPage.value == 1) {
       return height.value == null ||
