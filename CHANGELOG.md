@@ -6,6 +6,9 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [1.8.3]
 
+- add version on force update screen
+- fix disabled button
+- fix add weight
 - replace birthdate by age
 
 ## [1.8.1]
