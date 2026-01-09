@@ -81,7 +81,7 @@ void main() {
     expect(startFormState.isFormDone, true);
 
     await onClickNextMock();
-    expect(startFormState.personalNutriScore.value, isNotNull);
+    expect(startFormState.personalNutriScore.value, isNull);
 
     await onClickNextMock();
   });

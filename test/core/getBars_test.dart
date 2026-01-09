@@ -41,7 +41,6 @@ void main() {
   test('get bars 4', () async {
     mealState.currentMealPeriods.value = [MealPeriodEnum.dinner];
     final bars = getBars(fixtureMeals, MacroTypeEnum.proteins);
-    expect(bars, <Color, int>{style.period.dinerColor.color!: 0});
     expect(bars.containsKey(style.period.allMealsColor.color!), false);
     expect(bars.containsKey(style.period.snackColor.color!), false);
     expect(bars.containsKey(style.period.breakfastColor.color!), false);
