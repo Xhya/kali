@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/widgets/ValidateCode.widget.dart';
-import 'package:kali/core/domains/authentication.repository.dart';
+import 'package:kali/repository/authentication.repository.dart';
 import 'package:kali/core/states/register.state.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/EmailInput.widget.dart';

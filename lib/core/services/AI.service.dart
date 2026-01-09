@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:kali/core/domains/ai.repository.dart';
+import 'package:kali/repository/ai.repository.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/states/Ai.state.dart';
 import 'package:uuid/uuid.dart';

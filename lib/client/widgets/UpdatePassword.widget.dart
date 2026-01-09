@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/widgets/PasswordInput.widget.dart';
-import 'package:kali/core/domains/authentication.repository.dart';
+import 'package:kali/repository/authentication.repository.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Translation.service.dart';
 import 'package:provider/provider.dart';

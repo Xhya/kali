@@ -1,5 +1,5 @@
-import 'package:kali/core/domains/feature.data.dart';
-import 'package:kali/core/domains/feature.repository.dart';
+import 'package:kali/repository/feature.data.dart';
+import 'package:kali/repository/feature.repository.dart';
 import 'package:kali/core/states/feature.state.dart';
 
 final featureService = FeatureService();

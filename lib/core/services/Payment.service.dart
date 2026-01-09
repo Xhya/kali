@@ -1,4 +1,4 @@
-import 'package:kali/core/domains/payment.repository.dart';
+import 'package:kali/repository/payment.repository.dart';
 import 'package:kali/core/models/CreateSubscription.model.dart';
 
 final paymentService = PaymentService();

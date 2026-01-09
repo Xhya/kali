@@ -8,7 +8,7 @@ import 'package:kali/client/widgets/EmailInput.widget.dart';
 import 'package:kali/client/widgets/MainButton.widget.dart';
 import 'package:kali/client/widgets/PasswordInput.widget.dart';
 import 'package:kali/core/actions/confetti.actions.dart';
-import 'package:kali/core/domains/authentication.repository.dart';
+import 'package:kali/repository/authentication.repository.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/User.service.dart';

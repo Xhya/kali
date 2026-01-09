@@ -5,7 +5,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kali/client/Style.service.dart';
 import 'package:kali/client/widgets/CloseButton.widget.dart';
 import 'package:kali/client/widgets/CustomCard.widget.dart';
-import 'package:kali/core/domains/localStorage.repository.dart';
+import 'package:kali/repository/localStorage.repository.dart';
 import 'package:kali/core/utils/storageKeys.utils.dart';
 import 'package:permission_handler/permission_handler.dart';
 

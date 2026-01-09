@@ -10,7 +10,7 @@ import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Navigation.service.dart';
 import 'package:kali/core/services/Translation.service.dart';
 import 'package:provider/provider.dart';
-import 'package:kali/core/domains/feature.service.dart';
+import 'package:kali/core/services/feature.service.dart';
 import 'package:kali/core/states/feature.state.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:kali/client/layout/Base.scaffold.dart';

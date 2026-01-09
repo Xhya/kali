@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:kali/core/domains/localStorage.repository.dart';
+import 'package:kali/repository/localStorage.repository.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/utils/storageKeys.utils.dart';
 import 'package:kali/environment.dart';

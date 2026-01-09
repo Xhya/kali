@@ -1,7 +1,7 @@
-import 'package:kali/core/domains/nutriscore.service.dart';
+import 'package:kali/core/services/nutriscore.service.dart';
 import 'package:kali/core/states/Ai.state.dart';
 import 'package:kali/core/states/quickAddMeal.state.dart';
-import 'package:kali/core/domains/meal.service.dart';
+import 'package:kali/core/services/meal.service.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/utils/computeMealPeriod.utils.dart';
 

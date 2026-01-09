@@ -7,7 +7,7 @@ import 'package:kali/client/widgets/CustomIcon.widget.dart';
 import 'package:kali/client/widgets/CustomInkwell.widget.dart';
 import 'package:kali/client/widgets/CustomInput.dart';
 import 'package:kali/client/widgets/Debouncer.widget.dart';
-import 'package:kali/core/domains/nutriscore.service.dart';
+import 'package:kali/core/services/nutriscore.service.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/states/Ai.state.dart';
 import 'package:kali/core/states/configuration.state.dart';

@@ -7,7 +7,7 @@ import 'package:kali/client/widgets/CustomCard.widget.dart';
 import 'package:kali/client/widgets/EndOfTestPeriod.widget.dart';
 import 'package:kali/core/actions/checkAppVersion.actions.dart';
 import 'package:kali/core/actions/navigation.actions.dart';
-import 'package:kali/core/domains/user.repository.dart';
+import 'package:kali/repository/user.repository.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/Hardware.service.dart';
 import 'package:kali/core/services/Translation.service.dart';

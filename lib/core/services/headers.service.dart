@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:kali/core/domains/localStorage.repository.dart';
+import 'package:kali/repository/localStorage.repository.dart';
 import 'package:kali/core/states/lang.state.dart';
 import 'package:kali/core/utils/storageKeys.utils.dart';
 import 'package:package_info_plus/package_info_plus.dart';

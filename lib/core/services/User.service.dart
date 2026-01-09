@@ -1,6 +1,6 @@
-import 'package:kali/core/domains/nutriScore.repository.dart';
-import 'package:kali/core/domains/user.repository.dart';
-import 'package:kali/core/domains/userNutriscore.repository.dart';
+import 'package:kali/repository/nutriScore.repository.dart';
+import 'package:kali/repository/user.repository.dart';
+import 'package:kali/repository/userNutriscore.repository.dart';
 import 'package:kali/core/models/EditUser.formdata.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/models/User.model.dart';

@@ -1,4 +1,4 @@
-import 'package:kali/core/domains/localStorage.repository.dart';
+import 'package:kali/repository/localStorage.repository.dart';
 import 'package:kali/core/services/Hardware.service.dart';
 import 'package:kali/core/services/User.service.dart';
 import 'package:kali/core/utils/storageKeys.utils.dart';
@@ -6,7 +6,7 @@ import 'package:kali/environment.dart';
 import 'package:uuid/uuid.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
-import 'package:kali/core/domains/authentication.repository.dart';
+import 'package:kali/repository/authentication.repository.dart';
 import 'package:kali/core/services/Error.service.dart';
 
 final authenticationService = AuthenticationService();

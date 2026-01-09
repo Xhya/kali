@@ -1,4 +1,4 @@
-import 'package:kali/core/domains/nutriScore.repository.dart';
+import 'package:kali/repository/nutriScore.repository.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/states/nutriScore.state.dart';
 

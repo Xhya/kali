@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kali/core/domains/authentication.repository.dart';
+import 'package:kali/repository/authentication.repository.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:provider/provider.dart';
 import 'package:kali/client/Style.service.dart';

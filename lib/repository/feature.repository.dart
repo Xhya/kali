@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:kali/core/domains/feature.data.dart';
+import 'package:kali/repository/feature.data.dart';
 import 'package:kali/core/models/Feature.model.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/services/headers.service.dart';

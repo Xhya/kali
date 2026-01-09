@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:kali/core/domains/localStorage.repository.dart';
+import 'package:kali/repository/localStorage.repository.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/meal.fixture.dart';
 import 'package:kali/core/utils/storageKeys.utils.dart';

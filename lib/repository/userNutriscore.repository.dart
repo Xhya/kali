@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:kali/core/domains/nutriScore.repository.dart';
+import 'package:kali/repository/nutriScore.repository.dart';
 import 'package:kali/core/models/NutriScore.model.dart';
 import 'package:kali/core/models/nutriScore.fixture.dart';
 import 'package:kali/core/services/Error.service.dart';

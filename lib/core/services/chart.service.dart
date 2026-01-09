@@ -1,4 +1,4 @@
-import 'package:kali/core/domains/chart.repository.dart';
+import 'package:kali/repository/chart.repository.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/states/chart.state.dart';
 

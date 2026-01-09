@@ -1,4 +1,4 @@
-import 'package:kali/core/domains/weight.repository.dart';
+import 'package:kali/repository/weight.repository.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/states/weight.state.dart';
 

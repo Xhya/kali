@@ -12,7 +12,7 @@ import 'package:kali/client/widgets/MealPeriodsHorizontal.widget.dart';
 import 'package:kali/client/widgets/MealRow.widget.dart';
 import 'package:kali/client/widgets/SlidableItem.widget.dart';
 import 'package:kali/core/actions/Goto.actions.dart';
-import 'package:kali/core/domains/meal.service.dart';
+import 'package:kali/core/services/meal.service.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
 import 'package:kali/core/services/Error.service.dart';
 import 'package:kali/core/states/date.state.dart';

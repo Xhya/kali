@@ -21,7 +21,7 @@ import 'package:kali/client/widgets/MealRow.widget.dart';
 import 'package:kali/client/widgets/NutriScoreGauges.widget.dart';
 import 'package:kali/client/widgets/QuickAddMealButton.widget.dart';
 import 'package:kali/core/actions/Goto.actions.dart';
-import 'package:kali/core/domains/meal.service.dart';
+import 'package:kali/core/services/meal.service.dart';
 import 'package:kali/core/states/meal.state.dart';
 import 'package:kali/core/models/Meal.model.dart';
 import 'package:kali/core/models/MealPeriod.enum.dart';
